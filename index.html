@@ -42,6 +42,68 @@ meta_description: "VJs TV is the global broadcast network for VJ culture. Watch 
   </div>
 </section>
 
+<!-- CHANNEL GRID — NTS 3-COLUMN SCHEDULE -->
+<section class="vjs-channel-section">
+  <div class="vjs-channel-grid">
+    <!-- COL 1: ON AIR -->
+    <div class="vjs-channel-col on-air">
+      <div class="vjs-channel-col-label">On Air Now</div>
+      {% assign featured_artists = site.vjs | where: "featured", true %}
+      {% assign on_air = featured_artists | first %}
+      {% if on_air %}
+      <div class="vjs-channel-artist-name">{{ on_air.title }}</div>
+      <div class="vjs-channel-artist-style">{{ on_air.visual_style }}</div>
+      <div style="font-size:0.75rem; color:var(--vjs-text-muted); margin-bottom:1.25rem;">{{ on_air.location }}</div>
+      {% else %}
+      <div class="vjs-channel-artist-name">VJs TV</div>
+      <div class="vjs-channel-artist-style">Global Visual Network</div>
+      <div style="font-size:0.75rem; color:var(--vjs-text-muted); margin-bottom:1.25rem;">Broadcasting Worldwide</div>
+      {% endif %}
+      <a href="/live" class="vjs-channel-link">&#9654;&nbsp; Watch Live</a>
+    </div>
+    <!-- COL 2: NEXT UP -->
+    <div class="vjs-channel-col next-up">
+      <div class="vjs-channel-col-label">Next Up</div>
+      {% assign sorted_events = site.events | sort: "date" %}
+      {% assign next_event = sorted_events | last %}
+      {% if next_event %}
+      <div class="vjs-channel-artist-name" style="font-size:1.1rem;">{{ next_event.title }}</div>
+      <div class="vjs-channel-artist-style">{{ next_event.date | date: "%B %d, %Y" }} &middot; {{ next_event.time }}</div>
+      <div style="font-size:0.75rem; color:var(--vjs-text-muted); margin-bottom:1.25rem;">{{ next_event.location }}</div>
+      {% else %}
+      <div class="vjs-channel-artist-name" style="font-size:1.1rem;">Coming Soon</div>
+      <div class="vjs-channel-artist-style">Stay tuned for the next broadcast</div>
+      {% endif %}
+      <a href="/events" class="vjs-channel-link" style="color:var(--vjs-cyan);">&#128337;&nbsp; Full Schedule</a>
+    </div>
+    <!-- COL 3: CHANNEL SELECT -->
+    <div class="vjs-channel-col">
+      <div class="vjs-channel-col-label">Channels</div>
+      <a href="/live" class="vjs-channel-select-item active">
+        <div class="vjs-channel-num">CH.1</div>
+        <div>
+          <div class="vjs-channel-name">LIVE</div>
+          <div class="vjs-channel-desc">Live visual performances</div>
+        </div>
+      </a>
+      <a href="/projects" class="vjs-channel-select-item">
+        <div class="vjs-channel-num">CH.2</div>
+        <div>
+          <div class="vjs-channel-name">LOOP GALLERY</div>
+          <div class="vjs-channel-desc">24/7 generative loop archive</div>
+        </div>
+      </a>
+      <a href="/technology" class="vjs-channel-select-item">
+        <div class="vjs-channel-num">CH.3</div>
+        <div>
+          <div class="vjs-channel-name">VJ EDUCATION</div>
+          <div class="vjs-channel-desc">Tools, tutorials &amp; tech</div>
+        </div>
+      </a>
+    </div>
+  </div>
+</section>
+
 <!-- SPONSOR TICKER -->
 <div class="vjs-sponsor-bar">
   <div class="vjs-sponsor-bar-track">
@@ -168,6 +230,47 @@ meta_description: "VJs TV is the global broadcast network for VJ culture. Watch 
         <div class="vjs-set-meta">{{ project.artist }} &middot; {{ project.location }}</div>
       </div>
     </a>
+    {% endfor %}
+  </div>
+</section>
+
+<!-- LOOP PACKS MARKETPLACE -->
+<section class="vjs-loop-packs-section">
+  <div class="container" style="margin-bottom:2rem;">
+    <div class="vjs-reveal" style="display:flex; align-items:flex-end; justify-content:space-between; flex-wrap:wrap; gap:1rem;">
+      <div>
+        <div class="vjs-section-label" style="color:#39ff14;">Marketplace</div>
+        <h2 class="vjs-section-title">VJ Loop Packs</h2>
+        <div class="vjs-accent-line" style="background: linear-gradient(90deg, #39ff14, rgba(57,255,20,0.2));"></div>
+        <p style="color:var(--vjs-text-muted); font-size:0.85rem; margin-top:0.75rem; max-width:500px;">Download exclusive visual loop packs created by VJs in the network. Powered by MadMapper, Resolume &amp; TouchDesigner.</p>
+      </div>
+      <a href="/submit" class="vjs-btn vjs-btn-outline" style="font-size:0.78rem; padding:10px 28px; border-color:rgba(57,255,20,0.3); color:#39ff14;">Submit Pack &rarr;</a>
+    </div>
+  </div>
+  <div class="vjs-sets-scroll">
+    {% assign pack_gradients = "rgba(57,255,20,0.3) 0%,rgba(0,212,255,0.2) 100%|rgba(157,0,255,0.4) 0%,rgba(57,255,20,0.2) 100%|rgba(0,212,255,0.3) 0%,rgba(57,255,20,0.25) 100%|rgba(255,0,170,0.3) 0%,rgba(57,255,20,0.15) 100%|rgba(57,255,20,0.25) 0%,rgba(157,0,255,0.3) 100%|rgba(0,212,255,0.25) 0%,rgba(255,0,170,0.2) 100%|rgba(157,0,255,0.35) 0%,rgba(0,212,255,0.2) 100%|rgba(57,255,20,0.35) 0%,rgba(0,212,255,0.25) 100%" | split: "|" %}
+    {% assign pack_names = "Neural Glitch Vol.1|Acid Geometry|Dark Matter Loops|Holographic Rave|Cyberpunk City|Dome Textures|Liquid Chrome|Signal Noise" | split: "|" %}
+    {% assign pack_artists = site.vjs | map: "title" %}
+    {% assign pack_counts = "48 clips|32 clips|64 clips|28 clips|56 clips|40 clips|24 clips|72 clips" | split: "|" %}
+    {% assign pack_prices = "FREE|€15|€25|FREE|€20|€30|FREE|€18" | split: "|" %}
+    {% for pn in pack_names %}
+    {% assign pi = forloop.index0 %}
+    {% assign pa = pack_artists[pi] %}
+    <div class="vjs-pack-card">
+      <div class="vjs-pack-thumb" style="background: linear-gradient(135deg, {{ pack_gradients[pi] }});">
+        <div style="position:absolute; inset:0; background:repeating-linear-gradient(45deg, transparent, transparent 6px, rgba(0,0,0,0.08) 6px, rgba(0,0,0,0.08) 7px);"></div>
+        <div class="vjs-pack-count">{{ pack_counts[pi] }}</div>
+        <div class="vjs-pack-icon">&#9632;</div>
+      </div>
+      <div class="vjs-pack-info">
+        <div class="vjs-pack-name">{{ pn }}</div>
+        <div class="vjs-pack-artist">by {{ pa }}</div>
+        <div class="vjs-pack-footer">
+          <span class="vjs-pack-price">{{ pack_prices[pi] }}</span>
+          <button class="vjs-pack-dl">&#8595; GET</button>
+        </div>
+      </div>
+    </div>
     {% endfor %}
   </div>
 </section>

@@ -11,6 +11,8 @@ technologies:
   - TouchDesigner
   - GLSL Shaders
   - Resolume Wire
+software: "TouchDesigner"
+bpm: 110
 featured: true
 video_url: "https://vimeo.com"
 ---

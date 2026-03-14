@@ -11,6 +11,8 @@ technologies:
   - Resolume Avenue
   - HeavyM
   - Notch
+software: "Resolume Avenue"
+bpm: 124
 featured: true
 video_url: "https://vimeo.com"
 ---

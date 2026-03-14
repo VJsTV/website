@@ -11,6 +11,8 @@ technologies:
   - Stable Diffusion
   - TouchDesigner
   - Resolume Arena
+software: "TouchDesigner"
+bpm: 145
 featured: true
 video_url: "https://vimeo.com"
 ---

@@ -12,6 +12,8 @@ technologies:
   - TouchDesigner
   - Stable Diffusion
   - Spatial Audio
+software: "TouchDesigner"
+bpm: 90
 featured: true
 ---
 

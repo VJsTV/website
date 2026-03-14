@@ -11,6 +11,8 @@ technologies:
   - Resolume Arena
   - Ableton Live
   - Custom MIDI
+software: "Resolume Arena"
+bpm: 138
 featured: true
 ---
 
