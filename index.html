@@ -36,8 +36,8 @@ meta_description: "VJs TV is the global broadcast network for VJ culture. Watch 
 
     <div style="display:flex; gap:1rem; justify-content:center; flex-wrap:wrap;">
       <a href="/live" class="vjs-btn vjs-btn-primary">&#9654; Watch Live</a>
+      <a href="/sponsors" class="vjs-btn vjs-btn-sponsor">Become a Sponsor</a>
       <a href="/artists" class="vjs-btn vjs-btn-outline">Discover Artists</a>
-      <a href="/search" class="vjs-btn vjs-btn-outline" style="border-color:rgba(255,255,255,0.15); color:rgba(255,255,255,0.5);">&#128269; Search</a>
     </div>
   </div>
 </section>
@@ -159,23 +159,51 @@ meta_description: "VJs TV is the global broadcast network for VJ culture. Watch 
   </div>
 </section>
 
-<!-- TECHNOLOGY -->
+<!-- TECHNOLOGY — PREMIUM TOOL CARDS -->
 <section class="vjs-section" style="background:var(--vjs-darker);">
   <div class="container">
-    <div class="vjs-reveal" style="display:flex; align-items:flex-end; justify-content:space-between; flex-wrap:wrap; gap:1rem; margin-bottom:2.5rem;">
+    <div class="vjs-reveal" style="display:flex; align-items:flex-end; justify-content:space-between; flex-wrap:wrap; gap:1rem; margin-bottom:3rem;">
       <div>
+        <div class="vjs-section-label">The Tools Powering VJ Culture</div>
         <h2 class="vjs-section-title">Technology</h2>
-        <div class="vjs-accent-line" style="background:var(--vjs-gradient-3);"></div>
-        <p style="color:var(--vjs-text-muted); max-width:560px;">The tools powering the world's most ambitious live visual performances.</p>
+        <div class="vjs-accent-line vjs-accent-line-magenta"></div>
+        <p style="color:var(--vjs-text-muted); max-width:560px;">Industry-standard software and platforms used by every featured artist on VJs TV.</p>
       </div>
-      <a href="/technology" class="vjs-btn vjs-btn-outline" style="font-size:0.8rem;">All Technology &rarr;</a>
+      <a href="/technology" class="vjs-btn vjs-btn-outline" style="font-size:0.8rem;">All Tools &rarr;</a>
     </div>
     <div class="vjs-grid vjs-grid-3">
-      {% for tech in site.technology limit:3 %}
+      {% assign featured_tech = site.technology | where: "featured", true %}
+      {% for tech in featured_tech limit:3 %}
       <div class="vjs-reveal vjs-reveal-delay-{{ forloop.index }}">
-        {% include cards/technology-card.html tech=tech %}
+        <a href="{{ tech.url }}" class="text-decoration-none">
+          <div class="vjs-tool-card"
+               style="--tc-color: linear-gradient(90deg, {{ tech.logo_color | default: 'var(--vjs-ultraviolet)' }}, transparent);
+                      --tc-border: {{ tech.logo_border | default: 'rgba(123,47,255,0.4)' }};
+                      --tc-glow: {{ tech.logo_glow | default: 'rgba(123,47,255,0.25)' }};
+                      --tc-text: {{ tech.logo_color | default: 'var(--vjs-cyan)' }};
+                      --tc-bg: {{ tech.logo_bg | default: 'rgba(0,245,212,0.06)' }};
+                      --tc-border-light: {{ tech.logo_border | default: 'rgba(0,245,212,0.2)' }};">
+            <div class="vjs-tool-logo" style="background:{{ tech.logo_bg | default: 'rgba(123,47,255,0.12)' }}; border:1px solid {{ tech.logo_border | default: 'rgba(123,47,255,0.3)' }}; color:{{ tech.logo_color | default: 'var(--vjs-ultraviolet)' }};">{{ tech.logo_abbr | default: tech.title | truncate: 3, '' }}</div>
+            <div class="vjs-tool-category">{{ tech.category }}</div>
+            <div class="vjs-tool-name">{{ tech.title }}</div>
+            <p class="vjs-tool-desc">{{ tech.description | truncate: 130 }}</p>
+            {% if tech.sponsor_value %}
+            <div class="vjs-tool-sponsor-value" style="--tc-text:{{ tech.logo_color | default: 'var(--vjs-cyan)' }}; --tc-bg:{{ tech.logo_bg | default: 'rgba(0,245,212,0.06)' }}; --tc-border-light:{{ tech.logo_border | default: 'rgba(0,245,212,0.2)' }}; color:{{ tech.logo_color | default: 'var(--vjs-cyan)' }}; background:{{ tech.logo_bg | default: 'rgba(0,245,212,0.06)' }}; border-color:{{ tech.logo_border | default: 'rgba(0,245,212,0.2)' }};">{{ tech.sponsor_value }}</div>
+            {% endif %}
+            {% if tech.used_by %}
+            <div class="vjs-tool-users">
+              <span style="font-family:'Orbitron',sans-serif; font-size:0.55rem; text-transform:uppercase; letter-spacing:0.12em; color:var(--vjs-text-muted);">Used by: </span>
+              {% for name in tech.used_by limit:3 %}<span class="vjs-tag vjs-tag-purple" style="font-size:0.65rem;">{{ name }}</span>{% endfor %}
+            </div>
+            {% endif %}
+          </div>
+        </a>
       </div>
       {% endfor %}
+    </div>
+    <div class="vjs-reveal" style="text-align:center; margin-top:3rem; padding:2rem; background:rgba(123,47,255,0.04); border:1px solid rgba(123,47,255,0.15); border-radius:16px;">
+      <p style="color:var(--vjs-text-muted); margin-bottom:1rem; font-size:0.9rem;">Is your technology used by VJs worldwide? <strong style="color:#fff;">Get featured on VJs TV.</strong></p>
+      <a href="/sponsors" class="vjs-btn vjs-btn-sponsor" style="font-size:0.85rem; padding:12px 32px;">Become a Technology Partner</a>
     </div>
   </div>
 </section>
@@ -221,7 +249,7 @@ meta_description: "VJs TV is the global broadcast network for VJ culture. Watch 
   </div>
 </section>
 
-{% include layouts/footer/footer-1.html %}
+{% include vjstv-footer.html %}
 
 <script>
 (function() {

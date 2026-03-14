@@ -9,9 +9,10 @@ meta_description: "Visual software, projection systems, media servers, LED techn
 
 <div class="vjs-page-header">
   <div class="container">
+    <div class="vjs-section-label">The Arsenal of Visual Performance</div>
     <h1 class="vjs-section-title" style="font-size:clamp(2rem,5vw,3.5rem);">Technology</h1>
     <div class="vjs-accent-line"></div>
-    <p style="color:var(--vjs-text-muted); max-width:600px; font-size:1.05rem;">Visual software, projection systems, media servers, LED technologies, and AI visual tools powering VJ culture worldwide.</p>
+    <p style="color:var(--vjs-text-muted); max-width:600px; font-size:1.05rem;">Visual software, projection systems, media servers, LED technologies, and AI tools powering VJ culture worldwide. Each tool links directly to the artists using it.</p>
   </div>
 </div>
 
@@ -31,18 +32,45 @@ meta_description: "Visual software, projection systems, media servers, LED techn
       {% endfor %}
     </div>
 
-    <div class="vjs-grid vjs-grid-3" id="tech-grid">
+    <div class="row g-4" id="tech-grid">
       {% for tech in site.technology %}
-      <div class="vjs-tech-item" data-cat="{{ tech.category | downcase | replace: ' ', '-' }}">
-        {% include cards/technology-card.html tech=tech %}
+      <div class="col-lg-4 col-md-6 vjs-tech-item" data-cat="{{ tech.category | downcase | replace: ' ', '-' }}">
+        <a href="{{ tech.url }}" class="text-decoration-none" style="height:100%; display:block;">
+          <div class="vjs-tool-card"
+               style="--tc-color: linear-gradient(90deg, {{ tech.logo_color | default: 'var(--vjs-ultraviolet)' }}, transparent);
+                      --tc-border: {{ tech.logo_border | default: 'rgba(123,47,255,0.4)' }};
+                      --tc-glow: {{ tech.logo_glow | default: 'rgba(123,47,255,0.25)' }};">
+            <div class="vjs-tool-logo" style="background:{{ tech.logo_bg | default: 'rgba(123,47,255,0.12)' }}; border:1px solid {{ tech.logo_border | default: 'rgba(123,47,255,0.3)' }}; color:{{ tech.logo_color | default: 'var(--vjs-ultraviolet)' }};">{{ tech.logo_abbr | default: tech.title | truncate: 3, '' }}</div>
+            <div class="vjs-tool-category">{{ tech.category }}</div>
+            <div class="vjs-tool-name">{{ tech.title }}</div>
+            <p class="vjs-tool-desc">{{ tech.description }}</p>
+            {% if tech.sponsor_value %}
+            <div class="vjs-tool-sponsor-value" style="color:{{ tech.logo_color | default: 'var(--vjs-cyan)' }}; background:{{ tech.logo_bg | default: 'rgba(0,245,212,0.06)' }}; border-color:{{ tech.logo_border | default: 'rgba(0,245,212,0.2)' }};">{{ tech.sponsor_value }}</div>
+            {% endif %}
+            {% if tech.used_by %}
+            <div class="vjs-tool-users">
+              <span style="font-family:'Orbitron',sans-serif; font-size:0.55rem; text-transform:uppercase; letter-spacing:0.12em; color:var(--vjs-text-muted);">Used by: </span>
+              {% for name in tech.used_by limit:4 %}<span class="vjs-tag vjs-tag-purple" style="font-size:0.65rem;">{{ name }}</span>{% endfor %}
+            </div>
+            {% endif %}
+          </div>
+        </a>
       </div>
       {% endfor %}
+    </div>
+
+    <!-- SPONSOR CTA -->
+    <div style="margin-top:4rem; text-align:center; padding:3rem; background:linear-gradient(135deg, rgba(123,47,255,0.06) 0%, rgba(255,0,255,0.04) 100%); border:1px solid rgba(123,47,255,0.2); border-radius:20px;">
+      <div class="vjs-section-label" style="justify-content:center; max-width:300px; margin:0 auto 1rem;">For Technology Brands</div>
+      <h3 style="font-family:'Space Grotesk',sans-serif; font-weight:700; font-size:1.5rem; margin-bottom:0.75rem;">Get Your Technology Featured</h3>
+      <p style="color:var(--vjs-text-muted); max-width:500px; margin:0 auto 1.5rem; font-size:0.9rem;">Reach the most technically engaged VJ audience on the planet. Technology partner placement drives direct software adoption and brand credibility.</p>
+      <a href="/sponsors#tiers" class="vjs-btn vjs-btn-sponsor" style="font-size:0.9rem;">View Technology Partnership Tiers</a>
     </div>
 
   </div>
 </section>
 
-{% include layouts/footer/footer-1.html %}
+{% include vjstv-footer.html %}
 
 <script>
 document.querySelectorAll('[data-cat]').forEach(function(btn) {
