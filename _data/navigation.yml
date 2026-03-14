@@ -31,7 +31,7 @@ main_menu:
     url: "/sponsors"
     menu_type: "simple"
 
-  - text: "Business Model"
+  - text: "Partners"
     url: "/business-model"
     menu_type: "simple"
 

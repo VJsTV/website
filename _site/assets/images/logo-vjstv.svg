@@ -1,0 +1,14 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 118 30" fill="none">
+  <defs>
+    <linearGradient id="vjsgrad" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#ff00aa"/>
+      <stop offset="45%" stop-color="#9d00ff"/>
+      <stop offset="100%" stop-color="#00f9ff"/>
+    </linearGradient>
+    <filter id="glow">
+      <feGaussianBlur stdDeviation="1.5" result="blur"/>
+      <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+  </defs>
+  <text font-family="'Orbitron', 'Courier New', monospace" font-weight="900" font-size="21" fill="url(#vjsgrad)" filter="url(#glow)" x="0" y="23" letter-spacing="1">VJs TV</text>
+</svg>

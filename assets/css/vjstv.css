@@ -44,23 +44,156 @@ h1, h2, h3, h4, h5, h6,
   background-color: var(--vjs-black) !important;
 }
 
+/* ============================================================
+   PREMIUM NAVBAR — VJs TV
+   ============================================================ */
 .navbar {
-  background-color: rgba(10, 10, 15, 0.95) !important;
-  backdrop-filter: blur(20px);
-  border-bottom: 1px solid var(--vjs-border) !important;
+  background: rgba(5, 5, 5, 0.88) !important;
+  backdrop-filter: blur(28px) saturate(180%) !important;
+  -webkit-backdrop-filter: blur(28px) saturate(180%) !important;
+  border-bottom: none !important;
+  box-shadow: none !important;
+  padding-top: 0 !important;
+  padding-bottom: 0 !important;
+  min-height: 56px;
+  position: sticky !important;
+  top: 0 !important;
+  z-index: 9999 !important;
 }
 
+/* Gradient bottom border via pseudo-element */
+.navbar::after {
+  content: '';
+  position: absolute;
+  bottom: 0; left: 0; right: 0;
+  height: 1px;
+  background: linear-gradient(90deg,
+    transparent 0%,
+    rgba(157, 0, 255, 0.55) 20%,
+    rgba(0, 249, 255, 0.55) 50%,
+    rgba(255, 0, 170, 0.55) 80%,
+    transparent 100%
+  );
+  pointer-events: none;
+}
+
+/* Logo */
+.navbar-brand img.logo-light,
+.navbar-brand img.logo-dark {
+  height: 26px !important;
+  width: auto !important;
+  max-width: none !important;
+  filter: drop-shadow(0 0 8px rgba(157, 0, 255, 0.5)) !important;
+  transition: filter 0.3s ease !important;
+}
+.navbar-brand:hover img {
+  filter: drop-shadow(0 0 14px rgba(0, 249, 255, 0.7)) !important;
+}
+
+/* All nav links — Orbitron, compact, muted default */
 .navbar .nav-link {
-  font-family: 'Space Grotesk', sans-serif !important;
+  font-family: 'Orbitron', 'Space Grotesk', monospace !important;
   text-transform: uppercase !important;
-  font-size: 0.8rem !important;
-  letter-spacing: 0.08em !important;
-  color: var(--vjs-text) !important;
-  transition: color 0.3s ease !important;
+  font-size: 0.58rem !important;
+  font-weight: 600 !important;
+  letter-spacing: 0.12em !important;
+  color: rgba(200, 200, 220, 0.65) !important;
+  padding: 0 0.65rem !important;
+  line-height: 56px !important;
+  position: relative;
+  transition: color 0.25s ease, text-shadow 0.25s ease !important;
+  white-space: nowrap;
 }
 
+/* Hover: electric blue glow */
 .navbar .nav-link:hover {
-  color: var(--vjs-electric-blue) !important;
+  color: #00f9ff !important;
+  text-shadow: 0 0 10px rgba(0, 249, 255, 0.7), 0 0 20px rgba(0, 249, 255, 0.3) !important;
+}
+
+/* Underline grow from center on hover */
+.navbar .nav-link::after {
+  content: '';
+  position: absolute;
+  bottom: 8px; left: 50%;
+  transform: translateX(-50%) scaleX(0);
+  width: 80%; height: 1px;
+  background: linear-gradient(90deg, transparent, #00f9ff, transparent);
+  transition: transform 0.25s ease;
+}
+.navbar .nav-link:hover::after {
+  transform: translateX(-50%) scaleX(1);
+}
+
+/* LIVE link — red pulse dot */
+.navbar .nav-link[href="/live"] {
+  color: rgba(255, 60, 60, 0.9) !important;
+}
+.navbar .nav-link[href="/live"]::before {
+  content: '';
+  display: inline-block;
+  width: 5px; height: 5px;
+  background: #ff3c3c;
+  border-radius: 50%;
+  margin-right: 5px;
+  vertical-align: middle;
+  position: relative; top: -1px;
+  box-shadow: 0 0 6px #ff3c3c;
+  animation: live-blink 1.2s ease-in-out infinite;
+}
+.navbar .nav-link[href="/live"]:hover {
+  color: #ff6666 !important;
+  text-shadow: 0 0 10px rgba(255, 60, 60, 0.7) !important;
+}
+.navbar .nav-link[href="/live"]::after {
+  background: linear-gradient(90deg, transparent, #ff3c3c, transparent);
+}
+@keyframes live-blink {
+  0%, 100% { opacity: 1; box-shadow: 0 0 6px #ff3c3c; }
+  50% { opacity: 0.3; box-shadow: 0 0 2px #ff3c3c; }
+}
+
+/* SUBMIT — neon pill button */
+.navbar .nav-link[href="/submit"] {
+  color: #00f9ff !important;
+  border: 1px solid rgba(0, 249, 255, 0.4) !important;
+  border-radius: 20px !important;
+  padding: 5px 14px !important;
+  line-height: 1.4 !important;
+  margin: 0 6px !important;
+  font-size: 0.57rem !important;
+  transition: all 0.25s ease !important;
+}
+.navbar .nav-link[href="/submit"]:hover {
+  background: rgba(0, 249, 255, 0.1) !important;
+  border-color: #00f9ff !important;
+  box-shadow: 0 0 14px rgba(0, 249, 255, 0.3) !important;
+  text-shadow: none !important;
+}
+.navbar .nav-link[href="/submit"]::after { display: none; }
+
+/* MAGAZINE — violet accent */
+.navbar .nav-link[href="https://vjsmag.com"] {
+  color: rgba(157, 0, 255, 0.8) !important;
+}
+.navbar .nav-link[href="https://vjsmag.com"]:hover {
+  color: #9d00ff !important;
+  text-shadow: 0 0 10px rgba(157, 0, 255, 0.7) !important;
+}
+.navbar .nav-link[href="https://vjsmag.com"]::after {
+  background: linear-gradient(90deg, transparent, #9d00ff, transparent);
+}
+
+/* Container to use full width */
+.navbar > .container {
+  max-width: 100% !important;
+  padding-left: 24px !important;
+  padding-right: 24px !important;
+}
+
+/* Vertically centre everything in the bar */
+.navbar .navbar-nav {
+  align-items: center !important;
 }
 
 .vjs-hero {
@@ -536,7 +669,7 @@ footer p, footer address {
 }
 
 .inverse-text .nav-link {
-  color: var(--vjs-text) !important;
+  color: rgba(200, 200, 220, 0.65) !important;
 }
 
 .offcanvas-nav {

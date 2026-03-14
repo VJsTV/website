@@ -12,10 +12,10 @@ meta_twitter_image: "/assets/images/meta-image.webp"
 color_scheme:
 font_scheme:
 
-black_logo_1x: "/assets/images/logo-light.webp"
-black_logo_2x: "/assets/images/logo-light@2x.webp"
-light_logo_1x: "/assets/images/logo-light.webp"
-light_logo_2x: "/assets/images/logo-light@2x.webp"
+black_logo_1x: "/assets/images/logo-vjstv.svg"
+black_logo_2x: "/assets/images/logo-vjstv.svg"
+light_logo_1x: "/assets/images/logo-vjstv.svg"
+light_logo_2x: "/assets/images/logo-vjstv.svg"
 
 address_01: 'Global Network<br/>VJs TV HQ'
 phone_number: ""
