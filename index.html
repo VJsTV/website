@@ -115,46 +115,109 @@ meta_description: "VJs TV is the global broadcast network for VJ culture. Watch 
   </div>
 </section>
 
-<!-- FEATURED ARTISTS -->
-<section class="vjs-section" style="background:var(--vjs-darker);">
+<!-- ARTISTS — NTS STYLE GRID -->
+<section style="padding:80px 0; background:var(--vjs-darker);">
   <div class="container">
-    <div class="vjs-reveal" style="display:flex; align-items:flex-end; justify-content:space-between; flex-wrap:wrap; gap:1rem; margin-bottom:2.5rem;">
+    <div class="vjs-reveal" style="display:flex; align-items:flex-end; justify-content:space-between; flex-wrap:wrap; gap:1rem; margin-bottom:2rem;">
       <div>
+        <div class="vjs-section-label">VJ Artists</div>
         <h2 class="vjs-section-title">Featured Artists</h2>
         <div class="vjs-accent-line" style="background:var(--vjs-gradient-3);"></div>
-        <p style="color:var(--vjs-text-muted); max-width:560px;">Visual performers pushing the boundaries of live AV art from cities around the world.</p>
       </div>
-      <a href="/artists" class="vjs-btn vjs-btn-outline" style="font-size:0.8rem;">All Artists &rarr;</a>
+      <a href="/artists" class="vjs-btn vjs-btn-outline" style="font-size:0.78rem; padding:10px 28px;">All Artists &rarr;</a>
     </div>
-    <div class="vjs-grid vjs-grid-3">
-      {% assign featured_artists = site.vjs | where: "featured", true %}
-      {% for artist in featured_artists limit:3 %}
-      <div class="vjs-reveal vjs-reveal-delay-{{ forloop.index }}">
+  </div>
+  <div class="container-fluid" style="padding:0;">
+    <div class="vjs-reveal">
+      <div class="vjs-nts-grid" style="max-width:1320px; margin:0 auto;">
+        {% assign featured_artists = site.vjs | where: "featured", true %}
+        {% for artist in featured_artists limit:6 %}
         {% include cards/artist-card.html artist=artist %}
+        {% endfor %}
       </div>
-      {% endfor %}
     </div>
   </div>
 </section>
 
-<!-- FEATURED PROJECTS -->
-<section class="vjs-section">
-  <div class="container">
-    <div class="vjs-reveal" style="display:flex; align-items:flex-end; justify-content:space-between; flex-wrap:wrap; gap:1rem; margin-bottom:2.5rem;">
+<!-- SETS — BOILER ROOM HORIZONTAL SCROLL -->
+<section class="vjs-sets-section">
+  <div class="container" style="margin-bottom:2rem;">
+    <div class="vjs-reveal" style="display:flex; align-items:flex-end; justify-content:space-between; flex-wrap:wrap; gap:1rem;">
       <div>
-        <h2 class="vjs-section-title">Latest Projects</h2>
-        <div class="vjs-accent-line"></div>
-        <p style="color:var(--vjs-text-muted); max-width:560px;">Projection mapping, generative AI, immersive domes, and live stage visuals.</p>
+        <div class="vjs-section-label" style="color:var(--vjs-magenta);">Archive</div>
+        <h2 class="vjs-section-title">Sets &amp; Projects</h2>
+        <div class="vjs-accent-line" style="background: linear-gradient(90deg, var(--vjs-magenta), var(--vjs-ultraviolet));"></div>
       </div>
-      <a href="/projects" class="vjs-btn vjs-btn-outline" style="font-size:0.8rem;">All Projects &rarr;</a>
+      <a href="/projects" class="vjs-btn vjs-btn-outline" style="font-size:0.78rem; padding:10px 28px;">Browse All Sets &rarr;</a>
     </div>
-    <div class="vjs-grid vjs-grid-3">
-      {% assign featured_projects = site.projects | where: "featured", true %}
-      {% for project in featured_projects limit:3 %}
-      <div class="vjs-reveal vjs-reveal-delay-{{ forloop.index }}">
-        {% include cards/project-card.html project=project %}
+  </div>
+  <div class="vjs-sets-scroll">
+    {% assign set_gradients = "rgba(157,0,255,0.5) 0%,rgba(0,212,255,0.25) 100%|rgba(255,0,170,0.4) 0%,rgba(157,0,255,0.4) 100%|rgba(0,212,255,0.4) 0%,rgba(157,0,255,0.35) 100%|rgba(157,0,255,0.35) 0%,rgba(255,0,170,0.35) 100%|rgba(0,245,255,0.3) 0%,rgba(157,0,255,0.5) 100%|rgba(255,0,170,0.5) 0%,rgba(0,212,255,0.3) 100%" | split: "|" %}
+    {% for project in site.projects %}
+    {% assign gi = forloop.index0 | modulo: 6 %}
+    <a href="{{ project.url }}" class="vjs-set-card">
+      <div class="vjs-set-thumb">
+        <div class="vjs-set-thumb-bg" style="background: linear-gradient(135deg, {{ set_gradients[gi] }}); position:relative; width:100%; height:100%;">
+          <div style="position:absolute; inset:0; background:repeating-linear-gradient(0deg, transparent, transparent 3px, rgba(0,0,0,0.07) 3px, rgba(0,0,0,0.07) 4px);"></div>
+        </div>
+        <div class="vjs-set-thumb-play"><span>&#9654;</span></div>
       </div>
-      {% endfor %}
+      <div class="vjs-set-info">
+        <div class="vjs-set-location">{{ project.project_type }}</div>
+        <div class="vjs-set-title">{{ project.title }}</div>
+        <div class="vjs-set-meta">{{ project.artist }} &middot; {{ project.location }}</div>
+      </div>
+    </a>
+    {% endfor %}
+  </div>
+</section>
+
+<!-- PROJECTS — RED BULL TV GRID -->
+<section style="padding:80px 0; background:var(--vjs-black);">
+  <div class="container">
+    <div class="vjs-reveal" style="display:flex; align-items:flex-end; justify-content:space-between; flex-wrap:wrap; gap:1rem; margin-bottom:2rem;">
+      <div>
+        <div class="vjs-section-label">Featured Work</div>
+        <h2 class="vjs-section-title">Latest Projects</h2>
+        <div class="vjs-accent-line" style="background: linear-gradient(90deg, var(--vjs-magenta), var(--vjs-ultraviolet));"></div>
+      </div>
+      <a href="/projects" class="vjs-btn vjs-btn-outline" style="font-size:0.78rem; padding:10px 28px;">All Projects &rarr;</a>
+    </div>
+    <div class="vjs-reveal">
+      <div class="vjs-redbull-grid">
+        {% assign featured_projects = site.projects | where: "featured", true %}
+        {% for project in featured_projects limit:4 %}
+        {% if forloop.first %}
+        <a href="{{ project.url }}" class="text-decoration-none vjs-redbull-card featured">
+          <div class="vjs-redbull-thumb">
+            <div class="vjs-redbull-thumb-bg" style="background: linear-gradient(135deg, rgba(255,0,170,0.4) 0%, rgba(157,0,255,0.5) 50%, rgba(0,212,255,0.25) 100%); position:relative; width:100%; height:100%;">
+              <div style="position:absolute; inset:0; background:repeating-linear-gradient(45deg, transparent, transparent 8px, rgba(157,0,255,0.03) 8px, rgba(157,0,255,0.03) 9px);"></div>
+            </div>
+            <div class="vjs-redbull-play">&#9654;</div>
+            <div class="vjs-redbull-overlay">
+              <div class="vjs-redbull-cat">{{ project.project_type }}</div>
+              <div class="vjs-redbull-title">{{ project.title }}</div>
+              <div class="vjs-redbull-artist">{{ project.artist }} &middot; {{ project.location }} &middot; {{ project.year }}</div>
+            </div>
+          </div>
+        </a>
+        {% else %}
+        <a href="{{ project.url }}" class="text-decoration-none vjs-redbull-card">
+          <div class="vjs-redbull-thumb">
+            <div class="vjs-redbull-thumb-bg" style="background: linear-gradient(135deg, rgba(157,0,255,0.4) 0%, rgba(0,212,255,0.25) 50%, rgba(255,0,170,0.2) 100%); position:relative; width:100%; height:100%;">
+              <div style="position:absolute; inset:0; background:repeating-linear-gradient(0deg, transparent, transparent 4px, rgba(0,0,0,0.06) 4px, rgba(0,0,0,0.06) 5px);"></div>
+            </div>
+            <div class="vjs-redbull-play">&#9654;</div>
+            <div class="vjs-redbull-overlay">
+              <div class="vjs-redbull-cat">{{ project.project_type }}</div>
+              <div class="vjs-redbull-title">{{ project.title }}</div>
+              <div class="vjs-redbull-artist">{{ project.artist }} &middot; {{ project.year }}</div>
+            </div>
+          </div>
+        </a>
+        {% endif %}
+        {% endfor %}
+      </div>
     </div>
   </div>
 </section>

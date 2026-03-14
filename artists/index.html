@@ -53,7 +53,7 @@ meta_description: "Discover visual artists and VJs from around the world. Filter
       {{ site.vjs | size }} Artists
     </div>
 
-    <div class="vjs-grid vjs-grid-3" id="artists-grid">
+    <div class="vjs-nts-grid" id="artists-grid">
       {% for artist in site.vjs %}
       <div class="vjs-artist-item"
            data-style="{{ artist.visual_style | downcase }}"

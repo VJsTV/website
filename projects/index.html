@@ -41,7 +41,7 @@ meta_description: "Explore the global index of VJ work. Filter by type: projecti
       </div>
     </div>
 
-    <div class="vjs-grid vjs-grid-3" id="projects-grid">
+    <div id="projects-grid" style="display:grid; grid-template-columns:repeat(3,1fr); gap:1px; background:var(--vjs-border); border:1px solid var(--vjs-border);">
       {% assign sorted_projects = site.projects | sort: "year" | reverse %}
       {% for project in sorted_projects %}
       <div class="vjs-project-item"

@@ -1,24 +1,26 @@
-<a href="{{ include.artist.url }}" class="text-decoration-none" data-style="{{ include.artist.visual_style | downcase }}" data-tech="{{ include.artist.technologies | join: ',' | downcase }}" data-location="{{ include.artist.location | downcase }}">
-  <div class="vjs-artist-card">
-    <div class="vjs-artist-card-visual" style="background: linear-gradient(135deg, rgba(123,47,255,0.35) 0%, rgba(0,212,255,0.2) 100%);">
-      <div style="position:absolute; inset:0; display:flex; flex-direction:column; align-items:center; justify-content:center;">
-        <span style="font-size:3rem; opacity:0.5;">&#9673;</span>
-        <span style="font-family:'Orbitron',sans-serif; font-size:0.65rem; letter-spacing:0.2em; color:rgba(255,255,255,0.4); text-transform:uppercase; margin-top:0.5rem;">{{ include.artist.location }}</span>
-      </div>
-      <div class="vjs-artist-card-overlay">
-        <div style="color: var(--vjs-text); font-size:0.8rem; line-height:1.5;">{{ include.artist.bio | truncate: 100 }}</div>
+<a href="{{ include.artist.url }}" class="text-decoration-none vjs-nts-card"
+   data-style="{{ include.artist.visual_style | downcase }}"
+   data-tech="{{ include.artist.technologies | join: ',' | downcase }}"
+   data-location="{{ include.artist.location | downcase }}">
+  <div class="vjs-nts-visual">
+    <div class="vjs-nts-visual-inner" style="background: linear-gradient(135deg, rgba(157,0,255,0.45) 0%, rgba(0,212,255,0.2) 60%, rgba(255,0,170,0.15) 100%); position:relative; width:100%; height:100%;">
+      <div style="position:absolute; inset:0; background: radial-gradient(ellipse 80% 80% at 30% 40%, rgba(157,0,255,0.3) 0%, transparent 60%), radial-gradient(ellipse 60% 60% at 75% 65%, rgba(0,212,255,0.2) 0%, transparent 55%);"></div>
+      <div style="position:absolute; inset:0; background: repeating-linear-gradient(90deg, transparent, transparent 6px, rgba(157,0,255,0.04) 6px, rgba(157,0,255,0.04) 7px);"></div>
+      <div style="position:absolute; inset:0; display:flex; align-items:center; justify-content:center;">
+        <span style="font-family:'Orbitron',sans-serif; font-size:5rem; font-weight:900; color:rgba(255,255,255,0.06); letter-spacing:-0.05em; user-select:none;">{{ include.artist.title | slice: 0, 1 | upcase }}</span>
       </div>
     </div>
-    <div class="vjs-card-body">
-      <h4 class="vjs-card-title">{{ include.artist.title }}</h4>
-      <p class="vjs-card-text" style="font-size:0.8rem; margin-bottom:0.75rem; color: var(--vjs-electric-blue);">{{ include.artist.visual_style }}</p>
-      {% if include.artist.technologies %}
-      <div>
-        {% for tech in include.artist.technologies limit:3 %}
-        <span class="vjs-tag vjs-tag-purple">{{ tech }}</span>
-        {% endfor %}
-      </div>
-      {% endif %}
+  </div>
+  <div class="vjs-nts-info">
+    <div class="vjs-nts-location">{{ include.artist.location }}</div>
+    <div class="vjs-nts-name">{{ include.artist.title }}</div>
+    <div class="vjs-nts-style">{{ include.artist.visual_style | truncate: 50 }}</div>
+    {% if include.artist.technologies %}
+    <div style="margin-top:0.5rem; display:flex; flex-wrap:wrap; gap:0.3rem;">
+      {% for tech in include.artist.technologies limit:3 %}
+      <span class="vjs-tag vjs-tag-purple" style="font-size:0.6rem; padding:2px 8px;">{{ tech }}</span>
+      {% endfor %}
     </div>
+    {% endif %}
   </div>
 </a>
