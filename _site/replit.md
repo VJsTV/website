@@ -8,8 +8,8 @@ VJs TV is a Jekyll-based platform for VJ culture and audiovisual performances. I
 - **Framework:** Jekyll 4.3.x (static site generator)
 - **Plugins:** jekyll-feed
 - **Styling:** Bootstrap + custom CSS (assets/css/vjstv.css)
-- **Fonts:** Space Grotesk, Inter, Orbitron (Google Fonts)
-- **Design:** Dark theme with ultraviolet/electric blue/magenta neon aesthetic
+- **Fonts:** Barlow Condensed (primary), Orbitron (accents) (Google Fonts)
+- **Design:** NTS.live-inspired dark cyberpunk — flat design, 0px border-radius, dense layouts, #050505 black, ultraviolet/cyan/magenta accents
 
 ## Collections
 - `_vjs/` - VJ artist profiles (renders to /artists/:name)
@@ -20,7 +20,7 @@ VJs TV is a Jekyll-based platform for VJ culture and audiovisual performances. I
 - `_sponsors/` - Sponsors and brand partners (renders to /sponsors/:name)
 
 ## Pages
-- `/` - Homepage: particle hero canvas, countdown timer to next broadcast, scrolling sponsor ticker, animated stats counters, scroll-reveal sections, featured artists/projects/tech/sponsors
+- `/` - Homepage: NTS-style live broadcast strip (2 channels), full-bleed hero with sidebar thumbnails, VJs TV Picks horizontal scroll, scrolling sponsor ticker, animated stats counters, featured artists grid, loop packs marketplace, editorial project grid, technology section, sponsors, CTA
 - `/live` - Live broadcast page with player and schedule
 - `/artists` - Artist directory with JS filter by visual style + technology (auto-generated from data)
 - `/projects` - Project index with JS filter by type + sort by date (auto-generated from data)

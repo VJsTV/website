@@ -7,100 +7,76 @@ meta_description: "VJs TV is the global broadcast network for VJ culture. Watch 
 
 {% include layouts/nav/nav-3.html default_logo="white" %}
 
-<div class="vjs-progress-bar" id="vjs-progress-bar"></div>
-
-<!-- HERO -->
-<section class="vjs-hero" style="position:relative; overflow:hidden; min-height:100vh; display:flex; align-items:center; justify-content:center;">
-  <canvas id="vjs-hero-canvas" style="position:absolute; inset:0; width:100%; height:100%; pointer-events:none; z-index:0;"></canvas>
-  <div class="vjs-hero-bg" style="z-index:1;"></div>
-  <div class="vjs-hero-content" style="z-index:2; text-align:center; padding:2rem 1rem;">
-    <div style="display:inline-flex; align-items:center; gap:0.75rem; background:rgba(0,212,255,0.08); border:1px solid rgba(0,212,255,0.25); border-radius:30px; padding:7px 20px; margin-bottom:2rem;">
-      <span style="width:8px; height:8px; background:var(--vjs-cyan); border-radius:50%; display:inline-block; animation:vjsPulse 1.5s infinite;"></span>
-      <span style="font-family:'Orbitron',sans-serif; font-size:0.65rem; letter-spacing:0.2em; color:var(--vjs-cyan); text-transform:uppercase;">Broadcasting Worldwide</span>
-    </div>
-    <h1 class="vjs-hero-title">VJs TV</h1>
-    <p class="vjs-hero-subtitle">Global Broadcast Network for VJ Culture</p>
-
-    <div style="margin:2rem 0;">
-      <p style="font-family:'Orbitron',sans-serif; font-size:0.65rem; text-transform:uppercase; letter-spacing:0.2em; color:var(--vjs-text-muted); margin-bottom:1rem;">Next Live Broadcast</p>
-      <div class="vjs-countdown" id="vjs-countdown">
-        <div class="vjs-countdown-unit"><div class="vjs-countdown-number" id="cd-days">--</div><div class="vjs-countdown-label">Days</div></div>
-        <div class="vjs-countdown-sep">:</div>
-        <div class="vjs-countdown-unit"><div class="vjs-countdown-number" id="cd-hours">--</div><div class="vjs-countdown-label">Hours</div></div>
-        <div class="vjs-countdown-sep">:</div>
-        <div class="vjs-countdown-unit"><div class="vjs-countdown-number" id="cd-mins">--</div><div class="vjs-countdown-label">Mins</div></div>
-        <div class="vjs-countdown-sep">:</div>
-        <div class="vjs-countdown-unit"><div class="vjs-countdown-number" id="cd-secs">--</div><div class="vjs-countdown-label">Secs</div></div>
-      </div>
-    </div>
-
-    <div style="display:flex; gap:1rem; justify-content:center; flex-wrap:wrap;">
-      <a href="/live" class="vjs-btn vjs-btn-primary">&#9654; Watch Live</a>
-      <a href="/sponsors" class="vjs-btn vjs-btn-sponsor">Become a Sponsor</a>
-      <a href="/artists" class="vjs-btn vjs-btn-outline">Discover Artists</a>
-    </div>
-  </div>
-</section>
-
-<!-- CHANNEL GRID — NTS 3-COLUMN SCHEDULE -->
-<section class="vjs-channel-section">
-  <div class="vjs-channel-grid">
-    <!-- COL 1: ON AIR -->
-    <div class="vjs-channel-col on-air">
-      <div class="vjs-channel-col-label">On Air Now</div>
+<!-- NTS-STYLE LIVE STRIP -->
+<div class="vjs-live-strip">
+  <div class="vjs-live-strip-label"><span class="dot"></span> LIVE NOW</div>
+  <div class="vjs-live-strip-ch">
+    <div class="vjs-live-strip-ch-num">1</div>
+    <a href="/live" class="vjs-live-strip-ch-play"><svg viewBox="0 0 10 12"><polygon points="0,0 10,6 0,12"/></svg></a>
+    <div class="vjs-live-strip-ch-info">
       {% assign featured_artists = site.vjs | where: "featured", true %}
       {% assign on_air = featured_artists | first %}
-      {% if on_air %}
-      <div class="vjs-channel-artist-name">{{ on_air.title }}</div>
-      <div class="vjs-channel-artist-style">{{ on_air.visual_style }}</div>
-      <div style="font-size:0.75rem; color:var(--vjs-text-muted); margin-bottom:1.25rem;">{{ on_air.location }}</div>
-      {% else %}
-      <div class="vjs-channel-artist-name">VJs TV</div>
-      <div class="vjs-channel-artist-style">Global Visual Network</div>
-      <div style="font-size:0.75rem; color:var(--vjs-text-muted); margin-bottom:1.25rem;">Broadcasting Worldwide</div>
-      {% endif %}
-      <a href="/live" class="vjs-channel-link">&#9654;&nbsp; Watch Live</a>
+      <span class="title">{% if on_air %}{{ on_air.title }} — {{ on_air.visual_style }}{% else %}VJs TV Live Stream{% endif %}</span>
     </div>
-    <!-- COL 2: NEXT UP -->
-    <div class="vjs-channel-col next-up">
-      <div class="vjs-channel-col-label">Next Up</div>
-      {% assign sorted_events = site.events | sort: "date" %}
-      {% assign next_event = sorted_events | last %}
-      {% if next_event %}
-      <div class="vjs-channel-artist-name" style="font-size:1.1rem;">{{ next_event.title }}</div>
-      <div class="vjs-channel-artist-style">{{ next_event.date | date: "%B %d, %Y" }} &middot; {{ next_event.time }}</div>
-      <div style="font-size:0.75rem; color:var(--vjs-text-muted); margin-bottom:1.25rem;">{{ next_event.location }}</div>
-      {% else %}
-      <div class="vjs-channel-artist-name" style="font-size:1.1rem;">Coming Soon</div>
-      <div class="vjs-channel-artist-style">Stay tuned for the next broadcast</div>
-      {% endif %}
-      <a href="/events" class="vjs-channel-link" style="color:var(--vjs-cyan);">&#128337;&nbsp; Full Schedule</a>
+    <div class="vjs-live-strip-loc">{% if on_air %}{{ on_air.location }}{% else %}WORLDWIDE{% endif %}</div>
+  </div>
+  <div class="vjs-live-strip-ch">
+    <div class="vjs-live-strip-ch-num">2</div>
+    <a href="/live" class="vjs-live-strip-ch-play"><svg viewBox="0 0 10 12"><polygon points="0,0 10,6 0,12"/></svg></a>
+    <div class="vjs-live-strip-ch-info">
+      {% assign second_artist = featured_artists | last %}
+      <span class="title">{% if second_artist %}{{ second_artist.title }} — {{ second_artist.visual_style }}{% else %}Loop Gallery{% endif %}</span>
     </div>
-    <!-- COL 3: CHANNEL SELECT -->
-    <div class="vjs-channel-col">
-      <div class="vjs-channel-col-label">Channels</div>
-      <a href="/live" class="vjs-channel-select-item active">
-        <div class="vjs-channel-num">CH.1</div>
-        <div>
-          <div class="vjs-channel-name">LIVE</div>
-          <div class="vjs-channel-desc">Live visual performances</div>
-        </div>
-      </a>
-      <a href="/projects" class="vjs-channel-select-item">
-        <div class="vjs-channel-num">CH.2</div>
-        <div>
-          <div class="vjs-channel-name">LOOP GALLERY</div>
-          <div class="vjs-channel-desc">24/7 generative loop archive</div>
-        </div>
-      </a>
-      <a href="/technology" class="vjs-channel-select-item">
-        <div class="vjs-channel-num">CH.3</div>
-        <div>
-          <div class="vjs-channel-name">VJ EDUCATION</div>
-          <div class="vjs-channel-desc">Tools, tutorials &amp; tech</div>
-        </div>
-      </a>
+    <div class="vjs-live-strip-loc">{% if second_artist %}{{ second_artist.location }}{% else %}24/7{% endif %}</div>
+  </div>
+  <div class="vjs-live-strip-right">
+    <div class="vjs-live-strip-icon" title="Schedule">&#128337;</div>
+    <div class="vjs-live-strip-icon" title="Volume">&#128266;</div>
+  </div>
+</div>
+
+<div class="vjs-progress-bar" id="vjs-progress-bar"></div>
+
+<!-- NTS-STYLE HERO — FULL-BLEED + SIDEBAR -->
+<section class="vjs-nts-hero">
+  <div class="vjs-nts-hero-main">
+    <div class="vjs-nts-hero-bg" style="background: linear-gradient(135deg, rgba(157,0,255,0.45) 0%, rgba(0,212,255,0.25) 30%, rgba(255,0,170,0.3) 70%, rgba(5,5,5,0.9) 100%);"></div>
+    <div class="vjs-nts-hero-gradient"></div>
+    <div class="vjs-nts-hero-content">
+      <a href="/live" class="vjs-nts-hero-play"><svg viewBox="0 0 16 20"><polygon points="0,0 16,10 0,20" fill="#000"/></svg></a>
+      {% assign hero_project = site.projects | where: "featured", true | first %}
+      <div class="vjs-nts-hero-tags">
+        <span class="vjs-nts-hero-tag">VJ Performance</span>
+        <span class="vjs-nts-hero-tag">{% if hero_project %}{{ hero_project.project_type }}{% else %}Live Visual{% endif %}</span>
+        {% if hero_project.software %}<span class="vjs-nts-hero-tag">{{ hero_project.software }}</span>{% endif %}
+      </div>
+      <h1 class="vjs-nts-hero-title">{% if hero_project %}{{ hero_project.title }}{% else %}VJs TV Live{% endif %}</h1>
+      <p class="vjs-nts-hero-desc">{% if hero_project %}{{ hero_project.description | truncate: 180 }}{% else %}Global broadcast network for VJ culture. Watch live visual performances, discover artists, and explore audiovisual projects.{% endif %}</p>
+      <div class="vjs-nts-hero-nav">
+        {% assign featured_count = site.projects | where: "featured", true | size %}
+        <span>1 / {% if featured_count > 0 %}{{ featured_count }}{% else %}1{% endif %}</span>
+        <button>&#8249;</button>
+        <button>&#9646;&#9646;</button>
+        <button>&#8250;</button>
+      </div>
     </div>
+  </div>
+  <div class="vjs-nts-hero-sidebar">
+    {% assign sidebar_projects = site.projects | where: "featured", true %}
+    {% for project in sidebar_projects limit:6 %}
+    <a href="{{ project.url }}" class="vjs-nts-sidebar-card">
+      <div class="vjs-nts-sidebar-thumb">
+        {% assign sidebar_gradients = "rgba(157,0,255,0.6),rgba(0,212,255,0.3)|rgba(255,0,170,0.5),rgba(157,0,255,0.4)|rgba(0,212,255,0.5),rgba(157,0,255,0.35)|rgba(157,0,255,0.4),rgba(255,0,170,0.35)|rgba(0,249,255,0.4),rgba(157,0,255,0.5)|rgba(255,0,170,0.6),rgba(0,212,255,0.3)" | split: "|" %}
+        {% assign si = forloop.index0 | modulo: 6 %}
+        <div class="vjs-nts-sidebar-thumb-bg" style="background: linear-gradient(135deg, {{ sidebar_gradients[si] }});"></div>
+        <div class="vjs-nts-sidebar-thumb-play">&#9654;</div>
+      </div>
+      <div class="vjs-nts-sidebar-info">
+        <div class="vjs-nts-sidebar-label">{{ project.project_type }}</div>
+        <div class="vjs-nts-sidebar-title">{{ project.title }}</div>
+      </div>
+    </a>
+    {% endfor %}
   </div>
 </section>
 
@@ -113,107 +89,13 @@ meta_description: "VJs TV is the global broadcast network for VJ culture. Watch 
   </div>
 </div>
 
-<!-- STATS -->
-<div class="vjs-stats-bar vjs-reveal">
-  <div class="vjs-stat-item"><div class="vjs-stat-number" id="stat-artists">0</div><div class="vjs-stat-label">Artists</div></div>
-  <div class="vjs-stat-item"><div class="vjs-stat-number" id="stat-projects">0</div><div class="vjs-stat-label">Projects</div></div>
-  <div class="vjs-stat-item"><div class="vjs-stat-number" id="stat-events">0</div><div class="vjs-stat-label">Events</div></div>
-  <div class="vjs-stat-item"><div class="vjs-stat-number" id="stat-countries">0</div><div class="vjs-stat-label">Countries</div></div>
-</div>
-
-<!-- LIVE SECTION -->
-<section class="vjs-section vjs-reveal">
-  <div class="container">
-    <div style="display:flex; align-items:flex-start; justify-content:space-between; flex-wrap:wrap; gap:1rem; margin-bottom:2.5rem;">
-      <div>
-        <div style="display:inline-flex; align-items:center; gap:0.5rem; margin-bottom:0.75rem;">
-          <span style="width:8px; height:8px; background:#ff3333; border-radius:50%; display:inline-block; animation:vjsPulse 1.5s infinite;"></span>
-          <span style="font-family:'Orbitron',sans-serif; font-size:0.7rem; letter-spacing:0.2em; color:#ff3333; text-transform:uppercase;">Live Now</span>
-        </div>
-        <h2 class="vjs-section-title">Broadcast</h2>
-        <div class="vjs-accent-line"></div>
-      </div>
-      <a href="/live" class="vjs-btn vjs-btn-outline" style="font-size:0.8rem; margin-top:0.5rem;">Full Schedule &rarr;</a>
-    </div>
-    <div class="row g-4">
-      <div class="col-lg-8">
-        <div style="background:var(--vjs-card); border:1px solid var(--vjs-border); border-radius:16px; overflow:hidden;">
-          <div style="aspect-ratio:16/9; background:linear-gradient(135deg, rgba(123,47,255,0.3) 0%, rgba(0,212,255,0.08) 100%); display:flex; align-items:center; justify-content:center; flex-direction:column; gap:1rem;">
-            <div style="width:80px; height:80px; background:rgba(123,47,255,0.25); border-radius:50%; display:flex; align-items:center; justify-content:center; font-size:2rem; border:2px solid rgba(123,47,255,0.4);">&#9654;</div>
-            <span style="color:var(--vjs-text-muted); font-family:'Orbitron',sans-serif; font-size:0.65rem; letter-spacing:0.2em; text-transform:uppercase;">Stream Preview</span>
-          </div>
-          <div style="padding:1.5rem; border-top:1px solid var(--vjs-border);">
-            {% assign sorted_events = site.events | sort: "date" %}
-            {% assign next_event = sorted_events | last %}
-            <div style="display:flex; justify-content:space-between; align-items:flex-start; flex-wrap:wrap; gap:1rem;">
-              <div>
-                <h3 style="font-size:1.1rem; margin-bottom:0.4rem; color:#fff;">{{ next_event.title }}</h3>
-                <p style="color:var(--vjs-text-muted); font-size:0.85rem;">{% for name in next_event.artists %}{{ name }}{% unless forloop.last %}, {% endunless %}{% endfor %} &middot; {{ next_event.date | date: "%b %d, %Y" }}</p>
-              </div>
-              <a href="/live" class="vjs-btn vjs-btn-primary" style="font-size:0.8rem;">Watch Live</a>
-            </div>
-          </div>
-        </div>
-      </div>
-      <div class="col-lg-4">
-        <h3 style="font-family:'Orbitron',sans-serif; font-size:0.7rem; text-transform:uppercase; letter-spacing:0.15em; color:var(--vjs-text-muted); margin-bottom:1.25rem; padding-bottom:0.75rem; border-bottom:1px solid var(--vjs-border);">Upcoming</h3>
-        {% for event in sorted_events limit:3 %}
-        <a href="{{ event.url }}" class="text-decoration-none">
-          <div style="display:flex; gap:1rem; padding:1rem; background:var(--vjs-card); border:1px solid var(--vjs-border); border-radius:10px; margin-bottom:0.75rem; transition:border-color 0.3s;" onmouseover="this.style.borderColor='var(--vjs-ultraviolet)'" onmouseout="this.style.borderColor='var(--vjs-border)'">
-            <div style="text-align:center; flex-shrink:0; min-width:44px;">
-              <div style="font-family:'Orbitron',sans-serif; font-size:1.3rem; font-weight:700; color:var(--vjs-electric-blue); line-height:1;">{{ event.date | date: "%d" }}</div>
-              <div style="font-family:'Orbitron',sans-serif; font-size:0.55rem; text-transform:uppercase; letter-spacing:0.12em; color:var(--vjs-text-muted);">{{ event.date | date: "%b" }}</div>
-            </div>
-            <div style="min-width:0;">
-              <div style="font-size:0.85rem; font-weight:600; color:#fff; margin-bottom:0.2rem; white-space:nowrap; overflow:hidden; text-overflow:ellipsis;">{{ event.title }}</div>
-              <div style="font-size:0.75rem; color:var(--vjs-text-muted);">{{ event.location }}</div>
-            </div>
-          </div>
-        </a>
-        {% endfor %}
-        <a href="/events" style="font-size:0.8rem; color:var(--vjs-ultraviolet); text-decoration:none; font-family:'Space Grotesk',sans-serif;">All Events &rarr;</a>
-      </div>
-    </div>
+<!-- VJS TV PICKS — NTS PICKS STYLE -->
+<section class="vjs-picks-section">
+  <div class="vjs-picks-header">
+    <span class="vjs-picks-title">VJs TV Picks</span>
+    <a href="/projects" class="vjs-picks-link">View All &#8250;</a>
   </div>
-</section>
-
-<!-- ARTISTS — NTS STYLE GRID -->
-<section style="padding:80px 0; background:var(--vjs-darker);">
-  <div class="container">
-    <div class="vjs-reveal" style="display:flex; align-items:flex-end; justify-content:space-between; flex-wrap:wrap; gap:1rem; margin-bottom:2rem;">
-      <div>
-        <div class="vjs-section-label">VJ Artists</div>
-        <h2 class="vjs-section-title">Featured Artists</h2>
-        <div class="vjs-accent-line" style="background:var(--vjs-gradient-3);"></div>
-      </div>
-      <a href="/artists" class="vjs-btn vjs-btn-outline" style="font-size:0.78rem; padding:10px 28px;">All Artists &rarr;</a>
-    </div>
-  </div>
-  <div class="container-fluid" style="padding:0;">
-    <div class="vjs-reveal">
-      <div class="vjs-nts-grid" style="max-width:1320px; margin:0 auto;">
-        {% assign featured_artists = site.vjs | where: "featured", true %}
-        {% for artist in featured_artists limit:6 %}
-        {% include cards/artist-card.html artist=artist %}
-        {% endfor %}
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- SETS — BOILER ROOM HORIZONTAL SCROLL -->
-<section class="vjs-sets-section">
-  <div class="container" style="margin-bottom:2rem;">
-    <div class="vjs-reveal" style="display:flex; align-items:flex-end; justify-content:space-between; flex-wrap:wrap; gap:1rem;">
-      <div>
-        <div class="vjs-section-label" style="color:var(--vjs-magenta);">Archive</div>
-        <h2 class="vjs-section-title">Sets &amp; Projects</h2>
-        <div class="vjs-accent-line" style="background: linear-gradient(90deg, var(--vjs-magenta), var(--vjs-ultraviolet));"></div>
-      </div>
-      <a href="/projects" class="vjs-btn vjs-btn-outline" style="font-size:0.78rem; padding:10px 28px;">Browse All Sets &rarr;</a>
-    </div>
-  </div>
-  <div class="vjs-sets-scroll">
+  <div class="vjs-sets-scroll" style="padding-left:16px; padding-right:16px;">
     {% assign set_gradients = "rgba(157,0,255,0.5) 0%,rgba(0,212,255,0.25) 100%|rgba(255,0,170,0.4) 0%,rgba(157,0,255,0.4) 100%|rgba(0,212,255,0.4) 0%,rgba(157,0,255,0.35) 100%|rgba(157,0,255,0.35) 0%,rgba(255,0,170,0.35) 100%|rgba(0,245,255,0.3) 0%,rgba(157,0,255,0.5) 100%|rgba(255,0,170,0.5) 0%,rgba(0,212,255,0.3) 100%" | split: "|" %}
     {% for project in site.projects %}
     {% assign gi = forloop.index0 | modulo: 6 %}
@@ -234,20 +116,48 @@ meta_description: "VJs TV is the global broadcast network for VJ culture. Watch 
   </div>
 </section>
 
-<!-- LOOP PACKS MARKETPLACE -->
-<section class="vjs-loop-packs-section">
-  <div class="container" style="margin-bottom:2rem;">
-    <div class="vjs-reveal" style="display:flex; align-items:flex-end; justify-content:space-between; flex-wrap:wrap; gap:1rem;">
-      <div>
-        <div class="vjs-section-label" style="color:#39ff14;">Marketplace</div>
-        <h2 class="vjs-section-title">VJ Loop Packs</h2>
-        <div class="vjs-accent-line" style="background: linear-gradient(90deg, #39ff14, rgba(57,255,20,0.2));"></div>
-        <p style="color:var(--vjs-text-muted); font-size:0.85rem; margin-top:0.75rem; max-width:500px;">Download exclusive visual loop packs created by VJs in the network. Powered by MadMapper, Resolume &amp; TouchDesigner.</p>
+<!-- STATS -->
+<div class="vjs-stats-bar vjs-reveal">
+  <div class="vjs-stat-item"><div class="vjs-stat-number" id="stat-artists">0</div><div class="vjs-stat-label">Artists</div></div>
+  <div class="vjs-stat-item"><div class="vjs-stat-number" id="stat-projects">0</div><div class="vjs-stat-label">Projects</div></div>
+  <div class="vjs-stat-item"><div class="vjs-stat-number" id="stat-events">0</div><div class="vjs-stat-label">Events</div></div>
+  <div class="vjs-stat-item"><div class="vjs-stat-number" id="stat-countries">0</div><div class="vjs-stat-label">Countries</div></div>
+</div>
+
+<!-- ARTISTS — NTS GRID -->
+<section style="padding:50px 0; background:var(--vjs-darker); border-bottom:1px solid #222;">
+  <div style="padding:0 16px; max-width:1400px; margin:0 auto;">
+    <div class="vjs-reveal" style="display:flex; align-items:baseline; justify-content:space-between; flex-wrap:wrap; gap:1rem; margin-bottom:24px;">
+      <div style="display:flex; align-items:baseline; gap:12px;">
+        <h2 class="vjs-section-title" style="margin:0;">Featured Artists</h2>
+        <a href="/artists" class="vjs-picks-link">View All &#8250;</a>
       </div>
-      <a href="/submit" class="vjs-btn vjs-btn-outline" style="font-size:0.78rem; padding:10px 28px; border-color:rgba(57,255,20,0.3); color:#39ff14;">Submit Pack &rarr;</a>
     </div>
   </div>
-  <div class="vjs-sets-scroll">
+  <div style="max-width:1400px; margin:0 auto;">
+    <div class="vjs-reveal">
+      <div class="vjs-nts-grid">
+        {% assign featured_artists = site.vjs | where: "featured", true %}
+        {% for artist in featured_artists limit:6 %}
+        {% include cards/artist-card.html artist=artist %}
+        {% endfor %}
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- LOOP PACKS MARKETPLACE -->
+<section style="padding:50px 0; background:#000; border-bottom:1px solid #222;">
+  <div style="padding:0 16px; max-width:1400px; margin:0 auto; margin-bottom:24px;">
+    <div class="vjs-reveal" style="display:flex; align-items:baseline; justify-content:space-between; flex-wrap:wrap; gap:1rem;">
+      <div style="display:flex; align-items:baseline; gap:12px;">
+        <h2 class="vjs-section-title" style="margin:0;">VJ Loop Packs</h2>
+        <a href="/submit" class="vjs-picks-link" style="color:#39ff14;">Submit Pack &#8250;</a>
+      </div>
+      <span style="font-family:'Barlow Condensed',sans-serif; font-size:0.72rem; color:var(--vjs-text-muted); text-transform:uppercase; letter-spacing:0.06em;">Marketplace</span>
+    </div>
+  </div>
+  <div class="vjs-sets-scroll" style="padding-left:16px; padding-right:16px;">
     {% assign pack_gradients = "rgba(57,255,20,0.3) 0%,rgba(0,212,255,0.2) 100%|rgba(157,0,255,0.4) 0%,rgba(57,255,20,0.2) 100%|rgba(0,212,255,0.3) 0%,rgba(57,255,20,0.25) 100%|rgba(255,0,170,0.3) 0%,rgba(57,255,20,0.15) 100%|rgba(57,255,20,0.25) 0%,rgba(157,0,255,0.3) 100%|rgba(0,212,255,0.25) 0%,rgba(255,0,170,0.2) 100%|rgba(157,0,255,0.35) 0%,rgba(0,212,255,0.2) 100%|rgba(57,255,20,0.35) 0%,rgba(0,212,255,0.25) 100%" | split: "|" %}
     {% assign pack_names = "Neural Glitch Vol.1|Acid Geometry|Dark Matter Loops|Holographic Rave|Cyberpunk City|Dome Textures|Liquid Chrome|Signal Noise" | split: "|" %}
     {% assign pack_artists = site.vjs | map: "title" %}
@@ -275,16 +185,14 @@ meta_description: "VJs TV is the global broadcast network for VJ culture. Watch 
   </div>
 </section>
 
-<!-- PROJECTS — RED BULL TV GRID -->
-<section style="padding:80px 0; background:var(--vjs-black);">
-  <div class="container">
-    <div class="vjs-reveal" style="display:flex; align-items:flex-end; justify-content:space-between; flex-wrap:wrap; gap:1rem; margin-bottom:2rem;">
-      <div>
-        <div class="vjs-section-label">Featured Work</div>
-        <h2 class="vjs-section-title">Latest Projects</h2>
-        <div class="vjs-accent-line" style="background: linear-gradient(90deg, var(--vjs-magenta), var(--vjs-ultraviolet));"></div>
+<!-- PROJECTS — EDITORIAL GRID -->
+<section style="padding:50px 0; background:var(--vjs-darker); border-bottom:1px solid #222;">
+  <div style="padding:0 16px; max-width:1400px; margin:0 auto;">
+    <div class="vjs-reveal" style="display:flex; align-items:baseline; justify-content:space-between; flex-wrap:wrap; gap:1rem; margin-bottom:24px;">
+      <div style="display:flex; align-items:baseline; gap:12px;">
+        <h2 class="vjs-section-title" style="margin:0;">Latest Projects</h2>
+        <a href="/projects" class="vjs-picks-link">View All &#8250;</a>
       </div>
-      <a href="/projects" class="vjs-btn vjs-btn-outline" style="font-size:0.78rem; padding:10px 28px;">All Projects &rarr;</a>
     </div>
     <div class="vjs-reveal">
       <div class="vjs-redbull-grid">
@@ -325,17 +233,15 @@ meta_description: "VJs TV is the global broadcast network for VJ culture. Watch 
   </div>
 </section>
 
-<!-- TECHNOLOGY — PREMIUM TOOL CARDS -->
-<section class="vjs-section" style="background:var(--vjs-darker);">
-  <div class="container">
-    <div class="vjs-reveal" style="display:flex; align-items:flex-end; justify-content:space-between; flex-wrap:wrap; gap:1rem; margin-bottom:3rem;">
-      <div>
-        <div class="vjs-section-label">The Tools Powering VJ Culture</div>
-        <h2 class="vjs-section-title">Technology</h2>
-        <div class="vjs-accent-line vjs-accent-line-magenta"></div>
-        <p style="color:var(--vjs-text-muted); max-width:560px;">Industry-standard software and platforms used by every featured artist on VJs TV.</p>
+<!-- TECHNOLOGY -->
+<section style="padding:50px 0; background:#000; border-bottom:1px solid #222;">
+  <div style="padding:0 16px; max-width:1400px; margin:0 auto;">
+    <div class="vjs-reveal" style="display:flex; align-items:baseline; justify-content:space-between; flex-wrap:wrap; gap:1rem; margin-bottom:24px;">
+      <div style="display:flex; align-items:baseline; gap:12px;">
+        <h2 class="vjs-section-title" style="margin:0;">Technology</h2>
+        <a href="/technology" class="vjs-picks-link">View All &#8250;</a>
       </div>
-      <a href="/technology" class="vjs-btn vjs-btn-outline" style="font-size:0.8rem;">All Tools &rarr;</a>
+      <span style="font-family:'Barlow Condensed',sans-serif; font-size:0.72rem; color:var(--vjs-text-muted); text-transform:uppercase; letter-spacing:0.06em;">The Tools Powering VJ Culture</span>
     </div>
     <div class="vjs-grid vjs-grid-3">
       {% assign featured_tech = site.technology | where: "featured", true %}
@@ -358,7 +264,7 @@ meta_description: "VJs TV is the global broadcast network for VJ culture. Watch 
             {% endif %}
             {% if tech.used_by %}
             <div class="vjs-tool-users">
-              <span style="font-family:'Orbitron',sans-serif; font-size:0.55rem; text-transform:uppercase; letter-spacing:0.12em; color:var(--vjs-text-muted);">Used by: </span>
+              <span style="font-family:'Barlow Condensed',sans-serif; font-size:0.65rem; text-transform:uppercase; letter-spacing:0.08em; color:var(--vjs-text-muted);">Used by: </span>
               {% for name in tech.used_by limit:3 %}<span class="vjs-tag vjs-tag-purple" style="font-size:0.65rem;">{{ name }}</span>{% endfor %}
             </div>
             {% endif %}
@@ -367,47 +273,47 @@ meta_description: "VJs TV is the global broadcast network for VJ culture. Watch 
       </div>
       {% endfor %}
     </div>
-    <div class="vjs-reveal" style="text-align:center; margin-top:3rem; padding:2rem; background:rgba(123,47,255,0.04); border:1px solid rgba(123,47,255,0.15); border-radius:16px;">
-      <p style="color:var(--vjs-text-muted); margin-bottom:1rem; font-size:0.9rem;">Is your technology used by VJs worldwide? <strong style="color:#fff;">Get featured on VJs TV.</strong></p>
-      <a href="/sponsors" class="vjs-btn vjs-btn-sponsor" style="font-size:0.85rem; padding:12px 32px;">Become a Technology Partner</a>
+    <div class="vjs-reveal" style="margin-top:24px; padding:20px; background:var(--vjs-card); border:1px solid var(--vjs-border);">
+      <div style="display:flex; align-items:center; justify-content:space-between; flex-wrap:wrap; gap:1rem;">
+        <p style="color:var(--vjs-text-muted); margin:0; font-size:0.85rem;">Is your technology used by VJs worldwide? <strong style="color:#fff;">Get featured on VJs TV.</strong></p>
+        <a href="/sponsors" class="vjs-btn vjs-btn-sponsor" style="font-size:0.8rem; padding:8px 24px;">Become a Partner</a>
+      </div>
     </div>
   </div>
 </section>
 
 <!-- SPONSORS -->
-<section class="vjs-section">
-  <div class="container">
-    <div class="vjs-reveal" style="text-align:center; margin-bottom:2.5rem;">
-      <h2 class="vjs-section-title">Partners &amp; Sponsors</h2>
-      <div class="vjs-accent-line" style="margin:1rem auto;"></div>
-      <p style="color:var(--vjs-text-muted); max-width:560px; margin:0 auto;">The brands and organizations powering the global VJ broadcast network.</p>
+<section style="padding:50px 0; background:var(--vjs-darker); border-bottom:1px solid #222;">
+  <div style="padding:0 16px; max-width:1400px; margin:0 auto;">
+    <div class="vjs-reveal" style="display:flex; align-items:baseline; justify-content:space-between; flex-wrap:wrap; gap:1rem; margin-bottom:24px;">
+      <div style="display:flex; align-items:baseline; gap:12px;">
+        <h2 class="vjs-section-title" style="margin:0;">Partners & Sponsors</h2>
+        <a href="/business-model" class="vjs-picks-link">View All &#8250;</a>
+      </div>
     </div>
     <div class="vjs-grid vjs-grid-4">
       {% for sponsor in site.sponsors limit:4 %}
       <div class="vjs-reveal vjs-reveal-delay-{{ forloop.index }}">
         <a href="{{ sponsor.url }}" class="text-decoration-none">
-          <div class="vjs-card" style="text-align:center; padding:2rem 1rem;">
-            <div style="font-family:'Orbitron',sans-serif; font-size:0.65rem; text-transform:uppercase; letter-spacing:0.12em; color:var(--vjs-text-muted); margin-bottom:0.5rem;">{{ sponsor.tier }}</div>
-            <h4 style="font-size:1rem; margin-bottom:0.5rem;">{{ sponsor.title }}</h4>
+          <div class="vjs-card" style="text-align:center; padding:1.5rem 1rem;">
+            <div style="font-family:'Barlow Condensed',sans-serif; font-size:0.68rem; text-transform:uppercase; letter-spacing:0.1em; color:var(--vjs-text-muted); margin-bottom:0.4rem;">{{ sponsor.tier }}</div>
+            <h4 style="font-size:1rem; margin-bottom:0.4rem;">{{ sponsor.title }}</h4>
             <p style="font-size:0.8rem; color:var(--vjs-text-muted); margin:0;">{{ sponsor.tagline }}</p>
           </div>
         </a>
       </div>
       {% endfor %}
     </div>
-    <div class="vjs-reveal" style="text-align:center; margin-top:2.5rem;">
-      <a href="/business-model" class="vjs-btn vjs-btn-primary">Become a Partner</a>
-    </div>
   </div>
 </section>
 
 <!-- CTA -->
-<section class="vjs-section vjs-cta-section">
-  <div class="container text-center" style="padding:60px 0;">
+<section style="padding:40px 0; background:#000; border-bottom:1px solid #222;">
+  <div style="padding:0 16px; max-width:1400px; margin:0 auto; text-align:center;">
     <div class="vjs-reveal">
-      <h2 class="vjs-section-title" style="margin-bottom:1rem;">Join the Network</h2>
-      <p style="color:var(--vjs-text-muted); max-width:600px; margin:0 auto 2rem;">Submit your visual performance projects and become part of the global VJ community.</p>
-      <div style="display:flex; gap:1rem; justify-content:center; flex-wrap:wrap;">
+      <h2 class="vjs-section-title" style="margin-bottom:8px;">Join the Network</h2>
+      <p style="color:var(--vjs-text-muted); max-width:600px; margin:0 auto 20px; font-size:0.9rem;">Submit your visual performance projects and become part of the global VJ community.</p>
+      <div style="display:flex; gap:10px; justify-content:center; flex-wrap:wrap;">
         <a href="/submit" class="vjs-btn vjs-btn-primary">Submit Project</a>
         <a href="https://vjsmag.com" target="_blank" class="vjs-btn vjs-btn-outline">Read VJSMag</a>
       </div>
@@ -419,51 +325,6 @@ meta_description: "VJs TV is the global broadcast network for VJ culture. Watch 
 
 <script>
 (function() {
-  // HERO PARTICLES
-  var canvas = document.getElementById('vjs-hero-canvas');
-  if (canvas) {
-    var ctx = canvas.getContext('2d'), pts = [], mouse = {x:-9999,y:-9999};
-    function resize() { canvas.width = canvas.offsetWidth; canvas.height = canvas.offsetHeight; }
-    resize(); window.addEventListener('resize', resize);
-    document.querySelector('.vjs-hero').addEventListener('mousemove', function(e) {
-      var r = canvas.getBoundingClientRect(); mouse.x = e.clientX-r.left; mouse.y = e.clientY-r.top;
-    });
-    var colors = ['rgba(123,47,255,','rgba(0,212,255,','rgba(255,0,255,'];
-    for (var i=0; i<90; i++) pts.push({ x:Math.random()*window.innerWidth, y:Math.random()*window.innerHeight, vx:(Math.random()-.5)*.6, vy:(Math.random()-.5)*.6, r:Math.random()*2+0.5, c:colors[i%3] });
-    function draw() {
-      ctx.clearRect(0,0,canvas.width,canvas.height);
-      pts.forEach(function(p) {
-        var dx=mouse.x-p.x, dy=mouse.y-p.y, d=Math.sqrt(dx*dx+dy*dy);
-        if(d<130){p.vx-=dx/d*.25; p.vy-=dy/d*.25;}
-        p.x+=p.vx; p.y+=p.vy; p.vx*=.98; p.vy*=.98;
-        if(p.x<0)p.x=canvas.width; if(p.x>canvas.width)p.x=0;
-        if(p.y<0)p.y=canvas.height; if(p.y>canvas.height)p.y=0;
-        ctx.beginPath(); ctx.arc(p.x,p.y,p.r,0,Math.PI*2);
-        ctx.fillStyle=p.c+'0.75)'; ctx.fill();
-      });
-      for(var i=0;i<pts.length;i++) for(var j=i+1;j<pts.length;j++) {
-        var dx=pts[i].x-pts[j].x, dy=pts[i].y-pts[j].y, d=Math.sqrt(dx*dx+dy*dy);
-        if(d<110){ ctx.beginPath(); ctx.moveTo(pts[i].x,pts[i].y); ctx.lineTo(pts[j].x,pts[j].y);
-          ctx.strokeStyle='rgba(123,47,255,'+(0.12*(1-d/110))+')'; ctx.lineWidth=.5; ctx.stroke(); }
-      }
-      requestAnimationFrame(draw);
-    }
-    draw();
-  }
-
-  // COUNTDOWN — target: 2026-04-20 21:00 CET (UTC+1)
-  var target = new Date('2026-04-20T20:00:00Z');
-  function pad(n){return n<10?'0'+n:n;}
-  function tick(){
-    var diff = target - new Date();
-    if(diff<=0){['cd-days','cd-hours','cd-mins','cd-secs'].forEach(function(id){document.getElementById(id).textContent='00';});return;}
-    document.getElementById('cd-days').textContent  = pad(Math.floor(diff/86400000));
-    document.getElementById('cd-hours').textContent = pad(Math.floor((diff%86400000)/3600000));
-    document.getElementById('cd-mins').textContent  = pad(Math.floor((diff%3600000)/60000));
-    document.getElementById('cd-secs').textContent  = pad(Math.floor((diff%60000)/1000));
-  }
-  tick(); setInterval(tick, 1000);
-
   // STATS COUNTER
   var statsTargets = { 'stat-artists': {{ site.vjs | size }}, 'stat-projects': {{ site.projects | size }}, 'stat-events': {{ site.events | size }}, 'stat-countries': 24 };
   var started = false;
