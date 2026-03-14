@@ -1,0 +1,36 @@
+---
+layout: default
+title: "Sponsors - VJs TV"
+meta_title: "Sponsors & Partners - VJs TV"
+meta_description: "Technology partners, creative partners, and equipment partners supporting VJ culture and visual performance."
+---
+
+{% include layouts/nav/nav-3.html default_logo="white" %}
+
+<div class="vjs-page-header">
+  <div class="container">
+    <h1 class="vjs-section-title" style="font-size:clamp(2rem,5vw,3.5rem);">Sponsors & Partners</h1>
+    <div class="vjs-accent-line"></div>
+    <p style="color: var(--vjs-text-muted); max-width:600px; font-size:1.05rem;">Title sponsors, technology partners, creative partners, and equipment partners supporting the future of visual performance.</p>
+  </div>
+</div>
+
+<section class="vjs-section">
+  <div class="container">
+    <div class="vjs-grid vjs-grid-3">
+      {% for sponsor in site.sponsors %}
+      {% include cards/sponsor-card.html sponsor=sponsor %}
+      {% endfor %}
+    </div>
+  </div>
+</section>
+
+<section class="vjs-section vjs-cta-section">
+  <div class="container text-center" style="padding:60px 0;">
+    <h2 class="vjs-section-title" style="margin-bottom:1rem;">Become a Partner</h2>
+    <p class="vjs-section-subtitle" style="max-width:600px; margin:0 auto 2rem;">Reach the global VJ community. Partner with VJs TV to connect your brand with visual artists and creative technologists.</p>
+    <a href="mailto:hello@vjstv.com" class="vjs-btn vjs-btn-primary">Contact Us</a>
+  </div>
+</section>
+
+{% include layouts/footer/footer-1.html %}

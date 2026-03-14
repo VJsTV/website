@@ -1,0 +1,546 @@
+@import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=Inter:wght@300;400;500;600;700&family=Orbitron:wght@400;500;600;700;800;900&display=swap');
+
+:root {
+  --vjs-black: #0a0a0f;
+  --vjs-dark: #12121a;
+  --vjs-darker: #0e0e16;
+  --vjs-card: #1a1a2e;
+  --vjs-border: #2a2a3e;
+  --vjs-ultraviolet: #7b2fff;
+  --vjs-electric-blue: #00d4ff;
+  --vjs-magenta: #ff00ff;
+  --vjs-pink: #ff3cac;
+  --vjs-cyan: #00f5d4;
+  --vjs-text: #e0e0f0;
+  --vjs-text-muted: #8888aa;
+  --vjs-gradient-1: linear-gradient(135deg, #7b2fff 0%, #00d4ff 100%);
+  --vjs-gradient-2: linear-gradient(135deg, #ff3cac 0%, #7b2fff 50%, #00d4ff 100%);
+  --vjs-gradient-3: linear-gradient(135deg, #ff00ff 0%, #7b2fff 100%);
+  --vjs-glow-purple: 0 0 30px rgba(123, 47, 255, 0.3);
+  --vjs-glow-blue: 0 0 30px rgba(0, 212, 255, 0.3);
+}
+
+body {
+  font-family: 'Inter', sans-serif !important;
+  background-color: var(--vjs-black) !important;
+  color: var(--vjs-text) !important;
+}
+
+h1, h2, h3, h4, h5, h6,
+.display-1, .display-2, .display-3, .display-4 {
+  font-family: 'Space Grotesk', sans-serif !important;
+  color: #ffffff !important;
+}
+
+.vjs-orbitron {
+  font-family: 'Orbitron', sans-serif !important;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+}
+
+.content-wrapper {
+  background-color: var(--vjs-black) !important;
+}
+
+.navbar {
+  background-color: rgba(10, 10, 15, 0.95) !important;
+  backdrop-filter: blur(20px);
+  border-bottom: 1px solid var(--vjs-border) !important;
+}
+
+.navbar .nav-link {
+  font-family: 'Space Grotesk', sans-serif !important;
+  text-transform: uppercase !important;
+  font-size: 0.8rem !important;
+  letter-spacing: 0.08em !important;
+  color: var(--vjs-text) !important;
+  transition: color 0.3s ease !important;
+}
+
+.navbar .nav-link:hover {
+  color: var(--vjs-electric-blue) !important;
+}
+
+.vjs-hero {
+  position: relative;
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--vjs-black);
+  overflow: hidden;
+}
+
+.vjs-hero-bg {
+  position: absolute;
+  top: 0; left: 0; right: 0; bottom: 0;
+  background: radial-gradient(ellipse at 20% 50%, rgba(123, 47, 255, 0.15) 0%, transparent 50%),
+              radial-gradient(ellipse at 80% 50%, rgba(0, 212, 255, 0.1) 0%, transparent 50%),
+              radial-gradient(ellipse at 50% 100%, rgba(255, 0, 255, 0.08) 0%, transparent 50%);
+  z-index: 0;
+}
+
+.vjs-hero-content {
+  position: relative;
+  z-index: 1;
+  text-align: center;
+  padding: 2rem;
+}
+
+.vjs-hero-title {
+  font-family: 'Orbitron', sans-serif !important;
+  font-size: clamp(3rem, 8vw, 7rem) !important;
+  font-weight: 900 !important;
+  letter-spacing: 0.05em;
+  background: var(--vjs-gradient-2);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  line-height: 1.1;
+  margin-bottom: 1.5rem;
+}
+
+.vjs-hero-subtitle {
+  font-family: 'Space Grotesk', sans-serif !important;
+  font-size: clamp(1rem, 2vw, 1.4rem) !important;
+  color: var(--vjs-text-muted) !important;
+  max-width: 600px;
+  margin: 0 auto 2rem;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+}
+
+.vjs-btn {
+  display: inline-block;
+  padding: 14px 40px;
+  font-family: 'Space Grotesk', sans-serif;
+  font-weight: 600;
+  font-size: 0.9rem;
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  border: none;
+  border-radius: 50px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  text-decoration: none !important;
+}
+
+.vjs-btn-primary {
+  background: var(--vjs-gradient-1);
+  color: #fff !important;
+  box-shadow: var(--vjs-glow-purple);
+}
+
+.vjs-btn-primary:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 0 50px rgba(123, 47, 255, 0.5);
+  color: #fff !important;
+}
+
+.vjs-btn-outline {
+  background: transparent;
+  color: var(--vjs-electric-blue) !important;
+  border: 2px solid var(--vjs-electric-blue);
+}
+
+.vjs-btn-outline:hover {
+  background: var(--vjs-electric-blue);
+  color: var(--vjs-black) !important;
+}
+
+.vjs-section {
+  padding: 100px 0;
+  background-color: var(--vjs-black);
+}
+
+.vjs-section-alt {
+  background-color: var(--vjs-darker);
+}
+
+.vjs-section-title {
+  font-family: 'Orbitron', sans-serif !important;
+  font-size: clamp(1.5rem, 3vw, 2.5rem) !important;
+  font-weight: 700 !important;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  margin-bottom: 0.5rem;
+}
+
+.vjs-section-subtitle {
+  color: var(--vjs-text-muted) !important;
+  font-size: 1rem;
+  letter-spacing: 0.05em;
+  margin-bottom: 3rem;
+}
+
+.vjs-accent-line {
+  width: 60px;
+  height: 3px;
+  background: var(--vjs-gradient-1);
+  margin-bottom: 1.5rem;
+}
+
+.vjs-accent-line-center {
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.vjs-card {
+  background: var(--vjs-card) !important;
+  border: 1px solid var(--vjs-border) !important;
+  border-radius: 12px !important;
+  overflow: hidden;
+  transition: all 0.4s ease;
+  height: 100%;
+}
+
+.vjs-card:hover {
+  border-color: var(--vjs-ultraviolet) !important;
+  transform: translateY(-5px);
+  box-shadow: var(--vjs-glow-purple);
+}
+
+.vjs-card-img {
+  width: 100%;
+  height: 220px;
+  object-fit: cover;
+  position: relative;
+}
+
+.vjs-card-img-placeholder {
+  width: 100%;
+  height: 220px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 3rem;
+}
+
+.vjs-card-body {
+  padding: 1.5rem;
+}
+
+.vjs-card-title {
+  font-family: 'Space Grotesk', sans-serif !important;
+  font-size: 1.15rem !important;
+  font-weight: 600 !important;
+  margin-bottom: 0.5rem;
+}
+
+.vjs-card-text {
+  color: var(--vjs-text-muted) !important;
+  font-size: 0.9rem;
+  line-height: 1.6;
+}
+
+.vjs-tag {
+  display: inline-block;
+  padding: 4px 12px;
+  font-size: 0.7rem;
+  font-family: 'Space Grotesk', sans-serif;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  border-radius: 20px;
+  margin-right: 6px;
+  margin-bottom: 6px;
+}
+
+.vjs-tag-purple {
+  background: rgba(123, 47, 255, 0.2);
+  color: var(--vjs-ultraviolet);
+  border: 1px solid rgba(123, 47, 255, 0.3);
+}
+
+.vjs-tag-blue {
+  background: rgba(0, 212, 255, 0.15);
+  color: var(--vjs-electric-blue);
+  border: 1px solid rgba(0, 212, 255, 0.3);
+}
+
+.vjs-tag-magenta {
+  background: rgba(255, 0, 255, 0.15);
+  color: var(--vjs-magenta);
+  border: 1px solid rgba(255, 0, 255, 0.3);
+}
+
+.vjs-tag-cyan {
+  background: rgba(0, 245, 212, 0.15);
+  color: var(--vjs-cyan);
+  border: 1px solid rgba(0, 245, 212, 0.3);
+}
+
+.vjs-live-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 6px 16px;
+  background: rgba(255, 0, 60, 0.2);
+  border: 1px solid rgba(255, 0, 60, 0.5);
+  border-radius: 20px;
+  font-family: 'Orbitron', sans-serif;
+  font-size: 0.75rem;
+  font-weight: 700;
+  color: #ff003c;
+  text-transform: uppercase;
+  letter-spacing: 0.15em;
+}
+
+.vjs-live-dot {
+  width: 8px;
+  height: 8px;
+  background: #ff003c;
+  border-radius: 50%;
+  animation: vjsPulse 1.5s ease-in-out infinite;
+}
+
+@keyframes vjsPulse {
+  0%, 100% { opacity: 1; transform: scale(1); }
+  50% { opacity: 0.5; transform: scale(1.3); }
+}
+
+.vjs-live-player {
+  position: relative;
+  width: 100%;
+  padding-bottom: 56.25%;
+  background: var(--vjs-dark);
+  border-radius: 16px;
+  overflow: hidden;
+  border: 1px solid var(--vjs-border);
+  box-shadow: var(--vjs-glow-purple);
+}
+
+.vjs-live-player iframe,
+.vjs-live-player .vjs-placeholder {
+  position: absolute;
+  top: 0; left: 0;
+  width: 100%;
+  height: 100%;
+}
+
+.vjs-live-placeholder {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  background: radial-gradient(ellipse at center, rgba(123, 47, 255, 0.1) 0%, var(--vjs-dark) 70%);
+}
+
+.vjs-live-placeholder-icon {
+  font-size: 4rem;
+  margin-bottom: 1rem;
+  opacity: 0.5;
+}
+
+.vjs-schedule-item {
+  display: flex;
+  align-items: center;
+  padding: 1.25rem 1.5rem;
+  background: var(--vjs-card);
+  border: 1px solid var(--vjs-border);
+  border-radius: 12px;
+  margin-bottom: 1rem;
+  transition: all 0.3s ease;
+}
+
+.vjs-schedule-item:hover {
+  border-color: var(--vjs-ultraviolet);
+  box-shadow: var(--vjs-glow-purple);
+}
+
+.vjs-schedule-time {
+  font-family: 'Orbitron', sans-serif;
+  font-size: 0.85rem;
+  color: var(--vjs-electric-blue);
+  white-space: nowrap;
+  min-width: 100px;
+}
+
+.vjs-schedule-info {
+  flex: 1;
+  padding: 0 1.5rem;
+}
+
+.vjs-schedule-artist {
+  font-family: 'Space Grotesk', sans-serif;
+  font-weight: 600;
+  font-size: 1.05rem;
+  color: #fff;
+}
+
+.vjs-schedule-desc {
+  font-size: 0.85rem;
+  color: var(--vjs-text-muted);
+}
+
+.vjs-grid {
+  display: grid;
+  gap: 1.5rem;
+}
+
+.vjs-grid-3 {
+  grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+}
+
+.vjs-grid-4 {
+  grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+}
+
+.vjs-page-header {
+  padding: 160px 0 80px;
+  background: var(--vjs-darker);
+  position: relative;
+  overflow: hidden;
+}
+
+.vjs-page-header::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0; bottom: 0;
+  background: radial-gradient(ellipse at 30% 50%, rgba(123, 47, 255, 0.08) 0%, transparent 50%),
+              radial-gradient(ellipse at 70% 50%, rgba(0, 212, 255, 0.05) 0%, transparent 50%);
+}
+
+.vjs-page-header .container {
+  position: relative;
+  z-index: 1;
+}
+
+.vjs-sponsor-tier {
+  font-family: 'Orbitron', sans-serif;
+  font-size: 0.8rem;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: var(--vjs-ultraviolet);
+  margin-bottom: 2rem;
+  padding-bottom: 0.5rem;
+  border-bottom: 1px solid var(--vjs-border);
+}
+
+.vjs-sponsor-logo {
+  width: 100%;
+  height: 120px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--vjs-card);
+  border: 1px solid var(--vjs-border);
+  border-radius: 12px;
+  padding: 1.5rem;
+  transition: all 0.3s ease;
+}
+
+.vjs-sponsor-logo:hover {
+  border-color: var(--vjs-ultraviolet);
+  box-shadow: var(--vjs-glow-purple);
+}
+
+.vjs-cta-section {
+  background: linear-gradient(135deg, rgba(123, 47, 255, 0.15) 0%, rgba(0, 212, 255, 0.1) 50%, rgba(255, 0, 255, 0.1) 100%);
+  border-top: 1px solid var(--vjs-border);
+  border-bottom: 1px solid var(--vjs-border);
+}
+
+.vjs-detail-header {
+  padding: 160px 0 60px;
+  background: var(--vjs-darker);
+}
+
+.vjs-detail-meta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1.5rem;
+  margin: 1.5rem 0;
+}
+
+.vjs-detail-meta-item {
+  display: flex;
+  flex-direction: column;
+}
+
+.vjs-detail-meta-label {
+  font-family: 'Orbitron', sans-serif;
+  font-size: 0.65rem;
+  text-transform: uppercase;
+  letter-spacing: 0.15em;
+  color: var(--vjs-text-muted);
+  margin-bottom: 4px;
+}
+
+.vjs-detail-meta-value {
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: 0.95rem;
+  color: var(--vjs-electric-blue);
+}
+
+footer {
+  background-color: var(--vjs-darker) !important;
+  border-top: 1px solid var(--vjs-border) !important;
+}
+
+footer a {
+  color: var(--vjs-text-muted) !important;
+  transition: color 0.3s ease !important;
+}
+
+footer a:hover {
+  color: var(--vjs-electric-blue) !important;
+}
+
+footer h5 {
+  font-family: 'Orbitron', sans-serif !important;
+  font-size: 0.8rem !important;
+  letter-spacing: 0.1em !important;
+  text-transform: uppercase !important;
+}
+
+footer p, footer address {
+  color: var(--vjs-text-muted) !important;
+}
+
+.widget-title {
+  color: #ffffff !important;
+}
+
+.inverse-text .nav-link {
+  color: var(--vjs-text) !important;
+}
+
+.offcanvas-nav {
+  background-color: var(--vjs-dark) !important;
+}
+
+.dropdown-menu {
+  background-color: var(--vjs-card) !important;
+  border: 1px solid var(--vjs-border) !important;
+}
+
+.dropdown-item {
+  color: var(--vjs-text) !important;
+}
+
+.dropdown-item:hover {
+  background-color: rgba(123, 47, 255, 0.15) !important;
+  color: var(--vjs-electric-blue) !important;
+}
+
+@media (max-width: 768px) {
+  .vjs-hero-title {
+    font-size: 2.5rem !important;
+  }
+  .vjs-section {
+    padding: 60px 0;
+  }
+  .vjs-grid-3 {
+    grid-template-columns: 1fr;
+  }
+  .vjs-grid-4 {
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  }
+  .vjs-schedule-item {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+  .vjs-schedule-info {
+    padding: 0.5rem 0;
+  }
+}

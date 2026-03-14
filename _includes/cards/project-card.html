@@ -1,0 +1,15 @@
+<a href="{{ include.project.url }}" class="text-decoration-none">
+  <div class="vjs-card">
+    <div class="vjs-card-img-placeholder" style="background: linear-gradient(135deg, rgba(255,0,255,0.2) 0%, rgba(123,47,255,0.3) 100%);">
+      <span style="font-size:2.5rem; opacity:0.6;">&#9654;</span>
+    </div>
+    <div class="vjs-card-body">
+      <div style="margin-bottom:0.5rem;">
+        <span class="vjs-tag vjs-tag-magenta">{{ include.project.project_type }}</span>
+      </div>
+      <h4 class="vjs-card-title">{{ include.project.title }}</h4>
+      <p class="vjs-card-text" style="margin-bottom:0.25rem;">{{ include.project.artist }}</p>
+      <p class="vjs-card-text" style="font-size:0.8rem;">{{ include.project.location }} &middot; {{ include.project.year }}</p>
+    </div>
+  </div>
+</a>

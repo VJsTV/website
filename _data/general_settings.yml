@@ -1,126 +1,86 @@
-# General Settings
-title: "Snowlake - Creative Business and Startup Jekyll Theme"
-email: "tortoizthemes@gmail.com"
-email_2: "support@tortoizthemes.com"
-description: >- # this means to ignore newlines until "baseurl:"
-  Snowlake Jekyll Theme is a perfectly crafted fast loading and SEO-friendly static site generator theme
-  with a variety of UI elements and countless features. A perfect theme to build your next dream project.
+title: "VJs TV - Global Broadcast Network for VJ Culture"
+email: "hello@vjstv.com"
+description: >-
+  VJs TV is the global broadcast network for VJ culture, audiovisual performances,
+  and digital visual art. Watch live performances, discover artists, and explore
+  the world of visual performance.
 favicon: "/assets/images/favicon.webp"
 
-# Seo Meta Settings
 meta_og_image: "/assets/images/meta-image.webp"
 meta_twitter_image: "/assets/images/meta-image.webp"
 
-# Site Wide Theme Color Setting
-color_scheme:  #Aqua Blue Brown Cobalt Green Hibiscus Leaf Meander Orange Pink Purple Red Rose Sky Teal Violet Yellow
+color_scheme:
+font_scheme:
 
-# Site Wide Theme Font Setting
-font_scheme:  # Jost, Nunito , DM Sans + Zilla Slab , HK Grotesk, Abhaya, Libre
-
-# Sitewide Logo
-black_logo_1x: "/assets/images/logo.webp"
-black_logo_2x: "/assets/images/logo@2x.webp"
+black_logo_1x: "/assets/images/logo-light.webp"
+black_logo_2x: "/assets/images/logo-light@2x.webp"
 light_logo_1x: "/assets/images/logo-light.webp"
 light_logo_2x: "/assets/images/logo-light@2x.webp"
 
-# Site Wide Address and Phone Number
-address_01: 'Moonshine St. <br>14/05 Light City,<br /> London, United Kingdom'
-phone_number: "+00 (123) 456 78 90"
+address_01: 'Global Network<br/>VJs TV HQ'
+phone_number: ""
 
-# Site Wide Copyright
-copyright_text: "© 2025 Snowlake. All rights reserved."
+copyright_text: "&copy; 2025 VJs TV. All rights reserved."
 
-# Site Wide Google Analytics
 google_analytics:
   enable: false
-  key: "UA-664136761-1"  # UA-664136761-1
+  key: ""
 
-# Site Wide Google Map  
-google_map: |
-  <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3172.4564967931838!2d-122.03250858386237!3d37.33169997984258!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x808fb5b6e94ffe23%3A0x63bb79532baa6af4!2sApple+Campus!5e0!3m2!1sen!2str!4v1553850783971!5m2!1sen!2str" style="width:100%; height: 100%; border:0" allowfullscreen=""></iframe>
-
-# Site Wide Social Accounts
 social_accounts:
   title: "Follow Us"
   links:
-    - url: "#"
+    - url: "https://instagram.com/vjstv"
+      icon: "jam jam-instagram"
+    - url: "https://youtube.com/@vjstv"
+      icon: "jam jam-youtube"
+    - url: "https://vimeo.com/vjstv"
+      icon: "jam jam-vimeo"
+    - url: "https://twitter.com/vjstv"
       icon: "jam jam-twitter"
 
-    - url: "#"
-      icon: "jam jam-facebook"
-
-    - url: "#"
-      icon: "jam jam-instagram"
-
-    - url: "#"
-      icon: "jam jam-vimeo"
-      
-    - url: "#"
-      icon: "jam jam-youtube"
-
-# Site Wide External Links for footer
 external_links:
-  title: "Learn More"
+  title: "Platform"
   links:
-    - url: "#"
-      text: "About Us"
-    - url: "#"
-      text: "Our Story"
-    - url: "#"
+    - url: "/live"
+      text: "Live"
+    - url: "/artists"
+      text: "Artists"
+    - url: "/projects"
       text: "Projects"
-    - url: "#"
-      text: "Pricing"
-    - url: "#"
-      text: "Features"
+    - url: "/events"
+      text: "Events"
 
-# Site Wide External Links for footer
 external_links_02:
-  title: "Need Help?"
+  title: "Explore"
   links:
+    - url: "/studios"
+      text: "Studios"
+    - url: "/technology"
+      text: "Technology"
+    - url: "/sponsors"
+      text: "Sponsors"
+    - url: "/submit"
+      text: "Submit Project"
+
+external_links_03:
+  title: "Network"
+  links:
+    - url: "https://vjsmag.com"
+      text: "VJSMag"
     - url: "#"
-      text: "Support"
+      text: "About"
     - url: "#"
-      text: "Get Started"
-    - url: "#"
-      text: "Contact Us"
-    - url: "#"
-      text: "Terms of Use"
+      text: "Contact"
     - url: "#"
       text: "Privacy Policy"
 
-# Site Wide External Links for footer
-external_links_03:
-  title: "Company"
-  links:
-    - url: "#"
-      text: "Our Team"
-    - url: "#"
-      text: "Strategy"
-    - url: "#"
-      text: "Service"
-    - url: "#"
-      text: "Mission"
-    - url: "#"
-      text: "Process"
-
-# Footer Newsletter
 footer_newsletter:
-  title: "Our Newsletter"
-  sub_title: "Subscribe to our newsletter to get our news & deals delivered to your inbox!"
-  subscribe_button_text: "Join"
+  title: "Join the Network"
+  sub_title: "Subscribe to get updates on live performances, new artists, and exclusive content."
+  subscribe_button_text: "Subscribe"
 
-# Author Page Background Image
 author_page_header:
   header_background_image: "/assets/images/art/bg31.webp"
 
-# Gallery
 gallery:
-  images:
-  - img: "/assets/images/art/z1.svg"
-  - img: "/assets/images/art/z2.svg"
-  - img: "/assets/images/art/z3.svg"
-  - img: "/assets/images/art/z4.svg"
-  - img: "/assets/images/art/z5.svg"
-  - img: "/assets/images/art/z6.svg"
-  - img: "/assets/images/art/z7.svg"
-  - img: "/assets/images/art/z8.svg"
+  images: []

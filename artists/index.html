@@ -1,0 +1,28 @@
+---
+layout: default
+title: "Artists - VJs TV"
+meta_title: "VJ Artists Directory - VJs TV"
+meta_description: "Discover visual artists and VJs from around the world on VJs TV."
+---
+
+{% include layouts/nav/nav-3.html default_logo="white" %}
+
+<div class="vjs-page-header">
+  <div class="container">
+    <h1 class="vjs-section-title" style="font-size:clamp(2rem,5vw,3.5rem);">Artists</h1>
+    <div class="vjs-accent-line"></div>
+    <p style="color: var(--vjs-text-muted); max-width:600px; font-size:1.05rem;">The global directory of VJ artists and visual performers. Explore their work, discover their tools, and watch their performances.</p>
+  </div>
+</div>
+
+<section class="vjs-section">
+  <div class="container">
+    <div class="vjs-grid vjs-grid-3">
+      {% for artist in site.vjs %}
+      {% include cards/artist-card.html artist=artist %}
+      {% endfor %}
+    </div>
+  </div>
+</section>
+
+{% include layouts/footer/footer-1.html %}

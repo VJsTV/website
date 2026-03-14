@@ -1,0 +1,19 @@
+<a href="{{ include.artist.url }}" class="text-decoration-none">
+  <div class="vjs-card">
+    <div class="vjs-card-img-placeholder" style="background: linear-gradient(135deg, rgba(123,47,255,0.3) 0%, rgba(0,212,255,0.2) 100%);">
+      <span style="font-size:2.5rem; opacity:0.6;">&#9673;</span>
+    </div>
+    <div class="vjs-card-body">
+      <h4 class="vjs-card-title">{{ include.artist.title }}</h4>
+      <p class="vjs-card-text" style="margin-bottom:0.5rem;">{{ include.artist.location }}</p>
+      <p class="vjs-card-text" style="font-size:0.8rem;">{{ include.artist.visual_style }}</p>
+      {% if include.artist.technologies %}
+      <div style="margin-top:0.75rem;">
+        {% for tech in include.artist.technologies limit:3 %}
+        <span class="vjs-tag vjs-tag-purple">{{ tech }}</span>
+        {% endfor %}
+      </div>
+      {% endif %}
+    </div>
+  </div>
+</a>

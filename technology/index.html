@@ -1,0 +1,28 @@
+---
+layout: default
+title: "Technology - VJs TV"
+meta_title: "VJ Technology & Tools - VJs TV"
+meta_description: "Visual software, projection systems, media servers, LED technologies, and AI visual tools used by VJs worldwide."
+---
+
+{% include layouts/nav/nav-3.html default_logo="white" %}
+
+<div class="vjs-page-header">
+  <div class="container">
+    <h1 class="vjs-section-title" style="font-size:clamp(2rem,5vw,3.5rem);">Technology</h1>
+    <div class="vjs-accent-line"></div>
+    <p style="color: var(--vjs-text-muted); max-width:600px; font-size:1.05rem;">Visual software, projection systems, media servers, LED technologies, and AI visual tools powering the world of VJ culture.</p>
+  </div>
+</div>
+
+<section class="vjs-section">
+  <div class="container">
+    <div class="vjs-grid vjs-grid-3">
+      {% for tech in site.technology %}
+      {% include cards/technology-card.html tech=tech %}
+      {% endfor %}
+    </div>
+  </div>
+</section>
+
+{% include layouts/footer/footer-1.html %}

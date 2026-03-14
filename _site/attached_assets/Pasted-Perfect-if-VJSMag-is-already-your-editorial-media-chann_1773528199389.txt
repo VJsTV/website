@@ -1,0 +1,404 @@
+Perfect — if **VJSMag** is already your **editorial/media channel**, then **VJs TV should not duplicate the blog**. The website should instead function as the **platform layer**: broadcasting, discovery, and project infrastructure for VJ culture.
+
+So we slightly adjust the structure.
+
+---
+
+# VJs TV – Correct Platform Architecture
+
+VJs TV becomes the **platform + stage**.
+
+VJSMag becomes the **media publication**.
+
+Think of it like:
+
+* **Boiler Room** → performances
+* **Resident Advisor** → editorial/media
+
+Both connected but different.
+
+---
+
+# Correct Navigation
+
+Remove **Blog** from VJs TV.
+
+Final navigation:
+
+```
+Home
+Live
+Artists
+Projects
+Events
+Studios
+Technology
+Sponsors
+Submit Project
+```
+
+And add a **VJSMag link** in the header:
+
+```
+Magazine → vjsmag.com
+```
+
+---
+
+# Homepage Structure
+
+Your homepage should feel like a **broadcast network**.
+
+```
+Hero
+LIVE NOW
+
+Upcoming Performances
+
+Featured Artists
+
+Featured Projects
+
+Studios & Installations
+
+Technology & Tools
+
+Sponsors
+
+Join the Network
+```
+
+The **LIVE section must dominate the page**.
+
+---
+
+# Section Roles
+
+## Live
+
+Purpose: **watch performances**
+
+Content:
+
+```
+Live broadcast player
+Upcoming schedule
+Performing artists
+```
+
+Embed from:
+
+* YouTube Live
+  or
+* Vimeo
+
+---
+
+# Artists
+
+Directory of VJs.
+
+Each page includes:
+
+```
+bio
+visual style
+projects
+live streams
+studio
+technology used
+```
+
+---
+
+# Projects
+
+This is extremely important.
+
+It becomes the **global index of VJ work**.
+
+Types:
+
+```
+live visuals
+projection mapping
+AI visuals
+generative art
+immersive installations
+dome visuals
+stage visuals
+```
+
+Each project includes:
+
+```
+artist
+technology
+video
+location
+event history
+```
+
+---
+
+# Events
+
+Shows and festivals.
+
+Examples:
+
+```
+VJs TV Live Sessions
+Festival visuals
+Brand activations
+```
+
+---
+
+# Studios
+
+Studios where visual performances are produced.
+
+Examples:
+
+```
+AV studios
+immersive domes
+projection labs
+visual collectives
+```
+
+---
+
+# Technology
+
+This is attractive for **sponsors**.
+
+Include:
+
+```
+visual software
+projection systems
+media servers
+LED technologies
+AI visual tools
+```
+
+Examples:
+
+* Resolume
+* TouchDesigner
+* MadMapper
+
+---
+
+# Sponsors
+
+Your **revenue page**.
+
+Categories:
+
+```
+Title sponsor
+Technology partners
+Creative partners
+Equipment partners
+```
+
+Each sponsor page shows:
+
+```
+brand
+tools used by artists
+sponsored performances
+```
+
+---
+
+# Submit Project
+
+This becomes the **growth engine**.
+
+Artists submit:
+
+```
+artist
+project
+video
+technology used
+studio
+location
+```
+
+Submission tools:
+
+* Tally
+* Typeform
+
+---
+
+# Repository Structure
+
+Update your repo with these collections:
+
+```
+_vjs
+_projects
+_events
+_studios
+_technology
+_sponsors
+```
+
+Example:
+
+```
+_vjs/
+vj-kai.md
+luna-visuals.md
+
+_projects/
+ai-dome-show.md
+berlin-techno-visuals.md
+
+_events/
+vjs-tv-live-01.md
+
+_studios/
+berlin-visual-lab.md
+tokyo-projection-studio.md
+
+_technology/
+touchdesigner.md
+resolume.md
+```
+
+---
+
+# Design Direction
+
+The design should feel like:
+
+```
+digital art museum
++
+broadcast studio
++
+electronic music culture
+```
+
+Colors:
+
+```
+black
+ultraviolet
+electric blue
+magenta
+```
+
+Fonts:
+
+```
+Space Grotesk
+Inter
+Orbitron
+```
+
+---
+
+# Updated Replit Prompt
+
+Paste this in **Replit**.
+
+```
+I have a Jekyll GitHub Pages repository for VJs TV.
+
+The platform is a global broadcast network for VJ culture and audiovisual performances.
+
+Important: the editorial media and blog already exist on vjsmag.com.
+
+Therefore the VJs TV site should NOT include a blog.
+
+Instead the site should focus on:
+
+1. Live visual performance broadcasting
+2. Directory of VJ artists
+3. Audiovisual projects
+4. Events and performances
+5. Studios and installations
+6. Technology used by VJs
+7. Sponsors and brand partners
+8. Project submissions
+
+Please update the architecture with these collections:
+
+_vjs
+_projects
+_events
+_studios
+_technology
+_sponsors
+
+Create these main pages:
+
+/live
+/artists
+/projects
+/events
+/studios
+/technology
+/sponsors
+/submit
+
+Homepage sections:
+
+Hero with video background
+LIVE broadcast player
+Upcoming performances
+Featured artists
+Featured projects
+Studios
+Technology tools
+Sponsors
+Submit project call-to-action
+
+Design direction:
+
+dark theme
+cyber / neon aesthetic
+large video blocks
+visual art culture
+performance oriented
+
+Optimize for GitHub Pages static deployment.
+
+Also create reusable components for:
+
+artist cards
+project cards
+event cards
+studio cards
+technology cards
+sponsor cards
+live stream player
+```
+
+---
+
+# One Important Strategic Move
+
+You should also **connect the two sites**:
+
+**VJSMag → culture / media**
+**VJs TV → platform / performances**
+
+Articles on **VJSMag** should embed performances from **VJs TV**.
+
+That creates a **media + platform ecosystem**.
+
+---
+
+If you want, I can also show you something very powerful next:
+
+**How to turn VJs TV into the global IMDb of VJ culture**
+(which could realistically become **the largest visual performance database online**).

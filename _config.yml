@@ -2,11 +2,8 @@ baseurl: ""
 url: "https://vjstv.com"
 permalink: "/:title"
 
-# Build settings
 plugins:
   - jekyll-feed
-  - jekyll-paginate-v2
-  - jekyll-archives
 
 collections:
   vjs:
@@ -28,28 +25,27 @@ collections:
     output: true
     permalink: /sponsors/:name
 
-############################################################
-# Site configuration for the Jekyll 3 Pagination Gem
-pagination:
-  enabled: false
-
-############################################################
-
-# Jekyll Archives Configuration
-jekyll-archives:
-  enabled:
-    - tags
-    - categories
-  layouts:
-    tag: tag
-    category: category
-  permalinks:
-    tag: '/tag/:name/'
-    category: '/category/:name/'
-
-feed:
-  collections:
-    posts:
-      path: "/index.xml"
-
 highlighter: rouge
+
+exclude:
+  - portfolios
+  - _portfolio
+  - blogs
+  - _posts
+  - _authors
+  - _shop_items
+  - shop
+  - services
+  - about
+  - contact
+  - features
+  - elements
+  - home-pages
+  - search.json
+  - CNAME
+  - cloudflare.toml
+  - github.toml
+  - netlify.toml
+  - README.md
+  - Gemfile
+  - Gemfile.lock

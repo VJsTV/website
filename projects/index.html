@@ -1,0 +1,28 @@
+---
+layout: default
+title: "Projects - VJs TV"
+meta_title: "Audiovisual Projects - VJs TV"
+meta_description: "Explore the global index of VJ work. Live visuals, projection mapping, AI visuals, generative art, and immersive installations."
+---
+
+{% include layouts/nav/nav-3.html default_logo="white" %}
+
+<div class="vjs-page-header">
+  <div class="container">
+    <h1 class="vjs-section-title" style="font-size:clamp(2rem,5vw,3.5rem);">Projects</h1>
+    <div class="vjs-accent-line"></div>
+    <p style="color: var(--vjs-text-muted); max-width:600px; font-size:1.05rem;">The global index of VJ work. Live visuals, projection mapping, AI visuals, generative art, immersive installations, dome visuals, and stage visuals.</p>
+  </div>
+</div>
+
+<section class="vjs-section">
+  <div class="container">
+    <div class="vjs-grid vjs-grid-3">
+      {% for project in site.projects %}
+      {% include cards/project-card.html project=project %}
+      {% endfor %}
+    </div>
+  </div>
+</section>
+
+{% include layouts/footer/footer-1.html %}

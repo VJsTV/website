@@ -1,0 +1,28 @@
+---
+layout: default
+title: "Studios - VJs TV"
+meta_title: "Studios & Installations - VJs TV"
+meta_description: "Discover AV studios, immersive domes, projection labs, and visual collectives where visual performances are produced."
+---
+
+{% include layouts/nav/nav-3.html default_logo="white" %}
+
+<div class="vjs-page-header">
+  <div class="container">
+    <h1 class="vjs-section-title" style="font-size:clamp(2rem,5vw,3.5rem);">Studios</h1>
+    <div class="vjs-accent-line"></div>
+    <p style="color: var(--vjs-text-muted); max-width:600px; font-size:1.05rem;">AV studios, immersive domes, projection labs, and visual collectives where audiovisual performances are produced and rehearsed.</p>
+  </div>
+</div>
+
+<section class="vjs-section">
+  <div class="container">
+    <div class="vjs-grid vjs-grid-3">
+      {% for studio in site.studios %}
+      {% include cards/studio-card.html studio=studio %}
+      {% endfor %}
+    </div>
+  </div>
+</section>
+
+{% include layouts/footer/footer-1.html %}

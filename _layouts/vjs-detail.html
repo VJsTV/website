@@ -1,0 +1,171 @@
+---
+layout: default
+---
+{% include layouts/nav/nav-3.html default_logo="white" %}
+
+<div class="vjs-detail-header">
+  <div class="container">
+    {% if page.technologies %}
+    <div style="margin-bottom:1rem;">
+      {% for tech in page.technologies %}
+      <span class="vjs-tag vjs-tag-purple">{{ tech }}</span>
+      {% endfor %}
+    </div>
+    {% endif %}
+    <h1 class="vjs-section-title" style="margin-bottom:1rem;">{{ page.title }}</h1>
+    <div class="vjs-accent-line"></div>
+    <div class="vjs-detail-meta">
+      {% if page.location %}
+      <div class="vjs-detail-meta-item">
+        <span class="vjs-detail-meta-label">Location</span>
+        <span class="vjs-detail-meta-value">{{ page.location }}</span>
+      </div>
+      {% endif %}
+      {% if page.artist %}
+      <div class="vjs-detail-meta-item">
+        <span class="vjs-detail-meta-label">Artist</span>
+        <span class="vjs-detail-meta-value">{{ page.artist }}</span>
+      </div>
+      {% endif %}
+      {% if page.year %}
+      <div class="vjs-detail-meta-item">
+        <span class="vjs-detail-meta-label">Year</span>
+        <span class="vjs-detail-meta-value">{{ page.year }}</span>
+      </div>
+      {% endif %}
+      {% if page.project_type %}
+      <div class="vjs-detail-meta-item">
+        <span class="vjs-detail-meta-label">Type</span>
+        <span class="vjs-detail-meta-value">{{ page.project_type }}</span>
+      </div>
+      {% endif %}
+      {% if page.visual_style %}
+      <div class="vjs-detail-meta-item">
+        <span class="vjs-detail-meta-label">Style</span>
+        <span class="vjs-detail-meta-value">{{ page.visual_style }}</span>
+      </div>
+      {% endif %}
+      {% if page.studio %}
+      <div class="vjs-detail-meta-item">
+        <span class="vjs-detail-meta-label">Studio</span>
+        <span class="vjs-detail-meta-value">{{ page.studio }}</span>
+      </div>
+      {% endif %}
+      {% if page.studio_type %}
+      <div class="vjs-detail-meta-item">
+        <span class="vjs-detail-meta-label">Type</span>
+        <span class="vjs-detail-meta-value">{{ page.studio_type }}</span>
+      </div>
+      {% endif %}
+      {% if page.category %}
+      <div class="vjs-detail-meta-item">
+        <span class="vjs-detail-meta-label">Category</span>
+        <span class="vjs-detail-meta-value">{{ page.category }}</span>
+      </div>
+      {% endif %}
+      {% if page.developer %}
+      <div class="vjs-detail-meta-item">
+        <span class="vjs-detail-meta-label">Developer</span>
+        <span class="vjs-detail-meta-value">{{ page.developer }}</span>
+      </div>
+      {% endif %}
+      {% if page.tier %}
+      <div class="vjs-detail-meta-item">
+        <span class="vjs-detail-meta-label">Partner Tier</span>
+        <span class="vjs-detail-meta-value">{{ page.tier }}</span>
+      </div>
+      {% endif %}
+      {% if page.date and page.event_type %}
+      <div class="vjs-detail-meta-item">
+        <span class="vjs-detail-meta-label">Date</span>
+        <span class="vjs-detail-meta-value">{{ page.date | date: "%B %d, %Y" }}</span>
+      </div>
+      {% endif %}
+      {% if page.time %}
+      <div class="vjs-detail-meta-item">
+        <span class="vjs-detail-meta-label">Time</span>
+        <span class="vjs-detail-meta-value">{{ page.time }}</span>
+      </div>
+      {% endif %}
+    </div>
+  </div>
+</div>
+
+{% if page.video_url %}
+<section class="vjs-section" style="padding-top:60px;">
+  <div class="container">
+    <div class="vjs-live-player">
+      <iframe src="{{ page.video_url }}" frameborder="0" allowfullscreen allow="autoplay; encrypted-media"></iframe>
+    </div>
+  </div>
+</section>
+{% endif %}
+
+<section class="vjs-section" {% if page.video_url %}style="padding-top:0;"{% endif %}>
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-8">
+        <div style="color: var(--vjs-text); line-height: 1.8; font-size: 1.05rem;">
+          {{ content }}
+        </div>
+      </div>
+      <div class="col-lg-4">
+        {% if page.equipment %}
+        <div style="background: var(--vjs-card); border: 1px solid var(--vjs-border); border-radius:12px; padding:1.5rem; margin-bottom:1.5rem;">
+          <h5 class="vjs-orbitron" style="font-size:0.75rem; color: var(--vjs-electric-blue); margin-bottom:1rem;">Equipment</h5>
+          <ul style="list-style:none; padding:0; margin:0;">
+            {% for item in page.equipment %}
+            <li style="padding:0.4rem 0; border-bottom:1px solid var(--vjs-border); color: var(--vjs-text-muted); font-size:0.9rem;">{{ item }}</li>
+            {% endfor %}
+          </ul>
+        </div>
+        {% endif %}
+        {% if page.used_by %}
+        <div style="background: var(--vjs-card); border: 1px solid var(--vjs-border); border-radius:12px; padding:1.5rem; margin-bottom:1.5rem;">
+          <h5 class="vjs-orbitron" style="font-size:0.75rem; color: var(--vjs-electric-blue); margin-bottom:1rem;">Used By</h5>
+          <ul style="list-style:none; padding:0; margin:0;">
+            {% for name in page.used_by %}
+            <li style="padding:0.4rem 0; border-bottom:1px solid var(--vjs-border); color: var(--vjs-text-muted); font-size:0.9rem;">{{ name }}</li>
+            {% endfor %}
+          </ul>
+        </div>
+        {% endif %}
+        {% if page.artists %}
+        <div style="background: var(--vjs-card); border: 1px solid var(--vjs-border); border-radius:12px; padding:1.5rem; margin-bottom:1.5rem;">
+          <h5 class="vjs-orbitron" style="font-size:0.75rem; color: var(--vjs-electric-blue); margin-bottom:1rem;">Artists</h5>
+          <ul style="list-style:none; padding:0; margin:0;">
+            {% for name in page.artists %}
+            <li style="padding:0.4rem 0; border-bottom:1px solid var(--vjs-border); color: var(--vjs-text-muted); font-size:0.9rem;">{{ name }}</li>
+            {% endfor %}
+          </ul>
+        </div>
+        {% endif %}
+        {% if page.sponsored_artists %}
+        <div style="background: var(--vjs-card); border: 1px solid var(--vjs-border); border-radius:12px; padding:1.5rem; margin-bottom:1.5rem;">
+          <h5 class="vjs-orbitron" style="font-size:0.75rem; color: var(--vjs-electric-blue); margin-bottom:1rem;">Sponsored Artists</h5>
+          <ul style="list-style:none; padding:0; margin:0;">
+            {% for name in page.sponsored_artists %}
+            <li style="padding:0.4rem 0; border-bottom:1px solid var(--vjs-border); color: var(--vjs-text-muted); font-size:0.9rem;">{{ name }}</li>
+            {% endfor %}
+          </ul>
+        </div>
+        {% endif %}
+        {% if page.website %}
+        <a href="{{ page.website }}" target="_blank" class="vjs-btn vjs-btn-outline" style="width:100%; text-align:center; display:block;">Visit Website</a>
+        {% endif %}
+        {% if page.social %}
+        <div style="margin-top:1.5rem;">
+          {% if page.social.instagram %}
+          <a href="{{ page.social.instagram }}" target="_blank" class="vjs-tag vjs-tag-magenta" style="text-decoration:none;">Instagram</a>
+          {% endif %}
+          {% if page.social.vimeo %}
+          <a href="{{ page.social.vimeo }}" target="_blank" class="vjs-tag vjs-tag-blue" style="text-decoration:none;">Vimeo</a>
+          {% endif %}
+        </div>
+        {% endif %}
+      </div>
+    </div>
+  </div>
+</section>
+
+{% include layouts/footer/footer-1.html %}

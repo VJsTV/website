@@ -1,0 +1,13 @@
+<a href="{{ include.sponsor.url }}" class="text-decoration-none">
+  <div class="vjs-card" style="text-align:center;">
+    <div class="vjs-card-img-placeholder" style="background: var(--vjs-card); height:140px;">
+      <span style="font-family:'Orbitron',sans-serif; font-size:1.2rem; font-weight:700; color: var(--vjs-electric-blue);">{{ include.sponsor.title }}</span>
+    </div>
+    <div class="vjs-card-body">
+      <div style="margin-bottom:0.5rem;">
+        <span class="vjs-tag vjs-tag-blue">{{ include.sponsor.tier }}</span>
+      </div>
+      <p class="vjs-card-text" style="font-size:0.8rem;">{{ include.sponsor.description | truncate: 100 }}</p>
+    </div>
+  </div>
+</a>

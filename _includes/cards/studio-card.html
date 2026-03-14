@@ -1,0 +1,15 @@
+<a href="{{ include.studio.url }}" class="text-decoration-none">
+  <div class="vjs-card">
+    <div class="vjs-card-img-placeholder" style="background: linear-gradient(135deg, rgba(0,245,212,0.15) 0%, rgba(0,212,255,0.2) 100%);">
+      <span style="font-size:2.5rem; opacity:0.6;">&#9632;</span>
+    </div>
+    <div class="vjs-card-body">
+      <div style="margin-bottom:0.5rem;">
+        <span class="vjs-tag vjs-tag-cyan">{{ include.studio.studio_type }}</span>
+      </div>
+      <h4 class="vjs-card-title">{{ include.studio.title }}</h4>
+      <p class="vjs-card-text" style="margin-bottom:0.25rem;">{{ include.studio.location }}</p>
+      <p class="vjs-card-text" style="font-size:0.8rem;">{{ include.studio.description | truncate: 100 }}</p>
+    </div>
+  </div>
+</a>

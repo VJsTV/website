@@ -1,0 +1,15 @@
+<a href="{{ include.event.url }}" class="text-decoration-none">
+  <div class="vjs-card">
+    <div class="vjs-card-img-placeholder" style="background: linear-gradient(135deg, rgba(0,212,255,0.2) 0%, rgba(123,47,255,0.2) 100%);">
+      <span style="font-size:2.5rem; opacity:0.6;">&#9733;</span>
+    </div>
+    <div class="vjs-card-body">
+      <div style="margin-bottom:0.5rem;">
+        <span class="vjs-tag vjs-tag-blue">{{ include.event.event_type }}</span>
+      </div>
+      <h4 class="vjs-card-title">{{ include.event.title }}</h4>
+      <p class="vjs-card-text" style="margin-bottom:0.25rem;">{{ include.event.date | date: "%B %d, %Y" }}</p>
+      <p class="vjs-card-text" style="font-size:0.8rem;">{{ include.event.location }}</p>
+    </div>
+  </div>
+</a>

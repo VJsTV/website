@@ -1,0 +1,14 @@
+<a href="{{ include.tech.url }}" class="text-decoration-none">
+  <div class="vjs-card">
+    <div class="vjs-card-img-placeholder" style="background: linear-gradient(135deg, rgba(123,47,255,0.2) 0%, rgba(255,60,172,0.15) 100%); height:160px;">
+      <span style="font-size:2.5rem; opacity:0.6;">&#9881;</span>
+    </div>
+    <div class="vjs-card-body">
+      <div style="margin-bottom:0.5rem;">
+        <span class="vjs-tag vjs-tag-purple">{{ include.tech.category }}</span>
+      </div>
+      <h4 class="vjs-card-title">{{ include.tech.title }}</h4>
+      <p class="vjs-card-text" style="font-size:0.8rem;">{{ include.tech.description | truncate: 120 }}</p>
+    </div>
+  </div>
+</a>
