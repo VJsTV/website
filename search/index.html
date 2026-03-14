@@ -1,0 +1,149 @@
+---
+layout: default
+title: "Search - VJs TV"
+meta_title: "Search Artists, Projects & Events - VJs TV"
+meta_description: "Search across all VJ artists, projects, events, studios, and technology on VJs TV."
+---
+
+{% include layouts/nav/nav-3.html default_logo="white" %}
+
+<div class="vjs-page-header">
+  <div class="container">
+    <h1 class="vjs-section-title" style="font-size:clamp(2rem,5vw,3.5rem);">Search</h1>
+    <div class="vjs-accent-line"></div>
+    <p style="color:var(--vjs-text-muted); max-width:600px; font-size:1.05rem;">Search across artists, projects, events, studios, and technology.</p>
+  </div>
+</div>
+
+<section class="vjs-section">
+  <div class="container">
+
+    <div class="vjs-search-input-wrap">
+      <span class="vjs-search-icon">&#128269;</span>
+      <input type="text" id="vjs-search" class="vjs-search-input" placeholder="Type to search... e.g. Berlin, TouchDesigner, Projection Mapping" autocomplete="off" autofocus />
+    </div>
+
+    <!-- CATEGORY FILTER -->
+    <div class="vjs-filter-bar" style="justify-content:center; margin-bottom:2.5rem;">
+      <button class="vjs-filter-btn active" data-cat-filter="all">All</button>
+      <button class="vjs-filter-btn" data-cat-filter="artist">Artists</button>
+      <button class="vjs-filter-btn" data-cat-filter="project">Projects</button>
+      <button class="vjs-filter-btn" data-cat-filter="event">Events</button>
+      <button class="vjs-filter-btn" data-cat-filter="studio">Studios</button>
+      <button class="vjs-filter-btn" data-cat-filter="technology">Technology</button>
+    </div>
+
+    <div id="vjs-results-label" class="vjs-search-results-label" style="display:none;"></div>
+    <div id="vjs-results"></div>
+    <div id="vjs-no-results" style="display:none; text-align:center; padding:3rem; color:var(--vjs-text-muted); font-family:'Space Grotesk',sans-serif;">
+      <div style="font-size:2rem; margin-bottom:1rem;">&#128269;</div>
+      No results found. Try a different search term.
+    </div>
+
+    <div id="vjs-search-prompt" style="text-align:center; padding:3rem; color:var(--vjs-text-muted); font-family:'Space Grotesk',sans-serif;">
+      <div style="font-size:2rem; margin-bottom:1rem; opacity:0.4;">&#9673;</div>
+      <p>Start typing to search the entire VJs TV network.</p>
+      <div style="display:flex; flex-wrap:wrap; gap:0.5rem; justify-content:center; margin-top:1.5rem;">
+        <button class="vjs-filter-btn" onclick="triggerSearch('TouchDesigner')">TouchDesigner</button>
+        <button class="vjs-filter-btn" onclick="triggerSearch('Berlin')">Berlin</button>
+        <button class="vjs-filter-btn" onclick="triggerSearch('Projection Mapping')">Projection Mapping</button>
+        <button class="vjs-filter-btn" onclick="triggerSearch('AI')">AI Visuals</button>
+        <button class="vjs-filter-btn" onclick="triggerSearch('London')">London</button>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+{% include layouts/footer/footer-1.html %}
+
+<script>
+var searchData = [
+  {% for artist in site.vjs %}
+  { type:'artist', title:{{ artist.title | jsonify }}, url:{{ artist.url | jsonify }}, location:{{ artist.location | default: "" | jsonify }}, desc:{{ artist.visual_style | default: "" | jsonify }}, tags:{{ artist.technologies | join: ', ' | jsonify }}, icon:'&#9673;', color:'rgba(123,47,255,0.2)' },
+  {% endfor %}
+  {% for project in site.projects %}
+  { type:'project', title:{{ project.title | jsonify }}, url:{{ project.url | jsonify }}, location:{{ project.location | default: "" | jsonify }}, desc:{{ project.project_type | default: "" | jsonify }}, tags:{{ project.artist | default: "" | jsonify }}, icon:'&#9654;', color:'rgba(255,0,255,0.15)' },
+  {% endfor %}
+  {% for event in site.events %}
+  { type:'event', title:{{ event.title | jsonify }}, url:{{ event.url | jsonify }}, location:{{ event.location | default: "" | jsonify }}, desc:{{ event.event_type | default: "" | jsonify }}, tags:{{ event.date | date: "%B %d, %Y" | jsonify }}, icon:'&#128198;', color:'rgba(0,212,255,0.12)' },
+  {% endfor %}
+  {% for studio in site.studios %}
+  { type:'studio', title:{{ studio.title | jsonify }}, url:{{ studio.url | jsonify }}, location:{{ studio.location | default: "" | jsonify }}, desc:{{ studio.specialization | default: "" | jsonify }}, tags:'', icon:'&#127748;', color:'rgba(255,60,172,0.12)' },
+  {% endfor %}
+  {% for tech in site.technology %}
+  { type:'technology', title:{{ tech.title | jsonify }}, url:{{ tech.url | jsonify }}, location:'', desc:{{ tech.category | default: "" | jsonify }}, tags:{{ tech.description | truncate: 80 | jsonify }}, icon:'&#9883;', color:'rgba(0,245,212,0.1)' },
+  {% endfor %}
+];
+
+var typeLabels = { artist:'Artist', project:'Project', event:'Event', studio:'Studio', technology:'Technology' };
+var typeColors = { artist:'var(--vjs-ultraviolet)', project:'var(--vjs-magenta)', event:'var(--vjs-electric-blue)', studio:'var(--vjs-pink)', technology:'var(--vjs-cyan)' };
+
+var activeCat = 'all';
+var currentQuery = '';
+
+function score(item, q) {
+  var text = [item.title, item.location, item.desc, item.tags].join(' ').toLowerCase();
+  var terms = q.toLowerCase().split(/\s+/).filter(Boolean);
+  return terms.every(function(t){ return text.indexOf(t) !== -1; });
+}
+
+function renderResults(query) {
+  var results = document.getElementById('vjs-results');
+  var noRes   = document.getElementById('vjs-no-results');
+  var label   = document.getElementById('vjs-results-label');
+  var prompt  = document.getElementById('vjs-search-prompt');
+
+  if(!query) {
+    results.innerHTML=''; noRes.style.display='none'; label.style.display='none';
+    prompt.style.display='block'; return;
+  }
+  prompt.style.display='none';
+
+  var filtered = searchData.filter(function(item) {
+    var catMatch = activeCat==='all' || item.type===activeCat;
+    return catMatch && score(item, query);
+  });
+
+  label.style.display='block';
+  label.textContent = filtered.length + ' result' + (filtered.length!==1?'s':'') + ' for "' + query + '"';
+
+  if(filtered.length===0) { results.innerHTML=''; noRes.style.display='block'; return; }
+  noRes.style.display='none';
+
+  results.innerHTML = filtered.map(function(item) {
+    return '<a href="'+item.url+'" class="vjs-search-result-item">'
+      + '<div class="vjs-search-result-icon" style="background:'+item.color+';">'+item.icon+'</div>'
+      + '<div class="vjs-search-result-body">'
+      + '<div class="vjs-search-result-title">'+item.title+'</div>'
+      + '<div class="vjs-search-result-meta">'
+      + '<span style="color:'+typeColors[item.type]+'; font-family:\'Orbitron\',sans-serif; font-size:0.6rem; text-transform:uppercase; letter-spacing:0.12em; margin-right:0.75rem;">'+typeLabels[item.type]+'</span>'
+      + (item.location ? item.location+' &middot; ' : '')
+      + item.desc
+      + (item.tags ? ' &middot; '+item.tags : '')
+      + '</div></div>'
+      + '<span style="color:var(--vjs-text-muted); font-size:1rem;">&rsaquo;</span>'
+      + '</a>';
+  }).join('');
+}
+
+function triggerSearch(q) {
+  document.getElementById('vjs-search').value = q;
+  currentQuery = q;
+  renderResults(q);
+}
+
+document.getElementById('vjs-search').addEventListener('input', function() {
+  currentQuery = this.value.trim();
+  renderResults(currentQuery);
+});
+
+document.querySelectorAll('[data-cat-filter]').forEach(function(btn) {
+  btn.addEventListener('click', function() {
+    document.querySelectorAll('[data-cat-filter]').forEach(function(b){ b.classList.remove('active'); });
+    btn.classList.add('active');
+    activeCat = btn.dataset.catFilter;
+    renderResults(currentQuery);
+  });
+});
+</script>

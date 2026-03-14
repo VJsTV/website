@@ -1,14 +1,19 @@
-<a href="{{ include.artist.url }}" class="text-decoration-none">
-  <div class="vjs-card">
-    <div class="vjs-card-img-placeholder" style="background: linear-gradient(135deg, rgba(123,47,255,0.3) 0%, rgba(0,212,255,0.2) 100%);">
-      <span style="font-size:2.5rem; opacity:0.6;">&#9673;</span>
+<a href="{{ include.artist.url }}" class="text-decoration-none" data-style="{{ include.artist.visual_style | downcase }}" data-tech="{{ include.artist.technologies | join: ',' | downcase }}" data-location="{{ include.artist.location | downcase }}">
+  <div class="vjs-artist-card">
+    <div class="vjs-artist-card-visual" style="background: linear-gradient(135deg, rgba(123,47,255,0.35) 0%, rgba(0,212,255,0.2) 100%);">
+      <div style="position:absolute; inset:0; display:flex; flex-direction:column; align-items:center; justify-content:center;">
+        <span style="font-size:3rem; opacity:0.5;">&#9673;</span>
+        <span style="font-family:'Orbitron',sans-serif; font-size:0.65rem; letter-spacing:0.2em; color:rgba(255,255,255,0.4); text-transform:uppercase; margin-top:0.5rem;">{{ include.artist.location }}</span>
+      </div>
+      <div class="vjs-artist-card-overlay">
+        <div style="color: var(--vjs-text); font-size:0.8rem; line-height:1.5;">{{ include.artist.bio | truncate: 100 }}</div>
+      </div>
     </div>
     <div class="vjs-card-body">
       <h4 class="vjs-card-title">{{ include.artist.title }}</h4>
-      <p class="vjs-card-text" style="margin-bottom:0.5rem;">{{ include.artist.location }}</p>
-      <p class="vjs-card-text" style="font-size:0.8rem;">{{ include.artist.visual_style }}</p>
+      <p class="vjs-card-text" style="font-size:0.8rem; margin-bottom:0.75rem; color: var(--vjs-electric-blue);">{{ include.artist.visual_style }}</p>
       {% if include.artist.technologies %}
-      <div style="margin-top:0.75rem;">
+      <div>
         {% for tech in include.artist.technologies limit:3 %}
         <span class="vjs-tag vjs-tag-purple">{{ tech }}</span>
         {% endfor %}

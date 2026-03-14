@@ -2,7 +2,7 @@
 layout: default
 title: "Projects - VJs TV"
 meta_title: "Audiovisual Projects - VJs TV"
-meta_description: "Explore the global index of VJ work. Live visuals, projection mapping, AI visuals, generative art, and immersive installations."
+meta_description: "Explore the global index of VJ work. Filter by type: projection mapping, generative AI, immersive dome, live visuals, and more."
 ---
 
 {% include layouts/nav/nav-3.html default_logo="white" %}
@@ -11,18 +11,100 @@ meta_description: "Explore the global index of VJ work. Live visuals, projection
   <div class="container">
     <h1 class="vjs-section-title" style="font-size:clamp(2rem,5vw,3.5rem);">Projects</h1>
     <div class="vjs-accent-line"></div>
-    <p style="color: var(--vjs-text-muted); max-width:600px; font-size:1.05rem;">The global index of VJ work. Live visuals, projection mapping, AI visuals, generative art, immersive installations, dome visuals, and stage visuals.</p>
+    <p style="color:var(--vjs-text-muted); max-width:600px; font-size:1.05rem;">The global index of VJ work. Filter by type, sort by date, and explore every project in the network.</p>
   </div>
 </div>
 
 <section class="vjs-section">
   <div class="container">
-    <div class="vjs-grid vjs-grid-3">
+
+    <!-- TYPE FILTER -->
+    <div class="vjs-filter-bar">
+      <span class="vjs-filter-label">Type:</span>
+      <button class="vjs-filter-btn active" data-type="all">All</button>
+      {% assign types = "" %}
       {% for project in site.projects %}
-      {% include cards/project-card.html project=project %}
+        {% unless types contains project.project_type %}
+          {% assign types = types | append: project.project_type | append: "|" %}
+          <button class="vjs-filter-btn" data-type="{{ project.project_type | downcase | replace: ' ', '-' }}">{{ project.project_type }}</button>
+        {% endunless %}
       {% endfor %}
     </div>
+
+    <!-- SORT -->
+    <div style="display:flex; align-items:center; justify-content:space-between; flex-wrap:wrap; gap:1rem; margin-bottom:2rem;">
+      <div id="projects-count" style="font-family:'Orbitron',sans-serif; font-size:0.65rem; text-transform:uppercase; letter-spacing:0.15em; color:var(--vjs-text-muted);">{{ site.projects | size }} Projects</div>
+      <div style="display:flex; gap:0.5rem; align-items:center;">
+        <span style="font-family:'Orbitron',sans-serif; font-size:0.65rem; text-transform:uppercase; letter-spacing:0.12em; color:var(--vjs-text-muted);">Sort:</span>
+        <button class="vjs-filter-btn active" data-sort="latest" style="font-size:0.7rem; padding:5px 14px;">Latest</button>
+        <button class="vjs-filter-btn" data-sort="oldest" style="font-size:0.7rem; padding:5px 14px;">Oldest</button>
+      </div>
+    </div>
+
+    <div class="vjs-grid vjs-grid-3" id="projects-grid">
+      {% assign sorted_projects = site.projects | sort: "year" | reverse %}
+      {% for project in sorted_projects %}
+      <div class="vjs-project-item"
+           data-type="{{ project.project_type | downcase | replace: ' ', '-' }}"
+           data-year="{{ project.year }}">
+        {% include cards/project-card.html project=project %}
+      </div>
+      {% endfor %}
+    </div>
+
+    <div id="projects-no-results" style="display:none; text-align:center; padding:4rem; color:var(--vjs-text-muted); font-family:'Space Grotesk',sans-serif;">
+      No projects match this filter. <a href="#" onclick="resetProjectFilter()" style="color:var(--vjs-ultraviolet);">Reset filter</a>
+    </div>
+
   </div>
 </section>
 
 {% include layouts/footer/footer-1.html %}
+
+<script>
+var activeType = 'all';
+
+function applyProjectFilter() {
+  var items = document.querySelectorAll('.vjs-project-item');
+  var visible = 0;
+  items.forEach(function(item) {
+    var type = item.dataset.type || '';
+    var match = activeType === 'all' || type === activeType;
+    item.style.display = match ? '' : 'none';
+    if(match) visible++;
+  });
+  var cnt = document.getElementById('projects-count');
+  var nr  = document.getElementById('projects-no-results');
+  if(cnt) cnt.textContent = visible + ' Project' + (visible!==1?'s':'');
+  if(nr)  nr.style.display = visible===0 ? 'block' : 'none';
+}
+
+function resetProjectFilter() {
+  activeType='all';
+  document.querySelectorAll('[data-type]').forEach(function(b){ b.classList.toggle('active', b.dataset.type==='all'); });
+  applyProjectFilter();
+}
+
+document.querySelectorAll('[data-type]').forEach(function(btn) {
+  btn.addEventListener('click', function() {
+    document.querySelectorAll('[data-type]').forEach(function(b){ b.classList.remove('active'); });
+    btn.classList.add('active');
+    activeType = btn.dataset.type;
+    applyProjectFilter();
+  });
+});
+
+document.querySelectorAll('[data-sort]').forEach(function(btn) {
+  btn.addEventListener('click', function() {
+    document.querySelectorAll('[data-sort]').forEach(function(b){ b.classList.remove('active'); });
+    btn.classList.add('active');
+    var grid = document.getElementById('projects-grid');
+    var items = Array.from(grid.querySelectorAll('.vjs-project-item'));
+    items.sort(function(a,b){
+      var ya=parseInt(a.dataset.year||0), yb=parseInt(b.dataset.year||0);
+      return btn.dataset.sort==='latest' ? yb-ya : ya-yb;
+    });
+    items.forEach(function(el){ grid.appendChild(el); });
+  });
+});
+</script>

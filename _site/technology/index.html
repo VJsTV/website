@@ -156,6 +156,13 @@
         
         
           <li class="nav-item">
+          <a class="nav-link" href="/search">Search</a>
+        </li>
+        
+        
+        
+        
+          <li class="nav-item">
           <a class="nav-link" href="/submit">Submit</a>
         </li>
         
@@ -235,63 +242,109 @@
   <div class="container">
     <h1 class="vjs-section-title" style="font-size:clamp(2rem,5vw,3.5rem);">Technology</h1>
     <div class="vjs-accent-line"></div>
-    <p style="color: var(--vjs-text-muted); max-width:600px; font-size:1.05rem;">Visual software, projection systems, media servers, LED technologies, and AI visual tools powering the world of VJ culture.</p>
+    <p style="color:var(--vjs-text-muted); max-width:600px; font-size:1.05rem;">Visual software, projection systems, media servers, LED technologies, and AI visual tools powering VJ culture worldwide.</p>
   </div>
 </div>
 
 <section class="vjs-section">
   <div class="container">
-    <div class="vjs-grid vjs-grid-3">
+
+    <!-- CATEGORY FILTER -->
+    <div class="vjs-filter-bar">
+      <span class="vjs-filter-label">Category:</span>
+      <button class="vjs-filter-btn active" data-cat="all">All</button>
       
-      <a href="/technology/madmapper" class="text-decoration-none">
-  <div class="vjs-card">
+      
+        
+          
+          <button class="vjs-filter-btn" data-cat="projection-mapping">Projection Mapping</button>
+        
+      
+        
+          
+          <button class="vjs-filter-btn" data-cat="visual-software">Visual Software</button>
+        
+      
+        
+      
+    </div>
+
+    <div class="vjs-grid vjs-grid-3" id="tech-grid">
+      
+      <div class="vjs-tech-item" data-cat="projection-mapping">
+        <a href="/technology/madmapper" class="text-decoration-none" data-category="projection-mapping">
+  <div class="vjs-card" style="border-color: rgba(123,47,255,0.2);">
     <div class="vjs-card-img-placeholder" style="background: linear-gradient(135deg, rgba(123,47,255,0.2) 0%, rgba(255,60,172,0.15) 100%); height:160px;">
-      <span style="font-size:2.5rem; opacity:0.6;">&#9881;</span>
+      <div style="text-align:center;">
+        <div style="font-family:'Orbitron',sans-serif; font-weight:700; font-size:1.6rem; color: var(--vjs-ultraviolet); opacity:0.9;">MadM</div>
+      </div>
     </div>
     <div class="vjs-card-body">
-      <div style="margin-bottom:0.5rem;">
-        <span class="vjs-tag vjs-tag-purple">Projection Mapping</span>
-      </div>
+      <div style="margin-bottom:0.5rem;"><span class="vjs-tag vjs-tag-purple">Projection Mapping</span></div>
       <h4 class="vjs-card-title">MadMapper</h4>
-      <p class="vjs-card-text" style="font-size:0.8rem;">Advanced projection mapping and LED mapping software for creating spatial augmented reality experiences and architect...</p>
+      <p class="vjs-card-text" style="font-size:0.8rem; margin-bottom:0.75rem;">Advanced projection mapping and LED mapping software for creating spatial augmented reality experiences and architect...</p>
+      
+      <div style="margin-top:auto;">
+        <span style="font-family:'Orbitron',sans-serif; font-size:0.6rem; text-transform:uppercase; letter-spacing:0.1em; color: var(--vjs-text-muted);">Used by: </span>
+        <span class="vjs-tag vjs-tag-blue">Luna Visuals</span>
+      </div>
+      
     </div>
   </div>
 </a>
 
+      </div>
       
-      <a href="/technology/resolume" class="text-decoration-none">
-  <div class="vjs-card">
+      <div class="vjs-tech-item" data-cat="visual-software">
+        <a href="/technology/resolume" class="text-decoration-none" data-category="visual-software">
+  <div class="vjs-card" style="border-color: rgba(123,47,255,0.2);">
     <div class="vjs-card-img-placeholder" style="background: linear-gradient(135deg, rgba(123,47,255,0.2) 0%, rgba(255,60,172,0.15) 100%); height:160px;">
-      <span style="font-size:2.5rem; opacity:0.6;">&#9881;</span>
+      <div style="text-align:center;">
+        <div style="font-family:'Orbitron',sans-serif; font-weight:700; font-size:1.6rem; color: var(--vjs-ultraviolet); opacity:0.9;">Reso</div>
+      </div>
     </div>
     <div class="vjs-card-body">
-      <div style="margin-bottom:0.5rem;">
-        <span class="vjs-tag vjs-tag-purple">Visual Software</span>
-      </div>
+      <div style="margin-bottom:0.5rem;"><span class="vjs-tag vjs-tag-purple">Visual Software</span></div>
       <h4 class="vjs-card-title">Resolume Arena</h4>
-      <p class="vjs-card-text" style="font-size:0.8rem;">Industry-leading VJ software for real-time video mixing, compositing, and effects. Used by VJs worldwide for live per...</p>
+      <p class="vjs-card-text" style="font-size:0.8rem; margin-bottom:0.75rem;">Industry-leading VJ software for real-time video mixing, compositing, and effects. Used by VJs worldwide for live per...</p>
+      
+      <div style="margin-top:auto;">
+        <span style="font-family:'Orbitron',sans-serif; font-size:0.6rem; text-transform:uppercase; letter-spacing:0.1em; color: var(--vjs-text-muted);">Used by: </span>
+        <span class="vjs-tag vjs-tag-blue">VJ Kai</span><span class="vjs-tag vjs-tag-blue">Nova Spectrum</span>
+      </div>
+      
     </div>
   </div>
 </a>
 
+      </div>
       
-      <a href="/technology/touchdesigner" class="text-decoration-none">
-  <div class="vjs-card">
+      <div class="vjs-tech-item" data-cat="visual-software">
+        <a href="/technology/touchdesigner" class="text-decoration-none" data-category="visual-software">
+  <div class="vjs-card" style="border-color: rgba(123,47,255,0.2);">
     <div class="vjs-card-img-placeholder" style="background: linear-gradient(135deg, rgba(123,47,255,0.2) 0%, rgba(255,60,172,0.15) 100%); height:160px;">
-      <span style="font-size:2.5rem; opacity:0.6;">&#9881;</span>
+      <div style="text-align:center;">
+        <div style="font-family:'Orbitron',sans-serif; font-weight:700; font-size:1.6rem; color: var(--vjs-ultraviolet); opacity:0.9;">Touc</div>
+      </div>
     </div>
     <div class="vjs-card-body">
-      <div style="margin-bottom:0.5rem;">
-        <span class="vjs-tag vjs-tag-purple">Visual Software</span>
-      </div>
+      <div style="margin-bottom:0.5rem;"><span class="vjs-tag vjs-tag-purple">Visual Software</span></div>
       <h4 class="vjs-card-title">TouchDesigner</h4>
-      <p class="vjs-card-text" style="font-size:0.8rem;">A node-based visual programming environment for real-time interactive multimedia content. The industry standard for g...</p>
+      <p class="vjs-card-text" style="font-size:0.8rem; margin-bottom:0.75rem;">A node-based visual programming environment for real-time interactive multimedia content. The industry standard for g...</p>
+      
+      <div style="margin-top:auto;">
+        <span style="font-family:'Orbitron',sans-serif; font-size:0.6rem; text-transform:uppercase; letter-spacing:0.1em; color: var(--vjs-text-muted);">Used by: </span>
+        <span class="vjs-tag vjs-tag-blue">VJ Kai</span><span class="vjs-tag vjs-tag-blue">Nova Spectrum</span>
+      </div>
+      
     </div>
   </div>
 </a>
 
+      </div>
       
     </div>
+
   </div>
 </section>
 
@@ -410,6 +463,19 @@
     </ul>
   </div>
 </footer>
+
+<script>
+document.querySelectorAll('[data-cat]').forEach(function(btn) {
+  btn.addEventListener('click', function() {
+    document.querySelectorAll('[data-cat]').forEach(function(b){ b.classList.remove('active'); });
+    btn.classList.add('active');
+    var filter = btn.dataset.cat;
+    document.querySelectorAll('.vjs-tech-item').forEach(function(item) {
+      item.style.display = (filter==='all' || item.dataset.cat===filter) ? '' : 'none';
+    });
+  });
+});
+</script>
 
   </div>
   <!-- Site Scripts-->

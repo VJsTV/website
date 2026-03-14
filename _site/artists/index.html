@@ -7,13 +7,13 @@
 <!-- Primary Meta Tags -->
 <title> VJ Artists Directory - VJs TV </title>
 <meta name="title" content=" VJ Artists Directory - VJs TV ">
-<meta name="description" content=" Discover visual artists and VJs from around the world on VJs TV. ">
+<meta name="description" content=" Discover visual artists and VJs from around the world. Filter by visual style, technology, and location. ">
 
   <!-- Open Graph / Facebook -->
 <meta property="og:type" content="website">
 <meta property="og:url" content=" /artists/ ">
 <meta property="og:title" content=" VJ Artists Directory - VJs TV ">
-<meta property="og:description" content=" Discover visual artists and VJs from around the world on VJs TV. ">
+<meta property="og:description" content=" Discover visual artists and VJs from around the world. Filter by visual style, technology, and location. ">
 
 <meta property="og:image" content="/assets/images/meta-image.webp" />
 
@@ -21,7 +21,7 @@
 <meta property="twitter:card" content="summary_large_image">
 <meta property="twitter:url" content="/artists/">
 <meta property="twitter:title" content=" VJ Artists Directory - VJs TV ">
-<meta property="twitter:description" content=" Discover visual artists and VJs from around the world on VJs TV. ">
+<meta property="twitter:description" content=" Discover visual artists and VJs from around the world. Filter by visual style, technology, and location. ">
 
 <meta property="twitter:image" content="/assets/images/meta-image.webp" />
 
@@ -156,6 +156,13 @@
         
         
           <li class="nav-item">
+          <a class="nav-link" href="/search">Search</a>
+        </li>
+        
+        
+        
+        
+          <li class="nav-item">
           <a class="nav-link" href="/submit">Submit</a>
         </li>
         
@@ -235,25 +242,284 @@
   <div class="container">
     <h1 class="vjs-section-title" style="font-size:clamp(2rem,5vw,3.5rem);">Artists</h1>
     <div class="vjs-accent-line"></div>
-    <p style="color: var(--vjs-text-muted); max-width:600px; font-size:1.05rem;">The global directory of VJ artists and visual performers. Explore their work, discover their tools, and watch their performances.</p>
+    <p style="color:var(--vjs-text-muted); max-width:600px; font-size:1.05rem;">The global directory of VJ artists and visual performers. Filter by style, technology, or location.</p>
   </div>
 </div>
 
 <section class="vjs-section">
   <div class="container">
-    <div class="vjs-grid vjs-grid-3">
+
+    <!-- FILTER BAR: STYLE -->
+    <div class="vjs-filter-bar" id="style-filter-bar">
+      <span class="vjs-filter-label">Style:</span>
+      <button class="vjs-filter-btn active" data-filter-group="style" data-filter="all">All</button>
       
-      <a href="/artists/luna-visuals" class="text-decoration-none">
-  <div class="vjs-card">
-    <div class="vjs-card-img-placeholder" style="background: linear-gradient(135deg, rgba(123,47,255,0.3) 0%, rgba(0,212,255,0.2) 100%);">
-      <span style="font-size:2.5rem; opacity:0.6;">&#9673;</span>
+      
+        
+        
+          
+            
+            <button class="vjs-filter-btn" data-filter-group="style" data-filter="generative art">Generative Art</button>
+          
+        
+          
+            
+            <button class="vjs-filter-btn" data-filter-group="style" data-filter="fractals">Fractals</button>
+          
+        
+      
+        
+        
+          
+            
+            <button class="vjs-filter-btn" data-filter-group="style" data-filter="projection mapping">Projection Mapping</button>
+          
+        
+          
+            
+            <button class="vjs-filter-btn" data-filter-group="style" data-filter="interactive art">Interactive Art</button>
+          
+        
+      
+        
+        
+          
+        
+          
+            
+            <button class="vjs-filter-btn" data-filter-group="style" data-filter="immersive installations">Immersive Installations</button>
+          
+        
+      
+        
+        
+          
+            
+            <button class="vjs-filter-btn" data-filter-group="style" data-filter="stage visuals">Stage Visuals</button>
+          
+        
+          
+            
+            <button class="vjs-filter-btn" data-filter-group="style" data-filter="led art">LED Art</button>
+          
+        
+      
+        
+        
+          
+            
+            <button class="vjs-filter-btn" data-filter-group="style" data-filter="glitch art">Glitch Art</button>
+          
+        
+          
+            
+            <button class="vjs-filter-btn" data-filter-group="style" data-filter="abstract motion">Abstract Motion</button>
+          
+        
+      
+        
+        
+          
+            
+            <button class="vjs-filter-btn" data-filter-group="style" data-filter="generative ai visuals">Generative AI Visuals</button>
+          
+        
+          
+        
+      
+    </div>
+
+    <!-- FILTER BAR: TECHNOLOGY -->
+    <div class="vjs-filter-bar" id="tech-filter-bar" style="margin-top:-1rem;">
+      <span class="vjs-filter-label">Tech:</span>
+      <button class="vjs-filter-btn active" data-filter-group="tech" data-filter="all">All</button>
+      
+      
+        
+          
+            
+            <button class="vjs-filter-btn" data-filter-group="tech" data-filter="touchdesigner">TouchDesigner</button>
+          
+        
+          
+            
+            <button class="vjs-filter-btn" data-filter-group="tech" data-filter="glsl shaders">GLSL Shaders</button>
+          
+        
+          
+            
+            <button class="vjs-filter-btn" data-filter-group="tech" data-filter="processing">Processing</button>
+          
+        
+      
+        
+          
+            
+            <button class="vjs-filter-btn" data-filter-group="tech" data-filter="madmapper">MadMapper</button>
+          
+        
+          
+            
+            <button class="vjs-filter-btn" data-filter-group="tech" data-filter="touchdesigner">Touchdesigner</button>
+          
+        
+          
+            
+            <button class="vjs-filter-btn" data-filter-group="tech" data-filter="kinect">Kinect</button>
+          
+        
+      
+        
+          
+        
+          
+            
+            <button class="vjs-filter-btn" data-filter-group="tech" data-filter="notch">Notch</button>
+          
+        
+          
+            
+            <button class="vjs-filter-btn" data-filter-group="tech" data-filter="unreal engine">Unreal Engine</button>
+          
+        
+      
+        
+          
+            
+            <button class="vjs-filter-btn" data-filter-group="tech" data-filter="resolume arena">Resolume Arena</button>
+          
+        
+          
+        
+          
+            
+            <button class="vjs-filter-btn" data-filter-group="tech" data-filter="disguise">Disguise</button>
+          
+        
+      
+        
+          
+            
+            <button class="vjs-filter-btn" data-filter-group="tech" data-filter="resolume avenue">Resolume Avenue</button>
+          
+        
+          
+            
+            <button class="vjs-filter-btn" data-filter-group="tech" data-filter="after effects">After Effects</button>
+          
+        
+          
+            
+            <button class="vjs-filter-btn" data-filter-group="tech" data-filter="vdmx">VDMX</button>
+          
+        
+      
+        
+          
+        
+          
+            
+            <button class="vjs-filter-btn" data-filter-group="tech" data-filter="stable diffusion">Stable Diffusion</button>
+          
+        
+          
+        
+      
+    </div>
+
+    <div id="artists-count" style="font-family:'Orbitron',sans-serif; font-size:0.65rem; text-transform:uppercase; letter-spacing:0.15em; color:var(--vjs-text-muted); margin-bottom:1.5rem;">
+      6 Artists
+    </div>
+
+    <div class="vjs-grid vjs-grid-3" id="artists-grid">
+      
+      <div class="vjs-artist-item"
+           data-style="generative art, fractals"
+           data-tech="touchdesigner,glsl shaders,processing">
+        <a href="/artists/aurora-fractals" class="text-decoration-none" data-style="generative art, fractals" data-tech="touchdesigner,glsl shaders,processing" data-location="amsterdam, netherlands">
+  <div class="vjs-artist-card">
+    <div class="vjs-artist-card-visual" style="background: linear-gradient(135deg, rgba(123,47,255,0.35) 0%, rgba(0,212,255,0.2) 100%);">
+      <div style="position:absolute; inset:0; display:flex; flex-direction:column; align-items:center; justify-content:center;">
+        <span style="font-size:3rem; opacity:0.5;">&#9673;</span>
+        <span style="font-family:'Orbitron',sans-serif; font-size:0.65rem; letter-spacing:0.2em; color:rgba(255,255,255,0.4); text-transform:uppercase; margin-top:0.5rem;">Amsterdam, Netherlands</span>
+      </div>
+      <div class="vjs-artist-card-overlay">
+        <div style="color: var(--vjs-text); font-size:0.8rem; line-height:1.5;">Amsterdam-based generative artist creating mathematical visual worlds in real time. Specializes i...</div>
+      </div>
+    </div>
+    <div class="vjs-card-body">
+      <h4 class="vjs-card-title">Aurora Fractals</h4>
+      <p class="vjs-card-text" style="font-size:0.8rem; margin-bottom:0.75rem; color: var(--vjs-electric-blue);">Generative Art, Fractals</p>
+      
+      <div>
+        
+        <span class="vjs-tag vjs-tag-purple">TouchDesigner</span>
+        
+        <span class="vjs-tag vjs-tag-purple">GLSL Shaders</span>
+        
+        <span class="vjs-tag vjs-tag-purple">Processing</span>
+        
+      </div>
+      
+    </div>
+  </div>
+</a>
+
+      </div>
+      
+      <div class="vjs-artist-item"
+           data-style="projection mapping, interactive art"
+           data-tech="madmapper,touchdesigner,kinect">
+        <a href="/artists/flux-collective" class="text-decoration-none" data-style="projection mapping, interactive art" data-tech="madmapper,touchdesigner,kinect" data-location="são paulo, brazil">
+  <div class="vjs-artist-card">
+    <div class="vjs-artist-card-visual" style="background: linear-gradient(135deg, rgba(123,47,255,0.35) 0%, rgba(0,212,255,0.2) 100%);">
+      <div style="position:absolute; inset:0; display:flex; flex-direction:column; align-items:center; justify-content:center;">
+        <span style="font-size:3rem; opacity:0.5;">&#9673;</span>
+        <span style="font-family:'Orbitron',sans-serif; font-size:0.65rem; letter-spacing:0.2em; color:rgba(255,255,255,0.4); text-transform:uppercase; margin-top:0.5rem;">São Paulo, Brazil</span>
+      </div>
+      <div class="vjs-artist-card-overlay">
+        <div style="color: var(--vjs-text); font-size:0.8rem; line-height:1.5;">São Paulo collective fusing Brazilian visual traditions with cutting-edge projection mapping and ...</div>
+      </div>
+    </div>
+    <div class="vjs-card-body">
+      <h4 class="vjs-card-title">Flux Collective</h4>
+      <p class="vjs-card-text" style="font-size:0.8rem; margin-bottom:0.75rem; color: var(--vjs-electric-blue);">Projection Mapping, Interactive Art</p>
+      
+      <div>
+        
+        <span class="vjs-tag vjs-tag-purple">MadMapper</span>
+        
+        <span class="vjs-tag vjs-tag-purple">Touchdesigner</span>
+        
+        <span class="vjs-tag vjs-tag-purple">Kinect</span>
+        
+      </div>
+      
+    </div>
+  </div>
+</a>
+
+      </div>
+      
+      <div class="vjs-artist-item"
+           data-style="projection mapping, immersive installations"
+           data-tech="madmapper,notch,unreal engine">
+        <a href="/artists/luna-visuals" class="text-decoration-none" data-style="projection mapping, immersive installations" data-tech="madmapper,notch,unreal engine" data-location="tokyo, japan">
+  <div class="vjs-artist-card">
+    <div class="vjs-artist-card-visual" style="background: linear-gradient(135deg, rgba(123,47,255,0.35) 0%, rgba(0,212,255,0.2) 100%);">
+      <div style="position:absolute; inset:0; display:flex; flex-direction:column; align-items:center; justify-content:center;">
+        <span style="font-size:3rem; opacity:0.5;">&#9673;</span>
+        <span style="font-family:'Orbitron',sans-serif; font-size:0.65rem; letter-spacing:0.2em; color:rgba(255,255,255,0.4); text-transform:uppercase; margin-top:0.5rem;">Tokyo, Japan</span>
+      </div>
+      <div class="vjs-artist-card-overlay">
+        <div style="color: var(--vjs-text); font-size:0.8rem; line-height:1.5;">Tokyo-based visual collective creating large-scale projection mapping and immersive dome experien...</div>
+      </div>
     </div>
     <div class="vjs-card-body">
       <h4 class="vjs-card-title">Luna Visuals</h4>
-      <p class="vjs-card-text" style="margin-bottom:0.5rem;">Tokyo, Japan</p>
-      <p class="vjs-card-text" style="font-size:0.8rem;">Projection Mapping, Immersive Installations</p>
+      <p class="vjs-card-text" style="font-size:0.8rem; margin-bottom:0.75rem; color: var(--vjs-electric-blue);">Projection Mapping, Immersive Installations</p>
       
-      <div style="margin-top:0.75rem;">
+      <div>
         
         <span class="vjs-tag vjs-tag-purple">MadMapper</span>
         
@@ -267,18 +533,27 @@
   </div>
 </a>
 
+      </div>
       
-      <a href="/artists/nova-spectrum" class="text-decoration-none">
-  <div class="vjs-card">
-    <div class="vjs-card-img-placeholder" style="background: linear-gradient(135deg, rgba(123,47,255,0.3) 0%, rgba(0,212,255,0.2) 100%);">
-      <span style="font-size:2.5rem; opacity:0.6;">&#9673;</span>
+      <div class="vjs-artist-item"
+           data-style="stage visuals, led art"
+           data-tech="resolume arena,touchdesigner,disguise">
+        <a href="/artists/nova-spectrum" class="text-decoration-none" data-style="stage visuals, led art" data-tech="resolume arena,touchdesigner,disguise" data-location="los angeles, usa">
+  <div class="vjs-artist-card">
+    <div class="vjs-artist-card-visual" style="background: linear-gradient(135deg, rgba(123,47,255,0.35) 0%, rgba(0,212,255,0.2) 100%);">
+      <div style="position:absolute; inset:0; display:flex; flex-direction:column; align-items:center; justify-content:center;">
+        <span style="font-size:3rem; opacity:0.5;">&#9673;</span>
+        <span style="font-family:'Orbitron',sans-serif; font-size:0.65rem; letter-spacing:0.2em; color:rgba(255,255,255,0.4); text-transform:uppercase; margin-top:0.5rem;">Los Angeles, USA</span>
+      </div>
+      <div class="vjs-artist-card-overlay">
+        <div style="color: var(--vjs-text); font-size:0.8rem; line-height:1.5;">LA-based visual designer specializing in large-scale stage productions and LED installations for ...</div>
+      </div>
     </div>
     <div class="vjs-card-body">
       <h4 class="vjs-card-title">Nova Spectrum</h4>
-      <p class="vjs-card-text" style="margin-bottom:0.5rem;">Los Angeles, USA</p>
-      <p class="vjs-card-text" style="font-size:0.8rem;">Stage Visuals, LED Art</p>
+      <p class="vjs-card-text" style="font-size:0.8rem; margin-bottom:0.75rem; color: var(--vjs-electric-blue);">Stage Visuals, LED Art</p>
       
-      <div style="margin-top:0.75rem;">
+      <div>
         
         <span class="vjs-tag vjs-tag-purple">Resolume Arena</span>
         
@@ -292,18 +567,61 @@
   </div>
 </a>
 
+      </div>
       
-      <a href="/artists/vj-kai" class="text-decoration-none">
-  <div class="vjs-card">
-    <div class="vjs-card-img-placeholder" style="background: linear-gradient(135deg, rgba(123,47,255,0.3) 0%, rgba(0,212,255,0.2) 100%);">
-      <span style="font-size:2.5rem; opacity:0.6;">&#9673;</span>
+      <div class="vjs-artist-item"
+           data-style="glitch art, abstract motion"
+           data-tech="resolume avenue,after effects,vdmx">
+        <a href="/artists/pixel-storm" class="text-decoration-none" data-style="glitch art, abstract motion" data-tech="resolume avenue,after effects,vdmx" data-location="london, uk">
+  <div class="vjs-artist-card">
+    <div class="vjs-artist-card-visual" style="background: linear-gradient(135deg, rgba(123,47,255,0.35) 0%, rgba(0,212,255,0.2) 100%);">
+      <div style="position:absolute; inset:0; display:flex; flex-direction:column; align-items:center; justify-content:center;">
+        <span style="font-size:3rem; opacity:0.5;">&#9673;</span>
+        <span style="font-family:'Orbitron',sans-serif; font-size:0.65rem; letter-spacing:0.2em; color:rgba(255,255,255,0.4); text-transform:uppercase; margin-top:0.5rem;">London, UK</span>
+      </div>
+      <div class="vjs-artist-card-overlay">
+        <div style="color: var(--vjs-text); font-size:0.8rem; line-height:1.5;">London-based VJ duo specializing in glitch aesthetics and abstract motion graphics. Their perform...</div>
+      </div>
+    </div>
+    <div class="vjs-card-body">
+      <h4 class="vjs-card-title">Pixel Storm</h4>
+      <p class="vjs-card-text" style="font-size:0.8rem; margin-bottom:0.75rem; color: var(--vjs-electric-blue);">Glitch Art, Abstract Motion</p>
+      
+      <div>
+        
+        <span class="vjs-tag vjs-tag-purple">Resolume Avenue</span>
+        
+        <span class="vjs-tag vjs-tag-purple">After Effects</span>
+        
+        <span class="vjs-tag vjs-tag-purple">VDMX</span>
+        
+      </div>
+      
+    </div>
+  </div>
+</a>
+
+      </div>
+      
+      <div class="vjs-artist-item"
+           data-style="generative ai visuals, glitch art"
+           data-tech="touchdesigner,stable diffusion,resolume arena">
+        <a href="/artists/vj-kai" class="text-decoration-none" data-style="generative ai visuals, glitch art" data-tech="touchdesigner,stable diffusion,resolume arena" data-location="berlin, germany">
+  <div class="vjs-artist-card">
+    <div class="vjs-artist-card-visual" style="background: linear-gradient(135deg, rgba(123,47,255,0.35) 0%, rgba(0,212,255,0.2) 100%);">
+      <div style="position:absolute; inset:0; display:flex; flex-direction:column; align-items:center; justify-content:center;">
+        <span style="font-size:3rem; opacity:0.5;">&#9673;</span>
+        <span style="font-family:'Orbitron',sans-serif; font-size:0.65rem; letter-spacing:0.2em; color:rgba(255,255,255,0.4); text-transform:uppercase; margin-top:0.5rem;">Berlin, Germany</span>
+      </div>
+      <div class="vjs-artist-card-overlay">
+        <div style="color: var(--vjs-text); font-size:0.8rem; line-height:1.5;">Berlin-based visual artist pushing the boundaries of AI-generated live visuals. Known for hypnoti...</div>
+      </div>
     </div>
     <div class="vjs-card-body">
       <h4 class="vjs-card-title">VJ Kai</h4>
-      <p class="vjs-card-text" style="margin-bottom:0.5rem;">Berlin, Germany</p>
-      <p class="vjs-card-text" style="font-size:0.8rem;">Generative AI Visuals, Glitch Art</p>
+      <p class="vjs-card-text" style="font-size:0.8rem; margin-bottom:0.75rem; color: var(--vjs-electric-blue);">Generative AI Visuals, Glitch Art</p>
       
-      <div style="margin-top:0.75rem;">
+      <div>
         
         <span class="vjs-tag vjs-tag-purple">TouchDesigner</span>
         
@@ -317,8 +635,14 @@
   </div>
 </a>
 
+      </div>
       
     </div>
+
+    <div id="artists-no-results" style="display:none; text-align:center; padding:4rem; color:var(--vjs-text-muted); font-family:'Space Grotesk',sans-serif;">
+      No artists match this filter. <a href="#" onclick="resetFilters()" style="color:var(--vjs-ultraviolet);">Reset filters</a>
+    </div>
+
   </div>
 </section>
 
@@ -437,6 +761,50 @@
     </ul>
   </div>
 </footer>
+
+<script>
+var activeStyle = 'all', activeTech = 'all';
+
+function applyFilters() {
+  var items = document.querySelectorAll('.vjs-artist-item');
+  var visible = 0;
+  items.forEach(function(item) {
+    var style = item.dataset.style || '';
+    var tech  = item.dataset.tech  || '';
+    var matchStyle = activeStyle === 'all' || style.indexOf(activeStyle) !== -1;
+    var matchTech  = activeTech  === 'all' || tech.indexOf(activeTech)  !== -1;
+    if(matchStyle && matchTech) { item.style.display=''; visible++; }
+    else { item.style.display='none'; }
+  });
+  var count = document.getElementById('artists-count');
+  var noRes = document.getElementById('artists-no-results');
+  if(count) count.textContent = visible + ' Artist' + (visible!==1?'s':'');
+  if(noRes) noRes.style.display = visible===0 ? 'block' : 'none';
+}
+
+function resetFilters() {
+  activeStyle='all'; activeTech='all';
+  document.querySelectorAll('.vjs-filter-btn').forEach(function(b){
+    b.classList.toggle('active', b.dataset.filter==='all');
+  });
+  applyFilters();
+}
+
+document.querySelectorAll('.vjs-filter-btn').forEach(function(btn) {
+  btn.addEventListener('click', function() {
+    var group = btn.dataset.filterGroup;
+    document.querySelectorAll('[data-filter-group="'+group+'"]').forEach(function(b){ b.classList.remove('active'); });
+    btn.classList.add('active');
+    if(group==='style') activeStyle = btn.dataset.filter;
+    if(group==='tech')  activeTech  = btn.dataset.filter;
+    applyFilters();
+  });
+});
+
+// Scroll reveal
+var ro = new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting){e.target.classList.add('is-visible');ro.unobserve(e.target);}});},{threshold:.1});
+document.querySelectorAll('.vjs-reveal').forEach(function(el){ro.observe(el);});
+</script>
 
   </div>
   <!-- Site Scripts-->

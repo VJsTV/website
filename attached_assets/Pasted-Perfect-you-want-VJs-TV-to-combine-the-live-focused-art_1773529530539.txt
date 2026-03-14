@@ -1,0 +1,247 @@
+Perfect — you want **VJs TV** to combine the **live-focused, artist-centric, and broadcast-quality models** of **NTS Radio**, **Boiler Room**, and **Red Bull TV**, but **focused on VJ culture and live visual performances**.
+
+Below is a **full plan + ready-to-use Replit prompt** to restructure your repo and implement it.
+
+---
+
+# 1. Core Principles
+
+**VJs TV design goals:**
+
+1. **Live-first:** Homepage dominated by ongoing or upcoming live streams.
+2. **Artist discovery:** Directory of VJs with bio, projects, technology, past events.
+3. **Project indexing:** Each visual performance is an indexed “project” page.
+4. **Broadcast quality:** Cinematic/immersive visuals, responsive video, clean UI.
+5. **Sponsor integration:** Tools/brands displayed contextually.
+6. **Global scale:** Easily add new artists, events, projects.
+7. **Static + scalable:** Fully static Jekyll site on GitHub Pages, with optional dynamic loops for relationships.
+
+---
+
+# 2. Recommended Structure for VJs TV
+
+## Navigation
+
+```
+Home
+Live
+Artists
+Projects
+Events
+Studios
+Technology
+Sponsors
+Submit Project
+```
+
+Add a **link to VJSMag** for editorial content.
+
+---
+
+## Homepage Sections
+
+1. **Hero / Live Now**
+
+   * Embed live stream (YouTube/Vimeo).
+   * Countdown to next show.
+   * Featured artist/project overlay.
+
+2. **Upcoming Performances**
+
+   * List upcoming events/projects with live preview thumbnails.
+
+3. **Featured Artists**
+
+   * Grid with hover previews linking to artist pages.
+
+4. **Featured Projects**
+
+   * Carousel of projects or generative visuals.
+
+5. **Studios / Installations**
+
+   * Highlight top VJ studios or performance labs.
+
+6. **Technology & Tools**
+
+   * Showcase tools used by VJs (TouchDesigner, Resolume, MadMapper).
+
+7. **Sponsors / Partners**
+
+   * Interactive carousel linking to sponsored artists/projects.
+
+8. **Submit Project CTA**
+
+   * Encourages artists to submit their work to the platform.
+
+---
+
+## Collections (Jekyll)
+
+```
+_vjs
+_projects
+_events
+_studios
+_technology
+_sponsors
+```
+
+Each collection auto-generates:
+
+* index page
+* entity pages with **relationships** (artist → projects → events → technology → studios).
+
+---
+
+## Example Entity Relationships
+
+**Artist page:**
+
+* Projects created
+* Past events
+* Studio affiliations
+* Technology/tools used
+
+**Project page:**
+
+* Artist
+* Event
+* Technology
+* Studio
+
+**Event page:**
+
+* Artists performing
+* Projects shown
+* Location / venue
+
+**Technology page:**
+
+* Artists using the tool
+* Projects using the tool
+
+---
+
+# 3. Design Direction
+
+* **Dark / cyber aesthetic**: black + neon purple, electric blue, magenta
+* **Typography**: Inter, Space Grotesk, Orbitron
+* **Visuals**: Video backgrounds, animated transitions, glitch effects, hover previews
+* **Responsive**: Mobile-first, lazy-load videos/images
+
+---
+
+# 4. Submission / Community
+
+* `/submit` page with Typeform/Tally integration.
+* Fields: Artist, Project, Technology, Studio, Location, Video link.
+* Submissions auto-generate entries in the GitHub repo via GitHub Actions.
+
+---
+
+# 5. Live Broadcast Page
+
+* Dedicated `/live` page
+* Embed YouTube/Vimeo stream
+* List performing artists with links
+* Display schedule of upcoming live events
+* Optional live chat integration
+
+---
+
+# 6. Prompt for Replit
+
+Paste this **exact prompt** into Replit:
+
+---
+
+```text
+I have a Jekyll GitHub Pages repository for a project called VJs TV.
+
+I want to transform it into a **global VJ live performance platform**, inspired by:
+
+- NTS Live (live-first, clean UI, scheduling)
+- Boiler Room (artist-focused, archive, immersive visuals)
+- Red Bull TV (high-quality broadcast, project/event integration)
+
+Goals for the site:
+
+1. Homepage dominated by live broadcasts
+2. Directory of VJ artists
+3. Indexed database of audiovisual projects
+4. Event archives with upcoming/live schedule
+5. Studios and installations
+6. Technologies used by artists
+7. Sponsor/brand integration
+8. Artist project submissions
+
+Collections to create:
+
+_vjs
+_projects
+_events
+_studios
+_technology
+_sponsors
+
+Each collection must have:
+
+- Frontmatter metadata
+- Index page
+- Entity page
+- Relationships to other collections (e.g., Artist → Projects → Events → Technology → Studio)
+
+Primary pages:
+
+/live
+/vjs
+/projects
+/events
+/studios
+/technology
+/sponsors
+/submit
+
+Homepage sections:
+
+- Hero with video background and LIVE NOW player
+- Countdown to next broadcast
+- Upcoming performances
+- Featured artists
+- Featured projects
+- Studios & installations
+- Technology & tools
+- Sponsors
+- Submit project CTA
+- Link to vjsmag.com for editorial content
+
+Design:
+
+- Dark/cyber aesthetic (black + neon purple/blue/magenta)
+- Typography: Inter, Space Grotesk, Orbitron
+- Animated video backgrounds
+- Hover previews on artist/project cards
+- Responsive/mobile-first
+- Lazy-loaded videos/images
+
+Components to build:
+
+- Artist card
+- Project card
+- Event card
+- Studio card
+- Technology card
+- Sponsor card
+- Live stream player
+- Video showcase grid
+
+The site must remain fully static and compatible with GitHub Pages.  
+It should scale to thousands of artists, projects, and events.
+```
+
+---
+
+If you want, I can **also create a follow-up Replit prompt** that will **generate example content for 5 artists, 5 projects, 3 events, 3 studios, 5 technologies, 3 sponsors**, so you can preview the **entire IMDb-style VJs TV ecosystem immediately**.
+
+Do you want me to create that next?

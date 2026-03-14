@@ -1,0 +1,47 @@
+You are an expert front-end developer. UPGRADE the existing VJs TV website (already live at vjstv.com) to premium sponsor-attracting level.
+
+Use ONLY:
+- index.html
+- style.css (Tailwind via CDN)
+- script.js
+- Keep the current sections: Live, Artists, Projects, Technology, Sponsors (plus navbar and footer).
+
+**Theme Upgrade (must be stronger)**:
+- Full dark cyberpunk VJ aesthetic: #0a0a0a background, neon cyan (#00f9ff), magenta (#ff00ff), purple (#8b00ff).
+- Heavy neon glows (text-shadow + box-shadow), futuristic fonts.
+- Canvas particle background (VJ-style floating dots/lines that react to mouse movement — make it subtle but always visible).
+- Every card and button must have neon hover glow + scale animation.
+
+**Technology Section Upgrade** (keep existing text but enhance):
+- Heading + subtitle exactly as live.
+- Turn the list into 5 beautiful neon cards.
+- Examples become interactive cards with real logos (use public URLs or SVGs): Resolume, TouchDesigner, MadMapper + short “why sponsors love this” line.
+
+**Sponsors Section — Major Overhaul (make this the star revenue page)**:
+- Heading + “Your revenue page.” subtitle.
+- Four large clickable neon category cards:
+  - Title Sponsor
+  - Technology Partners
+  - Creative Partners
+  - Equipment Partners
+- Clicking any card opens a stunning modal (Tailwind + JS) containing:
+  - “What this sponsor page shows” (logo placement, integration with our visuals, media exposure, event mentions, etc.)
+  - Benefits bullet list
+  - Pricing tiers: Platinum ($50k/year), Gold ($25k/year), Silver ($10k/year) — with what each includes
+  - “Partner With Us” button that opens a simple contact form (name, company, email, message)
+- Add subtle “Current Partners” showcase at the bottom with Resolume + TouchDesigner logos.
+
+**Hero & Navbar**:
+- Keep existing but make hero headline bolder and add a second neon button “Become a Sponsor” that scrolls to Sponsors.
+- Navbar: VJs TV logo (neon) + links to all sections + “Contact” button.
+
+**Footer**:
+- Copyright + full contact form + social icons.
+
+**Polish**:
+- 100% responsive
+- Smooth scroll to sections
+- All modals animated and closable
+- Production-ready code
+
+Generate the complete updated code for index.html, style.css, and script.js. Start by showing the new Tailwind script and HTML skeleton, then full files. Make it look expensive and immersive — this must feel like a premium VJ technology platform that sponsors will want to be part of.

@@ -11,18 +11,48 @@ meta_description: "Visual software, projection systems, media servers, LED techn
   <div class="container">
     <h1 class="vjs-section-title" style="font-size:clamp(2rem,5vw,3.5rem);">Technology</h1>
     <div class="vjs-accent-line"></div>
-    <p style="color: var(--vjs-text-muted); max-width:600px; font-size:1.05rem;">Visual software, projection systems, media servers, LED technologies, and AI visual tools powering the world of VJ culture.</p>
+    <p style="color:var(--vjs-text-muted); max-width:600px; font-size:1.05rem;">Visual software, projection systems, media servers, LED technologies, and AI visual tools powering VJ culture worldwide.</p>
   </div>
 </div>
 
 <section class="vjs-section">
   <div class="container">
-    <div class="vjs-grid vjs-grid-3">
+
+    <!-- CATEGORY FILTER -->
+    <div class="vjs-filter-bar">
+      <span class="vjs-filter-label">Category:</span>
+      <button class="vjs-filter-btn active" data-cat="all">All</button>
+      {% assign cats = "" %}
       {% for tech in site.technology %}
-      {% include cards/technology-card.html tech=tech %}
+        {% unless cats contains tech.category %}
+          {% assign cats = cats | append: tech.category | append: "|" %}
+          <button class="vjs-filter-btn" data-cat="{{ tech.category | downcase | replace: ' ', '-' }}">{{ tech.category }}</button>
+        {% endunless %}
       {% endfor %}
     </div>
+
+    <div class="vjs-grid vjs-grid-3" id="tech-grid">
+      {% for tech in site.technology %}
+      <div class="vjs-tech-item" data-cat="{{ tech.category | downcase | replace: ' ', '-' }}">
+        {% include cards/technology-card.html tech=tech %}
+      </div>
+      {% endfor %}
+    </div>
+
   </div>
 </section>
 
 {% include layouts/footer/footer-1.html %}
+
+<script>
+document.querySelectorAll('[data-cat]').forEach(function(btn) {
+  btn.addEventListener('click', function() {
+    document.querySelectorAll('[data-cat]').forEach(function(b){ b.classList.remove('active'); });
+    btn.classList.add('active');
+    var filter = btn.dataset.cat;
+    document.querySelectorAll('.vjs-tech-item').forEach(function(item) {
+      item.style.display = (filter==='all' || item.dataset.cat===filter) ? '' : 'none';
+    });
+  });
+});
+</script>

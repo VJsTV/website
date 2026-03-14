@@ -20,14 +20,15 @@ VJs TV is a Jekyll-based platform for VJ culture and audiovisual performances. I
 - `_sponsors/` - Sponsors and brand partners (renders to /sponsors/:name)
 
 ## Pages
-- `/` - Homepage (hero, live broadcast, artists, projects, studios, tech, sponsors, CTA)
+- `/` - Homepage: particle hero canvas, countdown timer to next broadcast, scrolling sponsor ticker, animated stats counters, scroll-reveal sections, featured artists/projects/tech/sponsors
 - `/live` - Live broadcast page with player and schedule
-- `/artists` - VJ artist directory
-- `/projects` - Global index of VJ work
-- `/events` - Events and performances
+- `/artists` - Artist directory with JS filter by visual style + technology (auto-generated from data)
+- `/projects` - Project index with JS filter by type + sort by date (auto-generated from data)
+- `/events` - Events split into Upcoming / Archive sections, with date badges
 - `/studios` - Studios and installations
-- `/technology` - VJ technology and tools
+- `/technology` - Technology directory with JS category filter
 - `/sponsors` - Sponsors and partners
+- `/search` - Global search across all collections (client-side, no server needed)
 - `/submit` - Project submission page
 - `/business-model` - Sponsor pitch page with interactive modals, partnership tiers, particle background, and contact form
 

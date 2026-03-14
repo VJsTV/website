@@ -1,14 +1,20 @@
-<a href="{{ include.tech.url }}" class="text-decoration-none">
-  <div class="vjs-card">
+<a href="{{ include.tech.url }}" class="text-decoration-none" data-category="{{ include.tech.category | downcase | replace: ' ', '-' }}">
+  <div class="vjs-card" style="border-color: rgba(123,47,255,0.2);">
     <div class="vjs-card-img-placeholder" style="background: linear-gradient(135deg, rgba(123,47,255,0.2) 0%, rgba(255,60,172,0.15) 100%); height:160px;">
-      <span style="font-size:2.5rem; opacity:0.6;">&#9881;</span>
+      <div style="text-align:center;">
+        <div style="font-family:'Orbitron',sans-serif; font-weight:700; font-size:1.6rem; color: var(--vjs-ultraviolet); opacity:0.9;">{{ include.tech.title | truncate: 4, '' }}</div>
+      </div>
     </div>
     <div class="vjs-card-body">
-      <div style="margin-bottom:0.5rem;">
-        <span class="vjs-tag vjs-tag-purple">{{ include.tech.category }}</span>
-      </div>
+      <div style="margin-bottom:0.5rem;"><span class="vjs-tag vjs-tag-purple">{{ include.tech.category }}</span></div>
       <h4 class="vjs-card-title">{{ include.tech.title }}</h4>
-      <p class="vjs-card-text" style="font-size:0.8rem;">{{ include.tech.description | truncate: 120 }}</p>
+      <p class="vjs-card-text" style="font-size:0.8rem; margin-bottom:0.75rem;">{{ include.tech.description | truncate: 120 }}</p>
+      {% if include.tech.used_by %}
+      <div style="margin-top:auto;">
+        <span style="font-family:'Orbitron',sans-serif; font-size:0.6rem; text-transform:uppercase; letter-spacing:0.1em; color: var(--vjs-text-muted);">Used by: </span>
+        {% for name in include.tech.used_by limit:2 %}<span class="vjs-tag vjs-tag-blue">{{ name }}</span>{% endfor %}
+      </div>
+      {% endif %}
     </div>
   </div>
 </a>

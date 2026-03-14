@@ -1,15 +1,29 @@
+{% assign today_str = "now" | date: "%Y-%m-%d" %}
+{% assign event_str = include.event.date | date: "%Y-%m-%d" %}
+{% if event_str >= today_str %}
+{% assign is_upcoming = true %}
+{% else %}
+{% assign is_upcoming = false %}
+{% endif %}
 <a href="{{ include.event.url }}" class="text-decoration-none">
-  <div class="vjs-card">
-    <div class="vjs-card-img-placeholder" style="background: linear-gradient(135deg, rgba(0,212,255,0.2) 0%, rgba(123,47,255,0.2) 100%);">
-      <span style="font-size:2.5rem; opacity:0.6;">&#9733;</span>
+  <div class="vjs-card" style="{% unless is_upcoming %}opacity:0.7;{% endunless %}">
+    <div class="vjs-card-img-placeholder" style="background: linear-gradient(135deg, rgba(0,212,255,0.{% if is_upcoming %}25{% else %}12{% endif %}) 0%, rgba(123,47,255,0.{% if is_upcoming %}2{% else %}1{% endif %}) 100%); height:180px;">
+      <div style="text-align:center;">
+        <div style="font-family:'Orbitron',sans-serif; font-size:2.5rem; font-weight:700; color: var(--vjs-electric-blue); opacity:{% if is_upcoming %}0.8{% else %}0.4{% endif %}; line-height:1;">{{ include.event.date | date: "%d" }}</div>
+        <div style="font-family:'Orbitron',sans-serif; font-size:0.7rem; text-transform:uppercase; letter-spacing:0.2em; color: var(--vjs-text-muted);">{{ include.event.date | date: "%b %Y" }}</div>
+      </div>
     </div>
     <div class="vjs-card-body">
-      <div style="margin-bottom:0.5rem;">
-        <span class="vjs-tag vjs-tag-blue">{{ include.event.event_type }}</span>
-      </div>
+      {% if is_upcoming %}<div class="vjs-event-upcoming-badge">Upcoming</div>{% else %}<div class="vjs-event-past-badge">Past</div>{% endif %}
+      <div style="margin-bottom:0.4rem;"><span class="vjs-tag vjs-tag-blue">{{ include.event.event_type }}</span></div>
       <h4 class="vjs-card-title">{{ include.event.title }}</h4>
-      <p class="vjs-card-text" style="margin-bottom:0.25rem;">{{ include.event.date | date: "%B %d, %Y" }}</p>
-      <p class="vjs-card-text" style="font-size:0.8rem;">{{ include.event.location }}</p>
+      <p class="vjs-card-text" style="font-size:0.8rem; margin-bottom:0.25rem;">&#128205; {{ include.event.location }}</p>
+      {% if include.event.time %}<p class="vjs-card-text" style="font-size:0.8rem; color: var(--vjs-electric-blue);">&#128336; {{ include.event.time }}</p>{% endif %}
+      {% if include.event.artists %}
+      <div style="margin-top:0.5rem;">
+        {% for name in include.event.artists limit:2 %}<span class="vjs-tag vjs-tag-purple">{{ name }}</span>{% endfor %}
+      </div>
+      {% endif %}
     </div>
   </div>
 </a>

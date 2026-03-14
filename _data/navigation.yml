@@ -35,6 +35,10 @@ main_menu:
     url: "/business-model"
     menu_type: "simple"
 
+  - text: "Search"
+    url: "/search"
+    menu_type: "simple"
+
   - text: "Submit"
     url: "/submit"
     menu_type: "simple"

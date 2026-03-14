@@ -156,6 +156,13 @@
         
         
           <li class="nav-item">
+          <a class="nav-link" href="/search">Search</a>
+        </li>
+        
+        
+        
+        
+          <li class="nav-item">
           <a class="nav-link" href="/submit">Submit</a>
         </li>
         
@@ -231,92 +238,203 @@
   </div>
   <!-- /.offcanvas-info -->
 
-<section class="vjs-hero">
-  <div class="vjs-hero-bg"></div>
-  <div class="vjs-hero-content">
+<div class="vjs-progress-bar" id="vjs-progress-bar"></div>
+
+<!-- HERO -->
+<section class="vjs-hero" style="position:relative; overflow:hidden; min-height:100vh; display:flex; align-items:center; justify-content:center;">
+  <canvas id="vjs-hero-canvas" style="position:absolute; inset:0; width:100%; height:100%; pointer-events:none; z-index:0;"></canvas>
+  <div class="vjs-hero-bg" style="z-index:1;"></div>
+  <div class="vjs-hero-content" style="z-index:2; text-align:center; padding:2rem 1rem;">
+    <div style="display:inline-flex; align-items:center; gap:0.75rem; background:rgba(0,212,255,0.08); border:1px solid rgba(0,212,255,0.25); border-radius:30px; padding:7px 20px; margin-bottom:2rem;">
+      <span style="width:8px; height:8px; background:var(--vjs-cyan); border-radius:50%; display:inline-block; animation:vjsPulse 1.5s infinite;"></span>
+      <span style="font-family:'Orbitron',sans-serif; font-size:0.65rem; letter-spacing:0.2em; color:var(--vjs-cyan); text-transform:uppercase;">Broadcasting Worldwide</span>
+    </div>
     <h1 class="vjs-hero-title">VJs TV</h1>
     <p class="vjs-hero-subtitle">Global Broadcast Network for VJ Culture</p>
+
+    <div style="margin:2rem 0;">
+      <p style="font-family:'Orbitron',sans-serif; font-size:0.65rem; text-transform:uppercase; letter-spacing:0.2em; color:var(--vjs-text-muted); margin-bottom:1rem;">Next Live Broadcast</p>
+      <div class="vjs-countdown" id="vjs-countdown">
+        <div class="vjs-countdown-unit"><div class="vjs-countdown-number" id="cd-days">--</div><div class="vjs-countdown-label">Days</div></div>
+        <div class="vjs-countdown-sep">:</div>
+        <div class="vjs-countdown-unit"><div class="vjs-countdown-number" id="cd-hours">--</div><div class="vjs-countdown-label">Hours</div></div>
+        <div class="vjs-countdown-sep">:</div>
+        <div class="vjs-countdown-unit"><div class="vjs-countdown-number" id="cd-mins">--</div><div class="vjs-countdown-label">Mins</div></div>
+        <div class="vjs-countdown-sep">:</div>
+        <div class="vjs-countdown-unit"><div class="vjs-countdown-number" id="cd-secs">--</div><div class="vjs-countdown-label">Secs</div></div>
+      </div>
+    </div>
+
     <div style="display:flex; gap:1rem; justify-content:center; flex-wrap:wrap;">
-      <a href="/live" class="vjs-btn vjs-btn-primary">Watch Live</a>
-      <a href="/submit" class="vjs-btn vjs-btn-outline">Submit Project</a>
+      <a href="/live" class="vjs-btn vjs-btn-primary">&#9654; Watch Live</a>
+      <a href="/artists" class="vjs-btn vjs-btn-outline">Discover Artists</a>
+      <a href="/search" class="vjs-btn vjs-btn-outline" style="border-color:rgba(255,255,255,0.15); color:rgba(255,255,255,0.5);">&#128269; Search</a>
     </div>
   </div>
 </section>
 
-<section class="vjs-section vjs-section-alt">
+<!-- SPONSOR TICKER -->
+<div class="vjs-sponsor-bar">
+  <div class="vjs-sponsor-bar-track">
+    <span class="vjs-sponsor-bar-item">Derivative (TouchDesigner)</span><span class="vjs-sponsor-bar-dot"> &diams; </span><span class="vjs-sponsor-bar-item">Resolume</span><span class="vjs-sponsor-bar-dot"> &diams; </span>
+    <span class="vjs-sponsor-bar-item">Derivative (TouchDesigner)</span><span class="vjs-sponsor-bar-dot"> &diams; </span><span class="vjs-sponsor-bar-item">Resolume</span><span class="vjs-sponsor-bar-dot"> &diams; </span>
+    <span class="vjs-sponsor-bar-item">Derivative (TouchDesigner)</span><span class="vjs-sponsor-bar-dot"> &diams; </span><span class="vjs-sponsor-bar-item">Resolume</span><span class="vjs-sponsor-bar-dot"> &diams; </span>
+  </div>
+</div>
+
+<!-- STATS -->
+<div class="vjs-stats-bar vjs-reveal">
+  <div class="vjs-stat-item"><div class="vjs-stat-number" id="stat-artists">0</div><div class="vjs-stat-label">Artists</div></div>
+  <div class="vjs-stat-item"><div class="vjs-stat-number" id="stat-projects">0</div><div class="vjs-stat-label">Projects</div></div>
+  <div class="vjs-stat-item"><div class="vjs-stat-number" id="stat-events">0</div><div class="vjs-stat-label">Events</div></div>
+  <div class="vjs-stat-item"><div class="vjs-stat-number" id="stat-countries">0</div><div class="vjs-stat-label">Countries</div></div>
+</div>
+
+<!-- LIVE SECTION -->
+<section class="vjs-section vjs-reveal">
   <div class="container">
-    <div class="text-center" style="margin-bottom:3rem;">
-      <div class="vjs-live-badge" style="display:inline-flex; margin-bottom:1.5rem;">
-        <span class="vjs-live-dot"></span>
-        LIVE NOW
+    <div style="display:flex; align-items:flex-start; justify-content:space-between; flex-wrap:wrap; gap:1rem; margin-bottom:2.5rem;">
+      <div>
+        <div style="display:inline-flex; align-items:center; gap:0.5rem; margin-bottom:0.75rem;">
+          <span style="width:8px; height:8px; background:#ff3333; border-radius:50%; display:inline-block; animation:vjsPulse 1.5s infinite;"></span>
+          <span style="font-family:'Orbitron',sans-serif; font-size:0.7rem; letter-spacing:0.2em; color:#ff3333; text-transform:uppercase;">Live Now</span>
+        </div>
+        <h2 class="vjs-section-title">Broadcast</h2>
+        <div class="vjs-accent-line"></div>
       </div>
-      <h2 class="vjs-section-title">Live Broadcast</h2>
-      <p class="vjs-section-subtitle">Watch visual performances streaming right now</p>
+      <a href="/live" class="vjs-btn vjs-btn-outline" style="font-size:0.8rem; margin-top:0.5rem;">Full Schedule &rarr;</a>
     </div>
-    <div class="vjs-live-player" style="max-width:900px; margin:0 auto;">
-      <div class="vjs-live-placeholder" style="position:absolute; top:0; left:0; width:100%; height:100%;">
-        <div class="vjs-live-placeholder-icon">&#9654;</div>
-        <p style="color: var(--vjs-text-muted); font-family:'Space Grotesk',sans-serif; letter-spacing:0.1em; text-transform:uppercase; font-size:0.85rem;">Next broadcast coming soon</p>
+    <div class="row g-4">
+      <div class="col-lg-8">
+        <div style="background:var(--vjs-card); border:1px solid var(--vjs-border); border-radius:16px; overflow:hidden;">
+          <div style="aspect-ratio:16/9; background:linear-gradient(135deg, rgba(123,47,255,0.3) 0%, rgba(0,212,255,0.08) 100%); display:flex; align-items:center; justify-content:center; flex-direction:column; gap:1rem;">
+            <div style="width:80px; height:80px; background:rgba(123,47,255,0.25); border-radius:50%; display:flex; align-items:center; justify-content:center; font-size:2rem; border:2px solid rgba(123,47,255,0.4);">&#9654;</div>
+            <span style="color:var(--vjs-text-muted); font-family:'Orbitron',sans-serif; font-size:0.65rem; letter-spacing:0.2em; text-transform:uppercase;">Stream Preview</span>
+          </div>
+          <div style="padding:1.5rem; border-top:1px solid var(--vjs-border);">
+            
+            
+            <div style="display:flex; justify-content:space-between; align-items:flex-start; flex-wrap:wrap; gap:1rem;">
+              <div>
+                <h3 style="font-size:1.1rem; margin-bottom:0.4rem; color:#fff;">VJs TV Live Session 003</h3>
+                <p style="color:var(--vjs-text-muted); font-size:0.85rem;">Aurora Fractals, Nova Spectrum &middot; Apr 20, 2026</p>
+              </div>
+              <a href="/live" class="vjs-btn vjs-btn-primary" style="font-size:0.8rem;">Watch Live</a>
+            </div>
+          </div>
+        </div>
       </div>
-    </div>
-    <div style="text-center; margin-top:2rem; text-align:center;">
-      <a href="/live" class="vjs-btn vjs-btn-outline" style="margin-top:2rem;">View Schedule</a>
+      <div class="col-lg-4">
+        <h3 style="font-family:'Orbitron',sans-serif; font-size:0.7rem; text-transform:uppercase; letter-spacing:0.15em; color:var(--vjs-text-muted); margin-bottom:1.25rem; padding-bottom:0.75rem; border-bottom:1px solid var(--vjs-border);">Upcoming</h3>
+        
+        <a href="/events/glitch-cathedral-premiere" class="text-decoration-none">
+          <div style="display:flex; gap:1rem; padding:1rem; background:var(--vjs-card); border:1px solid var(--vjs-border); border-radius:10px; margin-bottom:0.75rem; transition:border-color 0.3s;" onmouseover="this.style.borderColor='var(--vjs-ultraviolet)'" onmouseout="this.style.borderColor='var(--vjs-border)'">
+            <div style="text-align:center; flex-shrink:0; min-width:44px;">
+              <div style="font-family:'Orbitron',sans-serif; font-size:1.3rem; font-weight:700; color:var(--vjs-electric-blue); line-height:1;">31</div>
+              <div style="font-family:'Orbitron',sans-serif; font-size:0.55rem; text-transform:uppercase; letter-spacing:0.12em; color:var(--vjs-text-muted);">Oct</div>
+            </div>
+            <div style="min-width:0;">
+              <div style="font-size:0.85rem; font-weight:600; color:#fff; margin-bottom:0.2rem; white-space:nowrap; overflow:hidden; text-overflow:ellipsis;">Glitch Cathedral World Premiere</div>
+              <div style="font-size:0.75rem; color:var(--vjs-text-muted);">London, UK</div>
+            </div>
+          </div>
+        </a>
+        
+        <a href="/events/vjs-tv-live-01" class="text-decoration-none">
+          <div style="display:flex; gap:1rem; padding:1rem; background:var(--vjs-card); border:1px solid var(--vjs-border); border-radius:10px; margin-bottom:0.75rem; transition:border-color 0.3s;" onmouseover="this.style.borderColor='var(--vjs-ultraviolet)'" onmouseout="this.style.borderColor='var(--vjs-border)'">
+            <div style="text-align:center; flex-shrink:0; min-width:44px;">
+              <div style="font-family:'Orbitron',sans-serif; font-size:1.3rem; font-weight:700; color:var(--vjs-electric-blue); line-height:1;">15</div>
+              <div style="font-family:'Orbitron',sans-serif; font-size:0.55rem; text-transform:uppercase; letter-spacing:0.12em; color:var(--vjs-text-muted);">Apr</div>
+            </div>
+            <div style="min-width:0;">
+              <div style="font-size:0.85rem; font-weight:600; color:#fff; margin-bottom:0.2rem; white-space:nowrap; overflow:hidden; text-overflow:ellipsis;">VJs TV Live Session 001</div>
+              <div style="font-size:0.75rem; color:var(--vjs-text-muted);">Online / Berlin</div>
+            </div>
+          </div>
+        </a>
+        
+        <a href="/events/flux-mutek-2025" class="text-decoration-none">
+          <div style="display:flex; gap:1rem; padding:1rem; background:var(--vjs-card); border:1px solid var(--vjs-border); border-radius:10px; margin-bottom:0.75rem; transition:border-color 0.3s;" onmouseover="this.style.borderColor='var(--vjs-ultraviolet)'" onmouseout="this.style.borderColor='var(--vjs-border)'">
+            <div style="text-align:center; flex-shrink:0; min-width:44px;">
+              <div style="font-family:'Orbitron',sans-serif; font-size:1.3rem; font-weight:700; color:var(--vjs-electric-blue); line-height:1;">12</div>
+              <div style="font-family:'Orbitron',sans-serif; font-size:0.55rem; text-transform:uppercase; letter-spacing:0.12em; color:var(--vjs-text-muted);">Jun</div>
+            </div>
+            <div style="min-width:0;">
+              <div style="font-size:0.85rem; font-weight:600; color:#fff; margin-bottom:0.2rem; white-space:nowrap; overflow:hidden; text-overflow:ellipsis;">Flux @ MUTEK Montreal 2025</div>
+              <div style="font-size:0.75rem; color:var(--vjs-text-muted);">Montreal, Canada</div>
+            </div>
+          </div>
+        </a>
+        
+        <a href="/events" style="font-size:0.8rem; color:var(--vjs-ultraviolet); text-decoration:none; font-family:'Space Grotesk',sans-serif;">All Events &rarr;</a>
+      </div>
     </div>
   </div>
 </section>
 
-<section class="vjs-section">
+<!-- FEATURED ARTISTS -->
+<section class="vjs-section" style="background:var(--vjs-darker);">
   <div class="container">
-    <div class="vjs-accent-line"></div>
-    <h2 class="vjs-section-title">Upcoming Performances</h2>
-    <p class="vjs-section-subtitle">Scheduled live sessions and events</p>
-    
-    <div class="vjs-schedule-item">
-      <div class="vjs-schedule-time">
-        Apr 15<br/>
-        <span style="font-size:0.7rem; color: var(--vjs-text-muted);">20:00 CET</span>
+    <div class="vjs-reveal" style="display:flex; align-items:flex-end; justify-content:space-between; flex-wrap:wrap; gap:1rem; margin-bottom:2.5rem;">
+      <div>
+        <h2 class="vjs-section-title">Featured Artists</h2>
+        <div class="vjs-accent-line" style="background:var(--vjs-gradient-3);"></div>
+        <p style="color:var(--vjs-text-muted); max-width:560px;">Visual performers pushing the boundaries of live AV art from cities around the world.</p>
       </div>
-      <div class="vjs-schedule-info">
-        <div class="vjs-schedule-artist">VJs TV Live Session 001</div>
-        <div class="vjs-schedule-desc">Online / Berlin &middot; Live Stream</div>
-      </div>
-      <a href="/events/vjs-tv-live-01" class="vjs-btn vjs-btn-outline" style="padding:8px 24px; font-size:0.75rem;">Details</a>
+      <a href="/artists" class="vjs-btn vjs-btn-outline" style="font-size:0.8rem;">All Artists &rarr;</a>
     </div>
-    
-    <div class="vjs-schedule-item">
-      <div class="vjs-schedule-time">
-        Jun 20<br/>
-        <span style="font-size:0.7rem; color: var(--vjs-text-muted);">22:00 EST</span>
-      </div>
-      <div class="vjs-schedule-info">
-        <div class="vjs-schedule-artist">MUTEK Visuals Showcase</div>
-        <div class="vjs-schedule-desc">Montreal, Canada &middot; Festival</div>
-      </div>
-      <a href="/events/mutek-visuals-showcase" class="vjs-btn vjs-btn-outline" style="padding:8px 24px; font-size:0.75rem;">Details</a>
-    </div>
-    
-  </div>
-</section>
-
-<section class="vjs-section vjs-section-alt">
-  <div class="container">
-    <div class="vjs-accent-line"></div>
-    <h2 class="vjs-section-title">Featured Artists</h2>
-    <p class="vjs-section-subtitle">Discover the world's leading visual performers</p>
     <div class="vjs-grid vjs-grid-3">
       
       
-      <a href="/artists/luna-visuals" class="text-decoration-none">
-  <div class="vjs-card">
-    <div class="vjs-card-img-placeholder" style="background: linear-gradient(135deg, rgba(123,47,255,0.3) 0%, rgba(0,212,255,0.2) 100%);">
-      <span style="font-size:2.5rem; opacity:0.6;">&#9673;</span>
+      <div class="vjs-reveal vjs-reveal-delay-1">
+        <a href="/artists/flux-collective" class="text-decoration-none" data-style="projection mapping, interactive art" data-tech="madmapper,touchdesigner,kinect" data-location="são paulo, brazil">
+  <div class="vjs-artist-card">
+    <div class="vjs-artist-card-visual" style="background: linear-gradient(135deg, rgba(123,47,255,0.35) 0%, rgba(0,212,255,0.2) 100%);">
+      <div style="position:absolute; inset:0; display:flex; flex-direction:column; align-items:center; justify-content:center;">
+        <span style="font-size:3rem; opacity:0.5;">&#9673;</span>
+        <span style="font-family:'Orbitron',sans-serif; font-size:0.65rem; letter-spacing:0.2em; color:rgba(255,255,255,0.4); text-transform:uppercase; margin-top:0.5rem;">São Paulo, Brazil</span>
+      </div>
+      <div class="vjs-artist-card-overlay">
+        <div style="color: var(--vjs-text); font-size:0.8rem; line-height:1.5;">São Paulo collective fusing Brazilian visual traditions with cutting-edge projection mapping and ...</div>
+      </div>
+    </div>
+    <div class="vjs-card-body">
+      <h4 class="vjs-card-title">Flux Collective</h4>
+      <p class="vjs-card-text" style="font-size:0.8rem; margin-bottom:0.75rem; color: var(--vjs-electric-blue);">Projection Mapping, Interactive Art</p>
+      
+      <div>
+        
+        <span class="vjs-tag vjs-tag-purple">MadMapper</span>
+        
+        <span class="vjs-tag vjs-tag-purple">Touchdesigner</span>
+        
+        <span class="vjs-tag vjs-tag-purple">Kinect</span>
+        
+      </div>
+      
+    </div>
+  </div>
+</a>
+
+      </div>
+      
+      <div class="vjs-reveal vjs-reveal-delay-2">
+        <a href="/artists/luna-visuals" class="text-decoration-none" data-style="projection mapping, immersive installations" data-tech="madmapper,notch,unreal engine" data-location="tokyo, japan">
+  <div class="vjs-artist-card">
+    <div class="vjs-artist-card-visual" style="background: linear-gradient(135deg, rgba(123,47,255,0.35) 0%, rgba(0,212,255,0.2) 100%);">
+      <div style="position:absolute; inset:0; display:flex; flex-direction:column; align-items:center; justify-content:center;">
+        <span style="font-size:3rem; opacity:0.5;">&#9673;</span>
+        <span style="font-family:'Orbitron',sans-serif; font-size:0.65rem; letter-spacing:0.2em; color:rgba(255,255,255,0.4); text-transform:uppercase; margin-top:0.5rem;">Tokyo, Japan</span>
+      </div>
+      <div class="vjs-artist-card-overlay">
+        <div style="color: var(--vjs-text); font-size:0.8rem; line-height:1.5;">Tokyo-based visual collective creating large-scale projection mapping and immersive dome experien...</div>
+      </div>
     </div>
     <div class="vjs-card-body">
       <h4 class="vjs-card-title">Luna Visuals</h4>
-      <p class="vjs-card-text" style="margin-bottom:0.5rem;">Tokyo, Japan</p>
-      <p class="vjs-card-text" style="font-size:0.8rem;">Projection Mapping, Immersive Installations</p>
+      <p class="vjs-card-text" style="font-size:0.8rem; margin-bottom:0.75rem; color: var(--vjs-electric-blue);">Projection Mapping, Immersive Installations</p>
       
-      <div style="margin-top:0.75rem;">
+      <div>
         
         <span class="vjs-tag vjs-tag-purple">MadMapper</span>
         
@@ -330,20 +448,25 @@
   </div>
 </a>
 
+      </div>
       
-      
-      
-      <a href="/artists/nova-spectrum" class="text-decoration-none">
-  <div class="vjs-card">
-    <div class="vjs-card-img-placeholder" style="background: linear-gradient(135deg, rgba(123,47,255,0.3) 0%, rgba(0,212,255,0.2) 100%);">
-      <span style="font-size:2.5rem; opacity:0.6;">&#9673;</span>
+      <div class="vjs-reveal vjs-reveal-delay-3">
+        <a href="/artists/nova-spectrum" class="text-decoration-none" data-style="stage visuals, led art" data-tech="resolume arena,touchdesigner,disguise" data-location="los angeles, usa">
+  <div class="vjs-artist-card">
+    <div class="vjs-artist-card-visual" style="background: linear-gradient(135deg, rgba(123,47,255,0.35) 0%, rgba(0,212,255,0.2) 100%);">
+      <div style="position:absolute; inset:0; display:flex; flex-direction:column; align-items:center; justify-content:center;">
+        <span style="font-size:3rem; opacity:0.5;">&#9673;</span>
+        <span style="font-family:'Orbitron',sans-serif; font-size:0.65rem; letter-spacing:0.2em; color:rgba(255,255,255,0.4); text-transform:uppercase; margin-top:0.5rem;">Los Angeles, USA</span>
+      </div>
+      <div class="vjs-artist-card-overlay">
+        <div style="color: var(--vjs-text); font-size:0.8rem; line-height:1.5;">LA-based visual designer specializing in large-scale stage productions and LED installations for ...</div>
+      </div>
     </div>
     <div class="vjs-card-body">
       <h4 class="vjs-card-title">Nova Spectrum</h4>
-      <p class="vjs-card-text" style="margin-bottom:0.5rem;">Los Angeles, USA</p>
-      <p class="vjs-card-text" style="font-size:0.8rem;">Stage Visuals, LED Art</p>
+      <p class="vjs-card-text" style="font-size:0.8rem; margin-bottom:0.75rem; color: var(--vjs-electric-blue);">Stage Visuals, LED Art</p>
       
-      <div style="margin-top:0.75rem;">
+      <div>
         
         <span class="vjs-tag vjs-tag-purple">Resolume Arena</span>
         
@@ -357,26 +480,55 @@
   </div>
 </a>
 
+      </div>
+      
+    </div>
+  </div>
+</section>
+
+<!-- FEATURED PROJECTS -->
+<section class="vjs-section">
+  <div class="container">
+    <div class="vjs-reveal" style="display:flex; align-items:flex-end; justify-content:space-between; flex-wrap:wrap; gap:1rem; margin-bottom:2.5rem;">
+      <div>
+        <h2 class="vjs-section-title">Latest Projects</h2>
+        <div class="vjs-accent-line"></div>
+        <p style="color:var(--vjs-text-muted); max-width:560px;">Projection mapping, generative AI, immersive domes, and live stage visuals.</p>
+      </div>
+      <a href="/projects" class="vjs-btn vjs-btn-outline" style="font-size:0.8rem;">All Projects &rarr;</a>
+    </div>
+    <div class="vjs-grid vjs-grid-3">
       
       
+      <div class="vjs-reveal vjs-reveal-delay-1">
+        <a href="/projects/ai-dome-show" class="text-decoration-none" data-type="immersive-installation" data-artist="vj kai" data-year="2025">
+  <div class="vjs-project-card">
+    <div class="vjs-project-card-visual" style="background: linear-gradient(135deg, rgba(255,0,255,0.2) 0%, rgba(123,47,255,0.35) 50%, rgba(0,212,255,0.15) 100%);">
+      <div class="vjs-project-card-play">&#9654;</div>
       
-      <a href="/artists/vj-kai" class="text-decoration-none">
-  <div class="vjs-card">
-    <div class="vjs-card-img-placeholder" style="background: linear-gradient(135deg, rgba(123,47,255,0.3) 0%, rgba(0,212,255,0.2) 100%);">
-      <span style="font-size:2.5rem; opacity:0.6;">&#9673;</span>
+      <div style="position:absolute; top:0.75rem; right:0.75rem;">
+        <span class="vjs-tag vjs-tag-blue" style="font-size:0.6rem;">VIDEO</span>
+      </div>
+      
     </div>
     <div class="vjs-card-body">
-      <h4 class="vjs-card-title">VJ Kai</h4>
-      <p class="vjs-card-text" style="margin-bottom:0.5rem;">Berlin, Germany</p>
-      <p class="vjs-card-text" style="font-size:0.8rem;">Generative AI Visuals, Glitch Art</p>
+      <div class="vjs-project-card-meta">
+        <span class="vjs-tag vjs-tag-magenta">Immersive Installation</span>
+      </div>
+      <h4 class="vjs-card-title" style="margin-top:0.5rem;">AI Dome Experience</h4>
+      <div style="display:flex; flex-wrap:wrap; gap:0.75rem; margin-top:0.5rem; align-items:center;">
+        <span style="color: var(--vjs-text-muted); font-size:0.8rem;">&#127827; VJ Kai</span>
+        <span style="color: var(--vjs-text-muted); font-size:0.8rem;">&#128205; Berlin, Germany</span>
+        <span style="color: var(--vjs-text-muted); font-size:0.8rem;">2025</span>
+      </div>
       
-      <div style="margin-top:0.75rem;">
+      <div style="margin-top:0.6rem;">
         
         <span class="vjs-tag vjs-tag-purple">TouchDesigner</span>
         
         <span class="vjs-tag vjs-tag-purple">Stable Diffusion</span>
         
-        <span class="vjs-tag vjs-tag-purple">Resolume Arena</span>
+        <span class="vjs-tag vjs-tag-purple">Spatial Audio</span>
         
       </div>
       
@@ -384,248 +536,220 @@
   </div>
 </a>
 
-      
-      
-    </div>
-    <div style="text-align:center; margin-top:3rem;">
-      <a href="/artists" class="vjs-btn vjs-btn-outline">All Artists</a>
-    </div>
-  </div>
-</section>
-
-<section class="vjs-section">
-  <div class="container">
-    <div class="vjs-accent-line"></div>
-    <h2 class="vjs-section-title">Featured Projects</h2>
-    <p class="vjs-section-subtitle">The global index of VJ work</p>
-    <div class="vjs-grid vjs-grid-3">
-      
-      
-      <a href="/projects/ai-dome-show" class="text-decoration-none">
-  <div class="vjs-card">
-    <div class="vjs-card-img-placeholder" style="background: linear-gradient(135deg, rgba(255,0,255,0.2) 0%, rgba(123,47,255,0.3) 100%);">
-      <span style="font-size:2.5rem; opacity:0.6;">&#9654;</span>
-    </div>
-    <div class="vjs-card-body">
-      <div style="margin-bottom:0.5rem;">
-        <span class="vjs-tag vjs-tag-magenta">Immersive Installation</span>
       </div>
-      <h4 class="vjs-card-title">AI Dome Experience</h4>
-      <p class="vjs-card-text" style="margin-bottom:0.25rem;">VJ Kai</p>
-      <p class="vjs-card-text" style="font-size:0.8rem;">Berlin, Germany &middot; 2025</p>
-    </div>
-  </div>
-</a>
-
       
+      <div class="vjs-reveal vjs-reveal-delay-2">
+        <a href="/projects/berlin-techno-visuals" class="text-decoration-none" data-type="live-visuals" data-artist="vj kai" data-year="2025">
+  <div class="vjs-project-card">
+    <div class="vjs-project-card-visual" style="background: linear-gradient(135deg, rgba(255,0,255,0.2) 0%, rgba(123,47,255,0.35) 50%, rgba(0,212,255,0.15) 100%);">
+      <div class="vjs-project-card-play">&#9654;</div>
       
-      
-      <a href="/projects/berlin-techno-visuals" class="text-decoration-none">
-  <div class="vjs-card">
-    <div class="vjs-card-img-placeholder" style="background: linear-gradient(135deg, rgba(255,0,255,0.2) 0%, rgba(123,47,255,0.3) 100%);">
-      <span style="font-size:2.5rem; opacity:0.6;">&#9654;</span>
     </div>
     <div class="vjs-card-body">
-      <div style="margin-bottom:0.5rem;">
+      <div class="vjs-project-card-meta">
         <span class="vjs-tag vjs-tag-magenta">Live Visuals</span>
       </div>
-      <h4 class="vjs-card-title">Berlin Techno Visuals</h4>
-      <p class="vjs-card-text" style="margin-bottom:0.25rem;">VJ Kai</p>
-      <p class="vjs-card-text" style="font-size:0.8rem;">Berlin, Germany &middot; 2025</p>
+      <h4 class="vjs-card-title" style="margin-top:0.5rem;">Berlin Techno Visuals</h4>
+      <div style="display:flex; flex-wrap:wrap; gap:0.75rem; margin-top:0.5rem; align-items:center;">
+        <span style="color: var(--vjs-text-muted); font-size:0.8rem;">&#127827; VJ Kai</span>
+        <span style="color: var(--vjs-text-muted); font-size:0.8rem;">&#128205; Berlin, Germany</span>
+        <span style="color: var(--vjs-text-muted); font-size:0.8rem;">2025</span>
+      </div>
+      
+      <div style="margin-top:0.6rem;">
+        
+        <span class="vjs-tag vjs-tag-purple">Resolume Arena</span>
+        
+        <span class="vjs-tag vjs-tag-purple">Ableton Live</span>
+        
+        <span class="vjs-tag vjs-tag-purple">Custom MIDI</span>
+        
+      </div>
+      
     </div>
   </div>
 </a>
 
+      </div>
       
+      <div class="vjs-reveal vjs-reveal-delay-3">
+        <a href="/projects/dome-visions" class="text-decoration-none" data-type="immersive-dome" data-artist="aurora fractals" data-year="2024">
+  <div class="vjs-project-card">
+    <div class="vjs-project-card-visual" style="background: linear-gradient(135deg, rgba(255,0,255,0.2) 0%, rgba(123,47,255,0.35) 50%, rgba(0,212,255,0.15) 100%);">
+      <div class="vjs-project-card-play">&#9654;</div>
       
+      <div style="position:absolute; top:0.75rem; right:0.75rem;">
+        <span class="vjs-tag vjs-tag-blue" style="font-size:0.6rem;">VIDEO</span>
+      </div>
       
-      <a href="/projects/tokyo-light-temple" class="text-decoration-none">
-  <div class="vjs-card">
-    <div class="vjs-card-img-placeholder" style="background: linear-gradient(135deg, rgba(255,0,255,0.2) 0%, rgba(123,47,255,0.3) 100%);">
-      <span style="font-size:2.5rem; opacity:0.6;">&#9654;</span>
     </div>
     <div class="vjs-card-body">
-      <div style="margin-bottom:0.5rem;">
-        <span class="vjs-tag vjs-tag-magenta">Projection Mapping</span>
+      <div class="vjs-project-card-meta">
+        <span class="vjs-tag vjs-tag-magenta">Immersive Dome</span>
       </div>
-      <h4 class="vjs-card-title">Light Temple Tokyo</h4>
-      <p class="vjs-card-text" style="margin-bottom:0.25rem;">Luna Visuals</p>
-      <p class="vjs-card-text" style="font-size:0.8rem;">Tokyo, Japan &middot; 2024</p>
+      <h4 class="vjs-card-title" style="margin-top:0.5rem;">Dome Visions</h4>
+      <div style="display:flex; flex-wrap:wrap; gap:0.75rem; margin-top:0.5rem; align-items:center;">
+        <span style="color: var(--vjs-text-muted); font-size:0.8rem;">&#127827; Aurora Fractals</span>
+        <span style="color: var(--vjs-text-muted); font-size:0.8rem;">&#128205; Amsterdam, Netherlands</span>
+        <span style="color: var(--vjs-text-muted); font-size:0.8rem;">2024</span>
+      </div>
+      
+      <div style="margin-top:0.6rem;">
+        
+        <span class="vjs-tag vjs-tag-purple">TouchDesigner</span>
+        
+        <span class="vjs-tag vjs-tag-purple">GLSL Shaders</span>
+        
+        <span class="vjs-tag vjs-tag-purple">Resolume Wire</span>
+        
+      </div>
+      
     </div>
   </div>
 </a>
 
+      </div>
       
-      
-    </div>
-    <div style="text-align:center; margin-top:3rem;">
-      <a href="/projects" class="vjs-btn vjs-btn-outline">All Projects</a>
     </div>
   </div>
 </section>
 
-<section class="vjs-section vjs-section-alt">
+<!-- TECHNOLOGY -->
+<section class="vjs-section" style="background:var(--vjs-darker);">
   <div class="container">
-    <div class="row">
-      <div class="col-lg-6">
-        <div class="vjs-accent-line"></div>
-        <h2 class="vjs-section-title">Studios</h2>
-        <p class="vjs-section-subtitle" style="margin-bottom:2rem;">Where visual performances are produced</p>
-        <div class="vjs-grid" style="grid-template-columns:1fr;">
-          
-          <a href="/studios/berlin-visual-lab" class="text-decoration-none">
-  <div class="vjs-card">
-    <div class="vjs-card-img-placeholder" style="background: linear-gradient(135deg, rgba(0,245,212,0.15) 0%, rgba(0,212,255,0.2) 100%);">
-      <span style="font-size:2.5rem; opacity:0.6;">&#9632;</span>
-    </div>
-    <div class="vjs-card-body">
-      <div style="margin-bottom:0.5rem;">
-        <span class="vjs-tag vjs-tag-cyan">AV Studio</span>
-      </div>
-      <h4 class="vjs-card-title">Berlin Visual Lab</h4>
-      <p class="vjs-card-text" style="margin-bottom:0.25rem;">Berlin, Germany</p>
-      <p class="vjs-card-text" style="font-size:0.8rem;">A state-of-the-art audiovisual production studio in the heart of Berlin's creative district, spec...</p>
-    </div>
-  </div>
-</a>
-
-          
-          <a href="/studios/tokyo-projection-studio" class="text-decoration-none">
-  <div class="vjs-card">
-    <div class="vjs-card-img-placeholder" style="background: linear-gradient(135deg, rgba(0,245,212,0.15) 0%, rgba(0,212,255,0.2) 100%);">
-      <span style="font-size:2.5rem; opacity:0.6;">&#9632;</span>
-    </div>
-    <div class="vjs-card-body">
-      <div style="margin-bottom:0.5rem;">
-        <span class="vjs-tag vjs-tag-cyan">Projection Lab</span>
-      </div>
-      <h4 class="vjs-card-title">Tokyo Projection Studio</h4>
-      <p class="vjs-card-text" style="margin-bottom:0.25rem;">Tokyo, Japan</p>
-      <p class="vjs-card-text" style="font-size:0.8rem;">A cutting-edge projection mapping laboratory in Shibuya, equipped with high-lumen projectors and ...</p>
-    </div>
-  </div>
-</a>
-
-          
-        </div>
-        <div style="margin-top:1.5rem;">
-          <a href="/studios" class="vjs-btn vjs-btn-outline" style="padding:8px 24px; font-size:0.8rem;">All Studios</a>
-        </div>
-      </div>
-      <div class="col-lg-6" style="margin-top:2rem;">
-        <div class="vjs-accent-line"></div>
+    <div class="vjs-reveal" style="display:flex; align-items:flex-end; justify-content:space-between; flex-wrap:wrap; gap:1rem; margin-bottom:2.5rem;">
+      <div>
         <h2 class="vjs-section-title">Technology</h2>
-        <p class="vjs-section-subtitle" style="margin-bottom:2rem;">Tools powering visual culture</p>
-        <div class="vjs-grid" style="grid-template-columns:1fr;">
-          
-          <a href="/technology/madmapper" class="text-decoration-none">
-  <div class="vjs-card">
+        <div class="vjs-accent-line" style="background:var(--vjs-gradient-3);"></div>
+        <p style="color:var(--vjs-text-muted); max-width:560px;">The tools powering the world's most ambitious live visual performances.</p>
+      </div>
+      <a href="/technology" class="vjs-btn vjs-btn-outline" style="font-size:0.8rem;">All Technology &rarr;</a>
+    </div>
+    <div class="vjs-grid vjs-grid-3">
+      
+      <div class="vjs-reveal vjs-reveal-delay-1">
+        <a href="/technology/madmapper" class="text-decoration-none" data-category="projection-mapping">
+  <div class="vjs-card" style="border-color: rgba(123,47,255,0.2);">
     <div class="vjs-card-img-placeholder" style="background: linear-gradient(135deg, rgba(123,47,255,0.2) 0%, rgba(255,60,172,0.15) 100%); height:160px;">
-      <span style="font-size:2.5rem; opacity:0.6;">&#9881;</span>
+      <div style="text-align:center;">
+        <div style="font-family:'Orbitron',sans-serif; font-weight:700; font-size:1.6rem; color: var(--vjs-ultraviolet); opacity:0.9;">MadM</div>
+      </div>
     </div>
     <div class="vjs-card-body">
-      <div style="margin-bottom:0.5rem;">
-        <span class="vjs-tag vjs-tag-purple">Projection Mapping</span>
-      </div>
+      <div style="margin-bottom:0.5rem;"><span class="vjs-tag vjs-tag-purple">Projection Mapping</span></div>
       <h4 class="vjs-card-title">MadMapper</h4>
-      <p class="vjs-card-text" style="font-size:0.8rem;">Advanced projection mapping and LED mapping software for creating spatial augmented reality experiences and architect...</p>
+      <p class="vjs-card-text" style="font-size:0.8rem; margin-bottom:0.75rem;">Advanced projection mapping and LED mapping software for creating spatial augmented reality experiences and architect...</p>
+      
+      <div style="margin-top:auto;">
+        <span style="font-family:'Orbitron',sans-serif; font-size:0.6rem; text-transform:uppercase; letter-spacing:0.1em; color: var(--vjs-text-muted);">Used by: </span>
+        <span class="vjs-tag vjs-tag-blue">Luna Visuals</span>
+      </div>
+      
     </div>
   </div>
 </a>
 
-          
-          <a href="/technology/resolume" class="text-decoration-none">
-  <div class="vjs-card">
+      </div>
+      
+      <div class="vjs-reveal vjs-reveal-delay-2">
+        <a href="/technology/resolume" class="text-decoration-none" data-category="visual-software">
+  <div class="vjs-card" style="border-color: rgba(123,47,255,0.2);">
     <div class="vjs-card-img-placeholder" style="background: linear-gradient(135deg, rgba(123,47,255,0.2) 0%, rgba(255,60,172,0.15) 100%); height:160px;">
-      <span style="font-size:2.5rem; opacity:0.6;">&#9881;</span>
+      <div style="text-align:center;">
+        <div style="font-family:'Orbitron',sans-serif; font-weight:700; font-size:1.6rem; color: var(--vjs-ultraviolet); opacity:0.9;">Reso</div>
+      </div>
     </div>
     <div class="vjs-card-body">
-      <div style="margin-bottom:0.5rem;">
-        <span class="vjs-tag vjs-tag-purple">Visual Software</span>
-      </div>
+      <div style="margin-bottom:0.5rem;"><span class="vjs-tag vjs-tag-purple">Visual Software</span></div>
       <h4 class="vjs-card-title">Resolume Arena</h4>
-      <p class="vjs-card-text" style="font-size:0.8rem;">Industry-leading VJ software for real-time video mixing, compositing, and effects. Used by VJs worldwide for live per...</p>
+      <p class="vjs-card-text" style="font-size:0.8rem; margin-bottom:0.75rem;">Industry-leading VJ software for real-time video mixing, compositing, and effects. Used by VJs worldwide for live per...</p>
+      
+      <div style="margin-top:auto;">
+        <span style="font-family:'Orbitron',sans-serif; font-size:0.6rem; text-transform:uppercase; letter-spacing:0.1em; color: var(--vjs-text-muted);">Used by: </span>
+        <span class="vjs-tag vjs-tag-blue">VJ Kai</span><span class="vjs-tag vjs-tag-blue">Nova Spectrum</span>
+      </div>
+      
     </div>
   </div>
 </a>
 
-          
-          <a href="/technology/touchdesigner" class="text-decoration-none">
-  <div class="vjs-card">
+      </div>
+      
+      <div class="vjs-reveal vjs-reveal-delay-3">
+        <a href="/technology/touchdesigner" class="text-decoration-none" data-category="visual-software">
+  <div class="vjs-card" style="border-color: rgba(123,47,255,0.2);">
     <div class="vjs-card-img-placeholder" style="background: linear-gradient(135deg, rgba(123,47,255,0.2) 0%, rgba(255,60,172,0.15) 100%); height:160px;">
-      <span style="font-size:2.5rem; opacity:0.6;">&#9881;</span>
+      <div style="text-align:center;">
+        <div style="font-family:'Orbitron',sans-serif; font-weight:700; font-size:1.6rem; color: var(--vjs-ultraviolet); opacity:0.9;">Touc</div>
+      </div>
     </div>
     <div class="vjs-card-body">
-      <div style="margin-bottom:0.5rem;">
-        <span class="vjs-tag vjs-tag-purple">Visual Software</span>
-      </div>
+      <div style="margin-bottom:0.5rem;"><span class="vjs-tag vjs-tag-purple">Visual Software</span></div>
       <h4 class="vjs-card-title">TouchDesigner</h4>
-      <p class="vjs-card-text" style="font-size:0.8rem;">A node-based visual programming environment for real-time interactive multimedia content. The industry standard for g...</p>
+      <p class="vjs-card-text" style="font-size:0.8rem; margin-bottom:0.75rem;">A node-based visual programming environment for real-time interactive multimedia content. The industry standard for g...</p>
+      
+      <div style="margin-top:auto;">
+        <span style="font-family:'Orbitron',sans-serif; font-size:0.6rem; text-transform:uppercase; letter-spacing:0.1em; color: var(--vjs-text-muted);">Used by: </span>
+        <span class="vjs-tag vjs-tag-blue">VJ Kai</span><span class="vjs-tag vjs-tag-blue">Nova Spectrum</span>
+      </div>
+      
     </div>
   </div>
 </a>
 
-          
-        </div>
-        <div style="margin-top:1.5rem;">
-          <a href="/technology" class="vjs-btn vjs-btn-outline" style="padding:8px 24px; font-size:0.8rem;">All Technology</a>
-        </div>
       </div>
+      
     </div>
   </div>
 </section>
 
+<!-- SPONSORS -->
 <section class="vjs-section">
-  <div class="container text-center">
-    <div class="vjs-accent-line vjs-accent-line-center"></div>
-    <h2 class="vjs-section-title">Sponsors & Partners</h2>
-    <p class="vjs-section-subtitle">Supporting the future of visual performance</p>
-    <div class="vjs-grid vjs-grid-3" style="max-width:800px; margin:0 auto;">
-      
-      <a href="/sponsors/derivative-sponsor" class="text-decoration-none">
-  <div class="vjs-card" style="text-align:center;">
-    <div class="vjs-card-img-placeholder" style="background: var(--vjs-card); height:140px;">
-      <span style="font-family:'Orbitron',sans-serif; font-size:1.2rem; font-weight:700; color: var(--vjs-electric-blue);">Derivative (TouchDesigner)</span>
+  <div class="container">
+    <div class="vjs-reveal" style="text-align:center; margin-bottom:2.5rem;">
+      <h2 class="vjs-section-title">Partners &amp; Sponsors</h2>
+      <div class="vjs-accent-line" style="margin:1rem auto;"></div>
+      <p style="color:var(--vjs-text-muted); max-width:560px; margin:0 auto;">The brands and organizations powering the global VJ broadcast network.</p>
     </div>
-    <div class="vjs-card-body">
-      <div style="margin-bottom:0.5rem;">
-        <span class="vjs-tag vjs-tag-blue">Technology Partner</span>
+    <div class="vjs-grid vjs-grid-4">
+      
+      <div class="vjs-reveal vjs-reveal-delay-1">
+        <a href="/sponsors/derivative-sponsor" class="text-decoration-none">
+          <div class="vjs-card" style="text-align:center; padding:2rem 1rem;">
+            <div style="font-family:'Orbitron',sans-serif; font-size:0.65rem; text-transform:uppercase; letter-spacing:0.12em; color:var(--vjs-text-muted); margin-bottom:0.5rem;">Technology Partner</div>
+            <h4 style="font-size:1rem; margin-bottom:0.5rem;">Derivative (TouchDesigner)</h4>
+            <p style="font-size:0.8rem; color:var(--vjs-text-muted); margin:0;"></p>
+          </div>
+        </a>
       </div>
-      <p class="vjs-card-text" style="font-size:0.8rem;">Creators of TouchDesigner, the node-based visual programming platform used by artists worldwide.</p>
-    </div>
-  </div>
-</a>
-
       
-      <a href="/sponsors/resolume-sponsor" class="text-decoration-none">
-  <div class="vjs-card" style="text-align:center;">
-    <div class="vjs-card-img-placeholder" style="background: var(--vjs-card); height:140px;">
-      <span style="font-family:'Orbitron',sans-serif; font-size:1.2rem; font-weight:700; color: var(--vjs-electric-blue);">Resolume</span>
-    </div>
-    <div class="vjs-card-body">
-      <div style="margin-bottom:0.5rem;">
-        <span class="vjs-tag vjs-tag-blue">Technology Partner</span>
+      <div class="vjs-reveal vjs-reveal-delay-2">
+        <a href="/sponsors/resolume-sponsor" class="text-decoration-none">
+          <div class="vjs-card" style="text-align:center; padding:2rem 1rem;">
+            <div style="font-family:'Orbitron',sans-serif; font-size:0.65rem; text-transform:uppercase; letter-spacing:0.12em; color:var(--vjs-text-muted); margin-bottom:0.5rem;">Technology Partner</div>
+            <h4 style="font-size:1rem; margin-bottom:0.5rem;">Resolume</h4>
+            <p style="font-size:0.8rem; color:var(--vjs-text-muted); margin:0;"></p>
+          </div>
+        </a>
       </div>
-      <p class="vjs-card-text" style="font-size:0.8rem;">Industry-leading VJ software powering visual performances worldwide.</p>
-    </div>
-  </div>
-</a>
-
       
     </div>
-    <div style="margin-top:3rem;">
-      <a href="/sponsors" class="vjs-btn vjs-btn-outline">Partner With Us</a>
+    <div class="vjs-reveal" style="text-align:center; margin-top:2.5rem;">
+      <a href="/business-model" class="vjs-btn vjs-btn-primary">Become a Partner</a>
     </div>
   </div>
 </section>
 
+<!-- CTA -->
 <section class="vjs-section vjs-cta-section">
   <div class="container text-center" style="padding:60px 0;">
-    <h2 class="vjs-section-title" style="margin-bottom:1rem;">Join the Network</h2>
-    <p class="vjs-section-subtitle" style="max-width:600px; margin:0 auto 2rem;">Submit your visual performance projects and become part of the global VJ community.</p>
-    <div style="display:flex; gap:1rem; justify-content:center; flex-wrap:wrap;">
-      <a href="/submit" class="vjs-btn vjs-btn-primary">Submit Project</a>
-      <a href="https://vjsmag.com" target="_blank" class="vjs-btn vjs-btn-outline">Read VJSMag</a>
+    <div class="vjs-reveal">
+      <h2 class="vjs-section-title" style="margin-bottom:1rem;">Join the Network</h2>
+      <p style="color:var(--vjs-text-muted); max-width:600px; margin:0 auto 2rem;">Submit your visual performance projects and become part of the global VJ community.</p>
+      <div style="display:flex; gap:1rem; justify-content:center; flex-wrap:wrap;">
+        <a href="/submit" class="vjs-btn vjs-btn-primary">Submit Project</a>
+        <a href="https://vjsmag.com" target="_blank" class="vjs-btn vjs-btn-outline">Read VJSMag</a>
+      </div>
     </div>
   </div>
 </section>
@@ -745,6 +869,79 @@
     </ul>
   </div>
 </footer>
+
+<script>
+(function() {
+  // HERO PARTICLES
+  var canvas = document.getElementById('vjs-hero-canvas');
+  if (canvas) {
+    var ctx = canvas.getContext('2d'), pts = [], mouse = {x:-9999,y:-9999};
+    function resize() { canvas.width = canvas.offsetWidth; canvas.height = canvas.offsetHeight; }
+    resize(); window.addEventListener('resize', resize);
+    document.querySelector('.vjs-hero').addEventListener('mousemove', function(e) {
+      var r = canvas.getBoundingClientRect(); mouse.x = e.clientX-r.left; mouse.y = e.clientY-r.top;
+    });
+    var colors = ['rgba(123,47,255,','rgba(0,212,255,','rgba(255,0,255,'];
+    for (var i=0; i<90; i++) pts.push({ x:Math.random()*window.innerWidth, y:Math.random()*window.innerHeight, vx:(Math.random()-.5)*.6, vy:(Math.random()-.5)*.6, r:Math.random()*2+0.5, c:colors[i%3] });
+    function draw() {
+      ctx.clearRect(0,0,canvas.width,canvas.height);
+      pts.forEach(function(p) {
+        var dx=mouse.x-p.x, dy=mouse.y-p.y, d=Math.sqrt(dx*dx+dy*dy);
+        if(d<130){p.vx-=dx/d*.25; p.vy-=dy/d*.25;}
+        p.x+=p.vx; p.y+=p.vy; p.vx*=.98; p.vy*=.98;
+        if(p.x<0)p.x=canvas.width; if(p.x>canvas.width)p.x=0;
+        if(p.y<0)p.y=canvas.height; if(p.y>canvas.height)p.y=0;
+        ctx.beginPath(); ctx.arc(p.x,p.y,p.r,0,Math.PI*2);
+        ctx.fillStyle=p.c+'0.75)'; ctx.fill();
+      });
+      for(var i=0;i<pts.length;i++) for(var j=i+1;j<pts.length;j++) {
+        var dx=pts[i].x-pts[j].x, dy=pts[i].y-pts[j].y, d=Math.sqrt(dx*dx+dy*dy);
+        if(d<110){ ctx.beginPath(); ctx.moveTo(pts[i].x,pts[i].y); ctx.lineTo(pts[j].x,pts[j].y);
+          ctx.strokeStyle='rgba(123,47,255,'+(0.12*(1-d/110))+')'; ctx.lineWidth=.5; ctx.stroke(); }
+      }
+      requestAnimationFrame(draw);
+    }
+    draw();
+  }
+
+  // COUNTDOWN — target: 2026-04-20 21:00 CET (UTC+1)
+  var target = new Date('2026-04-20T20:00:00Z');
+  function pad(n){return n<10?'0'+n:n;}
+  function tick(){
+    var diff = target - new Date();
+    if(diff<=0){['cd-days','cd-hours','cd-mins','cd-secs'].forEach(function(id){document.getElementById(id).textContent='00';});return;}
+    document.getElementById('cd-days').textContent  = pad(Math.floor(diff/86400000));
+    document.getElementById('cd-hours').textContent = pad(Math.floor((diff%86400000)/3600000));
+    document.getElementById('cd-mins').textContent  = pad(Math.floor((diff%3600000)/60000));
+    document.getElementById('cd-secs').textContent  = pad(Math.floor((diff%60000)/1000));
+  }
+  tick(); setInterval(tick, 1000);
+
+  // STATS COUNTER
+  var statsTargets = { 'stat-artists': 6, 'stat-projects': 7, 'stat-events': 5, 'stat-countries': 24 };
+  var started = false;
+  function startCounters() {
+    if(started) return; started=true;
+    Object.keys(statsTargets).forEach(function(id) {
+      var el=document.getElementById(id), t=statsTargets[id], n=0, s=Math.max(1,Math.ceil(t/40));
+      var tmr=setInterval(function(){n=Math.min(n+s,t); el.textContent=n; if(n>=t)clearInterval(tmr);},35);
+    });
+  }
+  var so = new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting)startCounters();});},{threshold:.3});
+  var sb = document.querySelector('.vjs-stats-bar'); if(sb) so.observe(sb);
+
+  // SCROLL REVEAL
+  var ro = new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting){e.target.classList.add('is-visible');ro.unobserve(e.target);}});},{threshold:.1});
+  document.querySelectorAll('.vjs-reveal').forEach(function(el){ro.observe(el);});
+
+  // PROGRESS BAR
+  var bar = document.getElementById('vjs-progress-bar');
+  if(bar) window.addEventListener('scroll',function(){
+    var t = document.documentElement.scrollHeight - window.innerHeight;
+    bar.style.width=(t>0?(window.scrollY/t*100):0)+'%';
+  });
+})();
+</script>
 
   </div>
   <!-- Site Scripts-->
