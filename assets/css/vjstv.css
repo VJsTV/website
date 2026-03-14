@@ -1695,41 +1695,55 @@ h1, h2, h3, h4, h5, h6,
 }
 
 /* Contact form inside modal */
-.vjs-form-group { margin-bottom: 1.25rem; }
+.vjs-form-group { margin-bottom: 1rem; }
 .vjs-form-label {
   display: block;
-  font-family: 'Orbitron', sans-serif;
-  font-size: 0.6rem;
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 0.65rem;
+  font-weight: 600;
   text-transform: uppercase;
-  letter-spacing: 0.15em;
-  color: var(--vjs-text-muted);
-  margin-bottom: 0.5rem;
+  letter-spacing: 0.1em;
+  color: rgba(255,255,255,0.4);
+  margin-bottom: 6px;
 }
 .vjs-form-input, .vjs-form-textarea {
   width: 100%;
-  padding: 13px 16px;
-  background: var(--vjs-card);
-  border: 1px solid var(--vjs-border);
-  border-radius: 10px;
-  color: var(--vjs-text);
-  font-family: 'Inter', sans-serif;
-  font-size: 0.9rem;
+  padding: 10px 14px;
+  background: rgba(255,255,255,0.03);
+  border: 1px solid #333;
+  border-radius: 0;
+  color: #fff;
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 0.88rem;
+  font-weight: 400;
   outline: none;
-  transition: border-color 0.3s, box-shadow 0.3s;
+  transition: border-color 0.15s;
   box-sizing: border-box;
+  -webkit-appearance: none;
+  appearance: none;
+}
+.vjs-form-input::placeholder, .vjs-form-textarea::placeholder {
+  color: rgba(255,255,255,0.2);
 }
 .vjs-form-input:focus, .vjs-form-textarea:focus {
-  border-color: var(--vjs-ultraviolet);
-  box-shadow: 0 0 15px rgba(123,47,255,0.25);
+  border-color: #fff;
+  box-shadow: none;
 }
 .vjs-form-textarea { min-height: 110px; resize: vertical; }
 .vjs-form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
 @media (max-width: 540px) { .vjs-form-row { grid-template-columns: 1fr; } }
+.vjs-form-input option { background: #000; color: #fff; }
+select.vjs-form-input {
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='6'%3E%3Cpath d='M0 0l5 6 5-6z' fill='%23666'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 14px center;
+  padding-right: 36px;
+}
 .vjs-form-success {
   text-align: center;
   padding: 2rem;
   color: var(--vjs-cyan);
-  font-family: 'Space Grotesk', sans-serif;
+  font-family: 'Barlow Condensed', sans-serif;
   display: none;
 }
 
@@ -1971,37 +1985,6 @@ h1, h2, h3, h4, h5, h6,
 /* ============================================================
    FORM ELEMENTS
    ============================================================ */
-.vjs-form-label {
-  display: block;
-  font-family: 'Orbitron', sans-serif;
-  font-size: 0.6rem;
-  text-transform: uppercase;
-  letter-spacing: 0.15em;
-  color: var(--vjs-text-muted);
-  margin-bottom: 0.4rem;
-  margin-top: 1.25rem;
-}
-.vjs-form-input {
-  display: block;
-  width: 100%;
-  background: rgba(255,255,255,0.04);
-  border: 1px solid var(--vjs-border);
-  border-radius: 8px;
-  padding: 0.65rem 1rem;
-  color: #fff;
-  font-family: 'Space Grotesk', sans-serif;
-  font-size: 0.9rem;
-  transition: border-color 0.2s, box-shadow 0.2s;
-  outline: none;
-  -webkit-appearance: none;
-  appearance: none;
-}
-.vjs-form-input::placeholder { color: rgba(255,255,255,0.2); }
-.vjs-form-input:focus {
-  border-color: var(--vjs-ultraviolet);
-  box-shadow: 0 0 0 3px rgba(123,47,255,0.15);
-}
-.vjs-form-input option { background: #0a0a0f; color: #fff; }
 
 /* ============================================================
    DETAIL PAGE RELATIONSHIP CARDS
