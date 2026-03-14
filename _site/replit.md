@@ -29,6 +29,7 @@ VJs TV is a Jekyll-based platform for VJ culture and audiovisual performances. I
 - `/technology` - VJ technology and tools
 - `/sponsors` - Sponsors and partners
 - `/submit` - Project submission page
+- `/business-model` - Sponsor pitch page with interactive modals, partnership tiers, particle background, and contact form
 
 ## Key Files
 - `_config.yml` - Jekyll configuration with collections
