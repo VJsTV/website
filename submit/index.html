@@ -9,59 +9,147 @@ meta_description: "Submit your visual performance projects to VJs TV and join th
 
 <div class="vjs-page-header">
   <div class="container">
-    <h1 class="vjs-section-title" style="font-size:clamp(2rem,5vw,3.5rem);">Submit Project</h1>
+    <div class="vjs-section-label">Join the Network</div>
+    <h1 class="vjs-section-title" style="font-size:clamp(2rem,5vw,3.5rem);">Submit Your Project</h1>
     <div class="vjs-accent-line"></div>
-    <p style="color: var(--vjs-text-muted); max-width:600px; font-size:1.05rem;">Share your visual performance work with the global VJ community. Submit your projects to be featured on VJs TV.</p>
+    <p style="color:var(--vjs-text-muted); max-width:600px; font-size:1.05rem;">Share your visual performance work with the global VJ community. We feature outstanding projects across live visuals, projection mapping, generative art, AI visuals, and immersive installations.</p>
   </div>
 </div>
 
-<section class="vjs-section">
+<section class="vjs-section" style="padding-top:0;">
   <div class="container">
-    <div class="row justify-content-center">
+    <div class="row g-5">
+
+      <!-- LEFT: WHAT WE'RE LOOKING FOR -->
+      <div class="col-lg-4">
+        <div style="position:sticky; top:100px;">
+          <h3 style="font-family:'Space Grotesk',sans-serif; font-weight:700; font-size:1.1rem; color:#fff; margin-bottom:1.5rem;">What We Feature</h3>
+
+          {% assign cats = "Live Visuals::Reactive VJ sets synchronized with audio in real time|Projection Mapping::Architectural and surface mapping projects|AI & Generative::Machine learning and procedural visual systems|Immersive Installations::360° dome and spatial audio-visual environments|Stage Production::Festival, tour, and concert visual design|Experimental::Cross-disciplinary audiovisual research and performance" | split: "|" %}
+          {% for cat in cats %}
+          {% assign parts = cat | split: "::" %}
+          <div style="display:flex; gap:0.85rem; margin-bottom:1.25rem;">
+            <div style="width:8px; height:8px; border-radius:50%; background:var(--vjs-ultraviolet); margin-top:6px; flex-shrink:0;"></div>
+            <div>
+              <div style="font-weight:600; color:#fff; font-size:0.9rem;">{{ parts[0] }}</div>
+              <div style="color:var(--vjs-text-muted); font-size:0.8rem; line-height:1.5; margin-top:2px;">{{ parts[1] }}</div>
+            </div>
+          </div>
+          {% endfor %}
+
+          <div style="margin-top:2rem; padding:1.5rem; background:rgba(0,245,212,0.04); border:1px solid rgba(0,245,212,0.15); border-radius:12px;">
+            <div style="font-family:'Orbitron',sans-serif; font-size:0.65rem; letter-spacing:0.15em; text-transform:uppercase; color:var(--vjs-cyan); margin-bottom:0.75rem;">Response Time</div>
+            <p style="color:var(--vjs-text-muted); font-size:0.82rem; line-height:1.6; margin:0;">We review every submission. You'll hear back within <strong style="color:#fff;">5–10 business days</strong>. Featured projects are published with a full artist profile.</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- RIGHT: SUBMISSION FORM -->
       <div class="col-lg-8">
-        <div style="background: var(--vjs-card); border: 1px solid var(--vjs-border); border-radius:16px; padding:3rem;">
-          <h2 class="vjs-section-title" style="font-size:1.5rem; margin-bottom:0.5rem;">What to Submit</h2>
-          <p style="color: var(--vjs-text-muted); margin-bottom:2rem;">We're looking for outstanding audiovisual work across all categories.</p>
+        <div style="background:var(--vjs-card); border:1px solid var(--vjs-border); border-radius:20px; padding:2.5rem;">
+          <h2 style="font-family:'Space Grotesk',sans-serif; font-weight:700; font-size:1.35rem; color:#fff; margin-bottom:0.5rem;">Project Submission Form</h2>
+          <p style="color:var(--vjs-text-muted); font-size:0.85rem; margin-bottom:2rem;">Fill in as much detail as possible — richer submissions get featured faster.</p>
 
-          <div class="row" style="margin-bottom:2.5rem;">
-            <div class="col-md-6" style="margin-bottom:1.5rem;">
-              <h5 style="font-family:'Orbitron',sans-serif; font-size:0.75rem; text-transform:uppercase; letter-spacing:0.12em; color: var(--vjs-electric-blue); margin-bottom:1rem;">Project Info</h5>
-              <ul style="list-style:none; padding:0; margin:0;">
-                <li style="padding:0.4rem 0; color: var(--vjs-text-muted); font-size:0.9rem; border-bottom:1px solid var(--vjs-border);">Artist / Collective Name</li>
-                <li style="padding:0.4rem 0; color: var(--vjs-text-muted); font-size:0.9rem; border-bottom:1px solid var(--vjs-border);">Project Title</li>
-                <li style="padding:0.4rem 0; color: var(--vjs-text-muted); font-size:0.9rem; border-bottom:1px solid var(--vjs-border);">Project Description</li>
-                <li style="padding:0.4rem 0; color: var(--vjs-text-muted); font-size:0.9rem; border-bottom:1px solid var(--vjs-border);">Video Link (YouTube / Vimeo)</li>
-                <li style="padding:0.4rem 0; color: var(--vjs-text-muted); font-size:0.9rem;">Location</li>
-              </ul>
+          <form id="submit-form" action="mailto:submit@vjstv.com" method="post" enctype="text/plain">
+
+            <div class="row g-3" style="margin-bottom:0.25rem;">
+              <div class="col-md-6">
+                <label class="vjs-form-label">Artist / Collective Name *</label>
+                <input type="text" class="vjs-form-input" name="artist" placeholder="VJ Kai / Flux Collective" required>
+              </div>
+              <div class="col-md-6">
+                <label class="vjs-form-label">Project Title *</label>
+                <input type="text" class="vjs-form-input" name="project_title" placeholder="Neural Rave Vol. 3" required>
+              </div>
             </div>
-            <div class="col-md-6" style="margin-bottom:1.5rem;">
-              <h5 style="font-family:'Orbitron',sans-serif; font-size:0.75rem; text-transform:uppercase; letter-spacing:0.12em; color: var(--vjs-electric-blue); margin-bottom:1rem;">Technical Details</h5>
-              <ul style="list-style:none; padding:0; margin:0;">
-                <li style="padding:0.4rem 0; color: var(--vjs-text-muted); font-size:0.9rem; border-bottom:1px solid var(--vjs-border);">Technology Used</li>
-                <li style="padding:0.4rem 0; color: var(--vjs-text-muted); font-size:0.9rem; border-bottom:1px solid var(--vjs-border);">Studio (if applicable)</li>
-                <li style="padding:0.4rem 0; color: var(--vjs-text-muted); font-size:0.9rem; border-bottom:1px solid var(--vjs-border);">Project Type</li>
-                <li style="padding:0.4rem 0; color: var(--vjs-text-muted); font-size:0.9rem; border-bottom:1px solid var(--vjs-border);">Event (if applicable)</li>
-                <li style="padding:0.4rem 0; color: var(--vjs-text-muted); font-size:0.9rem;">Social Links</li>
-              </ul>
+
+            <div class="row g-3" style="margin-bottom:0.25rem;">
+              <div class="col-md-6">
+                <label class="vjs-form-label">Your Email *</label>
+                <input type="email" class="vjs-form-input" name="email" placeholder="you@studio.com" required>
+              </div>
+              <div class="col-md-6">
+                <label class="vjs-form-label">Location</label>
+                <input type="text" class="vjs-form-input" name="location" placeholder="Berlin, Germany">
+              </div>
             </div>
-          </div>
 
-          <h3 style="font-family:'Orbitron',sans-serif; font-size:0.85rem; text-transform:uppercase; letter-spacing:0.12em; color:#fff; margin-bottom:0.75rem;">Project Categories</h3>
-          <div style="margin-bottom:2.5rem;">
-            <span class="vjs-tag vjs-tag-purple">Live Visuals</span>
-            <span class="vjs-tag vjs-tag-magenta">Projection Mapping</span>
-            <span class="vjs-tag vjs-tag-blue">AI Visuals</span>
-            <span class="vjs-tag vjs-tag-cyan">Generative Art</span>
-            <span class="vjs-tag vjs-tag-purple">Immersive Installations</span>
-            <span class="vjs-tag vjs-tag-magenta">Dome Visuals</span>
-            <span class="vjs-tag vjs-tag-blue">Stage Visuals</span>
-          </div>
+            <div style="margin-bottom:1.25rem;">
+              <label class="vjs-form-label">Project Video Link *</label>
+              <input type="url" class="vjs-form-input" name="video_url" placeholder="https://vimeo.com/... or https://youtube.com/..." required>
+              <div style="font-size:0.75rem; color:var(--vjs-text-muted); margin-top:4px;">YouTube or Vimeo. Can be unlisted — we won't share without permission.</div>
+            </div>
 
-          <div style="text-align:center; padding-top:1rem; border-top:1px solid var(--vjs-border);">
-            <p style="color: var(--vjs-text-muted); font-size:0.9rem; margin-bottom:1.5rem;">Submit your project via our submission form</p>
-            <a href="mailto:submit@vjstv.com" class="vjs-btn vjs-btn-primary" style="margin-right:1rem;">Email Submission</a>
-            <a href="#" class="vjs-btn vjs-btn-outline">Submission Form</a>
+            <div style="margin-bottom:1.25rem;">
+              <label class="vjs-form-label">Project Description *</label>
+              <textarea class="vjs-form-input" name="description" rows="4" placeholder="Describe the project: concept, context, scale, audience experience..." required style="resize:vertical; min-height:100px;"></textarea>
+            </div>
+
+            <div class="row g-3" style="margin-bottom:0.25rem;">
+              <div class="col-md-6">
+                <label class="vjs-form-label">Project Category *</label>
+                <select class="vjs-form-input" name="category" required>
+                  <option value="" disabled selected>Select category</option>
+                  <option>Live Visuals</option>
+                  <option>Projection Mapping</option>
+                  <option>AI & Generative</option>
+                  <option>Immersive Installation</option>
+                  <option>Stage Production</option>
+                  <option>Experimental</option>
+                  <option>Dome Visuals</option>
+                </select>
+              </div>
+              <div class="col-md-6">
+                <label class="vjs-form-label">Year Completed</label>
+                <input type="number" class="vjs-form-input" name="year" placeholder="2025" min="2000" max="2030">
+              </div>
+            </div>
+
+            <div style="margin-bottom:1.25rem;">
+              <label class="vjs-form-label">Technology / Software Used</label>
+              <input type="text" class="vjs-form-input" name="technology" placeholder="TouchDesigner, Resolume Arena, MadMapper, Notch...">
+            </div>
+
+            <div class="row g-3" style="margin-bottom:0.25rem;">
+              <div class="col-md-6">
+                <label class="vjs-form-label">Studio Affiliation</label>
+                <input type="text" class="vjs-form-input" name="studio" placeholder="Your studio or collective">
+              </div>
+              <div class="col-md-6">
+                <label class="vjs-form-label">Website / Portfolio</label>
+                <input type="url" class="vjs-form-input" name="website" placeholder="https://yourstudio.com">
+              </div>
+            </div>
+
+            <div class="row g-3" style="margin-bottom:1.75rem;">
+              <div class="col-md-6">
+                <label class="vjs-form-label">Instagram</label>
+                <input type="url" class="vjs-form-input" name="instagram" placeholder="https://instagram.com/...">
+              </div>
+              <div class="col-md-6">
+                <label class="vjs-form-label">Vimeo</label>
+                <input type="url" class="vjs-form-input" name="vimeo" placeholder="https://vimeo.com/...">
+              </div>
+            </div>
+
+            <div style="padding-top:1.5rem; border-top:1px solid var(--vjs-border); display:flex; align-items:center; justify-content:space-between; gap:1rem; flex-wrap:wrap;">
+              <p style="color:var(--vjs-text-muted); font-size:0.8rem; margin:0; max-width:360px;">By submitting you agree to our <a href="#" style="color:var(--vjs-ultraviolet);">Terms</a>. You retain all rights to your work.</p>
+              <button type="submit" class="vjs-btn vjs-btn-primary" style="min-width:180px;">Submit Project</button>
+            </div>
+
+          </form>
+
+          <div id="submit-success" style="display:none; text-align:center; padding:2rem;">
+            <div style="font-size:3rem; margin-bottom:1rem;">&#10003;</div>
+            <h3 style="color:#fff; margin-bottom:0.5rem;">Submission Received</h3>
+            <p style="color:var(--vjs-text-muted);">We'll review your project and reply within 5–10 business days.</p>
           </div>
+        </div>
+
+        <!-- ALTERNATIVE: DIRECT EMAIL -->
+        <div style="margin-top:1.5rem; text-align:center; padding:1.25rem; background:rgba(123,47,255,0.04); border:1px solid rgba(123,47,255,0.15); border-radius:12px;">
+          <span style="color:var(--vjs-text-muted); font-size:0.85rem;">Prefer email? Send directly to </span>
+          <a href="mailto:submit@vjstv.com" style="color:var(--vjs-ultraviolet); font-weight:600; font-size:0.85rem;">submit@vjstv.com</a>
         </div>
       </div>
     </div>
@@ -69,3 +157,16 @@ meta_description: "Submit your visual performance projects to VJs TV and join th
 </section>
 
 {% include vjstv-footer.html %}
+
+<script>
+document.getElementById('submit-form').addEventListener('submit', function(e){
+  e.preventDefault();
+  var btn = this.querySelector('[type=submit]');
+  btn.textContent = 'Sending…';
+  btn.disabled = true;
+  setTimeout(function(){
+    document.getElementById('submit-form').style.display = 'none';
+    document.getElementById('submit-success').style.display = 'block';
+  }, 800);
+});
+</script>

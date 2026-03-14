@@ -7,13 +7,13 @@
 <!-- Primary Meta Tags -->
 <title> Live Visual Performances - VJs TV </title>
 <meta name="title" content=" Live Visual Performances - VJs TV ">
-<meta name="description" content=" Watch live VJ performances and audiovisual broadcasts on VJs TV. ">
+<meta name="description" content=" Watch live VJ performances and audiovisual broadcasts streaming now on VJs TV. ">
 
   <!-- Open Graph / Facebook -->
 <meta property="og:type" content="website">
 <meta property="og:url" content=" /live/ ">
 <meta property="og:title" content=" Live Visual Performances - VJs TV ">
-<meta property="og:description" content=" Watch live VJ performances and audiovisual broadcasts on VJs TV. ">
+<meta property="og:description" content=" Watch live VJ performances and audiovisual broadcasts streaming now on VJs TV. ">
 
 <meta property="og:image" content="/assets/images/meta-image.webp" />
 
@@ -21,7 +21,7 @@
 <meta property="twitter:card" content="summary_large_image">
 <meta property="twitter:url" content="/live/">
 <meta property="twitter:title" content=" Live Visual Performances - VJs TV ">
-<meta property="twitter:description" content=" Watch live VJ performances and audiovisual broadcasts on VJs TV. ">
+<meta property="twitter:description" content=" Watch live VJ performances and audiovisual broadcasts streaming now on VJs TV. ">
 
 <meta property="twitter:image" content="/assets/images/meta-image.webp" />
 
@@ -238,116 +238,261 @@
   </div>
   <!-- /.offcanvas-info -->
 
-<div class="vjs-page-header">
-  <div class="container">
-    <div class="vjs-live-badge" style="margin-bottom:1.5rem;">
-      <span class="vjs-live-dot"></span>
-      LIVE
+<!-- LIVE HERO -->
+<section style="background:#000; padding-top:80px; padding-bottom:0; position:relative; overflow:hidden;">
+  <div style="position:absolute; inset:0; background:radial-gradient(ellipse 80% 60% at 50% 0%, rgba(123,47,255,0.18) 0%, transparent 70%); pointer-events:none;"></div>
+  <div class="container" style="position:relative;">
+    <div style="display:flex; align-items:center; gap:1rem; margin-bottom:1.5rem; flex-wrap:wrap;">
+      <div class="vjs-live-badge"><span class="vjs-live-dot"></span>LIVE BROADCAST</div>
+      <span style="font-family:'Orbitron',sans-serif; font-size:0.6rem; letter-spacing:0.2em; color:var(--vjs-text-muted); text-transform:uppercase;">VJs TV · Global Visual Network</span>
     </div>
-    <h1 class="vjs-section-title" style="font-size:clamp(2rem,5vw,3.5rem);">Live Broadcast</h1>
-    <div class="vjs-accent-line"></div>
-    <p style="color: var(--vjs-text-muted); max-width:600px; font-size:1.05rem;">Watch visual performances streaming live. Tune in for scheduled broadcasts and exclusive sessions from artists around the world.</p>
-  </div>
-</div>
 
-<section class="vjs-section">
+    <div class="row g-4 align-items-start">
+      <!-- MAIN PLAYER -->
+      <div class="col-lg-8">
+        <div class="vjs-live-player" style="margin-bottom:0;">
+          <!-- REPLACE src="" with your YouTube Live embed: https://www.youtube.com/embed/LIVE_ID?autoplay=1 -->
+          <!-- <iframe src="https://www.youtube.com/embed/YOUR_LIVE_ID?autoplay=1&mute=1" frameborder="0" allowfullscreen allow="autoplay; encrypted-media"></iframe> -->
+          <div class="vjs-live-placeholder" style="position:absolute; top:0; left:0; width:100%; height:100%;">
+            <div style="position:absolute; inset:0; background:linear-gradient(135deg, rgba(123,47,255,0.08) 0%, rgba(255,0,255,0.05) 100%);"></div>
+            <div style="position:relative; z-index:1; text-align:center;">
+              <div class="vjs-live-placeholder-icon" style="font-size:3.5rem; margin-bottom:1rem;">&#9654;</div>
+              <p style="color:#fff; font-family:'Space Grotesk',sans-serif; font-weight:700; font-size:1.1rem; margin-bottom:0.5rem;">Stream Goes Live Here</p>
+              <p style="color:var(--vjs-text-muted); font-size:0.8rem; margin-bottom:1.5rem;">Replace the embed comment in <code style="color:var(--vjs-cyan); background:rgba(0,245,212,0.08); padding:2px 6px; border-radius:4px; font-size:0.75rem;">live/index.html</code> with your YouTube Live URL</p>
+              <a href="#schedule" class="vjs-btn vjs-btn-outline" style="font-size:0.8rem;">View Schedule ↓</a>
+            </div>
+          </div>
+        </div>
+
+        <!-- NOW PLAYING BAR -->
+        <div style="background:rgba(123,47,255,0.08); border:1px solid rgba(123,47,255,0.2); border-top:none; border-radius:0 0 12px 12px; padding:1rem 1.5rem; display:flex; align-items:center; justify-content:space-between; flex-wrap:wrap; gap:0.75rem;">
+          <div>
+            <span style="font-family:'Orbitron',sans-serif; font-size:0.55rem; letter-spacing:0.2em; text-transform:uppercase; color:var(--vjs-text-muted);">Now Playing</span>
+            <div style="font-family:'Space Grotesk',sans-serif; font-weight:700; color:#fff; margin-top:2px;" id="live-now-title">VJs TV Live Session</div>
+          </div>
+          <div style="display:flex; gap:0.75rem; align-items:center;">
+            <span style="font-family:'Orbitron',sans-serif; font-size:0.6rem; color:var(--vjs-ultraviolet);">&#9679; <span id="live-viewers">—</span> watching</span>
+            <a href="https://youtube.com/vjstv" target="_blank" class="vjs-btn vjs-btn-primary" style="font-size:0.75rem; padding:6px 16px;">Watch on YouTube</a>
+          </div>
+        </div>
+      </div>
+
+      <!-- SIDEBAR: NEXT BROADCAST COUNTDOWN -->
+      <div class="col-lg-4">
+        <div style="background:var(--vjs-card); border:1px solid var(--vjs-border); border-radius:16px; padding:1.75rem; margin-bottom:1.25rem;">
+          <div class="vjs-section-label" style="margin-bottom:1.25rem;">Next Broadcast</div>
+          <div id="live-countdown" style="display:grid; grid-template-columns:repeat(4,1fr); gap:0.5rem; margin-bottom:1.25rem;">
+            <div style="text-align:center;">
+              <div id="lcd-days" style="font-family:'Orbitron',sans-serif; font-size:1.6rem; font-weight:700; color:var(--vjs-ultraviolet); line-height:1;">--</div>
+              <div style="font-family:'Orbitron',sans-serif; font-size:0.5rem; letter-spacing:0.15em; color:var(--vjs-text-muted); text-transform:uppercase;">Days</div>
+            </div>
+            <div style="text-align:center;">
+              <div id="lcd-hours" style="font-family:'Orbitron',sans-serif; font-size:1.6rem; font-weight:700; color:var(--vjs-electric-blue); line-height:1;">--</div>
+              <div style="font-family:'Orbitron',sans-serif; font-size:0.5rem; letter-spacing:0.15em; color:var(--vjs-text-muted); text-transform:uppercase;">Hours</div>
+            </div>
+            <div style="text-align:center;">
+              <div id="lcd-mins" style="font-family:'Orbitron',sans-serif; font-size:1.6rem; font-weight:700; color:var(--vjs-magenta); line-height:1;">--</div>
+              <div style="font-family:'Orbitron',sans-serif; font-size:0.5rem; letter-spacing:0.15em; color:var(--vjs-text-muted); text-transform:uppercase;">Mins</div>
+            </div>
+            <div style="text-align:center;">
+              <div id="lcd-secs" style="font-family:'Orbitron',sans-serif; font-size:1.6rem; font-weight:700; color:var(--vjs-cyan); line-height:1;">--</div>
+              <div style="font-family:'Orbitron',sans-serif; font-size:0.5rem; letter-spacing:0.15em; color:var(--vjs-text-muted); text-transform:uppercase;">Secs</div>
+            </div>
+          </div>
+          
+          
+          
+          <div style="border-top:1px solid var(--vjs-border); padding-top:1.25rem;">
+            <div style="font-family:'Orbitron',sans-serif; font-size:0.6rem; letter-spacing:0.15em; color:var(--vjs-text-muted); text-transform:uppercase; margin-bottom:0.5rem;">April 15, 2025 · 20:00 CET</div>
+            <div style="font-weight:700; color:#fff; font-size:1rem; margin-bottom:0.25rem;">VJs TV Live Session 001</div>
+            
+            <div style="font-size:0.8rem; color:var(--vjs-text-muted);">VJ Kai, Nova Spectrum</div>
+            
+            <a href="/events/vjs-tv-live-01" class="vjs-btn vjs-btn-outline" style="font-size:0.75rem; padding:8px 16px; margin-top:1rem; width:100%; text-align:center; display:block;">View Details</a>
+          </div>
+          
+        </div>
+
+        <!-- PERFORMING ARTISTS -->
+        <div style="background:var(--vjs-card); border:1px solid var(--vjs-border); border-radius:16px; padding:1.75rem;">
+          <div class="vjs-section-label" style="margin-bottom:1.25rem;">Featured Artists</div>
+          
+          
+          <a href="/artists/flux-collective" class="text-decoration-none" style="display:flex; align-items:center; gap:0.85rem; padding:0.6rem 0; border-bottom:1px solid var(--vjs-border);">
+            <div style="width:40px; height:40px; background:linear-gradient(135deg, rgba(123,47,255,0.4), rgba(0,212,255,0.2)); border-radius:50%; display:flex; align-items:center; justify-content:center; font-family:'Orbitron',sans-serif; font-size:0.7rem; color:#fff; flex-shrink:0;">Fl</div>
+            <div style="min-width:0;">
+              <div style="font-weight:600; color:#fff; font-size:0.85rem; white-space:nowrap; overflow:hidden; text-overflow:ellipsis;">Flux Collective</div>
+              <div style="font-size:0.72rem; color:var(--vjs-text-muted);">São Paulo, Brazil</div>
+            </div>
+          </a>
+          
+          <a href="/artists/luna-visuals" class="text-decoration-none" style="display:flex; align-items:center; gap:0.85rem; padding:0.6rem 0; border-bottom:1px solid var(--vjs-border);">
+            <div style="width:40px; height:40px; background:linear-gradient(135deg, rgba(123,47,255,0.4), rgba(0,212,255,0.2)); border-radius:50%; display:flex; align-items:center; justify-content:center; font-family:'Orbitron',sans-serif; font-size:0.7rem; color:#fff; flex-shrink:0;">Lu</div>
+            <div style="min-width:0;">
+              <div style="font-weight:600; color:#fff; font-size:0.85rem; white-space:nowrap; overflow:hidden; text-overflow:ellipsis;">Luna Visuals</div>
+              <div style="font-size:0.72rem; color:var(--vjs-text-muted);">Tokyo, Japan</div>
+            </div>
+          </a>
+          
+          <a href="/artists/nova-spectrum" class="text-decoration-none" style="display:flex; align-items:center; gap:0.85rem; padding:0.6rem 0; border-bottom:1px solid var(--vjs-border);">
+            <div style="width:40px; height:40px; background:linear-gradient(135deg, rgba(123,47,255,0.4), rgba(0,212,255,0.2)); border-radius:50%; display:flex; align-items:center; justify-content:center; font-family:'Orbitron',sans-serif; font-size:0.7rem; color:#fff; flex-shrink:0;">No</div>
+            <div style="min-width:0;">
+              <div style="font-weight:600; color:#fff; font-size:0.85rem; white-space:nowrap; overflow:hidden; text-overflow:ellipsis;">Nova Spectrum</div>
+              <div style="font-size:0.72rem; color:var(--vjs-text-muted);">Los Angeles, USA</div>
+            </div>
+          </a>
+          
+          <a href="/artists/pixel-storm" class="text-decoration-none" style="display:flex; align-items:center; gap:0.85rem; padding:0.6rem 0; border-bottom:1px solid var(--vjs-border);">
+            <div style="width:40px; height:40px; background:linear-gradient(135deg, rgba(123,47,255,0.4), rgba(0,212,255,0.2)); border-radius:50%; display:flex; align-items:center; justify-content:center; font-family:'Orbitron',sans-serif; font-size:0.7rem; color:#fff; flex-shrink:0;">Pi</div>
+            <div style="min-width:0;">
+              <div style="font-weight:600; color:#fff; font-size:0.85rem; white-space:nowrap; overflow:hidden; text-overflow:ellipsis;">Pixel Storm</div>
+              <div style="font-size:0.72rem; color:var(--vjs-text-muted);">London, UK</div>
+            </div>
+          </a>
+          
+          <a href="/artists/vj-kai" class="text-decoration-none" style="display:flex; align-items:center; gap:0.85rem; padding:0.6rem 0; border-bottom:1px solid var(--vjs-border);">
+            <div style="width:40px; height:40px; background:linear-gradient(135deg, rgba(123,47,255,0.4), rgba(0,212,255,0.2)); border-radius:50%; display:flex; align-items:center; justify-content:center; font-family:'Orbitron',sans-serif; font-size:0.7rem; color:#fff; flex-shrink:0;">VJ</div>
+            <div style="min-width:0;">
+              <div style="font-weight:600; color:#fff; font-size:0.85rem; white-space:nowrap; overflow:hidden; text-overflow:ellipsis;">VJ Kai</div>
+              <div style="font-size:0.72rem; color:var(--vjs-text-muted);">Berlin, Germany</div>
+            </div>
+          </a>
+          
+          <a href="/artists" style="display:block; text-align:center; margin-top:1rem; font-family:'Orbitron',sans-serif; font-size:0.6rem; letter-spacing:0.15em; color:var(--vjs-ultraviolet); text-transform:uppercase;">All Artists →</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SCHEDULE -->
+<section class="vjs-section" id="schedule">
   <div class="container">
-    <div class="vjs-live-player" style="max-width:1000px; margin:0 auto 4rem;">
-      <div class="vjs-live-placeholder" style="position:absolute; top:0; left:0; width:100%; height:100%;">
-        <div class="vjs-live-placeholder-icon">&#9654;</div>
-        <p style="color: var(--vjs-text-muted); font-family:'Space Grotesk',sans-serif; letter-spacing:0.1em; text-transform:uppercase; font-size:0.85rem;">Next broadcast coming soon</p>
-        <p style="color: var(--vjs-text-muted); font-size:0.8rem; margin-top:0.5rem;">Embed your YouTube Live or Vimeo stream here</p>
-      </div>
-    </div>
+    <div class="vjs-section-label">Upcoming</div>
+    <h2 class="vjs-section-title" style="font-size:clamp(1.5rem,3vw,2.2rem);">Broadcast Schedule</h2>
     <div class="vjs-accent-line"></div>
-    <h2 class="vjs-section-title" style="font-size:1.5rem;">Upcoming Schedule</h2>
-    <p class="vjs-section-subtitle">Scheduled performances and live sessions</p>
-    
-    <div class="vjs-schedule-item">
-      <div class="vjs-schedule-time">
-        Oct 31<br/>
-        <span style="font-size:0.7rem; color: var(--vjs-text-muted);">21:00 GMT</span>
-      </div>
-      <div class="vjs-schedule-info">
-        <div class="vjs-schedule-artist">Glitch Cathedral World Premiere</div>
-        <div class="vjs-schedule-desc">
-          London, UK
-          
-           &middot; Pixel Storm
-          
+
+    <div style="margin-top:2.5rem;">
+      
+      
+      <div class="vjs-schedule-item vjs-reveal" style="transition-delay:60ms;">
+        <div class="vjs-schedule-time">
+          <div style="font-family:'Orbitron',sans-serif; font-size:1rem; font-weight:700; color:var(--vjs-ultraviolet);">31</div>
+          <div style="font-family:'Space Grotesk',sans-serif; font-size:0.7rem; text-transform:uppercase; letter-spacing:0.1em; color:var(--vjs-text-muted);">Oct</div>
+          <div style="font-size:0.65rem; color:var(--vjs-text-muted); margin-top:4px;">21:00 GMT</div>
         </div>
-      </div>
-      <a href="/events/glitch-cathedral-premiere" class="vjs-btn vjs-btn-outline" style="padding:8px 24px; font-size:0.75rem;">Details</a>
-    </div>
-    
-    <div class="vjs-schedule-item">
-      <div class="vjs-schedule-time">
-        Apr 15<br/>
-        <span style="font-size:0.7rem; color: var(--vjs-text-muted);">20:00 CET</span>
-      </div>
-      <div class="vjs-schedule-info">
-        <div class="vjs-schedule-artist">VJs TV Live Session 001</div>
-        <div class="vjs-schedule-desc">
-          Online / Berlin
-          
-           &middot; VJ Kai, Nova Spectrum
-          
+        <div class="vjs-schedule-info">
+          <div style="display:flex; align-items:center; gap:0.75rem; flex-wrap:wrap; margin-bottom:0.4rem;">
+            <div class="vjs-schedule-artist">Glitch Cathedral World Premiere</div>
+            <span class="vjs-tag vjs-tag-purple" style="font-size:0.6rem;">Installation</span>
+          </div>
+          <div class="vjs-schedule-desc">
+            London, UK
+             &middot; Pixel Storm
+          </div>
         </div>
+        <a href="/events/glitch-cathedral-premiere" class="vjs-btn vjs-btn-outline" style="padding:8px 24px; font-size:0.75rem; white-space:nowrap; flex-shrink:0;">Details</a>
       </div>
-      <a href="/events/vjs-tv-live-01" class="vjs-btn vjs-btn-outline" style="padding:8px 24px; font-size:0.75rem;">Details</a>
-    </div>
-    
-    <div class="vjs-schedule-item">
-      <div class="vjs-schedule-time">
-        Jun 12<br/>
-        <span style="font-size:0.7rem; color: var(--vjs-text-muted);">22:00 EDT</span>
-      </div>
-      <div class="vjs-schedule-info">
-        <div class="vjs-schedule-artist">Flux @ MUTEK Montreal 2025</div>
-        <div class="vjs-schedule-desc">
-          Montreal, Canada
-          
-           &middot; Flux Collective, Luna Visuals
-          
+      
+      <div class="vjs-schedule-item vjs-reveal" style="transition-delay:120ms;">
+        <div class="vjs-schedule-time">
+          <div style="font-family:'Orbitron',sans-serif; font-size:1rem; font-weight:700; color:var(--vjs-ultraviolet);">15</div>
+          <div style="font-family:'Space Grotesk',sans-serif; font-size:0.7rem; text-transform:uppercase; letter-spacing:0.1em; color:var(--vjs-text-muted);">Apr</div>
+          <div style="font-size:0.65rem; color:var(--vjs-text-muted); margin-top:4px;">20:00 CET</div>
         </div>
-      </div>
-      <a href="/events/flux-mutek-2025" class="vjs-btn vjs-btn-outline" style="padding:8px 24px; font-size:0.75rem;">Details</a>
-    </div>
-    
-    <div class="vjs-schedule-item">
-      <div class="vjs-schedule-time">
-        Jun 20<br/>
-        <span style="font-size:0.7rem; color: var(--vjs-text-muted);">22:00 EST</span>
-      </div>
-      <div class="vjs-schedule-info">
-        <div class="vjs-schedule-artist">MUTEK Visuals Showcase</div>
-        <div class="vjs-schedule-desc">
-          Montreal, Canada
-          
-           &middot; Luna Visuals, Nova Spectrum
-          
+        <div class="vjs-schedule-info">
+          <div style="display:flex; align-items:center; gap:0.75rem; flex-wrap:wrap; margin-bottom:0.4rem;">
+            <div class="vjs-schedule-artist">VJs TV Live Session 001</div>
+            <span class="vjs-tag vjs-tag-purple" style="font-size:0.6rem;">Live Stream</span>
+          </div>
+          <div class="vjs-schedule-desc">
+            Online / Berlin
+             &middot; VJ Kai, Nova Spectrum
+          </div>
         </div>
+        <a href="/events/vjs-tv-live-01" class="vjs-btn vjs-btn-outline" style="padding:8px 24px; font-size:0.75rem; white-space:nowrap; flex-shrink:0;">Details</a>
       </div>
-      <a href="/events/mutek-visuals-showcase" class="vjs-btn vjs-btn-outline" style="padding:8px 24px; font-size:0.75rem;">Details</a>
-    </div>
-    
-    <div class="vjs-schedule-item">
-      <div class="vjs-schedule-time">
-        Apr 20<br/>
-        <span style="font-size:0.7rem; color: var(--vjs-text-muted);">21:00 CET</span>
-      </div>
-      <div class="vjs-schedule-info">
-        <div class="vjs-schedule-artist">VJs TV Live Session 003</div>
-        <div class="vjs-schedule-desc">
-          Online / Amsterdam
-          
-           &middot; Aurora Fractals, Nova Spectrum
-          
+      
+      <div class="vjs-schedule-item vjs-reveal" style="transition-delay:180ms;">
+        <div class="vjs-schedule-time">
+          <div style="font-family:'Orbitron',sans-serif; font-size:1rem; font-weight:700; color:var(--vjs-ultraviolet);">12</div>
+          <div style="font-family:'Space Grotesk',sans-serif; font-size:0.7rem; text-transform:uppercase; letter-spacing:0.1em; color:var(--vjs-text-muted);">Jun</div>
+          <div style="font-size:0.65rem; color:var(--vjs-text-muted); margin-top:4px;">22:00 EDT</div>
         </div>
+        <div class="vjs-schedule-info">
+          <div style="display:flex; align-items:center; gap:0.75rem; flex-wrap:wrap; margin-bottom:0.4rem;">
+            <div class="vjs-schedule-artist">Flux @ MUTEK Montreal 2025</div>
+            <span class="vjs-tag vjs-tag-purple" style="font-size:0.6rem;">Festival</span>
+          </div>
+          <div class="vjs-schedule-desc">
+            Montreal, Canada
+             &middot; Flux Collective, Luna Visuals
+          </div>
+        </div>
+        <a href="/events/flux-mutek-2025" class="vjs-btn vjs-btn-outline" style="padding:8px 24px; font-size:0.75rem; white-space:nowrap; flex-shrink:0;">Details</a>
       </div>
-      <a href="/events/vjstv-live-003" class="vjs-btn vjs-btn-outline" style="padding:8px 24px; font-size:0.75rem;">Details</a>
+      
+      <div class="vjs-schedule-item vjs-reveal" style="transition-delay:240ms;">
+        <div class="vjs-schedule-time">
+          <div style="font-family:'Orbitron',sans-serif; font-size:1rem; font-weight:700; color:var(--vjs-ultraviolet);">20</div>
+          <div style="font-family:'Space Grotesk',sans-serif; font-size:0.7rem; text-transform:uppercase; letter-spacing:0.1em; color:var(--vjs-text-muted);">Jun</div>
+          <div style="font-size:0.65rem; color:var(--vjs-text-muted); margin-top:4px;">22:00 EST</div>
+        </div>
+        <div class="vjs-schedule-info">
+          <div style="display:flex; align-items:center; gap:0.75rem; flex-wrap:wrap; margin-bottom:0.4rem;">
+            <div class="vjs-schedule-artist">MUTEK Visuals Showcase</div>
+            <span class="vjs-tag vjs-tag-purple" style="font-size:0.6rem;">Festival</span>
+          </div>
+          <div class="vjs-schedule-desc">
+            Montreal, Canada
+             &middot; Luna Visuals, Nova Spectrum
+          </div>
+        </div>
+        <a href="/events/mutek-visuals-showcase" class="vjs-btn vjs-btn-outline" style="padding:8px 24px; font-size:0.75rem; white-space:nowrap; flex-shrink:0;">Details</a>
+      </div>
+      
+      <div class="vjs-schedule-item vjs-reveal" style="transition-delay:300ms;">
+        <div class="vjs-schedule-time">
+          <div style="font-family:'Orbitron',sans-serif; font-size:1rem; font-weight:700; color:var(--vjs-ultraviolet);">20</div>
+          <div style="font-family:'Space Grotesk',sans-serif; font-size:0.7rem; text-transform:uppercase; letter-spacing:0.1em; color:var(--vjs-text-muted);">Apr</div>
+          <div style="font-size:0.65rem; color:var(--vjs-text-muted); margin-top:4px;">21:00 CET</div>
+        </div>
+        <div class="vjs-schedule-info">
+          <div style="display:flex; align-items:center; gap:0.75rem; flex-wrap:wrap; margin-bottom:0.4rem;">
+            <div class="vjs-schedule-artist">VJs TV Live Session 003</div>
+            <span class="vjs-tag vjs-tag-purple" style="font-size:0.6rem;">Live Stream</span>
+          </div>
+          <div class="vjs-schedule-desc">
+            Online / Amsterdam
+             &middot; Aurora Fractals, Nova Spectrum
+          </div>
+        </div>
+        <a href="/events/vjstv-live-003" class="vjs-btn vjs-btn-outline" style="padding:8px 24px; font-size:0.75rem; white-space:nowrap; flex-shrink:0;">Details</a>
+      </div>
+      
     </div>
-    
+
+    <!-- WATCH ANYWHERE CTA -->
+    <div style="margin-top:4rem; display:grid; grid-template-columns:repeat(auto-fit,minmax(220px,1fr)); gap:1.5rem;">
+      <div style="background:var(--vjs-card); border:1px solid var(--vjs-border); border-radius:16px; padding:1.75rem; text-align:center;">
+        <div style="font-size:2rem; margin-bottom:0.75rem;">&#9654;</div>
+        <h4 style="font-family:'Space Grotesk',sans-serif; font-weight:700; font-size:1rem; color:#fff; margin-bottom:0.5rem;">YouTube Live</h4>
+        <p style="color:var(--vjs-text-muted); font-size:0.8rem; margin-bottom:1rem;">Stream directly through YouTube for the highest quality live experience.</p>
+        <a href="https://youtube.com/@vjstv" target="_blank" class="vjs-btn vjs-btn-outline" style="font-size:0.75rem; width:100%;">Subscribe</a>
+      </div>
+      <div style="background:var(--vjs-card); border:1px solid var(--vjs-border); border-radius:16px; padding:1.75rem; text-align:center;">
+        <div style="font-size:2rem; margin-bottom:0.75rem;">&#128247;</div>
+        <h4 style="font-family:'Space Grotesk',sans-serif; font-weight:700; font-size:1rem; color:#fff; margin-bottom:0.5rem;">Newsletter</h4>
+        <p style="color:var(--vjs-text-muted); font-size:0.8rem; margin-bottom:1rem;">Get notified before every broadcast directly to your inbox.</p>
+        <a href="#notify" class="vjs-btn vjs-btn-outline" style="font-size:0.75rem; width:100%;">Get Notified</a>
+      </div>
+      <div style="background:var(--vjs-card); border:1px solid var(--vjs-border); border-radius:16px; padding:1.75rem; text-align:center;">
+        <div style="font-size:2rem; margin-bottom:0.75rem;">&#127897;</div>
+        <h4 style="font-family:'Space Grotesk',sans-serif; font-weight:700; font-size:1rem; color:#fff; margin-bottom:0.5rem;">Perform Live</h4>
+        <p style="color:var(--vjs-text-muted); font-size:0.8rem; margin-bottom:1rem;">Are you a VJ? Apply to perform on VJs TV's global broadcast.</p>
+        <a href="/submit" class="vjs-btn vjs-btn-sponsor" style="font-size:0.75rem; width:100%;">Apply Now</a>
+      </div>
+    </div>
   </div>
 </section>
 
@@ -454,6 +599,47 @@ function vjsFooterSubmit(e) {
 }
 </script>
 
+
+<script>
+// Countdown to next event
+(function(){
+  var events = [
+    
+    { date: "2024-10-31T00:00:00", title: "Glitch Cathedral World Premiere" },
+    
+    { date: "2025-04-15T00:00:00", title: "VJs TV Live Session 001" },
+    
+    { date: "2025-06-12T00:00:00", title: "Flux @ MUTEK Montreal 2025" },
+    
+    { date: "2025-06-20T00:00:00", title: "MUTEK Visuals Showcase" },
+    
+    { date: "2026-04-20T00:00:00", title: "VJs TV Live Session 003" },
+    
+  ];
+  var now = new Date();
+  var future = events.filter(function(e){ return new Date(e.date) > now; }).sort(function(a,b){ return new Date(a.date)-new Date(b.date); });
+  if (!future.length) return;
+  var target = new Date(future[0].date);
+  document.getElementById('live-now-title').textContent = future[0].title;
+  function tick(){
+    var diff = target - new Date();
+    if(diff <= 0){ document.getElementById('lcd-days').textContent='00'; return; }
+    var d = Math.floor(diff/86400000);
+    var h = Math.floor((diff%86400000)/3600000);
+    var m = Math.floor((diff%3600000)/60000);
+    var s = Math.floor((diff%60000)/1000);
+    document.getElementById('lcd-days').textContent  = String(d).padStart(2,'0');
+    document.getElementById('lcd-hours').textContent = String(h).padStart(2,'0');
+    document.getElementById('lcd-mins').textContent  = String(m).padStart(2,'0');
+    document.getElementById('lcd-secs').textContent  = String(s).padStart(2,'0');
+  }
+  tick(); setInterval(tick, 1000);
+})();
+
+// Scroll reveal
+var ro = new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting){e.target.classList.add('is-visible');ro.unobserve(e.target);}});},{threshold:.1});
+document.querySelectorAll('.vjs-reveal').forEach(function(el){ro.observe(el);});
+</script>
 
   </div>
   <!-- Site Scripts-->

@@ -9,20 +9,90 @@ meta_description: "Discover AV studios, immersive domes, projection labs, and vi
 
 <div class="vjs-page-header">
   <div class="container">
+    <div class="vjs-section-label">Where Visuals Are Born</div>
     <h1 class="vjs-section-title" style="font-size:clamp(2rem,5vw,3.5rem);">Studios</h1>
     <div class="vjs-accent-line"></div>
-    <p style="color: var(--vjs-text-muted); max-width:600px; font-size:1.05rem;">AV studios, immersive domes, projection labs, and visual collectives where audiovisual performances are produced and rehearsed.</p>
+    <p style="color:var(--vjs-text-muted); max-width:600px; font-size:1.05rem;">AV studios, immersive domes, projection labs, and visual collectives — the physical spaces where audiovisual performances are created, rehearsed, and broadcast.</p>
   </div>
 </div>
 
 <section class="vjs-section">
   <div class="container">
-    <div class="vjs-grid vjs-grid-3">
+
+    <!-- TYPE FILTER -->
+    <div class="vjs-filter-bar">
+      <span class="vjs-filter-label">Type:</span>
+      <button class="vjs-filter-btn active" data-stype="all">All</button>
+      {% assign types = "" %}
       {% for studio in site.studios %}
-      {% include cards/studio-card.html studio=studio %}
+        {% assign stype = studio.studio_type | downcase | replace: ' ', '-' %}
+        {% unless types contains stype %}
+          {% assign types = types | append: stype | append: "|" %}
+          <button class="vjs-filter-btn" data-stype="{{ stype }}">{{ studio.studio_type }}</button>
+        {% endunless %}
       {% endfor %}
     </div>
+
+    <div class="row g-4" id="studios-grid">
+      {% for studio in site.studios %}
+      <div class="col-lg-4 col-md-6 vjs-studio-item" data-stype="{{ studio.studio_type | downcase | replace: ' ', '-' }}">
+        <a href="{{ studio.url }}" class="text-decoration-none" style="height:100%; display:block;">
+          <div class="vjs-card" style="height:100%; transition: transform 0.2s ease, box-shadow 0.2s ease;">
+            <div class="vjs-card-img-placeholder" style="background:linear-gradient(135deg, rgba(0,245,212,0.1) 0%, rgba(0,212,255,0.15) 100%); position:relative; overflow:hidden;">
+              <div style="position:absolute; inset:0; background:linear-gradient(135deg, rgba(0,245,212,0.06), rgba(123,47,255,0.08));"></div>
+              <div style="position:relative; z-index:1; text-align:center;">
+                <div style="font-family:'Orbitron',sans-serif; font-size:2rem; font-weight:900; color:rgba(0,245,212,0.25); letter-spacing:-0.05em; margin-bottom:0.5rem;">{{ studio.title | truncate: 3, '' | upcase }}</div>
+                <span style="font-family:'Orbitron',sans-serif; font-size:0.55rem; letter-spacing:0.2em; text-transform:uppercase; color:rgba(255,255,255,0.35);">{{ studio.location }}</span>
+              </div>
+            </div>
+            <div class="vjs-card-body">
+              <div style="display:flex; align-items:center; justify-content:space-between; margin-bottom:0.75rem; flex-wrap:wrap; gap:0.5rem;">
+                <span class="vjs-tag vjs-tag-cyan">{{ studio.studio_type }}</span>
+                {% if studio.artists %}<span style="font-family:'Orbitron',sans-serif; font-size:0.55rem; letter-spacing:0.12em; color:var(--vjs-text-muted); text-transform:uppercase;">{{ studio.artists | size }} artist{% if studio.artists.size != 1 %}s{% endif %}</span>{% endif %}
+              </div>
+              <h4 class="vjs-card-title">{{ studio.title }}</h4>
+              <p class="vjs-card-text" style="font-size:0.82rem; color:var(--vjs-text-muted); margin-bottom:0.75rem;">{{ studio.location }}</p>
+              <p class="vjs-card-text" style="font-size:0.8rem;">{{ studio.description | truncate: 110 }}</p>
+              {% if studio.equipment %}
+              <div style="margin-top:0.75rem; display:flex; flex-wrap:wrap; gap:0.35rem;">
+                {% for eq in studio.equipment limit:3 %}
+                <span style="font-size:0.65rem; background:rgba(0,245,212,0.06); border:1px solid rgba(0,245,212,0.15); border-radius:4px; padding:2px 7px; color:var(--vjs-text-muted);">{{ eq }}</span>
+                {% endfor %}
+              </div>
+              {% endif %}
+            </div>
+          </div>
+        </a>
+      </div>
+      {% endfor %}
+    </div>
+
+    <!-- SUBMIT STUDIO CTA -->
+    <div style="margin-top:4rem; display:grid; grid-template-columns:1fr 1fr; gap:1.5rem; align-items:center; padding:2.5rem 3rem; background:linear-gradient(135deg, rgba(0,245,212,0.05) 0%, rgba(123,47,255,0.05) 100%); border:1px solid rgba(0,245,212,0.15); border-radius:20px;">
+      <div>
+        <div class="vjs-section-label" style="margin-bottom:0.75rem;">For Studios</div>
+        <h3 style="font-family:'Space Grotesk',sans-serif; font-weight:700; font-size:1.3rem; color:#fff; margin-bottom:0.5rem;">List Your Studio</h3>
+        <p style="color:var(--vjs-text-muted); font-size:0.87rem; line-height:1.6; margin:0;">AV studios, performance labs, and residency spaces are invited to join the VJs TV studio directory. Reach artists actively seeking production facilities worldwide.</p>
+      </div>
+      <div style="text-align:right;">
+        <a href="/submit" class="vjs-btn vjs-btn-sponsor" style="font-size:0.85rem;">Submit Your Studio</a>
+      </div>
+    </div>
+
   </div>
 </section>
 
 {% include vjstv-footer.html %}
+
+<script>
+document.querySelectorAll('[data-stype]').forEach(function(btn) {
+  btn.addEventListener('click', function() {
+    document.querySelectorAll('[data-stype]').forEach(function(b){ b.classList.remove('active'); });
+    btn.classList.add('active');
+    var filter = btn.dataset.stype;
+    document.querySelectorAll('.vjs-studio-item').forEach(function(item) {
+      item.style.display = (filter==='all' || item.dataset.stype===filter) ? '' : 'none';
+    });
+  });
+});
+</script>

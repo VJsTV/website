@@ -2,54 +2,192 @@
 layout: default
 title: "Live - VJs TV"
 meta_title: "Live Visual Performances - VJs TV"
-meta_description: "Watch live VJ performances and audiovisual broadcasts on VJs TV."
+meta_description: "Watch live VJ performances and audiovisual broadcasts streaming now on VJs TV."
 ---
 
 {% include layouts/nav/nav-3.html default_logo="white" %}
 
-<div class="vjs-page-header">
-  <div class="container">
-    <div class="vjs-live-badge" style="margin-bottom:1.5rem;">
-      <span class="vjs-live-dot"></span>
-      LIVE
+<!-- LIVE HERO -->
+<section style="background:#000; padding-top:80px; padding-bottom:0; position:relative; overflow:hidden;">
+  <div style="position:absolute; inset:0; background:radial-gradient(ellipse 80% 60% at 50% 0%, rgba(123,47,255,0.18) 0%, transparent 70%); pointer-events:none;"></div>
+  <div class="container" style="position:relative;">
+    <div style="display:flex; align-items:center; gap:1rem; margin-bottom:1.5rem; flex-wrap:wrap;">
+      <div class="vjs-live-badge"><span class="vjs-live-dot"></span>LIVE BROADCAST</div>
+      <span style="font-family:'Orbitron',sans-serif; font-size:0.6rem; letter-spacing:0.2em; color:var(--vjs-text-muted); text-transform:uppercase;">VJs TV · Global Visual Network</span>
     </div>
-    <h1 class="vjs-section-title" style="font-size:clamp(2rem,5vw,3.5rem);">Live Broadcast</h1>
-    <div class="vjs-accent-line"></div>
-    <p style="color: var(--vjs-text-muted); max-width:600px; font-size:1.05rem;">Watch visual performances streaming live. Tune in for scheduled broadcasts and exclusive sessions from artists around the world.</p>
-  </div>
-</div>
 
-<section class="vjs-section">
-  <div class="container">
-    <div class="vjs-live-player" style="max-width:1000px; margin:0 auto 4rem;">
-      <div class="vjs-live-placeholder" style="position:absolute; top:0; left:0; width:100%; height:100%;">
-        <div class="vjs-live-placeholder-icon">&#9654;</div>
-        <p style="color: var(--vjs-text-muted); font-family:'Space Grotesk',sans-serif; letter-spacing:0.1em; text-transform:uppercase; font-size:0.85rem;">Next broadcast coming soon</p>
-        <p style="color: var(--vjs-text-muted); font-size:0.8rem; margin-top:0.5rem;">Embed your YouTube Live or Vimeo stream here</p>
-      </div>
-    </div>
-    <div class="vjs-accent-line"></div>
-    <h2 class="vjs-section-title" style="font-size:1.5rem;">Upcoming Schedule</h2>
-    <p class="vjs-section-subtitle">Scheduled performances and live sessions</p>
-    {% for event in site.events %}
-    <div class="vjs-schedule-item">
-      <div class="vjs-schedule-time">
-        {{ event.date | date: "%b %d" }}<br/>
-        <span style="font-size:0.7rem; color: var(--vjs-text-muted);">{{ event.time }}</span>
-      </div>
-      <div class="vjs-schedule-info">
-        <div class="vjs-schedule-artist">{{ event.title }}</div>
-        <div class="vjs-schedule-desc">
-          {{ event.location }}
-          {% if event.artists %}
-           &middot; {% for artist in event.artists %}{{ artist }}{% unless forloop.last %}, {% endunless %}{% endfor %}
-          {% endif %}
+    <div class="row g-4 align-items-start">
+      <!-- MAIN PLAYER -->
+      <div class="col-lg-8">
+        <div class="vjs-live-player" style="margin-bottom:0;">
+          <!-- REPLACE src="" with your YouTube Live embed: https://www.youtube.com/embed/LIVE_ID?autoplay=1 -->
+          <!-- <iframe src="https://www.youtube.com/embed/YOUR_LIVE_ID?autoplay=1&mute=1" frameborder="0" allowfullscreen allow="autoplay; encrypted-media"></iframe> -->
+          <div class="vjs-live-placeholder" style="position:absolute; top:0; left:0; width:100%; height:100%;">
+            <div style="position:absolute; inset:0; background:linear-gradient(135deg, rgba(123,47,255,0.08) 0%, rgba(255,0,255,0.05) 100%);"></div>
+            <div style="position:relative; z-index:1; text-align:center;">
+              <div class="vjs-live-placeholder-icon" style="font-size:3.5rem; margin-bottom:1rem;">&#9654;</div>
+              <p style="color:#fff; font-family:'Space Grotesk',sans-serif; font-weight:700; font-size:1.1rem; margin-bottom:0.5rem;">Stream Goes Live Here</p>
+              <p style="color:var(--vjs-text-muted); font-size:0.8rem; margin-bottom:1.5rem;">Replace the embed comment in <code style="color:var(--vjs-cyan); background:rgba(0,245,212,0.08); padding:2px 6px; border-radius:4px; font-size:0.75rem;">live/index.html</code> with your YouTube Live URL</p>
+              <a href="#schedule" class="vjs-btn vjs-btn-outline" style="font-size:0.8rem;">View Schedule ↓</a>
+            </div>
+          </div>
+        </div>
+
+        <!-- NOW PLAYING BAR -->
+        <div style="background:rgba(123,47,255,0.08); border:1px solid rgba(123,47,255,0.2); border-top:none; border-radius:0 0 12px 12px; padding:1rem 1.5rem; display:flex; align-items:center; justify-content:space-between; flex-wrap:wrap; gap:0.75rem;">
+          <div>
+            <span style="font-family:'Orbitron',sans-serif; font-size:0.55rem; letter-spacing:0.2em; text-transform:uppercase; color:var(--vjs-text-muted);">Now Playing</span>
+            <div style="font-family:'Space Grotesk',sans-serif; font-weight:700; color:#fff; margin-top:2px;" id="live-now-title">VJs TV Live Session</div>
+          </div>
+          <div style="display:flex; gap:0.75rem; align-items:center;">
+            <span style="font-family:'Orbitron',sans-serif; font-size:0.6rem; color:var(--vjs-ultraviolet);">&#9679; <span id="live-viewers">—</span> watching</span>
+            <a href="https://youtube.com/vjstv" target="_blank" class="vjs-btn vjs-btn-primary" style="font-size:0.75rem; padding:6px 16px;">Watch on YouTube</a>
+          </div>
         </div>
       </div>
-      <a href="{{ event.url }}" class="vjs-btn vjs-btn-outline" style="padding:8px 24px; font-size:0.75rem;">Details</a>
+
+      <!-- SIDEBAR: NEXT BROADCAST COUNTDOWN -->
+      <div class="col-lg-4">
+        <div style="background:var(--vjs-card); border:1px solid var(--vjs-border); border-radius:16px; padding:1.75rem; margin-bottom:1.25rem;">
+          <div class="vjs-section-label" style="margin-bottom:1.25rem;">Next Broadcast</div>
+          <div id="live-countdown" style="display:grid; grid-template-columns:repeat(4,1fr); gap:0.5rem; margin-bottom:1.25rem;">
+            <div style="text-align:center;">
+              <div id="lcd-days" style="font-family:'Orbitron',sans-serif; font-size:1.6rem; font-weight:700; color:var(--vjs-ultraviolet); line-height:1;">--</div>
+              <div style="font-family:'Orbitron',sans-serif; font-size:0.5rem; letter-spacing:0.15em; color:var(--vjs-text-muted); text-transform:uppercase;">Days</div>
+            </div>
+            <div style="text-align:center;">
+              <div id="lcd-hours" style="font-family:'Orbitron',sans-serif; font-size:1.6rem; font-weight:700; color:var(--vjs-electric-blue); line-height:1;">--</div>
+              <div style="font-family:'Orbitron',sans-serif; font-size:0.5rem; letter-spacing:0.15em; color:var(--vjs-text-muted); text-transform:uppercase;">Hours</div>
+            </div>
+            <div style="text-align:center;">
+              <div id="lcd-mins" style="font-family:'Orbitron',sans-serif; font-size:1.6rem; font-weight:700; color:var(--vjs-magenta); line-height:1;">--</div>
+              <div style="font-family:'Orbitron',sans-serif; font-size:0.5rem; letter-spacing:0.15em; color:var(--vjs-text-muted); text-transform:uppercase;">Mins</div>
+            </div>
+            <div style="text-align:center;">
+              <div id="lcd-secs" style="font-family:'Orbitron',sans-serif; font-size:1.6rem; font-weight:700; color:var(--vjs-cyan); line-height:1;">--</div>
+              <div style="font-family:'Orbitron',sans-serif; font-size:0.5rem; letter-spacing:0.15em; color:var(--vjs-text-muted); text-transform:uppercase;">Secs</div>
+            </div>
+          </div>
+          {% assign upcoming = site.events | where: "event_type", "Live Stream" | sort: "date" %}
+          {% assign next_event = upcoming | first %}
+          {% if next_event %}
+          <div style="border-top:1px solid var(--vjs-border); padding-top:1.25rem;">
+            <div style="font-family:'Orbitron',sans-serif; font-size:0.6rem; letter-spacing:0.15em; color:var(--vjs-text-muted); text-transform:uppercase; margin-bottom:0.5rem;">{{ next_event.date | date: "%B %d, %Y" }} · {{ next_event.time }}</div>
+            <div style="font-weight:700; color:#fff; font-size:1rem; margin-bottom:0.25rem;">{{ next_event.title }}</div>
+            {% if next_event.artists %}
+            <div style="font-size:0.8rem; color:var(--vjs-text-muted);">{% for a in next_event.artists %}{{ a }}{% unless forloop.last %}, {% endunless %}{% endfor %}</div>
+            {% endif %}
+            <a href="{{ next_event.url }}" class="vjs-btn vjs-btn-outline" style="font-size:0.75rem; padding:8px 16px; margin-top:1rem; width:100%; text-align:center; display:block;">View Details</a>
+          </div>
+          {% endif %}
+        </div>
+
+        <!-- PERFORMING ARTISTS -->
+        <div style="background:var(--vjs-card); border:1px solid var(--vjs-border); border-radius:16px; padding:1.75rem;">
+          <div class="vjs-section-label" style="margin-bottom:1.25rem;">Featured Artists</div>
+          {% assign featured_artists = site.vjs | where: "featured", true | limit: 4 %}
+          {% for artist in featured_artists %}
+          <a href="{{ artist.url }}" class="text-decoration-none" style="display:flex; align-items:center; gap:0.85rem; padding:0.6rem 0; border-bottom:1px solid var(--vjs-border);">
+            <div style="width:40px; height:40px; background:linear-gradient(135deg, rgba(123,47,255,0.4), rgba(0,212,255,0.2)); border-radius:50%; display:flex; align-items:center; justify-content:center; font-family:'Orbitron',sans-serif; font-size:0.7rem; color:#fff; flex-shrink:0;">{{ artist.title | truncate: 2, '' }}</div>
+            <div style="min-width:0;">
+              <div style="font-weight:600; color:#fff; font-size:0.85rem; white-space:nowrap; overflow:hidden; text-overflow:ellipsis;">{{ artist.title }}</div>
+              <div style="font-size:0.72rem; color:var(--vjs-text-muted);">{{ artist.location }}</div>
+            </div>
+          </a>
+          {% endfor %}
+          <a href="/artists" style="display:block; text-align:center; margin-top:1rem; font-family:'Orbitron',sans-serif; font-size:0.6rem; letter-spacing:0.15em; color:var(--vjs-ultraviolet); text-transform:uppercase;">All Artists →</a>
+        </div>
+      </div>
     </div>
-    {% endfor %}
+  </div>
+</section>
+
+<!-- SCHEDULE -->
+<section class="vjs-section" id="schedule">
+  <div class="container">
+    <div class="vjs-section-label">Upcoming</div>
+    <h2 class="vjs-section-title" style="font-size:clamp(1.5rem,3vw,2.2rem);">Broadcast Schedule</h2>
+    <div class="vjs-accent-line"></div>
+
+    <div style="margin-top:2.5rem;">
+      {% assign sorted_events = site.events | sort: "date" %}
+      {% for event in sorted_events %}
+      <div class="vjs-schedule-item vjs-reveal" style="transition-delay:{{ forloop.index | times: 60 }}ms;">
+        <div class="vjs-schedule-time">
+          <div style="font-family:'Orbitron',sans-serif; font-size:1rem; font-weight:700; color:var(--vjs-ultraviolet);">{{ event.date | date: "%d" }}</div>
+          <div style="font-family:'Space Grotesk',sans-serif; font-size:0.7rem; text-transform:uppercase; letter-spacing:0.1em; color:var(--vjs-text-muted);">{{ event.date | date: "%b" }}</div>
+          {% if event.time %}<div style="font-size:0.65rem; color:var(--vjs-text-muted); margin-top:4px;">{{ event.time }}</div>{% endif %}
+        </div>
+        <div class="vjs-schedule-info">
+          <div style="display:flex; align-items:center; gap:0.75rem; flex-wrap:wrap; margin-bottom:0.4rem;">
+            <div class="vjs-schedule-artist">{{ event.title }}</div>
+            {% if event.event_type %}<span class="vjs-tag vjs-tag-purple" style="font-size:0.6rem;">{{ event.event_type }}</span>{% endif %}
+          </div>
+          <div class="vjs-schedule-desc">
+            {% if event.location %}{{ event.location }}{% endif %}
+            {% if event.artists %} &middot; {% for artist in event.artists %}{{ artist }}{% unless forloop.last %}, {% endunless %}{% endfor %}{% endif %}
+          </div>
+        </div>
+        <a href="{{ event.url }}" class="vjs-btn vjs-btn-outline" style="padding:8px 24px; font-size:0.75rem; white-space:nowrap; flex-shrink:0;">Details</a>
+      </div>
+      {% endfor %}
+    </div>
+
+    <!-- WATCH ANYWHERE CTA -->
+    <div style="margin-top:4rem; display:grid; grid-template-columns:repeat(auto-fit,minmax(220px,1fr)); gap:1.5rem;">
+      <div style="background:var(--vjs-card); border:1px solid var(--vjs-border); border-radius:16px; padding:1.75rem; text-align:center;">
+        <div style="font-size:2rem; margin-bottom:0.75rem;">&#9654;</div>
+        <h4 style="font-family:'Space Grotesk',sans-serif; font-weight:700; font-size:1rem; color:#fff; margin-bottom:0.5rem;">YouTube Live</h4>
+        <p style="color:var(--vjs-text-muted); font-size:0.8rem; margin-bottom:1rem;">Stream directly through YouTube for the highest quality live experience.</p>
+        <a href="https://youtube.com/@vjstv" target="_blank" class="vjs-btn vjs-btn-outline" style="font-size:0.75rem; width:100%;">Subscribe</a>
+      </div>
+      <div style="background:var(--vjs-card); border:1px solid var(--vjs-border); border-radius:16px; padding:1.75rem; text-align:center;">
+        <div style="font-size:2rem; margin-bottom:0.75rem;">&#128247;</div>
+        <h4 style="font-family:'Space Grotesk',sans-serif; font-weight:700; font-size:1rem; color:#fff; margin-bottom:0.5rem;">Newsletter</h4>
+        <p style="color:var(--vjs-text-muted); font-size:0.8rem; margin-bottom:1rem;">Get notified before every broadcast directly to your inbox.</p>
+        <a href="#notify" class="vjs-btn vjs-btn-outline" style="font-size:0.75rem; width:100%;">Get Notified</a>
+      </div>
+      <div style="background:var(--vjs-card); border:1px solid var(--vjs-border); border-radius:16px; padding:1.75rem; text-align:center;">
+        <div style="font-size:2rem; margin-bottom:0.75rem;">&#127897;</div>
+        <h4 style="font-family:'Space Grotesk',sans-serif; font-weight:700; font-size:1rem; color:#fff; margin-bottom:0.5rem;">Perform Live</h4>
+        <p style="color:var(--vjs-text-muted); font-size:0.8rem; margin-bottom:1rem;">Are you a VJ? Apply to perform on VJs TV's global broadcast.</p>
+        <a href="/submit" class="vjs-btn vjs-btn-sponsor" style="font-size:0.75rem; width:100%;">Apply Now</a>
+      </div>
+    </div>
   </div>
 </section>
 
 {% include vjstv-footer.html %}
+
+<script>
+// Countdown to next event
+(function(){
+  var events = [
+    {% for event in site.events %}
+    { date: "{{ event.date | date: '%Y-%m-%dT%H:%M:%S' }}", title: "{{ event.title | escape }}" },
+    {% endfor %}
+  ];
+  var now = new Date();
+  var future = events.filter(function(e){ return new Date(e.date) > now; }).sort(function(a,b){ return new Date(a.date)-new Date(b.date); });
+  if (!future.length) return;
+  var target = new Date(future[0].date);
+  document.getElementById('live-now-title').textContent = future[0].title;
+  function tick(){
+    var diff = target - new Date();
+    if(diff <= 0){ document.getElementById('lcd-days').textContent='00'; return; }
+    var d = Math.floor(diff/86400000);
+    var h = Math.floor((diff%86400000)/3600000);
+    var m = Math.floor((diff%3600000)/60000);
+    var s = Math.floor((diff%60000)/1000);
+    document.getElementById('lcd-days').textContent  = String(d).padStart(2,'0');
+    document.getElementById('lcd-hours').textContent = String(h).padStart(2,'0');
+    document.getElementById('lcd-mins').textContent  = String(m).padStart(2,'0');
+    document.getElementById('lcd-secs').textContent  = String(s).padStart(2,'0');
+  }
+  tick(); setInterval(tick, 1000);
+})();
+
+// Scroll reveal
+var ro = new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting){e.target.classList.add('is-visible');ro.unobserve(e.target);}});},{threshold:.1});
+document.querySelectorAll('.vjs-reveal').forEach(function(el){ro.observe(el);});
+</script>

@@ -240,51 +240,240 @@
 
 <div class="vjs-page-header">
   <div class="container">
+    <div class="vjs-section-label">Where Visuals Are Born</div>
     <h1 class="vjs-section-title" style="font-size:clamp(2rem,5vw,3.5rem);">Studios</h1>
     <div class="vjs-accent-line"></div>
-    <p style="color: var(--vjs-text-muted); max-width:600px; font-size:1.05rem;">AV studios, immersive domes, projection labs, and visual collectives where audiovisual performances are produced and rehearsed.</p>
+    <p style="color:var(--vjs-text-muted); max-width:600px; font-size:1.05rem;">AV studios, immersive domes, projection labs, and visual collectives — the physical spaces where audiovisual performances are created, rehearsed, and broadcast.</p>
   </div>
 </div>
 
 <section class="vjs-section">
   <div class="container">
-    <div class="vjs-grid vjs-grid-3">
-      
-      <a href="/studios/berlin-visual-lab" class="text-decoration-none">
-  <div class="vjs-card">
-    <div class="vjs-card-img-placeholder" style="background: linear-gradient(135deg, rgba(0,245,212,0.15) 0%, rgba(0,212,255,0.2) 100%);">
-      <span style="font-size:2.5rem; opacity:0.6;">&#9632;</span>
-    </div>
-    <div class="vjs-card-body">
-      <div style="margin-bottom:0.5rem;">
-        <span class="vjs-tag vjs-tag-cyan">AV Studio</span>
-      </div>
-      <h4 class="vjs-card-title">Berlin Visual Lab</h4>
-      <p class="vjs-card-text" style="margin-bottom:0.25rem;">Berlin, Germany</p>
-      <p class="vjs-card-text" style="font-size:0.8rem;">A state-of-the-art audiovisual production studio in the heart of Berlin's creative district, spec...</p>
-    </div>
-  </div>
-</a>
 
+    <!-- TYPE FILTER -->
+    <div class="vjs-filter-bar">
+      <span class="vjs-filter-label">Type:</span>
+      <button class="vjs-filter-btn active" data-stype="all">All</button>
       
-      <a href="/studios/tokyo-projection-studio" class="text-decoration-none">
-  <div class="vjs-card">
-    <div class="vjs-card-img-placeholder" style="background: linear-gradient(135deg, rgba(0,245,212,0.15) 0%, rgba(0,212,255,0.2) 100%);">
-      <span style="font-size:2.5rem; opacity:0.6;">&#9632;</span>
+      
+        
+        
+          
+          <button class="vjs-filter-btn" data-stype="av-studio">AV Studio</button>
+        
+      
+        
+        
+          
+          <button class="vjs-filter-btn" data-stype="stage-production">Stage Production</button>
+        
+      
+        
+        
+          
+          <button class="vjs-filter-btn" data-stype="av-collective">AV Collective</button>
+        
+      
+        
+        
+          
+          <button class="vjs-filter-btn" data-stype="immersive-dome">Immersive Dome</button>
+        
+      
+        
+        
+          
+          <button class="vjs-filter-btn" data-stype="projection-lab">Projection Lab</button>
+        
+      
     </div>
-    <div class="vjs-card-body">
-      <div style="margin-bottom:0.5rem;">
-        <span class="vjs-tag vjs-tag-cyan">Projection Lab</span>
-      </div>
-      <h4 class="vjs-card-title">Tokyo Projection Studio</h4>
-      <p class="vjs-card-text" style="margin-bottom:0.25rem;">Tokyo, Japan</p>
-      <p class="vjs-card-text" style="font-size:0.8rem;">A cutting-edge projection mapping laboratory in Shibuya, equipped with high-lumen projectors and ...</p>
-    </div>
-  </div>
-</a>
 
+    <div class="row g-4" id="studios-grid">
+      
+      <div class="col-lg-4 col-md-6 vjs-studio-item" data-stype="av-studio">
+        <a href="/studios/berlin-visual-lab" class="text-decoration-none" style="height:100%; display:block;">
+          <div class="vjs-card" style="height:100%; transition: transform 0.2s ease, box-shadow 0.2s ease;">
+            <div class="vjs-card-img-placeholder" style="background:linear-gradient(135deg, rgba(0,245,212,0.1) 0%, rgba(0,212,255,0.15) 100%); position:relative; overflow:hidden;">
+              <div style="position:absolute; inset:0; background:linear-gradient(135deg, rgba(0,245,212,0.06), rgba(123,47,255,0.08));"></div>
+              <div style="position:relative; z-index:1; text-align:center;">
+                <div style="font-family:'Orbitron',sans-serif; font-size:2rem; font-weight:900; color:rgba(0,245,212,0.25); letter-spacing:-0.05em; margin-bottom:0.5rem;">BER</div>
+                <span style="font-family:'Orbitron',sans-serif; font-size:0.55rem; letter-spacing:0.2em; text-transform:uppercase; color:rgba(255,255,255,0.35);">Berlin, Germany</span>
+              </div>
+            </div>
+            <div class="vjs-card-body">
+              <div style="display:flex; align-items:center; justify-content:space-between; margin-bottom:0.75rem; flex-wrap:wrap; gap:0.5rem;">
+                <span class="vjs-tag vjs-tag-cyan">AV Studio</span>
+                <span style="font-family:'Orbitron',sans-serif; font-size:0.55rem; letter-spacing:0.12em; color:var(--vjs-text-muted); text-transform:uppercase;">1 artist</span>
+              </div>
+              <h4 class="vjs-card-title">Berlin Visual Lab</h4>
+              <p class="vjs-card-text" style="font-size:0.82rem; color:var(--vjs-text-muted); margin-bottom:0.75rem;">Berlin, Germany</p>
+              <p class="vjs-card-text" style="font-size:0.8rem;">A state-of-the-art audiovisual production studio in the heart of Berlin's creative district, specializing i...</p>
+              
+              <div style="margin-top:0.75rem; display:flex; flex-wrap:wrap; gap:0.35rem;">
+                
+                <span style="font-size:0.65rem; background:rgba(0,245,212,0.06); border:1px solid rgba(0,245,212,0.15); border-radius:4px; padding:2px 7px; color:var(--vjs-text-muted);">4K Projection Array</span>
+                
+                <span style="font-size:0.65rem; background:rgba(0,245,212,0.06); border:1px solid rgba(0,245,212,0.15); border-radius:4px; padding:2px 7px; color:var(--vjs-text-muted);">LED Wall 6x3m</span>
+                
+                <span style="font-size:0.65rem; background:rgba(0,245,212,0.06); border:1px solid rgba(0,245,212,0.15); border-radius:4px; padding:2px 7px; color:var(--vjs-text-muted);">Spatial Audio System</span>
+                
+              </div>
+              
+            </div>
+          </div>
+        </a>
+      </div>
+      
+      <div class="col-lg-4 col-md-6 vjs-studio-item" data-stype="stage-production">
+        <a href="/studios/los-angeles-stage-lab" class="text-decoration-none" style="height:100%; display:block;">
+          <div class="vjs-card" style="height:100%; transition: transform 0.2s ease, box-shadow 0.2s ease;">
+            <div class="vjs-card-img-placeholder" style="background:linear-gradient(135deg, rgba(0,245,212,0.1) 0%, rgba(0,212,255,0.15) 100%); position:relative; overflow:hidden;">
+              <div style="position:absolute; inset:0; background:linear-gradient(135deg, rgba(0,245,212,0.06), rgba(123,47,255,0.08));"></div>
+              <div style="position:relative; z-index:1; text-align:center;">
+                <div style="font-family:'Orbitron',sans-serif; font-size:2rem; font-weight:900; color:rgba(0,245,212,0.25); letter-spacing:-0.05em; margin-bottom:0.5rem;">LA </div>
+                <span style="font-family:'Orbitron',sans-serif; font-size:0.55rem; letter-spacing:0.2em; text-transform:uppercase; color:rgba(255,255,255,0.35);">Los Angeles, USA</span>
+              </div>
+            </div>
+            <div class="vjs-card-body">
+              <div style="display:flex; align-items:center; justify-content:space-between; margin-bottom:0.75rem; flex-wrap:wrap; gap:0.5rem;">
+                <span class="vjs-tag vjs-tag-cyan">Stage Production</span>
+                <span style="font-family:'Orbitron',sans-serif; font-size:0.55rem; letter-spacing:0.12em; color:var(--vjs-text-muted); text-transform:uppercase;">1 artist</span>
+              </div>
+              <h4 class="vjs-card-title">LA Stage Visual Lab</h4>
+              <p class="vjs-card-text" style="font-size:0.82rem; color:var(--vjs-text-muted); margin-bottom:0.75rem;">Los Angeles, USA</p>
+              <p class="vjs-card-text" style="font-size:0.8rem;">West Coast's premium stage visual production facility. Serving Coachella, EDC, and major touring production...</p>
+              
+              <div style="margin-top:0.75rem; display:flex; flex-wrap:wrap; gap:0.35rem;">
+                
+                <span style="font-size:0.65rem; background:rgba(0,245,212,0.06); border:1px solid rgba(0,245,212,0.15); border-radius:4px; padding:2px 7px; color:var(--vjs-text-muted);">40m² LED Volume Wall</span>
+                
+                <span style="font-size:0.65rem; background:rgba(0,245,212,0.06); border:1px solid rgba(0,245,212,0.15); border-radius:4px; padding:2px 7px; color:var(--vjs-text-muted);">Full-Stage Laser Rig</span>
+                
+                <span style="font-size:0.65rem; background:rgba(0,245,212,0.06); border:1px solid rgba(0,245,212,0.15); border-radius:4px; padding:2px 7px; color:var(--vjs-text-muted);">disguise vx4 Server</span>
+                
+              </div>
+              
+            </div>
+          </div>
+        </a>
+      </div>
+      
+      <div class="col-lg-4 col-md-6 vjs-studio-item" data-stype="av-collective">
+        <a href="/studios/paris-visual-collective" class="text-decoration-none" style="height:100%; display:block;">
+          <div class="vjs-card" style="height:100%; transition: transform 0.2s ease, box-shadow 0.2s ease;">
+            <div class="vjs-card-img-placeholder" style="background:linear-gradient(135deg, rgba(0,245,212,0.1) 0%, rgba(0,212,255,0.15) 100%); position:relative; overflow:hidden;">
+              <div style="position:absolute; inset:0; background:linear-gradient(135deg, rgba(0,245,212,0.06), rgba(123,47,255,0.08));"></div>
+              <div style="position:relative; z-index:1; text-align:center;">
+                <div style="font-family:'Orbitron',sans-serif; font-size:2rem; font-weight:900; color:rgba(0,245,212,0.25); letter-spacing:-0.05em; margin-bottom:0.5rem;">PAR</div>
+                <span style="font-family:'Orbitron',sans-serif; font-size:0.55rem; letter-spacing:0.2em; text-transform:uppercase; color:rgba(255,255,255,0.35);">Paris, France</span>
+              </div>
+            </div>
+            <div class="vjs-card-body">
+              <div style="display:flex; align-items:center; justify-content:space-between; margin-bottom:0.75rem; flex-wrap:wrap; gap:0.5rem;">
+                <span class="vjs-tag vjs-tag-cyan">AV Collective</span>
+                <span style="font-family:'Orbitron',sans-serif; font-size:0.55rem; letter-spacing:0.12em; color:var(--vjs-text-muted); text-transform:uppercase;">2 artists</span>
+              </div>
+              <h4 class="vjs-card-title">Paris Visual Collective</h4>
+              <p class="vjs-card-text" style="font-size:0.82rem; color:var(--vjs-text-muted); margin-bottom:0.75rem;">Paris, France</p>
+              <p class="vjs-card-text" style="font-size:0.8rem;">A multidisciplinary collective and residency space in Belleville, Paris. Home to artists working at the int...</p>
+              
+              <div style="margin-top:0.75rem; display:flex; flex-wrap:wrap; gap:0.35rem;">
+                
+                <span style="font-size:0.65rem; background:rgba(0,245,212,0.06); border:1px solid rgba(0,245,212,0.15); border-radius:4px; padding:2px 7px; color:var(--vjs-text-muted);">Multi-Screen Installation Rig</span>
+                
+                <span style="font-size:0.65rem; background:rgba(0,245,212,0.06); border:1px solid rgba(0,245,212,0.15); border-radius:4px; padding:2px 7px; color:var(--vjs-text-muted);">Live Coding Performance Setup</span>
+                
+                <span style="font-size:0.65rem; background:rgba(0,245,212,0.06); border:1px solid rgba(0,245,212,0.15); border-radius:4px; padding:2px 7px; color:var(--vjs-text-muted);">Custom GLSL Shader Environment</span>
+                
+              </div>
+              
+            </div>
+          </div>
+        </a>
+      </div>
+      
+      <div class="col-lg-4 col-md-6 vjs-studio-item" data-stype="immersive-dome">
+        <a href="/studios/sao-paulo-immersive" class="text-decoration-none" style="height:100%; display:block;">
+          <div class="vjs-card" style="height:100%; transition: transform 0.2s ease, box-shadow 0.2s ease;">
+            <div class="vjs-card-img-placeholder" style="background:linear-gradient(135deg, rgba(0,245,212,0.1) 0%, rgba(0,212,255,0.15) 100%); position:relative; overflow:hidden;">
+              <div style="position:absolute; inset:0; background:linear-gradient(135deg, rgba(0,245,212,0.06), rgba(123,47,255,0.08));"></div>
+              <div style="position:relative; z-index:1; text-align:center;">
+                <div style="font-family:'Orbitron',sans-serif; font-size:2rem; font-weight:900; color:rgba(0,245,212,0.25); letter-spacing:-0.05em; margin-bottom:0.5rem;">SÃO</div>
+                <span style="font-family:'Orbitron',sans-serif; font-size:0.55rem; letter-spacing:0.2em; text-transform:uppercase; color:rgba(255,255,255,0.35);">São Paulo, Brazil</span>
+              </div>
+            </div>
+            <div class="vjs-card-body">
+              <div style="display:flex; align-items:center; justify-content:space-between; margin-bottom:0.75rem; flex-wrap:wrap; gap:0.5rem;">
+                <span class="vjs-tag vjs-tag-cyan">Immersive Dome</span>
+                <span style="font-family:'Orbitron',sans-serif; font-size:0.55rem; letter-spacing:0.12em; color:var(--vjs-text-muted); text-transform:uppercase;">1 artist</span>
+              </div>
+              <h4 class="vjs-card-title">São Paulo Immersive Lab</h4>
+              <p class="vjs-card-text" style="font-size:0.82rem; color:var(--vjs-text-muted); margin-bottom:0.75rem;">São Paulo, Brazil</p>
+              <p class="vjs-card-text" style="font-size:0.8rem;">South America's leading fulldome production facility, creating 360° audiovisual experiences that blend Braz...</p>
+              
+              <div style="margin-top:0.75rem; display:flex; flex-wrap:wrap; gap:0.35rem;">
+                
+                <span style="font-size:0.65rem; background:rgba(0,245,212,0.06); border:1px solid rgba(0,245,212,0.15); border-radius:4px; padding:2px 7px; color:var(--vjs-text-muted);">10m Inflatable Dome</span>
+                
+                <span style="font-size:0.65rem; background:rgba(0,245,212,0.06); border:1px solid rgba(0,245,212,0.15); border-radius:4px; padding:2px 7px; color:var(--vjs-text-muted);">6x Fulldome Projectors</span>
+                
+                <span style="font-size:0.65rem; background:rgba(0,245,212,0.06); border:1px solid rgba(0,245,212,0.15); border-radius:4px; padding:2px 7px; color:var(--vjs-text-muted);">Spatial Audio 48ch</span>
+                
+              </div>
+              
+            </div>
+          </div>
+        </a>
+      </div>
+      
+      <div class="col-lg-4 col-md-6 vjs-studio-item" data-stype="projection-lab">
+        <a href="/studios/tokyo-projection-studio" class="text-decoration-none" style="height:100%; display:block;">
+          <div class="vjs-card" style="height:100%; transition: transform 0.2s ease, box-shadow 0.2s ease;">
+            <div class="vjs-card-img-placeholder" style="background:linear-gradient(135deg, rgba(0,245,212,0.1) 0%, rgba(0,212,255,0.15) 100%); position:relative; overflow:hidden;">
+              <div style="position:absolute; inset:0; background:linear-gradient(135deg, rgba(0,245,212,0.06), rgba(123,47,255,0.08));"></div>
+              <div style="position:relative; z-index:1; text-align:center;">
+                <div style="font-family:'Orbitron',sans-serif; font-size:2rem; font-weight:900; color:rgba(0,245,212,0.25); letter-spacing:-0.05em; margin-bottom:0.5rem;">TOK</div>
+                <span style="font-family:'Orbitron',sans-serif; font-size:0.55rem; letter-spacing:0.2em; text-transform:uppercase; color:rgba(255,255,255,0.35);">Tokyo, Japan</span>
+              </div>
+            </div>
+            <div class="vjs-card-body">
+              <div style="display:flex; align-items:center; justify-content:space-between; margin-bottom:0.75rem; flex-wrap:wrap; gap:0.5rem;">
+                <span class="vjs-tag vjs-tag-cyan">Projection Lab</span>
+                <span style="font-family:'Orbitron',sans-serif; font-size:0.55rem; letter-spacing:0.12em; color:var(--vjs-text-muted); text-transform:uppercase;">1 artist</span>
+              </div>
+              <h4 class="vjs-card-title">Tokyo Projection Studio</h4>
+              <p class="vjs-card-text" style="font-size:0.82rem; color:var(--vjs-text-muted); margin-bottom:0.75rem;">Tokyo, Japan</p>
+              <p class="vjs-card-text" style="font-size:0.8rem;">A cutting-edge projection mapping laboratory in Shibuya, equipped with high-lumen projectors and a full-sca...</p>
+              
+              <div style="margin-top:0.75rem; display:flex; flex-wrap:wrap; gap:0.35rem;">
+                
+                <span style="font-size:0.65rem; background:rgba(0,245,212,0.06); border:1px solid rgba(0,245,212,0.15); border-radius:4px; padding:2px 7px; color:var(--vjs-text-muted);">20K Lumen Projectors x8</span>
+                
+                <span style="font-size:0.65rem; background:rgba(0,245,212,0.06); border:1px solid rgba(0,245,212,0.15); border-radius:4px; padding:2px 7px; color:var(--vjs-text-muted);">Scale Model Stage</span>
+                
+                <span style="font-size:0.65rem; background:rgba(0,245,212,0.06); border:1px solid rgba(0,245,212,0.15); border-radius:4px; padding:2px 7px; color:var(--vjs-text-muted);">Motion Capture System</span>
+                
+              </div>
+              
+            </div>
+          </div>
+        </a>
+      </div>
       
     </div>
+
+    <!-- SUBMIT STUDIO CTA -->
+    <div style="margin-top:4rem; display:grid; grid-template-columns:1fr 1fr; gap:1.5rem; align-items:center; padding:2.5rem 3rem; background:linear-gradient(135deg, rgba(0,245,212,0.05) 0%, rgba(123,47,255,0.05) 100%); border:1px solid rgba(0,245,212,0.15); border-radius:20px;">
+      <div>
+        <div class="vjs-section-label" style="margin-bottom:0.75rem;">For Studios</div>
+        <h3 style="font-family:'Space Grotesk',sans-serif; font-weight:700; font-size:1.3rem; color:#fff; margin-bottom:0.5rem;">List Your Studio</h3>
+        <p style="color:var(--vjs-text-muted); font-size:0.87rem; line-height:1.6; margin:0;">AV studios, performance labs, and residency spaces are invited to join the VJs TV studio directory. Reach artists actively seeking production facilities worldwide.</p>
+      </div>
+      <div style="text-align:right;">
+        <a href="/submit" class="vjs-btn vjs-btn-sponsor" style="font-size:0.85rem;">Submit Your Studio</a>
+      </div>
+    </div>
+
   </div>
 </section>
 
@@ -391,6 +580,19 @@ function vjsFooterSubmit(e) {
 }
 </script>
 
+
+<script>
+document.querySelectorAll('[data-stype]').forEach(function(btn) {
+  btn.addEventListener('click', function() {
+    document.querySelectorAll('[data-stype]').forEach(function(b){ b.classList.remove('active'); });
+    btn.classList.add('active');
+    var filter = btn.dataset.stype;
+    document.querySelectorAll('.vjs-studio-item').forEach(function(item) {
+      item.style.display = (filter==='all' || item.dataset.stype===filter) ? '' : 'none';
+    });
+  });
+});
+</script>
 
   </div>
   <!-- Site Scripts-->
