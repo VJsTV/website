@@ -3224,6 +3224,7 @@ svg.vjs-nts-sidebar-thumb-play {
 }
 
 @media (max-width: 991px) {
+  body { padding-bottom: 80px; }
   /* ========== MOBILE NAVBAR — SIMPLE & CLEAN ========== */
   .navbar {
     position: sticky !important;
