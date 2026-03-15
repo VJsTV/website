@@ -81,6 +81,11 @@ h1, h2, h3, h4, h5, h6,
 
 .navbar::after { display: none; }
 
+.banner--clone {
+  display: none !important;
+  visibility: hidden !important;
+}
+
 .navbar-brand img.logo-light,
 .navbar-brand img.logo-dark {
   height: 22px !important;
