@@ -3212,80 +3212,209 @@ svg.vjs-nts-sidebar-thumb-play {
   height: 36px;
 }
 
-@media (max-width: 768px) {
-  /* Navbar mobile fixes */
+@media (max-width: 991px) {
+  /* ========== MOBILE NAVBAR — SIMPLE & CLEAN ========== */
   .navbar {
     position: sticky !important;
     top: 0 !important;
     z-index: 9999 !important;
+    height: 44px !important;
+    min-height: 44px !important;
+    max-height: 44px !important;
+    background: #000 !important;
+    border-bottom: 1px solid #1a1a1a !important;
+    display: flex !important;
+    align-items: center !important;
+    overflow: visible !important;
   }
-  
+
   .navbar > .container {
-    padding-left: 8px !important;
-    padding-right: 8px !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: space-between !important;
+    height: 44px !important;
+    padding-left: 12px !important;
+    padding-right: 12px !important;
+    flex-wrap: nowrap !important;
   }
-  
+
+  .navbar-brand {
+    order: 1 !important;
+    flex-shrink: 0 !important;
+    padding: 0 !important;
+    margin: 0 !important;
+    display: flex !important;
+    align-items: center !important;
+    height: 44px !important;
+  }
+
   .navbar-brand img.logo-light,
   .navbar-brand img.logo-dark {
     height: 18px !important;
+    width: auto !important;
   }
-  
-  .navbar .nav-link {
-    padding: 0 4px !important;
-    font-size: 0.6rem !important;
-    line-height: 40px !important;
+
+  .navbar-other {
+    order: 3 !important;
+    margin-left: auto !important;
+    display: flex !important;
+    align-items: center !important;
+    height: 44px !important;
   }
-  
-  /* Live strip mobile fixes */
+
+  .navbar-hamburger {
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    height: 44px !important;
+    padding: 0 !important;
+  }
+
+  button.hamburger {
+    display: inline-block !important;
+    width: 22px !important;
+    height: 18px !important;
+    padding: 0 !important;
+  }
+
+  button.hamburger:before,
+  button.hamburger span,
+  button.hamburger:after {
+    background: #fff !important;
+    height: 2px !important;
+    margin: 0 0 4px !important;
+  }
+
+  .navbar-collapse.offcanvas-nav {
+    display: none !important;
+    position: fixed !important;
+    top: 0 !important;
+    left: auto !important;
+    right: -300px !important;
+    width: 280px !important;
+    height: 100vh !important;
+    background: #0a0a0a !important;
+    z-index: 10001 !important;
+    overflow-y: auto !important;
+    flex-basis: auto !important;
+    flex-grow: 0 !important;
+    visibility: visible !important;
+    transition: right 0.3s ease-in-out !important;
+  }
+
+  .navbar-collapse.offcanvas-nav.open,
+  .navbar.fixed .navbar-collapse.offcanvas-nav.open,
+  .navbar.banner--clone .navbar-collapse.offcanvas-nav.open {
+    display: block !important;
+    right: 0 !important;
+    left: auto !important;
+    visibility: visible !important;
+  }
+
+  .navbar-collapse.offcanvas-nav .navbar-nav {
+    flex-direction: column !important;
+    align-items: flex-start !important;
+    padding: 20px !important;
+  }
+
+  .navbar-collapse.offcanvas-nav .nav-link {
+    line-height: 2.5 !important;
+    font-size: 0.8rem !important;
+    padding: 4px 0 !important;
+    display: block !important;
+    width: 100% !important;
+  }
+
+  .banner--clone.navbar {
+    display: none !important;
+  }
+
+  /* ========== LIVE STRIP MOBILE ========== */
   .vjs-live-strip {
-    font-size: 0.6rem;
     height: 28px !important;
-    position: relative;
-    z-index: 9998;
+    font-size: 0.6rem !important;
+    position: relative !important;
+    z-index: 9998 !important;
   }
-  
+
   .vjs-live-strip-label {
-    padding: 0 10px !important;
-    font-size: 0.58rem !important;
+    padding: 0 8px !important;
+    font-size: 0.55rem !important;
+    gap: 4px !important;
   }
-  
+
   .vjs-live-strip-ch {
-    flex: 1;
-    min-width: 0;
+    flex: 1 !important;
+    min-width: 0 !important;
   }
-  
+
+  .vjs-live-strip-ch:nth-child(3) {
+    display: none !important;
+  }
+
   .vjs-live-strip-ch-num {
-    font-size: 0.5rem;
+    font-size: 0.5rem !important;
+    width: 18px !important;
+    min-width: 18px !important;
   }
-  
+
+  .vjs-live-strip-ch-play {
+    width: 24px !important;
+  }
+
   .vjs-live-strip-ch-info {
-    font-size: 0.55rem;
+    font-size: 0.52rem !important;
+    padding: 0 6px !important;
   }
-  
-  .vjs-live-strip-loc { 
-    display: none; 
+
+  .vjs-live-strip-loc {
+    display: none !important;
   }
-  
-  .vjs-live-strip-right { 
-    display: none; 
+
+  .vjs-live-strip-right {
+    display: none !important;
   }
-  
-  /* Submit page responsiveness */
+
+  /* ========== HERO MOBILE ========== */
+  .vjs-nts-hero {
+    height: auto !important;
+    max-height: none !important;
+    min-height: 50vh !important;
+  }
+
+  .vjs-nts-hero-content {
+    padding: 24px 16px !important;
+  }
+
+  .vjs-nts-hero-title {
+    font-size: 1.6rem !important;
+  }
+
+  .vjs-nts-hero-desc {
+    font-size: 0.82rem !important;
+  }
+
+  .vjs-nts-hero-play {
+    width: 40px !important;
+    height: 40px !important;
+    margin-bottom: 16px !important;
+  }
+
+  /* ========== SUBMIT PAGE ========== */
   .vjs-submit-grid {
     grid-template-columns: 1fr !important;
   }
-  
+
   .vjs-submit-sidebar {
     padding: 24px 16px !important;
     border-right: none !important;
     border-bottom: 1px solid #222 !important;
   }
-  
+
   .vjs-submit-form-container {
     padding: 20px 16px !important;
   }
-  
-  /* Form grid fields */
+
   [style*="grid-template-columns:1fr 1fr"] {
     grid-template-columns: 1fr !important;
     gap: 12px !important;
