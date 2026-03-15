@@ -285,17 +285,35 @@ meta_description: "VJs TV is the global broadcast network for VJ culture. Watch 
       </div>
     </div>
     <div class="vjs-grid vjs-grid-4">
-      {% for sponsor in site.sponsors limit:4 %}
-      <div class="vjs-reveal vjs-reveal-delay-{{ forloop.index }}">
-        <a href="{{ sponsor.url }}" class="text-decoration-none">
-          <div class="vjs-card" style="text-align:center; padding:1.5rem 1rem;">
-            <div style="font-family:'Barlow Condensed',sans-serif; font-size:0.68rem; text-transform:uppercase; letter-spacing:0.1em; color:var(--vjs-text-muted); margin-bottom:0.4rem;">{{ sponsor.tier }}</div>
-            <h4 style="font-size:1rem; margin-bottom:0.4rem;">{{ sponsor.title }}</h4>
-            <p style="font-size:0.8rem; color:var(--vjs-text-muted); margin:0;">{{ sponsor.tagline }}</p>
+      {% if site.sponsors.size > 0 %}
+        {% for sponsor in site.sponsors limit:4 %}
+        <div class="vjs-reveal vjs-reveal-delay-{{ forloop.index }}">
+          <a href="{{ sponsor.url }}" class="text-decoration-none">
+            <div class="vjs-card" style="text-align:center; padding:1.5rem 1rem;">
+              <div style="font-family:'Barlow Condensed',sans-serif; font-size:0.68rem; text-transform:uppercase; letter-spacing:0.1em; color:var(--vjs-text-muted); margin-bottom:0.4rem;">{{ sponsor.tier }}</div>
+              <h4 style="font-size:1rem; margin-bottom:0.4rem;">{{ sponsor.title }}</h4>
+              <p style="font-size:0.8rem; color:var(--vjs-text-muted); margin:0;">{{ sponsor.tagline }}</p>
+            </div>
+          </a>
+        </div>
+        {% endfor %}
+      {% else %}
+        <div style="grid-column:1/-1; text-align:center; padding:4rem 2rem; background:var(--vjs-card); border:1px solid var(--vjs-border); border-radius:0;">
+          <div style="margin-bottom:1.5rem;">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" style="width:2rem; height:2rem; color:var(--vjs-text-muted); margin:0 auto; display:block; opacity:0.6;">
+              <path d="M13 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V9z"/>
+              <polyline points="13 2 13 9 20 9"/>
+              <path d="M9 15h6M9 11h6"/>
+            </svg>
           </div>
-        </a>
-      </div>
-      {% endfor %}
+          <h3 style="font-size:1.2rem; margin-bottom:0.5rem; color:#fff;">Become a Partner</h3>
+          <p style="font-size:0.9rem; color:var(--vjs-text-muted); margin-bottom:1.5rem; max-width:500px; margin-left:auto; margin-right:auto;">VJs TV works with technology partners, sponsors, and collaborators to advance global VJ culture. Apply to appear as a partner and connect with the world's creative visual community.</p>
+          <div style="display:flex; gap:10px; justify-content:center; flex-wrap:wrap;">
+            <a href="/business-model" class="vjs-btn vjs-btn-primary">Partnership Options</a>
+            <a href="/business-model#contact" class="vjs-btn vjs-btn-outline">Get In Touch</a>
+          </div>
+        </div>
+      {% endif %}
     </div>
   </div>
 </section>
