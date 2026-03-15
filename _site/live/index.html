@@ -250,10 +250,10 @@
   <!-- /.offcanvas-info -->
 
 <!-- LIVE HERO -->
-<section style="background:#000; padding-top:80px; padding-bottom:0; position:relative; overflow:hidden;">
+<section style="background:#000; padding-top:60px; padding-bottom:0; position:relative; overflow:hidden;">
   <div style="position:absolute; inset:0; background:radial-gradient(ellipse 80% 60% at 50% 0%, rgba(123,47,255,0.18) 0%, transparent 70%); pointer-events:none;"></div>
-  <div class="container" style="position:relative;">
-    <div style="display:flex; align-items:center; gap:1rem; margin-bottom:1.5rem; flex-wrap:wrap;">
+  <div class="container" style="position:relative; padding-left:12px; padding-right:12px;">
+    <div style="display:flex; align-items:center; gap:1rem; margin-bottom:1rem; flex-wrap:wrap;">
       <div class="vjs-live-badge"><span class="vjs-live-dot"></span>LIVE BROADCAST</div>
       <span style="font-family:'Orbitron',sans-serif; font-size:0.6rem; letter-spacing:0.2em; color:var(--vjs-text-muted); text-transform:uppercase;">VJs TV · Global Visual Network</span>
     </div>
@@ -289,7 +289,7 @@
         </div>
 
         <!-- NOW PLAYING BAR -->
-        <div style="background:rgba(123,47,255,0.08); border:1px solid rgba(123,47,255,0.2); border-top:none; border-radius:0 0 12px 12px; padding:1rem 1.5rem; display:flex; align-items:center; justify-content:space-between; flex-wrap:wrap; gap:0.75rem;">
+        <div style="background:rgba(123,47,255,0.08); border:1px solid rgba(123,47,255,0.2); border-top:none; padding:0.75rem 1rem; display:flex; align-items:center; justify-content:space-between; flex-wrap:wrap; gap:0.5rem;">
           <div>
             <span style="font-family:'Orbitron',sans-serif; font-size:0.55rem; letter-spacing:0.2em; text-transform:uppercase; color:var(--vjs-text-muted);">Now Playing</span>
             <div style="font-family:'Space Grotesk',sans-serif; font-weight:700; color:#fff; margin-top:2px;" id="live-now-title">VJs TV Live Session</div>
@@ -578,14 +578,14 @@
     <span class="vjstv-footer-copyright">&copy; 2026 VJs TV</span>
     <span class="vjstv-footer-sep">&middot;</span>
     <span class="vjstv-footer-network">Part of VJs TV Network</span>
-    <a href="/business-model#defi" class="vjs-defi-link" title="Decentralized Finance Network">
-      <span class="vjs-defi-dot"></span>DEFI NETWORK
-    </a>
+    <a href="/privacy" class="vjstv-footer-link">Privacy Policy</a>
+    <span class="vjstv-footer-sep">&middot;</span>
+    <a href="/terms" class="vjstv-footer-link">Terms and Conditions</a>
     <div class="vjstv-footer-newsletter">
       <span>Stay Updated</span>
-      <form onsubmit="event.preventDefault(); this.querySelector('button').textContent='Subscribed'; this.querySelector('input').disabled=true;" autocomplete="off">
-        <input type="email" placeholder="your@email.com" required />
-        <button type="submit"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg></button>
+      <form onsubmit="event.preventDefault(); this.querySelector('button').textContent='✓'; this.querySelector('input').disabled=true;" autocomplete="off" style="display:flex; gap:0.5rem; align-items:stretch;">
+        <input type="email" placeholder="your@email.com" required style="flex:1; padding:6px 10px; background:rgba(255,255,255,0.05); border:1px solid rgba(255,255,255,0.1); color:#fff; font-size:0.75rem; font-family:inherit; border-radius:0;" />
+        <button type="submit" style="padding:6px 12px; background:var(--vjs-ultraviolet); border:none; color:#fff; font-weight:700; cursor:pointer; font-size:0.7rem; letter-spacing:0.05em; border-radius:0; transition:background 0.2s;">Subscribe</button>
       </form>
     </div>
   </div>
