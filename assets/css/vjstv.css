@@ -2131,7 +2131,8 @@ select.vjs-form-input {
   font-family: 'Barlow Condensed', sans-serif;
   font-size: 0.75rem;
   padding: 0 14px;
-  width: 220px;
+  flex: 1;
+  min-width: 0;
   outline: none !important;
   box-shadow: none !important;
   border-radius: 0 !important;
