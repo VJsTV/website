@@ -10,22 +10,22 @@
 <meta name="robots" content="index, follow" />
 <link rel="preconnect" href="https://fonts.googleapis.com" />
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-<title>VJs TV Global Map — Artists, Events & Studios Worldwide</title>
-<meta name="title" content="VJs TV Global Map — Artists, Events & Studios Worldwide">
-<meta name="description" content="Explore the VJs TV global network. See where artists, projects, events, studios, and partners are located around the world.">
+<title>KOLOBOK</title>
+<meta name="title" content="KOLOBOK">
+<meta name="description" content="An interactive multimedia projection mapping adaptation of the classic Slavic folk tale KOLOBOK, created by SilaSveta for the Moscow International Festival. Audiences interacted with the narrative in real time through gesture and movement.">
 
   <meta property="og:type" content="website">
-<meta property="og:url" content="http://0.0.0.0:5000/countries/">
+<meta property="og:url" content="http://0.0.0.0:5000/projects/kolobok-silasveta">
 <meta property="og:site_name" content="VJs TV">
-<meta property="og:title" content="VJs TV Global Map — Artists, Events & Studios Worldwide">
-<meta property="og:description" content="Explore the VJs TV global network. See where artists, projects, events, studios, and partners are located around the world.">
+<meta property="og:title" content="KOLOBOK">
+<meta property="og:description" content="An interactive multimedia projection mapping adaptation of the classic Slavic folk tale KOLOBOK, created by SilaSveta for the Moscow International Festival. Audiences interacted with the narrative in real time through gesture and movement.">
 
 <meta property="og:image" content="/assets/images/meta-image.webp" />
 
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:site" content="@vjs_tv">
-<meta name="twitter:title" content="VJs TV Global Map — Artists, Events & Studios Worldwide">
-<meta name="twitter:description" content="Explore the VJs TV global network. See where artists, projects, events, studios, and partners are located around the world.">
+<meta name="twitter:title" content="KOLOBOK">
+<meta name="twitter:description" content="An interactive multimedia projection mapping adaptation of the classic Slavic folk tale KOLOBOK, created by SilaSveta for the Moscow International Festival. Audiences interacted with the narrative in real time through gesture and movement.">
 
 <meta name="twitter:image" content="/assets/images/meta-image.webp" />
 
@@ -254,389 +254,127 @@
   </div>
   <!-- /.offcanvas-info -->
 
-<div class="vjs-page-header">
-  <div class="container">
-    <div style="display:flex; align-items:center; gap:1rem; margin-bottom:0.5rem;">
-      <span style="font-family:'Orbitron',sans-serif; font-size:0.7rem; letter-spacing:0.2em; text-transform:uppercase; color:var(--vjs-cyan);">Global Network</span>
-      <span style="flex:1; height:1px; background:var(--vjs-border);"></span>
+<div class="vjs-detail-header">
+  <div class="vjs-detail-header-inner">
+    
+    <div class="vjs-detail-tags">
+      
+      <span class="vjs-detail-tag">Interactive Projection Mapping</span>
+      
+      <span class="vjs-detail-tag">Gesture Recognition</span>
+      
+      <span class="vjs-detail-tag">Architectural Projection</span>
+      
+      <span class="vjs-detail-tag">Real-time Rendering</span>
+      
     </div>
-    <h1 class="vjs-section-title" style="font-size:clamp(2rem,5vw,3.5rem);">World Map</h1>
-    <div class="vjs-accent-line"></div>
-    <p id="vjs-map-subtitle" style="color:var(--vjs-text-muted); max-width:700px; font-size:1.05rem;">The global footprint of VJ culture — artists, projects, events, studios, and partners mapped worldwide.</p>
+    
+    <h1 class="vjs-detail-title">KOLOBOK</h1>
+    <div class="vjs-detail-meta">
+      
+      <div class="vjs-detail-meta-item">
+        <span class="vjs-detail-meta-label">Location</span>
+        <span class="vjs-detail-meta-value">Moscow, Russia</span>
+      </div>
+      
+      
+      <div class="vjs-detail-meta-item">
+        <span class="vjs-detail-meta-label">Artist</span>
+        <span class="vjs-detail-meta-value">SilaSveta</span>
+      </div>
+      
+      
+      <div class="vjs-detail-meta-item">
+        <span class="vjs-detail-meta-label">Year</span>
+        <span class="vjs-detail-meta-value">2012</span>
+      </div>
+      
+      
+      <div class="vjs-detail-meta-item">
+        <span class="vjs-detail-meta-label">Type</span>
+        <span class="vjs-detail-meta-value">Interactive Architectural Projection</span>
+      </div>
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+    </div>
   </div>
 </div>
 
-<section style="padding:0;">
-  <div id="vjs-map" style="width:100%; height:70vh; min-height:500px; background:#050505;"></div>
-</section>
 
-<section class="vjs-section">
-  <div class="container">
-    <div style="display:flex; align-items:center; gap:1rem; margin-bottom:2rem;">
-      <span style="font-family:'Orbitron',sans-serif; font-size:0.7rem; letter-spacing:0.2em; text-transform:uppercase; color:var(--vjs-cyan);">Legend</span>
-      <span style="flex:1; height:1px; background:var(--vjs-border);"></span>
-    </div>
-    <div style="display:flex; flex-wrap:wrap; gap:1.5rem 3rem; margin-bottom:3rem;">
-      <div style="display:flex; align-items:center; gap:0.5rem;"><span style="width:12px; height:12px; background:#9d00ff; display:inline-block;"></span><span style="font-size:0.85rem; color:var(--vjs-text-muted);">Artists</span></div>
-      <div style="display:flex; align-items:center; gap:0.5rem;"><span style="width:12px; height:12px; background:#00f9ff; display:inline-block;"></span><span style="font-size:0.85rem; color:var(--vjs-text-muted);">Projects</span></div>
-      <div style="display:flex; align-items:center; gap:0.5rem;"><span style="width:12px; height:12px; background:#ff00aa; display:inline-block;"></span><span style="font-size:0.85rem; color:var(--vjs-text-muted);">Events</span></div>
-      <div style="display:flex; align-items:center; gap:0.5rem;"><span style="width:12px; height:12px; background:#39ff14; display:inline-block;"></span><span style="font-size:0.85rem; color:var(--vjs-text-muted);">Studios</span></div>
-      <div style="display:flex; align-items:center; gap:0.5rem;"><span style="width:12px; height:12px; background:#ff8c00; display:inline-block;"></span><span style="font-size:0.85rem; color:var(--vjs-text-muted);">Partners</span></div>
-    </div>
-
-    <div style="display:flex; align-items:center; gap:1rem; margin-bottom:2rem;">
-      <span style="font-family:'Orbitron',sans-serif; font-size:0.7rem; letter-spacing:0.2em; text-transform:uppercase; color:var(--vjs-cyan);">Countries</span>
-      <span style="flex:1; height:1px; background:var(--vjs-border);"></span>
-    </div>
-
-    <div class="vjs-grid vjs-grid-4" id="country-grid">
+<section style="padding:40px 0 0; background:#000;">
+  <div style="max-width:1100px; margin:0 auto; padding:0 24px;">
+    <div class="vjs-live-player">
+      <iframe src="https://player.vimeo.com/video/51680823" frameborder="0" allowfullscreen allow="autoplay; encrypted-media"></iframe>
     </div>
   </div>
 </section>
 
-<link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
-<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
 
-<style>
-  #vjs-map { z-index: 1; }
-  #vjs-map .leaflet-control-zoom a {
-    background: #111 !important;
-    color: #00f9ff !important;
-    border: 1px solid #222 !important;
-    border-radius: 0 !important;
-  }
-  #vjs-map .leaflet-control-zoom a:hover { background: #222 !important; }
-  .leaflet-container { background: #050505 !important; }
-  .leaflet-popup-content-wrapper {
-    background: #111 !important;
-    color: #e0e0e0 !important;
-    border-radius: 0 !important;
-    border: 1px solid #333 !important;
-    font-family: 'Barlow Condensed', sans-serif !important;
-  }
-  .leaflet-popup-tip { background: #111 !important; }
-  .leaflet-popup-content { margin: 10px 14px !important; font-size: 0.9rem !important; }
-  .leaflet-popup-content h4 { margin: 0 0 6px; font-family: 'Orbitron', sans-serif; font-size: 0.75rem; letter-spacing: 0.1em; }
-  .leaflet-popup-content a { color: #00f9ff !important; text-decoration: none !important; }
-  .leaflet-popup-content a:hover { text-decoration: underline !important; }
-  .vjs-country-card {
-    background: var(--vjs-darker);
-    border: 1px solid var(--vjs-border);
-    padding: 1rem 1.25rem;
-    transition: border-color 0.15s;
-    cursor: pointer;
-  }
-  .vjs-country-card:hover { border-color: var(--vjs-electric-blue); }
-  .vjs-country-name {
-    font-family: 'Barlow Condensed', sans-serif;
-    font-size: 1rem;
-    font-weight: 600;
-    color: #fff;
-    text-transform: uppercase;
-    letter-spacing: 0.05em;
-  }
-  .vjs-country-count {
-    font-family: 'Orbitron', sans-serif;
-    font-size: 0.75rem;
-    color: var(--vjs-electric-blue);
-    margin-top: 0.25rem;
-  }
-  .leaflet-control-attribution { display: none !important; }
-</style>
+<section style="padding:40px 0 60px; background:#000;">
+  <div style="max-width:1100px; margin:0 auto; padding:0 24px;">
+    <div class="vjs-detail-grid">
+      <div class="vjs-detail-body">
+        <p><strong>KOLOBOK</strong> is an interactive architectural projection mapping installation by <strong>SilaSveta Studio</strong>, created for the Moscow International Festival. Drawing from the classic Slavic children’s folk tale of a round yellow cake that rolls away from everyone it meets, SilaSveta transformed a building facade into a living, reactive storybook.</p>
 
-<script>
-(function(){
-  var cityCoords = {
-    'tokyo': [35.6762, 139.6503],
-    'los angeles': [34.0522, -118.2437],
-    'berlin': [52.5200, 13.4050],
-    'london': [51.5074, -0.1278],
-    'amsterdam': [52.3676, 4.9041],
-    'são paulo': [  -23.5505, -46.6333],
-    'sao paulo': [-23.5505, -46.6333],
-    'paris': [48.8566, 2.3522],
-    'montreal': [45.5017, -73.5673],
-    'montréal': [45.5017, -73.5673],
-    'barcelona': [41.3874, 2.1686],
-    'athens': [37.9838, 23.7275],
-    'istanbul': [41.0082, 28.9784],
-    'indio': [33.7207, -116.2156],
-    'lille': [50.6292, 3.0573],
-    'geneva': [46.2044, 6.1432],
-    'las vegas': [36.1699, -115.1398],
-    'prague': [50.0755, 14.4378],
-    'boom': [51.0892, 4.3682],
-    'linz': [48.3069, 14.2858],
-    'helsinki': [60.1699, 24.9384],
-    'eindhoven': [51.4416, 5.4697],
-    'lyon': [45.7640, 4.8357],
-    'black rock desert': [40.7862, -119.2065],
-    'toronto': [43.6532, -79.3832],
-    'new york': [40.7128, -74.0060]
-  };
+<p>Audiences were invited to interact with the projection through gesture and movement — drawing the story forward, influencing its characters, and becoming part of the narrative. The work demonstrates SilaSveta’s signature approach of fusing spectacle with participation, creating public art that is simultaneously cinematic and communal.</p>
 
-  var countryCoords = {
-    'japan': [36.2048, 138.2529],
-    'usa': [39.8283, -98.5795],
-    'germany': [51.1657, 10.4515],
-    'uk': [55.3781, -3.4360],
-    'netherlands': [52.1326, 5.2913],
-    'brazil': [-14.2350, -51.9253],
-    'france': [46.6034, 1.8883],
-    'canada': [56.1304, -106.3468],
-    'spain': [40.4637, -3.7492],
-    'greece': [39.0742, 21.8243],
-    'turkey': [38.9637, 35.2433],
-    'switzerland': [46.8182, 8.2275],
-    'belgium': [50.8503, 4.3517],
-    'austria': [47.5162, 14.5501],
-    'finland': [61.9241, 25.7482],
-    'czech republic': [49.8175, 15.4730]
-  };
+<p>The Moscow-based studio has become one of Russia’s most internationally celebrated projection mapping studios, producing work for festivals, brands, and cultural institutions across Europe and beyond.</p>
 
-  function getCoords(loc) {
-    if (!loc) return null;
-    var l = loc.toLowerCase();
-    for (var city in cityCoords) {
-      if (l.indexOf(city) !== -1) return cityCoords[city];
-    }
-    for (var country in countryCoords) {
-      if (l.indexOf(country) !== -1) return countryCoords[country];
-    }
-    return null;
-  }
+      </div>
+      <div class="vjs-detail-sidebar">
 
-  function getCountry(loc) {
-    if (!loc) return null;
-    var parts = loc.split(',');
-    return parts[parts.length - 1].trim();
-  }
+        
 
-  var rawData = [
-    
-    { type:'artist', name:"Aurora Fractals", location:"Amsterdam, Netherlands", url:'/artists/aurora-fractals' },
-    
-    { type:'artist', name:"Caio Todomundo", location:"Brazil", url:'/artists/caio-todomundo' },
-    
-    { type:'artist', name:"D-Fuse", location:"London, United Kingdom", url:'/artists/d-fuse' },
-    
-    { type:'artist', name:"Flux Collective", location:"São Paulo, Brazil", url:'/artists/flux-collective' },
-    
-    { type:'artist', name:"Geometrica Studio", location:"Madrid, Spain", url:'/artists/geometrica-studio' },
-    
-    { type:'artist', name:"Jacob Rendell", location:"International", url:'/artists/jacob-rendell' },
-    
-    { type:'artist', name:"Luna Visuals", location:"Tokyo, Japan", url:'/artists/luna-visuals' },
-    
-    { type:'artist', name:"Moment Factory", location:"Montréal, Canada", url:'/artists/moment-factory' },
-    
-    { type:'artist', name:"Nova Spectrum", location:"Los Angeles, USA", url:'/artists/nova-spectrum' },
-    
-    { type:'artist', name:"Onionlab", location:"Barcelona, Spain", url:'/artists/onionlab' },
-    
-    { type:'artist', name:"Pixel Storm", location:"London, UK", url:'/artists/pixel-storm' },
-    
-    { type:'artist', name:"Quayola", location:"London, United Kingdom", url:'/artists/quayola' },
-    
-    { type:'artist', name:"Robert Seidel", location:"Berlin, Germany", url:'/artists/robert-seidel' },
-    
-    { type:'artist', name:"Ryoichi Kurokawa", location:"Japan / International", url:'/artists/ryoichi-kurokawa' },
-    
-    { type:'artist', name:"SATI", location:"France", url:'/artists/sati' },
-    
-    { type:'artist', name:"seeper", location:"London, United Kingdom", url:'/artists/seeper' },
-    
-    { type:'artist', name:"SilaSveta", location:"Moscow, Russia", url:'/artists/silasveta' },
-    
-    { type:'artist', name:"Sougwen Chung", location:"New York, USA", url:'/artists/sougwen-chung' },
-    
-    { type:'artist', name:"Superbien", location:"Paris, France", url:'/artists/superbien' },
-    
-    { type:'artist', name:"Tigrelab", location:"Barcelona, Spain", url:'/artists/tigrelab' },
-    
-    { type:'artist', name:"VJ Kai", location:"Berlin, Germany", url:'/artists/vj-kai' },
-    
-    
-    { type:'project', name:"A-cero XV Aniversario", location:"Madrid, Spain", url:'/projects/a-cero-xv-aniversario' },
-    
-    { type:'project', name:"AI Dome Experience", location:"Berlin, Germany", url:'/projects/ai-dome-show' },
-    
-    { type:'project', name:"Berlin Techno Visuals", location:"Berlin, Germany", url:'/projects/berlin-techno-visuals' },
-    
-    { type:'project', name:"Chiaroscuro", location:"New York, USA", url:'/projects/chiaroscuro-sougwen' },
-    
-    { type:'project', name:"CINESTHESY 1.0 Full", location:"France", url:'/projects/cinesthesy-visionsonic' },
-    
-    { type:'project', name:"DIVINE CREATION", location:"International", url:'/projects/divine-creation-rendell' },
-    
-    { type:'project', name:"Dome Visions", location:"Amsterdam, Netherlands", url:'/projects/dome-visions' },
-    
-    { type:'project', name:"Glitch Cathedral", location:"London, UK", url:'/projects/glitch-cathedral' },
-    
-    { type:'project', name:"KOLOBOK", location:"Moscow, Russia", url:'/projects/kolobok-silasveta' },
-    
-    { type:'project', name:"LEXUS HYBRID ZERO — Zero Tunnel", location:"Seoul, South Korea", url:'/projects/lexus-hybrid-zero' },
-    
-    { type:'project', name:"The LightLine of Gotham", location:"New York City, USA", url:'/projects/lightline-gotham-seeper' },
-    
-    { type:'project', name:"Live with MiraCalix", location:"International", url:'/projects/live-with-miracalix' },
-    
-    { type:'project', name:"LOOM", location:"United Kingdom", url:'/projects/loom-matt-smith' },
-    
-    { type:'project', name:"Neural Rave", location:"Barcelona, Spain", url:'/projects/neural-rave' },
-    
-    { type:'project', name:"NEXUS", location:"Madrid, Spain", url:'/projects/nexus-geometrica' },
-    
-    { type:'project', name:"NINJA DRESSED IN NEON", location:"Brazil", url:'/projects/ninja-dressed-neon' },
-    
-    { type:'project', name:"ORANGE — Show Hello!", location:"Paris, France", url:'/projects/orange-superbien' },
-    
-    { type:'project', name:"Oscillating Continuum", location:"International", url:'/projects/oscillating-continuum' },
-    
-    { type:'project', name:"Particle", location:"São Paulo, Brazil", url:'/projects/particle-dfuse' },
-    
-    { type:'project', name:"PTA 04", location:"International", url:'/projects/pta-04-quayola' },
-    
-    { type:'project', name:"Sagrada Familia: Ode à la Vie", location:"Barcelona, Spain", url:'/projects/sagrada-familia-ode' },
-    
-    { type:'project', name:"São Paulo Facades", location:"São Paulo, Brazil", url:'/projects/sao-paulo-facades' },
-    
-    { type:'project', name:"Tearing Shadows", location:"Berlin, Germany", url:'/projects/tearing-shadows-seidel' },
-    
-    { type:'project', name:"Light Temple Tokyo", location:"Tokyo, Japan", url:'/projects/tokyo-light-temple' },
-    
-    
-    { type:'event', name:"Glitch Cathedral World Premiere", location:"London, UK", url:'/events/glitch-cathedral-premiere' },
-    
-    { type:'event', name:"VJs TV Live Session 001", location:"Online / Berlin", url:'/events/vjs-tv-live-01' },
-    
-    { type:'event', name:"Flux @ MUTEK Montreal 2025", location:"Montreal, Canada", url:'/events/flux-mutek-2025' },
-    
-    { type:'event', name:"MUTEK Visuals Showcase", location:"Montreal, Canada", url:'/events/mutek-visuals-showcase' },
-    
-    { type:'event', name:"Athens Digital Arts Festival (ADAF) 2026", location:"Athens, Greece", url:'/events/athens-digital-arts-2026' },
-    
-    { type:'event', name:"Coachella Valley Music & Arts Festival 2026", location:"Indio, California, USA", url:'/events/coachella-2026' },
-    
-    { type:'event', name:"Sónar Istanbul 2026", location:"Istanbul, Turkey", url:'/events/sonar-istanbul-2026' },
-    
-    { type:'event', name:"Video Mapping Festival 2026", location:"Lille + Hauts-de-France, France", url:'/events/video-mapping-festival-2026' },
-    
-    { type:'event', name:"VJs TV Live Session 003", location:"Online / Amsterdam", url:'/events/vjstv-live-003' },
-    
-    { type:'event', name:"Mapping Festival 2026", location:"Geneva, Switzerland", url:'/events/mapping-festival-2026' },
-    
-    { type:'event', name:"EDC Las Vegas 2026", location:"Las Vegas Motor Speedway, Nevada, USA", url:'/events/edc-las-vegas-2026' },
-    
-    { type:'event', name:"TOKYO LIGHTS 2026 — 1 Minute Projection Mapping Competition", location:"Tokyo Metropolitan Government Building, Japan", url:'/events/tokyo-lights-2026' },
-    
-    { type:'event', name:"Primavera Sound Barcelona 2026", location:"Parc del Fòrum, Barcelona, Spain", url:'/events/primavera-sound-2026' },
-    
-    { type:'event', name:"Sónar Barcelona 2026", location:"Fira Gran Via, Barcelona, Spain", url:'/events/sonar-barcelona-2026' },
-    
-    { type:'event', name:"Tomorrowland Belgium 2026", location:"Boom, Belgium", url:'/events/tomorrowland-2026' },
-    
-    { type:'event', name:"Mo:Dem Festival 2026", location:"France (venue TBA)", url:'/events/modem-festival-2026' },
-    
-    { type:'event', name:"MUTEK Montréal 2026 — Edition 27", location:"Quartier des spectacles, Montréal, Canada", url:'/events/mutek-montreal-2026' },
-    
-    { type:'event', name:"Burning Man 2026", location:"Black Rock Desert, Nevada, USA", url:'/events/burning-man-2026' },
-    
-    { type:'event', name:"Ars Electronica 2026", location:"Linz, Austria", url:'/events/ars-electronica-2026' },
-    
-    { type:'event', name:"Aavistus Festival 2026", location:"Helsinki, Finland", url:'/events/aavistus-festival-2026' },
-    
-    { type:'event', name:"Signal Festival Prague 2026", location:"Prague, Czech Republic", url:'/events/signal-festival-2026' },
-    
-    { type:'event', name:"GLOW Eindhoven 2026", location:"Eindhoven, Netherlands", url:'/events/glow-eindhoven-2026' },
-    
-    { type:'event', name:"Fête des Lumières Lyon 2026", location:"Lyon, France", url:'/events/fete-des-lumieres-2026' },
-    
-    
-    { type:'studio', name:"Berlin Visual Lab", location:"Berlin, Germany", url:'/studios/berlin-visual-lab' },
-    
-    { type:'studio', name:"LA Stage Visual Lab", location:"Los Angeles, USA", url:'/studios/los-angeles-stage-lab' },
-    
-    { type:'studio', name:"Paris Visual Collective", location:"Paris, France", url:'/studios/paris-visual-collective' },
-    
-    { type:'studio', name:"São Paulo Immersive Lab", location:"São Paulo, Brazil", url:'/studios/sao-paulo-immersive' },
-    
-    { type:'studio', name:"Tokyo Projection Studio", location:"Tokyo, Japan", url:'/studios/tokyo-projection-studio' },
-    
-    
-  ];
+        
 
-  var colors = { artist:'#9d00ff', project:'#00f9ff', event:'#ff00aa', studio:'#39ff14', partner:'#ff8c00' };
-  var labels = { artist:'Artist', project:'Project', event:'Event', studio:'Studio', partner:'Partner' };
+        
 
-  var map = L.map('vjs-map', {
-    center: [25, 10],
-    zoom: 2,
-    minZoom: 2,
-    maxZoom: 12,
-    zoomControl: true,
-    scrollWheelZoom: true
-  });
+        
 
-  L.tileLayer('https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png', {
-    subdomains: 'abcd',
-    maxZoom: 19
-  }).addTo(map);
+        
 
-  var countries = {};
-  var markers = [];
+        
 
-  rawData.forEach(function(d) {
-    if (!d.location) return;
-    var coords = getCoords(d.location);
-    var country = getCountry(d.location);
-    if (country) {
-      if (!countries[country]) countries[country] = { artists:0, projects:0, events:0, studios:0, partners:0, total:0 };
-      countries[country][d.type + 's'] = (countries[country][d.type + 's'] || 0) + 1;
-      countries[country].total++;
-    }
-    if (!coords) return;
+        
+        
 
-    var col = colors[d.type];
-    var icon = L.divIcon({
-      className: '',
-      html: '<div style="width:12px;height:12px;background:' + col + ';border:2px solid ' + col + ';box-shadow:0 0 8px ' + col + ';opacity:0.9;"></div>',
-      iconSize: [12, 12],
-      iconAnchor: [6, 6]
-    });
+        
+        
+        
 
-    var popup = '<h4 style="color:' + col + ';">' + labels[d.type].toUpperCase() + '</h4>' +
-      '<a href="' + d.url + '"><strong>' + d.name + '</strong></a><br>' +
-      '<span style="color:#888; font-size:0.8rem;">' + d.location + '</span>';
+        
+        
+        
+        <div class="vjs-sidebar-card">
+          <div class="vjs-sidebar-card-heading" style="color:var(--vjs-ultraviolet);">Artist</div>
+          <a href="/artists/silasveta" class="vjs-relation-item">
+            <div class="vjs-relation-avatar">Si</div>
+            <div>
+              <div class="vjs-relation-name">SilaSveta</div>
+              <div class="vjs-relation-meta">Moscow, Russia</div>
+            </div>
+          </a>
+        </div>
+        
+        
 
-    var m = L.marker(coords, { icon: icon }).bindPopup(popup);
-    markers.push(m);
-  });
+        
 
-  var group = L.layerGroup(markers).addTo(map);
+        
 
-  var grid = document.getElementById('country-grid');
-  var sortedCountries = Object.keys(countries).sort(function(a,b) { return countries[b].total - countries[a].total; });
-
-  sortedCountries.forEach(function(name) {
-    var c = countries[name];
-    var card = document.createElement('div');
-    card.className = 'vjs-country-card';
-    var details = [];
-    if (c.artists) details.push(c.artists + ' Artist' + (c.artists > 1 ? 's' : ''));
-    if (c.projects) details.push(c.projects + ' Project' + (c.projects > 1 ? 's' : ''));
-    if (c.events) details.push(c.events + ' Event' + (c.events > 1 ? 's' : ''));
-    if (c.studios) details.push(c.studios + ' Studio' + (c.studios > 1 ? 's' : ''));
-    if (c.partners) details.push(c.partners + ' Partner' + (c.partners > 1 ? 's' : ''));
-    card.innerHTML = '<div class="vjs-country-name">' + name + '</div>' +
-      '<div class="vjs-country-count">' + c.total + ' — ' + details.join(' · ') + '</div>';
-    grid.appendChild(card);
-  });
-
-  var sub = document.getElementById('vjs-map-subtitle');
-  if (sub) sub.innerHTML = 'The global footprint of VJ culture — artists, projects, events, studios, and partners mapped across <strong style="color:#00f9ff;">' + sortedCountries.length + ' countries</strong> worldwide.';
-})();
-</script>
+      </div>
+    </div>
+  </div>
+</section>
 
 <footer class="vjstv-footer" role="contentinfo" aria-label="Site footer">
   <div class="vjstv-footer-top">

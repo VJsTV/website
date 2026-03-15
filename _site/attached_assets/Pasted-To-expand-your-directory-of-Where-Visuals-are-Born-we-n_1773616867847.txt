@@ -1,0 +1,48 @@
+To expand your directory of "Where Visuals are Born," we need to look at the powerhouses that bridge the gap between high-end commercial production, experimental labs, and the VJ scene.
+
+In 2026, these are the studios that operate "Visual R&D" centers where the next decade of stage technology is being built.
+
+---
+
+### 1. The Global "Experience" Powerhouses
+
+These are the studios that have the "industrial" capacity to build entire digital worlds for stadiums and cities.
+
+* **Ouchhh Studio (Istanbul/Global):** A pioneer of "Data Paintings" and "AI Sci-Art." They are famous for projects like *Datagate*, which used real-time NASA data. Their studio is a hotbed for **Neuro-Design**, where they use brain-wave data (EEG) to drive generative visuals.
+* **XiteLabs (Los Angeles):** A leader in **Extended Reality (XR)** and virtual production. They are the team behind the visuals for **Sofi Tukker** at Coachella and have been pioneers in using **Unreal Engine** for live concerts. Their lab is where "Virtual Stages" meet the real world.
+* **Silent Partners Studio (Montreal):** If you've seen a massive tour for **Taylor Swift**, **Beyoncé**, or **SZA**, you’ve seen their work. They are the masters of high-end cinematic content that integrates perfectly with live camera feeds.
+
+### 2. The Artistic Research Collectives
+
+Similar to AntiVJ, these groups focus on the "purity" of light and the intersection of biology and code.
+
+* **NOHLAB (Istanbul):** Known for their award-winning immersive exhibitions like *Van Gogh: An Immersive Journey*. They specialize in "Site-Specific" installations that blur the line between historical architecture and futuristic digital skins.
+* **onformative (Berlin):** A studio focused on "generative design." Their lab is famous for exploring the beauty of data and movement, often creating visuals for high-end brands (Audi, Nike) that look like organic, shifting organisms.
+* **FIELD.IO (London/Berlin):** A creative studio that treats visuals as "System Aesthetics." Their 2026 work involves "Speculative Design," where they create visual metaphors for complex topics like AI "Black Boxes" and scientific datasets.
+
+### 3. The Tech-Avant-Garde & "Projection Labs"
+
+These are the spaces where new software and hardware combinations are tested before they ever hit a stage.
+
+* **fuse* (Italy):** A multidisciplinary studio that is currently leading in "Human-Machine Interaction." Their *Synergies 2026* project involves telematic setups where visuals are transmitted in life-size between cities (like Lucerne and Taipei) with zero latency.
+* **Marshmallow Laser Feast (UK):** Famous for their work in **VR and Lidar mapping**. They don't just use video; they use lasers to scan forests and bodies, creating "Point Cloud" visuals that allow an audience to "see" the invisible parts of nature.
+* **Tundra (International):** Their "studio" is essentially a hardware lab. They are famous for *The Day We Left Field*, but in 2026, they are the go-to for **Kinetic Visuals**—where the screens themselves move, tilt, and rotate to the music.
+
+### 4. Special Mentions: Immersive Infrastructure
+
+* **Fulldome.pro:** Not just a studio, but the global lab for "Dome VJing." They provide the hardware (the domes) and the "Media Servers" that allow VJs to map a 360-degree sphere without losing resolution.
+* **The Video Mapping Festival Lab (Lille, France):** Operated by *Rencontres Audiovisuelles*, this is a dedicated "Projection Lab" where new artists are trained in architectural mapping, keeping the European VJ tradition alive.
+
+---
+
+### Summary for your Site:
+
+| Studio | Vibe | Key Tech |
+| --- | --- | --- |
+| **Ouchhh** | Data & Neuroscience | AI, EEG Sensors, Data Sculptures |
+| **XiteLabs** | Stadium Rock / Pop | Unreal Engine, XR, Virtual Stages |
+| **NOHLAB** | Architectural Poetry | Projection Mapping, Immersive Domes |
+| **fuse*** | Experimental Research | Biometrics, Real-time Transmission |
+| **FIELD.IO** | Minimalist / Branding | Generative Code, System Design |
+
+**Would you like me to look for "Studio Tour" videos or technical case studies for any of these to link on the VJs TV artists page?**

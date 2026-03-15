@@ -1,0 +1,50 @@
+In the world of high-end VJing and audiovisual art, **Studios** are the cathedrals of light. These are the physical hubs where 200-server render farms live, where "Creative Directors" meet "Technical Directors," and where the world’s most massive tours and immersive museums are prototyped.
+
+Here are the most influential **Studios and Collectives** currently defining the industry in 2026.
+
+---
+
+### 1. The Giants (Architecture & Experience)
+
+These studios work on a scale that turns cities into screens and buildings into living stories.
+
+* **Moment Factory (Montreal):** The undisputed heavyweight. With offices in Paris, Tokyo, and NYC, they are famous for "Lumina Night Walks" and the massive visual production for **Madonna**, **Red Hot Chili Peppers**, and the **Las Vegas Sphere**.
+* **59 Productions (London/NYC):** The kings of "projection design" for theater and large-scale cultural events. They famously projected onto the **Sydney Opera House** and the **Tower of London**. They bridge the gap between high-art storytelling and technical projection mapping.
+* **Tamschick Media+Space (Berlin):** Specialists in "scenographic media." They create permanent museum installations that are so integrated into the architecture you can't tell where the building ends and the video begins.
+
+### 2. The Artistic Avant-Garde (Collectives)
+
+These are smaller, high-concept groups (like AntiVJ) where the "magic" is often more experimental and minimalist.
+
+* **AntiVJ (European Collective):** Founded by artists like **Joanie Lemercier** and **Yannick Jacquet**, they remain the gold standard for minimalist, geometric projection mapping. Their "studio" is more of a visual label for independent masters of light.
+* **Marshmallow Laser Feast (UK):** Famous for *We Live in an Ocean of Air*. They specialize in VR and immersive installations that explore the intersection of nature and technology. They don't just use screens; they use lidars, sensors, and spatial audio.
+* **Urban Screen (Germany):** Based in an old gas tank (The Gasometer), they are pioneers of "Luminous Art." They are famous for their slow, poetic architectural transformations that make buildings look like they are breathing or melting.
+* **Tundra (International):** A collective that builds "Audiovisual Instruments." Their studio is a lab for custom hardware—like thousands of motorized LED fans or hanging laser grids—to create immersive rooms that feel like a physical glitch.
+
+### 3. The New Powerhouses (AI & Immersive Domes)
+
+As of 2026, these studios are leading the transition into real-time generative and AI-driven environments.
+
+* **Refik Anadol Studio (Los Angeles):** A "Machine Intelligence" lab. This isn't just a visual studio; it’s a data science hub that turns massive datasets into fluid, hallucinatory "Data Paintings."
+* **Fulldome.pro (Global):** The world leader in **Immersive Domes**. They provide the physical infrastructure and the software for 360-degree projection environments. Their labs are where "Dome VJing" is born.
+* **Lumos Immersive:** A breakout 2026 technical powerhouse. They are famous for **low-latency interactivity at scale**—creating visuals for thousands of people that respond instantly to the movement of the crowd via AI-tracking.
+
+### 4. The Broadcast & XR Labs
+
+Where the line between "Virtual" and "Live" is erased.
+
+* **Silent Partners Studio (Montreal/LA):** The masterminds behind the visuals for **Taylor Swift**, **Beyoncé**, and **SZA**. They specialize in "XR" (Extended Reality), blending live stage LED screens with virtual backgrounds for broadcast.
+* **Immanent (Los Angeles):** Founded by **Drew Best**, they are the go-to studio for the "Bass Music" world (**Excision**, **Subtronics**). Their studio is where the most intense, high-polygon 3D robotic animations are rendered.
+
+---
+
+### Summary Table: Where to find them
+
+| Studio Type | Key Names | Best Known For |
+| --- | --- | --- |
+| **Experience Design** | Moment Factory, 59 Productions | Stadium Tours, Olympics, The Sphere |
+| **AV Collectives** | AntiVJ, Tundra, Urban Screen | Architectural Mapping, Light Art |
+| **Digital/AI Lab** | Refik Anadol Studio, Marshmallow Laser Feast | Data Art, VR/Spatial Experiences |
+| **Technical/Hardware** | Fulldome.pro, Lumos Immersive | Domes, Interactive Tracking |
+
+**Would you like me to find the physical addresses or "Lab Tour" videos for any of these studios for your site?**
