@@ -2656,6 +2656,26 @@ body.cinema-mode .col-lg-8 { flex: 0 0 100% !important; max-width: 100% !importa
   .vjs-mobile-nav { display: flex; }
   .vjs-float-sidebar { display: none; }
   body { padding-bottom: 72px; }
+
+  /* STATS BAR MOBILE */
+  .vjs-stats-bar {
+    flex-wrap: nowrap !important;
+    overflow-x: auto !important;
+    overflow-y: hidden !important;
+    -webkit-overflow-scrolling: touch;
+  }
+  .vjs-stat-item {
+    padding: 0.9rem 1.2rem !important;
+    flex: 0 0 auto !important;
+    min-width: auto !important;
+    font-size: 0.85rem;
+  }
+  .vjs-stat-number {
+    font-size: 1.4rem !important;
+  }
+  .vjs-stat-label {
+    font-size: 0.6rem !important;
+  }
   
   /* LIVE PAGE MOBILE FIXES */
   .vjs-channel-tabs {
@@ -3271,6 +3291,25 @@ svg.vjs-nts-sidebar-thumb-play {
 
 @media (max-width: 991px) {
   body { padding-bottom: 80px; }
+
+  /* STATS BAR TABLET */
+  .vjs-stats-bar {
+    flex-wrap: nowrap !important;
+    overflow-x: auto !important;
+    overflow-y: hidden !important;
+    -webkit-overflow-scrolling: touch;
+  }
+  .vjs-stat-item {
+    padding: 1rem 1.8rem !important;
+    flex: 0 0 auto !important;
+    min-width: auto !important;
+  }
+  .vjs-stat-number {
+    font-size: 1.6rem !important;
+  }
+  .vjs-stat-label {
+    font-size: 0.65rem !important;
+  }
   /* ========== MOBILE NAVBAR — SIMPLE & CLEAN ========== */
   .navbar {
     position: sticky !important;
