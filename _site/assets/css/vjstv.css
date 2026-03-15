@@ -22,6 +22,11 @@
   --vjs-glow-cyan:   0 0 40px rgba(0, 249, 255, 0.45), 0 0 80px rgba(0, 249, 255, 0.15);
 }
 
+html, body {
+  margin: 0 !important;
+  padding: 0 !important;
+}
+
 body {
   font-family: 'Barlow Condensed', 'Inter', sans-serif !important;
   background-color: var(--vjs-black) !important;
@@ -53,7 +58,8 @@ h1, h2, h3, h4, h5, h6,
   border-bottom: 1px solid #222 !important;
   padding-top: 0 !important;
   padding-bottom: 0 !important;
-  min-height: 40px;
+  margin: 0 !important;
+  height: 40px;
   position: sticky !important;
   top: 0 !important;
   z-index: 9999 !important;
@@ -2789,6 +2795,7 @@ body.cinema-mode .col-lg-8 { flex: 0 0 100% !important; max-width: 100% !importa
   display: flex;
   align-items: stretch;
   height: 32px;
+  margin: 0 !important;
   font-family: 'Barlow Condensed', sans-serif;
   overflow: hidden;
 }
