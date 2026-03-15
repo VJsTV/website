@@ -65,6 +65,18 @@ h1, h2, h3, h4, h5, h6,
   z-index: 9999 !important;
   box-shadow: none !important;
   backdrop-filter: none !important;
+  will-change: position;
+}
+
+.navbar-brand {
+  display: flex;
+  align-items: center;
+  min-width: 60px;
+}
+
+.navbar-hamburger {
+  display: flex;
+  align-items: center;
 }
 
 .navbar::after { display: none; }
@@ -3201,9 +3213,62 @@ svg.vjs-nts-sidebar-thumb-play {
 }
 
 @media (max-width: 768px) {
-  .vjs-live-strip { font-size: 0.6rem; }
-  .vjs-live-strip-loc { display: none; }
-  .vjs-live-strip-right { display: none; }
+  /* Navbar mobile fixes */
+  .navbar {
+    position: sticky !important;
+    top: 0 !important;
+    z-index: 9999 !important;
+  }
+  
+  .navbar > .container {
+    padding-left: 8px !important;
+    padding-right: 8px !important;
+  }
+  
+  .navbar-brand img.logo-light,
+  .navbar-brand img.logo-dark {
+    height: 18px !important;
+  }
+  
+  .navbar .nav-link {
+    padding: 0 4px !important;
+    font-size: 0.6rem !important;
+    line-height: 40px !important;
+  }
+  
+  /* Live strip mobile fixes */
+  .vjs-live-strip {
+    font-size: 0.6rem;
+    height: 28px !important;
+    position: relative;
+    z-index: 9998;
+  }
+  
+  .vjs-live-strip-label {
+    padding: 0 10px !important;
+    font-size: 0.58rem !important;
+  }
+  
+  .vjs-live-strip-ch {
+    flex: 1;
+    min-width: 0;
+  }
+  
+  .vjs-live-strip-ch-num {
+    font-size: 0.5rem;
+  }
+  
+  .vjs-live-strip-ch-info {
+    font-size: 0.55rem;
+  }
+  
+  .vjs-live-strip-loc { 
+    display: none; 
+  }
+  
+  .vjs-live-strip-right { 
+    display: none; 
+  }
   
   /* Submit page responsiveness */
   .vjs-submit-grid {
