@@ -9,8 +9,24 @@ event_type: "Live Stream"
 artists:
   - "VJ Kai"
   - "Nova Spectrum"
+technologies:
+  - "Resolume Arena"
+  - "AI Generative"
+  - "Glitch Art"
+website: "https://vjstv.com/live"
 description: "The inaugural VJs TV live stream session featuring two of the most exciting visual artists working today."
 featured: true
 ---
 
-The first official VJs TV Live Session brings together VJ Kai and Nova Spectrum for an evening of cutting-edge audiovisual performance. Broadcasting live from Berlin, this session showcases the future of VJ culture.
+## VJs TV Live Session 001
+
+**April 15, 2025 — 20:00 CET — Live from Berlin**
+
+The first official VJs TV Live Session brought together **VJ Kai** and **Nova Spectrum** for an evening of cutting-edge audiovisual performance. Broadcasting live from Berlin, this inaugural session set the template for what would become VJs TV's signature live stream format.
+
+### Highlights
+
+- **The inaugural VJs TV Live Session** — the broadcast that started it all
+- **VJ Kai** — Berlin-based AI visual artist pushing the boundaries of generative live visuals
+- **Nova Spectrum** — LA-based visual designer with large-scale stage production experience
+- **Live from Berlin** — broadcast from VJ Kai's studio in the heart of Berlin's electronic music scene

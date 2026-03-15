@@ -25,6 +25,7 @@ collections:
     output: true
     permalink: /sponsors/:name
 
+future: true
 highlighter: rouge
 
 exclude:

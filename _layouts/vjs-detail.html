@@ -74,6 +74,12 @@ layout: default
         <span class="vjs-detail-meta-value">{{ page.tier }}</span>
       </div>
       {% endif %}
+      {% if page.event_type %}
+      <div class="vjs-detail-meta-item">
+        <span class="vjs-detail-meta-label">Type</span>
+        <span class="vjs-detail-meta-value">{{ page.event_type }}</span>
+      </div>
+      {% endif %}
       {% if page.date and page.event_type %}
       <div class="vjs-detail-meta-item">
         <span class="vjs-detail-meta-label">Date</span>
@@ -84,6 +90,12 @@ layout: default
       <div class="vjs-detail-meta-item">
         <span class="vjs-detail-meta-label">Time</span>
         <span class="vjs-detail-meta-value">{{ page.time }}</span>
+      </div>
+      {% endif %}
+      {% if page.website %}
+      <div class="vjs-detail-meta-item">
+        <span class="vjs-detail-meta-label">Website</span>
+        <span class="vjs-detail-meta-value"><a href="{{ page.website }}" target="_blank" rel="noopener" style="color:var(--vjs-cyan); text-decoration:none;">{{ page.website | remove: 'https://' | remove: 'http://' | split: '/' | first }} ↗</a></span>
       </div>
       {% endif %}
     </div>
