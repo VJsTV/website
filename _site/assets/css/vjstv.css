@@ -2308,28 +2308,6 @@ body.glitch-mode::before {
   color: #5865F2;
 }
 .vjs-float-sidebar-icon { font-size: 1.1rem; line-height: 1; }
-.vjs-float-sidebar-meter {
-  width: 48px;
-  background: rgba(10,10,15,0.9);
-  border: 1px solid var(--vjs-border);
-  border-right: none;
-  padding: 6px 0;
-  display: flex;
-  flex-direction: column-reverse;
-  align-items: center;
-  gap: 2px;
-  height: 80px;
-}
-.vjs-float-meter-bar {
-  width: 24px;
-  height: 4px;
-  border-radius: 0;
-  background: var(--vjs-border);
-  transition: background 0.2s, box-shadow 0.2s;
-}
-.vjs-float-meter-bar.active-1 { background: #39ff14; box-shadow: 0 0 6px #39ff14; }
-.vjs-float-meter-bar.active-2 { background: var(--vjs-cyan); box-shadow: 0 0 6px var(--vjs-cyan); }
-.vjs-float-meter-bar.active-3 { background: var(--vjs-ultraviolet); box-shadow: 0 0 6px var(--vjs-ultraviolet); }
 
 /* Tip jar modal */
 .vjs-tip-modal {

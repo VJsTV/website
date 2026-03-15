@@ -433,29 +433,6 @@
   </div>
 </footer>
 
-<!-- FLOATING SIDEBAR -->
-<div class="vjs-float-sidebar" id="vjs-float-sidebar">
-  <div class="vjs-float-sidebar-meter" id="vjs-meter">
-    <div class="vjs-float-meter-bar" id="mb0"></div>
-    <div class="vjs-float-meter-bar" id="mb1"></div>
-    <div class="vjs-float-meter-bar" id="mb2"></div>
-    <div class="vjs-float-meter-bar" id="mb3"></div>
-    <div class="vjs-float-meter-bar" id="mb4"></div>
-    <div class="vjs-float-meter-bar" id="mb5"></div>
-    <div class="vjs-float-meter-bar" id="mb6"></div>
-    <div class="vjs-float-meter-bar" id="mb7"></div>
-    <div class="vjs-float-meter-bar" id="mb8"></div>
-  </div>
-  <button type="button" class="vjs-float-sidebar-btn" id="glitch-btn" onclick="vjsToggleGlitch()" title="Toggle Glitch Mode" aria-label="Toggle glitch visual effect">
-    <svg class="vjs-float-sidebar-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><polygon points="12,2 15,10 23,10 17,15 19,23 12,18 5,23 7,15 1,10 9,10"/></svg>
-  </button>
-  <a href="https://discord.gg/vjstv" target="_blank" rel="noopener" class="vjs-float-sidebar-btn discord" title="Join Discord" aria-label="Join VJs TV Discord server">
-    <svg class="vjs-float-sidebar-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><circle cx="7" cy="15" r="2"/><circle cx="17" cy="15" r="2"/><path d="M12 5C7 5 3 8 3 12c0 2 1 4 2 5v3h14v-3c1-1 2-3 2-5 0-4-4-7-9-7Z"/></svg>
-  </a>
-  <button type="button" class="vjs-float-sidebar-btn tip" onclick="vjsOpenTip()" title="Visual Tip Jar" aria-label="Open tip jar to support artists">
-    <svg class="vjs-float-sidebar-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M9 3h6v2H9V3z"/><path d="M8 5h8c1 0 2 1 2 2v10c0 2-1 4-2 4H8c-1 0-2-2-2-4V7c0-1 1-2 2-2Z"/><circle cx="12" cy="12" r="2"/></svg>
-  </button>
-</div>
 
 <!-- TIP JAR MODAL -->
 <div class="vjs-tip-modal" id="vjs-tip-modal" role="dialog" aria-label="Visual Tip Jar" onclick="if(event.target===this)vjsCloseTip()">
@@ -513,30 +490,6 @@ function vjsTipAmount(amt) {
   alert('Thank you for supporting VJs TV! ' + amt + ' tip — payment integration coming soon.');
 }
 
-(function() {
-  var bars = [];
-  for(var i=0;i<9;i++) { var b=document.getElementById('mb'+i); if(b) bars.push(b); }
-  var meterVisible = true;
-  var sidebar = document.getElementById('vjs-float-sidebar');
-  if(sidebar && window.IntersectionObserver) {
-    var mObs = new IntersectionObserver(function(es){meterVisible=es[0].isIntersecting;});
-    mObs.observe(sidebar);
-  }
-  function animateMeter() {
-    if(meterVisible) {
-      var level = Math.random();
-      bars.forEach(function(b, i) {
-        var thresh = (i+1)/bars.length;
-        b.className = 'vjs-float-meter-bar';
-        if(level > thresh) {
-          b.classList.add(i < 3 ? 'active-1' : i < 6 ? 'active-2' : 'active-3');
-        }
-      });
-    }
-    setTimeout(animateMeter, 120 + Math.random()*80);
-  }
-  animateMeter();
-})();
 
 (function() {
   var path = window.location.pathname;
