@@ -56,7 +56,7 @@ meta_description: "VJs TV is the global broadcast network for VJ culture. Watch 
   </div>
   <div class="vjs-nts-hero-sidebar">
     {% assign sidebar_projects = site.projects | where: "featured", true %}
-    {% for project in sidebar_projects limit:6 %}
+    {% for project in sidebar_projects limit:3 %}
     <a href="{{ project.url }}" class="vjs-nts-sidebar-card">
       <div class="vjs-nts-sidebar-thumb">
         {% assign sidebar_gradients = "rgba(157,0,255,0.6),rgba(0,212,255,0.3)|rgba(255,0,170,0.5),rgba(157,0,255,0.4)|rgba(0,212,255,0.5),rgba(157,0,255,0.35)|rgba(157,0,255,0.4),rgba(255,0,170,0.35)|rgba(0,249,255,0.4),rgba(157,0,255,0.5)|rgba(255,0,170,0.6),rgba(0,212,255,0.3)" | split: "|" %}
