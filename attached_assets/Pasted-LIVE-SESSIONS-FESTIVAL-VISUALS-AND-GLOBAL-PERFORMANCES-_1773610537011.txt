@@ -1,0 +1,96 @@
+LIVE SESSIONS, FESTIVAL VISUALS, AND GLOBAL PERFORMANCES
+The heartbeat of VJs TV — Real-time VJ sets, immersive festival visuals, projection-mapped spectacles, fulldome experiences, and groundbreaking global AV performances. Browse upcoming and past events below (updated March 2026).
+Every event features cutting-edge tools from the VJ arsenal (Resolume Arena, TouchDesigner, MadMapper, Hippotizer, NovaStar LED, AI generative loops) in real-world studios, domes, and stages.
+UPCOMING (March 2026 onward)
+VJs TV Live Session 003
+• Date: 20 April 2026
+• Location: Online / Amsterdam (live stream)
+• Time: 21:00 CET
+• Type: Live Stream / VJ Session
+• Tags: Aurora Fractals • Nova Spectrum
+• Why watch: Exclusive real-time VJ set with AI-reactive visuals and projection-mapping elements.
+Video Mapping Festival 2026
+• Date: 10–11 April 2026 (Lille kickoff) + regional tour until October
+• Location: Lille + Hauts-de-France, France
+• Type: Festival / Projection Mapping Contest & Residency
+• Tags: Video Mapping • Installations • Awards
+• Why watch: 9th edition with international artist residencies, building façades mapped live, and student/professional contests.
+Mapping Festival 2026
+• Date: 7–17 May 2026
+• Location: Geneva, Switzerland
+• Type: Festival (live performances + installations)
+• Tags: Visual Audio • Deviant Electronics • Immersive AV
+• Why watch: No fixed theme — open call for real-time AV systems, hybrid art–science works, and club-scale VJ performances.
+TOKYO LIGHTS 2026 – 1 Minute Projection Mapping Competition
+• Date: Screenings 23–24 & 30–31 May 2026 (finale 31 May)
+• Location: Tokyo Metropolitan Government Building, Japan
+• Type: International Competition / Projection Mapping
+• Tags: 1-Minute Loops • Architectural Mapping
+• Why watch: One of the world’s biggest projection-mapping contests on a landmark building.
+Mo:Dem Festival 2026
+• Date: 3–9 August 2026
+• Location: France (exact venue TBA)
+• Type: Festival (VJ performances + AV)
+• Tags: Underground Electronics • Live Visuals
+• Why watch: Multi-day immersive AV camp with VJs treating visuals as “the face, heartbeat, and dimension” of the experience.
+MUTEK Montréal 2026 (Edition 27)
+• Date: 25–30 August 2026
+• Location: Montréal, Canada (Quartier des spectacles)
+• Type: Festival (digital arts + electronic music)
+• Tags: Immersive Experiences • Flux Collective • Luna Visuals style
+• Confirmed artists (first wave): Jeff Mills, Rival Consoles, Ben UFO, Voices From The Lake, Polygonia + more.
+• Why watch: Heavy focus on live VJ/AV integration; previous editions featured Flux @ MUTEK and MUTEK Visuals Showcase.
+Aavistus Festival 2026
+• Date: 1–4 October 2026
+• Location: Helsinki, Finland
+• Type: Biennial of Audiovisual Art & VJ Culture
+• Theme: “Attention, please!” (Noise, signal, perception, politics of attention)
+• Tags: VJ Performances • AV Live • Projection Mapping • Installations
+• Why watch: Artist-led, non-profit — open call for VJ sets, media art, and experimental works.
+VJs TV Live Session 004 (TBA) + more in the series
+• Ongoing monthly global live streams with rotating VJs and AI visuals.
+ARCHIVE / PAST EVENTS (2016–2025)
+Glitch Cathedral World Premiere
+• Date: 31 October 2024
+• Location: London, UK
+• Type: Installation / Premiere
+• Tags: Pixel Storm
+• Highlights: Cathedral-scale glitch visuals.
+VJs TV Live Session 001
+• Date: 15 April 2025
+• Location: Online / Berlin
+• Type: Live Stream
+• Tags: VJ Kai • Nova Spectrum
+Flux @ MUTEK Montreal 2025
+• Date: 12 June 2025
+• Location: Montréal, Canada
+• Type: Festival Performance
+• Tags: Flux Collective • Luna Visuals
+MUTEK Visuals Showcase
+• Date: 20 June 2025
+• Location: Montréal, Canada
+• Type: Festival
+• Tags: Luna Visuals • Nova Spectrum
+Classic 2016 VJs TV Archive Highlights (the original 9 that started everything)
+
+BAM 2 – TEASER
+ROBOTIC – Fedde Le Grand & Jewelz & Sparks
+Max Cooper & Tom Hodge – Remnants by Nick Cobby
+Dry Lights – Xavier Chassaing
+Contour & Shape – denial of service
+PROFORMA live AV Kinect performance
+Pantokine – Cirque Garuda
+Visuals II – Pupillendriller
+SGP Water Screen – Hear Colour & Rejenr8 Productions
+
+Notable Historical AV/VJ Performances
+
+Amon Tobin ISAM Tour (groundbreaking 3D projection-mapped cube sets, 2011–2012)
+Max Cooper live AV shows (Remnants, Yearning for the Infinite, etc.)
+Past Mapping Festival editions (Geneva)
+Past MUTEK editions with fulldome & LED wall integrations
+Past Video Mapping Festival winners (Lille)
+AVX Festival (Gdynia, Poland) – recent AV experiment editions
+
+Ready to integrate into vjstv.com/events?
+This list matches your current page design (neon gradient date cards, “UPCOMING” vs “ARCHIVE”, type badges, location/time, purple tags). Copy any entry directly into your Replit site or ask me for the exact Replit AI prompt to auto-generate the full updated Events section with these (including hover glows, “Watch Replay” buttons for archive, and “RSVP” for upcoming).
