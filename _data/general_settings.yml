@@ -31,12 +31,16 @@ social_accounts:
   links:
     - url: "https://instagram.com/vjstv"
       icon: "jam jam-instagram"
-    - url: "https://youtube.com/@vjstv"
-      icon: "jam jam-youtube"
+    - url: "https://facebook.com/vjstv"
+      icon: "jam jam-facebook"
+    - url: "https://twitter.com/vjs_tv"
+      icon: "jam jam-twitter"
+    - url: "https://www.linkedin.com/company/vjstv"
+      icon: "jam jam-linkedin"
     - url: "https://vimeo.com/vjstv"
       icon: "jam jam-vimeo"
-    - url: "https://twitter.com/vjstv"
-      icon: "jam jam-twitter"
+    - url: "https://tiktok.com/@vjs.tv"
+      icon: "jam jam-tiktok"
 
 external_links:
   title: "Platform"
