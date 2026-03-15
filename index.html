@@ -116,7 +116,7 @@ meta_description: "VJs TV is the global broadcast network for VJ culture. Watch 
   <a href="/events" class="vjs-stat-item vjs-stat-link"><div class="vjs-stat-number" id="stat-events">0</div><div class="vjs-stat-label">Events</div></a>
   <a href="/studios" class="vjs-stat-item vjs-stat-link"><div class="vjs-stat-number" id="stat-studios">0</div><div class="vjs-stat-label">Studios</div></a>
   <a href="/sponsors" class="vjs-stat-item vjs-stat-link"><div class="vjs-stat-number" id="stat-sponsors">0</div><div class="vjs-stat-label">Partners</div></a>
-  <a href="javascript:void(0)" class="vjs-stat-item vjs-stat-link"><div class="vjs-stat-number" id="stat-countries">24</div><div class="vjs-stat-label">Countries</div></a>
+  <a href="/countries" class="vjs-stat-item vjs-stat-link"><div class="vjs-stat-number" id="stat-countries">24</div><div class="vjs-stat-label">Countries</div></a>
 </div>
 
 <!-- ARTISTS — NTS GRID -->
@@ -338,7 +338,8 @@ meta_description: "VJs TV is the global broadcast network for VJ culture. Watch 
 
 <script>
 (function() {
-  var statsTargets = { 'stat-artists': {{ site.vjs | size }}, 'stat-projects': {{ site.projects | size }}, 'stat-events': {{ site.events | size }}, 'stat-studios': {{ site.studios | size | default: 0 }}, 'stat-sponsors': {{ site.sponsors | size | default: 0 }}, 'stat-countries': 24 };
+  {% assign _countries = "" %}{% for a in site.vjs %}{% if a.location %}{% assign _c = a.location | split: ", " | last | strip %}{% unless _countries contains _c %}{% assign _countries = _countries | append: _c | append: "|" %}{% endunless %}{% endif %}{% endfor %}{% for p in site.projects %}{% if p.location %}{% assign _c = p.location | split: ", " | last | strip %}{% unless _countries contains _c %}{% assign _countries = _countries | append: _c | append: "|" %}{% endunless %}{% endif %}{% endfor %}{% for e in site.events %}{% if e.location %}{% assign _c = e.location | split: ", " | last | strip %}{% unless _countries contains _c %}{% assign _countries = _countries | append: _c | append: "|" %}{% endunless %}{% endif %}{% endfor %}{% for s in site.studios %}{% if s.location %}{% assign _c = s.location | split: ", " | last | strip %}{% unless _countries contains _c %}{% assign _countries = _countries | append: _c | append: "|" %}{% endunless %}{% endif %}{% endfor %}{% assign _country_arr = _countries | split: "|" %}
+  var statsTargets = { 'stat-artists': {{ site.vjs | size }}, 'stat-projects': {{ site.projects | size }}, 'stat-events': {{ site.events | size }}, 'stat-studios': {{ site.studios | size | default: 0 }}, 'stat-sponsors': {{ site.sponsors | size | default: 0 }}, 'stat-countries': {{ _country_arr | size }} };
   var started = false;
   function startCounters() {
     if(started) return; started=true;

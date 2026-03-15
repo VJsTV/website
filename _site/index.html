@@ -474,7 +474,7 @@
   <a href="/events" class="vjs-stat-item vjs-stat-link"><div class="vjs-stat-number" id="stat-events">0</div><div class="vjs-stat-label">Events</div></a>
   <a href="/studios" class="vjs-stat-item vjs-stat-link"><div class="vjs-stat-number" id="stat-studios">0</div><div class="vjs-stat-label">Studios</div></a>
   <a href="/sponsors" class="vjs-stat-item vjs-stat-link"><div class="vjs-stat-number" id="stat-sponsors">0</div><div class="vjs-stat-label">Partners</div></a>
-  <a href="javascript:void(0)" class="vjs-stat-item vjs-stat-link"><div class="vjs-stat-number" id="stat-countries">24</div><div class="vjs-stat-label">Countries</div></a>
+  <a href="/countries" class="vjs-stat-item vjs-stat-link"><div class="vjs-stat-number" id="stat-countries">24</div><div class="vjs-stat-label">Countries</div></a>
 </div>
 
 <!-- ARTISTS — NTS GRID -->
@@ -1208,7 +1208,8 @@ function vjsTipAmount(amt) {
 
 <script>
 (function() {
-  var statsTargets = { 'stat-artists': 6, 'stat-projects': 7, 'stat-events': 23, 'stat-studios': 5, 'stat-sponsors': 3, 'stat-countries': 24 };
+  
+  var statsTargets = { 'stat-artists': 6, 'stat-projects': 7, 'stat-events': 23, 'stat-studios': 5, 'stat-sponsors': 3, 'stat-countries': 19 };
   var started = false;
   function startCounters() {
     if(started) return; started=true;

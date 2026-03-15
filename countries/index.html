@@ -1,0 +1,258 @@
+---
+layout: default
+title: "Global Map - VJs TV"
+meta_title: "VJs TV Global Map — Artists, Events & Studios Worldwide"
+meta_description: "Explore the VJs TV global network. See where artists, projects, events, studios, and partners are located around the world."
+---
+
+{% include layouts/nav/nav-3.html default_logo="white" %}
+
+<div class="vjs-page-header">
+  <div class="container">
+    <div style="display:flex; align-items:center; gap:1rem; margin-bottom:0.5rem;">
+      <span style="font-family:'Orbitron',sans-serif; font-size:0.7rem; letter-spacing:0.2em; text-transform:uppercase; color:var(--vjs-cyan);">Global Network</span>
+      <span style="flex:1; height:1px; background:var(--vjs-border);"></span>
+    </div>
+    <h1 class="vjs-section-title" style="font-size:clamp(2rem,5vw,3.5rem);">World Map</h1>
+    <div class="vjs-accent-line"></div>
+    <p id="vjs-map-subtitle" style="color:var(--vjs-text-muted); max-width:700px; font-size:1.05rem;">The global footprint of VJ culture — artists, projects, events, studios, and partners mapped worldwide.</p>
+  </div>
+</div>
+
+<section style="padding:0;">
+  <div id="vjs-map" style="width:100%; height:70vh; min-height:500px; background:#050505;"></div>
+</section>
+
+<section class="vjs-section">
+  <div class="container">
+    <div style="display:flex; align-items:center; gap:1rem; margin-bottom:2rem;">
+      <span style="font-family:'Orbitron',sans-serif; font-size:0.7rem; letter-spacing:0.2em; text-transform:uppercase; color:var(--vjs-cyan);">Legend</span>
+      <span style="flex:1; height:1px; background:var(--vjs-border);"></span>
+    </div>
+    <div style="display:flex; flex-wrap:wrap; gap:1.5rem 3rem; margin-bottom:3rem;">
+      <div style="display:flex; align-items:center; gap:0.5rem;"><span style="width:12px; height:12px; background:#9d00ff; display:inline-block;"></span><span style="font-size:0.85rem; color:var(--vjs-text-muted);">Artists</span></div>
+      <div style="display:flex; align-items:center; gap:0.5rem;"><span style="width:12px; height:12px; background:#00f9ff; display:inline-block;"></span><span style="font-size:0.85rem; color:var(--vjs-text-muted);">Projects</span></div>
+      <div style="display:flex; align-items:center; gap:0.5rem;"><span style="width:12px; height:12px; background:#ff00aa; display:inline-block;"></span><span style="font-size:0.85rem; color:var(--vjs-text-muted);">Events</span></div>
+      <div style="display:flex; align-items:center; gap:0.5rem;"><span style="width:12px; height:12px; background:#39ff14; display:inline-block;"></span><span style="font-size:0.85rem; color:var(--vjs-text-muted);">Studios</span></div>
+      <div style="display:flex; align-items:center; gap:0.5rem;"><span style="width:12px; height:12px; background:#ff8c00; display:inline-block;"></span><span style="font-size:0.85rem; color:var(--vjs-text-muted);">Partners</span></div>
+    </div>
+
+    <div style="display:flex; align-items:center; gap:1rem; margin-bottom:2rem;">
+      <span style="font-family:'Orbitron',sans-serif; font-size:0.7rem; letter-spacing:0.2em; text-transform:uppercase; color:var(--vjs-cyan);">Countries</span>
+      <span style="flex:1; height:1px; background:var(--vjs-border);"></span>
+    </div>
+
+    <div class="vjs-grid vjs-grid-4" id="country-grid">
+    </div>
+  </div>
+</section>
+
+<link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+
+<style>
+  #vjs-map { z-index: 1; }
+  #vjs-map .leaflet-control-zoom a {
+    background: #111 !important;
+    color: #00f9ff !important;
+    border: 1px solid #222 !important;
+    border-radius: 0 !important;
+  }
+  #vjs-map .leaflet-control-zoom a:hover { background: #222 !important; }
+  .leaflet-container { background: #050505 !important; }
+  .leaflet-popup-content-wrapper {
+    background: #111 !important;
+    color: #e0e0e0 !important;
+    border-radius: 0 !important;
+    border: 1px solid #333 !important;
+    font-family: 'Barlow Condensed', sans-serif !important;
+  }
+  .leaflet-popup-tip { background: #111 !important; }
+  .leaflet-popup-content { margin: 10px 14px !important; font-size: 0.9rem !important; }
+  .leaflet-popup-content h4 { margin: 0 0 6px; font-family: 'Orbitron', sans-serif; font-size: 0.75rem; letter-spacing: 0.1em; }
+  .leaflet-popup-content a { color: #00f9ff !important; text-decoration: none !important; }
+  .leaflet-popup-content a:hover { text-decoration: underline !important; }
+  .vjs-country-card {
+    background: var(--vjs-darker);
+    border: 1px solid var(--vjs-border);
+    padding: 1rem 1.25rem;
+    transition: border-color 0.15s;
+    cursor: pointer;
+  }
+  .vjs-country-card:hover { border-color: var(--vjs-electric-blue); }
+  .vjs-country-name {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: 1rem;
+    font-weight: 600;
+    color: #fff;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+  }
+  .vjs-country-count {
+    font-family: 'Orbitron', sans-serif;
+    font-size: 0.75rem;
+    color: var(--vjs-electric-blue);
+    margin-top: 0.25rem;
+  }
+  .leaflet-control-attribution { display: none !important; }
+</style>
+
+<script>
+(function(){
+  var cityCoords = {
+    'tokyo': [35.6762, 139.6503],
+    'los angeles': [34.0522, -118.2437],
+    'berlin': [52.5200, 13.4050],
+    'london': [51.5074, -0.1278],
+    'amsterdam': [52.3676, 4.9041],
+    'são paulo': [  -23.5505, -46.6333],
+    'sao paulo': [-23.5505, -46.6333],
+    'paris': [48.8566, 2.3522],
+    'montreal': [45.5017, -73.5673],
+    'montréal': [45.5017, -73.5673],
+    'barcelona': [41.3874, 2.1686],
+    'athens': [37.9838, 23.7275],
+    'istanbul': [41.0082, 28.9784],
+    'indio': [33.7207, -116.2156],
+    'lille': [50.6292, 3.0573],
+    'geneva': [46.2044, 6.1432],
+    'las vegas': [36.1699, -115.1398],
+    'prague': [50.0755, 14.4378],
+    'boom': [51.0892, 4.3682],
+    'linz': [48.3069, 14.2858],
+    'helsinki': [60.1699, 24.9384],
+    'eindhoven': [51.4416, 5.4697],
+    'lyon': [45.7640, 4.8357],
+    'black rock desert': [40.7862, -119.2065],
+    'toronto': [43.6532, -79.3832],
+    'new york': [40.7128, -74.0060]
+  };
+
+  var countryCoords = {
+    'japan': [36.2048, 138.2529],
+    'usa': [39.8283, -98.5795],
+    'germany': [51.1657, 10.4515],
+    'uk': [55.3781, -3.4360],
+    'netherlands': [52.1326, 5.2913],
+    'brazil': [-14.2350, -51.9253],
+    'france': [46.6034, 1.8883],
+    'canada': [56.1304, -106.3468],
+    'spain': [40.4637, -3.7492],
+    'greece': [39.0742, 21.8243],
+    'turkey': [38.9637, 35.2433],
+    'switzerland': [46.8182, 8.2275],
+    'belgium': [50.8503, 4.3517],
+    'austria': [47.5162, 14.5501],
+    'finland': [61.9241, 25.7482],
+    'czech republic': [49.8175, 15.4730]
+  };
+
+  function getCoords(loc) {
+    if (!loc) return null;
+    var l = loc.toLowerCase();
+    for (var city in cityCoords) {
+      if (l.indexOf(city) !== -1) return cityCoords[city];
+    }
+    for (var country in countryCoords) {
+      if (l.indexOf(country) !== -1) return countryCoords[country];
+    }
+    return null;
+  }
+
+  function getCountry(loc) {
+    if (!loc) return null;
+    var parts = loc.split(',');
+    return parts[parts.length - 1].trim();
+  }
+
+  var rawData = [
+    {% for a in site.vjs %}
+    { type:'artist', name:{{ a.title | jsonify }}, location:{{ a.location | jsonify }}, url:'{{ a.url }}' },
+    {% endfor %}
+    {% for p in site.projects %}
+    { type:'project', name:{{ p.title | jsonify }}, location:{{ p.location | jsonify }}, url:'{{ p.url }}' },
+    {% endfor %}
+    {% for e in site.events %}
+    { type:'event', name:{{ e.title | jsonify }}, location:{{ e.location | jsonify }}, url:'{{ e.url }}' },
+    {% endfor %}
+    {% for s in site.studios %}
+    { type:'studio', name:{{ s.title | jsonify }}, location:{{ s.location | jsonify }}, url:'{{ s.url }}' },
+    {% endfor %}
+    {% for sp in site.sponsors %}
+    { type:'partner', name:{{ sp.title | jsonify }}, location:{{ sp.location | default: '' | jsonify }}, url:'{{ sp.url }}' }{% unless forloop.last %},{% endunless %}
+    {% endfor %}
+  ];
+
+  var colors = { artist:'#9d00ff', project:'#00f9ff', event:'#ff00aa', studio:'#39ff14', partner:'#ff8c00' };
+  var labels = { artist:'Artist', project:'Project', event:'Event', studio:'Studio', partner:'Partner' };
+
+  var map = L.map('vjs-map', {
+    center: [25, 10],
+    zoom: 2,
+    minZoom: 2,
+    maxZoom: 12,
+    zoomControl: true,
+    scrollWheelZoom: true
+  });
+
+  L.tileLayer('https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png', {
+    subdomains: 'abcd',
+    maxZoom: 19
+  }).addTo(map);
+
+  var countries = {};
+  var markers = [];
+
+  rawData.forEach(function(d) {
+    if (!d.location) return;
+    var coords = getCoords(d.location);
+    var country = getCountry(d.location);
+    if (country) {
+      if (!countries[country]) countries[country] = { artists:0, projects:0, events:0, studios:0, partners:0, total:0 };
+      countries[country][d.type + 's'] = (countries[country][d.type + 's'] || 0) + 1;
+      countries[country].total++;
+    }
+    if (!coords) return;
+
+    var col = colors[d.type];
+    var icon = L.divIcon({
+      className: '',
+      html: '<div style="width:12px;height:12px;background:' + col + ';border:2px solid ' + col + ';box-shadow:0 0 8px ' + col + ';opacity:0.9;"></div>',
+      iconSize: [12, 12],
+      iconAnchor: [6, 6]
+    });
+
+    var popup = '<h4 style="color:' + col + ';">' + labels[d.type].toUpperCase() + '</h4>' +
+      '<a href="' + d.url + '"><strong>' + d.name + '</strong></a><br>' +
+      '<span style="color:#888; font-size:0.8rem;">' + d.location + '</span>';
+
+    var m = L.marker(coords, { icon: icon }).bindPopup(popup);
+    markers.push(m);
+  });
+
+  var group = L.layerGroup(markers).addTo(map);
+
+  var grid = document.getElementById('country-grid');
+  var sortedCountries = Object.keys(countries).sort(function(a,b) { return countries[b].total - countries[a].total; });
+
+  sortedCountries.forEach(function(name) {
+    var c = countries[name];
+    var card = document.createElement('div');
+    card.className = 'vjs-country-card';
+    var details = [];
+    if (c.artists) details.push(c.artists + ' Artist' + (c.artists > 1 ? 's' : ''));
+    if (c.projects) details.push(c.projects + ' Project' + (c.projects > 1 ? 's' : ''));
+    if (c.events) details.push(c.events + ' Event' + (c.events > 1 ? 's' : ''));
+    if (c.studios) details.push(c.studios + ' Studio' + (c.studios > 1 ? 's' : ''));
+    if (c.partners) details.push(c.partners + ' Partner' + (c.partners > 1 ? 's' : ''));
+    card.innerHTML = '<div class="vjs-country-name">' + name + '</div>' +
+      '<div class="vjs-country-count">' + c.total + ' — ' + details.join(' · ') + '</div>';
+    grid.appendChild(card);
+  });
+
+  var sub = document.getElementById('vjs-map-subtitle');
+  if (sub) sub.innerHTML = 'The global footprint of VJ culture — artists, projects, events, studios, and partners mapped across <strong style="color:#00f9ff;">' + sortedCountries.length + ' countries</strong> worldwide.';
+})();
+</script>
+
+{% include vjstv-footer.html %}
