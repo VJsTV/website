@@ -3169,6 +3169,35 @@ button.vjs-live-strip-icon {
   border: none;
   padding: 0;
   cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+button.vjs-live-strip-icon svg {
+  width: 1rem;
+  height: 1rem;
+  color: rgba(255,255,255,0.85);
+  transition: color 0.2s;
+}
+
+button.vjs-live-strip-icon:hover svg {
+  color: #fff;
+}
+
+svg.vjs-float-sidebar-icon {
+  width: 20px;
+  height: 20px;
+}
+
+svg.vjs-mobile-nav-icon {
+  width: 1.2rem;
+  height: 1.2rem;
+}
+
+svg.vjs-nts-sidebar-thumb-play {
+  width: 36px;
+  height: 36px;
 }
 
 @media (max-width: 768px) {

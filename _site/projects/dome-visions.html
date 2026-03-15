@@ -384,14 +384,14 @@
         <a href="/technology">Technology</a>
         <a href="/search">Search</a>
         <a href="/sponsors">Sponsors</a>
-        <a href="https://vjsmag.com" target="_blank" rel="noopener">VJSMag &#8599;</a>
+        <a href="https://vjsmag.com" target="_blank" rel="noopener">VJSMag <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" style="width:0.8em; height:0.8em; display:inline-block; vertical-align:middle; margin-left:3px;"><path d="M7 17L17 7M17 7H9M17 7v8"/></svg></a>
       </div>
       <div class="vjstv-footer-col">
         <div class="vjstv-footer-heading">Connect</div>
         <a href="/submit">Submit Project</a>
         <a href="/business-model">Partner With Us</a>
-        <a href="https://discord.gg/vjstv" target="_blank" rel="noopener">Discord &#8599;</a>
-        <a href="https://vjsmag.com" target="_blank" rel="noopener">Magazine &#8599;</a>
+        <a href="https://discord.gg/vjstv" target="_blank" rel="noopener">Discord <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" style="width:0.8em; height:0.8em; display:inline-block; vertical-align:middle; margin-left:3px;"><path d="M7 17L17 7M17 7H9M17 7v8"/></svg></a>
+        <a href="https://vjsmag.com" target="_blank" rel="noopener">Magazine <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" style="width:0.8em; height:0.8em; display:inline-block; vertical-align:middle; margin-left:3px;"><path d="M7 17L17 7M17 7H9M17 7v8"/></svg></a>
       </div>
     </div>
   </div>
@@ -421,7 +421,7 @@
       <span>Stay updated</span>
       <form onsubmit="event.preventDefault(); this.querySelector('button').textContent='Subscribed'; this.querySelector('input').disabled=true;" autocomplete="off">
         <input type="email" placeholder="your@email.com" required />
-        <button type="submit">&#8594;</button>
+        <button type="submit"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg></button>
       </form>
     </div>
   </div>
@@ -450,27 +450,27 @@
     <div class="vjs-float-meter-bar" id="mb8"></div>
   </div>
   <button type="button" class="vjs-float-sidebar-btn" id="glitch-btn" onclick="vjsToggleGlitch()" title="Toggle Glitch Mode" aria-label="Toggle glitch visual effect">
-    <span class="vjs-float-sidebar-icon" aria-hidden="true">&#9732;</span>
+    <svg class="vjs-float-sidebar-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><polygon points="12,2 15,10 23,10 17,15 19,23 12,18 5,23 7,15 1,10 9,10"/></svg>
   </button>
   <a href="https://discord.gg/vjstv" target="_blank" rel="noopener" class="vjs-float-sidebar-btn discord" title="Join Discord" aria-label="Join VJs TV Discord server">
-    <span class="vjs-float-sidebar-icon" aria-hidden="true">&#128172;</span>
+    <svg class="vjs-float-sidebar-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><circle cx="7" cy="15" r="2"/><circle cx="17" cy="15" r="2"/><path d="M12 5C7 5 3 8 3 12c0 2 1 4 2 5v3h14v-3c1-1 2-3 2-5 0-4-4-7-9-7Z"/></svg>
   </a>
   <button type="button" class="vjs-float-sidebar-btn tip" onclick="vjsOpenTip()" title="Visual Tip Jar" aria-label="Open tip jar to support artists">
-    <span class="vjs-float-sidebar-icon" aria-hidden="true">&#128184;</span>
+    <svg class="vjs-float-sidebar-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M9 3h6v2H9V3z"/><path d="M8 5h8c1 0 2 1 2 2v10c0 2-1 4-2 4H8c-1 0-2-2-2-4V7c0-1 1-2 2-2Z"/><circle cx="12" cy="12" r="2"/></svg>
   </button>
 </div>
 
 <!-- TIP JAR MODAL -->
 <div class="vjs-tip-modal" id="vjs-tip-modal" role="dialog" aria-label="Visual Tip Jar" onclick="if(event.target===this)vjsCloseTip()">
   <div class="vjs-tip-modal-inner">
-    <div style="font-size:2.5rem; margin-bottom:1rem;">&#128184;</div>
+    <div style="margin-bottom:1rem;"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" style="width:2.5rem; height:2.5rem;"><path d="M9 3h6v2H9V3z"/><path d="M8 5h8c1 0 2 1 2 2v10c0 2-1 4-2 4H8c-1 0-2-2-2-4V7c0-1 1-2 2-2Z"/><circle cx="12" cy="12" r="2"/></svg></div>
     <h3 style="font-family:'Barlow Condensed',sans-serif; font-size:1rem; font-weight:700; letter-spacing:0.08em; text-transform:uppercase; color:#fff; margin-bottom:0.5rem;">Visual Tip Jar</h3>
     <p style="font-size:0.82rem; color:var(--vjs-text-muted); margin-bottom:1.75rem; line-height:1.6;">Support the VJs in the network directly. 100% goes to the artists.</p>
     <div style="display:grid; grid-template-columns:1fr 1fr; gap:8px; margin-bottom:1.25rem;">
       <button type="button" onclick="vjsTipAmount('€5')"  class="vjs-tip-btn">€5</button>
       <button type="button" onclick="vjsTipAmount('€10')" class="vjs-tip-btn">€10</button>
       <button type="button" onclick="vjsTipAmount('€25')" class="vjs-tip-btn">€25</button>
-      <button type="button" onclick="vjsTipAmount('€50')" class="vjs-tip-btn featured">€50 &#9733;</button>
+      <button type="button" onclick="vjsTipAmount('€50')" class="vjs-tip-btn featured">€50 <svg viewBox="0 0 24 24" fill="currentColor" style="width:0.8em; height:0.8em; display:inline-block; vertical-align:middle; margin-left:2px;"><polygon points="12,2 15,10 23,10 17,15 19,23 12,18 5,23 7,15 1,10 9,10"/></svg></button>
     </div>
     <button type="button" onclick="vjsCloseTip()" style="background:none; border:none; color:var(--vjs-text-muted); font-family:'Barlow Condensed',sans-serif; font-size:0.7rem; letter-spacing:0.1em; cursor:pointer; text-transform:uppercase;">Close</button>
   </div>
@@ -480,23 +480,23 @@
 <nav class="vjs-mobile-nav" id="vjs-mobile-nav" aria-label="Mobile navigation">
   <div class="vjs-mobile-nav-items">
     <a href="/" class="vjs-mobile-nav-item">
-      <span class="vjs-mobile-nav-icon">&#8962;</span>
+      <svg class="vjs-mobile-nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M3 10h2v10H3z"/><path d="M19 10h2v10h-2z"/><path d="M6 10L12 3l6 7v10H6z"/><rect x="10" y="13" width="4" height="4"/></svg>
       <span class="vjs-mobile-nav-label">Home</span>
     </a>
     <a href="/live" class="vjs-mobile-nav-item live-item">
-      <span class="vjs-mobile-nav-icon">&#9654;</span>
+      <svg class="vjs-mobile-nav-icon" viewBox="0 0 24 24" fill="currentColor"><polygon points="5,3 5,21 21,12"/></svg>
       <span class="vjs-mobile-nav-label">Live</span>
     </a>
     <a href="/artists" class="vjs-mobile-nav-item">
-      <span class="vjs-mobile-nav-icon">&#9673;</span>
+      <svg class="vjs-mobile-nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="12" cy="8" r="3"/><path d="M12 14c-4 0-6 2-6 4v3h12v-3c0-2-2-4-6-4Z"/></svg>
       <span class="vjs-mobile-nav-label">Artists</span>
     </a>
     <a href="/events" class="vjs-mobile-nav-item">
-      <span class="vjs-mobile-nav-icon">&#128337;</span>
+      <svg class="vjs-mobile-nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="4" y="3" width="16" height="18" rx="1"/><path d="M7 7h10M7 11h10M7 15h10"/><path d="M8 3v3M16 3v3"/></svg>
       <span class="vjs-mobile-nav-label">Events</span>
     </a>
     <a href="/submit" class="vjs-mobile-nav-item">
-      <span class="vjs-mobile-nav-icon">&#43;</span>
+      <svg class="vjs-mobile-nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M12 5v14M5 12h14"/></svg>
       <span class="vjs-mobile-nav-label">Submit</span>
     </a>
   </div>

@@ -30,8 +30,8 @@ meta_description: "VJs TV is the global broadcast network for VJ culture. Watch 
     <div class="vjs-live-strip-loc">{% if second_artist %}{{ second_artist.location }}{% else %}24/7{% endif %}</div>
   </div>
   <div class="vjs-live-strip-right">
-    <button type="button" class="vjs-live-strip-icon" title="Schedule" aria-label="View broadcast schedule">&#128337;</button>
-    <button type="button" class="vjs-live-strip-icon" title="Volume" aria-label="Toggle volume">&#128266;</button>
+    <button type="button" class="vjs-live-strip-icon" title="Schedule" aria-label="View broadcast schedule"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" style="width:1em; height:1em;"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg></button>
+    <button type="button" class="vjs-live-strip-icon" title="Volume" aria-label="Toggle volume"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" style="width:1em; height:1em;"><path d="M3 9v6h4l5 5V4L7 9H3Z"/><path d="M16 5c2 2 2 6 0 8M19 2c3 3 3 9 0 12"/></svg></button>
   </div>
 </div>
 
@@ -55,9 +55,9 @@ meta_description: "VJs TV is the global broadcast network for VJ culture. Watch 
       <div class="vjs-nts-hero-nav">
         {% assign featured_count = site.projects | where: "featured", true | size %}
         <span>1 / {% if featured_count > 0 %}{{ featured_count }}{% else %}1{% endif %}</span>
-        <button type="button" aria-label="Previous slide">&#8249;</button>
-        <button type="button" aria-label="Pause slideshow">&#9646;&#9646;</button>
-        <button type="button" aria-label="Next slide">&#8250;</button>
+        <button type="button" aria-label="Previous slide"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M15 18l-6-6 6-6"/></svg></button>
+        <button type="button" aria-label="Pause slideshow"><svg viewBox="0 0 24 24" fill="currentColor"><rect x="6" y="4" width="3" height="16"/><rect x="15" y="4" width="3" height="16"/></svg></button>
+        <button type="button" aria-label="Next slide"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 18l6-6-6-6"/></svg></button>
       </div>
     </div>
   </div>
@@ -69,7 +69,7 @@ meta_description: "VJs TV is the global broadcast network for VJ culture. Watch 
         {% assign sidebar_gradients = "rgba(157,0,255,0.6),rgba(0,212,255,0.3)|rgba(255,0,170,0.5),rgba(157,0,255,0.4)|rgba(0,212,255,0.5),rgba(157,0,255,0.35)|rgba(157,0,255,0.4),rgba(255,0,170,0.35)|rgba(0,249,255,0.4),rgba(157,0,255,0.5)|rgba(255,0,170,0.6),rgba(0,212,255,0.3)" | split: "|" %}
         {% assign si = forloop.index0 | modulo: 6 %}
         <div class="vjs-nts-sidebar-thumb-bg" style="background: linear-gradient(135deg, {{ sidebar_gradients[si] }});"></div>
-        <div class="vjs-nts-sidebar-thumb-play">&#9654;</div>
+        <svg class="vjs-nts-sidebar-thumb-play" viewBox="0 0 24 24" fill="currentColor"><polygon points="5,3 5,21 21,12"/></svg>
       </div>
       <div class="vjs-nts-sidebar-info">
         <div class="vjs-nts-sidebar-label">{{ project.project_type }}</div>
@@ -93,7 +93,7 @@ meta_description: "VJs TV is the global broadcast network for VJ culture. Watch 
 <section class="vjs-picks-section">
   <div class="vjs-picks-header">
     <span class="vjs-picks-title">VJs TV Picks</span>
-    <a href="/projects" class="vjs-picks-link">View All &#8250;</a>
+    <a href="/projects" class="vjs-picks-link">View All <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="width:0.8em; height:0.8em; display:inline-block; vertical-align:middle; margin-left:3px;"><path d="M9 18l6-6-6-6"/></svg></a>
   </div>
   <div class="vjs-sets-scroll" style="padding-left:16px; padding-right:16px;">
     {% assign set_gradients = "rgba(157,0,255,0.5) 0%,rgba(0,212,255,0.25) 100%|rgba(255,0,170,0.4) 0%,rgba(157,0,255,0.4) 100%|rgba(0,212,255,0.4) 0%,rgba(157,0,255,0.35) 100%|rgba(157,0,255,0.35) 0%,rgba(255,0,170,0.35) 100%|rgba(0,245,255,0.3) 0%,rgba(157,0,255,0.5) 100%|rgba(255,0,170,0.5) 0%,rgba(0,212,255,0.3) 100%" | split: "|" %}
@@ -104,7 +104,7 @@ meta_description: "VJs TV is the global broadcast network for VJ culture. Watch 
         <div class="vjs-set-thumb-bg" style="background: linear-gradient(135deg, {{ set_gradients[gi] }}); position:relative; width:100%; height:100%;">
           <div style="position:absolute; inset:0; background:repeating-linear-gradient(0deg, transparent, transparent 3px, rgba(0,0,0,0.07) 3px, rgba(0,0,0,0.07) 4px);"></div>
         </div>
-        <div class="vjs-set-thumb-play"><span>&#9654;</span></div>
+        <div class="vjs-set-thumb-play"><svg viewBox="0 0 24 24" fill="currentColor"><polygon points="5,3 5,21 21,12"/></svg></div>
       </div>
       <div class="vjs-set-info">
         <div class="vjs-set-location">{{ project.project_type }}</div>
@@ -130,7 +130,7 @@ meta_description: "VJs TV is the global broadcast network for VJ culture. Watch 
     <div class="vjs-reveal" style="display:flex; align-items:baseline; justify-content:space-between; flex-wrap:wrap; gap:1rem; margin-bottom:24px;">
       <div style="display:flex; align-items:baseline; gap:12px;">
         <h2 class="vjs-section-title" style="margin:0;">Featured Artists</h2>
-        <a href="/artists" class="vjs-picks-link">View All &#8250;</a>
+        <a href="/artists" class="vjs-picks-link">View All <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="width:0.8em; height:0.8em; display:inline-block; vertical-align:middle; margin-left:3px;"><path d="M9 18l6-6-6-6"/></svg></a>
       </div>
     </div>
   </div>
@@ -152,7 +152,7 @@ meta_description: "VJs TV is the global broadcast network for VJ culture. Watch 
     <div class="vjs-reveal" style="display:flex; align-items:baseline; justify-content:space-between; flex-wrap:wrap; gap:1rem;">
       <div style="display:flex; align-items:baseline; gap:12px;">
         <h2 class="vjs-section-title" style="margin:0;">VJ Loop Packs</h2>
-        <a href="/submit" class="vjs-picks-link" style="color:#39ff14;">Submit Pack &#8250;</a>
+        <a href="/submit" class="vjs-picks-link" style="color:#39ff14;">Submit Pack <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="width:0.8em; height:0.8em; display:inline-block; vertical-align:middle; margin-left:3px; color:#39ff14;"><path d="M9 18l6-6-6-6"/></svg></a>
       </div>
       <span style="font-family:'Barlow Condensed',sans-serif; font-size:0.72rem; color:var(--vjs-text-muted); text-transform:uppercase; letter-spacing:0.06em;">Marketplace</span>
     </div>
@@ -170,14 +170,14 @@ meta_description: "VJs TV is the global broadcast network for VJ culture. Watch 
       <div class="vjs-pack-thumb" style="background: linear-gradient(135deg, {{ pack_gradients[pi] }});">
         <div style="position:absolute; inset:0; background:repeating-linear-gradient(45deg, transparent, transparent 6px, rgba(0,0,0,0.08) 6px, rgba(0,0,0,0.08) 7px);"></div>
         <div class="vjs-pack-count">{{ pack_counts[pi] }}</div>
-        <div class="vjs-pack-icon">&#9632;</div>
+        <div class="vjs-pack-icon"><svg viewBox="0 0 24 24" fill="currentColor"><rect x="4" y="4" width="16" height="16"/></svg></div>
       </div>
       <div class="vjs-pack-info">
         <div class="vjs-pack-name">{{ pn }}</div>
         <div class="vjs-pack-artist">by {{ pa }}</div>
         <div class="vjs-pack-footer">
           <span class="vjs-pack-price">{{ pack_prices[pi] }}</span>
-          <button class="vjs-pack-dl">&#8595; GET</button>
+          <button class="vjs-pack-dl"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" style="width:0.8em; height:0.8em; display:inline-block; vertical-align:middle; margin-right:4px;"><path d="M12 3v14M5 11l7 7 7-7"/></svg> GET</button>
         </div>
       </div>
     </div>
@@ -191,7 +191,7 @@ meta_description: "VJs TV is the global broadcast network for VJ culture. Watch 
     <div class="vjs-reveal" style="display:flex; align-items:baseline; justify-content:space-between; flex-wrap:wrap; gap:1rem; margin-bottom:24px;">
       <div style="display:flex; align-items:baseline; gap:12px;">
         <h2 class="vjs-section-title" style="margin:0;">Latest Projects</h2>
-        <a href="/projects" class="vjs-picks-link">View All &#8250;</a>
+        <a href="/projects" class="vjs-picks-link">View All <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="width:0.8em; height:0.8em; display:inline-block; vertical-align:middle; margin-left:3px;"><path d="M9 18l6-6-6-6"/></svg></a>
       </div>
     </div>
     <div class="vjs-reveal">
@@ -204,7 +204,7 @@ meta_description: "VJs TV is the global broadcast network for VJ culture. Watch 
             <div class="vjs-redbull-thumb-bg" style="background: linear-gradient(135deg, rgba(255,0,170,0.4) 0%, rgba(157,0,255,0.5) 50%, rgba(0,212,255,0.25) 100%); position:relative; width:100%; height:100%;">
               <div style="position:absolute; inset:0; background:repeating-linear-gradient(45deg, transparent, transparent 8px, rgba(157,0,255,0.03) 8px, rgba(157,0,255,0.03) 9px);"></div>
             </div>
-            <div class="vjs-redbull-play">&#9654;</div>
+            <svg class="vjs-redbull-play" viewBox="0 0 24 24" fill="currentColor" style="position:absolute; top:50%; left:50%; transform:translate(-50%,-50%); width:40px; height:40px;"><polygon points="5,3 5,21 21,12"/></svg>
             <div class="vjs-redbull-overlay">
               <div class="vjs-redbull-cat">{{ project.project_type }}</div>
               <div class="vjs-redbull-title">{{ project.title }}</div>
@@ -218,7 +218,7 @@ meta_description: "VJs TV is the global broadcast network for VJ culture. Watch 
             <div class="vjs-redbull-thumb-bg" style="background: linear-gradient(135deg, rgba(157,0,255,0.4) 0%, rgba(0,212,255,0.25) 50%, rgba(255,0,170,0.2) 100%); position:relative; width:100%; height:100%;">
               <div style="position:absolute; inset:0; background:repeating-linear-gradient(0deg, transparent, transparent 4px, rgba(0,0,0,0.06) 4px, rgba(0,0,0,0.06) 5px);"></div>
             </div>
-            <div class="vjs-redbull-play">&#9654;</div>
+            <svg class="vjs-redbull-play" viewBox="0 0 24 24" fill="currentColor" style="position:absolute; top:50%; left:50%; transform:translate(-50%,-50%); width:40px; height:40px;"><polygon points="5,3 5,21 21,12"/></svg>
             <div class="vjs-redbull-overlay">
               <div class="vjs-redbull-cat">{{ project.project_type }}</div>
               <div class="vjs-redbull-title">{{ project.title }}</div>
@@ -239,7 +239,7 @@ meta_description: "VJs TV is the global broadcast network for VJ culture. Watch 
     <div class="vjs-reveal" style="display:flex; align-items:baseline; justify-content:space-between; flex-wrap:wrap; gap:1rem; margin-bottom:24px;">
       <div style="display:flex; align-items:baseline; gap:12px;">
         <h2 class="vjs-section-title" style="margin:0;">Technology</h2>
-        <a href="/technology" class="vjs-picks-link">View All &#8250;</a>
+        <a href="/technology" class="vjs-picks-link">View All <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="width:0.8em; height:0.8em; display:inline-block; vertical-align:middle; margin-left:3px;"><path d="M9 18l6-6-6-6"/></svg></a>
       </div>
       <span style="font-family:'Barlow Condensed',sans-serif; font-size:0.72rem; color:var(--vjs-text-muted); text-transform:uppercase; letter-spacing:0.06em;">The Tools Powering VJ Culture</span>
     </div>
@@ -288,7 +288,7 @@ meta_description: "VJs TV is the global broadcast network for VJ culture. Watch 
     <div class="vjs-reveal" style="display:flex; align-items:baseline; justify-content:space-between; flex-wrap:wrap; gap:1rem; margin-bottom:24px;">
       <div style="display:flex; align-items:baseline; gap:12px;">
         <h2 class="vjs-section-title" style="margin:0;">Partners & Sponsors</h2>
-        <a href="/business-model" class="vjs-picks-link">View All &#8250;</a>
+        <a href="/business-model" class="vjs-picks-link">View All <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="width:0.8em; height:0.8em; display:inline-block; vertical-align:middle; margin-left:3px;"><path d="M9 18l6-6-6-6"/></svg></a>
       </div>
     </div>
     <div class="vjs-grid vjs-grid-4">
