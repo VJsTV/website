@@ -740,6 +740,58 @@ h1, h2, h3, h4, h5, h6,
 .vjs-sidebar-social-link:last-child { border-right: none; }
 .vjs-sidebar-social-link:hover { color: #fff !important; background: #111; }
 
+/* ── Share Buttons ───────────────────────────────────────── */
+.vjs-share-block {
+  margin-bottom: 20px;
+}
+.vjs-share-label {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.15em;
+  color: #555;
+  text-transform: uppercase;
+  margin-bottom: 10px;
+}
+.vjs-share-buttons {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+}
+.vjs-share-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 7px 11px;
+  border: 1px solid #222;
+  background: #0a0a0a;
+  color: #888;
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  text-decoration: none;
+  border-radius: 0 !important;
+  cursor: pointer;
+  transition: color 0.15s, border-color 0.15s, background 0.15s;
+  white-space: nowrap;
+  outline: none !important;
+  box-shadow: none !important;
+  -webkit-appearance: none;
+  appearance: none;
+}
+.vjs-share-btn svg {
+  flex-shrink: 0;
+  transition: opacity 0.15s;
+}
+.vjs-share-x:hover      { color: #fff; border-color: #fff; background: #111; }
+.vjs-share-fb:hover     { color: #1877f2; border-color: #1877f2; background: #0d1a2e; }
+.vjs-share-li:hover     { color: #0a66c2; border-color: #0a66c2; background: #071827; }
+.vjs-share-wa:hover     { color: #25d366; border-color: #25d366; background: #071a0f; }
+.vjs-share-copy:hover   { color: var(--vjs-cyan); border-color: var(--vjs-cyan); background: #001a1a; }
+.vjs-share-copied       { color: var(--vjs-neon) !important; border-color: var(--vjs-neon) !important; background: #001a00 !important; }
+
 
 .widget-title {
   color: #ffffff !important;
