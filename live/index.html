@@ -1,19 +1,223 @@
 ---
 layout: default
 title: "Live - VJs TV"
-meta_title: "Live Visual Performances - VJs TV"
-meta_description: "Watch live VJ performances and audiovisual broadcasts streaming now on VJs TV."
+meta_title: "Live Visual Performances & Loop Gallery - VJs TV"
+meta_description: "Watch live VJ performances and browse the 24/7 Loop Gallery — curated generative art, projection mapping, and live visual sets on continuous rotation."
 ---
 
 {% include layouts/nav/nav-3.html default_logo="white" %}
 
+<style>
+/* ── CHANNEL TABS ─────────────────────────────────────── */
+.vjs-channel-tabs { display:flex; gap:0; border-bottom:1px solid #1e1e1e; margin-bottom:0; }
+.vjs-channel-tab {
+  background:none; border:none; border-bottom:2px solid transparent;
+  color:#555; font-family:'Barlow Condensed',sans-serif; font-size:0.72rem;
+  font-weight:700; letter-spacing:0.12em; text-transform:uppercase;
+  padding:10px 20px 9px; cursor:pointer; transition:color .15s,border-color .15s;
+  display:flex; align-items:center; gap:6px;
+}
+.vjs-channel-tab .ch-num { font-family:'Barlow Condensed',sans-serif; font-size:0.6rem; color:#333; }
+.vjs-channel-tab.active { color:#fff; border-bottom-color:var(--vjs-ultraviolet); }
+.vjs-channel-tab.active .ch-num { color:var(--vjs-ultraviolet); }
+.vjs-channel-tab:hover:not(.active) { color:#999; }
+.ch2.active { border-bottom-color:var(--vjs-cyan) !important; }
+.ch2.active .ch-num { color:var(--vjs-cyan) !important; }
+.ch3.active { border-bottom-color:var(--vjs-neon) !important; }
+.ch3.active .ch-num { color:var(--vjs-neon) !important; }
+
+/* ── LOOP GALLERY ─────────────────────────────────────── */
+#ch2-content { display:none; }
+#ch3-content { display:none; }
+
+.lg-header {
+  display:flex; align-items:center; justify-content:space-between;
+  padding:16px 0 14px; border-bottom:1px solid #141414;
+  flex-wrap:wrap; gap:10px; margin-bottom:20px;
+}
+.lg-badge {
+  display:flex; align-items:center; gap:8px;
+  font-family:'Barlow Condensed',sans-serif; font-size:0.72rem;
+  font-weight:700; letter-spacing:0.15em; color:var(--vjs-cyan); text-transform:uppercase;
+}
+.lg-dot {
+  width:7px; height:7px; background:var(--vjs-cyan);
+  display:inline-block; animation:lgpulse 1.6s ease-in-out infinite;
+}
+@keyframes lgpulse { 0%,100%{opacity:1;} 50%{opacity:0.3;} }
+.lg-stats {
+  font-family:'Barlow Condensed',sans-serif; font-size:0.65rem;
+  letter-spacing:0.12em; color:#444; text-transform:uppercase;
+  display:flex; gap:20px;
+}
+.lg-stats span { color:#666; }
+.lg-stats strong { color:#888; }
+
+.lg-featured {
+  position:relative; width:100%; aspect-ratio:16/9;
+  background:#060606; margin-bottom:0; overflow:hidden;
+}
+.lg-featured iframe {
+  position:absolute; inset:0; width:100%; height:100%;
+  border:none;
+}
+.lg-now-bar {
+  background:#0a0a0a; border:1px solid #1a1a1a; border-top:2px solid var(--vjs-cyan);
+  padding:12px 18px; display:flex; align-items:center;
+  justify-content:space-between; flex-wrap:wrap; gap:10px; margin-bottom:24px;
+}
+.lg-now-label {
+  font-family:'Barlow Condensed',sans-serif; font-size:0.6rem;
+  letter-spacing:0.15em; color:var(--vjs-cyan); text-transform:uppercase;
+}
+.lg-now-title {
+  font-family:'Barlow Condensed',sans-serif; font-size:1rem;
+  font-weight:700; color:#fff; letter-spacing:0.03em;
+}
+.lg-now-meta {
+  font-family:'Barlow Condensed',sans-serif; font-size:0.7rem;
+  color:#555; letter-spacing:0.06em;
+}
+.lg-now-vimeo {
+  font-family:'Barlow Condensed',sans-serif; font-size:0.65rem;
+  font-weight:700; letter-spacing:0.12em; text-transform:uppercase;
+  color:#444; text-decoration:none; border:1px solid #222;
+  padding:5px 12px; transition:color .15s,border-color .15s;
+}
+.lg-now-vimeo:hover { color:var(--vjs-cyan); border-color:var(--vjs-cyan); }
+
+/* Filter */
+.lg-filters {
+  display:flex; gap:6px; flex-wrap:wrap; margin-bottom:20px; align-items:center;
+}
+.lg-filter-label {
+  font-family:'Barlow Condensed',sans-serif; font-size:0.6rem;
+  letter-spacing:0.15em; color:#333; text-transform:uppercase; margin-right:4px;
+}
+.lg-filter {
+  background:none; border:1px solid #1e1e1e; color:#555;
+  font-family:'Barlow Condensed',sans-serif; font-size:0.65rem;
+  font-weight:600; letter-spacing:0.1em; text-transform:uppercase;
+  padding:5px 13px; cursor:pointer; transition:all .15s;
+  border-radius:0 !important;
+}
+.lg-filter.active, .lg-filter:hover { border-color:var(--vjs-cyan); color:var(--vjs-cyan); background:#001a1a; }
+.lg-filter.active { background:#00141a; }
+
+/* Grid */
+.lg-grid {
+  display:grid;
+  grid-template-columns:repeat(4, 1fr);
+  gap:3px;
+}
+@media(max-width:1200px) { .lg-grid { grid-template-columns:repeat(3,1fr); } }
+@media(max-width:768px)  { .lg-grid { grid-template-columns:repeat(2,1fr); } }
+@media(max-width:480px)  { .lg-grid { grid-template-columns:1fr; } }
+
+.lg-card {
+  position:relative; aspect-ratio:16/9;
+  background:#080808; overflow:hidden; cursor:pointer;
+  transition:transform .18s; display:flex; flex-direction:column;
+}
+.lg-card:hover { transform:scale(1.02); z-index:2; }
+.lg-card.active-card { outline:2px solid var(--vjs-cyan); outline-offset:-2px; z-index:3; }
+
+.lg-card-bg {
+  position:absolute; inset:0;
+  transition:opacity .2s;
+}
+.lg-card:hover .lg-card-bg { opacity:0.7; }
+
+.lg-card-iframe {
+  position:absolute; inset:0; width:100%; height:100%; border:none; display:none;
+}
+.lg-card.playing .lg-card-iframe { display:block; }
+.lg-card.playing .lg-card-overlay { display:none; }
+
+.lg-card-overlay {
+  position:absolute; inset:0; display:flex; flex-direction:column;
+  justify-content:space-between; padding:10px; z-index:2;
+}
+.lg-card-top { display:flex; justify-content:space-between; align-items:flex-start; }
+.lg-card-cat {
+  font-family:'Barlow Condensed',sans-serif; font-size:0.55rem;
+  font-weight:700; letter-spacing:0.15em; text-transform:uppercase;
+  padding:3px 7px; color:#fff;
+}
+.lg-card-year {
+  font-family:'Barlow Condensed',sans-serif; font-size:0.6rem;
+  color:rgba(255,255,255,0.35); font-weight:600;
+}
+.lg-card-center {
+  display:flex; align-items:center; justify-content:center; flex:1;
+}
+.lg-play-btn {
+  width:38px; height:38px; border:2px solid rgba(255,255,255,0.5);
+  display:flex; align-items:center; justify-content:center;
+  font-size:12px; color:rgba(255,255,255,0.7);
+  transition:all .15s; padding-left:3px;
+}
+.lg-card:hover .lg-play-btn {
+  border-color:#fff; color:#fff; background:rgba(255,255,255,0.1);
+}
+.lg-card.active-card .lg-play-btn {
+  border-color:var(--vjs-cyan); color:var(--vjs-cyan); background:rgba(0,249,255,0.1);
+}
+.lg-card-bottom {}
+.lg-card-title {
+  font-family:'Barlow Condensed',sans-serif; font-size:0.85rem;
+  font-weight:700; color:#fff; letter-spacing:0.03em;
+  white-space:nowrap; overflow:hidden; text-overflow:ellipsis;
+  text-shadow:0 1px 4px rgba(0,0,0,0.8);
+}
+.lg-card-artist {
+  font-family:'Barlow Condensed',sans-serif; font-size:0.65rem;
+  color:rgba(255,255,255,0.45); letter-spacing:0.06em;
+  text-shadow:0 1px 4px rgba(0,0,0,0.8);
+}
+
+/* Category colour coding */
+.cat-generative  .lg-card-bg { background:linear-gradient(135deg,rgba(157,0,255,0.55) 0%,rgba(30,0,60,0.9) 100%); }
+.cat-generative  .lg-card-cat { background:rgba(157,0,255,0.6); }
+.cat-mapping     .lg-card-bg { background:linear-gradient(135deg,rgba(0,249,255,0.4) 0%,rgba(0,30,50,0.9) 100%); }
+.cat-mapping     .lg-card-cat { background:rgba(0,180,220,0.55); }
+.cat-liveav      .lg-card-bg { background:linear-gradient(135deg,rgba(255,0,170,0.45) 0%,rgba(50,0,30,0.9) 100%); }
+.cat-liveav      .lg-card-cat { background:rgba(200,0,120,0.6); }
+.cat-architectural .lg-card-bg { background:linear-gradient(135deg,rgba(57,255,20,0.3) 0%,rgba(0,20,10,0.9) 100%); }
+.cat-architectural .lg-card-cat { background:rgba(40,180,10,0.55); }
+
+/* CH.3 Education */
+.lg-edu-grid {
+  display:grid; grid-template-columns:repeat(auto-fit,minmax(260px,1fr));
+  gap:16px; padding:24px 0;
+}
+.lg-edu-card {
+  background:#0a0a0a; border:1px solid #1a1a1a; padding:24px;
+  transition:border-color .15s;
+}
+.lg-edu-card:hover { border-color:#333; }
+.lg-edu-icon { font-size:1.8rem; margin-bottom:12px; }
+.lg-edu-title {
+  font-family:'Barlow Condensed',sans-serif; font-size:1rem;
+  font-weight:700; letter-spacing:0.05em; color:#fff; margin-bottom:6px;
+}
+.lg-edu-desc { font-size:0.78rem; color:#555; line-height:1.6; margin-bottom:14px; }
+.lg-edu-link {
+  font-family:'Barlow Condensed',sans-serif; font-size:0.65rem;
+  font-weight:700; letter-spacing:0.12em; text-transform:uppercase;
+  color:var(--vjs-neon); text-decoration:none;
+}
+.lg-edu-link:hover { color:#fff; }
+</style>
+
 <!-- LIVE HERO -->
 <section style="background:#000; padding-top:60px; padding-bottom:0; position:relative; overflow:hidden;">
-  <div style="position:absolute; inset:0; background:radial-gradient(ellipse 80% 60% at 50% 0%, rgba(123,47,255,0.18) 0%, transparent 70%); pointer-events:none;"></div>
+  <div style="position:absolute; inset:0; background:radial-gradient(ellipse 80% 60% at 50% 0%, rgba(123,47,255,0.15) 0%, transparent 70%); pointer-events:none;"></div>
   <div class="container" style="position:relative; padding-left:12px; padding-right:12px;">
+
     <div style="display:flex; align-items:center; gap:1rem; margin-bottom:1rem; flex-wrap:wrap;">
-      <div class="vjs-live-badge"><span class="vjs-live-dot"></span>LIVE BROADCAST</div>
-      <span style="font-family:'Orbitron',sans-serif; font-size:0.6rem; letter-spacing:0.2em; color:var(--vjs-text-muted); text-transform:uppercase;">VJs TV · Global Visual Network</span>
+      <div class="vjs-live-badge" id="channel-badge"><span class="vjs-live-dot"></span>LIVE BROADCAST</div>
+      <span style="font-family:'Barlow Condensed',sans-serif; font-size:0.6rem; letter-spacing:0.2em; color:var(--vjs-text-muted); text-transform:uppercase;">VJs TV · Global Visual Network</span>
     </div>
 
     <!-- CHANNEL TABS -->
@@ -21,115 +225,406 @@ meta_description: "Watch live VJ performances and audiovisual broadcasts streami
       <button class="vjs-channel-tab active" id="ch1-tab" onclick="switchChannel(1)">
         <span class="ch-num">CH.1</span>LIVE
       </button>
-      <button class="vjs-channel-tab" id="ch2-tab" onclick="switchChannel(2)">
+      <button class="vjs-channel-tab ch2" id="ch2-tab" onclick="switchChannel(2)">
         <span class="ch-num">CH.2</span>LOOP GALLERY
       </button>
-      <button class="vjs-channel-tab" id="ch3-tab" onclick="switchChannel(3)">
+      <button class="vjs-channel-tab ch3" id="ch3-tab" onclick="switchChannel(3)">
         <span class="ch-num">CH.3</span>VJ EDUCATION
       </button>
     </div>
 
-    <div class="row g-4 align-items-start">
-      <!-- MAIN PLAYER -->
-      <div class="col-lg-8" id="player-col">
-        <div class="vjs-live-player" style="margin-bottom:0;" id="channel-player">
-          <!-- REPLACE src="" with your YouTube Live embed: https://www.youtube.com/embed/LIVE_ID?autoplay=1 -->
-          <!-- <iframe src="https://www.youtube.com/embed/YOUR_LIVE_ID?autoplay=1&mute=1" frameborder="0" allowfullscreen allow="autoplay; encrypted-media"></iframe> -->
-          <div class="vjs-live-placeholder" style="position:absolute; top:0; left:0; width:100%; height:100%;">
-            <div style="position:absolute; inset:0; background:linear-gradient(135deg, rgba(123,47,255,0.08) 0%, rgba(255,0,255,0.05) 100%);"></div>
-            <div style="position:relative; z-index:1; text-align:center;">
-              <div class="vjs-live-placeholder-icon" style="font-size:3.5rem; margin-bottom:1rem;">&#9654;</div>
-              <p style="color:#fff; font-family:'Space Grotesk',sans-serif; font-weight:700; font-size:1.1rem; margin-bottom:0.5rem;">Stream Goes Live Here</p>
-              <p style="color:var(--vjs-text-muted); font-size:0.8rem; margin-bottom:1.5rem;">Replace the embed comment in <code style="color:var(--vjs-cyan); background:rgba(0,245,212,0.08); padding:2px 6px; border-radius:4px; font-size:0.75rem;">live/index.html</code> with your YouTube Live URL</p>
-              <a href="#schedule" class="vjs-btn vjs-btn-outline" style="font-size:0.8rem;">View Schedule ↓</a>
+    <!-- ══════════════ CH.1 — LIVE ══════════════ -->
+    <div id="ch1-content">
+      <div class="row g-4 align-items-start">
+        <div class="col-lg-8" id="player-col">
+          <div class="vjs-live-player" style="margin-bottom:0;" id="channel-player">
+            <div class="vjs-live-placeholder" style="position:absolute; top:0; left:0; width:100%; height:100%;">
+              <div style="position:absolute; inset:0; background:linear-gradient(135deg, rgba(123,47,255,0.08) 0%, rgba(255,0,255,0.05) 100%);"></div>
+              <div style="position:relative; z-index:1; text-align:center;">
+                <div style="font-size:3.5rem; margin-bottom:1rem;">&#9654;</div>
+                <p style="color:#fff; font-family:'Barlow Condensed',sans-serif; font-weight:700; font-size:1.1rem; letter-spacing:0.05em; margin-bottom:0.5rem;">Stream Goes Live Here</p>
+                <p style="color:var(--vjs-text-muted); font-size:0.78rem; margin-bottom:1.5rem;">Replace the embed comment in <code style="color:var(--vjs-cyan); background:rgba(0,245,212,0.08); padding:2px 6px; font-size:0.72rem;">live/index.html</code> with your YouTube Live URL</p>
+                <a href="#schedule" class="vjs-btn vjs-btn-outline" style="font-size:0.8rem;">View Schedule ↓</a>
+              </div>
+            </div>
+          </div>
+          <div style="background:rgba(123,47,255,0.08); border:1px solid rgba(123,47,255,0.2); border-top:none; padding:0.75rem 1rem; display:flex; align-items:center; justify-content:space-between; flex-wrap:wrap; gap:0.5rem;">
+            <div>
+              <span style="font-family:'Barlow Condensed',sans-serif; font-size:0.55rem; letter-spacing:0.2em; text-transform:uppercase; color:var(--vjs-text-muted);">Now Playing</span>
+              <div style="font-family:'Barlow Condensed',sans-serif; font-weight:700; font-size:1rem; color:#fff; margin-top:2px;" id="live-now-title">VJs TV Live Session</div>
+            </div>
+            <div style="display:flex; gap:0.75rem; align-items:center; flex-wrap:wrap;">
+              <button class="vjs-cinema-btn" onclick="toggleCinema()" id="cinema-btn">&#9724; Cinema</button>
+              <a href="https://www.youtube.com/vjs_tv" target="_blank" class="vjs-btn vjs-btn-primary" style="font-size:0.75rem; padding:6px 16px;">Watch on YouTube</a>
             </div>
           </div>
         </div>
 
-        <!-- NOW PLAYING BAR -->
-        <div style="background:rgba(123,47,255,0.08); border:1px solid rgba(123,47,255,0.2); border-top:none; padding:0.75rem 1rem; display:flex; align-items:center; justify-content:space-between; flex-wrap:wrap; gap:0.5rem;">
-          <div>
-            <span style="font-family:'Orbitron',sans-serif; font-size:0.55rem; letter-spacing:0.2em; text-transform:uppercase; color:var(--vjs-text-muted);">Now Playing</span>
-            <div style="font-family:'Space Grotesk',sans-serif; font-weight:700; color:#fff; margin-top:2px;" id="live-now-title">VJs TV Live Session</div>
-          </div>
-          <div style="display:flex; gap:0.75rem; align-items:center; flex-wrap:wrap;">
-            <span style="font-family:'Orbitron',sans-serif; font-size:0.6rem; color:var(--vjs-ultraviolet);">&#9679; <span id="live-viewers">—</span> watching</span>
-            <button class="vjs-cinema-btn" onclick="toggleCinema()" id="cinema-btn">&#9724; Cinema</button>
-            <a href="https://www.youtube.com/vjs_tv" target="_blank" class="vjs-btn vjs-btn-primary" style="font-size:0.75rem; padding:6px 16px;">Watch on YouTube</a>
-          </div>
-        </div>
-      </div>
-
-      <!-- SIDEBAR: NEXT BROADCAST COUNTDOWN -->
-      <div class="col-lg-4">
-        <div style="background:var(--vjs-card); border:1px solid var(--vjs-border); border-radius:16px; padding:1.75rem; margin-bottom:1.25rem;">
-          <div class="vjs-section-label" style="margin-bottom:1.25rem;">Next Broadcast</div>
-          <div id="live-countdown" style="display:grid; grid-template-columns:repeat(4,1fr); gap:0.5rem; margin-bottom:1.25rem;">
-            <div style="text-align:center;">
-              <div id="lcd-days" style="font-family:'Orbitron',sans-serif; font-size:1.6rem; font-weight:700; color:var(--vjs-ultraviolet); line-height:1;">--</div>
-              <div style="font-family:'Orbitron',sans-serif; font-size:0.5rem; letter-spacing:0.15em; color:var(--vjs-text-muted); text-transform:uppercase;">Days</div>
+        <div class="col-lg-4">
+          <div style="background:var(--vjs-card); border:1px solid var(--vjs-border); padding:1.75rem; margin-bottom:1.25rem;">
+            <div class="vjs-section-label" style="margin-bottom:1.25rem;">Next Broadcast</div>
+            <div id="live-countdown" style="display:grid; grid-template-columns:repeat(4,1fr); gap:0.5rem; margin-bottom:1.25rem;">
+              <div style="text-align:center;"><div id="lcd-days" style="font-family:'Barlow Condensed',sans-serif; font-size:1.6rem; font-weight:700; color:var(--vjs-ultraviolet); line-height:1;">--</div><div style="font-family:'Barlow Condensed',sans-serif; font-size:0.5rem; letter-spacing:0.15em; color:var(--vjs-text-muted); text-transform:uppercase;">Days</div></div>
+              <div style="text-align:center;"><div id="lcd-hours" style="font-family:'Barlow Condensed',sans-serif; font-size:1.6rem; font-weight:700; color:var(--vjs-electric-blue); line-height:1;">--</div><div style="font-family:'Barlow Condensed',sans-serif; font-size:0.5rem; letter-spacing:0.15em; color:var(--vjs-text-muted); text-transform:uppercase;">Hours</div></div>
+              <div style="text-align:center;"><div id="lcd-mins" style="font-family:'Barlow Condensed',sans-serif; font-size:1.6rem; font-weight:700; color:var(--vjs-magenta); line-height:1;">--</div><div style="font-family:'Barlow Condensed',sans-serif; font-size:0.5rem; letter-spacing:0.15em; color:var(--vjs-text-muted); text-transform:uppercase;">Mins</div></div>
+              <div style="text-align:center;"><div id="lcd-secs" style="font-family:'Barlow Condensed',sans-serif; font-size:1.6rem; font-weight:700; color:var(--vjs-cyan); line-height:1;">--</div><div style="font-family:'Barlow Condensed',sans-serif; font-size:0.5rem; letter-spacing:0.15em; color:var(--vjs-text-muted); text-transform:uppercase;">Secs</div></div>
             </div>
-            <div style="text-align:center;">
-              <div id="lcd-hours" style="font-family:'Orbitron',sans-serif; font-size:1.6rem; font-weight:700; color:var(--vjs-electric-blue); line-height:1;">--</div>
-              <div style="font-family:'Orbitron',sans-serif; font-size:0.5rem; letter-spacing:0.15em; color:var(--vjs-text-muted); text-transform:uppercase;">Hours</div>
+            {% assign upcoming = site.events | where: "event_type", "Live Stream" | sort: "date" %}
+            {% assign next_event = upcoming | first %}
+            {% if next_event %}
+            <div style="border-top:1px solid var(--vjs-border); padding-top:1.25rem;">
+              <div style="font-family:'Barlow Condensed',sans-serif; font-size:0.6rem; letter-spacing:0.15em; color:var(--vjs-text-muted); text-transform:uppercase; margin-bottom:0.5rem;">{{ next_event.date | date: "%B %d, %Y" }} · {{ next_event.time }}</div>
+              <div style="font-weight:700; color:#fff; font-size:1rem; margin-bottom:0.25rem;">{{ next_event.title }}</div>
+              {% if next_event.artists %}<div style="font-size:0.8rem; color:var(--vjs-text-muted);">{% for a in next_event.artists %}{{ a }}{% unless forloop.last %}, {% endunless %}{% endfor %}</div>{% endif %}
+              <a href="{{ next_event.url }}" class="vjs-btn vjs-btn-outline" style="font-size:0.75rem; padding:8px 16px; margin-top:1rem; width:100%; text-align:center; display:block;">View Details</a>
             </div>
-            <div style="text-align:center;">
-              <div id="lcd-mins" style="font-family:'Orbitron',sans-serif; font-size:1.6rem; font-weight:700; color:var(--vjs-magenta); line-height:1;">--</div>
-              <div style="font-family:'Orbitron',sans-serif; font-size:0.5rem; letter-spacing:0.15em; color:var(--vjs-text-muted); text-transform:uppercase;">Mins</div>
-            </div>
-            <div style="text-align:center;">
-              <div id="lcd-secs" style="font-family:'Orbitron',sans-serif; font-size:1.6rem; font-weight:700; color:var(--vjs-cyan); line-height:1;">--</div>
-              <div style="font-family:'Orbitron',sans-serif; font-size:0.5rem; letter-spacing:0.15em; color:var(--vjs-text-muted); text-transform:uppercase;">Secs</div>
-            </div>
-          </div>
-          {% assign upcoming = site.events | where: "event_type", "Live Stream" | sort: "date" %}
-          {% assign next_event = upcoming | first %}
-          {% if next_event %}
-          <div style="border-top:1px solid var(--vjs-border); padding-top:1.25rem;">
-            <div style="font-family:'Orbitron',sans-serif; font-size:0.6rem; letter-spacing:0.15em; color:var(--vjs-text-muted); text-transform:uppercase; margin-bottom:0.5rem;">{{ next_event.date | date: "%B %d, %Y" }} · {{ next_event.time }}</div>
-            <div style="font-weight:700; color:#fff; font-size:1rem; margin-bottom:0.25rem;">{{ next_event.title }}</div>
-            {% if next_event.artists %}
-            <div style="font-size:0.8rem; color:var(--vjs-text-muted);">{% for a in next_event.artists %}{{ a }}{% unless forloop.last %}, {% endunless %}{% endfor %}</div>
             {% endif %}
-            <a href="{{ next_event.url }}" class="vjs-btn vjs-btn-outline" style="font-size:0.75rem; padding:8px 16px; margin-top:1rem; width:100%; text-align:center; display:block;">View Details</a>
           </div>
-          {% endif %}
-        </div>
-
-        <!-- PERFORMING ARTISTS -->
-        <div style="background:var(--vjs-card); border:1px solid var(--vjs-border); border-radius:16px; padding:1.75rem;">
-          <div class="vjs-section-label" style="margin-bottom:1.25rem;">Featured Artists</div>
-          {% assign featured_artists = site.vjs | where: "featured", true | limit: 4 %}
-          {% for artist in featured_artists %}
-          <a href="{{ artist.url }}" class="text-decoration-none" style="display:flex; align-items:center; gap:0.85rem; padding:0.6rem 0; border-bottom:1px solid var(--vjs-border);">
-            <div style="width:40px; height:40px; background:linear-gradient(135deg, rgba(123,47,255,0.4), rgba(0,212,255,0.2)); border-radius:50%; display:flex; align-items:center; justify-content:center; font-family:'Orbitron',sans-serif; font-size:0.7rem; color:#fff; flex-shrink:0;">{{ artist.title | truncate: 2, '' }}</div>
-            <div style="min-width:0;">
-              <div style="font-weight:600; color:#fff; font-size:0.85rem; white-space:nowrap; overflow:hidden; text-overflow:ellipsis;">{{ artist.title }}</div>
-              <div style="font-size:0.72rem; color:var(--vjs-text-muted);">{{ artist.location }}</div>
-            </div>
-          </a>
-          {% endfor %}
-          <a href="/artists" style="display:block; text-align:center; margin-top:1rem; font-family:'Orbitron',sans-serif; font-size:0.6rem; letter-spacing:0.15em; color:var(--vjs-ultraviolet); text-transform:uppercase;">All Artists →</a>
+          <div style="background:var(--vjs-card); border:1px solid var(--vjs-border); padding:1.75rem;">
+            <div class="vjs-section-label" style="margin-bottom:1.25rem;">Featured Artists</div>
+            {% assign featured_artists = site.vjs | where: "featured", true | limit: 4 %}
+            {% for artist in featured_artists %}
+            <a href="{{ artist.url }}" class="text-decoration-none" style="display:flex; align-items:center; gap:0.85rem; padding:0.6rem 0; border-bottom:1px solid var(--vjs-border);">
+              <div style="width:40px; height:40px; background:linear-gradient(135deg, rgba(123,47,255,0.4), rgba(0,212,255,0.2)); display:flex; align-items:center; justify-content:center; font-family:'Barlow Condensed',sans-serif; font-size:0.7rem; color:#fff; flex-shrink:0;">{{ artist.title | truncate: 2, '' }}</div>
+              <div style="min-width:0;"><div style="font-weight:600; color:#fff; font-size:0.85rem; white-space:nowrap; overflow:hidden; text-overflow:ellipsis;">{{ artist.title }}</div><div style="font-size:0.72rem; color:var(--vjs-text-muted);">{{ artist.location }}</div></div>
+            </a>
+            {% endfor %}
+            <a href="/artists" style="display:block; text-align:center; margin-top:1rem; font-family:'Barlow Condensed',sans-serif; font-size:0.6rem; letter-spacing:0.15em; color:var(--vjs-ultraviolet); text-transform:uppercase;">All Artists →</a>
+          </div>
         </div>
       </div>
     </div>
-  </div>
+
+    <!-- ══════════════ CH.2 — LOOP GALLERY ══════════════ -->
+    <div id="ch2-content">
+
+      <!-- Header -->
+      <div class="lg-header">
+        <div class="lg-badge">
+          <span class="lg-dot"></span>
+          LOOP GALLERY — CH.2 — 24/7 ON AIR
+        </div>
+        <div class="lg-stats">
+          <span><strong>11</strong> LOOPS</span>
+          <span><strong>4</strong> GENRES</span>
+          <span><strong>10</strong> ARTISTS</span>
+          <span><strong>2008–2016</strong></span>
+        </div>
+      </div>
+
+      <!-- Featured Player -->
+      <div class="lg-featured" id="lg-featured-player">
+        <iframe id="lg-featured-iframe"
+          src="https://player.vimeo.com/video/49960413?autoplay=0&title=0&byline=0&portrait=0&color=00f9ff"
+          allowfullscreen allow="autoplay; fullscreen; picture-in-picture">
+        </iframe>
+      </div>
+
+      <!-- Now Playing Bar -->
+      <div class="lg-now-bar">
+        <div>
+          <div class="lg-now-label">&#9679; Now On Air</div>
+          <div class="lg-now-title" id="lg-now-title">Sagrada Familia: Ode à la Vie</div>
+          <div class="lg-now-meta" id="lg-now-meta">Moment Factory &nbsp;·&nbsp; ARCHITECTURAL &nbsp;·&nbsp; 2012</div>
+        </div>
+        <a class="lg-now-vimeo" id="lg-now-vimeo" href="https://vimeo.com/49960413" target="_blank" rel="noopener">Watch on Vimeo ↗</a>
+      </div>
+
+      <!-- Filters -->
+      <div class="lg-filters">
+        <span class="lg-filter-label">Filter:</span>
+        <button class="lg-filter active" onclick="lgFilter('all', this)">All</button>
+        <button class="lg-filter" onclick="lgFilter('generative', this)">Generative Art</button>
+        <button class="lg-filter" onclick="lgFilter('mapping', this)">Projection Mapping</button>
+        <button class="lg-filter" onclick="lgFilter('liveav', this)">Live AV</button>
+        <button class="lg-filter" onclick="lgFilter('architectural', this)">Architectural</button>
+      </div>
+
+      <!-- Loop Grid -->
+      <div class="lg-grid" id="lg-grid">
+
+        <!-- 1 -->
+        <div class="lg-card cat-architectural active-card" data-cat="architectural"
+          data-id="49960413" data-title="Sagrada Familia: Ode à la Vie"
+          data-artist="Moment Factory" data-year="2012" data-type="ARCHITECTURAL"
+          onclick="lgPlay(this)">
+          <div class="lg-card-bg"></div>
+          <div class="lg-card-overlay">
+            <div class="lg-card-top">
+              <span class="lg-card-cat">Architectural</span>
+              <span class="lg-card-year">2012</span>
+            </div>
+            <div class="lg-card-center">
+              <div class="lg-play-btn">&#9654;</div>
+            </div>
+            <div class="lg-card-bottom">
+              <div class="lg-card-title">Sagrada Familia: Ode à la Vie</div>
+              <div class="lg-card-artist">Moment Factory</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- 2 -->
+        <div class="lg-card cat-generative" data-cat="generative"
+          data-id="66443975" data-title="Chiaroscuro"
+          data-artist="Sougwen Chung" data-year="2013" data-type="GENERATIVE ART"
+          onclick="lgPlay(this)">
+          <div class="lg-card-bg"></div>
+          <div class="lg-card-overlay">
+            <div class="lg-card-top">
+              <span class="lg-card-cat">Generative Art</span>
+              <span class="lg-card-year">2013</span>
+            </div>
+            <div class="lg-card-center"><div class="lg-play-btn">&#9654;</div></div>
+            <div class="lg-card-bottom">
+              <div class="lg-card-title">Chiaroscuro</div>
+              <div class="lg-card-artist">Sougwen Chung</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- 3 -->
+        <div class="lg-card cat-liveav" data-cat="liveav"
+          data-id="11767833" data-title="PTA 04"
+          data-artist="Quayola" data-year="2008" data-type="LIVE AV"
+          onclick="lgPlay(this)">
+          <div class="lg-card-bg"></div>
+          <div class="lg-card-overlay">
+            <div class="lg-card-top">
+              <span class="lg-card-cat">Live AV</span>
+              <span class="lg-card-year">2008</span>
+            </div>
+            <div class="lg-card-center"><div class="lg-play-btn">&#9654;</div></div>
+            <div class="lg-card-bottom">
+              <div class="lg-card-title">PTA 04</div>
+              <div class="lg-card-artist">Quayola</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- 4 -->
+        <div class="lg-card cat-mapping" data-cat="mapping"
+          data-id="15887314" data-title="The LightLine of Gotham"
+          data-artist="seeper" data-year="2010" data-type="PROJECTION MAPPING"
+          onclick="lgPlay(this)">
+          <div class="lg-card-bg"></div>
+          <div class="lg-card-overlay">
+            <div class="lg-card-top">
+              <span class="lg-card-cat">Projection Mapping</span>
+              <span class="lg-card-year">2010</span>
+            </div>
+            <div class="lg-card-center"><div class="lg-play-btn">&#9654;</div></div>
+            <div class="lg-card-bottom">
+              <div class="lg-card-title">LightLine of Gotham</div>
+              <div class="lg-card-artist">seeper</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- 5 -->
+        <div class="lg-card cat-liveav" data-cat="liveav"
+          data-id="6580885" data-title="Particle"
+          data-artist="D-Fuse" data-year="2009" data-type="LIVE AV"
+          onclick="lgPlay(this)">
+          <div class="lg-card-bg"></div>
+          <div class="lg-card-overlay">
+            <div class="lg-card-top">
+              <span class="lg-card-cat">Live AV</span>
+              <span class="lg-card-year">2009</span>
+            </div>
+            <div class="lg-card-center"><div class="lg-play-btn">&#9654;</div></div>
+            <div class="lg-card-bottom">
+              <div class="lg-card-title">Particle</div>
+              <div class="lg-card-artist">D-Fuse</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- 6 -->
+        <div class="lg-card cat-mapping" data-cat="mapping"
+          data-id="26381610" data-title="A-cero XV Aniversario"
+          data-artist="Onionlab" data-year="2011" data-type="PROJECTION MAPPING"
+          onclick="lgPlay(this)">
+          <div class="lg-card-bg"></div>
+          <div class="lg-card-overlay">
+            <div class="lg-card-top">
+              <span class="lg-card-cat">Projection Mapping</span>
+              <span class="lg-card-year">2011</span>
+            </div>
+            <div class="lg-card-center"><div class="lg-play-btn">&#9654;</div></div>
+            <div class="lg-card-bottom">
+              <div class="lg-card-title">A-cero XV Aniversario</div>
+              <div class="lg-card-artist">Onionlab</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- 7 -->
+        <div class="lg-card cat-liveav" data-cat="liveav"
+          data-id="73671956" data-title="Live with MiraCalix"
+          data-artist="Quayola" data-year="2013" data-type="LIVE AV"
+          onclick="lgPlay(this)">
+          <div class="lg-card-bg"></div>
+          <div class="lg-card-overlay">
+            <div class="lg-card-top">
+              <span class="lg-card-cat">Live AV</span>
+              <span class="lg-card-year">2013</span>
+            </div>
+            <div class="lg-card-center"><div class="lg-play-btn">&#9654;</div></div>
+            <div class="lg-card-bottom">
+              <div class="lg-card-title">Live with MiraCalix</div>
+              <div class="lg-card-artist">Quayola</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- 8 -->
+        <div class="lg-card cat-mapping" data-cat="mapping"
+          data-id="51680823" data-title="KOLOBOK"
+          data-artist="SilaSveta" data-year="2012" data-type="PROJECTION MAPPING"
+          onclick="lgPlay(this)">
+          <div class="lg-card-bg"></div>
+          <div class="lg-card-overlay">
+            <div class="lg-card-top">
+              <span class="lg-card-cat">Projection Mapping</span>
+              <span class="lg-card-year">2012</span>
+            </div>
+            <div class="lg-card-center"><div class="lg-play-btn">&#9654;</div></div>
+            <div class="lg-card-bottom">
+              <div class="lg-card-title">KOLOBOK</div>
+              <div class="lg-card-artist">SilaSveta</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- 9 -->
+        <div class="lg-card cat-liveav" data-cat="liveav"
+          data-id="2291898" data-title="CINESTHESY 1.0"
+          data-artist="SATI" data-year="2012" data-type="LIVE AV"
+          onclick="lgPlay(this)">
+          <div class="lg-card-bg"></div>
+          <div class="lg-card-overlay">
+            <div class="lg-card-top">
+              <span class="lg-card-cat">Live AV</span>
+              <span class="lg-card-year">2012</span>
+            </div>
+            <div class="lg-card-center"><div class="lg-play-btn">&#9654;</div></div>
+            <div class="lg-card-bottom">
+              <div class="lg-card-title">CINESTHESY 1.0</div>
+              <div class="lg-card-artist">SATI</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- 10 -->
+        <div class="lg-card cat-generative" data-cat="generative"
+          data-id="61227321" data-title="Tearing Shadows"
+          data-artist="Robert Seidel" data-year="2013" data-type="GENERATIVE ART"
+          onclick="lgPlay(this)">
+          <div class="lg-card-bg"></div>
+          <div class="lg-card-overlay">
+            <div class="lg-card-top">
+              <span class="lg-card-cat">Generative Art</span>
+              <span class="lg-card-year">2013</span>
+            </div>
+            <div class="lg-card-center"><div class="lg-play-btn">&#9654;</div></div>
+            <div class="lg-card-bottom">
+              <div class="lg-card-title">Tearing Shadows</div>
+              <div class="lg-card-artist">Robert Seidel</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- 11 -->
+        <div class="lg-card cat-architectural" data-cat="architectural"
+          data-id="234010348" data-title="ORANGE — Show Hello!"
+          data-artist="Superbien" data-year="2016" data-type="ARCHITECTURAL"
+          onclick="lgPlay(this)">
+          <div class="lg-card-bg"></div>
+          <div class="lg-card-overlay">
+            <div class="lg-card-top">
+              <span class="lg-card-cat">Architectural</span>
+              <span class="lg-card-year">2016</span>
+            </div>
+            <div class="lg-card-center"><div class="lg-play-btn">&#9654;</div></div>
+            <div class="lg-card-bottom">
+              <div class="lg-card-title">ORANGE — Show Hello!</div>
+              <div class="lg-card-artist">Superbien</div>
+            </div>
+          </div>
+        </div>
+
+      </div><!-- /lg-grid -->
+
+      <div style="margin-top:24px; padding:16px 0; border-top:1px solid #111; display:flex; align-items:center; justify-content:space-between; flex-wrap:wrap; gap:12px;">
+        <span style="font-family:'Barlow Condensed',sans-serif; font-size:0.65rem; letter-spacing:0.12em; color:#333; text-transform:uppercase;">Archive grows with every submission</span>
+        <a href="/submit" class="vjs-btn vjs-btn-outline" style="font-size:0.72rem; padding:8px 20px;">Submit Your Work ↗</a>
+      </div>
+
+    </div><!-- /ch2-content -->
+
+    <!-- ══════════════ CH.3 — VJ EDUCATION ══════════════ -->
+    <div id="ch3-content">
+      <div style="padding:16px 0 20px; border-bottom:1px solid #141414; margin-bottom:24px; display:flex; align-items:center; gap:10px;">
+        <span style="font-family:'Barlow Condensed',sans-serif; font-size:0.7rem; font-weight:700; letter-spacing:0.15em; color:var(--vjs-neon); text-transform:uppercase;">◉ VJ EDUCATION — CH.3</span>
+        <span style="font-family:'Barlow Condensed',sans-serif; font-size:0.6rem; letter-spacing:0.1em; color:#333; text-transform:uppercase;">Resources, tutorials & tools</span>
+      </div>
+      <div class="lg-edu-grid">
+        <div class="lg-edu-card">
+          <div class="lg-edu-icon">&#9684;</div>
+          <div class="lg-edu-title">Resolume Arena</div>
+          <div class="lg-edu-desc">The industry standard for VJ performance. Clip-based composition, effects, and MIDI/OSC control for live visual sets.</div>
+          <a href="/technology/resolume-arena" class="lg-edu-link">View Profile →</a>
+        </div>
+        <div class="lg-edu-card">
+          <div class="lg-edu-icon">&#9685;</div>
+          <div class="lg-edu-title">TouchDesigner</div>
+          <div class="lg-edu-desc">Node-based real-time programming environment for generative visuals, interactive installations, and data-driven performance.</div>
+          <a href="/technology/touchdesigner" class="lg-edu-link">View Profile →</a>
+        </div>
+        <div class="lg-edu-card">
+          <div class="lg-edu-icon">&#9632;</div>
+          <div class="lg-edu-title">MadMapper</div>
+          <div class="lg-edu-desc">Projection mapping software trusted by mapping studios and touring VJs for architectural and object mapping.</div>
+          <a href="/technology/madmapper" class="lg-edu-link">View Profile →</a>
+        </div>
+        <div class="lg-edu-card">
+          <div class="lg-edu-icon">&#9670;</div>
+          <div class="lg-edu-title">VDMX</div>
+          <div class="lg-edu-desc">Mac-native VJ software with deep MIDI mapping, multi-layer compositing, and Syphon/NDI connectivity for live performance.</div>
+          <a href="/technology/vdmx" class="lg-edu-link">View Profile →</a>
+        </div>
+        <div class="lg-edu-card">
+          <div class="lg-edu-icon">&#9651;</div>
+          <div class="lg-edu-title">Notch</div>
+          <div class="lg-edu-desc">Real-time 3D and motion graphics for broadcast, live events, and XR — the tool behind some of the world's biggest stage shows.</div>
+          <a href="/technology/notch" class="lg-edu-link">View Profile →</a>
+        </div>
+        <div class="lg-edu-card">
+          <div class="lg-edu-icon">&#9675;</div>
+          <div class="lg-edu-title">All Technology</div>
+          <div class="lg-edu-desc">Browse the complete VJs TV technology index — hardware, software, protocols, and the tools shaping visual performance globally.</div>
+          <a href="/technology" class="lg-edu-link">Browse All →</a>
+        </div>
+      </div>
+    </div>
+
+  </div><!-- /container -->
 </section>
 
-<!-- SCHEDULE -->
-<section class="vjs-section" id="schedule">
+<!-- SCHEDULE — only shown on CH.1 -->
+<section class="vjs-section" id="schedule" style="display:block;">
   <div class="container">
     <div class="vjs-section-label">Upcoming</div>
     <h2 class="vjs-section-title" style="font-size:clamp(1.5rem,3vw,2.2rem);">Broadcast Schedule</h2>
     <div class="vjs-accent-line"></div>
-
     <div style="margin-top:2.5rem;">
       {% assign sorted_events = site.events | sort: "date" %}
       {% for event in sorted_events %}
       <div class="vjs-schedule-item vjs-reveal" style="transition-delay:{{ forloop.index | times: 60 }}ms;">
         <div class="vjs-schedule-time">
-          <div style="font-family:'Orbitron',sans-serif; font-size:1rem; font-weight:700; color:var(--vjs-ultraviolet);">{{ event.date | date: "%d" }}</div>
-          <div style="font-family:'Space Grotesk',sans-serif; font-size:0.7rem; text-transform:uppercase; letter-spacing:0.1em; color:var(--vjs-text-muted);">{{ event.date | date: "%b" }}</div>
+          <div style="font-family:'Barlow Condensed',sans-serif; font-size:1rem; font-weight:700; color:var(--vjs-ultraviolet);">{{ event.date | date: "%d" }}</div>
+          <div style="font-family:'Barlow Condensed',sans-serif; font-size:0.7rem; text-transform:uppercase; letter-spacing:0.1em; color:var(--vjs-text-muted);">{{ event.date | date: "%b" }}</div>
           {% if event.time %}<div style="font-size:0.65rem; color:var(--vjs-text-muted); margin-top:4px;">{{ event.time }}</div>{% endif %}
         </div>
         <div class="vjs-schedule-info">
@@ -146,24 +641,22 @@ meta_description: "Watch live VJ performances and audiovisual broadcasts streami
       </div>
       {% endfor %}
     </div>
-
-    <!-- WATCH ANYWHERE CTA -->
     <div style="margin-top:4rem; display:grid; grid-template-columns:repeat(auto-fit,minmax(220px,1fr)); gap:1.5rem;">
-      <div style="background:var(--vjs-card); border:1px solid var(--vjs-border); border-radius:16px; padding:1.75rem; text-align:center;">
+      <div style="background:var(--vjs-card); border:1px solid var(--vjs-border); padding:1.75rem; text-align:center;">
         <div style="font-size:2rem; margin-bottom:0.75rem;">&#9654;</div>
-        <h4 style="font-family:'Space Grotesk',sans-serif; font-weight:700; font-size:1rem; color:#fff; margin-bottom:0.5rem;">YouTube Live</h4>
+        <h4 style="font-family:'Barlow Condensed',sans-serif; font-weight:700; font-size:1rem; letter-spacing:0.05em; color:#fff; margin-bottom:0.5rem;">YouTube Live</h4>
         <p style="color:var(--vjs-text-muted); font-size:0.8rem; margin-bottom:1rem;">Stream directly through YouTube for the highest quality live experience.</p>
         <a href="https://youtube.com/@vjstv" target="_blank" class="vjs-btn vjs-btn-outline" style="font-size:0.75rem; width:100%;">Subscribe</a>
       </div>
-      <div style="background:var(--vjs-card); border:1px solid var(--vjs-border); border-radius:16px; padding:1.75rem; text-align:center;">
+      <div style="background:var(--vjs-card); border:1px solid var(--vjs-border); padding:1.75rem; text-align:center;">
         <div style="font-size:2rem; margin-bottom:0.75rem;">&#128247;</div>
-        <h4 style="font-family:'Space Grotesk',sans-serif; font-weight:700; font-size:1rem; color:#fff; margin-bottom:0.5rem;">Newsletter</h4>
+        <h4 style="font-family:'Barlow Condensed',sans-serif; font-weight:700; font-size:1rem; letter-spacing:0.05em; color:#fff; margin-bottom:0.5rem;">Newsletter</h4>
         <p style="color:var(--vjs-text-muted); font-size:0.8rem; margin-bottom:1rem;">Get notified before every broadcast directly to your inbox.</p>
-        <a href="#notify" class="vjs-btn vjs-btn-outline" style="font-size:0.75rem; width:100%;">Get Notified</a>
+        <a href="#footer" class="vjs-btn vjs-btn-outline" style="font-size:0.75rem; width:100%;">Get Notified</a>
       </div>
-      <div style="background:var(--vjs-card); border:1px solid var(--vjs-border); border-radius:16px; padding:1.75rem; text-align:center;">
+      <div style="background:var(--vjs-card); border:1px solid var(--vjs-border); padding:1.75rem; text-align:center;">
         <div style="font-size:2rem; margin-bottom:0.75rem;">&#127897;</div>
-        <h4 style="font-family:'Space Grotesk',sans-serif; font-weight:700; font-size:1rem; color:#fff; margin-bottom:0.5rem;">Perform Live</h4>
+        <h4 style="font-family:'Barlow Condensed',sans-serif; font-weight:700; font-size:1rem; letter-spacing:0.05em; color:#fff; margin-bottom:0.5rem;">Perform Live</h4>
         <p style="color:var(--vjs-text-muted); font-size:0.8rem; margin-bottom:1rem;">Are you a VJ? Apply to perform on VJs TV's global broadcast.</p>
         <a href="/submit" class="vjs-btn vjs-btn-sponsor" style="font-size:0.75rem; width:100%;">Apply Now</a>
       </div>
@@ -174,97 +667,89 @@ meta_description: "Watch live VJ performances and audiovisual broadcasts streami
 {% include vjstv-footer.html %}
 
 <script>
-// Countdown to next event
+// ── COUNTDOWN ────────────────────────────────────────────────
 (function(){
-  var events = [
-    {% for event in site.events %}
-    { date: "{{ event.date | date: '%Y-%m-%dT%H:%M:%S' }}", title: "{{ event.title | escape }}" },
-    {% endfor %}
-  ];
+  var events = [{% for event in site.events %}{ date: "{{ event.date | date: '%Y-%m-%dT%H:%M:%S' }}", title: "{{ event.title | escape }}" },{% endfor %}];
   var now = new Date();
   var future = events.filter(function(e){ return new Date(e.date) > now; }).sort(function(a,b){ return new Date(a.date)-new Date(b.date); });
   if (!future.length) return;
   var target = new Date(future[0].date);
-  document.getElementById('live-now-title').textContent = future[0].title;
   function tick(){
     var diff = target - new Date();
-    if(diff <= 0){ document.getElementById('lcd-days').textContent='00'; return; }
-    var d = Math.floor(diff/86400000);
-    var h = Math.floor((diff%86400000)/3600000);
-    var m = Math.floor((diff%3600000)/60000);
-    var s = Math.floor((diff%60000)/1000);
-    document.getElementById('lcd-days').textContent  = String(d).padStart(2,'0');
-    document.getElementById('lcd-hours').textContent = String(h).padStart(2,'0');
-    document.getElementById('lcd-mins').textContent  = String(m).padStart(2,'0');
-    document.getElementById('lcd-secs').textContent  = String(s).padStart(2,'0');
+    if(diff <= 0) return;
+    var d = Math.floor(diff/86400000), h = Math.floor((diff%86400000)/3600000),
+        m = Math.floor((diff%3600000)/60000), s = Math.floor((diff%60000)/1000);
+    ['days','hours','mins','secs'].forEach(function(u,i){ var v=[d,h,m,s][i]; var el=document.getElementById('lcd-'+u); if(el) el.textContent=String(v).padStart(2,'0'); });
   }
   tick(); setInterval(tick, 1000);
 })();
 
-// Scroll reveal
-var ro = new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting){e.target.classList.add('is-visible');ro.unobserve(e.target);}});},{threshold:.1});
-document.querySelectorAll('.vjs-reveal').forEach(function(el){ro.observe(el);});
-</script>
-
-<script>
-// ── CHANNEL SWITCHING ──────────────────────────────────────
-var channelContent = {
-  1: {
-    label: '● LIVE BROADCAST',
-    title: 'VJs TV Live Session',
-    bg: 'linear-gradient(135deg, rgba(123,47,255,0.12) 0%, rgba(255,0,255,0.06) 100%)',
-    icon: '&#9654;',
-    info: 'Stream Goes Live Here',
-    desc: 'Replace the embed comment in <code style="color:var(--vjs-cyan);">live/index.html</code> with your YouTube Live URL'
-  },
-  2: {
-    label: '◈ LOOP GALLERY — CH.2',
-    title: '24/7 Generative Loop Archive',
-    bg: 'linear-gradient(135deg, rgba(0,212,255,0.1) 0%, rgba(157,0,255,0.08) 100%)',
-    icon: '&#9632;',
-    info: 'Loop Gallery',
-    desc: '24/7 curated VJ loop archive. Generative art, projection mapping, and live visual sets on continuous rotation.'
-  },
-  3: {
-    label: '◉ VJ EDUCATION — CH.3',
-    title: 'VJ Tools & Tutorials',
-    bg: 'linear-gradient(135deg, rgba(57,255,20,0.06) 0%, rgba(0,212,255,0.08) 100%)',
-    icon: '&#9670;',
-    info: 'VJ Education Channel',
-    desc: 'Tutorials on Resolume, TouchDesigner, MadMapper, VDMX, and the tools powering global VJ culture.'
-  }
-};
+// ── CHANNEL SWITCHING ───────────────────────────────────────
+var scheduleSection = document.getElementById('schedule');
 
 function switchChannel(ch) {
-  // Update tabs
-  [1,2,3].forEach(function(n) {
+  [1,2,3].forEach(function(n){
     var t = document.getElementById('ch'+n+'-tab');
+    var c = document.getElementById('ch'+n+'-content');
     if(t) t.classList.toggle('active', n===ch);
+    if(c) c.style.display = (n===ch) ? 'block' : 'none';
   });
-  var c = channelContent[ch];
+  // Show schedule only on CH.1
+  if(scheduleSection) scheduleSection.style.display = (ch===1) ? 'block' : 'none';
   // Update badge
-  var badge = document.querySelector('.vjs-live-badge');
-  if(badge) badge.innerHTML = '<span class="vjs-live-dot"></span>' + c.label;
-  // Update now playing
-  var title = document.getElementById('live-now-title');
-  if(title) title.textContent = c.title;
-  // Update player bg/content
-  var ph = document.querySelector('.vjs-live-placeholder');
-  if(ph) {
-    ph.querySelector('div').style.background = c.bg;
-    ph.querySelector('.vjs-live-placeholder-icon').innerHTML = c.icon;
-    ph.querySelectorAll('p')[0].textContent = c.info;
-    ph.querySelectorAll('p')[1].innerHTML = c.desc;
+  var badge = document.getElementById('channel-badge');
+  if(badge) {
+    var labels = { 1:'LIVE BROADCAST', 2:'LOOP GALLERY — CH.2', 3:'VJ EDUCATION — CH.3' };
+    badge.innerHTML = '<span class="vjs-live-dot"></span>' + labels[ch];
   }
 }
+
+// Init: hide schedule on load (it defaults to CH.1 which shows it)
+if(scheduleSection) scheduleSection.style.display = 'block';
 
 // ── CINEMA MODE ─────────────────────────────────────────────
 function toggleCinema() {
-  var body = document.body;
+  var isOn = document.body.classList.toggle('cinema-mode');
   var btn = document.getElementById('cinema-btn');
-  var isOn = body.classList.toggle('cinema-mode');
-  btn.innerHTML = isOn ? '&#9723; Exit Cinema' : '&#9724; Cinema';
-  btn.style.color = isOn ? 'var(--vjs-cyan)' : '';
-  btn.style.borderColor = isOn ? 'rgba(0,249,255,0.4)' : '';
+  if(btn) { btn.innerHTML = isOn ? '&#9723; Exit Cinema' : '&#9724; Cinema'; btn.style.color = isOn ? 'var(--vjs-cyan)' : ''; }
 }
+
+// ── LOOP GALLERY ────────────────────────────────────────────
+function lgPlay(card) {
+  var id    = card.dataset.id;
+  var title = card.dataset.title;
+  var artist= card.dataset.artist;
+  var year  = card.dataset.year;
+  var type  = card.dataset.type;
+
+  // Update featured iframe
+  var iframe = document.getElementById('lg-featured-iframe');
+  if(iframe) iframe.src = 'https://player.vimeo.com/video/' + id + '?autoplay=1&title=0&byline=0&portrait=0&color=00f9ff';
+
+  // Update now-playing bar
+  document.getElementById('lg-now-title').textContent = title;
+  document.getElementById('lg-now-meta').textContent  = artist + '  ·  ' + type + '  ·  ' + year;
+  document.getElementById('lg-now-vimeo').href = 'https://vimeo.com/' + id;
+
+  // Highlight active card
+  document.querySelectorAll('.lg-card').forEach(function(c){ c.classList.remove('active-card'); });
+  card.classList.add('active-card');
+
+  // Scroll to featured player
+  var fp = document.getElementById('lg-featured-player');
+  if(fp) fp.scrollIntoView({ behavior:'smooth', block:'start' });
+}
+
+function lgFilter(cat, btn) {
+  document.querySelectorAll('.lg-filter').forEach(function(b){ b.classList.remove('active'); });
+  btn.classList.add('active');
+  document.querySelectorAll('.lg-card').forEach(function(card){
+    var show = (cat === 'all') || (card.dataset.cat === cat);
+    card.style.display = show ? '' : 'none';
+  });
+}
+
+// ── SCROLL REVEAL ───────────────────────────────────────────
+var ro = new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting){e.target.classList.add('is-visible');ro.unobserve(e.target);}});},{threshold:.1});
+document.querySelectorAll('.vjs-reveal').forEach(function(el){ro.observe(el);});
 </script>
