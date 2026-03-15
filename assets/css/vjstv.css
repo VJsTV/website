@@ -2030,70 +2030,88 @@ select.vjs-form-input {
   color: #fff !important;
 }
 
-.vjstv-footer-newsletter {
+.vjstv-footer-newsletter-row {
+  border-top: 1px solid #222;
+  background: #000;
+  padding: 28px 32px;
+}
+.vjstv-footer-newsletter-inner {
+  max-width: 1400px;
+  margin: 0 auto;
   display: flex;
   align-items: center;
-  gap: 8px;
-  flex-shrink: 0;
-  margin-left: auto;
+  justify-content: space-between;
+  gap: 2rem;
+  flex-wrap: wrap;
 }
-.vjstv-footer-newsletter span {
+.vjstv-footer-newsletter-label {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+.vjstv-footer-newsletter-title {
   font-family: 'Barlow Condensed', sans-serif;
-  font-size: 0.65rem;
-  font-weight: 600;
+  font-size: 0.85rem;
+  font-weight: 700;
   text-transform: uppercase;
-  letter-spacing: 0.08em;
-  color: rgba(255,255,255,0.5);
-  white-space: nowrap;
+  letter-spacing: 0.12em;
+  color: #fff;
 }
-.vjstv-footer-newsletter form {
+.vjstv-footer-newsletter-sub {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 0.72rem;
+  color: rgba(255,255,255,0.4);
+  letter-spacing: 0.04em;
+}
+.vjstv-footer-newsletter-form {
   display: flex;
   border: 1px solid #333;
-  height: 24px;
-  border-radius: 0 !important;
+  height: 36px;
+  flex-shrink: 0;
 }
-.vjstv-footer-newsletter input {
+.vjstv-footer-newsletter-form:focus-within {
+  border-color: var(--vjs-ultraviolet);
+}
+.vjstv-footer-newsletter-form input {
   background: transparent;
   border: none;
   color: #fff;
   font-family: 'Barlow Condensed', sans-serif;
-  font-size: 0.65rem;
-  padding: 4px 8px;
-  width: 140px;
-  outline: none;
+  font-size: 0.75rem;
+  padding: 0 14px;
+  width: 220px;
+  outline: none !important;
+  box-shadow: none !important;
   border-radius: 0 !important;
 }
-.vjstv-footer-newsletter input:focus {
-  outline: none !important;
-  border: none !important;
-  box-shadow: none !important;
-}
-.vjstv-footer-newsletter input::placeholder { color: rgba(255,255,255,0.25); }
-.vjstv-footer-newsletter button {
-  background: #fff;
+.vjstv-footer-newsletter-form input::placeholder { color: rgba(255,255,255,0.25); }
+.vjstv-footer-newsletter-form button {
+  background: var(--vjs-ultraviolet);
   border: none;
-  color: #000;
-  font-size: 0.65rem;
+  color: #fff;
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 0.72rem;
   font-weight: 700;
-  padding: 0 8px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  padding: 0 18px;
   cursor: pointer;
   transition: background 0.15s;
-  display: flex;
-  align-items: center;
-  justify-content: center;
+  white-space: nowrap;
 }
-.vjstv-footer-newsletter button:hover { background: #b81aff; }
+.vjstv-footer-newsletter-form button:hover { background: #b81aff; }
 
 .vjstv-footer-bar {
   display: flex;
   align-items: center;
   gap: 6px;
-  padding: 12px 32px;
+  padding: 10px 32px;
   font-family: 'Barlow Condensed', sans-serif;
   font-size: 0.63rem;
   color: rgba(255,255,255,0.35);
-  height: 40px;
-  border-top: 1px solid #222;
+  min-height: 36px;
+  border-top: 1px solid #1a1a1a;
+  background: #050505;
 }
 .vjstv-footer-copyright { white-space: nowrap; }
 .vjstv-footer-sep { color: rgba(255,255,255,0.15); }
@@ -2138,11 +2156,17 @@ select.vjs-form-input {
   .vjstv-footer-brand { border-right: none; border-bottom: 1px solid #222; padding: 28px 20px; }
   .vjstv-footer-cols { grid-template-columns: repeat(3, 1fr); }
   .vjstv-footer-col { padding: 24px 16px; }
+  .vjstv-footer-newsletter-row { padding: 24px 20px; }
+  .vjstv-footer-newsletter-inner { gap: 1.25rem; }
 }
 @media (max-width: 600px) {
   .vjstv-footer-cols { grid-template-columns: 1fr 1fr; }
   .vjstv-footer-col:last-child { grid-column: 1 / -1; border-top: 1px solid #222; border-right: none; }
-  .vjstv-footer-bar { flex-wrap: wrap; padding: 10px 16px; }
+  .vjstv-footer-bar { flex-wrap: wrap; padding: 10px 16px; gap: 4px; }
+  .vjstv-footer-newsletter-row { padding: 20px 16px; }
+  .vjstv-footer-newsletter-inner { flex-direction: column; align-items: flex-start; }
+  .vjstv-footer-newsletter-form { width: 100%; }
+  .vjstv-footer-newsletter-form input { flex: 1; width: auto; min-width: 0; }
 }
 
 /* Section label above headings */

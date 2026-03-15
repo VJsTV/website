@@ -374,6 +374,19 @@
     </div>
   </div>
 
+  <div class="vjstv-footer-newsletter-row">
+    <div class="vjstv-footer-newsletter-inner">
+      <div class="vjstv-footer-newsletter-label">
+        <span class="vjstv-footer-newsletter-title">Stay Updated</span>
+        <span class="vjstv-footer-newsletter-sub">New artists, events & live sessions — straight to your inbox.</span>
+      </div>
+      <form class="vjstv-footer-newsletter-form" onsubmit="event.preventDefault(); this.querySelector('button').textContent='✓ Subscribed'; this.querySelector('input').disabled=true; this.querySelector('button').disabled=true;" autocomplete="off">
+        <input type="email" placeholder="your@email.com" required />
+        <button type="submit">Subscribe</button>
+      </form>
+    </div>
+  </div>
+
   <div class="vjstv-footer-bar">
     <div class="vjstv-footer-social">
       <a href="https://instagram.com/vjstv" target="_blank" rel="noopener" title="Instagram">
@@ -397,17 +410,11 @@
     </div>
     <span class="vjstv-footer-copyright">&copy; 2026 VJs TV</span>
     <span class="vjstv-footer-sep">&middot;</span>
-    <span class="vjstv-footer-network">Part of VJs TV Network</span>
+    <span class="vjstv-footer-network">Part of <a href="https://vjsmag.com" target="_blank" rel="noopener">VJs Mag</a> Network</span>
+    <span class="vjstv-footer-sep">&middot;</span>
     <a href="/privacy" class="vjstv-footer-link">Privacy Policy</a>
     <span class="vjstv-footer-sep">&middot;</span>
-    <a href="/terms" class="vjstv-footer-link">Terms and Conditions</a>
-    <div class="vjstv-footer-newsletter">
-      <span>Stay Updated</span>
-      <form onsubmit="event.preventDefault(); this.querySelector('button').textContent='✓'; this.querySelector('input').disabled=true;" autocomplete="off" style="display:flex; gap:0.5rem; align-items:stretch;">
-        <input type="email" placeholder="your@email.com" required style="flex:1; padding:6px 10px; background:rgba(255,255,255,0.05); border:1px solid rgba(255,255,255,0.1); color:#fff; font-size:0.75rem; font-family:inherit; border-radius:0;" />
-        <button type="submit" style="padding:6px 12px; background:var(--vjs-ultraviolet); border:none; color:#fff; font-weight:700; cursor:pointer; font-size:0.7rem; letter-spacing:0.05em; border-radius:0; transition:background 0.2s;">Subscribe</button>
-      </form>
-    </div>
+    <a href="/terms" class="vjstv-footer-link">Terms &amp; Conditions</a>
   </div>
 </footer>
 
