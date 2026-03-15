@@ -387,67 +387,303 @@
 
 <div class="vjs-progress-bar" id="vjs-progress-bar"></div>
 
-<!-- NTS-STYLE HERO — FULL-BLEED + SIDEBAR -->
-<section class="vjs-nts-hero">
-  <div class="vjs-nts-hero-main">
-    <div class="vjs-nts-hero-bg" style="background: linear-gradient(135deg, rgba(157,0,255,0.45) 0%, rgba(0,212,255,0.25) 30%, rgba(255,0,170,0.3) 70%, rgba(5,5,5,0.9) 100%);"></div>
-    <div class="vjs-nts-hero-gradient"></div>
-    <div class="vjs-nts-hero-content">
-      <a href="/live" class="vjs-nts-hero-play" aria-label="Watch live now"><svg viewBox="0 0 16 20" aria-hidden="true"><polygon points="0,0 16,10 0,20" fill="#000"/></svg></a>
-      
-      <div class="vjs-nts-hero-tags">
-        <span class="vjs-nts-hero-tag">VJ Performance</span>
-        <span class="vjs-nts-hero-tag">Immersive Installation</span>
-        <span class="vjs-nts-hero-tag">TouchDesigner</span>
+<!-- HERO — WATCHABLE VIDEO PLAYER -->
+<style>
+.vjs-hero-wrap {
+  display:grid;
+  grid-template-columns:1fr 260px;
+  height:520px;
+  background:#000;
+  border-bottom:1px solid #111;
+}
+@media(max-width:900px){
+  .vjs-hero-wrap { grid-template-columns:1fr; height:auto; }
+  .vjs-hero-sidebar { display:none; }
+}
+.vjs-hero-player {
+  position:relative; overflow:hidden; background:#000;
+}
+.vjs-hero-player iframe {
+  position:absolute; inset:0; width:100%; height:100%; border:none; display:block;
+}
+.vjs-hero-overlay {
+  position:absolute; bottom:0; left:0; right:0; z-index:2;
+  background:linear-gradient(to top, rgba(0,0,0,0.92) 0%, rgba(0,0,0,0.5) 60%, transparent 100%);
+  padding:28px 24px 20px;
+  pointer-events:none;
+}
+.vjs-hero-tags { display:flex; gap:6px; flex-wrap:wrap; margin-bottom:8px; }
+.vjs-hero-tag {
+  font-family:'Barlow Condensed',sans-serif; font-size:0.6rem; font-weight:700;
+  letter-spacing:0.14em; text-transform:uppercase;
+  background:rgba(255,255,255,0.1); border:1px solid rgba(255,255,255,0.18);
+  color:#ccc; padding:3px 8px;
+}
+.vjs-hero-tag-live { background:rgba(157,0,255,0.3); border-color:rgba(157,0,255,0.5); color:var(--vjs-ultraviolet); }
+.vjs-hero-title {
+  font-family:'Barlow Condensed',sans-serif; font-size:clamp(1.4rem,3vw,2.2rem);
+  font-weight:700; color:#fff; letter-spacing:0.04em; text-transform:uppercase;
+  line-height:1.1; margin:0 0 4px;
+}
+.vjs-hero-artist {
+  font-family:'Barlow Condensed',sans-serif; font-size:0.8rem;
+  color:rgba(255,255,255,0.5); letter-spacing:0.06em;
+}
+.vjs-hero-actions {
+  pointer-events:all; margin-top:12px; display:flex; align-items:center; gap:10px; flex-wrap:wrap;
+}
+.vjs-hero-vimeo-btn {
+  font-family:'Barlow Condensed',sans-serif; font-size:0.65rem; font-weight:700;
+  letter-spacing:0.12em; text-transform:uppercase; text-decoration:none;
+  color:#fff; border:1px solid rgba(255,255,255,0.25); padding:7px 16px;
+  transition:border-color .15s, color .15s; background:rgba(0,0,0,0.4);
+}
+.vjs-hero-vimeo-btn:hover { border-color:var(--vjs-cyan); color:var(--vjs-cyan); }
+.vjs-hero-project-btn {
+  font-family:'Barlow Condensed',sans-serif; font-size:0.65rem; font-weight:700;
+  letter-spacing:0.12em; text-transform:uppercase; text-decoration:none;
+  color:rgba(255,255,255,0.45); padding:7px 0;
+  transition:color .15s;
+}
+.vjs-hero-project-btn:hover { color:#fff; }
+
+/* Sidebar */
+.vjs-hero-sidebar {
+  background:#070707; border-left:1px solid #141414;
+  display:flex; flex-direction:column; overflow-y:auto;
+}
+.vjs-hero-sidebar-hdr {
+  font-family:'Barlow Condensed',sans-serif; font-size:0.58rem; font-weight:700;
+  letter-spacing:0.18em; text-transform:uppercase; color:#333;
+  padding:12px 14px 10px; border-bottom:1px solid #111;
+  flex-shrink:0;
+}
+.vjs-hero-card {
+  display:flex; align-items:stretch; gap:0; cursor:pointer;
+  border-bottom:1px solid #0f0f0f; transition:background .12s;
+  padding:0; background:none; border-left:none; border-right:none; border-top:none; text-align:left; width:100%;
+}
+.vjs-hero-card:hover { background:#0e0e0e; }
+.vjs-hero-card.active { background:#0e0e0e; border-left:2px solid var(--vjs-cyan); }
+.vjs-hero-card-thumb {
+  width:72px; height:54px; flex-shrink:0; position:relative; overflow:hidden;
+}
+.vjs-hero-card-thumb-bg { position:absolute; inset:0; }
+.vjs-hero-card-play {
+  position:absolute; inset:0; display:flex; align-items:center; justify-content:center;
+  color:rgba(255,255,255,0.6); font-size:10px;
+}
+.vjs-hero-card:hover .vjs-hero-card-play,
+.vjs-hero-card.active .vjs-hero-card-play { color:#fff; }
+.vjs-hero-card-info { padding:8px 10px; min-width:0; }
+.vjs-hero-card-cat {
+  font-family:'Barlow Condensed',sans-serif; font-size:0.52rem; font-weight:700;
+  letter-spacing:0.13em; text-transform:uppercase; color:#444; margin-bottom:3px;
+}
+.vjs-hero-card.active .vjs-hero-card-cat { color:var(--vjs-cyan); }
+.vjs-hero-card-title {
+  font-family:'Barlow Condensed',sans-serif; font-size:0.8rem; font-weight:700;
+  color:#ccc; letter-spacing:0.02em; line-height:1.2;
+  white-space:nowrap; overflow:hidden; text-overflow:ellipsis;
+}
+.vjs-hero-card:hover .vjs-hero-card-title,
+.vjs-hero-card.active .vjs-hero-card-title { color:#fff; }
+.vjs-hero-card-artist {
+  font-family:'Barlow Condensed',sans-serif; font-size:0.65rem;
+  color:#333; margin-top:2px;
+}
+</style>
+
+<section class="vjs-hero-wrap">
+
+  <!-- MAIN PLAYER -->
+  <div class="vjs-hero-player" id="hero-player">
+    <iframe id="hero-iframe"
+      src="https://player.vimeo.com/video/49960413?autoplay=0&title=0&byline=0&portrait=0&color=9d00ff"
+      allow="autoplay; fullscreen; picture-in-picture" allowfullscreen>
+    </iframe>
+    <div class="vjs-hero-overlay">
+      <div class="vjs-hero-tags">
+        <span class="vjs-hero-tag vjs-hero-tag-live">&#9679; Featured</span>
+        <span class="vjs-hero-tag" id="hero-tag-type">Architectural Projection</span>
+        <span class="vjs-hero-tag" id="hero-tag-year">2012</span>
       </div>
-      <h1 class="vjs-nts-hero-title">AI Dome Experience</h1>
-      <p class="vjs-nts-hero-desc">A 360-degree AI-generated visual experience inside a geodesic dome, featuring real-time generative art synchronized with ambient electronic music.</p>
+      <h1 class="vjs-hero-title" id="hero-title">Sagrada Familia: Ode à la Vie</h1>
+      <div class="vjs-hero-artist" id="hero-artist">Moment Factory &nbsp;·&nbsp; Barcelona, Spain</div>
+      <div class="vjs-hero-actions">
+        <a class="vjs-hero-vimeo-btn" id="hero-vimeo-link" href="https://vimeo.com/49960413" target="_blank" rel="noopener">▶ Watch on Vimeo</a>
+        <a class="vjs-hero-project-btn" id="hero-project-link" href="/projects">View Project →</a>
+      </div>
     </div>
   </div>
-  <div class="vjs-nts-hero-sidebar">
-    
-    
-    <a href="/projects/ai-dome-show" class="vjs-nts-sidebar-card">
-      <div class="vjs-nts-sidebar-thumb">
-        
-        
-        <div class="vjs-nts-sidebar-thumb-bg" style="background: linear-gradient(135deg, rgba(157,0,255,0.6),rgba(0,212,255,0.3));"></div>
-        <svg class="vjs-nts-sidebar-thumb-play" viewBox="0 0 24 24" fill="currentColor"><polygon points="5,3 5,21 21,12"/></svg>
+
+  <!-- SIDEBAR QUEUE -->
+  <div class="vjs-hero-sidebar">
+    <div class="vjs-hero-sidebar-hdr">Popular Projects</div>
+
+    <button class="vjs-hero-card active"
+      data-id="49960413" data-title="Sagrada Familia: Ode à la Vie"
+      data-artist="Moment Factory" data-loc="Barcelona, Spain"
+      data-type="Architectural Projection" data-year="2012"
+      data-bg="rgba(57,255,20,0.35),rgba(0,60,20,0.95)"
+      data-href="/projects/sagrada-familia-moment-factory"
+      onclick="heroPlay(this)">
+      <div class="vjs-hero-card-thumb">
+        <div class="vjs-hero-card-thumb-bg" style="background:linear-gradient(135deg,rgba(57,255,20,0.4),rgba(0,40,15,0.95));"></div>
+        <div class="vjs-hero-card-play">&#9654;</div>
       </div>
-      <div class="vjs-nts-sidebar-info">
-        <div class="vjs-nts-sidebar-label">Immersive Installation</div>
-        <div class="vjs-nts-sidebar-title">AI Dome Experience</div>
+      <div class="vjs-hero-card-info">
+        <div class="vjs-hero-card-cat">Architectural</div>
+        <div class="vjs-hero-card-title">Sagrada Familia</div>
+        <div class="vjs-hero-card-artist">Moment Factory</div>
       </div>
-    </a>
-    
-    <a href="/projects/berlin-techno-visuals" class="vjs-nts-sidebar-card">
-      <div class="vjs-nts-sidebar-thumb">
-        
-        
-        <div class="vjs-nts-sidebar-thumb-bg" style="background: linear-gradient(135deg, rgba(255,0,170,0.5),rgba(157,0,255,0.4));"></div>
-        <svg class="vjs-nts-sidebar-thumb-play" viewBox="0 0 24 24" fill="currentColor"><polygon points="5,3 5,21 21,12"/></svg>
+    </button>
+
+    <button class="vjs-hero-card"
+      data-id="66443975" data-title="Chiaroscuro"
+      data-artist="Sougwen Chung" data-loc="New York, USA"
+      data-type="Generative Art Installation" data-year="2013"
+      data-href="/projects/chiaroscuro-sougwen"
+      onclick="heroPlay(this)">
+      <div class="vjs-hero-card-thumb">
+        <div class="vjs-hero-card-thumb-bg" style="background:linear-gradient(135deg,rgba(157,0,255,0.6),rgba(30,0,60,0.95));"></div>
+        <div class="vjs-hero-card-play">&#9654;</div>
       </div>
-      <div class="vjs-nts-sidebar-info">
-        <div class="vjs-nts-sidebar-label">Live Visuals</div>
-        <div class="vjs-nts-sidebar-title">Berlin Techno Visuals</div>
+      <div class="vjs-hero-card-info">
+        <div class="vjs-hero-card-cat">Generative Art</div>
+        <div class="vjs-hero-card-title">Chiaroscuro</div>
+        <div class="vjs-hero-card-artist">Sougwen Chung</div>
       </div>
-    </a>
-    
-    <a href="/projects/chiaroscuro-sougwen" class="vjs-nts-sidebar-card">
-      <div class="vjs-nts-sidebar-thumb">
-        
-        
-        <div class="vjs-nts-sidebar-thumb-bg" style="background: linear-gradient(135deg, rgba(0,212,255,0.5),rgba(157,0,255,0.35));"></div>
-        <svg class="vjs-nts-sidebar-thumb-play" viewBox="0 0 24 24" fill="currentColor"><polygon points="5,3 5,21 21,12"/></svg>
+    </button>
+
+    <button class="vjs-hero-card"
+      data-id="234010348" data-title="ORANGE — Show Hello!"
+      data-artist="Superbien" data-loc="Paris, France"
+      data-type="Architectural Mapping" data-year="2016"
+      data-href="/projects/orange-superbien"
+      onclick="heroPlay(this)">
+      <div class="vjs-hero-card-thumb">
+        <div class="vjs-hero-card-thumb-bg" style="background:linear-gradient(135deg,rgba(255,150,0,0.5),rgba(60,20,0,0.95));"></div>
+        <div class="vjs-hero-card-play">&#9654;</div>
       </div>
-      <div class="vjs-nts-sidebar-info">
-        <div class="vjs-nts-sidebar-label">Immersive Installation</div>
-        <div class="vjs-nts-sidebar-title">Chiaroscuro</div>
+      <div class="vjs-hero-card-info">
+        <div class="vjs-hero-card-cat">Projection Mapping</div>
+        <div class="vjs-hero-card-title">ORANGE Show Hello!</div>
+        <div class="vjs-hero-card-artist">Superbien</div>
       </div>
-    </a>
-    
+    </button>
+
+    <button class="vjs-hero-card"
+      data-id="11767833" data-title="PTA 04"
+      data-artist="Quayola" data-loc="London, UK"
+      data-type="Live AV Performance" data-year="2008"
+      data-href="/projects/pta-04-quayola"
+      onclick="heroPlay(this)">
+      <div class="vjs-hero-card-thumb">
+        <div class="vjs-hero-card-thumb-bg" style="background:linear-gradient(135deg,rgba(255,0,170,0.5),rgba(50,0,30,0.95));"></div>
+        <div class="vjs-hero-card-play">&#9654;</div>
+      </div>
+      <div class="vjs-hero-card-info">
+        <div class="vjs-hero-card-cat">Live AV</div>
+        <div class="vjs-hero-card-title">PTA 04</div>
+        <div class="vjs-hero-card-artist">Quayola</div>
+      </div>
+    </button>
+
+    <button class="vjs-hero-card"
+      data-id="61227321" data-title="Tearing Shadows"
+      data-artist="Robert Seidel" data-loc="Berlin, Germany"
+      data-type="Generative Film" data-year="2013"
+      data-href="/projects/tearing-shadows-seidel"
+      onclick="heroPlay(this)">
+      <div class="vjs-hero-card-thumb">
+        <div class="vjs-hero-card-thumb-bg" style="background:linear-gradient(135deg,rgba(0,249,255,0.4),rgba(0,30,50,0.95));"></div>
+        <div class="vjs-hero-card-play">&#9654;</div>
+      </div>
+      <div class="vjs-hero-card-info">
+        <div class="vjs-hero-card-cat">Generative Art</div>
+        <div class="vjs-hero-card-title">Tearing Shadows</div>
+        <div class="vjs-hero-card-artist">Robert Seidel</div>
+      </div>
+    </button>
+
+    <button class="vjs-hero-card"
+      data-id="51680823" data-title="KOLOBOK"
+      data-artist="SilaSveta" data-loc="Moscow, Russia"
+      data-type="Interactive Projection" data-year="2012"
+      data-href="/projects/kolobok-silasveta"
+      onclick="heroPlay(this)">
+      <div class="vjs-hero-card-thumb">
+        <div class="vjs-hero-card-thumb-bg" style="background:linear-gradient(135deg,rgba(0,212,255,0.45),rgba(0,20,40,0.95));"></div>
+        <div class="vjs-hero-card-play">&#9654;</div>
+      </div>
+      <div class="vjs-hero-card-info">
+        <div class="vjs-hero-card-cat">Projection Mapping</div>
+        <div class="vjs-hero-card-title">KOLOBOK</div>
+        <div class="vjs-hero-card-artist">SilaSveta</div>
+      </div>
+    </button>
+
+    <button class="vjs-hero-card"
+      data-id="15887314" data-title="The LightLine of Gotham"
+      data-artist="seeper" data-loc="New York, USA"
+      data-type="Architectural Projection" data-year="2010"
+      data-href="/projects/lightline-gotham-seeper"
+      onclick="heroPlay(this)">
+      <div class="vjs-hero-card-thumb">
+        <div class="vjs-hero-card-thumb-bg" style="background:linear-gradient(135deg,rgba(157,0,255,0.4),rgba(0,212,255,0.3));"></div>
+        <div class="vjs-hero-card-play">&#9654;</div>
+      </div>
+      <div class="vjs-hero-card-info">
+        <div class="vjs-hero-card-cat">Architectural</div>
+        <div class="vjs-hero-card-title">LightLine of Gotham</div>
+        <div class="vjs-hero-card-artist">seeper</div>
+      </div>
+    </button>
+
+    <button class="vjs-hero-card"
+      data-id="26381610" data-title="A-cero XV Aniversario"
+      data-artist="Onionlab" data-loc="Madrid, Spain"
+      data-type="3D Projection Mapping" data-year="2011"
+      data-href="/projects/a-cero-xv-aniversario"
+      onclick="heroPlay(this)">
+      <div class="vjs-hero-card-thumb">
+        <div class="vjs-hero-card-thumb-bg" style="background:linear-gradient(135deg,rgba(255,0,170,0.4),rgba(157,0,255,0.5));"></div>
+        <div class="vjs-hero-card-play">&#9654;</div>
+      </div>
+      <div class="vjs-hero-card-info">
+        <div class="vjs-hero-card-cat">Projection Mapping</div>
+        <div class="vjs-hero-card-title">A-cero XV</div>
+        <div class="vjs-hero-card-artist">Onionlab</div>
+      </div>
+    </button>
+
   </div>
 </section>
+
+<script>
+function heroPlay(card) {
+  var id      = card.dataset.id;
+  var title   = card.dataset.title;
+  var artist  = card.dataset.artist;
+  var loc     = card.dataset.loc;
+  var type    = card.dataset.type;
+  var year    = card.dataset.year;
+  var href    = card.dataset.href;
+
+  document.getElementById('hero-iframe').src =
+    'https://player.vimeo.com/video/' + id + '?autoplay=1&title=0&byline=0&portrait=0&color=9d00ff';
+  document.getElementById('hero-title').textContent     = title;
+  document.getElementById('hero-artist').textContent    = artist + '  ·  ' + loc;
+  document.getElementById('hero-tag-type').textContent  = type;
+  document.getElementById('hero-tag-year').textContent  = year;
+  document.getElementById('hero-vimeo-link').href       = 'https://vimeo.com/' + id;
+  document.getElementById('hero-project-link').href     = href;
+
+  document.querySelectorAll('.vjs-hero-card').forEach(function(c){ c.classList.remove('active'); });
+  card.classList.add('active');
+}
+</script>
 
 <!-- SPONSOR TICKER -->
 <div class="vjs-sponsor-bar">
