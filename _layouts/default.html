@@ -13,7 +13,8 @@ user can't scroll away from the modal. {% endcomment %}
   {% include utilities/analytics.html %}
 </head>
 <body {% if page.overflow %} class="overflow-hidden" {% endif %}>
-  <div class="content-wrapper">
+  <a href="#main-content" class="skip-to-content">Skip to content</a>
+  <div class="content-wrapper" id="main-content" tabindex="-1">
     {{ content }}
   </div>
   <!-- Site Scripts-->

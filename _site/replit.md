@@ -36,11 +36,29 @@ VJs TV is a Jekyll-based platform for VJ culture and audiovisual performances. I
 - `_config.yml` - Jekyll configuration with collections
 - `_data/navigation.yml` - Main navigation menu
 - `_data/general_settings.yml` - Site-wide settings and branding
-- `assets/css/vjstv.css` - Custom dark/neon theme CSS
+- `assets/css/vjstv.css` - Custom dark/neon theme CSS (~3170 lines)
+- `_layouts/default.html` - Base layout with skip-to-content link
 - `_layouts/vjs-detail.html` - Shared detail page layout for all collections
+- `_includes/vjstv-footer.html` - Custom footer with floating sidebar, tip jar modal, mobile nav
 - `_includes/cards/` - Reusable card components (artist, project, event, studio, technology, sponsor)
 - `_includes/layouts/nav/nav-3.html` - Dark navigation bar (used across all pages)
-- `_includes/layouts/footer/footer-1.html` - Footer template
+- `_includes/core/head/meta-seo-tags.html` - SEO meta tags, JSON-LD schema
+- `_includes/core/head/meta-og-tags.html` - Open Graph + Twitter Card meta
+
+## Accessibility
+- Skip-to-content link (keyboard-accessible, cyan highlight)
+- `:focus-visible` outlines on all interactive elements (cyan)
+- ARIA labels on buttons, modals, navigation landmarks
+- `aria-hidden="true"` on decorative icons
+- `role="dialog"` on tip jar modal
+- `prefers-reduced-motion` media query disables all animations
+
+## Performance
+- `requestAnimationFrame` throttled scroll handler for progress bar
+- Passive scroll event listeners
+- `will-change` hints on animated elements
+- IntersectionObserver visibility gating on meter bar animation
+- `preconnect` for Google Fonts
 
 ## Development
 ```

@@ -1,10 +1,13 @@
 <meta charset="utf-8" />
-<!-- Primary Meta Tags -->
-<title>{% if page.meta_title %} {{ page.meta_title }} {% elsif page.title %} {{ page.title }} {% else %} {{
-    site.data.general_settings.title }}{% endif %}</title>
-<meta name="title" content="{% if page.meta_title %} {{ page.meta_title }} {% elsif page.title %} {{ page.title }} {% else %} {{ site.data.general_settings.title }}{% endif %}">
-<meta name="description" content="{% if page.meta_description %} {{ page.meta_description }} {% elsif page.description %} {{ page.description}} {% else %}
-         {{ site.data.general_settings.description }}{% endif %}">
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<meta name="theme-color" content="#050505" />
+<meta name="color-scheme" content="dark" />
+<meta name="robots" content="index, follow" />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<title>{% if page.meta_title %}{{ page.meta_title }}{% elsif page.title %}{{ page.title }}{% else %}{{ site.data.general_settings.title }}{% endif %}</title>
+<meta name="title" content="{% if page.meta_title %}{{ page.meta_title }}{% elsif page.title %}{{ page.title }}{% else %}{{ site.data.general_settings.title }}{% endif %}">
+<meta name="description" content="{% if page.meta_description %}{{ page.meta_description }}{% elsif page.description %}{{ page.description }}{% else %}{{ site.data.general_settings.description }}{% endif %}">
 {% if page.meta_keywords %}
 <meta name="keywords" content="{{ page.meta_keywords }}">
 {% endif %}

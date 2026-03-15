@@ -4,28 +4,34 @@
 <head>
   <!-- Meta Tags-->
   <meta charset="utf-8" />
-<!-- Primary Meta Tags -->
-<title> Mad Mapper </title>
-<meta name="title" content=" Mad Mapper ">
-<meta name="description" content=" The world's leading projection mapping and LED mapping software, trusted by VJs and installation artists worldwide. ">
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<meta name="theme-color" content="#050505" />
+<meta name="color-scheme" content="dark" />
+<meta name="robots" content="index, follow" />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<title>Mad Mapper</title>
+<meta name="title" content="Mad Mapper">
+<meta name="description" content="The world's leading projection mapping and LED mapping software, trusted by VJs and installation artists worldwide.">
 
-  <!-- Open Graph / Facebook -->
-<meta property="og:type" content="website">
-<meta property="og:url" content=" /sponsors/madmapper-sponsor ">
-<meta property="og:title" content=" Mad Mapper ">
-<meta property="og:description" content=" The world's leading projection mapping and LED mapping software, trusted by VJs and installation artists worldwide. ">
+  <meta property="og:type" content="website">
+<meta property="og:url" content="http://0.0.0.0:5000/sponsors/madmapper-sponsor">
+<meta property="og:site_name" content="VJs TV">
+<meta property="og:title" content="Mad Mapper">
+<meta property="og:description" content="The world's leading projection mapping and LED mapping software, trusted by VJs and installation artists worldwide.">
 
 <meta property="og:image" content="/assets/images/meta-image.webp" />
 
-<!-- Twitter -->
-<meta property="twitter:card" content="summary_large_image">
-<meta property="twitter:url" content="/sponsors/madmapper-sponsor">
-<meta property="twitter:title" content=" Mad Mapper ">
-<meta property="twitter:description" content=" The world's leading projection mapping and LED mapping software, trusted by VJs and installation artists worldwide. ">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:site" content="@vjs_tv">
+<meta name="twitter:title" content="Mad Mapper">
+<meta name="twitter:description" content="The world's leading projection mapping and LED mapping software, trusted by VJs and installation artists worldwide.">
 
-<meta property="twitter:image" content="/assets/images/meta-image.webp" />
+<meta name="twitter:image" content="/assets/images/meta-image.webp" />
 
-<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"WebSite","name":"VJs TV","url":"http://0.0.0.0:5000/","description":"VJs TV is the global broadcast network for VJ culture, audiovisual performances, and digital visual art. Watch live performances, discover artists, and explore the world of visual performance.","potentialAction":{"@type":"SearchAction","target":"http://0.0.0.0:5000/search?q={search_term_string}","query-input":"required name=search_term_string"}}
+</script>
   <!-- Stylesheets-->
   <link rel="shortcut icon" href="/assets/images/favicon.webp" />
 <link rel="stylesheet" type="text/css" href="/assets/css/bootstrap.min.css" />
@@ -45,7 +51,8 @@
   
 </head>
 <body >
-  <div class="content-wrapper">
+  <a href="#main-content" class="skip-to-content">Skip to content</a>
+  <div class="content-wrapper" id="main-content" tabindex="-1">
     <!--  Nav Name :Classic Dark Header -->
 <nav
   class="navbar  dark-wrapper inverse-text navbar-hover-opacity navbar-expand-lg nav-uppercase ">
@@ -324,7 +331,7 @@
   </div>
 </section>
 
-<footer class="vjstv-footer">
+<footer class="vjstv-footer" role="contentinfo" aria-label="Site footer">
   <div class="vjstv-footer-top">
     <div class="vjstv-footer-brand">
       <div class="vjstv-footer-logo">VJs TV</div>
@@ -410,35 +417,35 @@
     <div class="vjs-float-meter-bar" id="mb7"></div>
     <div class="vjs-float-meter-bar" id="mb8"></div>
   </div>
-  <button class="vjs-float-sidebar-btn" id="glitch-btn" onclick="vjsToggleGlitch()" title="Toggle Glitch Mode">
-    <span class="vjs-float-sidebar-icon">&#9732;</span>
+  <button type="button" class="vjs-float-sidebar-btn" id="glitch-btn" onclick="vjsToggleGlitch()" title="Toggle Glitch Mode" aria-label="Toggle glitch visual effect">
+    <span class="vjs-float-sidebar-icon" aria-hidden="true">&#9732;</span>
   </button>
-  <a href="https://discord.gg/vjstv" target="_blank" class="vjs-float-sidebar-btn discord" title="Join Discord">
-    <span class="vjs-float-sidebar-icon">&#128172;</span>
+  <a href="https://discord.gg/vjstv" target="_blank" rel="noopener" class="vjs-float-sidebar-btn discord" title="Join Discord" aria-label="Join VJs TV Discord server">
+    <span class="vjs-float-sidebar-icon" aria-hidden="true">&#128172;</span>
   </a>
-  <button class="vjs-float-sidebar-btn tip" onclick="vjsOpenTip()" title="Visual Tip Jar">
-    <span class="vjs-float-sidebar-icon">&#128184;</span>
+  <button type="button" class="vjs-float-sidebar-btn tip" onclick="vjsOpenTip()" title="Visual Tip Jar" aria-label="Open tip jar to support artists">
+    <span class="vjs-float-sidebar-icon" aria-hidden="true">&#128184;</span>
   </button>
 </div>
 
 <!-- TIP JAR MODAL -->
-<div class="vjs-tip-modal" id="vjs-tip-modal" onclick="if(event.target===this)vjsCloseTip()">
+<div class="vjs-tip-modal" id="vjs-tip-modal" role="dialog" aria-label="Visual Tip Jar" onclick="if(event.target===this)vjsCloseTip()">
   <div class="vjs-tip-modal-inner">
     <div style="font-size:2.5rem; margin-bottom:1rem;">&#128184;</div>
     <h3 style="font-family:'Barlow Condensed',sans-serif; font-size:1rem; font-weight:700; letter-spacing:0.08em; text-transform:uppercase; color:#fff; margin-bottom:0.5rem;">Visual Tip Jar</h3>
     <p style="font-size:0.82rem; color:var(--vjs-text-muted); margin-bottom:1.75rem; line-height:1.6;">Support the VJs in the network directly. 100% goes to the artists.</p>
     <div style="display:grid; grid-template-columns:1fr 1fr; gap:8px; margin-bottom:1.25rem;">
-      <button onclick="vjsTipAmount('€5')"  class="vjs-tip-btn">€5</button>
-      <button onclick="vjsTipAmount('€10')" class="vjs-tip-btn">€10</button>
-      <button onclick="vjsTipAmount('€25')" class="vjs-tip-btn">€25</button>
-      <button onclick="vjsTipAmount('€50')" class="vjs-tip-btn featured">€50 &#9733;</button>
+      <button type="button" onclick="vjsTipAmount('€5')"  class="vjs-tip-btn">€5</button>
+      <button type="button" onclick="vjsTipAmount('€10')" class="vjs-tip-btn">€10</button>
+      <button type="button" onclick="vjsTipAmount('€25')" class="vjs-tip-btn">€25</button>
+      <button type="button" onclick="vjsTipAmount('€50')" class="vjs-tip-btn featured">€50 &#9733;</button>
     </div>
-    <button onclick="vjsCloseTip()" style="background:none; border:none; color:var(--vjs-text-muted); font-family:'Barlow Condensed',sans-serif; font-size:0.7rem; letter-spacing:0.1em; cursor:pointer; text-transform:uppercase;">Close</button>
+    <button type="button" onclick="vjsCloseTip()" style="background:none; border:none; color:var(--vjs-text-muted); font-family:'Barlow Condensed',sans-serif; font-size:0.7rem; letter-spacing:0.1em; cursor:pointer; text-transform:uppercase;">Close</button>
   </div>
 </div>
 
 <!-- MOBILE BOTTOM NAV -->
-<nav class="vjs-mobile-nav" id="vjs-mobile-nav">
+<nav class="vjs-mobile-nav" id="vjs-mobile-nav" aria-label="Mobile navigation">
   <div class="vjs-mobile-nav-items">
     <a href="/" class="vjs-mobile-nav-item">
       <span class="vjs-mobile-nav-icon">&#8962;</span>
@@ -480,16 +487,24 @@ function vjsTipAmount(amt) {
 (function() {
   var bars = [];
   for(var i=0;i<9;i++) { var b=document.getElementById('mb'+i); if(b) bars.push(b); }
+  var meterVisible = true;
+  var sidebar = document.getElementById('vjs-float-sidebar');
+  if(sidebar && window.IntersectionObserver) {
+    var mObs = new IntersectionObserver(function(es){meterVisible=es[0].isIntersecting;});
+    mObs.observe(sidebar);
+  }
   function animateMeter() {
-    var level = Math.random();
-    bars.forEach(function(b, i) {
-      var thresh = (i+1)/bars.length;
-      b.className = 'vjs-float-meter-bar';
-      if(level > thresh) {
-        b.classList.add(i < 3 ? 'active-1' : i < 6 ? 'active-2' : 'active-3');
-      }
-    });
-    setTimeout(animateMeter, 80 + Math.random()*120);
+    if(meterVisible) {
+      var level = Math.random();
+      bars.forEach(function(b, i) {
+        var thresh = (i+1)/bars.length;
+        b.className = 'vjs-float-meter-bar';
+        if(level > thresh) {
+          b.classList.add(i < 3 ? 'active-1' : i < 6 ? 'active-2' : 'active-3');
+        }
+      });
+    }
+    setTimeout(animateMeter, 120 + Math.random()*80);
   }
   animateMeter();
 })();
