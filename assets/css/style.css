@@ -822,6 +822,15 @@ button.hamburger.animate.active:after {
     line-height: 3rem;
     font-size: 0.75rem;
     background: none !important;
+    border: none !important;
+    border-radius: 0 !important;
+    outline: none !important;
+    box-shadow: none !important;
+}
+.search-dropdown input[type="text"]:focus {
+    outline: none !important;
+    box-shadow: none !important;
+    border: none !important;
 }
 .search-dropdown .dropdown-menu.collapsing {
     display: block;
