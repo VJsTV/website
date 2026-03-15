@@ -3280,22 +3280,214 @@ textarea:focus-visible {
 button.vjs-live-strip-icon {
   background: none;
   border: none;
-  padding: 0;
+  padding: 4px;
   cursor: pointer;
   display: flex;
   align-items: center;
   justify-content: center;
+  transition: color 0.15s;
 }
 
 button.vjs-live-strip-icon svg {
   width: 1rem;
   height: 1rem;
-  color: rgba(255,255,255,0.85);
+  color: rgba(255,255,255,0.6);
   transition: color 0.2s;
 }
 
-button.vjs-live-strip-icon:hover svg {
+button.vjs-live-strip-icon:hover svg,
+button.vjs-live-strip-icon.active svg {
   color: #fff;
+}
+
+button.vjs-live-strip-icon.active {
+  color: var(--vjs-cyan);
+}
+
+button.vjs-live-strip-icon.active svg {
+  color: var(--vjs-cyan);
+}
+
+/* ================================================================
+   SCHEDULE PANEL
+   ================================================================ */
+.vjs-schedule-panel {
+  position: fixed;
+  top: 72px;
+  right: 0;
+  width: 360px;
+  max-height: calc(100vh - 72px);
+  background: #0a0a0a;
+  border-left: 1px solid #222;
+  border-bottom: 1px solid #222;
+  z-index: 9000;
+  transform: translateX(100%);
+  transition: transform 0.25s cubic-bezier(0.4,0,0.2,1);
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+}
+
+.vjs-schedule-panel.open {
+  transform: translateX(0);
+}
+
+.vjs-schedule-panel-inner {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  overflow: hidden;
+}
+
+.vjs-schedule-panel-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 14px 18px;
+  border-bottom: 1px solid #222;
+  background: #000;
+  flex-shrink: 0;
+}
+
+.vjs-schedule-panel-title {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 0.72rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  color: var(--vjs-cyan);
+}
+
+.vjs-schedule-panel-close {
+  background: none;
+  border: none;
+  color: rgba(255,255,255,0.4);
+  font-size: 1.1rem;
+  cursor: pointer;
+  line-height: 1;
+  padding: 0;
+  transition: color 0.15s;
+}
+
+.vjs-schedule-panel-close:hover { color: #fff; }
+
+.vjs-schedule-panel-body {
+  flex: 1;
+  overflow-y: auto;
+  scrollbar-width: thin;
+  scrollbar-color: #333 transparent;
+}
+
+.vjs-sched-row {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  padding: 12px 18px;
+  border-bottom: 1px solid #1a1a1a;
+  text-decoration: none;
+  transition: background 0.15s;
+}
+
+.vjs-sched-row:hover {
+  background: rgba(0,249,255,0.04);
+}
+
+.vjs-sched-date {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  flex-shrink: 0;
+  width: 36px;
+}
+
+.vjs-sched-month {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 0.55rem;
+  letter-spacing: 0.1em;
+  color: var(--vjs-cyan);
+  text-transform: uppercase;
+  line-height: 1;
+}
+
+.vjs-sched-day {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 1.4rem;
+  font-weight: 700;
+  color: #fff;
+  line-height: 1.1;
+}
+
+.vjs-sched-info {
+  flex: 1;
+  min-width: 0;
+}
+
+.vjs-sched-name {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 0.82rem;
+  font-weight: 600;
+  color: #fff;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.vjs-sched-meta {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 0.68rem;
+  color: rgba(255,255,255,0.35);
+  letter-spacing: 0.03em;
+  margin-top: 2px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.vjs-sched-type {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 0.55rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: var(--vjs-ultraviolet);
+  background: rgba(157,0,255,0.1);
+  border: 1px solid rgba(157,0,255,0.25);
+  padding: 2px 6px;
+  flex-shrink: 0;
+  white-space: nowrap;
+}
+
+.vjs-schedule-panel-footer {
+  display: block;
+  padding: 14px 18px;
+  border-top: 1px solid #222;
+  background: #000;
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 0.7rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: var(--vjs-cyan);
+  text-decoration: none;
+  text-align: center;
+  flex-shrink: 0;
+  transition: background 0.15s;
+}
+
+.vjs-schedule-panel-footer:hover {
+  background: rgba(0,249,255,0.05);
+  color: #fff;
+}
+
+@media (max-width: 480px) {
+  .vjs-schedule-panel {
+    width: 100vw;
+    top: 68px;
+    right: 0;
+    border-left: none;
+  }
 }
 
 svg.vjs-float-sidebar-icon {

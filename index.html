@@ -30,8 +30,48 @@ meta_description: "VJs TV is the global broadcast network for VJ culture. Watch 
     <div class="vjs-live-strip-loc">{% if second_artist %}{{ second_artist.location }}{% else %}24/7{% endif %}</div>
   </div>
   <div class="vjs-live-strip-right">
-    <button type="button" class="vjs-live-strip-icon" title="Schedule" aria-label="View broadcast schedule"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" style="width:1em; height:1em;"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg></button>
-    <button type="button" class="vjs-live-strip-icon" title="Volume" aria-label="Toggle volume"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" style="width:1em; height:1em;"><path d="M3 9v6h4l5 5V4L7 9H3Z"/><path d="M16 5c2 2 2 6 0 8M19 2c3 3 3 9 0 12"/></svg></button>
+    <button type="button" id="vjs-schedule-btn" class="vjs-live-strip-icon" title="Broadcast Schedule" aria-label="View broadcast schedule" onclick="vjsToggleSchedule()">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" style="width:1em; height:1em;"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg>
+    </button>
+    <button type="button" id="vjs-mute-btn" class="vjs-live-strip-icon" title="Toggle Audio" aria-label="Toggle audio" onclick="vjsToggleMute()">
+      <svg id="vjs-vol-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" style="width:1em; height:1em;">
+        <path d="M3 9v6h4l5 5V4L7 9H3Z"/>
+        <path d="M16 5c2 2 2 6 0 8M19 2c3 3 3 9 0 12"/>
+      </svg>
+    </button>
+  </div>
+</div>
+
+<!-- SCHEDULE PANEL -->
+<div id="vjs-schedule-panel" class="vjs-schedule-panel" aria-hidden="true">
+  <div class="vjs-schedule-panel-inner">
+    <div class="vjs-schedule-panel-header">
+      <span class="vjs-schedule-panel-title">Broadcast Schedule</span>
+      <button type="button" class="vjs-schedule-panel-close" onclick="vjsToggleSchedule()" aria-label="Close schedule">&times;</button>
+    </div>
+    <div class="vjs-schedule-panel-body">
+      {% assign upcoming = site.events | sort: "date" %}
+      {% assign now_ts = site.time | date: "%s" | plus: 0 %}
+      {% for ev in upcoming limit:8 %}
+      {% assign ev_ts = ev.date | date: "%s" | plus: 0 %}
+      {% if ev_ts >= now_ts %}
+      <a href="{{ ev.url }}" class="vjs-sched-row" onclick="vjsToggleSchedule()">
+        <div class="vjs-sched-date">
+          <span class="vjs-sched-month">{{ ev.date | date: "%b" | upcase }}</span>
+          <span class="vjs-sched-day">{{ ev.date | date: "%-d" }}</span>
+        </div>
+        <div class="vjs-sched-info">
+          <div class="vjs-sched-name">{{ ev.title }}</div>
+          <div class="vjs-sched-meta">{% if ev.time %}{{ ev.time }} · {% endif %}{{ ev.location }}</div>
+        </div>
+        {% if ev.event_type %}
+        <span class="vjs-sched-type">{{ ev.event_type }}</span>
+        {% endif %}
+      </a>
+      {% endif %}
+      {% endfor %}
+    </div>
+    <a href="/events" class="vjs-schedule-panel-footer">View All Events →</a>
   </div>
 </div>
 
@@ -333,6 +373,47 @@ meta_description: "VJs TV is the global broadcast network for VJ culture. Watch 
 {% include vjstv-footer.html %}
 
 <script>
+var vjsMuted = false;
+
+function vjsToggleMute() {
+  vjsMuted = !vjsMuted;
+  var btn = document.getElementById('vjs-mute-btn');
+  var icon = document.getElementById('vjs-vol-icon');
+  if (vjsMuted) {
+    icon.innerHTML = '<path d="M3 9v6h4l5 5V4L7 9H3Z"/><line x1="22" y1="9" x2="16" y2="15"/><line x1="16" y1="9" x2="22" y2="15"/>';
+    btn.style.color = 'rgba(255,0,170,0.7)';
+    btn.title = 'Unmute';
+  } else {
+    icon.innerHTML = '<path d="M3 9v6h4l5 5V4L7 9H3Z"/><path d="M16 5c2 2 2 6 0 8M19 2c3 3 3 9 0 12"/>';
+    btn.style.color = '';
+    btn.title = 'Mute';
+  }
+}
+
+function vjsToggleSchedule() {
+  var panel = document.getElementById('vjs-schedule-panel');
+  var btn = document.getElementById('vjs-schedule-btn');
+  var open = panel.classList.toggle('open');
+  panel.setAttribute('aria-hidden', open ? 'false' : 'true');
+  btn.classList.toggle('active', open);
+  if (open) {
+    document.addEventListener('click', vjsScheduleOutside, true);
+  } else {
+    document.removeEventListener('click', vjsScheduleOutside, true);
+  }
+}
+
+function vjsScheduleOutside(e) {
+  var panel = document.getElementById('vjs-schedule-panel');
+  var btn = document.getElementById('vjs-schedule-btn');
+  if (!panel.contains(e.target) && e.target !== btn && !btn.contains(e.target)) {
+    panel.classList.remove('open');
+    panel.setAttribute('aria-hidden', 'true');
+    btn.classList.remove('active');
+    document.removeEventListener('click', vjsScheduleOutside, true);
+  }
+}
+
 (function() {
   {% assign _countries = "" %}{% for a in site.vjs %}{% if a.location %}{% assign _c = a.location | split: ", " | last | strip %}{% unless _countries contains _c %}{% assign _countries = _countries | append: _c | append: "|" %}{% endunless %}{% endif %}{% endfor %}{% for p in site.projects %}{% if p.location %}{% assign _c = p.location | split: ", " | last | strip %}{% unless _countries contains _c %}{% assign _countries = _countries | append: _c | append: "|" %}{% endunless %}{% endif %}{% endfor %}{% for e in site.events %}{% if e.location %}{% assign _c = e.location | split: ", " | last | strip %}{% unless _countries contains _c %}{% assign _countries = _countries | append: _c | append: "|" %}{% endunless %}{% endif %}{% endfor %}{% for s in site.studios %}{% if s.location %}{% assign _c = s.location | split: ", " | last | strip %}{% unless _countries contains _c %}{% assign _countries = _countries | append: _c | append: "|" %}{% endunless %}{% endif %}{% endfor %}{% assign _country_arr = _countries | split: "|" %}
   var statsTargets = { 'stat-artists': {{ site.vjs | size }}, 'stat-projects': {{ site.projects | size }}, 'stat-events': {{ site.events | size }}, 'stat-studios': {{ site.studios | size | default: 0 }}, 'stat-sponsors': {{ site.sponsors | size | default: 0 }}, 'stat-countries': {{ _country_arr | size }} };

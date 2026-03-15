@@ -272,8 +272,111 @@
     <div class="vjs-live-strip-loc">Berlin, Germany</div>
   </div>
   <div class="vjs-live-strip-right">
-    <button type="button" class="vjs-live-strip-icon" title="Schedule" aria-label="View broadcast schedule"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" style="width:1em; height:1em;"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg></button>
-    <button type="button" class="vjs-live-strip-icon" title="Volume" aria-label="Toggle volume"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" style="width:1em; height:1em;"><path d="M3 9v6h4l5 5V4L7 9H3Z"/><path d="M16 5c2 2 2 6 0 8M19 2c3 3 3 9 0 12"/></svg></button>
+    <button type="button" id="vjs-schedule-btn" class="vjs-live-strip-icon" title="Broadcast Schedule" aria-label="View broadcast schedule" onclick="vjsToggleSchedule()">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" style="width:1em; height:1em;"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg>
+    </button>
+    <button type="button" id="vjs-mute-btn" class="vjs-live-strip-icon" title="Toggle Audio" aria-label="Toggle audio" onclick="vjsToggleMute()">
+      <svg id="vjs-vol-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" style="width:1em; height:1em;">
+        <path d="M3 9v6h4l5 5V4L7 9H3Z"/>
+        <path d="M16 5c2 2 2 6 0 8M19 2c3 3 3 9 0 12"/>
+      </svg>
+    </button>
+  </div>
+</div>
+
+<!-- SCHEDULE PANEL -->
+<div id="vjs-schedule-panel" class="vjs-schedule-panel" aria-hidden="true">
+  <div class="vjs-schedule-panel-inner">
+    <div class="vjs-schedule-panel-header">
+      <span class="vjs-schedule-panel-title">Broadcast Schedule</span>
+      <button type="button" class="vjs-schedule-panel-close" onclick="vjsToggleSchedule()" aria-label="Close schedule">&times;</button>
+    </div>
+    <div class="vjs-schedule-panel-body">
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      <a href="/events/athens-digital-arts-2026" class="vjs-sched-row" onclick="vjsToggleSchedule()">
+        <div class="vjs-sched-date">
+          <span class="vjs-sched-month">APR</span>
+          <span class="vjs-sched-day">3</span>
+        </div>
+        <div class="vjs-sched-info">
+          <div class="vjs-sched-name">Athens Digital Arts Festival (ADAF) 2026</div>
+          <div class="vjs-sched-meta">All Day · Athens, Greece</div>
+        </div>
+        
+        <span class="vjs-sched-type">Festival</span>
+        
+      </a>
+      
+      
+      
+      
+      <a href="/events/coachella-2026" class="vjs-sched-row" onclick="vjsToggleSchedule()">
+        <div class="vjs-sched-date">
+          <span class="vjs-sched-month">APR</span>
+          <span class="vjs-sched-day">10</span>
+        </div>
+        <div class="vjs-sched-info">
+          <div class="vjs-sched-name">Coachella Valley Music & Arts Festival 2026</div>
+          <div class="vjs-sched-meta">All Day · Indio, California, USA</div>
+        </div>
+        
+        <span class="vjs-sched-type">Festival</span>
+        
+      </a>
+      
+      
+      
+      
+      <a href="/events/sonar-istanbul-2026" class="vjs-sched-row" onclick="vjsToggleSchedule()">
+        <div class="vjs-sched-date">
+          <span class="vjs-sched-month">APR</span>
+          <span class="vjs-sched-day">10</span>
+        </div>
+        <div class="vjs-sched-info">
+          <div class="vjs-sched-name">Sónar Istanbul 2026</div>
+          <div class="vjs-sched-meta">All Day · Istanbul, Turkey</div>
+        </div>
+        
+        <span class="vjs-sched-type">Festival</span>
+        
+      </a>
+      
+      
+      
+      
+      <a href="/events/video-mapping-festival-2026" class="vjs-sched-row" onclick="vjsToggleSchedule()">
+        <div class="vjs-sched-date">
+          <span class="vjs-sched-month">APR</span>
+          <span class="vjs-sched-day">10</span>
+        </div>
+        <div class="vjs-sched-info">
+          <div class="vjs-sched-name">Video Mapping Festival 2026</div>
+          <div class="vjs-sched-meta">Evening · Lille + Hauts-de-France, France</div>
+        </div>
+        
+        <span class="vjs-sched-type">Festival</span>
+        
+      </a>
+      
+      
+    </div>
+    <a href="/events" class="vjs-schedule-panel-footer">View All Events →</a>
   </div>
 </div>
 
@@ -1206,6 +1309,47 @@ function vjsTipAmount(amt) {
 
 
 <script>
+var vjsMuted = false;
+
+function vjsToggleMute() {
+  vjsMuted = !vjsMuted;
+  var btn = document.getElementById('vjs-mute-btn');
+  var icon = document.getElementById('vjs-vol-icon');
+  if (vjsMuted) {
+    icon.innerHTML = '<path d="M3 9v6h4l5 5V4L7 9H3Z"/><line x1="22" y1="9" x2="16" y2="15"/><line x1="16" y1="9" x2="22" y2="15"/>';
+    btn.style.color = 'rgba(255,0,170,0.7)';
+    btn.title = 'Unmute';
+  } else {
+    icon.innerHTML = '<path d="M3 9v6h4l5 5V4L7 9H3Z"/><path d="M16 5c2 2 2 6 0 8M19 2c3 3 3 9 0 12"/>';
+    btn.style.color = '';
+    btn.title = 'Mute';
+  }
+}
+
+function vjsToggleSchedule() {
+  var panel = document.getElementById('vjs-schedule-panel');
+  var btn = document.getElementById('vjs-schedule-btn');
+  var open = panel.classList.toggle('open');
+  panel.setAttribute('aria-hidden', open ? 'false' : 'true');
+  btn.classList.toggle('active', open);
+  if (open) {
+    document.addEventListener('click', vjsScheduleOutside, true);
+  } else {
+    document.removeEventListener('click', vjsScheduleOutside, true);
+  }
+}
+
+function vjsScheduleOutside(e) {
+  var panel = document.getElementById('vjs-schedule-panel');
+  var btn = document.getElementById('vjs-schedule-btn');
+  if (!panel.contains(e.target) && e.target !== btn && !btn.contains(e.target)) {
+    panel.classList.remove('open');
+    panel.setAttribute('aria-hidden', 'true');
+    btn.classList.remove('active');
+    document.removeEventListener('click', vjsScheduleOutside, true);
+  }
+}
+
 (function() {
   
   var statsTargets = { 'stat-artists': 6, 'stat-projects': 7, 'stat-events': 23, 'stat-studios': 5, 'stat-sponsors': 0, 'stat-countries': 19 };
