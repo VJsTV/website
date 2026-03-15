@@ -2031,6 +2031,7 @@ select.vjs-form-input {
   display: flex;
   border: 1px solid #333;
   height: 24px;
+  border-radius: 0 !important;
 }
 .vjstv-footer-newsletter input {
   background: transparent;
@@ -2041,6 +2042,12 @@ select.vjs-form-input {
   padding: 4px 8px;
   width: 140px;
   outline: none;
+  border-radius: 0 !important;
+}
+.vjstv-footer-newsletter input:focus {
+  outline: none !important;
+  border: none !important;
+  box-shadow: none !important;
 }
 .vjstv-footer-newsletter input::placeholder { color: rgba(255,255,255,0.25); }
 .vjstv-footer-newsletter button {
