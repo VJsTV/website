@@ -3204,4 +3204,25 @@ svg.vjs-nts-sidebar-thumb-play {
   .vjs-live-strip { font-size: 0.6rem; }
   .vjs-live-strip-loc { display: none; }
   .vjs-live-strip-right { display: none; }
+  
+  /* Submit page responsiveness */
+  .vjs-submit-grid {
+    grid-template-columns: 1fr !important;
+  }
+  
+  .vjs-submit-sidebar {
+    padding: 24px 16px !important;
+    border-right: none !important;
+    border-bottom: 1px solid #222 !important;
+  }
+  
+  .vjs-submit-form-container {
+    padding: 20px 16px !important;
+  }
+  
+  /* Form grid fields */
+  [style*="grid-template-columns:1fr 1fr"] {
+    grid-template-columns: 1fr !important;
+    gap: 12px !important;
+  }
 }
