@@ -4,16 +4,15 @@ layout: default
 {% include layouts/nav/nav-3.html default_logo="white" %}
 
 <div class="vjs-detail-header">
-  <div class="container">
+  <div class="vjs-detail-header-inner">
     {% if page.technologies %}
-    <div style="margin-bottom:1rem;">
+    <div class="vjs-detail-tags">
       {% for tech in page.technologies %}
-      <span class="vjs-tag vjs-tag-purple">{{ tech }}</span>
+      <span class="vjs-detail-tag">{{ tech }}</span>
       {% endfor %}
     </div>
     {% endif %}
-    <h1 class="vjs-section-title" style="margin-bottom:1rem;">{{ page.title }}</h1>
-    <div class="vjs-accent-line"></div>
+    <h1 class="vjs-detail-title">{{ page.title }}</h1>
     <div class="vjs-detail-meta">
       {% if page.location %}
       <div class="vjs-detail-meta-item">
@@ -92,8 +91,8 @@ layout: default
 </div>
 
 {% if page.video_url %}
-<section class="vjs-section" style="padding-top:60px;">
-  <div class="container">
+<section style="padding:40px 0 0; background:#000;">
+  <div style="max-width:1100px; margin:0 auto; padding:0 24px;">
     <div class="vjs-live-player">
       <iframe src="{{ page.video_url }}" frameborder="0" allowfullscreen allow="autoplay; encrypted-media"></iframe>
     </div>
@@ -101,77 +100,72 @@ layout: default
 </section>
 {% endif %}
 
-<section class="vjs-section" {% if page.video_url %}style="padding-top:0;"{% endif %}>
-  <div class="container">
-    <div class="row">
-      <div class="col-lg-8">
-        <div style="color: var(--vjs-text); line-height: 1.8; font-size: 1.05rem;">
-          {{ content }}
-        </div>
+<section style="padding:40px 0 60px; background:#000;">
+  <div style="max-width:1100px; margin:0 auto; padding:0 24px;">
+    <div class="vjs-detail-grid">
+      <div class="vjs-detail-body">
+        {{ content }}
       </div>
-      <div class="col-lg-4">
+      <div class="vjs-detail-sidebar">
+
         {% if page.equipment %}
-        <div style="background: var(--vjs-card); border: 1px solid var(--vjs-border); border-radius:12px; padding:1.5rem; margin-bottom:1.5rem;">
-          <h5 class="vjs-orbitron" style="font-size:0.75rem; color: var(--vjs-electric-blue); margin-bottom:1rem;">Equipment</h5>
-          <ul style="list-style:none; padding:0; margin:0;">
-            {% for item in page.equipment %}
-            <li style="padding:0.4rem 0; border-bottom:1px solid var(--vjs-border); color: var(--vjs-text-muted); font-size:0.9rem;">{{ item }}</li>
-            {% endfor %}
-          </ul>
+        <div class="vjs-sidebar-card">
+          <div class="vjs-sidebar-card-heading">Equipment</div>
+          {% for item in page.equipment %}
+          <div class="vjs-sidebar-card-row">{{ item }}</div>
+          {% endfor %}
         </div>
         {% endif %}
+
         {% if page.used_by %}
-        <div style="background: var(--vjs-card); border: 1px solid var(--vjs-border); border-radius:12px; padding:1.5rem; margin-bottom:1.5rem;">
-          <h5 class="vjs-orbitron" style="font-size:0.75rem; color: var(--vjs-electric-blue); margin-bottom:1rem;">Used By</h5>
-          <ul style="list-style:none; padding:0; margin:0;">
-            {% for name in page.used_by %}
-            <li style="padding:0.4rem 0; border-bottom:1px solid var(--vjs-border); color: var(--vjs-text-muted); font-size:0.9rem;">{{ name }}</li>
-            {% endfor %}
-          </ul>
+        <div class="vjs-sidebar-card">
+          <div class="vjs-sidebar-card-heading">Used By</div>
+          {% for name in page.used_by %}
+          <div class="vjs-sidebar-card-row">{{ name }}</div>
+          {% endfor %}
         </div>
         {% endif %}
+
         {% if page.artists %}
-        <div style="background: var(--vjs-card); border: 1px solid var(--vjs-border); border-radius:12px; padding:1.5rem; margin-bottom:1.5rem;">
-          <h5 class="vjs-orbitron" style="font-size:0.75rem; color: var(--vjs-electric-blue); margin-bottom:1rem;">Artists</h5>
-          <ul style="list-style:none; padding:0; margin:0;">
-            {% for name in page.artists %}
-            <li style="padding:0.4rem 0; border-bottom:1px solid var(--vjs-border); color: var(--vjs-text-muted); font-size:0.9rem;">{{ name }}</li>
-            {% endfor %}
-          </ul>
+        <div class="vjs-sidebar-card">
+          <div class="vjs-sidebar-card-heading">Artists</div>
+          {% for name in page.artists %}
+          <div class="vjs-sidebar-card-row">{{ name }}</div>
+          {% endfor %}
         </div>
         {% endif %}
+
         {% if page.sponsored_artists %}
-        <div style="background: var(--vjs-card); border: 1px solid var(--vjs-border); border-radius:12px; padding:1.5rem; margin-bottom:1.5rem;">
-          <h5 class="vjs-orbitron" style="font-size:0.75rem; color: var(--vjs-electric-blue); margin-bottom:1rem;">Sponsored Artists</h5>
-          <ul style="list-style:none; padding:0; margin:0;">
-            {% for name in page.sponsored_artists %}
-            <li style="padding:0.4rem 0; border-bottom:1px solid var(--vjs-border); color: var(--vjs-text-muted); font-size:0.9rem;">{{ name }}</li>
-            {% endfor %}
-          </ul>
+        <div class="vjs-sidebar-card">
+          <div class="vjs-sidebar-card-heading">Sponsored Artists</div>
+          {% for name in page.sponsored_artists %}
+          <div class="vjs-sidebar-card-row">{{ name }}</div>
+          {% endfor %}
         </div>
         {% endif %}
+
         {% if page.website %}
-        <a href="{{ page.website }}" target="_blank" class="vjs-btn vjs-btn-outline" style="width:100%; text-align:center; display:block;">Visit Website</a>
+        <a href="{{ page.website }}" target="_blank" rel="noopener" class="vjs-sidebar-btn">Visit Website &#8599;</a>
         {% endif %}
+
         {% if page.social %}
-        <div style="margin-top:1.5rem;">
+        <div class="vjs-sidebar-social">
           {% if page.social.instagram %}
-          <a href="{{ page.social.instagram }}" target="_blank" class="vjs-tag vjs-tag-magenta" style="text-decoration:none;">Instagram</a>
+          <a href="{{ page.social.instagram }}" target="_blank" rel="noopener" class="vjs-sidebar-social-link">Instagram &#8599;</a>
           {% endif %}
           {% if page.social.vimeo %}
-          <a href="{{ page.social.vimeo }}" target="_blank" class="vjs-tag vjs-tag-blue" style="text-decoration:none;">Vimeo</a>
+          <a href="{{ page.social.vimeo }}" target="_blank" rel="noopener" class="vjs-sidebar-social-link">Vimeo &#8599;</a>
           {% endif %}
         </div>
         {% endif %}
 
-        <!-- ── RELATIONSHIP: Artist → their projects ── -->
         {% assign artist_projects = site.projects | where: "artist", page.title %}
         {% if artist_projects.size > 0 %}
-        <div style="background: var(--vjs-card); border: 1px solid var(--vjs-border); border-radius:12px; padding:1.5rem; margin-top:1.5rem;">
-          <h5 class="vjs-orbitron" style="font-size:0.75rem; color: var(--vjs-magenta); margin-bottom:1rem; text-transform:uppercase; letter-spacing:0.12em;">Projects</h5>
+        <div class="vjs-sidebar-card">
+          <div class="vjs-sidebar-card-heading" style="color:var(--vjs-magenta);">Projects</div>
           {% for proj in artist_projects %}
           <a href="{{ proj.url }}" class="vjs-relation-item">
-            <div class="vjs-relation-avatar" style="background:linear-gradient(135deg,rgba(255,0,255,0.35),rgba(123,47,255,0.2));">{{ proj.title | truncate: 2, '' }}</div>
+            <div class="vjs-relation-avatar" style="background:linear-gradient(135deg,rgba(255,0,170,0.35),rgba(157,0,255,0.2));">{{ proj.title | truncate: 2, '' }}</div>
             <div>
               <div class="vjs-relation-name">{{ proj.title }}</div>
               <div class="vjs-relation-meta">{{ proj.project_type }} · {{ proj.year }}</div>
@@ -181,7 +175,6 @@ layout: default
         </div>
         {% endif %}
 
-        <!-- ── RELATIONSHIP: Artist → events they performed at ── -->
         {% assign artist_events = "" | split: "" %}
         {% for ev in site.events %}
           {% if ev.artists contains page.title %}
@@ -189,11 +182,11 @@ layout: default
           {% endif %}
         {% endfor %}
         {% if artist_events.size > 0 %}
-        <div style="background: var(--vjs-card); border: 1px solid var(--vjs-border); border-radius:12px; padding:1.5rem; margin-top:1.5rem;">
-          <h5 class="vjs-orbitron" style="font-size:0.75rem; color: var(--vjs-electric-blue); margin-bottom:1rem; text-transform:uppercase; letter-spacing:0.12em;">Events</h5>
+        <div class="vjs-sidebar-card">
+          <div class="vjs-sidebar-card-heading" style="color:var(--vjs-cyan);">Events</div>
           {% for ev in artist_events %}
           <a href="{{ ev.url }}" class="vjs-relation-item">
-            <div class="vjs-relation-avatar" style="background:linear-gradient(135deg,rgba(0,212,255,0.35),rgba(0,245,212,0.15));">{{ ev.date | date: "%d" }}</div>
+            <div class="vjs-relation-avatar" style="background:linear-gradient(135deg,rgba(0,249,255,0.3),rgba(0,212,255,0.15));">{{ ev.date | date: "%d" }}</div>
             <div>
               <div class="vjs-relation-name">{{ ev.title }}</div>
               <div class="vjs-relation-meta">{{ ev.date | date: "%b %Y" }} · {{ ev.location }}</div>
@@ -203,12 +196,11 @@ layout: default
         </div>
         {% endif %}
 
-        <!-- ── RELATIONSHIP: Project → artist profile ── -->
         {% if page.artist %}
         {% assign project_artist = site.vjs | where: "title", page.artist | first %}
         {% if project_artist %}
-        <div style="background: var(--vjs-card); border: 1px solid var(--vjs-border); border-radius:12px; padding:1.5rem; margin-top:1.5rem;">
-          <h5 class="vjs-orbitron" style="font-size:0.75rem; color: var(--vjs-ultraviolet); margin-bottom:1rem; text-transform:uppercase; letter-spacing:0.12em;">Artist</h5>
+        <div class="vjs-sidebar-card">
+          <div class="vjs-sidebar-card-heading" style="color:var(--vjs-ultraviolet);">Artist</div>
           <a href="{{ project_artist.url }}" class="vjs-relation-item">
             <div class="vjs-relation-avatar">{{ project_artist.title | truncate: 2, '' }}</div>
             <div>
@@ -220,7 +212,6 @@ layout: default
         {% endif %}
         {% endif %}
 
-        <!-- ── RELATIONSHIP: Event → linked artist profiles ── -->
         {% if page.event_type and page.artists %}
         {% assign linked_artists = "" | split: "" %}
         {% for aname in page.artists %}
@@ -228,8 +219,8 @@ layout: default
           {% if found %}{% assign linked_artists = linked_artists | push: found %}{% endif %}
         {% endfor %}
         {% if linked_artists.size > 0 %}
-        <div style="background: var(--vjs-card); border: 1px solid var(--vjs-border); border-radius:12px; padding:1.5rem; margin-top:1.5rem;">
-          <h5 class="vjs-orbitron" style="font-size:0.75rem; color: var(--vjs-ultraviolet); margin-bottom:1rem; text-transform:uppercase; letter-spacing:0.12em;">Artist Profiles</h5>
+        <div class="vjs-sidebar-card">
+          <div class="vjs-sidebar-card-heading" style="color:var(--vjs-ultraviolet);">Artist Profiles</div>
           {% for a in linked_artists %}
           <a href="{{ a.url }}" class="vjs-relation-item">
             <div class="vjs-relation-avatar">{{ a.title | truncate: 2, '' }}</div>
@@ -243,7 +234,6 @@ layout: default
         {% endif %}
         {% endif %}
 
-        <!-- ── RELATIONSHIP: Technology → artists using it ── -->
         {% if page.category %}
         {% assign tech_artists = "" | split: "" %}
         {% for artist in site.vjs %}
@@ -252,11 +242,11 @@ layout: default
           {% endif %}
         {% endfor %}
         {% if tech_artists.size > 0 %}
-        <div style="background: var(--vjs-card); border: 1px solid var(--vjs-border); border-radius:12px; padding:1.5rem; margin-top:1.5rem;">
-          <h5 class="vjs-orbitron" style="font-size:0.75rem; color: var(--vjs-cyan); margin-bottom:1rem; text-transform:uppercase; letter-spacing:0.12em;">Artists Using This</h5>
+        <div class="vjs-sidebar-card">
+          <div class="vjs-sidebar-card-heading" style="color:var(--vjs-cyan);">Artists Using This</div>
           {% for a in tech_artists %}
           <a href="{{ a.url }}" class="vjs-relation-item">
-            <div class="vjs-relation-avatar" style="background:linear-gradient(135deg,rgba(0,245,212,0.3),rgba(0,212,255,0.2));">{{ a.title | truncate: 2, '' }}</div>
+            <div class="vjs-relation-avatar" style="background:linear-gradient(135deg,rgba(0,249,255,0.3),rgba(0,212,255,0.15));">{{ a.title | truncate: 2, '' }}</div>
             <div>
               <div class="vjs-relation-name">{{ a.title }}</div>
               <div class="vjs-relation-meta">{{ a.location }}</div>

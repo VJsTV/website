@@ -242,20 +242,19 @@
   <!-- /.offcanvas-info -->
 
 <div class="vjs-detail-header">
-  <div class="container">
+  <div class="vjs-detail-header-inner">
     
-    <div style="margin-bottom:1rem;">
+    <div class="vjs-detail-tags">
       
-      <span class="vjs-tag vjs-tag-purple">TouchDesigner</span>
+      <span class="vjs-detail-tag">TouchDesigner</span>
       
-      <span class="vjs-tag vjs-tag-purple">Stable Diffusion</span>
+      <span class="vjs-detail-tag">Stable Diffusion</span>
       
-      <span class="vjs-tag vjs-tag-purple">Resolume Arena</span>
+      <span class="vjs-detail-tag">Resolume Arena</span>
       
     </div>
     
-    <h1 class="vjs-section-title" style="margin-bottom:1rem;">VJ Kai</h1>
-    <div class="vjs-accent-line"></div>
+    <h1 class="vjs-detail-title">VJ Kai</h1>
     <div class="vjs-detail-meta">
       
       <div class="vjs-detail-meta-item">
@@ -290,42 +289,45 @@
 
 
 
-<section class="vjs-section" >
-  <div class="container">
-    <div class="row">
-      <div class="col-lg-8">
-        <div style="color: var(--vjs-text); line-height: 1.8; font-size: 1.05rem;">
-          <p>VJ Kai is a pioneering visual artist based in Berlin, known for blending artificial intelligence with traditional VJ techniques. Their work explores the intersection of generative art and live performance, creating immersive visual experiences that respond in real-time to music and audience interaction.</p>
+<section style="padding:40px 0 60px; background:#000;">
+  <div style="max-width:1100px; margin:0 auto; padding:0 24px;">
+    <div class="vjs-detail-grid">
+      <div class="vjs-detail-body">
+        <p>VJ Kai is a pioneering visual artist based in Berlin, known for blending artificial intelligence with traditional VJ techniques. Their work explores the intersection of generative art and live performance, creating immersive visual experiences that respond in real-time to music and audience interaction.</p>
 
 <p>With over a decade of experience in the audiovisual scene, Kai has performed at major festivals and clubs across Europe, including Berghain, Sonar, and MUTEK.</p>
 
-        </div>
       </div>
-      <div class="col-lg-4">
+      <div class="vjs-detail-sidebar">
+
         
+
         
+
         
+
         
+
         
+
         
-        <div style="margin-top:1.5rem;">
+        <div class="vjs-sidebar-social">
           
-          <a href="https://instagram.com/vjkai" target="_blank" class="vjs-tag vjs-tag-magenta" style="text-decoration:none;">Instagram</a>
+          <a href="https://instagram.com/vjkai" target="_blank" rel="noopener" class="vjs-sidebar-social-link">Instagram &#8599;</a>
           
           
-          <a href="https://vimeo.com/vjkai" target="_blank" class="vjs-tag vjs-tag-blue" style="text-decoration:none;">Vimeo</a>
+          <a href="https://vimeo.com/vjkai" target="_blank" rel="noopener" class="vjs-sidebar-social-link">Vimeo &#8599;</a>
           
         </div>
         
 
-        <!-- ── RELATIONSHIP: Artist → their projects ── -->
         
         
-        <div style="background: var(--vjs-card); border: 1px solid var(--vjs-border); border-radius:12px; padding:1.5rem; margin-top:1.5rem;">
-          <h5 class="vjs-orbitron" style="font-size:0.75rem; color: var(--vjs-magenta); margin-bottom:1rem; text-transform:uppercase; letter-spacing:0.12em;">Projects</h5>
+        <div class="vjs-sidebar-card">
+          <div class="vjs-sidebar-card-heading" style="color:var(--vjs-magenta);">Projects</div>
           
           <a href="/projects/ai-dome-show" class="vjs-relation-item">
-            <div class="vjs-relation-avatar" style="background:linear-gradient(135deg,rgba(255,0,255,0.35),rgba(123,47,255,0.2));">AI</div>
+            <div class="vjs-relation-avatar" style="background:linear-gradient(135deg,rgba(255,0,170,0.35),rgba(157,0,255,0.2));">AI</div>
             <div>
               <div class="vjs-relation-name">AI Dome Experience</div>
               <div class="vjs-relation-meta">Immersive Installation · 2025</div>
@@ -333,7 +335,7 @@
           </a>
           
           <a href="/projects/berlin-techno-visuals" class="vjs-relation-item">
-            <div class="vjs-relation-avatar" style="background:linear-gradient(135deg,rgba(255,0,255,0.35),rgba(123,47,255,0.2));">Be</div>
+            <div class="vjs-relation-avatar" style="background:linear-gradient(135deg,rgba(255,0,170,0.35),rgba(157,0,255,0.2));">Be</div>
             <div>
               <div class="vjs-relation-name">Berlin Techno Visuals</div>
               <div class="vjs-relation-meta">Live Visuals · 2025</div>
@@ -341,7 +343,7 @@
           </a>
           
           <a href="/projects/neural-rave" class="vjs-relation-item">
-            <div class="vjs-relation-avatar" style="background:linear-gradient(135deg,rgba(255,0,255,0.35),rgba(123,47,255,0.2));">Ne</div>
+            <div class="vjs-relation-avatar" style="background:linear-gradient(135deg,rgba(255,0,170,0.35),rgba(157,0,255,0.2));">Ne</div>
             <div>
               <div class="vjs-relation-name">Neural Rave</div>
               <div class="vjs-relation-meta">Generative AI Visuals · 2025</div>
@@ -351,15 +353,14 @@
         </div>
         
 
-        <!-- ── RELATIONSHIP: Artist → events they performed at ── -->
         
         
         
-        <div style="background: var(--vjs-card); border: 1px solid var(--vjs-border); border-radius:12px; padding:1.5rem; margin-top:1.5rem;">
-          <h5 class="vjs-orbitron" style="font-size:0.75rem; color: var(--vjs-electric-blue); margin-bottom:1rem; text-transform:uppercase; letter-spacing:0.12em;">Events</h5>
+        <div class="vjs-sidebar-card">
+          <div class="vjs-sidebar-card-heading" style="color:var(--vjs-cyan);">Events</div>
           
           <a href="/events/vjs-tv-live-01" class="vjs-relation-item">
-            <div class="vjs-relation-avatar" style="background:linear-gradient(135deg,rgba(0,212,255,0.35),rgba(0,245,212,0.15));">15</div>
+            <div class="vjs-relation-avatar" style="background:linear-gradient(135deg,rgba(0,249,255,0.3),rgba(0,212,255,0.15));">15</div>
             <div>
               <div class="vjs-relation-name">VJs TV Live Session 001</div>
               <div class="vjs-relation-meta">Apr 2025 · Online / Berlin</div>
@@ -369,13 +370,10 @@
         </div>
         
 
-        <!-- ── RELATIONSHIP: Project → artist profile ── -->
         
 
-        <!-- ── RELATIONSHIP: Event → linked artist profiles ── -->
         
 
-        <!-- ── RELATIONSHIP: Technology → artists using it ── -->
         
 
       </div>
