@@ -111,10 +111,12 @@ meta_description: "VJs TV is the global broadcast network for VJ culture. Watch 
 
 <!-- STATS -->
 <div class="vjs-stats-bar vjs-reveal">
-  <div class="vjs-stat-item"><div class="vjs-stat-number" id="stat-artists">0</div><div class="vjs-stat-label">Artists</div></div>
-  <div class="vjs-stat-item"><div class="vjs-stat-number" id="stat-projects">0</div><div class="vjs-stat-label">Projects</div></div>
-  <div class="vjs-stat-item"><div class="vjs-stat-number" id="stat-events">0</div><div class="vjs-stat-label">Events</div></div>
-  <div class="vjs-stat-item"><div class="vjs-stat-number" id="stat-countries">0</div><div class="vjs-stat-label">Countries</div></div>
+  <a href="/artists" class="vjs-stat-item vjs-stat-link"><div class="vjs-stat-number" id="stat-artists">0</div><div class="vjs-stat-label">Artists</div></a>
+  <a href="/projects" class="vjs-stat-item vjs-stat-link"><div class="vjs-stat-number" id="stat-projects">0</div><div class="vjs-stat-label">Projects</div></a>
+  <a href="/events" class="vjs-stat-item vjs-stat-link"><div class="vjs-stat-number" id="stat-events">0</div><div class="vjs-stat-label">Events</div></a>
+  <a href="/studios" class="vjs-stat-item vjs-stat-link"><div class="vjs-stat-number" id="stat-studios">0</div><div class="vjs-stat-label">Studios</div></a>
+  <a href="/sponsors" class="vjs-stat-item vjs-stat-link"><div class="vjs-stat-number" id="stat-sponsors">0</div><div class="vjs-stat-label">Partners</div></a>
+  <a href="javascript:void(0)" class="vjs-stat-item vjs-stat-link"><div class="vjs-stat-number" id="stat-countries">24</div><div class="vjs-stat-label">Countries</div></a>
 </div>
 
 <!-- ARTISTS — NTS GRID -->
@@ -336,7 +338,7 @@ meta_description: "VJs TV is the global broadcast network for VJ culture. Watch 
 
 <script>
 (function() {
-  var statsTargets = { 'stat-artists': {{ site.vjs | size }}, 'stat-projects': {{ site.projects | size }}, 'stat-events': {{ site.events | size }}, 'stat-countries': 24 };
+  var statsTargets = { 'stat-artists': {{ site.vjs | size }}, 'stat-projects': {{ site.projects | size }}, 'stat-events': {{ site.events | size }}, 'stat-studios': {{ site.studios | size | default: 0 }}, 'stat-sponsors': {{ site.sponsors | size | default: 0 }}, 'stat-countries': 24 };
   var started = false;
   function startCounters() {
     if(started) return; started=true;
