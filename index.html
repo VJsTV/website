@@ -52,13 +52,6 @@ meta_description: "VJs TV is the global broadcast network for VJ culture. Watch 
       </div>
       <h1 class="vjs-nts-hero-title">{% if hero_project %}{{ hero_project.title }}{% else %}VJs TV Live{% endif %}</h1>
       <p class="vjs-nts-hero-desc">{% if hero_project %}{{ hero_project.description | truncate: 180 }}{% else %}Global broadcast network for VJ culture. Watch live visual performances, discover artists, and explore audiovisual projects.{% endif %}</p>
-      <div class="vjs-nts-hero-nav">
-        {% assign featured_count = site.projects | where: "featured", true | size %}
-        <span>1 / {% if featured_count > 0 %}{{ featured_count }}{% else %}1{% endif %}</span>
-        <button type="button" aria-label="Previous slide"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M15 18l-6-6 6-6"/></svg></button>
-        <button type="button" aria-label="Pause slideshow"><svg viewBox="0 0 24 24" fill="currentColor"><rect x="6" y="4" width="3" height="16"/><rect x="15" y="4" width="3" height="16"/></svg></button>
-        <button type="button" aria-label="Next slide"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 18l6-6-6-6"/></svg></button>
-      </div>
     </div>
   </div>
   <div class="vjs-nts-hero-sidebar">
