@@ -434,8 +434,10 @@ document.querySelectorAll('.vjs-hero-card[data-id]').forEach(function(card) {
     {% assign gi = forloop.index0 | modulo: 6 %}
     <a href="{{ project.url }}" class="vjs-set-card">
       <div class="vjs-set-thumb">
-        <div class="vjs-set-thumb-bg" style="background: linear-gradient(135deg, {{ set_gradients[gi] }}); position:relative; width:100%; height:100%;">
-          <div style="position:absolute; inset:0; background:repeating-linear-gradient(0deg, transparent, transparent 3px, rgba(0,0,0,0.07) 3px, rgba(0,0,0,0.07) 4px);"></div>
+        <div class="vjs-set-thumb-bg vjs-vimeo-thumb"
+             data-vimeo="{{ project.vimeo_id }}"
+             style="background: linear-gradient(135deg, {{ set_gradients[gi] }}); position:relative; width:100%; height:100%;">
+          <div class="vjs-proj-thumb-shimmer"></div>
         </div>
       </div>
       <div class="vjs-set-info">

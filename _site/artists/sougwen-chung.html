@@ -620,6 +620,40 @@ function vjsTipAmount(amt) {
 <script src="/assets/js/simple-jekyll-search.min.js"></script>
 <script src="/assets/js/scripts.js"></script>
 
+<script>
+/* ── VJS GLOBAL VIMEO THUMBNAIL LOADER ──────────────────────────
+   Any element with class="vjs-vimeo-thumb" and data-vimeo="ID"
+   will automatically receive its Vimeo thumbnail as background.
+   Add those two attributes to any card/div to get auto-images.
+──────────────────────────────────────────────────────────────── */
+(function() {
+  function vjsLoadVimeoThumbs() {
+    document.querySelectorAll('.vjs-vimeo-thumb[data-vimeo]').forEach(function(el) {
+      var id = el.getAttribute('data-vimeo');
+      if (!id || el.dataset.vjsThumbLoaded) return;
+      el.dataset.vjsThumbLoaded = '1';
+      fetch('https://vimeo.com/api/v2/video/' + id + '.json')
+        .then(function(r) { return r.json(); })
+        .then(function(data) {
+          var url = data[0] && (data[0].thumbnail_large || data[0].thumbnail_medium || data[0].thumbnail_small);
+          if (url) {
+            el.style.backgroundImage    = 'url(' + url + ')';
+            el.style.backgroundSize     = 'cover';
+            el.style.backgroundPosition = 'center';
+            el.classList.add('loaded');
+          }
+        }).catch(function() {});
+    });
+  }
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', vjsLoadVimeoThumbs);
+  } else {
+    vjsLoadVimeoThumbs();
+  }
+  window.vjsLoadVimeoThumbs = vjsLoadVimeoThumbs;
+})();
+</script>
+
   
 </body>
 </html>

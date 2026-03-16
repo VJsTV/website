@@ -178,22 +178,5 @@ function setProjLayout(mode) {
   else                 { grid.classList.remove('vjs-layout-list'); bg.classList.add('active'); bl.classList.remove('active'); }
 }
 
-// Vimeo thumbnail loader
-(function() {
-  document.querySelectorAll('.vjs-vimeo-thumb[data-vimeo]').forEach(function(el) {
-    var id = el.getAttribute('data-vimeo');
-    if (!id) return;
-    fetch('https://vimeo.com/api/v2/video/' + id + '.json')
-      .then(function(r){ return r.json(); })
-      .then(function(data) {
-        var url = data[0] && (data[0].thumbnail_large || data[0].thumbnail_medium);
-        if (url) {
-          el.style.backgroundImage    = 'url(' + url + ')';
-          el.style.backgroundSize     = 'cover';
-          el.style.backgroundPosition = 'center';
-          el.classList.add('loaded');
-        }
-      }).catch(function(){});
-  });
-})();
+// Vimeo thumbnails are loaded globally by the site-wide vjsLoadVimeoThumbs() script.
 </script>
