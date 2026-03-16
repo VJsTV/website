@@ -3,6 +3,7 @@ layout: vjs-detail
 title: "Okiniko"
 name: "okiniko"
 location: "Europe / International"
+country: "International"
 visual_style: "360-Degree Mapping, Architectural Immersion, Complex Interior Projection"
 bio: "Veteran mapping artist and the go-to specialist for complex 360-degree immersive setups. If a club has a weirdly shaped ceiling or ancient pillars, Okiniko turns it into a seamless digital skin. A staple at European mapping festivals for a decade."
 studio: "Independent"

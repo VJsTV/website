@@ -3,6 +3,7 @@ layout: vjs-detail
 title: "Robert Seidel"
 name: "robert-seidel"
 location: "Berlin, Germany"
+country: "Germany"
 visual_style: "Generative Film, Projection Sculpture, Expanded Cinema"
 bio: "Berlin-based artist working at the intersection of generative imagery, projection sculpture, and expanded cinema. Seidel creates works that dissolve the boundary between screen and space, image and object."
 studio: "Independent"

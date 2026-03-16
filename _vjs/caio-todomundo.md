@@ -3,6 +3,7 @@ layout: vjs-detail
 title: "Caio Todomundo"
 name: "caio-todomundo"
 location: "Brazil"
+country: "Brazil"
 visual_style: "Neon Aesthetics, Kinetic Typography, Glitch, Live VJ Performance"
 bio: "Brazilian audiovisual artist and VJ known for vivid, high-energy live visual sets that combine neon aesthetics, kinetic typography, and glitch-influenced motion — a defining voice in Brazil's vibrant live visual arts scene."
 studio: "Independent"

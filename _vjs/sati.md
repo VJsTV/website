@@ -3,6 +3,7 @@ layout: vjs-detail
 title: "SATI"
 name: "sati"
 location: "France"
+country: "France"
 visual_style: "Live Audiovisual Performance, Synaesthetic Art, Sound-Image Synthesis"
 bio: "French audiovisual artist and performer working at the complete synthesis of sound and image. SATI's performances dissolve the distinction between composer and visual artist, creating unified sensory experiences of extraordinary coherence."
 studio: "Independent / Avoka"

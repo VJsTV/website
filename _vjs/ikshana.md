@@ -3,6 +3,7 @@ layout: vjs-detail
 title: "Ikshana"
 name: "ikshana"
 location: "International"
+country: "International"
 visual_style: "Mandala-Generative Art, Camera Feedback Loops, Psychedelic Organic Forms"
 bio: "A standout in the VJ Academy community, world-renowned for Mandala-Generative art using live camera feedback loops to create organic, psychedelic portals that feel alive and unpredictable. Her performances blur the boundary between technology and ritual."
 studio: "Independent"

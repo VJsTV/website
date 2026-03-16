@@ -3,6 +3,7 @@ layout: vjs-detail
 title: "Stef Mendesidis"
 name: "stef-mendesidis"
 location: "International"
+country: "International"
 visual_style: "High-Precision Techno Visuals, Four-Deck Sync, Visual Wall of Sound"
 bio: "A master of high-precision techno whose visuals are laser-focused and perfectly synced to his four-deck vinyl-style live sets. The result is a 'Visual Wall of Sound' — images as dense and physical as the music, locked together into a single overwhelming sensory object."
 studio: "Independent"

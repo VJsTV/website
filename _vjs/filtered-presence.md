@@ -3,6 +3,7 @@ layout: vjs-detail
 title: "Filtered Presence"
 name: "filtered-presence"
 location: "International"
+country: "International"
 visual_style: "Digital Ghost Aesthetics, Thermal Imaging, Audience-Integrated Performance"
 bio: "Duo Atoraye & p0x0, known for 'Digital Ghost' aesthetics. They use thermal cameras and depth sensors to turn the audience itself into a live, ghostly VJ layer in real-time — making every person in the room a co-author of the visual experience. Selected for the 25AV Residency 2026–2027."
 studio: "Filtered Presence"

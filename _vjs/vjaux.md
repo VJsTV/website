@@ -3,6 +3,7 @@ layout: vjs-detail
 title: "VJAuX"
 name: "vjaux"
 location: "International"
+country: "International"
 visual_style: "Eurodance, Retro-Future Aesthetics, Maximalist Club Visuals"
 bio: "A specialist in high-energy Eurodance and retro-future visual aesthetics, VJAuX is currently leading the trend of maximalist club visuals that feel like a high-speed journey through early internet culture — a relentless, joyful, nostalgic overload."
 studio: "Independent"

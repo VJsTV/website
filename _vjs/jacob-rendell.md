@@ -3,6 +3,7 @@ layout: vjs-detail
 title: "Jacob Rendell"
 name: "jacob-rendell"
 location: "International"
+country: "International"
 visual_style: "Generative Visuals, Real-time Performance, Motion Design"
 bio: "Audiovisual artist and VJ known for precisely choreographed generative real-time visuals and live performance. Works under the moniker universal-order. Collaborates with leading electronic music labels and artists."
 studio: "Universal Order"

@@ -3,6 +3,7 @@ layout: vjs-detail
 title: "fuse*"
 name: "fuse-star"
 location: "Modena, Italy"
+country: "Italy"
 visual_style: "Data Storytelling, Biometric Visuals, Live AV, Scientific Imagery"
 bio: "Italian masters of data-driven audiovisual art. Their 2026 project Dökk uses a dancer's heartbeat and brainwave data processed in real-time to generate the entire visual universe on stage. Pioneers of live AV performance where human biology becomes the source code."
 studio: "fuse* studio"

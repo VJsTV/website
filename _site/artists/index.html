@@ -254,1880 +254,1186 @@
   </div>
   <!-- /.offcanvas-info -->
 
+<style>
+.vjs-filter-dropdowns {
+  display:flex; align-items:center; gap:10px; flex-wrap:wrap;
+  padding:18px 0 22px; border-bottom:1px solid #1a1a1a; margin-bottom:24px;
+}
+.vjs-filter-group {
+  display:flex; align-items:center; gap:6px;
+}
+.vjs-filter-drop-label {
+  font-family:'Barlow Condensed',sans-serif; font-size:0.58rem; font-weight:700;
+  letter-spacing:0.18em; text-transform:uppercase; color:#444; white-space:nowrap;
+}
+.vjs-filter-select {
+  font-family:'Barlow Condensed',sans-serif; font-size:0.72rem; font-weight:600;
+  letter-spacing:0.06em; text-transform:uppercase;
+  background:#0a0a0a; color:#ccc; border:1px solid #222;
+  padding:7px 30px 7px 12px; appearance:none; -webkit-appearance:none;
+  cursor:pointer; outline:none; transition:border-color .15s,color .15s;
+  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='6' viewBox='0 0 10 6'%3E%3Cpath d='M0 0l5 6 5-6z' fill='%23555'/%3E%3C/svg%3E");
+  background-repeat:no-repeat; background-position:right 10px center;
+  min-width:160px; border-radius:0 !important;
+}
+.vjs-filter-select:hover, .vjs-filter-select:focus {
+  border-color:var(--vjs-ultraviolet); color:#fff;
+}
+.vjs-filter-select.active { border-color:var(--vjs-ultraviolet); color:var(--vjs-ultraviolet); }
+.vjs-filter-reset {
+  font-family:'Barlow Condensed',sans-serif; font-size:0.6rem; font-weight:700;
+  letter-spacing:0.14em; text-transform:uppercase;
+  background:none; border:1px solid #222; color:#444;
+  padding:7px 16px; cursor:pointer; transition:all .15s; border-radius:0 !important;
+  margin-left:4px;
+}
+.vjs-filter-reset:hover { border-color:#555; color:#aaa; }
+.vjs-artists-count {
+  font-family:'Barlow Condensed',sans-serif; font-size:0.65rem; font-weight:700;
+  letter-spacing:0.18em; text-transform:uppercase; color:#333;
+  margin-bottom:20px;
+}
+.vjs-artists-count strong { color:var(--vjs-ultraviolet); }
+</style>
+
 <div class="vjs-page-header">
   <div class="container">
     <h1 class="vjs-section-title" style="font-size:clamp(2rem,5vw,3.5rem);">Artists</h1>
     <div class="vjs-accent-line"></div>
-    <p style="color:var(--vjs-text-muted); max-width:600px; font-size:1.05rem;">The global directory of VJ artists and visual performers. Filter by style, technology, or location.</p>
+    <p style="color:var(--vjs-text-muted); max-width:600px; font-size:1.05rem;">The global directory of VJ artists and visual performers. Filter by style, technology, or country.</p>
   </div>
 </div>
 
 <section class="vjs-section">
   <div class="container">
 
-    <!-- FILTER BAR: STYLE -->
-    <div class="vjs-filter-bar" id="style-filter-bar">
-      <span class="vjs-filter-label">Style:</span>
-      <button class="vjs-filter-btn active" data-filter-group="style" data-filter="all">All</button>
-      
-      
-        
-        
+    <!-- DROPDOWN FILTER ROW -->
+    <div class="vjs-filter-dropdowns">
+
+      <div class="vjs-filter-group">
+        <span class="vjs-filter-drop-label">Style</span>
+        <select class="vjs-filter-select" id="style-select" onchange="applyDropFilters()">
+          <option value="all">All Styles</option>
           
-            
-            <button class="vjs-filter-btn" data-filter-group="style" data-filter="minimalist architecture">Minimalist Architecture</button>
           
-        
           
-            
-            <button class="vjs-filter-btn" data-filter-group="style" data-filter="light as space division">Light as Space Division</button>
           
-        
           
-            
-            <button class="vjs-filter-btn" data-filter-group="style" data-filter="warehouse techno aesthetics">Warehouse Techno Aesthetics</button>
+          <option value="360-degree mapping">360-Degree Mapping</option>
           
-        
-      
-        
-        
+          <option value="3d fashion aesthetics">3D Fashion Aesthetics</option>
           
-            
-            <button class="vjs-filter-btn" data-filter-group="style" data-filter="glitch aesthetics">Glitch Aesthetics</button>
+          <option value="ai-assisted performance">AI-Assisted Performance</option>
           
-        
+          <option value="ai-driven shape">AI-Driven Shape</option>
           
-            
-            <button class="vjs-filter-btn" data-filter-group="style" data-filter="mathematical visuals">Mathematical Visuals</button>
+          <option value="analog hardware visuals">Analog Hardware Visuals</option>
           
-        
+          <option value="architectural immersion">Architectural Immersion</option>
           
-            
-            <button class="vjs-filter-btn" data-filter-group="style" data-filter="frequency-driven imagery">Frequency-Driven Imagery</button>
+          <option value="audience-integrated performance">Audience-Integrated Performance</option>
           
-        
-      
-        
-        
+          <option value="audio-reactive destruction">Audio-Reactive Destruction</option>
           
-            
-            <button class="vjs-filter-btn" data-filter-group="style" data-filter="visual morphologies">Visual Morphologies</button>
+          <option value="audiovisual performance">Audiovisual Performance</option>
           
-        
+          <option value="audiovisual sculpture">Audiovisual Sculpture</option>
           
-            
-            <button class="vjs-filter-btn" data-filter-group="style" data-filter="organic generative systems">Organic Generative Systems</button>
+          <option value="biometric visuals">Biometric Visuals</option>
           
-        
+          <option value="brutalist minimalism">Brutalist Minimalism</option>
           
-            
-            <button class="vjs-filter-btn" data-filter-group="style" data-filter="ai-driven shape">AI-Driven Shape</button>
+          <option value="camera feedback loops">Camera Feedback Loops</option>
           
-        
-      
-        
-        
+          <option value="classical reinterpretation">Classical Reinterpretation</option>
           
-            
-            <button class="vjs-filter-btn" data-filter-group="style" data-filter="neon aesthetics">Neon Aesthetics</button>
+          <option value="complex interior projection">Complex Interior Projection</option>
           
-        
+          <option value="data storytelling">Data Storytelling</option>
           
-            
-            <button class="vjs-filter-btn" data-filter-group="style" data-filter="kinetic typography">Kinetic Typography</button>
+          <option value="digital ghost aesthetics">Digital Ghost Aesthetics</option>
           
-        
+          <option value="drawing">Drawing</option>
           
-        
+          <option value="eurodance">Eurodance</option>
           
-            
-            <button class="vjs-filter-btn" data-filter-group="style" data-filter="live vj performance">Live VJ Performance</button>
+          <option value="expanded cinema">Expanded Cinema</option>
           
-        
-      
-        
-        
+          <option value="experimental av">Experimental AV</option>
           
-            
-            <button class="vjs-filter-btn" data-filter-group="style" data-filter="modular av">Modular AV</button>
+          <option value="festival visual production">Festival Visual Production</option>
           
-        
+          <option value="first-person visual performance">First-Person Visual Performance</option>
           
-            
-            <button class="vjs-filter-btn" data-filter-group="style" data-filter="physical sound-image integration">Physical Sound-Image Integration</button>
+          <option value="four-deck sync">Four-Deck Sync</option>
           
-        
+          <option value="frequency-driven imagery">Frequency-Driven Imagery</option>
           
-            
-            <button class="vjs-filter-btn" data-filter-group="style" data-filter="patched synthesis">Patched Synthesis</button>
+          <option value="gamified vjing">Gamified VJing</option>
           
-        
-      
-        
-        
+          <option value="generative film">Generative Film</option>
           
-            
-            <button class="vjs-filter-btn" data-filter-group="style" data-filter="digital ghost aesthetics">Digital Ghost Aesthetics</button>
+          <option value="generative real-time systems">Generative Real-Time Systems</option>
           
-        
+          <option value="generative visuals">Generative Visuals</option>
           
-            
-            <button class="vjs-filter-btn" data-filter-group="style" data-filter="thermal imaging">Thermal Imaging</button>
+          <option value="glitch aesthetics">Glitch Aesthetics</option>
           
-        
+          <option value="high-precision techno visuals">High-Precision Techno Visuals</option>
           
-            
-            <button class="vjs-filter-btn" data-filter-group="style" data-filter="audience-integrated performance">Audience-Integrated Performance</button>
+          <option value="high-voltage electronics">High-Voltage Electronics</option>
           
-        
-      
-        
-        
+          <option value="human-machine collaboration">Human-Machine Collaboration</option>
           
-            
-            <button class="vjs-filter-btn" data-filter-group="style" data-filter="data storytelling">Data Storytelling</button>
+          <option value="hypnotic dark aesthetics">Hypnotic Dark Aesthetics</option>
           
-        
+          <option value="industrial techno">Industrial Techno</option>
           
-            
-            <button class="vjs-filter-btn" data-filter-group="style" data-filter="biometric visuals">Biometric Visuals</button>
+          <option value="kinetic typography">Kinetic Typography</option>
           
-        
+          <option value="light as space division">Light as Space Division</option>
           
-            
-            <button class="vjs-filter-btn" data-filter-group="style" data-filter="live av">Live AV</button>
+          <option value="live av">Live AV</option>
           
-        
+          <option value="live audiovisual performance">Live Audiovisual Performance</option>
           
-            
-            <button class="vjs-filter-btn" data-filter-group="style" data-filter="scientific imagery">Scientific Imagery</button>
+          <option value="live vj performance">Live VJ Performance</option>
           
-        
-      
-        
-        
+          <option value="live visual improvisation">Live Visual Improvisation</option>
           
-            
-            <button class="vjs-filter-btn" data-filter-group="style" data-filter="mandala-generative art">Mandala-Generative Art</button>
+          <option value="long-form transformation">Long-Form Transformation</option>
           
-        
+          <option value="mandala-generative art">Mandala-Generative Art</option>
           
-            
-            <button class="vjs-filter-btn" data-filter-group="style" data-filter="camera feedback loops">Camera Feedback Loops</button>
+          <option value="mathematical visuals">Mathematical Visuals</option>
           
-        
+          <option value="maximalist club visuals">Maximalist Club Visuals</option>
           
-            
-            <button class="vjs-filter-btn" data-filter-group="style" data-filter="psychedelic organic forms">Psychedelic Organic Forms</button>
+          <option value="minimalism">Minimalism</option>
           
-        
-      
-        
-        
+          <option value="minimalist architecture">Minimalist Architecture</option>
           
-            
-            <button class="vjs-filter-btn" data-filter-group="style" data-filter="generative visuals">Generative Visuals</button>
+          <option value="minimalist techno visuals">Minimalist Techno Visuals</option>
           
-        
+          <option value="modular av">Modular AV</option>
           
-            
-            <button class="vjs-filter-btn" data-filter-group="style" data-filter="real-time performance">Real-time Performance</button>
+          <option value="motion design">Motion Design</option>
           
-        
+          <option value="neon aesthetics">Neon Aesthetics</option>
           
-            
-            <button class="vjs-filter-btn" data-filter-group="style" data-filter="motion design">Motion Design</button>
+          <option value="organic generative systems">Organic Generative Systems</option>
           
-        
-      
-        
-        
+          <option value="patched synthesis">Patched Synthesis</option>
           
-            
-            <button class="vjs-filter-btn" data-filter-group="style" data-filter="generative real-time systems">Generative Real-Time Systems</button>
+          <option value="percussive visuals">Percussive Visuals</option>
           
-        
+          <option value="physical sound-image integration">Physical Sound-Image Integration</option>
           
-            
-            <button class="vjs-filter-btn" data-filter-group="style" data-filter="live visual improvisation">Live Visual Improvisation</button>
+          <option value="physical sound-image unity">Physical Sound-Image Unity</option>
           
-        
+          <option value="projection mapping">Projection Mapping</option>
           
-            
-            <button class="vjs-filter-btn" data-filter-group="style" data-filter="ai-assisted performance">AI-Assisted Performance</button>
+          <option value="projection sculpture">Projection Sculpture</option>
           
-        
-      
-        
-        
+          <option value="psychedelic organic forms">Psychedelic Organic Forms</option>
           
-            
-            <button class="vjs-filter-btn" data-filter-group="style" data-filter="analog hardware visuals">Analog Hardware Visuals</button>
+          <option value="real-time 3d navigation">Real-Time 3D Navigation</option>
           
-        
+          <option value="real-time performance">Real-time Performance</option>
           
-            
-            <button class="vjs-filter-btn" data-filter-group="style" data-filter="high-voltage electronics">High-Voltage Electronics</button>
+          <option value="retro-future aesthetics">Retro-Future Aesthetics</option>
           
-        
+          <option value="scientific imagery">Scientific Imagery</option>
           
-            
-            <button class="vjs-filter-btn" data-filter-group="style" data-filter="underground spectacle">Underground Spectacle</button>
+          <option value="sound-image synthesis">Sound-Image Synthesis</option>
           
-        
-      
-        
-        
+          <option value="stadium-scale spectacle">Stadium-Scale Spectacle</option>
           
-            
-            <button class="vjs-filter-btn" data-filter-group="style" data-filter="sub-bass visuals">Sub-Bass Visuals</button>
+          <option value="sub-bass visuals">Sub-Bass Visuals</option>
           
-        
+          <option value="synaesthetic art">Synaesthetic Art</option>
           
-            
-            <button class="vjs-filter-btn" data-filter-group="style" data-filter="physical sound-image unity">Physical Sound-Image Unity</button>
+          <option value="thermal imaging">Thermal Imaging</option>
           
-        
+          <option value="ultra-synced stage design">Ultra-Synced Stage Design</option>
           
-            
-            <button class="vjs-filter-btn" data-filter-group="style" data-filter="experimental av">Experimental AV</button>
+          <option value="underground spectacle">Underground Spectacle</option>
           
-        
-      
-        
-        
+          <option value="visual morphologies">Visual Morphologies</option>
           
-            
-            <button class="vjs-filter-btn" data-filter-group="style" data-filter="360-degree mapping">360-Degree Mapping</button>
+          <option value="visual music">Visual Music</option>
           
-        
+          <option value="visual wall of sound">Visual Wall of Sound</option>
           
-            
-            <button class="vjs-filter-btn" data-filter-group="style" data-filter="architectural immersion">Architectural Immersion</button>
+          <option value="warehouse techno aesthetics">Warehouse Techno Aesthetics</option>
           
-        
+        </select>
+      </div>
+
+      <div class="vjs-filter-group">
+        <span class="vjs-filter-drop-label">Tech</span>
+        <select class="vjs-filter-select" id="tech-select" onchange="applyDropFilters()">
+          <option value="all">All Technologies</option>
           
-            
-            <button class="vjs-filter-btn" data-filter-group="style" data-filter="complex interior projection">Complex Interior Projection</button>
           
-        
-      
-        
-        
           
-        
           
-            
-            <button class="vjs-filter-btn" data-filter-group="style" data-filter="audiovisual performance">Audiovisual Performance</button>
+          <option value="3d content production">3D Content Production</option>
           
-        
+          <option value="after effects">After Effects</option>
           
-            
-            <button class="vjs-filter-btn" data-filter-group="style" data-filter="classical reinterpretation">Classical Reinterpretation</button>
+          <option value="akai apc40 mkii">Akai APC40 MKII</option>
           
-        
-      
-        
-        
+          <option value="analogue signal processing">Analogue Signal Processing</option>
           
-            
-            <button class="vjs-filter-btn" data-filter-group="style" data-filter="gamified vjing">Gamified VJing</button>
+          <option value="analogue signal routing">Analogue Signal Routing</option>
           
-        
+          <option value="analogue synthesisers">Analogue Synthesisers</option>
           
-            
-            <button class="vjs-filter-btn" data-filter-group="style" data-filter="real-time 3d navigation">Real-Time 3D Navigation</button>
+          <option value="art-net / dmx">Art-Net / DMX</option>
           
-        
+          <option value="audio analysis">Audio Analysis</option>
           
-            
-            <button class="vjs-filter-btn" data-filter-group="style" data-filter="first-person visual performance">First-Person Visual Performance</button>
+          <option value="audio-reactive systems">Audio-reactive Systems</option>
           
-        
-      
-        
-        
+          <option value="biometric sensors">Biometric Sensors</option>
           
-            
-            <button class="vjs-filter-btn" data-filter-group="style" data-filter="generative film">Generative Film</button>
+          <option value="crt displays">CRT Displays</option>
           
-        
+          <option value="custom content">Custom Content</option>
           
-            
-            <button class="vjs-filter-btn" data-filter-group="style" data-filter="projection sculpture">Projection Sculpture</button>
+          <option value="custom data processing">Custom Data Processing</option>
           
-        
+          <option value="custom generative systems">Custom Generative Systems</option>
           
-            
-            <button class="vjs-filter-btn" data-filter-group="style" data-filter="expanded cinema">Expanded Cinema</button>
+          <option value="custom hardware">Custom Hardware</option>
           
-        
-      
-        
-        
+          <option value="custom rack servers">Custom Rack Servers</option>
           
-            
-            <button class="vjs-filter-btn" data-filter-group="style" data-filter="audiovisual sculpture">Audiovisual Sculpture</button>
+          <option value="custom software">Custom Software</option>
           
-        
+          <option value="custom systems">Custom Systems</option>
           
-        
+          <option value="custom visual software">Custom Visual Software</option>
           
-            
-            <button class="vjs-filter-btn" data-filter-group="style" data-filter="minimalism">Minimalism</button>
+          <option value="depth sensors">Depth Sensors</option>
           
-        
-      
-        
-        
+          <option value="glsl shaders">GLSL Shaders</option>
           
-            
-            <button class="vjs-filter-btn" data-filter-group="style" data-filter="live audiovisual performance">Live Audiovisual Performance</button>
+          <option value="generative imagery">Generative Imagery</option>
           
-        
+          <option value="glitch processing">Glitch Processing</option>
           
-            
-            <button class="vjs-filter-btn" data-filter-group="style" data-filter="synaesthetic art">Synaesthetic Art</button>
+          <option value="hd projection">HD Projection</option>
           
-        
+          <option value="hd video">HD Video</option>
           
-            
-            <button class="vjs-filter-btn" data-filter-group="style" data-filter="sound-image synthesis">Sound-Image Synthesis</button>
+          <option value="hand drawing">Hand Drawing</option>
           
-        
-      
-        
-        
+          <option value="hardware signal processing">Hardware Signal Processing</option>
           
-            
-            <button class="vjs-filter-btn" data-filter-group="style" data-filter="drawing">Drawing</button>
+          <option value="kinect v2">Kinect V2</option>
           
-        
+          <option value="led systems">LED Systems</option>
           
-            
-            <button class="vjs-filter-btn" data-filter-group="style" data-filter="projection mapping">Projection Mapping</button>
+          <option value="live av performance">Live AV Performance</option>
           
-        
+          <option value="live camera feedback">Live Camera Feedback</option>
           
-            
-            <button class="vjs-filter-btn" data-filter-group="style" data-filter="human-machine collaboration">Human-Machine Collaboration</button>
+          <option value="live vj performance">Live VJ Performance</option>
           
-        
-      
-        
-        
+          <option value="machine learning">Machine Learning</option>
           
-            
-            <button class="vjs-filter-btn" data-filter-group="style" data-filter="high-precision techno visuals">High-Precision Techno Visuals</button>
+          <option value="madmapper">MadMapper</option>
           
-        
+          <option value="matrox fx4">Matrox FX4</option>
           
-            
-            <button class="vjs-filter-btn" data-filter-group="style" data-filter="four-deck sync">Four-Deck Sync</button>
+          <option value="max/msp/jitter">Max/MSP/Jitter</option>
           
-        
+          <option value="modular synthesiser">Modular Synthesiser</option>
           
-            
-            <button class="vjs-filter-btn" data-filter-group="style" data-filter="visual wall of sound">Visual Wall of Sound</button>
+          <option value="motion graphics">Motion Graphics</option>
           
-        
-      
-        
-        
+          <option value="multi-projector systems">Multi-projector Systems</option>
           
-            
-            <button class="vjs-filter-btn" data-filter-group="style" data-filter="visual music">Visual Music</button>
+          <option value="multichannel audio">Multichannel Audio</option>
           
-        
+          <option value="ndi 6.0">NDI 6.0</option>
           
-            
-            <button class="vjs-filter-btn" data-filter-group="style" data-filter="ultra-synced stage design">Ultra-Synced Stage Design</button>
+          <option value="notch">Notch</option>
           
-        
+          <option value="osc / midi">OSC / MIDI</option>
           
-            
-            <button class="vjs-filter-btn" data-filter-group="style" data-filter="percussive visuals">Percussive Visuals</button>
+          <option value="osc integration">OSC Integration</option>
           
-        
-      
-        
-        
+          <option value="oxi e16">OXI E16</option>
           
-            
-            <button class="vjs-filter-btn" data-filter-group="style" data-filter="3d fashion aesthetics">3D Fashion Aesthetics</button>
+          <option value="pixera">Pixera</option>
           
-        
+          <option value="projection mapping">Projection Mapping</option>
           
-            
-            <button class="vjs-filter-btn" data-filter-group="style" data-filter="festival visual production">Festival Visual Production</button>
+          <option value="real-time 3d">Real-time 3D</option>
           
-        
+          <option value="real-time compositing">Real-time Compositing</option>
           
-            
-            <button class="vjs-filter-btn" data-filter-group="style" data-filter="stadium-scale spectacle">Stadium-Scale Spectacle</button>
+          <option value="real-time lighting integration">Real-time Lighting Integration</option>
           
-        
-      
-        
-        
+          <option value="real-time processing">Real-time Processing</option>
           
-            
-            <button class="vjs-filter-btn" data-filter-group="style" data-filter="minimalist techno visuals">Minimalist Techno Visuals</button>
+          <option value="real-time rendering">Real-time Rendering</option>
           
-        
+          <option value="real-time video mixing">Real-time Video Mixing</option>
           
-            
-            <button class="vjs-filter-btn" data-filter-group="style" data-filter="long-form transformation">Long-Form Transformation</button>
+          <option value="resolume">Resolume</option>
           
-        
+          <option value="resolume arena">Resolume Arena</option>
           
-            
-            <button class="vjs-filter-btn" data-filter-group="style" data-filter="hypnotic dark aesthetics">Hypnotic Dark Aesthetics</button>
+          <option value="resolume wire">Resolume Wire</option>
           
-        
-      
-        
-        
+          <option value="robotic systems">Robotic Systems</option>
           
-            
-            <button class="vjs-filter-btn" data-filter-group="style" data-filter="industrial techno">Industrial Techno</button>
+          <option value="smpte timecode">SMPTE Timecode</option>
           
-        
+          <option value="scientific visualisation">Scientific Visualisation</option>
           
-            
-            <button class="vjs-filter-btn" data-filter-group="style" data-filter="brutalist minimalism">Brutalist Minimalism</button>
+          <option value="sculptural fabrication">Sculptural Fabrication</option>
           
-        
+          <option value="spatial audio">Spatial Audio</option>
           
-            
-            <button class="vjs-filter-btn" data-filter-group="style" data-filter="audio-reactive destruction">Audio-Reactive Destruction</button>
+          <option value="spatial sound">Spatial Sound</option>
           
-        
-      
-        
-        
+          <option value="streamdiffusion">StreamDiffusion</option>
           
-            
-            <button class="vjs-filter-btn" data-filter-group="style" data-filter="eurodance">Eurodance</button>
+          <option value="sub-bass integration">Sub-bass Integration</option>
           
-        
+          <option value="thermal cameras">Thermal Cameras</option>
           
-            
-            <button class="vjs-filter-btn" data-filter-group="style" data-filter="retro-future aesthetics">Retro-Future Aesthetics</button>
+          <option value="touchdesigner">TouchDesigner</option>
           
-        
+          <option value="vdmx5">VDMX5</option>
           
-            
-            <button class="vjs-filter-btn" data-filter-group="style" data-filter="maximalist club visuals">Maximalist Club Visuals</button>
+          <option value="voltage-controlled visuals">Voltage-Controlled Visuals</option>
           
-        
-      
+          <option value="xbox controller">Xbox Controller</option>
+          
+        </select>
+      </div>
+
+      <div class="vjs-filter-group">
+        <span class="vjs-filter-drop-label">Country</span>
+        <select class="vjs-filter-select" id="country-select" onchange="applyDropFilters()">
+          <option value="all">All Countries</option>
+          
+          
+          
+          
+          <option value="brazil">Brazil</option>
+          
+          <option value="france">France</option>
+          
+          <option value="germany">Germany</option>
+          
+          <option value="international">International</option>
+          
+          <option value="italy">Italy</option>
+          
+          <option value="japan">Japan</option>
+          
+          <option value="netherlands">Netherlands</option>
+          
+          <option value="poland">Poland</option>
+          
+          <option value="portugal">Portugal</option>
+          
+          <option value="spain">Spain</option>
+          
+          <option value="usa">USA</option>
+          
+          <option value="united kingdom">United Kingdom</option>
+          
+        </select>
+      </div>
+
+      <button class="vjs-filter-reset" onclick="resetDropFilters()">Reset</button>
+
     </div>
 
-    <!-- FILTER BAR: TECHNOLOGY -->
-    <div class="vjs-filter-bar" id="tech-filter-bar" style="margin-top:-1rem;">
-      <span class="vjs-filter-label">Tech:</span>
-      <button class="vjs-filter-btn active" data-filter-group="tech" data-filter="all">All</button>
-      
-      
-        
-          
-            
-            <button class="vjs-filter-btn" data-filter-group="tech" data-filter="resolume">Resolume</button>
-          
-        
-          
-            
-            <button class="vjs-filter-btn" data-filter-group="tech" data-filter="touchdesigner">TouchDesigner</button>
-          
-        
-          
-            
-            <button class="vjs-filter-btn" data-filter-group="tech" data-filter="custom generative systems">Custom Generative Systems</button>
-          
-        
-          
-            
-            <button class="vjs-filter-btn" data-filter-group="tech" data-filter="real-time lighting integration">Real-time Lighting Integration</button>
-          
-        
-      
-        
-          
-            
-            <button class="vjs-filter-btn" data-filter-group="tech" data-filter="custom software">Custom Software</button>
-          
-        
-          
-        
-          
-            
-            <button class="vjs-filter-btn" data-filter-group="tech" data-filter="scientific visualisation">Scientific Visualisation</button>
-          
-        
-          
-            
-            <button class="vjs-filter-btn" data-filter-group="tech" data-filter="multichannel audio">Multichannel Audio</button>
-          
-        
-          
-            
-            <button class="vjs-filter-btn" data-filter-group="tech" data-filter="real-time processing">Real-time Processing</button>
-          
-        
-      
-        
-          
-        
-          
-            
-            <button class="vjs-filter-btn" data-filter-group="tech" data-filter="notch">Notch</button>
-          
-        
-          
-            
-            <button class="vjs-filter-btn" data-filter-group="tech" data-filter="machine learning">Machine Learning</button>
-          
-        
-          
-            
-            <button class="vjs-filter-btn" data-filter-group="tech" data-filter="real-time rendering">Real-time Rendering</button>
-          
-        
-          
-            
-            <button class="vjs-filter-btn" data-filter-group="tech" data-filter="glsl shaders">GLSL Shaders</button>
-          
-        
-      
-        
-          
-            
-            <button class="vjs-filter-btn" data-filter-group="tech" data-filter="live vj performance">Live VJ Performance</button>
-          
-        
-          
-            
-            <button class="vjs-filter-btn" data-filter-group="tech" data-filter="motion graphics">Motion Graphics</button>
-          
-        
-          
-            
-            <button class="vjs-filter-btn" data-filter-group="tech" data-filter="glitch processing">Glitch Processing</button>
-          
-        
-          
-            
-            <button class="vjs-filter-btn" data-filter-group="tech" data-filter="real-time video mixing">Real-time Video Mixing</button>
-          
-        
-      
-        
-          
-            
-            <button class="vjs-filter-btn" data-filter-group="tech" data-filter="modular synthesiser">Modular Synthesiser</button>
-          
-        
-          
-            
-            <button class="vjs-filter-btn" data-filter-group="tech" data-filter="custom visual software">Custom Visual Software</button>
-          
-        
-          
-            
-            <button class="vjs-filter-btn" data-filter-group="tech" data-filter="analogue signal processing">Analogue Signal Processing</button>
-          
-        
-          
-        
-          
-            
-            <button class="vjs-filter-btn" data-filter-group="tech" data-filter="osc integration">OSC Integration</button>
-          
-        
-      
-        
-          
-            
-            <button class="vjs-filter-btn" data-filter-group="tech" data-filter="thermal cameras">Thermal Cameras</button>
-          
-        
-          
-            
-            <button class="vjs-filter-btn" data-filter-group="tech" data-filter="depth sensors">Depth Sensors</button>
-          
-        
-          
-        
-          
-            
-            <button class="vjs-filter-btn" data-filter-group="tech" data-filter="real-time compositing">Real-time Compositing</button>
-          
-        
-          
-        
-      
-        
-          
-        
-          
-            
-            <button class="vjs-filter-btn" data-filter-group="tech" data-filter="biometric sensors">Biometric Sensors</button>
-          
-        
-          
-            
-            <button class="vjs-filter-btn" data-filter-group="tech" data-filter="custom data processing">Custom Data Processing</button>
-          
-        
-          
-        
-          
-            
-            <button class="vjs-filter-btn" data-filter-group="tech" data-filter="spatial audio">Spatial Audio</button>
-          
-        
-      
-        
-          
-        
-          
-            
-            <button class="vjs-filter-btn" data-filter-group="tech" data-filter="live camera feedback">Live Camera Feedback</button>
-          
-        
-          
-        
-          
-        
-          
-            
-            <button class="vjs-filter-btn" data-filter-group="tech" data-filter="custom systems">Custom Systems</button>
-          
-        
-      
-        
-          
-            
-            <button class="vjs-filter-btn" data-filter-group="tech" data-filter="max/msp/jitter">Max/MSP/Jitter</button>
-          
-        
-          
-            
-            <button class="vjs-filter-btn" data-filter-group="tech" data-filter="after effects">After Effects</button>
-          
-        
-          
-            
-            <button class="vjs-filter-btn" data-filter-group="tech" data-filter="vdmx5">VDMX5</button>
-          
-        
-          
-        
-          
-        
-      
-        
-          
-        
-          
-        
-          
-            
-            <button class="vjs-filter-btn" data-filter-group="tech" data-filter="streamdiffusion">StreamDiffusion</button>
-          
-        
-          
-            
-            <button class="vjs-filter-btn" data-filter-group="tech" data-filter="oxi e16">OXI E16</button>
-          
-        
-          
-            
-            <button class="vjs-filter-btn" data-filter-group="tech" data-filter="xbox controller">Xbox Controller</button>
-          
-        
-          
-        
-      
-        
-          
-            
-            <button class="vjs-filter-btn" data-filter-group="tech" data-filter="analogue synthesisers">Analogue Synthesisers</button>
-          
-        
-          
-            
-            <button class="vjs-filter-btn" data-filter-group="tech" data-filter="voltage-controlled visuals">Voltage-Controlled Visuals</button>
-          
-        
-          
-            
-            <button class="vjs-filter-btn" data-filter-group="tech" data-filter="custom hardware">Custom Hardware</button>
-          
-        
-          
-            
-            <button class="vjs-filter-btn" data-filter-group="tech" data-filter="crt displays">CRT Displays</button>
-          
-        
-          
-            
-            <button class="vjs-filter-btn" data-filter-group="tech" data-filter="hardware signal processing">Hardware Signal Processing</button>
-          
-        
-      
-        
-          
-        
-          
-            
-            <button class="vjs-filter-btn" data-filter-group="tech" data-filter="analogue signal routing">Analogue Signal Routing</button>
-          
-        
-          
-        
-          
-            
-            <button class="vjs-filter-btn" data-filter-group="tech" data-filter="sub-bass integration">Sub-bass Integration</button>
-          
-        
-          
-        
-      
-        
-          
-            
-            <button class="vjs-filter-btn" data-filter-group="tech" data-filter="madmapper">MadMapper</button>
-          
-        
-          
-        
-          
-            
-            <button class="vjs-filter-btn" data-filter-group="tech" data-filter="kinect v2">Kinect V2</button>
-          
-        
-          
-            
-            <button class="vjs-filter-btn" data-filter-group="tech" data-filter="matrox fx4">Matrox FX4</button>
-          
-        
-          
-            
-            <button class="vjs-filter-btn" data-filter-group="tech" data-filter="ndi 6.0">NDI 6.0</button>
-          
-        
-      
-        
-          
-        
-          
-        
-          
-            
-            <button class="vjs-filter-btn" data-filter-group="tech" data-filter="hd projection">HD Projection</button>
-          
-        
-          
-            
-            <button class="vjs-filter-btn" data-filter-group="tech" data-filter="robotic systems">Robotic Systems</button>
-          
-        
-          
-        
-      
-        
-          
-        
-          
-        
-          
-            
-            <button class="vjs-filter-btn" data-filter-group="tech" data-filter="real-time 3d">Real-time 3D</button>
-          
-        
-          
-        
-          
-            
-            <button class="vjs-filter-btn" data-filter-group="tech" data-filter="osc / midi">OSC / MIDI</button>
-          
-        
-      
-        
-          
-        
-          
-            
-            <button class="vjs-filter-btn" data-filter-group="tech" data-filter="generative imagery">Generative Imagery</button>
-          
-        
-          
-            
-            <button class="vjs-filter-btn" data-filter-group="tech" data-filter="multi-projector systems">Multi-projector Systems</button>
-          
-        
-          
-            
-            <button class="vjs-filter-btn" data-filter-group="tech" data-filter="sculptural fabrication">Sculptural Fabrication</button>
-          
-        
-          
-            
-            <button class="vjs-filter-btn" data-filter-group="tech" data-filter="spatial sound">Spatial Sound</button>
-          
-        
-      
-        
-          
-        
-          
-            
-            <button class="vjs-filter-btn" data-filter-group="tech" data-filter="hd video">HD Video</button>
-          
-        
-          
-        
-          
-        
-      
-        
-          
-            
-            <button class="vjs-filter-btn" data-filter-group="tech" data-filter="live av performance">Live AV Performance</button>
-          
-        
-          
-        
-          
-        
-          
-        
-      
-        
-          
-        
-          
-            
-            <button class="vjs-filter-btn" data-filter-group="tech" data-filter="projection mapping">Projection Mapping</button>
-          
-        
-          
-            
-            <button class="vjs-filter-btn" data-filter-group="tech" data-filter="hand drawing">Hand Drawing</button>
-          
-        
-          
-            
-            <button class="vjs-filter-btn" data-filter-group="tech" data-filter="led systems">LED Systems</button>
-          
-        
-          
-        
-      
-        
-          
-            
-            <button class="vjs-filter-btn" data-filter-group="tech" data-filter="resolume arena">Resolume Arena</button>
-          
-        
-          
-        
-          
-            
-            <button class="vjs-filter-btn" data-filter-group="tech" data-filter="smpte timecode">SMPTE Timecode</button>
-          
-        
-          
-            
-            <button class="vjs-filter-btn" data-filter-group="tech" data-filter="custom content">Custom Content</button>
-          
-        
-          
-            
-            <button class="vjs-filter-btn" data-filter-group="tech" data-filter="audio analysis">Audio Analysis</button>
-          
-        
-      
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-      
-        
-          
-            
-            <button class="vjs-filter-btn" data-filter-group="tech" data-filter="pixera">Pixera</button>
-          
-        
-          
-        
-          
-            
-            <button class="vjs-filter-btn" data-filter-group="tech" data-filter="custom rack servers">Custom Rack Servers</button>
-          
-        
-          
-        
-          
-            
-            <button class="vjs-filter-btn" data-filter-group="tech" data-filter="3d content production">3D Content Production</button>
-          
-        
-      
-        
-          
-        
-          
-        
-          
-        
-          
-            
-            <button class="vjs-filter-btn" data-filter-group="tech" data-filter="audio-reactive systems">Audio-reactive Systems</button>
-          
-        
-      
-        
-          
-        
-          
-            
-            <button class="vjs-filter-btn" data-filter-group="tech" data-filter="resolume wire">Resolume Wire</button>
-          
-        
-          
-            
-            <button class="vjs-filter-btn" data-filter-group="tech" data-filter="akai apc40 mkii">Akai APC40 MKII</button>
-          
-        
-          
-            
-            <button class="vjs-filter-btn" data-filter-group="tech" data-filter="art-net / dmx">Art-Net / DMX</button>
-          
-        
-      
-        
-          
-        
-          
-        
-          
-        
-          
-        
-      
-    </div>
-
-    <div id="artists-count" style="font-family:'Orbitron',sans-serif; font-size:0.65rem; text-transform:uppercase; letter-spacing:0.15em; color:var(--vjs-text-muted); margin-bottom:1.5rem;">
-      25 Artists
+    <div class="vjs-artists-count" id="artists-count">
+      <strong>25</strong> Artists
     </div>
 
     <div class="vjs-nts-grid" id="artists-grid">
       
+      
       <div class="vjs-artist-item"
            data-style="minimalist architecture, light as space division, warehouse techno aesthetics"
-           data-tech="resolume,touchdesigner,custom generative systems,real-time lighting integration">
-        <a href="/artists/30xn" class="text-decoration-none vjs-nts-card"
+           data-tech="resolume,touchdesigner,custom generative systems,real-time lighting integration"
+           data-country="portugal">
+        
+
+
+
+
+
+
+
+<a href="/artists/30xn" class="text-decoration-none vjs-nts-card"
    data-style="minimalist architecture, light as space division, warehouse techno aesthetics"
    data-tech="resolume,touchdesigner,custom generative systems,real-time lighting integration"
-   data-location="portugal">
+   data-country="portugal">
   <div class="vjs-nts-visual">
-    <div class="vjs-nts-visual-inner" style="background: linear-gradient(135deg, rgba(157,0,255,0.45) 0%, rgba(0,212,255,0.2) 60%, rgba(255,0,170,0.15) 100%); position:relative; width:100%; height:100%;">
-      <div style="position:absolute; inset:0; background: radial-gradient(ellipse 80% 80% at 30% 40%, rgba(157,0,255,0.3) 0%, transparent 60%), radial-gradient(ellipse 60% 60% at 75% 65%, rgba(0,212,255,0.2) 0%, transparent 55%);"></div>
-      <div style="position:absolute; inset:0; background: repeating-linear-gradient(90deg, transparent, transparent 6px, rgba(157,0,255,0.04) 6px, rgba(157,0,255,0.04) 7px);"></div>
-      <div style="position:absolute; inset:0; display:flex; align-items:center; justify-content:center;">
-        <span style="font-family:'Orbitron',sans-serif; font-size:5rem; font-weight:900; color:rgba(255,255,255,0.06); letter-spacing:-0.05em; user-select:none;">3</span>
-      </div>
+    <div class="vjs-artist-initials vjs-ai-5" data-letter="3">
+      <span>3</span>
     </div>
   </div>
   <div class="vjs-nts-info">
-    <div class="vjs-nts-location">Portugal</div>
+    <div class="vjs-nts-location"><span class="vjs-artist-country-flag">🇵🇹</span>Portugal</div>
     <div class="vjs-nts-name">30xN</div>
     <div class="vjs-nts-style">Minimalist Architecture, Light as Space Divisio...</div>
-    
-    <div style="margin-top:0.5rem; display:flex; flex-wrap:wrap; gap:0.3rem;">
-      
-      <span class="vjs-tag vjs-tag-purple" style="font-size:0.6rem; padding:2px 8px;">Resolume</span>
-      
-      <span class="vjs-tag vjs-tag-purple" style="font-size:0.6rem; padding:2px 8px;">TouchDesigner</span>
-      
-      <span class="vjs-tag vjs-tag-purple" style="font-size:0.6rem; padding:2px 8px;">Custom Generative Systems</span>
-      
-    </div>
-    
   </div>
 </a>
 
       </div>
+      
       
       <div class="vjs-artist-item"
            data-style="glitch aesthetics, mathematical visuals, frequency-driven imagery"
-           data-tech="custom software,generative systems,scientific visualisation,multichannel audio,real-time processing">
-        <a href="/artists/alva-noto" class="text-decoration-none vjs-nts-card"
+           data-tech="custom software,generative systems,scientific visualisation,multichannel audio,real-time processing"
+           data-country="germany">
+        
+
+
+
+
+
+
+
+<a href="/artists/alva-noto" class="text-decoration-none vjs-nts-card"
    data-style="glitch aesthetics, mathematical visuals, frequency-driven imagery"
    data-tech="custom software,generative systems,scientific visualisation,multichannel audio,real-time processing"
-   data-location="berlin, germany">
+   data-country="germany">
   <div class="vjs-nts-visual">
-    <div class="vjs-nts-visual-inner" style="background: linear-gradient(135deg, rgba(157,0,255,0.45) 0%, rgba(0,212,255,0.2) 60%, rgba(255,0,170,0.15) 100%); position:relative; width:100%; height:100%;">
-      <div style="position:absolute; inset:0; background: radial-gradient(ellipse 80% 80% at 30% 40%, rgba(157,0,255,0.3) 0%, transparent 60%), radial-gradient(ellipse 60% 60% at 75% 65%, rgba(0,212,255,0.2) 0%, transparent 55%);"></div>
-      <div style="position:absolute; inset:0; background: repeating-linear-gradient(90deg, transparent, transparent 6px, rgba(157,0,255,0.04) 6px, rgba(157,0,255,0.04) 7px);"></div>
-      <div style="position:absolute; inset:0; display:flex; align-items:center; justify-content:center;">
-        <span style="font-family:'Orbitron',sans-serif; font-size:5rem; font-weight:900; color:rgba(255,255,255,0.06); letter-spacing:-0.05em; user-select:none;">A</span>
-      </div>
+    <div class="vjs-artist-initials vjs-ai-1" data-letter="A">
+      <span>A</span>
     </div>
   </div>
   <div class="vjs-nts-info">
-    <div class="vjs-nts-location">Berlin, Germany</div>
+    <div class="vjs-nts-location"><span class="vjs-artist-country-flag">🇩🇪</span>Germany</div>
     <div class="vjs-nts-name">Alva Noto</div>
     <div class="vjs-nts-style">Glitch Aesthetics, Mathematical Visuals, Freque...</div>
-    
-    <div style="margin-top:0.5rem; display:flex; flex-wrap:wrap; gap:0.3rem;">
-      
-      <span class="vjs-tag vjs-tag-purple" style="font-size:0.6rem; padding:2px 8px;">Custom Software</span>
-      
-      <span class="vjs-tag vjs-tag-purple" style="font-size:0.6rem; padding:2px 8px;">Generative Systems</span>
-      
-      <span class="vjs-tag vjs-tag-purple" style="font-size:0.6rem; padding:2px 8px;">Scientific Visualisation</span>
-      
-    </div>
-    
   </div>
 </a>
 
       </div>
       
+      
       <div class="vjs-artist-item"
            data-style="visual morphologies, organic generative systems, ai-driven shape"
-           data-tech="touchdesigner,notch,machine learning,real-time rendering,glsl shaders">
-        <a href="/artists/arche-goah" class="text-decoration-none vjs-nts-card"
+           data-tech="touchdesigner,notch,machine learning,real-time rendering,glsl shaders"
+           data-country="international">
+        
+
+
+
+
+
+
+
+<a href="/artists/arche-goah" class="text-decoration-none vjs-nts-card"
    data-style="visual morphologies, organic generative systems, ai-driven shape"
    data-tech="touchdesigner,notch,machine learning,real-time rendering,glsl shaders"
-   data-location="international">
+   data-country="international">
   <div class="vjs-nts-visual">
-    <div class="vjs-nts-visual-inner" style="background: linear-gradient(135deg, rgba(157,0,255,0.45) 0%, rgba(0,212,255,0.2) 60%, rgba(255,0,170,0.15) 100%); position:relative; width:100%; height:100%;">
-      <div style="position:absolute; inset:0; background: radial-gradient(ellipse 80% 80% at 30% 40%, rgba(157,0,255,0.3) 0%, transparent 60%), radial-gradient(ellipse 60% 60% at 75% 65%, rgba(0,212,255,0.2) 0%, transparent 55%);"></div>
-      <div style="position:absolute; inset:0; background: repeating-linear-gradient(90deg, transparent, transparent 6px, rgba(157,0,255,0.04) 6px, rgba(157,0,255,0.04) 7px);"></div>
-      <div style="position:absolute; inset:0; display:flex; align-items:center; justify-content:center;">
-        <span style="font-family:'Orbitron',sans-serif; font-size:5rem; font-weight:900; color:rgba(255,255,255,0.06); letter-spacing:-0.05em; user-select:none;">A</span>
-      </div>
+    <div class="vjs-artist-initials vjs-ai-1" data-letter="A">
+      <span>A</span>
     </div>
   </div>
   <div class="vjs-nts-info">
     <div class="vjs-nts-location">International</div>
     <div class="vjs-nts-name">Arche Goah</div>
     <div class="vjs-nts-style">Visual Morphologies, Organic Generative Systems...</div>
-    
-    <div style="margin-top:0.5rem; display:flex; flex-wrap:wrap; gap:0.3rem;">
-      
-      <span class="vjs-tag vjs-tag-purple" style="font-size:0.6rem; padding:2px 8px;">TouchDesigner</span>
-      
-      <span class="vjs-tag vjs-tag-purple" style="font-size:0.6rem; padding:2px 8px;">Notch</span>
-      
-      <span class="vjs-tag vjs-tag-purple" style="font-size:0.6rem; padding:2px 8px;">Machine Learning</span>
-      
-    </div>
-    
   </div>
 </a>
 
       </div>
+      
       
       <div class="vjs-artist-item"
            data-style="neon aesthetics, kinetic typography, glitch, live vj performance"
-           data-tech="live vj performance,motion graphics,glitch processing,real-time video mixing">
-        <a href="/artists/caio-todomundo" class="text-decoration-none vjs-nts-card"
+           data-tech="live vj performance,motion graphics,glitch processing,real-time video mixing"
+           data-country="brazil">
+        
+
+
+
+
+
+
+
+<a href="/artists/caio-todomundo" class="text-decoration-none vjs-nts-card"
    data-style="neon aesthetics, kinetic typography, glitch, live vj performance"
    data-tech="live vj performance,motion graphics,glitch processing,real-time video mixing"
-   data-location="brazil">
+   data-country="brazil">
   <div class="vjs-nts-visual">
-    <div class="vjs-nts-visual-inner" style="background: linear-gradient(135deg, rgba(157,0,255,0.45) 0%, rgba(0,212,255,0.2) 60%, rgba(255,0,170,0.15) 100%); position:relative; width:100%; height:100%;">
-      <div style="position:absolute; inset:0; background: radial-gradient(ellipse 80% 80% at 30% 40%, rgba(157,0,255,0.3) 0%, transparent 60%), radial-gradient(ellipse 60% 60% at 75% 65%, rgba(0,212,255,0.2) 0%, transparent 55%);"></div>
-      <div style="position:absolute; inset:0; background: repeating-linear-gradient(90deg, transparent, transparent 6px, rgba(157,0,255,0.04) 6px, rgba(157,0,255,0.04) 7px);"></div>
-      <div style="position:absolute; inset:0; display:flex; align-items:center; justify-content:center;">
-        <span style="font-family:'Orbitron',sans-serif; font-size:5rem; font-weight:900; color:rgba(255,255,255,0.06); letter-spacing:-0.05em; user-select:none;">C</span>
-      </div>
+    <div class="vjs-artist-initials vjs-ai-1" data-letter="C">
+      <span>C</span>
     </div>
   </div>
   <div class="vjs-nts-info">
-    <div class="vjs-nts-location">Brazil</div>
+    <div class="vjs-nts-location"><span class="vjs-artist-country-flag">🇧🇷</span>Brazil</div>
     <div class="vjs-nts-name">Caio Todomundo</div>
     <div class="vjs-nts-style">Neon Aesthetics, Kinetic Typography, Glitch, Li...</div>
-    
-    <div style="margin-top:0.5rem; display:flex; flex-wrap:wrap; gap:0.3rem;">
-      
-      <span class="vjs-tag vjs-tag-purple" style="font-size:0.6rem; padding:2px 8px;">Live VJ Performance</span>
-      
-      <span class="vjs-tag vjs-tag-purple" style="font-size:0.6rem; padding:2px 8px;">Motion Graphics</span>
-      
-      <span class="vjs-tag vjs-tag-purple" style="font-size:0.6rem; padding:2px 8px;">Glitch Processing</span>
-      
-    </div>
-    
   </div>
 </a>
 
       </div>
+      
       
       <div class="vjs-artist-item"
            data-style="modular av, physical sound-image integration, patched synthesis"
-           data-tech="modular synthesiser,custom visual software,analogue signal processing,touchdesigner,osc integration">
-        <a href="/artists/cora-novoa" class="text-decoration-none vjs-nts-card"
+           data-tech="modular synthesiser,custom visual software,analogue signal processing,touchdesigner,osc integration"
+           data-country="spain">
+        
+
+
+
+
+
+
+
+<a href="/artists/cora-novoa" class="text-decoration-none vjs-nts-card"
    data-style="modular av, physical sound-image integration, patched synthesis"
    data-tech="modular synthesiser,custom visual software,analogue signal processing,touchdesigner,osc integration"
-   data-location="barcelona, spain">
+   data-country="spain">
   <div class="vjs-nts-visual">
-    <div class="vjs-nts-visual-inner" style="background: linear-gradient(135deg, rgba(157,0,255,0.45) 0%, rgba(0,212,255,0.2) 60%, rgba(255,0,170,0.15) 100%); position:relative; width:100%; height:100%;">
-      <div style="position:absolute; inset:0; background: radial-gradient(ellipse 80% 80% at 30% 40%, rgba(157,0,255,0.3) 0%, transparent 60%), radial-gradient(ellipse 60% 60% at 75% 65%, rgba(0,212,255,0.2) 0%, transparent 55%);"></div>
-      <div style="position:absolute; inset:0; background: repeating-linear-gradient(90deg, transparent, transparent 6px, rgba(157,0,255,0.04) 6px, rgba(157,0,255,0.04) 7px);"></div>
-      <div style="position:absolute; inset:0; display:flex; align-items:center; justify-content:center;">
-        <span style="font-family:'Orbitron',sans-serif; font-size:5rem; font-weight:900; color:rgba(255,255,255,0.06); letter-spacing:-0.05em; user-select:none;">C</span>
-      </div>
+    <div class="vjs-artist-initials vjs-ai-1" data-letter="C">
+      <span>C</span>
     </div>
   </div>
   <div class="vjs-nts-info">
-    <div class="vjs-nts-location">Barcelona, Spain</div>
+    <div class="vjs-nts-location"><span class="vjs-artist-country-flag">🇪🇸</span>Spain</div>
     <div class="vjs-nts-name">Cora Novoa</div>
     <div class="vjs-nts-style">Modular AV, Physical Sound-Image Integration, P...</div>
-    
-    <div style="margin-top:0.5rem; display:flex; flex-wrap:wrap; gap:0.3rem;">
-      
-      <span class="vjs-tag vjs-tag-purple" style="font-size:0.6rem; padding:2px 8px;">Modular Synthesiser</span>
-      
-      <span class="vjs-tag vjs-tag-purple" style="font-size:0.6rem; padding:2px 8px;">Custom Visual Software</span>
-      
-      <span class="vjs-tag vjs-tag-purple" style="font-size:0.6rem; padding:2px 8px;">Analogue Signal Processing</span>
-      
-    </div>
-    
   </div>
 </a>
 
       </div>
       
+      
       <div class="vjs-artist-item"
            data-style="digital ghost aesthetics, thermal imaging, audience-integrated performance"
-           data-tech="thermal cameras,depth sensors,touchdesigner,real-time compositing,custom software">
-        <a href="/artists/filtered-presence" class="text-decoration-none vjs-nts-card"
+           data-tech="thermal cameras,depth sensors,touchdesigner,real-time compositing,custom software"
+           data-country="international">
+        
+
+
+
+
+
+
+
+<a href="/artists/filtered-presence" class="text-decoration-none vjs-nts-card"
    data-style="digital ghost aesthetics, thermal imaging, audience-integrated performance"
    data-tech="thermal cameras,depth sensors,touchdesigner,real-time compositing,custom software"
-   data-location="international">
+   data-country="international">
   <div class="vjs-nts-visual">
-    <div class="vjs-nts-visual-inner" style="background: linear-gradient(135deg, rgba(157,0,255,0.45) 0%, rgba(0,212,255,0.2) 60%, rgba(255,0,170,0.15) 100%); position:relative; width:100%; height:100%;">
-      <div style="position:absolute; inset:0; background: radial-gradient(ellipse 80% 80% at 30% 40%, rgba(157,0,255,0.3) 0%, transparent 60%), radial-gradient(ellipse 60% 60% at 75% 65%, rgba(0,212,255,0.2) 0%, transparent 55%);"></div>
-      <div style="position:absolute; inset:0; background: repeating-linear-gradient(90deg, transparent, transparent 6px, rgba(157,0,255,0.04) 6px, rgba(157,0,255,0.04) 7px);"></div>
-      <div style="position:absolute; inset:0; display:flex; align-items:center; justify-content:center;">
-        <span style="font-family:'Orbitron',sans-serif; font-size:5rem; font-weight:900; color:rgba(255,255,255,0.06); letter-spacing:-0.05em; user-select:none;">F</span>
-      </div>
+    <div class="vjs-artist-initials vjs-ai-2" data-letter="F">
+      <span>F</span>
     </div>
   </div>
   <div class="vjs-nts-info">
     <div class="vjs-nts-location">International</div>
     <div class="vjs-nts-name">Filtered Presence</div>
     <div class="vjs-nts-style">Digital Ghost Aesthetics, Thermal Imaging, Audi...</div>
-    
-    <div style="margin-top:0.5rem; display:flex; flex-wrap:wrap; gap:0.3rem;">
-      
-      <span class="vjs-tag vjs-tag-purple" style="font-size:0.6rem; padding:2px 8px;">Thermal Cameras</span>
-      
-      <span class="vjs-tag vjs-tag-purple" style="font-size:0.6rem; padding:2px 8px;">Depth Sensors</span>
-      
-      <span class="vjs-tag vjs-tag-purple" style="font-size:0.6rem; padding:2px 8px;">TouchDesigner</span>
-      
-    </div>
-    
   </div>
 </a>
 
       </div>
+      
       
       <div class="vjs-artist-item"
            data-style="data storytelling, biometric visuals, live av, scientific imagery"
-           data-tech="touchdesigner,biometric sensors,custom data processing,real-time rendering,spatial audio">
-        <a href="/artists/fuse-star" class="text-decoration-none vjs-nts-card"
+           data-tech="touchdesigner,biometric sensors,custom data processing,real-time rendering,spatial audio"
+           data-country="italy">
+        
+
+
+
+
+
+
+
+<a href="/artists/fuse-star" class="text-decoration-none vjs-nts-card"
    data-style="data storytelling, biometric visuals, live av, scientific imagery"
    data-tech="touchdesigner,biometric sensors,custom data processing,real-time rendering,spatial audio"
-   data-location="modena, italy">
+   data-country="italy">
   <div class="vjs-nts-visual">
-    <div class="vjs-nts-visual-inner" style="background: linear-gradient(135deg, rgba(157,0,255,0.45) 0%, rgba(0,212,255,0.2) 60%, rgba(255,0,170,0.15) 100%); position:relative; width:100%; height:100%;">
-      <div style="position:absolute; inset:0; background: radial-gradient(ellipse 80% 80% at 30% 40%, rgba(157,0,255,0.3) 0%, transparent 60%), radial-gradient(ellipse 60% 60% at 75% 65%, rgba(0,212,255,0.2) 0%, transparent 55%);"></div>
-      <div style="position:absolute; inset:0; background: repeating-linear-gradient(90deg, transparent, transparent 6px, rgba(157,0,255,0.04) 6px, rgba(157,0,255,0.04) 7px);"></div>
-      <div style="position:absolute; inset:0; display:flex; align-items:center; justify-content:center;">
-        <span style="font-family:'Orbitron',sans-serif; font-size:5rem; font-weight:900; color:rgba(255,255,255,0.06); letter-spacing:-0.05em; user-select:none;">F</span>
-      </div>
+    <div class="vjs-artist-initials vjs-ai-2" data-letter="F">
+      <span>F</span>
     </div>
   </div>
   <div class="vjs-nts-info">
-    <div class="vjs-nts-location">Modena, Italy</div>
+    <div class="vjs-nts-location"><span class="vjs-artist-country-flag">🇮🇹</span>Italy</div>
     <div class="vjs-nts-name">fuse*</div>
     <div class="vjs-nts-style">Data Storytelling, Biometric Visuals, Live AV, ...</div>
-    
-    <div style="margin-top:0.5rem; display:flex; flex-wrap:wrap; gap:0.3rem;">
-      
-      <span class="vjs-tag vjs-tag-purple" style="font-size:0.6rem; padding:2px 8px;">TouchDesigner</span>
-      
-      <span class="vjs-tag vjs-tag-purple" style="font-size:0.6rem; padding:2px 8px;">Biometric Sensors</span>
-      
-      <span class="vjs-tag vjs-tag-purple" style="font-size:0.6rem; padding:2px 8px;">Custom Data Processing</span>
-      
-    </div>
-    
   </div>
 </a>
 
       </div>
       
+      
       <div class="vjs-artist-item"
            data-style="mandala-generative art, camera feedback loops, psychedelic organic forms"
-           data-tech="touchdesigner,live camera feedback,glsl shaders,processing,custom systems">
-        <a href="/artists/ikshana" class="text-decoration-none vjs-nts-card"
+           data-tech="touchdesigner,live camera feedback,glsl shaders,processing,custom systems"
+           data-country="international">
+        
+
+
+
+
+
+
+
+<a href="/artists/ikshana" class="text-decoration-none vjs-nts-card"
    data-style="mandala-generative art, camera feedback loops, psychedelic organic forms"
    data-tech="touchdesigner,live camera feedback,glsl shaders,processing,custom systems"
-   data-location="international">
+   data-country="international">
   <div class="vjs-nts-visual">
-    <div class="vjs-nts-visual-inner" style="background: linear-gradient(135deg, rgba(157,0,255,0.45) 0%, rgba(0,212,255,0.2) 60%, rgba(255,0,170,0.15) 100%); position:relative; width:100%; height:100%;">
-      <div style="position:absolute; inset:0; background: radial-gradient(ellipse 80% 80% at 30% 40%, rgba(157,0,255,0.3) 0%, transparent 60%), radial-gradient(ellipse 60% 60% at 75% 65%, rgba(0,212,255,0.2) 0%, transparent 55%);"></div>
-      <div style="position:absolute; inset:0; background: repeating-linear-gradient(90deg, transparent, transparent 6px, rgba(157,0,255,0.04) 6px, rgba(157,0,255,0.04) 7px);"></div>
-      <div style="position:absolute; inset:0; display:flex; align-items:center; justify-content:center;">
-        <span style="font-family:'Orbitron',sans-serif; font-size:5rem; font-weight:900; color:rgba(255,255,255,0.06); letter-spacing:-0.05em; user-select:none;">I</span>
-      </div>
+    <div class="vjs-artist-initials vjs-ai-2" data-letter="I">
+      <span>I</span>
     </div>
   </div>
   <div class="vjs-nts-info">
     <div class="vjs-nts-location">International</div>
     <div class="vjs-nts-name">Ikshana</div>
     <div class="vjs-nts-style">Mandala-Generative Art, Camera Feedback Loops, ...</div>
-    
-    <div style="margin-top:0.5rem; display:flex; flex-wrap:wrap; gap:0.3rem;">
-      
-      <span class="vjs-tag vjs-tag-purple" style="font-size:0.6rem; padding:2px 8px;">TouchDesigner</span>
-      
-      <span class="vjs-tag vjs-tag-purple" style="font-size:0.6rem; padding:2px 8px;">Live Camera Feedback</span>
-      
-      <span class="vjs-tag vjs-tag-purple" style="font-size:0.6rem; padding:2px 8px;">GLSL Shaders</span>
-      
-    </div>
-    
   </div>
 </a>
 
       </div>
       
+      
       <div class="vjs-artist-item"
            data-style="generative visuals, real-time performance, motion design"
-           data-tech="max/msp/jitter,after effects,vdmx5,generative systems,real-time rendering">
-        <a href="/artists/jacob-rendell" class="text-decoration-none vjs-nts-card"
+           data-tech="max/msp/jitter,after effects,vdmx5,generative systems,real-time rendering"
+           data-country="international">
+        
+
+
+
+
+
+
+
+<a href="/artists/jacob-rendell" class="text-decoration-none vjs-nts-card"
    data-style="generative visuals, real-time performance, motion design"
    data-tech="max/msp/jitter,after effects,vdmx5,generative systems,real-time rendering"
-   data-location="international">
+   data-country="international">
   <div class="vjs-nts-visual">
-    <div class="vjs-nts-visual-inner" style="background: linear-gradient(135deg, rgba(157,0,255,0.45) 0%, rgba(0,212,255,0.2) 60%, rgba(255,0,170,0.15) 100%); position:relative; width:100%; height:100%;">
-      <div style="position:absolute; inset:0; background: radial-gradient(ellipse 80% 80% at 30% 40%, rgba(157,0,255,0.3) 0%, transparent 60%), radial-gradient(ellipse 60% 60% at 75% 65%, rgba(0,212,255,0.2) 0%, transparent 55%);"></div>
-      <div style="position:absolute; inset:0; background: repeating-linear-gradient(90deg, transparent, transparent 6px, rgba(157,0,255,0.04) 6px, rgba(157,0,255,0.04) 7px);"></div>
-      <div style="position:absolute; inset:0; display:flex; align-items:center; justify-content:center;">
-        <span style="font-family:'Orbitron',sans-serif; font-size:5rem; font-weight:900; color:rgba(255,255,255,0.06); letter-spacing:-0.05em; user-select:none;">J</span>
-      </div>
+    <div class="vjs-artist-initials vjs-ai-2" data-letter="J">
+      <span>J</span>
     </div>
   </div>
   <div class="vjs-nts-info">
     <div class="vjs-nts-location">International</div>
     <div class="vjs-nts-name">Jacob Rendell</div>
     <div class="vjs-nts-style">Generative Visuals, Real-time Performance, Moti...</div>
-    
-    <div style="margin-top:0.5rem; display:flex; flex-wrap:wrap; gap:0.3rem;">
-      
-      <span class="vjs-tag vjs-tag-purple" style="font-size:0.6rem; padding:2px 8px;">Max/MSP/Jitter</span>
-      
-      <span class="vjs-tag vjs-tag-purple" style="font-size:0.6rem; padding:2px 8px;">After Effects</span>
-      
-      <span class="vjs-tag vjs-tag-purple" style="font-size:0.6rem; padding:2px 8px;">VDMX5</span>
-      
-    </div>
-    
   </div>
 </a>
 
       </div>
+      
       
       <div class="vjs-artist-item"
            data-style="generative real-time systems, live visual improvisation, ai-assisted performance"
-           data-tech="touchdesigner,resolume,streamdiffusion,oxi e16,xbox controller,osc">
-        <a href="/artists/jascha-suss" class="text-decoration-none vjs-nts-card"
+           data-tech="touchdesigner,resolume,streamdiffusion,oxi e16,xbox controller,osc"
+           data-country="germany">
+        
+
+
+
+
+
+
+
+<a href="/artists/jascha-suss" class="text-decoration-none vjs-nts-card"
    data-style="generative real-time systems, live visual improvisation, ai-assisted performance"
    data-tech="touchdesigner,resolume,streamdiffusion,oxi e16,xbox controller,osc"
-   data-location="germany / international">
+   data-country="germany">
   <div class="vjs-nts-visual">
-    <div class="vjs-nts-visual-inner" style="background: linear-gradient(135deg, rgba(157,0,255,0.45) 0%, rgba(0,212,255,0.2) 60%, rgba(255,0,170,0.15) 100%); position:relative; width:100%; height:100%;">
-      <div style="position:absolute; inset:0; background: radial-gradient(ellipse 80% 80% at 30% 40%, rgba(157,0,255,0.3) 0%, transparent 60%), radial-gradient(ellipse 60% 60% at 75% 65%, rgba(0,212,255,0.2) 0%, transparent 55%);"></div>
-      <div style="position:absolute; inset:0; background: repeating-linear-gradient(90deg, transparent, transparent 6px, rgba(157,0,255,0.04) 6px, rgba(157,0,255,0.04) 7px);"></div>
-      <div style="position:absolute; inset:0; display:flex; align-items:center; justify-content:center;">
-        <span style="font-family:'Orbitron',sans-serif; font-size:5rem; font-weight:900; color:rgba(255,255,255,0.06); letter-spacing:-0.05em; user-select:none;">J</span>
-      </div>
+    <div class="vjs-artist-initials vjs-ai-2" data-letter="J">
+      <span>J</span>
     </div>
   </div>
   <div class="vjs-nts-info">
-    <div class="vjs-nts-location">Germany / International</div>
+    <div class="vjs-nts-location"><span class="vjs-artist-country-flag">🇩🇪</span>Germany</div>
     <div class="vjs-nts-name">Jascha Süss</div>
     <div class="vjs-nts-style">Generative Real-Time Systems, Live Visual Impro...</div>
-    
-    <div style="margin-top:0.5rem; display:flex; flex-wrap:wrap; gap:0.3rem;">
-      
-      <span class="vjs-tag vjs-tag-purple" style="font-size:0.6rem; padding:2px 8px;">TouchDesigner</span>
-      
-      <span class="vjs-tag vjs-tag-purple" style="font-size:0.6rem; padding:2px 8px;">Resolume</span>
-      
-      <span class="vjs-tag vjs-tag-purple" style="font-size:0.6rem; padding:2px 8px;">StreamDiffusion</span>
-      
-    </div>
-    
   </div>
 </a>
 
       </div>
+      
       
       <div class="vjs-artist-item"
            data-style="analog hardware visuals, high-voltage electronics, underground spectacle"
-           data-tech="analogue synthesisers,voltage-controlled visuals,custom hardware,crt displays,hardware signal processing">
-        <a href="/artists/lady-starlight" class="text-decoration-none vjs-nts-card"
+           data-tech="analogue synthesisers,voltage-controlled visuals,custom hardware,crt displays,hardware signal processing"
+           data-country="usa">
+        
+
+
+
+
+
+
+
+<a href="/artists/lady-starlight" class="text-decoration-none vjs-nts-card"
    data-style="analog hardware visuals, high-voltage electronics, underground spectacle"
    data-tech="analogue synthesisers,voltage-controlled visuals,custom hardware,crt displays,hardware signal processing"
-   data-location="new york, usa / international">
+   data-country="usa">
   <div class="vjs-nts-visual">
-    <div class="vjs-nts-visual-inner" style="background: linear-gradient(135deg, rgba(157,0,255,0.45) 0%, rgba(0,212,255,0.2) 60%, rgba(255,0,170,0.15) 100%); position:relative; width:100%; height:100%;">
-      <div style="position:absolute; inset:0; background: radial-gradient(ellipse 80% 80% at 30% 40%, rgba(157,0,255,0.3) 0%, transparent 60%), radial-gradient(ellipse 60% 60% at 75% 65%, rgba(0,212,255,0.2) 0%, transparent 55%);"></div>
-      <div style="position:absolute; inset:0; background: repeating-linear-gradient(90deg, transparent, transparent 6px, rgba(157,0,255,0.04) 6px, rgba(157,0,255,0.04) 7px);"></div>
-      <div style="position:absolute; inset:0; display:flex; align-items:center; justify-content:center;">
-        <span style="font-family:'Orbitron',sans-serif; font-size:5rem; font-weight:900; color:rgba(255,255,255,0.06); letter-spacing:-0.05em; user-select:none;">L</span>
-      </div>
+    <div class="vjs-artist-initials vjs-ai-3" data-letter="L">
+      <span>L</span>
     </div>
   </div>
   <div class="vjs-nts-info">
-    <div class="vjs-nts-location">New York, USA / International</div>
+    <div class="vjs-nts-location"><span class="vjs-artist-country-flag">🇺🇸</span>USA</div>
     <div class="vjs-nts-name">Lady Starlight</div>
     <div class="vjs-nts-style">Analog Hardware Visuals, High-Voltage Electroni...</div>
-    
-    <div style="margin-top:0.5rem; display:flex; flex-wrap:wrap; gap:0.3rem;">
-      
-      <span class="vjs-tag vjs-tag-purple" style="font-size:0.6rem; padding:2px 8px;">Analogue Synthesisers</span>
-      
-      <span class="vjs-tag vjs-tag-purple" style="font-size:0.6rem; padding:2px 8px;">Voltage-Controlled Visuals</span>
-      
-      <span class="vjs-tag vjs-tag-purple" style="font-size:0.6rem; padding:2px 8px;">Custom Hardware</span>
-      
-    </div>
-    
   </div>
 </a>
 
       </div>
       
+      
       <div class="vjs-artist-item"
            data-style="sub-bass visuals, physical sound-image unity, experimental av"
-           data-tech="custom software,analogue signal routing,real-time processing,sub-bass integration,generative systems">
-        <a href="/artists/novi-sad" class="text-decoration-none vjs-nts-card"
+           data-tech="custom software,analogue signal routing,real-time processing,sub-bass integration,generative systems"
+           data-country="international">
+        
+
+
+
+
+
+
+
+<a href="/artists/novi-sad" class="text-decoration-none vjs-nts-card"
    data-style="sub-bass visuals, physical sound-image unity, experimental av"
    data-tech="custom software,analogue signal routing,real-time processing,sub-bass integration,generative systems"
-   data-location="international">
+   data-country="international">
   <div class="vjs-nts-visual">
-    <div class="vjs-nts-visual-inner" style="background: linear-gradient(135deg, rgba(157,0,255,0.45) 0%, rgba(0,212,255,0.2) 60%, rgba(255,0,170,0.15) 100%); position:relative; width:100%; height:100%;">
-      <div style="position:absolute; inset:0; background: radial-gradient(ellipse 80% 80% at 30% 40%, rgba(157,0,255,0.3) 0%, transparent 60%), radial-gradient(ellipse 60% 60% at 75% 65%, rgba(0,212,255,0.2) 0%, transparent 55%);"></div>
-      <div style="position:absolute; inset:0; background: repeating-linear-gradient(90deg, transparent, transparent 6px, rgba(157,0,255,0.04) 6px, rgba(157,0,255,0.04) 7px);"></div>
-      <div style="position:absolute; inset:0; display:flex; align-items:center; justify-content:center;">
-        <span style="font-family:'Orbitron',sans-serif; font-size:5rem; font-weight:900; color:rgba(255,255,255,0.06); letter-spacing:-0.05em; user-select:none;">N</span>
-      </div>
+    <div class="vjs-artist-initials vjs-ai-3" data-letter="N">
+      <span>N</span>
     </div>
   </div>
   <div class="vjs-nts-info">
     <div class="vjs-nts-location">International</div>
     <div class="vjs-nts-name">Novi_sad</div>
     <div class="vjs-nts-style">Sub-Bass Visuals, Physical Sound-Image Unity, E...</div>
-    
-    <div style="margin-top:0.5rem; display:flex; flex-wrap:wrap; gap:0.3rem;">
-      
-      <span class="vjs-tag vjs-tag-purple" style="font-size:0.6rem; padding:2px 8px;">Custom Software</span>
-      
-      <span class="vjs-tag vjs-tag-purple" style="font-size:0.6rem; padding:2px 8px;">Analogue Signal Routing</span>
-      
-      <span class="vjs-tag vjs-tag-purple" style="font-size:0.6rem; padding:2px 8px;">Real-time Processing</span>
-      
-    </div>
-    
   </div>
 </a>
 
       </div>
+      
       
       <div class="vjs-artist-item"
            data-style="360-degree mapping, architectural immersion, complex interior projection"
-           data-tech="madmapper,vdmx,kinect v2,matrox fx4,ndi 6.0">
-        <a href="/artists/okiniko" class="text-decoration-none vjs-nts-card"
+           data-tech="madmapper,vdmx,kinect v2,matrox fx4,ndi 6.0"
+           data-country="international">
+        
+
+
+
+
+
+
+
+<a href="/artists/okiniko" class="text-decoration-none vjs-nts-card"
    data-style="360-degree mapping, architectural immersion, complex interior projection"
    data-tech="madmapper,vdmx,kinect v2,matrox fx4,ndi 6.0"
-   data-location="europe / international">
+   data-country="international">
   <div class="vjs-nts-visual">
-    <div class="vjs-nts-visual-inner" style="background: linear-gradient(135deg, rgba(157,0,255,0.45) 0%, rgba(0,212,255,0.2) 60%, rgba(255,0,170,0.15) 100%); position:relative; width:100%; height:100%;">
-      <div style="position:absolute; inset:0; background: radial-gradient(ellipse 80% 80% at 30% 40%, rgba(157,0,255,0.3) 0%, transparent 60%), radial-gradient(ellipse 60% 60% at 75% 65%, rgba(0,212,255,0.2) 0%, transparent 55%);"></div>
-      <div style="position:absolute; inset:0; background: repeating-linear-gradient(90deg, transparent, transparent 6px, rgba(157,0,255,0.04) 6px, rgba(157,0,255,0.04) 7px);"></div>
-      <div style="position:absolute; inset:0; display:flex; align-items:center; justify-content:center;">
-        <span style="font-family:'Orbitron',sans-serif; font-size:5rem; font-weight:900; color:rgba(255,255,255,0.06); letter-spacing:-0.05em; user-select:none;">O</span>
-      </div>
+    <div class="vjs-artist-initials vjs-ai-3" data-letter="O">
+      <span>O</span>
     </div>
   </div>
   <div class="vjs-nts-info">
-    <div class="vjs-nts-location">Europe / International</div>
+    <div class="vjs-nts-location">International</div>
     <div class="vjs-nts-name">Okiniko</div>
     <div class="vjs-nts-style">360-Degree Mapping, Architectural Immersion, Co...</div>
-    
-    <div style="margin-top:0.5rem; display:flex; flex-wrap:wrap; gap:0.3rem;">
-      
-      <span class="vjs-tag vjs-tag-purple" style="font-size:0.6rem; padding:2px 8px;">MadMapper</span>
-      
-      <span class="vjs-tag vjs-tag-purple" style="font-size:0.6rem; padding:2px 8px;">VDMX</span>
-      
-      <span class="vjs-tag vjs-tag-purple" style="font-size:0.6rem; padding:2px 8px;">Kinect V2</span>
-      
-    </div>
-    
   </div>
 </a>
 
       </div>
+      
       
       <div class="vjs-artist-item"
            data-style="generative art, audiovisual performance, classical reinterpretation"
-           data-tech="real-time rendering,custom software,hd projection,robotic systems,machine learning">
-        <a href="/artists/quayola" class="text-decoration-none vjs-nts-card"
+           data-tech="real-time rendering,custom software,hd projection,robotic systems,machine learning"
+           data-country="united kingdom">
+        
+
+
+
+
+
+
+
+<a href="/artists/quayola" class="text-decoration-none vjs-nts-card"
    data-style="generative art, audiovisual performance, classical reinterpretation"
    data-tech="real-time rendering,custom software,hd projection,robotic systems,machine learning"
-   data-location="london, united kingdom">
+   data-country="united kingdom">
   <div class="vjs-nts-visual">
-    <div class="vjs-nts-visual-inner" style="background: linear-gradient(135deg, rgba(157,0,255,0.45) 0%, rgba(0,212,255,0.2) 60%, rgba(255,0,170,0.15) 100%); position:relative; width:100%; height:100%;">
-      <div style="position:absolute; inset:0; background: radial-gradient(ellipse 80% 80% at 30% 40%, rgba(157,0,255,0.3) 0%, transparent 60%), radial-gradient(ellipse 60% 60% at 75% 65%, rgba(0,212,255,0.2) 0%, transparent 55%);"></div>
-      <div style="position:absolute; inset:0; background: repeating-linear-gradient(90deg, transparent, transparent 6px, rgba(157,0,255,0.04) 6px, rgba(157,0,255,0.04) 7px);"></div>
-      <div style="position:absolute; inset:0; display:flex; align-items:center; justify-content:center;">
-        <span style="font-family:'Orbitron',sans-serif; font-size:5rem; font-weight:900; color:rgba(255,255,255,0.06); letter-spacing:-0.05em; user-select:none;">Q</span>
-      </div>
+    <div class="vjs-artist-initials vjs-ai-4" data-letter="Q">
+      <span>Q</span>
     </div>
   </div>
   <div class="vjs-nts-info">
-    <div class="vjs-nts-location">London, United Kingdom</div>
+    <div class="vjs-nts-location"><span class="vjs-artist-country-flag">🇬🇧</span>United Kingdom</div>
     <div class="vjs-nts-name">Quayola</div>
     <div class="vjs-nts-style">Generative Art, Audiovisual Performance, Classi...</div>
-    
-    <div style="margin-top:0.5rem; display:flex; flex-wrap:wrap; gap:0.3rem;">
-      
-      <span class="vjs-tag vjs-tag-purple" style="font-size:0.6rem; padding:2px 8px;">Real-time Rendering</span>
-      
-      <span class="vjs-tag vjs-tag-purple" style="font-size:0.6rem; padding:2px 8px;">Custom Software</span>
-      
-      <span class="vjs-tag vjs-tag-purple" style="font-size:0.6rem; padding:2px 8px;">HD Projection</span>
-      
-    </div>
-    
   </div>
 </a>
 
       </div>
       
+      
       <div class="vjs-artist-item"
            data-style="gamified vjing, real-time 3d navigation, first-person visual performance"
-           data-tech="notch,xbox controller,real-time 3d,resolume,osc / midi">
-        <a href="/artists/rexaffects" class="text-decoration-none vjs-nts-card"
+           data-tech="notch,xbox controller,real-time 3d,resolume,osc / midi"
+           data-country="international">
+        
+
+
+
+
+
+
+
+<a href="/artists/rexaffects" class="text-decoration-none vjs-nts-card"
    data-style="gamified vjing, real-time 3d navigation, first-person visual performance"
    data-tech="notch,xbox controller,real-time 3d,resolume,osc / midi"
-   data-location="international">
+   data-country="international">
   <div class="vjs-nts-visual">
-    <div class="vjs-nts-visual-inner" style="background: linear-gradient(135deg, rgba(157,0,255,0.45) 0%, rgba(0,212,255,0.2) 60%, rgba(255,0,170,0.15) 100%); position:relative; width:100%; height:100%;">
-      <div style="position:absolute; inset:0; background: radial-gradient(ellipse 80% 80% at 30% 40%, rgba(157,0,255,0.3) 0%, transparent 60%), radial-gradient(ellipse 60% 60% at 75% 65%, rgba(0,212,255,0.2) 0%, transparent 55%);"></div>
-      <div style="position:absolute; inset:0; background: repeating-linear-gradient(90deg, transparent, transparent 6px, rgba(157,0,255,0.04) 6px, rgba(157,0,255,0.04) 7px);"></div>
-      <div style="position:absolute; inset:0; display:flex; align-items:center; justify-content:center;">
-        <span style="font-family:'Orbitron',sans-serif; font-size:5rem; font-weight:900; color:rgba(255,255,255,0.06); letter-spacing:-0.05em; user-select:none;">R</span>
-      </div>
+    <div class="vjs-artist-initials vjs-ai-4" data-letter="R">
+      <span>R</span>
     </div>
   </div>
   <div class="vjs-nts-info">
     <div class="vjs-nts-location">International</div>
     <div class="vjs-nts-name">RexAffects</div>
     <div class="vjs-nts-style">Gamified VJing, Real-Time 3D Navigation, First-...</div>
-    
-    <div style="margin-top:0.5rem; display:flex; flex-wrap:wrap; gap:0.3rem;">
-      
-      <span class="vjs-tag vjs-tag-purple" style="font-size:0.6rem; padding:2px 8px;">Notch</span>
-      
-      <span class="vjs-tag vjs-tag-purple" style="font-size:0.6rem; padding:2px 8px;">Xbox Controller</span>
-      
-      <span class="vjs-tag vjs-tag-purple" style="font-size:0.6rem; padding:2px 8px;">Real-time 3D</span>
-      
-    </div>
-    
   </div>
 </a>
 
       </div>
+      
       
       <div class="vjs-artist-item"
            data-style="generative film, projection sculpture, expanded cinema"
-           data-tech="custom software,generative imagery,multi-projector systems,sculptural fabrication,spatial sound">
-        <a href="/artists/robert-seidel" class="text-decoration-none vjs-nts-card"
+           data-tech="custom software,generative imagery,multi-projector systems,sculptural fabrication,spatial sound"
+           data-country="germany">
+        
+
+
+
+
+
+
+
+<a href="/artists/robert-seidel" class="text-decoration-none vjs-nts-card"
    data-style="generative film, projection sculpture, expanded cinema"
    data-tech="custom software,generative imagery,multi-projector systems,sculptural fabrication,spatial sound"
-   data-location="berlin, germany">
+   data-country="germany">
   <div class="vjs-nts-visual">
-    <div class="vjs-nts-visual-inner" style="background: linear-gradient(135deg, rgba(157,0,255,0.45) 0%, rgba(0,212,255,0.2) 60%, rgba(255,0,170,0.15) 100%); position:relative; width:100%; height:100%;">
-      <div style="position:absolute; inset:0; background: radial-gradient(ellipse 80% 80% at 30% 40%, rgba(157,0,255,0.3) 0%, transparent 60%), radial-gradient(ellipse 60% 60% at 75% 65%, rgba(0,212,255,0.2) 0%, transparent 55%);"></div>
-      <div style="position:absolute; inset:0; background: repeating-linear-gradient(90deg, transparent, transparent 6px, rgba(157,0,255,0.04) 6px, rgba(157,0,255,0.04) 7px);"></div>
-      <div style="position:absolute; inset:0; display:flex; align-items:center; justify-content:center;">
-        <span style="font-family:'Orbitron',sans-serif; font-size:5rem; font-weight:900; color:rgba(255,255,255,0.06); letter-spacing:-0.05em; user-select:none;">R</span>
-      </div>
+    <div class="vjs-artist-initials vjs-ai-4" data-letter="R">
+      <span>R</span>
     </div>
   </div>
   <div class="vjs-nts-info">
-    <div class="vjs-nts-location">Berlin, Germany</div>
+    <div class="vjs-nts-location"><span class="vjs-artist-country-flag">🇩🇪</span>Germany</div>
     <div class="vjs-nts-name">Robert Seidel</div>
     <div class="vjs-nts-style">Generative Film, Projection Sculpture, Expanded...</div>
-    
-    <div style="margin-top:0.5rem; display:flex; flex-wrap:wrap; gap:0.3rem;">
-      
-      <span class="vjs-tag vjs-tag-purple" style="font-size:0.6rem; padding:2px 8px;">Custom Software</span>
-      
-      <span class="vjs-tag vjs-tag-purple" style="font-size:0.6rem; padding:2px 8px;">Generative Imagery</span>
-      
-      <span class="vjs-tag vjs-tag-purple" style="font-size:0.6rem; padding:2px 8px;">Multi-projector Systems</span>
-      
-    </div>
-    
   </div>
 </a>
 
       </div>
+      
       
       <div class="vjs-artist-item"
            data-style="audiovisual sculpture, generative art, minimalism"
-           data-tech="custom software,hd video,multichannel audio,sculptural fabrication">
-        <a href="/artists/ryoichi-kurokawa" class="text-decoration-none vjs-nts-card"
+           data-tech="custom software,hd video,multichannel audio,sculptural fabrication"
+           data-country="japan">
+        
+
+
+
+
+
+
+
+<a href="/artists/ryoichi-kurokawa" class="text-decoration-none vjs-nts-card"
    data-style="audiovisual sculpture, generative art, minimalism"
    data-tech="custom software,hd video,multichannel audio,sculptural fabrication"
-   data-location="japan / international">
+   data-country="japan">
   <div class="vjs-nts-visual">
-    <div class="vjs-nts-visual-inner" style="background: linear-gradient(135deg, rgba(157,0,255,0.45) 0%, rgba(0,212,255,0.2) 60%, rgba(255,0,170,0.15) 100%); position:relative; width:100%; height:100%;">
-      <div style="position:absolute; inset:0; background: radial-gradient(ellipse 80% 80% at 30% 40%, rgba(157,0,255,0.3) 0%, transparent 60%), radial-gradient(ellipse 60% 60% at 75% 65%, rgba(0,212,255,0.2) 0%, transparent 55%);"></div>
-      <div style="position:absolute; inset:0; background: repeating-linear-gradient(90deg, transparent, transparent 6px, rgba(157,0,255,0.04) 6px, rgba(157,0,255,0.04) 7px);"></div>
-      <div style="position:absolute; inset:0; display:flex; align-items:center; justify-content:center;">
-        <span style="font-family:'Orbitron',sans-serif; font-size:5rem; font-weight:900; color:rgba(255,255,255,0.06); letter-spacing:-0.05em; user-select:none;">R</span>
-      </div>
+    <div class="vjs-artist-initials vjs-ai-4" data-letter="R">
+      <span>R</span>
     </div>
   </div>
   <div class="vjs-nts-info">
-    <div class="vjs-nts-location">Japan / International</div>
+    <div class="vjs-nts-location"><span class="vjs-artist-country-flag">🇯🇵</span>Japan</div>
     <div class="vjs-nts-name">Ryoichi Kurokawa</div>
     <div class="vjs-nts-style">Audiovisual Sculpture, Generative Art, Minimalism</div>
-    
-    <div style="margin-top:0.5rem; display:flex; flex-wrap:wrap; gap:0.3rem;">
-      
-      <span class="vjs-tag vjs-tag-purple" style="font-size:0.6rem; padding:2px 8px;">Custom Software</span>
-      
-      <span class="vjs-tag vjs-tag-purple" style="font-size:0.6rem; padding:2px 8px;">HD Video</span>
-      
-      <span class="vjs-tag vjs-tag-purple" style="font-size:0.6rem; padding:2px 8px;">Multichannel Audio</span>
-      
-    </div>
-    
   </div>
 </a>
 
       </div>
+      
       
       <div class="vjs-artist-item"
            data-style="live audiovisual performance, synaesthetic art, sound-image synthesis"
-           data-tech="live av performance,custom visual software,multichannel audio,real-time processing">
-        <a href="/artists/sati" class="text-decoration-none vjs-nts-card"
+           data-tech="live av performance,custom visual software,multichannel audio,real-time processing"
+           data-country="france">
+        
+
+
+
+
+
+
+
+<a href="/artists/sati" class="text-decoration-none vjs-nts-card"
    data-style="live audiovisual performance, synaesthetic art, sound-image synthesis"
    data-tech="live av performance,custom visual software,multichannel audio,real-time processing"
-   data-location="france">
+   data-country="france">
   <div class="vjs-nts-visual">
-    <div class="vjs-nts-visual-inner" style="background: linear-gradient(135deg, rgba(157,0,255,0.45) 0%, rgba(0,212,255,0.2) 60%, rgba(255,0,170,0.15) 100%); position:relative; width:100%; height:100%;">
-      <div style="position:absolute; inset:0; background: radial-gradient(ellipse 80% 80% at 30% 40%, rgba(157,0,255,0.3) 0%, transparent 60%), radial-gradient(ellipse 60% 60% at 75% 65%, rgba(0,212,255,0.2) 0%, transparent 55%);"></div>
-      <div style="position:absolute; inset:0; background: repeating-linear-gradient(90deg, transparent, transparent 6px, rgba(157,0,255,0.04) 6px, rgba(157,0,255,0.04) 7px);"></div>
-      <div style="position:absolute; inset:0; display:flex; align-items:center; justify-content:center;">
-        <span style="font-family:'Orbitron',sans-serif; font-size:5rem; font-weight:900; color:rgba(255,255,255,0.06); letter-spacing:-0.05em; user-select:none;">S</span>
-      </div>
+    <div class="vjs-artist-initials vjs-ai-4" data-letter="S">
+      <span>S</span>
     </div>
   </div>
   <div class="vjs-nts-info">
-    <div class="vjs-nts-location">France</div>
+    <div class="vjs-nts-location"><span class="vjs-artist-country-flag">🇫🇷</span>France</div>
     <div class="vjs-nts-name">SATI</div>
     <div class="vjs-nts-style">Live Audiovisual Performance, Synaesthetic Art,...</div>
-    
-    <div style="margin-top:0.5rem; display:flex; flex-wrap:wrap; gap:0.3rem;">
-      
-      <span class="vjs-tag vjs-tag-purple" style="font-size:0.6rem; padding:2px 8px;">Live AV Performance</span>
-      
-      <span class="vjs-tag vjs-tag-purple" style="font-size:0.6rem; padding:2px 8px;">Custom Visual Software</span>
-      
-      <span class="vjs-tag vjs-tag-purple" style="font-size:0.6rem; padding:2px 8px;">Multichannel Audio</span>
-      
-    </div>
-    
   </div>
 </a>
 
       </div>
+      
       
       <div class="vjs-artist-item"
            data-style="drawing, projection mapping, human-machine collaboration"
-           data-tech="machine learning,projection mapping,hand drawing,led systems,custom software">
-        <a href="/artists/sougwen-chung" class="text-decoration-none vjs-nts-card"
+           data-tech="machine learning,projection mapping,hand drawing,led systems,custom software"
+           data-country="usa">
+        
+
+
+
+
+
+
+
+<a href="/artists/sougwen-chung" class="text-decoration-none vjs-nts-card"
    data-style="drawing, projection mapping, human-machine collaboration"
    data-tech="machine learning,projection mapping,hand drawing,led systems,custom software"
-   data-location="new york, usa">
+   data-country="usa">
   <div class="vjs-nts-visual">
-    <div class="vjs-nts-visual-inner" style="background: linear-gradient(135deg, rgba(157,0,255,0.45) 0%, rgba(0,212,255,0.2) 60%, rgba(255,0,170,0.15) 100%); position:relative; width:100%; height:100%;">
-      <div style="position:absolute; inset:0; background: radial-gradient(ellipse 80% 80% at 30% 40%, rgba(157,0,255,0.3) 0%, transparent 60%), radial-gradient(ellipse 60% 60% at 75% 65%, rgba(0,212,255,0.2) 0%, transparent 55%);"></div>
-      <div style="position:absolute; inset:0; background: repeating-linear-gradient(90deg, transparent, transparent 6px, rgba(157,0,255,0.04) 6px, rgba(157,0,255,0.04) 7px);"></div>
-      <div style="position:absolute; inset:0; display:flex; align-items:center; justify-content:center;">
-        <span style="font-family:'Orbitron',sans-serif; font-size:5rem; font-weight:900; color:rgba(255,255,255,0.06); letter-spacing:-0.05em; user-select:none;">S</span>
-      </div>
+    <div class="vjs-artist-initials vjs-ai-4" data-letter="S">
+      <span>S</span>
     </div>
   </div>
   <div class="vjs-nts-info">
-    <div class="vjs-nts-location">New York, USA</div>
+    <div class="vjs-nts-location"><span class="vjs-artist-country-flag">🇺🇸</span>USA</div>
     <div class="vjs-nts-name">Sougwen Chung</div>
     <div class="vjs-nts-style">Drawing, Projection Mapping, Human-Machine Coll...</div>
-    
-    <div style="margin-top:0.5rem; display:flex; flex-wrap:wrap; gap:0.3rem;">
-      
-      <span class="vjs-tag vjs-tag-purple" style="font-size:0.6rem; padding:2px 8px;">Machine Learning</span>
-      
-      <span class="vjs-tag vjs-tag-purple" style="font-size:0.6rem; padding:2px 8px;">Projection Mapping</span>
-      
-      <span class="vjs-tag vjs-tag-purple" style="font-size:0.6rem; padding:2px 8px;">Hand Drawing</span>
-      
-    </div>
-    
   </div>
 </a>
 
       </div>
       
+      
       <div class="vjs-artist-item"
            data-style="high-precision techno visuals, four-deck sync, visual wall of sound"
-           data-tech="resolume arena,touchdesigner,smpte timecode,custom content,audio analysis">
-        <a href="/artists/stef-mendesidis" class="text-decoration-none vjs-nts-card"
+           data-tech="resolume arena,touchdesigner,smpte timecode,custom content,audio analysis"
+           data-country="international">
+        
+
+
+
+
+
+
+
+<a href="/artists/stef-mendesidis" class="text-decoration-none vjs-nts-card"
    data-style="high-precision techno visuals, four-deck sync, visual wall of sound"
    data-tech="resolume arena,touchdesigner,smpte timecode,custom content,audio analysis"
-   data-location="international">
+   data-country="international">
   <div class="vjs-nts-visual">
-    <div class="vjs-nts-visual-inner" style="background: linear-gradient(135deg, rgba(157,0,255,0.45) 0%, rgba(0,212,255,0.2) 60%, rgba(255,0,170,0.15) 100%); position:relative; width:100%; height:100%;">
-      <div style="position:absolute; inset:0; background: radial-gradient(ellipse 80% 80% at 30% 40%, rgba(157,0,255,0.3) 0%, transparent 60%), radial-gradient(ellipse 60% 60% at 75% 65%, rgba(0,212,255,0.2) 0%, transparent 55%);"></div>
-      <div style="position:absolute; inset:0; background: repeating-linear-gradient(90deg, transparent, transparent 6px, rgba(157,0,255,0.04) 6px, rgba(157,0,255,0.04) 7px);"></div>
-      <div style="position:absolute; inset:0; display:flex; align-items:center; justify-content:center;">
-        <span style="font-family:'Orbitron',sans-serif; font-size:5rem; font-weight:900; color:rgba(255,255,255,0.06); letter-spacing:-0.05em; user-select:none;">S</span>
-      </div>
+    <div class="vjs-artist-initials vjs-ai-4" data-letter="S">
+      <span>S</span>
     </div>
   </div>
   <div class="vjs-nts-info">
     <div class="vjs-nts-location">International</div>
     <div class="vjs-nts-name">Stef Mendesidis</div>
     <div class="vjs-nts-style">High-Precision Techno Visuals, Four-Deck Sync, ...</div>
-    
-    <div style="margin-top:0.5rem; display:flex; flex-wrap:wrap; gap:0.3rem;">
-      
-      <span class="vjs-tag vjs-tag-purple" style="font-size:0.6rem; padding:2px 8px;">Resolume Arena</span>
-      
-      <span class="vjs-tag vjs-tag-purple" style="font-size:0.6rem; padding:2px 8px;">TouchDesigner</span>
-      
-      <span class="vjs-tag vjs-tag-purple" style="font-size:0.6rem; padding:2px 8px;">SMPTE Timecode</span>
-      
-    </div>
-    
   </div>
 </a>
 
       </div>
+      
       
       <div class="vjs-artist-item"
            data-style="visual music, ultra-synced stage design, percussive visuals"
-           data-tech="resolume arena,touchdesigner,smpte timecode,osc / midi,custom content">
-        <a href="/artists/synaesthesik" class="text-decoration-none vjs-nts-card"
+           data-tech="resolume arena,touchdesigner,smpte timecode,osc / midi,custom content"
+           data-country="netherlands">
+        
+
+
+
+
+
+
+
+<a href="/artists/synaesthesik" class="text-decoration-none vjs-nts-card"
    data-style="visual music, ultra-synced stage design, percussive visuals"
    data-tech="resolume arena,touchdesigner,smpte timecode,osc / midi,custom content"
-   data-location="amsterdam, netherlands">
+   data-country="netherlands">
   <div class="vjs-nts-visual">
-    <div class="vjs-nts-visual-inner" style="background: linear-gradient(135deg, rgba(157,0,255,0.45) 0%, rgba(0,212,255,0.2) 60%, rgba(255,0,170,0.15) 100%); position:relative; width:100%; height:100%;">
-      <div style="position:absolute; inset:0; background: radial-gradient(ellipse 80% 80% at 30% 40%, rgba(157,0,255,0.3) 0%, transparent 60%), radial-gradient(ellipse 60% 60% at 75% 65%, rgba(0,212,255,0.2) 0%, transparent 55%);"></div>
-      <div style="position:absolute; inset:0; background: repeating-linear-gradient(90deg, transparent, transparent 6px, rgba(157,0,255,0.04) 6px, rgba(157,0,255,0.04) 7px);"></div>
-      <div style="position:absolute; inset:0; display:flex; align-items:center; justify-content:center;">
-        <span style="font-family:'Orbitron',sans-serif; font-size:5rem; font-weight:900; color:rgba(255,255,255,0.06); letter-spacing:-0.05em; user-select:none;">S</span>
-      </div>
+    <div class="vjs-artist-initials vjs-ai-4" data-letter="S">
+      <span>S</span>
     </div>
   </div>
   <div class="vjs-nts-info">
-    <div class="vjs-nts-location">Amsterdam, Netherlands</div>
+    <div class="vjs-nts-location"><span class="vjs-artist-country-flag">🇳🇱</span>Netherlands</div>
     <div class="vjs-nts-name">Synaesthesik</div>
     <div class="vjs-nts-style">Visual Music, Ultra-Synced Stage Design, Percus...</div>
-    
-    <div style="margin-top:0.5rem; display:flex; flex-wrap:wrap; gap:0.3rem;">
-      
-      <span class="vjs-tag vjs-tag-purple" style="font-size:0.6rem; padding:2px 8px;">Resolume Arena</span>
-      
-      <span class="vjs-tag vjs-tag-purple" style="font-size:0.6rem; padding:2px 8px;">TouchDesigner</span>
-      
-      <span class="vjs-tag vjs-tag-purple" style="font-size:0.6rem; padding:2px 8px;">SMPTE Timecode</span>
-      
-    </div>
-    
   </div>
 </a>
 
       </div>
+      
       
       <div class="vjs-artist-item"
            data-style="3d fashion aesthetics, festival visual production, stadium-scale spectacle"
-           data-tech="pixera,notch,custom rack servers,smpte timecode,3d content production">
-        <a href="/artists/veemee-visuals" class="text-decoration-none vjs-nts-card"
+           data-tech="pixera,notch,custom rack servers,smpte timecode,3d content production"
+           data-country="netherlands">
+        
+
+
+
+
+
+
+
+<a href="/artists/veemee-visuals" class="text-decoration-none vjs-nts-card"
    data-style="3d fashion aesthetics, festival visual production, stadium-scale spectacle"
    data-tech="pixera,notch,custom rack servers,smpte timecode,3d content production"
-   data-location="netherlands">
+   data-country="netherlands">
   <div class="vjs-nts-visual">
-    <div class="vjs-nts-visual-inner" style="background: linear-gradient(135deg, rgba(157,0,255,0.45) 0%, rgba(0,212,255,0.2) 60%, rgba(255,0,170,0.15) 100%); position:relative; width:100%; height:100%;">
-      <div style="position:absolute; inset:0; background: radial-gradient(ellipse 80% 80% at 30% 40%, rgba(157,0,255,0.3) 0%, transparent 60%), radial-gradient(ellipse 60% 60% at 75% 65%, rgba(0,212,255,0.2) 0%, transparent 55%);"></div>
-      <div style="position:absolute; inset:0; background: repeating-linear-gradient(90deg, transparent, transparent 6px, rgba(157,0,255,0.04) 6px, rgba(157,0,255,0.04) 7px);"></div>
-      <div style="position:absolute; inset:0; display:flex; align-items:center; justify-content:center;">
-        <span style="font-family:'Orbitron',sans-serif; font-size:5rem; font-weight:900; color:rgba(255,255,255,0.06); letter-spacing:-0.05em; user-select:none;">V</span>
-      </div>
+    <div class="vjs-artist-initials vjs-ai-5" data-letter="V">
+      <span>V</span>
     </div>
   </div>
   <div class="vjs-nts-info">
-    <div class="vjs-nts-location">Netherlands</div>
+    <div class="vjs-nts-location"><span class="vjs-artist-country-flag">🇳🇱</span>Netherlands</div>
     <div class="vjs-nts-name">VeeMee Visuals</div>
     <div class="vjs-nts-style">3D Fashion Aesthetics, Festival Visual Producti...</div>
-    
-    <div style="margin-top:0.5rem; display:flex; flex-wrap:wrap; gap:0.3rem;">
-      
-      <span class="vjs-tag vjs-tag-purple" style="font-size:0.6rem; padding:2px 8px;">Pixera</span>
-      
-      <span class="vjs-tag vjs-tag-purple" style="font-size:0.6rem; padding:2px 8px;">Notch</span>
-      
-      <span class="vjs-tag vjs-tag-purple" style="font-size:0.6rem; padding:2px 8px;">Custom Rack Servers</span>
-      
-    </div>
-    
   </div>
 </a>
 
       </div>
+      
       
       <div class="vjs-artist-item"
            data-style="minimalist techno visuals, long-form transformation, hypnotic dark aesthetics"
-           data-tech="resolume arena,touchdesigner,custom content,audio-reactive systems">
-        <a href="/artists/vj-emiko" class="text-decoration-none vjs-nts-card"
+           data-tech="resolume arena,touchdesigner,custom content,audio-reactive systems"
+           data-country="international">
+        
+
+
+
+
+
+
+
+<a href="/artists/vj-emiko" class="text-decoration-none vjs-nts-card"
    data-style="minimalist techno visuals, long-form transformation, hypnotic dark aesthetics"
    data-tech="resolume arena,touchdesigner,custom content,audio-reactive systems"
-   data-location="europe">
+   data-country="international">
   <div class="vjs-nts-visual">
-    <div class="vjs-nts-visual-inner" style="background: linear-gradient(135deg, rgba(157,0,255,0.45) 0%, rgba(0,212,255,0.2) 60%, rgba(255,0,170,0.15) 100%); position:relative; width:100%; height:100%;">
-      <div style="position:absolute; inset:0; background: radial-gradient(ellipse 80% 80% at 30% 40%, rgba(157,0,255,0.3) 0%, transparent 60%), radial-gradient(ellipse 60% 60% at 75% 65%, rgba(0,212,255,0.2) 0%, transparent 55%);"></div>
-      <div style="position:absolute; inset:0; background: repeating-linear-gradient(90deg, transparent, transparent 6px, rgba(157,0,255,0.04) 6px, rgba(157,0,255,0.04) 7px);"></div>
-      <div style="position:absolute; inset:0; display:flex; align-items:center; justify-content:center;">
-        <span style="font-family:'Orbitron',sans-serif; font-size:5rem; font-weight:900; color:rgba(255,255,255,0.06); letter-spacing:-0.05em; user-select:none;">V</span>
-      </div>
+    <div class="vjs-artist-initials vjs-ai-5" data-letter="V">
+      <span>V</span>
     </div>
   </div>
   <div class="vjs-nts-info">
-    <div class="vjs-nts-location">Europe</div>
+    <div class="vjs-nts-location">International</div>
     <div class="vjs-nts-name">VJ Emiko</div>
     <div class="vjs-nts-style">Minimalist Techno Visuals, Long-Form Transforma...</div>
-    
-    <div style="margin-top:0.5rem; display:flex; flex-wrap:wrap; gap:0.3rem;">
-      
-      <span class="vjs-tag vjs-tag-purple" style="font-size:0.6rem; padding:2px 8px;">Resolume Arena</span>
-      
-      <span class="vjs-tag vjs-tag-purple" style="font-size:0.6rem; padding:2px 8px;">TouchDesigner</span>
-      
-      <span class="vjs-tag vjs-tag-purple" style="font-size:0.6rem; padding:2px 8px;">Custom Content</span>
-      
-    </div>
-    
   </div>
 </a>
 
       </div>
+      
       
       <div class="vjs-artist-item"
            data-style="industrial techno, brutalist minimalism, audio-reactive destruction"
-           data-tech="touchdesigner,resolume wire,akai apc40 mkii,art-net / dmx">
-        <a href="/artists/vj-mentalny-jez" class="text-decoration-none vjs-nts-card"
+           data-tech="touchdesigner,resolume wire,akai apc40 mkii,art-net / dmx"
+           data-country="poland">
+        
+
+
+
+
+
+
+
+<a href="/artists/vj-mentalny-jez" class="text-decoration-none vjs-nts-card"
    data-style="industrial techno, brutalist minimalism, audio-reactive destruction"
    data-tech="touchdesigner,resolume wire,akai apc40 mkii,art-net / dmx"
-   data-location="poland">
+   data-country="poland">
   <div class="vjs-nts-visual">
-    <div class="vjs-nts-visual-inner" style="background: linear-gradient(135deg, rgba(157,0,255,0.45) 0%, rgba(0,212,255,0.2) 60%, rgba(255,0,170,0.15) 100%); position:relative; width:100%; height:100%;">
-      <div style="position:absolute; inset:0; background: radial-gradient(ellipse 80% 80% at 30% 40%, rgba(157,0,255,0.3) 0%, transparent 60%), radial-gradient(ellipse 60% 60% at 75% 65%, rgba(0,212,255,0.2) 0%, transparent 55%);"></div>
-      <div style="position:absolute; inset:0; background: repeating-linear-gradient(90deg, transparent, transparent 6px, rgba(157,0,255,0.04) 6px, rgba(157,0,255,0.04) 7px);"></div>
-      <div style="position:absolute; inset:0; display:flex; align-items:center; justify-content:center;">
-        <span style="font-family:'Orbitron',sans-serif; font-size:5rem; font-weight:900; color:rgba(255,255,255,0.06); letter-spacing:-0.05em; user-select:none;">V</span>
-      </div>
+    <div class="vjs-artist-initials vjs-ai-5" data-letter="V">
+      <span>V</span>
     </div>
   </div>
   <div class="vjs-nts-info">
-    <div class="vjs-nts-location">Poland</div>
+    <div class="vjs-nts-location"><span class="vjs-artist-country-flag">🇵🇱</span>Poland</div>
     <div class="vjs-nts-name">VJ mentalny jeż</div>
     <div class="vjs-nts-style">Industrial Techno, Brutalist Minimalism, Audio-...</div>
-    
-    <div style="margin-top:0.5rem; display:flex; flex-wrap:wrap; gap:0.3rem;">
-      
-      <span class="vjs-tag vjs-tag-purple" style="font-size:0.6rem; padding:2px 8px;">TouchDesigner</span>
-      
-      <span class="vjs-tag vjs-tag-purple" style="font-size:0.6rem; padding:2px 8px;">Resolume Wire</span>
-      
-      <span class="vjs-tag vjs-tag-purple" style="font-size:0.6rem; padding:2px 8px;">Akai APC40 MKII</span>
-      
-    </div>
-    
   </div>
 </a>
 
       </div>
       
+      
       <div class="vjs-artist-item"
            data-style="eurodance, retro-future aesthetics, maximalist club visuals"
-           data-tech="resolume arena,touchdesigner,after effects,real-time compositing">
-        <a href="/artists/vjaux" class="text-decoration-none vjs-nts-card"
+           data-tech="resolume arena,touchdesigner,after effects,real-time compositing"
+           data-country="international">
+        
+
+
+
+
+
+
+
+<a href="/artists/vjaux" class="text-decoration-none vjs-nts-card"
    data-style="eurodance, retro-future aesthetics, maximalist club visuals"
    data-tech="resolume arena,touchdesigner,after effects,real-time compositing"
-   data-location="international">
+   data-country="international">
   <div class="vjs-nts-visual">
-    <div class="vjs-nts-visual-inner" style="background: linear-gradient(135deg, rgba(157,0,255,0.45) 0%, rgba(0,212,255,0.2) 60%, rgba(255,0,170,0.15) 100%); position:relative; width:100%; height:100%;">
-      <div style="position:absolute; inset:0; background: radial-gradient(ellipse 80% 80% at 30% 40%, rgba(157,0,255,0.3) 0%, transparent 60%), radial-gradient(ellipse 60% 60% at 75% 65%, rgba(0,212,255,0.2) 0%, transparent 55%);"></div>
-      <div style="position:absolute; inset:0; background: repeating-linear-gradient(90deg, transparent, transparent 6px, rgba(157,0,255,0.04) 6px, rgba(157,0,255,0.04) 7px);"></div>
-      <div style="position:absolute; inset:0; display:flex; align-items:center; justify-content:center;">
-        <span style="font-family:'Orbitron',sans-serif; font-size:5rem; font-weight:900; color:rgba(255,255,255,0.06); letter-spacing:-0.05em; user-select:none;">V</span>
-      </div>
+    <div class="vjs-artist-initials vjs-ai-5" data-letter="V">
+      <span>V</span>
     </div>
   </div>
   <div class="vjs-nts-info">
     <div class="vjs-nts-location">International</div>
     <div class="vjs-nts-name">VJAuX</div>
     <div class="vjs-nts-style">Eurodance, Retro-Future Aesthetics, Maximalist ...</div>
-    
-    <div style="margin-top:0.5rem; display:flex; flex-wrap:wrap; gap:0.3rem;">
-      
-      <span class="vjs-tag vjs-tag-purple" style="font-size:0.6rem; padding:2px 8px;">Resolume Arena</span>
-      
-      <span class="vjs-tag vjs-tag-purple" style="font-size:0.6rem; padding:2px 8px;">TouchDesigner</span>
-      
-      <span class="vjs-tag vjs-tag-purple" style="font-size:0.6rem; padding:2px 8px;">After Effects</span>
-      
-    </div>
-    
   </div>
 </a>
 
@@ -2135,8 +1441,8 @@
       
     </div>
 
-    <div id="artists-no-results" style="display:none; text-align:center; padding:4rem; color:var(--vjs-text-muted); font-family:'Space Grotesk',sans-serif;">
-      No artists match this filter. <a href="#" onclick="resetFilters()" style="color:var(--vjs-ultraviolet);">Reset filters</a>
+    <div id="artists-no-results" style="display:none; text-align:center; padding:4rem; color:var(--vjs-text-muted); font-family:'Barlow Condensed',sans-serif; font-size:1rem; letter-spacing:0.1em;">
+      No artists match this filter. <a href="#" onclick="resetDropFilters(); return false;" style="color:var(--vjs-ultraviolet);">Reset</a>
     </div>
 
   </div>
@@ -2290,45 +1596,45 @@ function vjsTipAmount(amt) {
 
 
 <script>
-var activeStyle = 'all', activeTech = 'all';
+function applyDropFilters() {
+  var style   = document.getElementById('style-select').value;
+  var tech    = document.getElementById('tech-select').value;
+  var country = document.getElementById('country-select').value;
 
-function applyFilters() {
+  ['style-select','tech-select','country-select'].forEach(function(id){
+    var el = document.getElementById(id);
+    el.classList.toggle('active', el.value !== 'all');
+  });
+
   var items = document.querySelectorAll('.vjs-artist-item');
   var visible = 0;
   items.forEach(function(item) {
-    var style = item.dataset.style || '';
-    var tech  = item.dataset.tech  || '';
-    var matchStyle = activeStyle === 'all' || style.indexOf(activeStyle) !== -1;
-    var matchTech  = activeTech  === 'all' || tech.indexOf(activeTech)  !== -1;
-    if(matchStyle && matchTech) { item.style.display=''; visible++; }
-    else { item.style.display='none'; }
+    var s = item.dataset.style  || '';
+    var t = item.dataset.tech   || '';
+    var c = item.dataset.country|| '';
+    var ms = style   === 'all' || s.indexOf(style)   !== -1;
+    var mt = tech    === 'all' || t.indexOf(tech)    !== -1;
+    var mc = country === 'all' || c.indexOf(country) !== -1;
+    if (ms && mt && mc) { item.style.display = ''; visible++; }
+    else                { item.style.display = 'none'; }
   });
+
   var count = document.getElementById('artists-count');
   var noRes = document.getElementById('artists-no-results');
-  if(count) count.textContent = visible + ' Artist' + (visible!==1?'s':'');
-  if(noRes) noRes.style.display = visible===0 ? 'block' : 'none';
+  if (count) count.innerHTML = '<strong>' + visible + '</strong> Artist' + (visible !== 1 ? 's' : '');
+  if (noRes) noRes.style.display = visible === 0 ? 'block' : 'none';
 }
 
-function resetFilters() {
-  activeStyle='all'; activeTech='all';
-  document.querySelectorAll('.vjs-filter-btn').forEach(function(b){
-    b.classList.toggle('active', b.dataset.filter==='all');
+function resetDropFilters() {
+  document.getElementById('style-select').value   = 'all';
+  document.getElementById('tech-select').value    = 'all';
+  document.getElementById('country-select').value = 'all';
+  ['style-select','tech-select','country-select'].forEach(function(id){
+    document.getElementById(id).classList.remove('active');
   });
-  applyFilters();
+  applyDropFilters();
 }
 
-document.querySelectorAll('.vjs-filter-btn').forEach(function(btn) {
-  btn.addEventListener('click', function() {
-    var group = btn.dataset.filterGroup;
-    document.querySelectorAll('[data-filter-group="'+group+'"]').forEach(function(b){ b.classList.remove('active'); });
-    btn.classList.add('active');
-    if(group==='style') activeStyle = btn.dataset.filter;
-    if(group==='tech')  activeTech  = btn.dataset.filter;
-    applyFilters();
-  });
-});
-
-// Scroll reveal
 var ro = new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting){e.target.classList.add('is-visible');ro.unobserve(e.target);}});},{threshold:.1});
 document.querySelectorAll('.vjs-reveal').forEach(function(el){ro.observe(el);});
 </script>

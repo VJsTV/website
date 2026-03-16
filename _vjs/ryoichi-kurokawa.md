@@ -3,6 +3,7 @@ layout: vjs-detail
 title: "Ryoichi Kurokawa"
 name: "ryoichi-kurokawa"
 location: "Japan / International"
+country: "Japan"
 visual_style: "Audiovisual Sculpture, Generative Art, Minimalism"
 bio: "Japanese audiovisual artist whose installations translate physical and mathematical phenomena into precise, meditative sensory experiences. His work operates at the intersection of sound, light, and scientific inquiry."
 studio: "Independent"

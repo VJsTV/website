@@ -3,6 +3,7 @@ layout: vjs-detail
 title: "VJ mentalny jeż"
 name: "vj-mentalny-jez"
 location: "Poland"
+country: "Poland"
 visual_style: "Industrial Techno, Brutalist Minimalism, Audio-Reactive Destruction"
 bio: "Polish VJ currently considered the definitive voice of industrial hard techno visuals. Known for raw, flickering, high-stamina performances using TouchDesigner to create audio-reactive systems that feel like the physical destruction of image itself. A staple at Teletech, Time Warp, and Glitch Festival."
 studio: "Independent"

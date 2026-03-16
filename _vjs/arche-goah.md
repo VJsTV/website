@@ -3,6 +3,7 @@ layout: vjs-detail
 title: "Arche Goah"
 name: "arche-goah"
 location: "International"
+country: "International"
 visual_style: "Visual Morphologies, Organic Generative Systems, AI-Driven Shape"
 bio: "A master of 'visual morphologies' — organic, shifting generative shapes built with AI and real-time systems that feel like living organisms rather than programmed content. Specialist in immersive spaces and club environments where fluid transformation replaces static imagery."
 studio: "Independent"

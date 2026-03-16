@@ -3,6 +3,7 @@ layout: vjs-detail
 title: "VeeMee Visuals"
 name: "veemee-visuals"
 location: "Netherlands"
+country: "Netherlands"
 visual_style: "3D Fashion Aesthetics, Festival Visual Production, Stadium-Scale Spectacle"
 bio: "Dutch collective widely regarded as the gold standard for high-end festival VJing. They manage the visual identity for dozens of the world's top DJs and are famous for flawless 3D content, stadium-scale technical precision, and blending fashion aesthetics with high-octane performance energy."
 studio: "VeeMee Visuals"

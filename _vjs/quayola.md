@@ -3,6 +3,7 @@ layout: vjs-detail
 title: "Quayola"
 name: "quayola"
 location: "London, United Kingdom"
+country: "United Kingdom"
 visual_style: "Generative Art, Audiovisual Performance, Classical Reinterpretation"
 bio: "London-based Italian artist working at the intersection of computational art, classical culture, and live audiovisual performance. Quayola translates art history, music, and nature into hybrid digital experiences of extraordinary precision and beauty."
 studio: "Studio Quayola"

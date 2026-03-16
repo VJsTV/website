@@ -3,6 +3,7 @@ layout: vjs-detail
 title: "Jascha Süss"
 name: "jascha-suss"
 location: "Germany / International"
+country: "Germany"
 visual_style: "Generative Real-Time Systems, Live Visual Improvisation, AI-Assisted Performance"
 bio: "A community pillar and educator who bridges Resolume and TouchDesigner. Famous for his custom VJ interface allowing complex generative art to be performed with the speed of a professional gamer using Xbox controllers, MIDI consoles, and AI restylisation. His tutorials are the most-watched in the field."
 studio: "Independent"

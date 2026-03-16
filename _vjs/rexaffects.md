@@ -3,6 +3,7 @@ layout: vjs-detail
 title: "RexAffects"
 name: "rexaffects"
 location: "International"
+country: "International"
 visual_style: "Gamified VJing, Real-Time 3D Navigation, First-Person Visual Performance"
 bio: "Master of the Notch + Xbox workflow and leader of the 'Gamified VJing' movement — navigating live 3D environments like a first-person shooter in real-time, perfectly synced to music. Pioneer of treating VJing as a physical, game-speed performance discipline."
 studio: "Independent"

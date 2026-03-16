@@ -1454,6 +1454,53 @@ h1, h2, h3, h4, h5, h6,
   transition: opacity 0.25s;
 }
 .vjs-nts-card:hover .vjs-nts-visual::after { opacity: 1; }
+
+.vjs-artist-photo {
+  width: 100%; height: 100%;
+  object-fit: cover; object-position: center top;
+  display: block;
+  transition: transform 0.5s ease;
+}
+.vjs-nts-card:hover .vjs-artist-photo { transform: scale(1.05); }
+
+.vjs-artist-initials {
+  width: 100%; height: 100%;
+  display: flex;
+  align-items: center; justify-content: center;
+  position: relative;
+  overflow: hidden;
+}
+.vjs-artist-initials::before {
+  content: '';
+  position: absolute; inset: 0;
+  background: radial-gradient(ellipse 90% 90% at 25% 35%, var(--ai-c1, rgba(157,0,255,0.5)) 0%, transparent 65%),
+              radial-gradient(ellipse 70% 70% at 80% 70%, var(--ai-c2, rgba(0,249,255,0.25)) 0%, transparent 60%);
+}
+.vjs-artist-initials::after {
+  content: attr(data-letter);
+  position: absolute;
+  font-family: 'Barlow Condensed', 'Orbitron', sans-serif;
+  font-size: 14rem; font-weight: 900;
+  color: rgba(255,255,255,0.04);
+  letter-spacing: -0.08em;
+  line-height: 1; user-select: none;
+  bottom: -2rem; right: -1rem;
+}
+.vjs-artist-initials span {
+  font-family: 'Orbitron', sans-serif;
+  font-size: 3.5rem; font-weight: 900;
+  color: rgba(255,255,255,0.55);
+  letter-spacing: -0.03em;
+  text-shadow: 0 0 30px var(--ai-c1, rgba(157,0,255,0.9)), 0 0 60px var(--ai-c1, rgba(157,0,255,0.5));
+  user-select: none; position: relative; z-index: 1;
+}
+.vjs-ai-1 { --ai-c1: rgba(157,0,255,0.55); --ai-c2: rgba(0,249,255,0.3); background: #09030f; }
+.vjs-ai-2 { --ai-c1: rgba(255,0,170,0.55); --ai-c2: rgba(157,0,255,0.3); background: #0f0308; }
+.vjs-ai-3 { --ai-c1: rgba(0,249,255,0.45); --ai-c2: rgba(57,255,20,0.25); background: #020e0f; }
+.vjs-ai-4 { --ai-c1: rgba(255,0,170,0.5); --ai-c2: rgba(255,120,0,0.25); background: #0f0305; }
+.vjs-ai-5 { --ai-c1: rgba(157,0,255,0.5); --ai-c2: rgba(255,0,170,0.35); background: #06020f; }
+.vjs-artist-country-flag { margin-right: 4px; font-size: 0.8em; }
+
 .vjs-nts-info {
   padding: 1rem 1.25rem;
   border-top: 1px solid var(--vjs-border);

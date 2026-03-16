@@ -3,6 +3,7 @@ layout: vjs-detail
 title: "Sougwen Chung"
 name: "sougwen-chung"
 location: "New York, USA"
+country: "USA"
 visual_style: "Drawing, Projection Mapping, Human-Machine Collaboration"
 bio: "New York-based artist and researcher whose practice explores the intersection of hand-drawn mark-making and machine learning, creating large-scale installations and performances where human and algorithmic creativity become indistinguishable."
 studio: "Independent"

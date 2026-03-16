@@ -3,6 +3,7 @@ layout: vjs-detail
 title: "VJ Emiko"
 name: "vj-emiko"
 location: "Europe"
+country: "International"
 visual_style: "Minimalist Techno Visuals, Long-Form Transformation, Hypnotic Dark Aesthetics"
 bio: "A respected veteran of the European techno underground, known for deep, dark, and minimalist visual sets built for marathon listening. Her approach focuses on long-form transformation over rapid cutting — visual work designed for 4-hour sets at venues like Dour Festival."
 studio: "Independent"

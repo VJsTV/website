@@ -3,6 +3,7 @@ layout: vjs-detail
 title: "Synaesthesik"
 name: "synaesthesik"
 location: "Amsterdam, Netherlands"
+country: "Netherlands"
 visual_style: "Visual Music, Ultra-Synced Stage Design, Percussive Visuals"
 bio: "Amsterdam-based powerhouse known for creating ultra-synced stage designs where light and video are so tightly locked to the kick drum they feel like a single instrument. Specialists in Visual Music — the philosophy that sound and image are one."
 studio: "Synaesthesik"

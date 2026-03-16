@@ -3,6 +3,7 @@ layout: vjs-detail
 title: "Novi_sad"
 name: "novi-sad"
 location: "International"
+country: "International"
 visual_style: "Sub-Bass Visuals, Physical Sound-Image Unity, Experimental AV"
 bio: "Legendary experimentalist who treats sound and image as a single physical entity. His 2026 performances use 'Sub-Bass Visuals' where the screen vibrates and distorts based on frequencies felt more than heard — vision and hearing collapsed into one bodily experience."
 studio: "Independent"
