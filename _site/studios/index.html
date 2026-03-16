@@ -267,11 +267,11 @@
   <div class="container">
 
     <!-- DROPDOWN FILTERS -->
-    <div class="vjs-filter-dropdowns">
+    <div class="vjs-filter-dropdowns" style="flex-wrap:nowrap;">
 
-      <div class="vjs-filter-group">
+      <div class="vjs-filter-group" style="flex:1; min-width:0;">
         <span class="vjs-filter-drop-label">Type</span>
-        <select class="vjs-filter-select" id="studio-type-select" onchange="applyStudioFilters()">
+        <select class="vjs-filter-select" id="studio-type-select" onchange="applyStudioFilters()" style="min-width:0; width:100%;">
           <option value="all">All Types</option>
           
           
@@ -280,9 +280,9 @@
         </select>
       </div>
 
-      <div class="vjs-filter-group">
+      <div class="vjs-filter-group" style="flex:1; min-width:0;">
         <span class="vjs-filter-drop-label">Equipment</span>
-        <select class="vjs-filter-select" id="studio-eq-select" onchange="applyStudioFilters()">
+        <select class="vjs-filter-select" id="studio-eq-select" onchange="applyStudioFilters()" style="min-width:0; width:100%;">
           <option value="all">All Equipment</option>
           
           
@@ -291,9 +291,9 @@
         </select>
       </div>
 
-      <div class="vjs-filter-group">
+      <div class="vjs-filter-group" style="flex:1; min-width:0;">
         <span class="vjs-filter-drop-label">Location</span>
-        <select class="vjs-filter-select" id="studio-loc-select" onchange="applyStudioFilters()">
+        <select class="vjs-filter-select" id="studio-loc-select" onchange="applyStudioFilters()" style="min-width:0; width:100%;">
           <option value="all">All Locations</option>
           
           
