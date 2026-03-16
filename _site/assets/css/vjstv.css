@@ -2815,24 +2815,31 @@ body.cinema-mode .col-lg-8 { flex: 0 0 100% !important; max-width: 100% !importa
 
   /* STATS BAR MOBILE */
   .vjs-stats-bar {
-    flex-wrap: nowrap !important;
-    overflow-x: auto !important;
-    overflow-y: hidden !important;
-    -webkit-overflow-scrolling: touch;
+    display: grid !important;
+    grid-template-columns: repeat(3, 1fr) !important;
+    flex-wrap: unset !important;
+    overflow-x: unset !important;
+    overflow-y: unset !important;
   }
   .vjs-stat-item {
-    padding: 0.9rem 1.2rem !important;
-    flex: 0 0 auto !important;
-    min-width: auto !important;
-    font-size: 0.85rem;
+    padding: 1rem 0.5rem !important;
+    flex: unset !important;
+    min-width: unset !important;
+    border-right: 1px solid var(--vjs-border) !important;
+    border-bottom: 1px solid var(--vjs-border) !important;
   }
+  .vjs-stat-item:nth-child(3),
+  .vjs-stat-item:nth-child(6) { border-right: none !important; }
+  .vjs-stat-item:nth-child(4),
+  .vjs-stat-item:nth-child(5),
+  .vjs-stat-item:nth-child(6) { border-bottom: none !important; }
   .vjs-stat-number {
-    font-size: 1.4rem !important;
+    font-size: 1.6rem !important;
   }
   .vjs-stat-label {
-    font-size: 0.6rem !important;
+    font-size: 0.58rem !important;
   }
-  
+
   /* LIVE PAGE MOBILE FIXES */
   .vjs-channel-tabs {
     margin-bottom: 1rem;
@@ -3642,22 +3649,26 @@ svg.vjs-nts-sidebar-thumb-play {
 
   /* STATS BAR TABLET */
   .vjs-stats-bar {
-    flex-wrap: nowrap !important;
-    overflow-x: auto !important;
-    overflow-y: hidden !important;
-    -webkit-overflow-scrolling: touch;
+    display: grid !important;
+    grid-template-columns: repeat(3, 1fr) !important;
+    flex-wrap: unset !important;
+    overflow-x: unset !important;
+    overflow-y: unset !important;
   }
   .vjs-stat-item {
-    padding: 1rem 1.8rem !important;
-    flex: 0 0 auto !important;
-    min-width: auto !important;
+    padding: 1.1rem 0.5rem !important;
+    flex: unset !important;
+    min-width: unset !important;
+    border-right: 1px solid var(--vjs-border) !important;
+    border-bottom: 1px solid var(--vjs-border) !important;
   }
-  .vjs-stat-number {
-    font-size: 1.6rem !important;
-  }
-  .vjs-stat-label {
-    font-size: 0.65rem !important;
-  }
+  .vjs-stat-item:nth-child(3),
+  .vjs-stat-item:nth-child(6) { border-right: none !important; }
+  .vjs-stat-item:nth-child(4),
+  .vjs-stat-item:nth-child(5),
+  .vjs-stat-item:nth-child(6) { border-bottom: none !important; }
+  .vjs-stat-number { font-size: 1.6rem !important; }
+  .vjs-stat-label  { font-size: 0.62rem !important; }
   /* ========== MOBILE NAVBAR — SIMPLE & CLEAN ========== */
   .navbar {
     position: sticky !important;
