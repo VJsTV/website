@@ -747,6 +747,7 @@ h1, h2, h3, h4, h5, h6,
 /* ── Share Buttons ───────────────────────────────────────── */
 .vjs-share-block {
   margin-bottom: 20px;
+  text-align: center;
 }
 .vjs-share-label {
   font-family: 'Barlow Condensed', sans-serif;
@@ -761,6 +762,7 @@ h1, h2, h3, h4, h5, h6,
   display: flex;
   flex-wrap: wrap;
   gap: 6px;
+  justify-content: center;
 }
 .vjs-share-btn {
   display: inline-flex;
