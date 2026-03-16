@@ -537,8 +537,10 @@ document.querySelectorAll('.vjs-hero-card[data-id]').forEach(function(card) {
         {% if forloop.first %}
         <a href="{{ project.url }}" class="text-decoration-none vjs-redbull-card featured">
           <div class="vjs-redbull-thumb">
-            <div class="vjs-redbull-thumb-bg" style="background: linear-gradient(135deg, rgba(255,0,170,0.4) 0%, rgba(157,0,255,0.5) 50%, rgba(0,212,255,0.25) 100%); position:relative; width:100%; height:100%;">
-              <div style="position:absolute; inset:0; background:repeating-linear-gradient(45deg, transparent, transparent 8px, rgba(157,0,255,0.03) 8px, rgba(157,0,255,0.03) 9px);"></div>
+            <div class="vjs-redbull-thumb-bg vjs-vimeo-thumb"
+                 data-vimeo="{{ project.vimeo_id }}"
+                 style="background: linear-gradient(135deg, rgba(255,0,170,0.4) 0%, rgba(157,0,255,0.5) 50%, rgba(0,212,255,0.25) 100%); position:relative; width:100%; height:100%;">
+              <div class="vjs-proj-thumb-shimmer"></div>
             </div>
             <div class="vjs-redbull-overlay">
               <div class="vjs-redbull-cat">{{ project.project_type }}</div>
@@ -550,8 +552,10 @@ document.querySelectorAll('.vjs-hero-card[data-id]').forEach(function(card) {
         {% else %}
         <a href="{{ project.url }}" class="text-decoration-none vjs-redbull-card">
           <div class="vjs-redbull-thumb">
-            <div class="vjs-redbull-thumb-bg" style="background: linear-gradient(135deg, rgba(157,0,255,0.4) 0%, rgba(0,212,255,0.25) 50%, rgba(255,0,170,0.2) 100%); position:relative; width:100%; height:100%;">
-              <div style="position:absolute; inset:0; background:repeating-linear-gradient(0deg, transparent, transparent 4px, rgba(0,0,0,0.06) 4px, rgba(0,0,0,0.06) 5px);"></div>
+            <div class="vjs-redbull-thumb-bg vjs-vimeo-thumb"
+                 data-vimeo="{{ project.vimeo_id }}"
+                 style="background: linear-gradient(135deg, rgba(157,0,255,0.4) 0%, rgba(0,212,255,0.25) 50%, rgba(255,0,170,0.2) 100%); position:relative; width:100%; height:100%;">
+              <div class="vjs-proj-thumb-shimmer"></div>
             </div>
             <div class="vjs-redbull-overlay">
               <div class="vjs-redbull-cat">{{ project.project_type }}</div>
