@@ -126,60 +126,52 @@ meta_description: "VJs TV is the global broadcast network for VJ culture. Watch 
   position:absolute; inset:0; width:100%; height:100%; border:none; display:block;
 }
 
-/* ── LOWER-THIRD BAR — compact, non-invasive ── */
-.vjs-hero-overlay {
-  position:absolute; bottom:0; left:0; right:0; z-index:2;
-  background:rgba(0,0,0,0.72);
-  backdrop-filter:blur(4px);
-  -webkit-backdrop-filter:blur(4px);
-  border-top:1px solid rgba(255,255,255,0.06);
-  padding:9px 14px 9px;
-  pointer-events:none;
-  display:flex; align-items:center; justify-content:space-between; gap:12px;
-  flex-wrap:wrap;
+/* ── CHYRON BAR — below the video, never overlapping ── */
+.vjs-hero-chyron {
+  background:#030303; border-top:2px solid #111; border-bottom:1px solid #0f0f0f;
+  padding:12px 20px; display:flex; align-items:center;
+  justify-content:space-between; gap:16px; flex-wrap:wrap;
 }
-.vjs-hero-overlay-left { display:flex; align-items:center; gap:10px; min-width:0; flex:1; }
-.vjs-hero-tag {
-  font-family:'Barlow Condensed',sans-serif; font-size:0.55rem; font-weight:700;
-  letter-spacing:0.14em; text-transform:uppercase;
-  background:rgba(157,0,255,0.25); border:1px solid rgba(157,0,255,0.4);
-  color:var(--vjs-ultraviolet); padding:2px 7px; flex-shrink:0; white-space:nowrap;
+.vjs-hero-chyron-left { display:flex; align-items:center; gap:10px; min-width:0; flex:1; overflow:hidden; }
+.vjs-hero-chyron-tag {
+  font-family:'Barlow Condensed',sans-serif; font-size:0.54rem; font-weight:700;
+  letter-spacing:0.15em; text-transform:uppercase;
+  color:var(--vjs-ultraviolet); border:1px solid rgba(157,0,255,0.4);
+  padding:2px 8px; flex-shrink:0; white-space:nowrap;
 }
-.vjs-hero-tag-type {
-  background:rgba(255,255,255,0.06); border-color:rgba(255,255,255,0.12); color:#888;
+.vjs-hero-chyron-type {
+  font-family:'Barlow Condensed',sans-serif; font-size:0.54rem; font-weight:700;
+  letter-spacing:0.13em; text-transform:uppercase; color:#333; flex-shrink:0; white-space:nowrap;
 }
-.vjs-hero-title {
-  font-family:'Barlow Condensed',sans-serif; font-size:0.95rem;
-  font-weight:700; color:#fff; letter-spacing:0.04em; text-transform:uppercase;
-  white-space:nowrap; overflow:hidden; text-overflow:ellipsis; max-width:340px;
+.vjs-hero-chyron-title {
+  font-family:'Barlow Condensed',sans-serif; font-size:1rem; font-weight:800;
+  letter-spacing:0.06em; text-transform:uppercase;
+  background:linear-gradient(90deg,#9d00ff 0%,#00f9ff 100%);
+  -webkit-background-clip:text; -webkit-text-fill-color:transparent;
+  background-clip:text;
+  white-space:nowrap; overflow:hidden; text-overflow:ellipsis;
 }
-.vjs-hero-artist {
-  font-family:'Barlow Condensed',sans-serif; font-size:0.7rem;
-  color:rgba(255,255,255,0.4); letter-spacing:0.04em; white-space:nowrap; flex-shrink:0;
+.vjs-hero-chyron-right { display:flex; align-items:center; gap:14px; flex-shrink:0; }
+.vjs-hero-chyron-artist {
+  font-family:'Barlow Condensed',sans-serif; font-size:0.68rem;
+  color:#444; letter-spacing:0.04em; white-space:nowrap;
 }
-.vjs-hero-actions {
-  pointer-events:all; display:flex; align-items:center; gap:8px; flex-shrink:0;
+.vjs-hero-chyron-vimeo {
+  font-family:'Barlow Condensed',sans-serif; font-size:0.58rem; font-weight:700;
+  letter-spacing:0.12em; text-transform:uppercase; color:#555; text-decoration:none;
+  border:1px solid #222; padding:4px 12px; transition:color .15s,border-color .15s;
 }
-.vjs-hero-vimeo-btn {
-  font-family:'Barlow Condensed',sans-serif; font-size:0.6rem; font-weight:700;
-  letter-spacing:0.1em; text-transform:uppercase; text-decoration:none;
-  color:#fff; border:1px solid rgba(255,255,255,0.2); padding:5px 12px;
-  transition:border-color .15s, color .15s; background:rgba(0,0,0,0.3);
-  white-space:nowrap;
-}
-.vjs-hero-vimeo-btn:hover { border-color:var(--vjs-cyan); color:var(--vjs-cyan); }
-.vjs-hero-project-btn {
-  font-family:'Barlow Condensed',sans-serif; font-size:0.6rem; font-weight:700;
-  letter-spacing:0.1em; text-transform:uppercase; text-decoration:none;
-  color:rgba(255,255,255,0.35); white-space:nowrap;
+.vjs-hero-chyron-vimeo:hover { color:var(--vjs-cyan); border-color:var(--vjs-cyan); }
+.vjs-hero-chyron-project {
+  font-family:'Barlow Condensed',sans-serif; font-size:0.58rem; font-weight:700;
+  letter-spacing:0.1em; text-transform:uppercase; color:#2a2a2a; text-decoration:none;
   transition:color .15s;
 }
-.vjs-hero-project-btn:hover { color:#fff; }
-
-/* Hide some overlay elements on very small screens */
-@media(max-width:480px){
-  .vjs-hero-tag-type, .vjs-hero-artist, .vjs-hero-project-btn { display:none; }
-  .vjs-hero-title { max-width:180px; }
+.vjs-hero-chyron-project:hover { color:#fff; }
+@media(max-width:600px){
+  .vjs-hero-chyron { padding:10px 14px; }
+  .vjs-hero-chyron-type, .vjs-hero-chyron-artist { display:none; }
+  .vjs-hero-chyron-project { display:none; }
 }
 
 /* Sidebar */
@@ -201,7 +193,8 @@ meta_description: "VJs TV is the global broadcast network for VJ culture. Watch 
 .vjs-hero-card:hover { background:#0e0e0e; }
 .vjs-hero-card.active { background:#0e0e0e; border-left:2px solid var(--vjs-cyan); }
 .vjs-hero-card-thumb {
-  width:72px; height:54px; flex-shrink:0; position:relative; overflow:hidden;
+  width:72px; height:54px; flex-shrink:0; overflow:hidden;
+  background:#111 center/cover no-repeat;
 }
 .vjs-hero-card-thumb-bg { position:absolute; inset:0; }
 .vjs-hero-card-play {
@@ -231,24 +224,12 @@ meta_description: "VJs TV is the global broadcast network for VJ culture. Watch 
 
 <section class="vjs-hero-wrap">
 
-  <!-- MAIN PLAYER -->
+  <!-- MAIN PLAYER — clean, no overlay -->
   <div class="vjs-hero-player" id="hero-player">
     <iframe id="hero-iframe"
       src="https://player.vimeo.com/video/49960413?autoplay=0&title=0&byline=0&portrait=0&color=9d00ff"
       allow="autoplay; fullscreen; picture-in-picture" allowfullscreen>
     </iframe>
-    <div class="vjs-hero-overlay">
-      <div class="vjs-hero-overlay-left">
-        <span class="vjs-hero-tag">&#9679; Featured</span>
-        <span class="vjs-hero-tag vjs-hero-tag-type" id="hero-tag-type">Architectural Projection</span>
-        <span class="vjs-hero-title" id="hero-title">Sagrada Familia: Ode à la Vie</span>
-        <span class="vjs-hero-artist" id="hero-artist">Moment Factory · Barcelona</span>
-      </div>
-      <div class="vjs-hero-actions">
-        <a class="vjs-hero-vimeo-btn" id="hero-vimeo-link" href="https://vimeo.com/49960413" target="_blank" rel="noopener">&#9654; Vimeo</a>
-        <a class="vjs-hero-project-btn" id="hero-project-link" href="/projects">Project →</a>
-      </div>
-    </div>
   </div>
 
   <!-- SIDEBAR QUEUE -->
@@ -263,8 +244,6 @@ meta_description: "VJs TV is the global broadcast network for VJ culture. Watch 
       data-href="/projects/sagrada-familia-moment-factory"
       onclick="heroPlay(this)">
       <div class="vjs-hero-card-thumb">
-        <div class="vjs-hero-card-thumb-bg" style="background:linear-gradient(135deg,rgba(57,255,20,0.4),rgba(0,40,15,0.95));"></div>
-        <div class="vjs-hero-card-play">&#9654;</div>
       </div>
       <div class="vjs-hero-card-info">
         <div class="vjs-hero-card-cat">Architectural</div>
@@ -280,8 +259,6 @@ meta_description: "VJs TV is the global broadcast network for VJ culture. Watch 
       data-href="/projects/chiaroscuro-sougwen"
       onclick="heroPlay(this)">
       <div class="vjs-hero-card-thumb">
-        <div class="vjs-hero-card-thumb-bg" style="background:linear-gradient(135deg,rgba(157,0,255,0.6),rgba(30,0,60,0.95));"></div>
-        <div class="vjs-hero-card-play">&#9654;</div>
       </div>
       <div class="vjs-hero-card-info">
         <div class="vjs-hero-card-cat">Generative Art</div>
@@ -297,8 +274,6 @@ meta_description: "VJs TV is the global broadcast network for VJ culture. Watch 
       data-href="/projects/orange-superbien"
       onclick="heroPlay(this)">
       <div class="vjs-hero-card-thumb">
-        <div class="vjs-hero-card-thumb-bg" style="background:linear-gradient(135deg,rgba(255,150,0,0.5),rgba(60,20,0,0.95));"></div>
-        <div class="vjs-hero-card-play">&#9654;</div>
       </div>
       <div class="vjs-hero-card-info">
         <div class="vjs-hero-card-cat">Projection Mapping</div>
@@ -314,8 +289,6 @@ meta_description: "VJs TV is the global broadcast network for VJ culture. Watch 
       data-href="/projects/pta-04-quayola"
       onclick="heroPlay(this)">
       <div class="vjs-hero-card-thumb">
-        <div class="vjs-hero-card-thumb-bg" style="background:linear-gradient(135deg,rgba(255,0,170,0.5),rgba(50,0,30,0.95));"></div>
-        <div class="vjs-hero-card-play">&#9654;</div>
       </div>
       <div class="vjs-hero-card-info">
         <div class="vjs-hero-card-cat">Live AV</div>
@@ -331,8 +304,6 @@ meta_description: "VJs TV is the global broadcast network for VJ culture. Watch 
       data-href="/projects/tearing-shadows-seidel"
       onclick="heroPlay(this)">
       <div class="vjs-hero-card-thumb">
-        <div class="vjs-hero-card-thumb-bg" style="background:linear-gradient(135deg,rgba(0,249,255,0.4),rgba(0,30,50,0.95));"></div>
-        <div class="vjs-hero-card-play">&#9654;</div>
       </div>
       <div class="vjs-hero-card-info">
         <div class="vjs-hero-card-cat">Generative Art</div>
@@ -348,8 +319,6 @@ meta_description: "VJs TV is the global broadcast network for VJ culture. Watch 
       data-href="/projects/kolobok-silasveta"
       onclick="heroPlay(this)">
       <div class="vjs-hero-card-thumb">
-        <div class="vjs-hero-card-thumb-bg" style="background:linear-gradient(135deg,rgba(0,212,255,0.45),rgba(0,20,40,0.95));"></div>
-        <div class="vjs-hero-card-play">&#9654;</div>
       </div>
       <div class="vjs-hero-card-info">
         <div class="vjs-hero-card-cat">Projection Mapping</div>
@@ -365,8 +334,6 @@ meta_description: "VJs TV is the global broadcast network for VJ culture. Watch 
       data-href="/projects/lightline-gotham-seeper"
       onclick="heroPlay(this)">
       <div class="vjs-hero-card-thumb">
-        <div class="vjs-hero-card-thumb-bg" style="background:linear-gradient(135deg,rgba(157,0,255,0.4),rgba(0,212,255,0.3));"></div>
-        <div class="vjs-hero-card-play">&#9654;</div>
       </div>
       <div class="vjs-hero-card-info">
         <div class="vjs-hero-card-cat">Architectural</div>
@@ -382,8 +349,6 @@ meta_description: "VJs TV is the global broadcast network for VJ culture. Watch 
       data-href="/projects/a-cero-xv-aniversario"
       onclick="heroPlay(this)">
       <div class="vjs-hero-card-thumb">
-        <div class="vjs-hero-card-thumb-bg" style="background:linear-gradient(135deg,rgba(255,0,170,0.4),rgba(157,0,255,0.5));"></div>
-        <div class="vjs-hero-card-play">&#9654;</div>
       </div>
       <div class="vjs-hero-card-info">
         <div class="vjs-hero-card-cat">Projection Mapping</div>
@@ -395,15 +360,28 @@ meta_description: "VJs TV is the global broadcast network for VJ culture. Watch 
   </div>
 </section>
 
+<!-- CHYRON BAR — title lives here, below the full video frame -->
+<div class="vjs-hero-chyron" id="hero-chyron">
+  <div class="vjs-hero-chyron-left">
+    <span class="vjs-hero-chyron-tag">&#9679; Featured</span>
+    <span class="vjs-hero-chyron-type" id="hero-tag-type">Architectural Projection</span>
+    <span class="vjs-hero-chyron-title" id="hero-title">Sagrada Familia: Ode à la Vie</span>
+  </div>
+  <div class="vjs-hero-chyron-right">
+    <span class="vjs-hero-chyron-artist" id="hero-artist">Moment Factory · Barcelona</span>
+    <a class="vjs-hero-chyron-vimeo" id="hero-vimeo-link" href="https://vimeo.com/49960413" target="_blank" rel="noopener">Vimeo</a>
+    <a class="vjs-hero-chyron-project" id="hero-project-link" href="/projects">Project →</a>
+  </div>
+</div>
+
 <script>
 function heroPlay(card) {
-  var id      = card.dataset.id;
-  var title   = card.dataset.title;
-  var artist  = card.dataset.artist;
-  var loc     = card.dataset.loc;
-  var type    = card.dataset.type;
-  var year    = card.dataset.year;
-  var href    = card.dataset.href;
+  var id    = card.dataset.id;
+  var title = card.dataset.title;
+  var artist= card.dataset.artist;
+  var loc   = card.dataset.loc;
+  var type  = card.dataset.type;
+  var href  = card.dataset.href;
 
   document.getElementById('hero-iframe').src =
     'https://player.vimeo.com/video/' + id + '?autoplay=1&title=0&byline=0&portrait=0&color=9d00ff';
@@ -416,6 +394,23 @@ function heroPlay(card) {
   document.querySelectorAll('.vjs-hero-card').forEach(function(c){ c.classList.remove('active'); });
   card.classList.add('active');
 }
+
+/* Load real Vimeo thumbnails into sidebar queue cards */
+document.querySelectorAll('.vjs-hero-card[data-id]').forEach(function(card) {
+  var id = card.dataset.id;
+  var thumb = card.querySelector('.vjs-hero-card-thumb');
+  if (!thumb) return;
+  fetch('https://vimeo.com/api/v2/video/' + id + '.json')
+    .then(function(r){ return r.json(); })
+    .then(function(data){
+      if (data[0] && data[0].thumbnail_large) {
+        thumb.style.background = '#000';
+        thumb.style.backgroundImage = 'url(' + data[0].thumbnail_large + ')';
+        thumb.style.backgroundSize = 'cover';
+        thumb.style.backgroundPosition = 'center';
+      }
+    }).catch(function(){});
+});
 </script>
 
 <!-- SPONSOR TICKER -->
@@ -442,7 +437,6 @@ function heroPlay(card) {
         <div class="vjs-set-thumb-bg" style="background: linear-gradient(135deg, {{ set_gradients[gi] }}); position:relative; width:100%; height:100%;">
           <div style="position:absolute; inset:0; background:repeating-linear-gradient(0deg, transparent, transparent 3px, rgba(0,0,0,0.07) 3px, rgba(0,0,0,0.07) 4px);"></div>
         </div>
-        <div class="vjs-set-thumb-play"><svg viewBox="0 0 24 24" fill="currentColor"><polygon points="5,3 5,21 21,12"/></svg></div>
       </div>
       <div class="vjs-set-info">
         <div class="vjs-set-location">{{ project.project_type }}</div>
@@ -544,7 +538,6 @@ function heroPlay(card) {
             <div class="vjs-redbull-thumb-bg" style="background: linear-gradient(135deg, rgba(255,0,170,0.4) 0%, rgba(157,0,255,0.5) 50%, rgba(0,212,255,0.25) 100%); position:relative; width:100%; height:100%;">
               <div style="position:absolute; inset:0; background:repeating-linear-gradient(45deg, transparent, transparent 8px, rgba(157,0,255,0.03) 8px, rgba(157,0,255,0.03) 9px);"></div>
             </div>
-            <svg class="vjs-redbull-play" viewBox="0 0 24 24" fill="currentColor" style="position:absolute; top:50%; left:50%; transform:translate(-50%,-50%); width:40px; height:40px;"><polygon points="5,3 5,21 21,12"/></svg>
             <div class="vjs-redbull-overlay">
               <div class="vjs-redbull-cat">{{ project.project_type }}</div>
               <div class="vjs-redbull-title">{{ project.title }}</div>
@@ -558,7 +551,6 @@ function heroPlay(card) {
             <div class="vjs-redbull-thumb-bg" style="background: linear-gradient(135deg, rgba(157,0,255,0.4) 0%, rgba(0,212,255,0.25) 50%, rgba(255,0,170,0.2) 100%); position:relative; width:100%; height:100%;">
               <div style="position:absolute; inset:0; background:repeating-linear-gradient(0deg, transparent, transparent 4px, rgba(0,0,0,0.06) 4px, rgba(0,0,0,0.06) 5px);"></div>
             </div>
-            <svg class="vjs-redbull-play" viewBox="0 0 24 24" fill="currentColor" style="position:absolute; top:50%; left:50%; transform:translate(-50%,-50%); width:40px; height:40px;"><polygon points="5,3 5,21 21,12"/></svg>
             <div class="vjs-redbull-overlay">
               <div class="vjs-redbull-cat">{{ project.project_type }}</div>
               <div class="vjs-redbull-title">{{ project.title }}</div>

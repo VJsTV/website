@@ -961,9 +961,9 @@ h1, h2, h3, h4, h5, h6,
   position: relative;
   overflow: hidden;
 }
-/* NTS-style: city + play button appear on hover */
+/* NTS-style: hover overlay */
 .vjs-artist-card-visual::after {
-  content: '▶ WATCH SETS';
+  content: 'WATCH SETS';
   position: absolute;
   inset: 0;
   background: rgba(5,5,5,0.65);
@@ -1438,7 +1438,7 @@ h1, h2, h3, h4, h5, h6,
 .vjs-nts-card:hover .vjs-nts-visual-inner { transform: scale(1.05); }
 /* NTS overlay */
 .vjs-nts-visual::after {
-  content: '▶ WATCH';
+  content: '';
   position: absolute;
   inset: 0;
   background: rgba(5,5,5,0.55);
