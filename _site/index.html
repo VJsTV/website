@@ -392,60 +392,105 @@
 .vjs-hero-wrap {
   display:grid;
   grid-template-columns:1fr 260px;
-  height:520px;
   background:#000;
   border-bottom:1px solid #111;
 }
-@media(max-width:900px){
-  .vjs-hero-wrap { grid-template-columns:1fr; height:auto; }
-  .vjs-hero-sidebar { display:none; }
+
+/* Desktop: fixed height */
+@media(min-width:901px){
+  .vjs-hero-wrap { height:520px; }
 }
+
+/* Mobile: stack player + queue vertically */
+@media(max-width:900px){
+  .vjs-hero-wrap { grid-template-columns:1fr; grid-template-rows:auto auto; }
+  .vjs-hero-sidebar {
+    border-left:none !important; border-top:1px solid #141414;
+    flex-direction:row !important; overflow-x:auto !important; overflow-y:hidden !important;
+    height:90px !important; flex-shrink:0;
+  }
+  .vjs-hero-sidebar-hdr { display:none; }
+  .vjs-hero-card {
+    flex-direction:column !important; width:110px !important; min-width:110px !important;
+    flex-shrink:0; border-bottom:none !important; border-right:1px solid #0f0f0f !important;
+    height:90px !important; padding:0 !important;
+  }
+  .vjs-hero-card-thumb { width:110px !important; height:60px !important; }
+  .vjs-hero-card-info { padding:4px 8px !important; }
+  .vjs-hero-card-cat { font-size:0.45rem !important; margin-bottom:1px !important; }
+  .vjs-hero-card-title { font-size:0.65rem !important; }
+  .vjs-hero-card-artist { display:none !important; }
+}
+
 .vjs-hero-player {
   position:relative; overflow:hidden; background:#000;
+  /* Intrinsic 16:9 height so iframe renders properly */
+  aspect-ratio:16/9;
 }
+/* On desktop, override aspect-ratio so fixed 520px height governs */
+@media(min-width:901px){
+  .vjs-hero-player { aspect-ratio:unset; height:100%; }
+}
+
 .vjs-hero-player iframe {
   position:absolute; inset:0; width:100%; height:100%; border:none; display:block;
 }
+
+/* ── LOWER-THIRD BAR — compact, non-invasive ── */
 .vjs-hero-overlay {
   position:absolute; bottom:0; left:0; right:0; z-index:2;
-  background:linear-gradient(to top, rgba(0,0,0,0.92) 0%, rgba(0,0,0,0.5) 60%, transparent 100%);
-  padding:28px 24px 20px;
+  background:rgba(0,0,0,0.72);
+  backdrop-filter:blur(4px);
+  -webkit-backdrop-filter:blur(4px);
+  border-top:1px solid rgba(255,255,255,0.06);
+  padding:9px 14px 9px;
   pointer-events:none;
+  display:flex; align-items:center; justify-content:space-between; gap:12px;
+  flex-wrap:wrap;
 }
-.vjs-hero-tags { display:flex; gap:6px; flex-wrap:wrap; margin-bottom:8px; }
+.vjs-hero-overlay-left { display:flex; align-items:center; gap:10px; min-width:0; flex:1; }
 .vjs-hero-tag {
-  font-family:'Barlow Condensed',sans-serif; font-size:0.6rem; font-weight:700;
+  font-family:'Barlow Condensed',sans-serif; font-size:0.55rem; font-weight:700;
   letter-spacing:0.14em; text-transform:uppercase;
-  background:rgba(255,255,255,0.1); border:1px solid rgba(255,255,255,0.18);
-  color:#ccc; padding:3px 8px;
+  background:rgba(157,0,255,0.25); border:1px solid rgba(157,0,255,0.4);
+  color:var(--vjs-ultraviolet); padding:2px 7px; flex-shrink:0; white-space:nowrap;
 }
-.vjs-hero-tag-live { background:rgba(157,0,255,0.3); border-color:rgba(157,0,255,0.5); color:var(--vjs-ultraviolet); }
+.vjs-hero-tag-type {
+  background:rgba(255,255,255,0.06); border-color:rgba(255,255,255,0.12); color:#888;
+}
 .vjs-hero-title {
-  font-family:'Barlow Condensed',sans-serif; font-size:clamp(1.4rem,3vw,2.2rem);
+  font-family:'Barlow Condensed',sans-serif; font-size:0.95rem;
   font-weight:700; color:#fff; letter-spacing:0.04em; text-transform:uppercase;
-  line-height:1.1; margin:0 0 4px;
+  white-space:nowrap; overflow:hidden; text-overflow:ellipsis; max-width:340px;
 }
 .vjs-hero-artist {
-  font-family:'Barlow Condensed',sans-serif; font-size:0.8rem;
-  color:rgba(255,255,255,0.5); letter-spacing:0.06em;
+  font-family:'Barlow Condensed',sans-serif; font-size:0.7rem;
+  color:rgba(255,255,255,0.4); letter-spacing:0.04em; white-space:nowrap; flex-shrink:0;
 }
 .vjs-hero-actions {
-  pointer-events:all; margin-top:12px; display:flex; align-items:center; gap:10px; flex-wrap:wrap;
+  pointer-events:all; display:flex; align-items:center; gap:8px; flex-shrink:0;
 }
 .vjs-hero-vimeo-btn {
-  font-family:'Barlow Condensed',sans-serif; font-size:0.65rem; font-weight:700;
-  letter-spacing:0.12em; text-transform:uppercase; text-decoration:none;
-  color:#fff; border:1px solid rgba(255,255,255,0.25); padding:7px 16px;
-  transition:border-color .15s, color .15s; background:rgba(0,0,0,0.4);
+  font-family:'Barlow Condensed',sans-serif; font-size:0.6rem; font-weight:700;
+  letter-spacing:0.1em; text-transform:uppercase; text-decoration:none;
+  color:#fff; border:1px solid rgba(255,255,255,0.2); padding:5px 12px;
+  transition:border-color .15s, color .15s; background:rgba(0,0,0,0.3);
+  white-space:nowrap;
 }
 .vjs-hero-vimeo-btn:hover { border-color:var(--vjs-cyan); color:var(--vjs-cyan); }
 .vjs-hero-project-btn {
-  font-family:'Barlow Condensed',sans-serif; font-size:0.65rem; font-weight:700;
-  letter-spacing:0.12em; text-transform:uppercase; text-decoration:none;
-  color:rgba(255,255,255,0.45); padding:7px 0;
+  font-family:'Barlow Condensed',sans-serif; font-size:0.6rem; font-weight:700;
+  letter-spacing:0.1em; text-transform:uppercase; text-decoration:none;
+  color:rgba(255,255,255,0.35); white-space:nowrap;
   transition:color .15s;
 }
 .vjs-hero-project-btn:hover { color:#fff; }
+
+/* Hide some overlay elements on very small screens */
+@media(max-width:480px){
+  .vjs-hero-tag-type, .vjs-hero-artist, .vjs-hero-project-btn { display:none; }
+  .vjs-hero-title { max-width:180px; }
+}
 
 /* Sidebar */
 .vjs-hero-sidebar {
@@ -503,16 +548,15 @@
       allow="autoplay; fullscreen; picture-in-picture" allowfullscreen>
     </iframe>
     <div class="vjs-hero-overlay">
-      <div class="vjs-hero-tags">
-        <span class="vjs-hero-tag vjs-hero-tag-live">&#9679; Featured</span>
-        <span class="vjs-hero-tag" id="hero-tag-type">Architectural Projection</span>
-        <span class="vjs-hero-tag" id="hero-tag-year">2012</span>
+      <div class="vjs-hero-overlay-left">
+        <span class="vjs-hero-tag">&#9679; Featured</span>
+        <span class="vjs-hero-tag vjs-hero-tag-type" id="hero-tag-type">Architectural Projection</span>
+        <span class="vjs-hero-title" id="hero-title">Sagrada Familia: Ode à la Vie</span>
+        <span class="vjs-hero-artist" id="hero-artist">Moment Factory · Barcelona</span>
       </div>
-      <h1 class="vjs-hero-title" id="hero-title">Sagrada Familia: Ode à la Vie</h1>
-      <div class="vjs-hero-artist" id="hero-artist">Moment Factory &nbsp;·&nbsp; Barcelona, Spain</div>
       <div class="vjs-hero-actions">
-        <a class="vjs-hero-vimeo-btn" id="hero-vimeo-link" href="https://vimeo.com/49960413" target="_blank" rel="noopener">▶ Watch on Vimeo</a>
-        <a class="vjs-hero-project-btn" id="hero-project-link" href="/projects">View Project →</a>
+        <a class="vjs-hero-vimeo-btn" id="hero-vimeo-link" href="https://vimeo.com/49960413" target="_blank" rel="noopener">&#9654; Vimeo</a>
+        <a class="vjs-hero-project-btn" id="hero-project-link" href="/projects">Project →</a>
       </div>
     </div>
   </div>
@@ -673,12 +717,11 @@ function heroPlay(card) {
 
   document.getElementById('hero-iframe').src =
     'https://player.vimeo.com/video/' + id + '?autoplay=1&title=0&byline=0&portrait=0&color=9d00ff';
-  document.getElementById('hero-title').textContent     = title;
-  document.getElementById('hero-artist').textContent    = artist + '  ·  ' + loc;
-  document.getElementById('hero-tag-type').textContent  = type;
-  document.getElementById('hero-tag-year').textContent  = year;
-  document.getElementById('hero-vimeo-link').href       = 'https://vimeo.com/' + id;
-  document.getElementById('hero-project-link').href     = href;
+  document.getElementById('hero-title').textContent    = title;
+  document.getElementById('hero-artist').textContent   = artist + ' · ' + loc.split(',')[0];
+  document.getElementById('hero-tag-type').textContent = type;
+  document.getElementById('hero-vimeo-link').href      = 'https://vimeo.com/' + id;
+  document.getElementById('hero-project-link').href    = href;
 
   document.querySelectorAll('.vjs-hero-card').forEach(function(c){ c.classList.remove('active'); });
   card.classList.add('active');
