@@ -1,5 +1,6 @@
 ---
 layout: vjs-detail
+vimeo_id: 2291898
 title: "CINESTHESY 1.0 Full"
 name: "cinesthesy-visionsonic"
 artist: "SATI"

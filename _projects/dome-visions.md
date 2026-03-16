@@ -1,5 +1,6 @@
 ---
 layout: vjs-detail
+vimeo_id: 12804312
 title: "Dome Visions"
 name: "dome-visions"
 artist: "Aurora Fractals"

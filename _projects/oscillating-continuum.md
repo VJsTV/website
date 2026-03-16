@@ -1,5 +1,6 @@
 ---
 layout: vjs-detail
+vimeo_id: 63167761
 title: "Oscillating Continuum"
 name: "oscillating-continuum"
 artist: "Ryoichi Kurokawa"

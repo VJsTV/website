@@ -107,4 +107,25 @@ document.querySelectorAll('[data-sort]').forEach(function(btn) {
     items.forEach(function(el){ grid.appendChild(el); });
   });
 });
+
+// Vimeo thumbnail loader
+(function() {
+  var thumbs = document.querySelectorAll('.vjs-vimeo-thumb[data-vimeo]');
+  thumbs.forEach(function(el) {
+    var id = el.getAttribute('data-vimeo');
+    if (!id) return;
+    fetch('https://vimeo.com/api/v2/video/' + id + '.json')
+      .then(function(r) { return r.json(); })
+      .then(function(data) {
+        var url = data[0] && (data[0].thumbnail_large || data[0].thumbnail_medium || data[0].thumbnail_small);
+        if (url) {
+          el.style.backgroundImage = 'url(' + url + ')';
+          el.style.backgroundSize  = 'cover';
+          el.style.backgroundPosition = 'center';
+          el.classList.add('loaded');
+        }
+      })
+      .catch(function() {});
+  });
+})();
 </script>

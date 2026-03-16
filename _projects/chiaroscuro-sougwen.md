@@ -1,5 +1,6 @@
 ---
 layout: vjs-detail
+vimeo_id: 66443975
 title: "Chiaroscuro"
 name: "chiaroscuro-sougwen"
 artist: "Sougwen Chung"

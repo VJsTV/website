@@ -22,8 +22,8 @@ VJs TV is a Jekyll-based platform for VJ culture and audiovisual performances. I
 ## Pages
 - `/` - Homepage: NTS-style live broadcast strip (2 channels), full-bleed hero with sidebar thumbnails, VJs TV Picks horizontal scroll, scrolling sponsor ticker, animated stats counters, featured artists grid, loop packs marketplace, editorial project grid, technology section, sponsors, CTA
 - `/live` - Live broadcast page with player and schedule
-- `/artists` - Artist directory with JS filter by visual style + technology (auto-generated from data)
-- `/projects` - Project index with JS filter by type + sort by date (auto-generated from data)
+- `/artists` - Artist directory with 3-dropdown JS filter (Style / Tech / Country), neon initials cards, country flags
+- `/projects` - Project index with JS filter by type + sort by date; all 24 projects have real Vimeo IDs → thumbnails fetched live via Vimeo API
 - `/events` - Events split into Upcoming / Archive sections, with date badges
 - `/studios` - Studios and installations
 - `/technology` - Technology directory with JS category filter

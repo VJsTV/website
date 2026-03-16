@@ -1,5 +1,6 @@
 ---
 layout: vjs-detail
+vimeo_id: 68690526
 title: "Neural Rave"
 name: "neural-rave"
 artist: "VJ Kai"

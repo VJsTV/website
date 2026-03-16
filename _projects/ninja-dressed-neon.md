@@ -1,5 +1,6 @@
 ---
 layout: vjs-detail
+vimeo_id: 238933303
 title: "NINJA DRESSED IN NEON"
 name: "ninja-dressed-neon"
 artist: "Caio Todomundo"

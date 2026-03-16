@@ -1,5 +1,6 @@
 ---
 layout: vjs-detail
+vimeo_id: 61227321
 title: "Tearing Shadows"
 name: "tearing-shadows-seidel"
 artist: "Robert Seidel"

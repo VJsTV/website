@@ -1,5 +1,6 @@
 ---
 layout: vjs-detail
+vimeo_id: 49994980
 title: "Light Temple Tokyo"
 name: "tokyo-light-temple"
 artist: "Luna Visuals"

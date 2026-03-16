@@ -1,5 +1,6 @@
 ---
 layout: vjs-detail
+vimeo_id: 53844908
 title: "NEXUS"
 name: "nexus-geometrica"
 artist: "Geometrica Studio"

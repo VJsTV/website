@@ -1,5 +1,6 @@
 ---
 layout: vjs-detail
+vimeo_id: 51680823
 title: "KOLOBOK"
 name: "kolobok-silasveta"
 artist: "SilaSveta"
