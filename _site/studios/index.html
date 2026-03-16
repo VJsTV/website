@@ -266,188 +266,57 @@
 <section class="vjs-section">
   <div class="container">
 
-    <!-- TYPE FILTER -->
-    <div class="vjs-filter-bar">
-      <span class="vjs-filter-label">Type:</span>
-      <button class="vjs-filter-btn active" data-stype="all">All</button>
-      
-      
-        
-        
+    <!-- DROPDOWN FILTERS -->
+    <div class="vjs-filter-dropdowns">
+
+      <div class="vjs-filter-group">
+        <span class="vjs-filter-drop-label">Type</span>
+        <select class="vjs-filter-select" id="studio-type-select" onchange="applyStudioFilters()">
+          <option value="all">All Types</option>
           
-          <button class="vjs-filter-btn" data-stype="dark-generative-geometry-studio">Dark Generative Geometry Studio</button>
-        
-      
-        
-        
           
-          <button class="vjs-filter-btn" data-stype="projection-design-&-live-experience-studio">Projection Design & Live Experience Studio</button>
-        
-      
-        
-        
           
-          <button class="vjs-filter-btn" data-stype="visual-label-/-av-collective">Visual Label / AV Collective</button>
-        
-      
-        
-        
+          <option value="architectural-projection-studio">Architectural Projection Studio</option><option value="arts-&-technology-collective">Arts & Technology Collective</option><option value="audiovisual-collective">Audiovisual Collective</option><option value="biological-algorithm-&-physical-pixel-studio">Biological Algorithm & Physical Pixel Studio</option><option value="dark-generative-geometry-studio">Dark Generative Geometry Studio</option><option value="data-painting-&-neuro-design-lab">Data Painting & Neuro-Design Lab</option><option value="extended-reality-&-virtual-production-studio">Extended Reality & Virtual Production Studio</option><option value="festival-organisation-&-production">Festival Organisation & Production</option><option value="generative-design-&-data-art-studio">Generative Design & Data Art Studio</option><option value="immersive-dome-infrastructure-&-production-lab">Immersive Dome Infrastructure & Production Lab</option><option value="immersive-exhibition-&-site-specific-installation-studio">Immersive Exhibition & Site-Specific Installation Studio</option><option value="immersive-experience-studio">Immersive Experience Studio</option><option value="immersive-installation-collective">Immersive Installation Collective</option><option value="interactive-projection-studio">Interactive Projection Studio</option><option value="kinetic-light-art-studio">Kinetic Light Art Studio</option><option value="kinetic-sound-sculpture-studio">Kinetic Sound Sculpture Studio</option><option value="luminous-art-&-architectural-media-studio">Luminous Art & Architectural Media Studio</option><option value="machine-intelligence-art-lab">Machine Intelligence Art Lab</option><option value="motion-design-&-projection-studio">Motion Design & Projection Studio</option><option value="multimedia-experience-studio">Multimedia Experience Studio</option><option value="participatory-art-&-algorithmic-sociology-studio">Participatory Art & Algorithmic Sociology Studio</option><option value="projection-design-&-live-experience-studio">Projection Design & Live Experience Studio</option><option value="projection-mapping-studio">Projection Mapping Studio</option><option value="scenographic-media-&-museum-installation-studio">Scenographic Media & Museum Installation Studio</option><option value="system-aesthetics-&-speculative-design-studio">System Aesthetics & Speculative Design Studio</option><option value="tech-art-research-lab">Tech-Art Research Lab</option><option value="visual-label-/-av-collective">Visual Label / AV Collective</option><option value="xr-&-live-concert-visual-production-studio">XR & Live Concert Visual Production Studio</option>
+        </select>
+      </div>
+
+      <div class="vjs-filter-group">
+        <span class="vjs-filter-drop-label">Equipment</span>
+        <select class="vjs-filter-select" id="studio-eq-select" onchange="applyStudioFilters()">
+          <option value="all">All Equipment</option>
           
-          <button class="vjs-filter-btn" data-stype="audiovisual-collective">Audiovisual Collective</button>
-        
-      
-        
-        
           
-          <button class="vjs-filter-btn" data-stype="system-aesthetics-&-speculative-design-studio">System Aesthetics & Speculative Design Studio</button>
-        
-      
-        
-        
           
-          <button class="vjs-filter-btn" data-stype="immersive-dome-infrastructure-&-production-lab">Immersive Dome Infrastructure & Production Lab</button>
-        
-      
-        
-        
+          <option value="1:1 stage replica test environments">1:1 Stage Replica Test Environments</option><option value="360-degree projection arrays">360-degree Projection Arrays</option><option value="3d animation">3D Animation</option><option value="3d content design">3D Content Design</option><option value="3d content pipeline">3D Content Pipeline</option><option value="5g low-latency av pipeline">5G Low-Latency AV Pipeline</option><option value="ai motion tracking systems">AI Motion Tracking Systems</option><option value="algorithmic animation pipelines">Algorithmic Animation Pipelines</option><option value="algorithmic animation tools">Algorithmic Animation Tools</option><option value="architectural media integration systems">Architectural Media Integration Systems</option><option value="architectural projection">Architectural Projection</option><option value="architectural projection arrays">Architectural Projection Arrays</option><option value="architectural projection mapping systems">Architectural Projection Mapping Systems</option><option value="architectural projection systems">Architectural Projection Systems</option><option value="architectural rigging">Architectural Rigging</option><option value="audience participation tech">Audience Participation Tech</option><option value="biological algorithm software">Biological Algorithm Software</option><option value="broadcast design tools">Broadcast Design Tools</option><option value="broadcast integration systems">Broadcast Integration Systems</option><option value="cardboard / wire / cotton assemblage">Cardboard / Wire / Cotton Assemblage</option><option value="computer vision camera arrays">Computer Vision Camera Arrays</option><option value="computer vision systems">Computer Vision Systems</option><option value="custom 3d mapping software">Custom 3D Mapping Software</option><option value="custom content management for permanent installs">Custom Content Management for Permanent Installs</option><option value="custom dome media servers">Custom Dome Media Servers</option><option value="custom drone fleet (licensed indoor)">Custom Drone Fleet (licensed indoor)</option><option value="custom generative code pipeline">Custom Generative Code Pipeline</option><option value="custom generative content pipeline">Custom Generative Content Pipeline</option><option value="custom generative systems">Custom Generative Systems</option><option value="custom industrial winch systems">Custom Industrial Winch Systems</option><option value="custom kinetic led systems">Custom Kinetic LED Systems</option><option value="custom led systems">Custom LED Systems</option><option value="custom long-form content pipeline">Custom Long-Form Content Pipeline</option><option value="custom machine learning pipelines">Custom Machine Learning Pipelines</option><option value="custom mapping software">Custom Mapping Software</option><option value="custom mechanical fabrication workshop">Custom Mechanical Fabrication Workshop</option><option value="custom media server clusters">Custom Media Server Clusters</option><option value="custom point cloud processing">Custom Point Cloud Processing</option><option value="custom software">Custom Software</option><option value="custom touchdesigner patches">Custom TouchDesigner Patches</option><option value="custom virtual stage design tools">Custom Virtual Stage Design Tools</option><option value="dc motor arrays (1,000+)">DC Motor Arrays (1,000+)</option><option value="data visualisation frameworks">Data Visualisation Frameworks</option><option value="dome content mastering tools">Dome Content Mastering Tools</option><option value="eeg headset integration systems">EEG Headset Integration Systems</option><option value="environmental sensor arrays">Environmental Sensor Arrays</option><option value="environmental sensor networks">Environmental Sensor Networks</option><option value="event production infrastructure">Event Production Infrastructure</option><option value="extended reality (xr) production pipeline">Extended Reality (XR) Production Pipeline</option><option value="festival production infrastructure">Festival Production Infrastructure</option><option value="fisheye lens systems">Fisheye Lens Systems</option><option value="found footage archive">Found Footage Archive</option><option value="full-scale black box studios">Full-Scale Black Box Studios</option><option value="gpu generative render farms">GPU Generative Render Farms</option><option value="gpu render farm clusters">GPU Render Farm Clusters</option><option value="generative visuals pipeline">Generative Visuals Pipeline</option><option value="gesture recognition hardware">Gesture Recognition Hardware</option><option value="high-lumen architectural projectors">High-Lumen Architectural Projectors</option><option value="high-lumen projection arrays">High-Lumen Projection Arrays</option><option value="high-speed motion capture systems">High-Speed Motion Capture Systems</option><option value="high-intensity strobe systems">High-intensity Strobe Systems</option><option value="high-precision formation control">High-precision Formation Control</option><option value="high-precision laser rigs">High-precision Laser Rigs</option><option value="immersive dome infrastructure">Immersive Dome Infrastructure</option><option value="interactive installation rigs">Interactive Installation Rigs</option><option value="interactive projection systems">Interactive Projection Systems</option><option value="interactive rigs">Interactive Rigs</option><option value="led volume stages">LED Volume Stages</option><option value="led volume systems">LED Volume Systems</option><option value="led and projection hybrid systems">LED and Projection Hybrid Systems</option><option value="large-format output systems">Large-Format Output Systems</option><option value="large-scale led and projection walls">Large-Scale LED and Projection Walls</option><option value="large-scale projection arrays">Large-Scale Projection Arrays</option><option value="large-format led displays">Large-format LED Displays</option><option value="lidar scanning systems">LiDAR Scanning Systems</option><option value="licensed indoor/outdoor drone fleet">Licensed Indoor/Outdoor Drone Fleet</option><option value="live cinema systems">Live Cinema Systems</option><option value="live performance visuals">Live Performance Visuals</option><option value="math-driven generative systems">Math-driven Generative Systems</option><option value="modular synthesiser arrays">Modular Synthesiser Arrays</option><option value="motion graphics pipeline">Motion Graphics Pipeline</option><option value="multi-channel audio systems">Multi-channel Audio Systems</option><option value="multi-projector arrays">Multi-projector Arrays</option><option value="multi-sensory environmental systems">Multi-sensory Environmental Systems</option><option value="multi-surface projection mapping">Multi-surface Projection Mapping</option><option value="multichannel audio">Multichannel Audio</option><option value="nasa / scientific dataset archives">NASA / Scientific Dataset Archives</option><option value="physical computing">Physical Computing</option><option value="portable and permanent dome structures">Portable and Permanent Dome Structures</option><option value="precision timing control systems">Precision Timing Control Systems</option><option value="real-time brainwave / eeg integration">Real-time Brainwave / EEG Integration</option><option value="real-time crowd analysis software">Real-time Crowd Analysis Software</option><option value="real-time data api pipelines">Real-time Data API Pipelines</option><option value="real-time game engine rendering">Real-time Game Engine Rendering</option><option value="real-time rendering infrastructure">Real-time Rendering Infrastructure</option><option value="real-time rendering systems">Real-time Rendering Systems</option><option value="real-time video processing">Real-time Video Processing</option><option value="research collaboration networks">Research Collaboration Networks</option><option value="robotic control systems">Robotic Control Systems</option><option value="spatial audio architecture">Spatial Audio Architecture</option><option value="spatial audio infrastructure">Spatial Audio Infrastructure</option><option value="spatial audio rigs">Spatial Audio Rigs</option><option value="spatial audio systems">Spatial Audio Systems</option><option value="transformator (1,000m² kinetic lab)">TRANSFORMATOR (1,000m² Kinetic Lab)</option><option value="the gasometer venue (custom permanent install)">The Gasometer Venue (custom permanent install)</option><option value="theatrical lighting integration">Theatrical Lighting Integration</option><option value="unreal engine real-time pipeline">Unreal Engine Real-time Pipeline</option><option value="vr development pipeline">VR Development Pipeline</option><option value="video mapping systems">Video Mapping Systems</option><option value="virtual production cameras">Virtual Production Cameras</option><option value="winch-powered mirror arrays">Winch-powered Mirror Arrays</option><option value="xr camera tracking systems">XR Camera Tracking Systems</option>
+        </select>
+      </div>
+
+      <div class="vjs-filter-group">
+        <span class="vjs-filter-drop-label">Location</span>
+        <select class="vjs-filter-select" id="studio-loc-select" onchange="applyStudioFilters()">
+          <option value="all">All Locations</option>
           
-          <button class="vjs-filter-btn" data-stype="motion-design-&-projection-studio">Motion Design & Projection Studio</button>
-        
-      
-        
-        
           
-          <button class="vjs-filter-btn" data-stype="immersive-experience-studio">Immersive Experience Studio</button>
-        
-      
-        
-        
           
-          <button class="vjs-filter-btn" data-stype="multimedia-experience-studio">Multimedia Experience Studio</button>
-        
-      
-        
-        
-          
-          <button class="vjs-filter-btn" data-stype="immersive-exhibition-&-site-specific-installation-studio">Immersive Exhibition & Site-Specific Installation Studio</button>
-        
-      
-        
-        
-          
-          <button class="vjs-filter-btn" data-stype="generative-design-&-data-art-studio">Generative Design & Data Art Studio</button>
-        
-      
-        
-        
-          
-          <button class="vjs-filter-btn" data-stype="projection-mapping-studio">Projection Mapping Studio</button>
-        
-      
-        
-        
-          
-          <button class="vjs-filter-btn" data-stype="data-painting-&-neuro-design-lab">Data Painting & Neuro-Design Lab</button>
-        
-      
-        
-        
-          
-          <button class="vjs-filter-btn" data-stype="participatory-art-&-algorithmic-sociology-studio">Participatory Art & Algorithmic Sociology Studio</button>
-        
-      
-        
-        
-          
-          <button class="vjs-filter-btn" data-stype="machine-intelligence-art-lab">Machine Intelligence Art Lab</button>
-        
-      
-        
-        
-          
-          <button class="vjs-filter-btn" data-stype="festival-organisation-&-production">Festival Organisation & Production</button>
-        
-      
-        
-        
-          
-          <button class="vjs-filter-btn" data-stype="tech-art-research-lab">Tech-Art Research Lab</button>
-        
-      
-        
-        
-          
-          <button class="vjs-filter-btn" data-stype="arts-&-technology-collective">Arts & Technology Collective</button>
-        
-      
-        
-        
-          
-          <button class="vjs-filter-btn" data-stype="interactive-projection-studio">Interactive Projection Studio</button>
-        
-      
-        
-        
-          
-          <button class="vjs-filter-btn" data-stype="xr-&-live-concert-visual-production-studio">XR & Live Concert Visual Production Studio</button>
-        
-      
-        
-        
-          
-          <button class="vjs-filter-btn" data-stype="biological-algorithm-&-physical-pixel-studio">Biological Algorithm & Physical Pixel Studio</button>
-        
-      
-        
-        
-          
-          <button class="vjs-filter-btn" data-stype="architectural-projection-studio">Architectural Projection Studio</button>
-        
-      
-        
-        
-          
-          <button class="vjs-filter-btn" data-stype="scenographic-media-&-museum-installation-studio">Scenographic Media & Museum Installation Studio</button>
-        
-      
-        
-        
-      
-        
-        
-          
-          <button class="vjs-filter-btn" data-stype="immersive-installation-collective">Immersive Installation Collective</button>
-        
-      
-        
-        
-          
-          <button class="vjs-filter-btn" data-stype="luminous-art-&-architectural-media-studio">Luminous Art & Architectural Media Studio</button>
-        
-      
-        
-        
-          
-          <button class="vjs-filter-btn" data-stype="kinetic-light-art-studio">Kinetic Light Art Studio</button>
-        
-      
-        
-        
-          
-          <button class="vjs-filter-btn" data-stype="extended-reality-&-virtual-production-studio">Extended Reality & Virtual Production Studio</button>
-        
-      
-        
-        
-          
-          <button class="vjs-filter-btn" data-stype="kinetic-sound-sculpture-studio">Kinetic Sound Sculpture Studio</button>
-        
-      
+          <option value="amsterdam, netherlands">Amsterdam, Netherlands</option><option value="barcelona, spain">Barcelona, Spain</option><option value="bern, switzerland">Bern, Switzerland</option><option value="bremen, germany">Bremen, Germany</option><option value="europe (distributed)">Europe (Distributed)</option><option value="global">Global</option><option value="international">International</option><option value="istanbul, turkey">Istanbul, Turkey</option><option value="istanbul, turkey / global">Istanbul, Turkey / Global</option><option value="lille, france">Lille, France</option><option value="london, uk / berlin, germany">London, UK / Berlin, Germany</option><option value="london, uk / new york, usa">London, UK / New York, USA</option><option value="london, united kingdom">London, United Kingdom</option><option value="los angeles, usa">Los Angeles, USA</option><option value="madrid, spain">Madrid, Spain</option><option value="montréal, canada">Montréal, Canada</option><option value="montréal, canada / los angeles, usa">Montréal, Canada / Los Angeles, USA</option><option value="moscow, russia">Moscow, Russia</option><option value="nomadic (st. petersburg / los angeles)">Nomadic (St. Petersburg / Los Angeles)</option><option value="paris, france">Paris, France</option><option value="tokyo, japan">Tokyo, Japan</option>
+        </select>
+      </div>
+
+      <button class="vjs-filter-reset" onclick="resetStudioFilters()">Reset</button>
+
+    </div>
+
+    <div class="vjs-filter-count" id="studios-count">
+      <strong>29</strong> Studios
     </div>
 
     <div class="row g-4" id="studios-grid">
       
-      <div class="col-lg-4 col-md-6 vjs-studio-item" data-stype="dark-generative-geometry-studio">
+      
+      <div class="col-lg-4 col-md-6 vjs-studio-item"
+           data-stype="dark-generative-geometry-studio"
+           data-equipment="modular synthesiser arrays,custom touchdesigner patches,high-intensity strobe systems,architectural projection,math-driven generative systems"
+           data-location="nomadic (st. petersburg / los angeles)">
         <a href="/studios/404-zero" class="text-decoration-none" style="height:100%; display:block;">
           <div class="vjs-card" style="height:100%; transition: transform 0.2s ease, box-shadow 0.2s ease;">
             <div class="vjs-card-img-placeholder" style="background:linear-gradient(135deg, rgba(0,245,212,0.1) 0%, rgba(0,212,255,0.15) 100%); position:relative; overflow:hidden;">
@@ -468,11 +337,11 @@
               
               <div style="margin-top:0.75rem; display:flex; flex-wrap:wrap; gap:0.35rem;">
                 
-                <span style="font-size:0.65rem; background:rgba(0,245,212,0.06); border:1px solid rgba(0,245,212,0.15); border-radius:4px; padding:2px 7px; color:var(--vjs-text-muted);">Modular Synthesiser Arrays</span>
+                <span style="font-size:0.65rem; background:rgba(0,245,212,0.06); border:1px solid rgba(0,245,212,0.15); padding:2px 7px; color:var(--vjs-text-muted); border-radius:0 !important;">Modular Synthesiser Arrays</span>
                 
-                <span style="font-size:0.65rem; background:rgba(0,245,212,0.06); border:1px solid rgba(0,245,212,0.15); border-radius:4px; padding:2px 7px; color:var(--vjs-text-muted);">Custom TouchDesigner Patches</span>
+                <span style="font-size:0.65rem; background:rgba(0,245,212,0.06); border:1px solid rgba(0,245,212,0.15); padding:2px 7px; color:var(--vjs-text-muted); border-radius:0 !important;">Custom TouchDesigner Patches</span>
                 
-                <span style="font-size:0.65rem; background:rgba(0,245,212,0.06); border:1px solid rgba(0,245,212,0.15); border-radius:4px; padding:2px 7px; color:var(--vjs-text-muted);">High-intensity Strobe Systems</span>
+                <span style="font-size:0.65rem; background:rgba(0,245,212,0.06); border:1px solid rgba(0,245,212,0.15); padding:2px 7px; color:var(--vjs-text-muted); border-radius:0 !important;">High-intensity Strobe Systems</span>
                 
               </div>
               
@@ -481,7 +350,11 @@
         </a>
       </div>
       
-      <div class="col-lg-4 col-md-6 vjs-studio-item" data-stype="projection-design-&-live-experience-studio">
+      
+      <div class="col-lg-4 col-md-6 vjs-studio-item"
+           data-stype="projection-design-&-live-experience-studio"
+           data-equipment="high-lumen projection arrays,custom 3d mapping software,led and projection hybrid systems,theatrical lighting integration"
+           data-location="london, uk / new york, usa">
         <a href="/studios/59-productions" class="text-decoration-none" style="height:100%; display:block;">
           <div class="vjs-card" style="height:100%; transition: transform 0.2s ease, box-shadow 0.2s ease;">
             <div class="vjs-card-img-placeholder" style="background:linear-gradient(135deg, rgba(0,245,212,0.1) 0%, rgba(0,212,255,0.15) 100%); position:relative; overflow:hidden;">
@@ -502,11 +375,11 @@
               
               <div style="margin-top:0.75rem; display:flex; flex-wrap:wrap; gap:0.35rem;">
                 
-                <span style="font-size:0.65rem; background:rgba(0,245,212,0.06); border:1px solid rgba(0,245,212,0.15); border-radius:4px; padding:2px 7px; color:var(--vjs-text-muted);">High-Lumen Projection Arrays</span>
+                <span style="font-size:0.65rem; background:rgba(0,245,212,0.06); border:1px solid rgba(0,245,212,0.15); padding:2px 7px; color:var(--vjs-text-muted); border-radius:0 !important;">High-Lumen Projection Arrays</span>
                 
-                <span style="font-size:0.65rem; background:rgba(0,245,212,0.06); border:1px solid rgba(0,245,212,0.15); border-radius:4px; padding:2px 7px; color:var(--vjs-text-muted);">Custom 3D Mapping Software</span>
+                <span style="font-size:0.65rem; background:rgba(0,245,212,0.06); border:1px solid rgba(0,245,212,0.15); padding:2px 7px; color:var(--vjs-text-muted); border-radius:0 !important;">Custom 3D Mapping Software</span>
                 
-                <span style="font-size:0.65rem; background:rgba(0,245,212,0.06); border:1px solid rgba(0,245,212,0.15); border-radius:4px; padding:2px 7px; color:var(--vjs-text-muted);">LED and Projection Hybrid Systems</span>
+                <span style="font-size:0.65rem; background:rgba(0,245,212,0.06); border:1px solid rgba(0,245,212,0.15); padding:2px 7px; color:var(--vjs-text-muted); border-radius:0 !important;">LED and Projection Hybrid Systems</span>
                 
               </div>
               
@@ -515,7 +388,11 @@
         </a>
       </div>
       
-      <div class="col-lg-4 col-md-6 vjs-studio-item" data-stype="visual-label-/-av-collective">
+      
+      <div class="col-lg-4 col-md-6 vjs-studio-item"
+           data-stype="visual-label-/-av-collective"
+           data-equipment="architectural projection systems,custom mapping software,generative visuals pipeline"
+           data-location="europe (distributed)">
         <a href="/studios/antivj" class="text-decoration-none" style="height:100%; display:block;">
           <div class="vjs-card" style="height:100%; transition: transform 0.2s ease, box-shadow 0.2s ease;">
             <div class="vjs-card-img-placeholder" style="background:linear-gradient(135deg, rgba(0,245,212,0.1) 0%, rgba(0,212,255,0.15) 100%); position:relative; overflow:hidden;">
@@ -536,11 +413,11 @@
               
               <div style="margin-top:0.75rem; display:flex; flex-wrap:wrap; gap:0.35rem;">
                 
-                <span style="font-size:0.65rem; background:rgba(0,245,212,0.06); border:1px solid rgba(0,245,212,0.15); border-radius:4px; padding:2px 7px; color:var(--vjs-text-muted);">Architectural Projection Systems</span>
+                <span style="font-size:0.65rem; background:rgba(0,245,212,0.06); border:1px solid rgba(0,245,212,0.15); padding:2px 7px; color:var(--vjs-text-muted); border-radius:0 !important;">Architectural Projection Systems</span>
                 
-                <span style="font-size:0.65rem; background:rgba(0,245,212,0.06); border:1px solid rgba(0,245,212,0.15); border-radius:4px; padding:2px 7px; color:var(--vjs-text-muted);">Custom Mapping Software</span>
+                <span style="font-size:0.65rem; background:rgba(0,245,212,0.06); border:1px solid rgba(0,245,212,0.15); padding:2px 7px; color:var(--vjs-text-muted); border-radius:0 !important;">Custom Mapping Software</span>
                 
-                <span style="font-size:0.65rem; background:rgba(0,245,212,0.06); border:1px solid rgba(0,245,212,0.15); border-radius:4px; padding:2px 7px; color:var(--vjs-text-muted);">Generative Visuals Pipeline</span>
+                <span style="font-size:0.65rem; background:rgba(0,245,212,0.06); border:1px solid rgba(0,245,212,0.15); padding:2px 7px; color:var(--vjs-text-muted); border-radius:0 !important;">Generative Visuals Pipeline</span>
                 
               </div>
               
@@ -549,7 +426,11 @@
         </a>
       </div>
       
-      <div class="col-lg-4 col-md-6 vjs-studio-item" data-stype="audiovisual-collective">
+      
+      <div class="col-lg-4 col-md-6 vjs-studio-item"
+           data-stype="audiovisual-collective"
+           data-equipment="live cinema systems,real-time video processing,found footage archive,custom software,multichannel audio"
+           data-location="london, united kingdom">
         <a href="/studios/d-fuse" class="text-decoration-none" style="height:100%; display:block;">
           <div class="vjs-card" style="height:100%; transition: transform 0.2s ease, box-shadow 0.2s ease;">
             <div class="vjs-card-img-placeholder" style="background:linear-gradient(135deg, rgba(0,245,212,0.1) 0%, rgba(0,212,255,0.15) 100%); position:relative; overflow:hidden;">
@@ -570,11 +451,11 @@
               
               <div style="margin-top:0.75rem; display:flex; flex-wrap:wrap; gap:0.35rem;">
                 
-                <span style="font-size:0.65rem; background:rgba(0,245,212,0.06); border:1px solid rgba(0,245,212,0.15); border-radius:4px; padding:2px 7px; color:var(--vjs-text-muted);">Live Cinema Systems</span>
+                <span style="font-size:0.65rem; background:rgba(0,245,212,0.06); border:1px solid rgba(0,245,212,0.15); padding:2px 7px; color:var(--vjs-text-muted); border-radius:0 !important;">Live Cinema Systems</span>
                 
-                <span style="font-size:0.65rem; background:rgba(0,245,212,0.06); border:1px solid rgba(0,245,212,0.15); border-radius:4px; padding:2px 7px; color:var(--vjs-text-muted);">Real-time Video Processing</span>
+                <span style="font-size:0.65rem; background:rgba(0,245,212,0.06); border:1px solid rgba(0,245,212,0.15); padding:2px 7px; color:var(--vjs-text-muted); border-radius:0 !important;">Real-time Video Processing</span>
                 
-                <span style="font-size:0.65rem; background:rgba(0,245,212,0.06); border:1px solid rgba(0,245,212,0.15); border-radius:4px; padding:2px 7px; color:var(--vjs-text-muted);">Found Footage Archive</span>
+                <span style="font-size:0.65rem; background:rgba(0,245,212,0.06); border:1px solid rgba(0,245,212,0.15); padding:2px 7px; color:var(--vjs-text-muted); border-radius:0 !important;">Found Footage Archive</span>
                 
               </div>
               
@@ -583,7 +464,11 @@
         </a>
       </div>
       
-      <div class="col-lg-4 col-md-6 vjs-studio-item" data-stype="system-aesthetics-&-speculative-design-studio">
+      
+      <div class="col-lg-4 col-md-6 vjs-studio-item"
+           data-stype="system-aesthetics-&-speculative-design-studio"
+           data-equipment="custom generative systems,algorithmic animation pipelines,real-time rendering infrastructure,research collaboration networks"
+           data-location="london, uk / berlin, germany">
         <a href="/studios/field-io" class="text-decoration-none" style="height:100%; display:block;">
           <div class="vjs-card" style="height:100%; transition: transform 0.2s ease, box-shadow 0.2s ease;">
             <div class="vjs-card-img-placeholder" style="background:linear-gradient(135deg, rgba(0,245,212,0.1) 0%, rgba(0,212,255,0.15) 100%); position:relative; overflow:hidden;">
@@ -604,11 +489,11 @@
               
               <div style="margin-top:0.75rem; display:flex; flex-wrap:wrap; gap:0.35rem;">
                 
-                <span style="font-size:0.65rem; background:rgba(0,245,212,0.06); border:1px solid rgba(0,245,212,0.15); border-radius:4px; padding:2px 7px; color:var(--vjs-text-muted);">Custom Generative Systems</span>
+                <span style="font-size:0.65rem; background:rgba(0,245,212,0.06); border:1px solid rgba(0,245,212,0.15); padding:2px 7px; color:var(--vjs-text-muted); border-radius:0 !important;">Custom Generative Systems</span>
                 
-                <span style="font-size:0.65rem; background:rgba(0,245,212,0.06); border:1px solid rgba(0,245,212,0.15); border-radius:4px; padding:2px 7px; color:var(--vjs-text-muted);">Algorithmic Animation Pipelines</span>
+                <span style="font-size:0.65rem; background:rgba(0,245,212,0.06); border:1px solid rgba(0,245,212,0.15); padding:2px 7px; color:var(--vjs-text-muted); border-radius:0 !important;">Algorithmic Animation Pipelines</span>
                 
-                <span style="font-size:0.65rem; background:rgba(0,245,212,0.06); border:1px solid rgba(0,245,212,0.15); border-radius:4px; padding:2px 7px; color:var(--vjs-text-muted);">Real-time Rendering Infrastructure</span>
+                <span style="font-size:0.65rem; background:rgba(0,245,212,0.06); border:1px solid rgba(0,245,212,0.15); padding:2px 7px; color:var(--vjs-text-muted); border-radius:0 !important;">Real-time Rendering Infrastructure</span>
                 
               </div>
               
@@ -617,7 +502,11 @@
         </a>
       </div>
       
-      <div class="col-lg-4 col-md-6 vjs-studio-item" data-stype="immersive-dome-infrastructure-&-production-lab">
+      
+      <div class="col-lg-4 col-md-6 vjs-studio-item"
+           data-stype="immersive-dome-infrastructure-&-production-lab"
+           data-equipment="portable and permanent dome structures,360-degree projection arrays,custom dome media servers,fisheye lens systems,dome content mastering tools"
+           data-location="global">
         <a href="/studios/fulldome-pro" class="text-decoration-none" style="height:100%; display:block;">
           <div class="vjs-card" style="height:100%; transition: transform 0.2s ease, box-shadow 0.2s ease;">
             <div class="vjs-card-img-placeholder" style="background:linear-gradient(135deg, rgba(0,245,212,0.1) 0%, rgba(0,212,255,0.15) 100%); position:relative; overflow:hidden;">
@@ -638,11 +527,11 @@
               
               <div style="margin-top:0.75rem; display:flex; flex-wrap:wrap; gap:0.35rem;">
                 
-                <span style="font-size:0.65rem; background:rgba(0,245,212,0.06); border:1px solid rgba(0,245,212,0.15); border-radius:4px; padding:2px 7px; color:var(--vjs-text-muted);">Portable and Permanent Dome Structures</span>
+                <span style="font-size:0.65rem; background:rgba(0,245,212,0.06); border:1px solid rgba(0,245,212,0.15); padding:2px 7px; color:var(--vjs-text-muted); border-radius:0 !important;">Portable and Permanent Dome Structures</span>
                 
-                <span style="font-size:0.65rem; background:rgba(0,245,212,0.06); border:1px solid rgba(0,245,212,0.15); border-radius:4px; padding:2px 7px; color:var(--vjs-text-muted);">360-degree Projection Arrays</span>
+                <span style="font-size:0.65rem; background:rgba(0,245,212,0.06); border:1px solid rgba(0,245,212,0.15); padding:2px 7px; color:var(--vjs-text-muted); border-radius:0 !important;">360-degree Projection Arrays</span>
                 
-                <span style="font-size:0.65rem; background:rgba(0,245,212,0.06); border:1px solid rgba(0,245,212,0.15); border-radius:4px; padding:2px 7px; color:var(--vjs-text-muted);">Custom Dome Media Servers</span>
+                <span style="font-size:0.65rem; background:rgba(0,245,212,0.06); border:1px solid rgba(0,245,212,0.15); padding:2px 7px; color:var(--vjs-text-muted); border-radius:0 !important;">Custom Dome Media Servers</span>
                 
               </div>
               
@@ -651,7 +540,11 @@
         </a>
       </div>
       
-      <div class="col-lg-4 col-md-6 vjs-studio-item" data-stype="motion-design-&-projection-studio">
+      
+      <div class="col-lg-4 col-md-6 vjs-studio-item"
+           data-stype="motion-design-&-projection-studio"
+           data-equipment="motion graphics pipeline,architectural projection,live performance visuals,3d animation,real-time rendering"
+           data-location="madrid, spain">
         <a href="/studios/geometrica-studio" class="text-decoration-none" style="height:100%; display:block;">
           <div class="vjs-card" style="height:100%; transition: transform 0.2s ease, box-shadow 0.2s ease;">
             <div class="vjs-card-img-placeholder" style="background:linear-gradient(135deg, rgba(0,245,212,0.1) 0%, rgba(0,212,255,0.15) 100%); position:relative; overflow:hidden;">
@@ -672,11 +565,11 @@
               
               <div style="margin-top:0.75rem; display:flex; flex-wrap:wrap; gap:0.35rem;">
                 
-                <span style="font-size:0.65rem; background:rgba(0,245,212,0.06); border:1px solid rgba(0,245,212,0.15); border-radius:4px; padding:2px 7px; color:var(--vjs-text-muted);">Motion Graphics Pipeline</span>
+                <span style="font-size:0.65rem; background:rgba(0,245,212,0.06); border:1px solid rgba(0,245,212,0.15); padding:2px 7px; color:var(--vjs-text-muted); border-radius:0 !important;">Motion Graphics Pipeline</span>
                 
-                <span style="font-size:0.65rem; background:rgba(0,245,212,0.06); border:1px solid rgba(0,245,212,0.15); border-radius:4px; padding:2px 7px; color:var(--vjs-text-muted);">Architectural Projection</span>
+                <span style="font-size:0.65rem; background:rgba(0,245,212,0.06); border:1px solid rgba(0,245,212,0.15); padding:2px 7px; color:var(--vjs-text-muted); border-radius:0 !important;">Architectural Projection</span>
                 
-                <span style="font-size:0.65rem; background:rgba(0,245,212,0.06); border:1px solid rgba(0,245,212,0.15); border-radius:4px; padding:2px 7px; color:var(--vjs-text-muted);">Live Performance Visuals</span>
+                <span style="font-size:0.65rem; background:rgba(0,245,212,0.06); border:1px solid rgba(0,245,212,0.15); padding:2px 7px; color:var(--vjs-text-muted); border-radius:0 !important;">Live Performance Visuals</span>
                 
               </div>
               
@@ -685,7 +578,11 @@
         </a>
       </div>
       
-      <div class="col-lg-4 col-md-6 vjs-studio-item" data-stype="immersive-experience-studio">
+      
+      <div class="col-lg-4 col-md-6 vjs-studio-item"
+           data-stype="immersive-experience-studio"
+           data-equipment="lidar scanning systems,vr development pipeline,spatial audio rigs,custom point cloud processing,multi-sensory environmental systems"
+           data-location="london, uk">
         <a href="/studios/marshmallow-laser-feast" class="text-decoration-none" style="height:100%; display:block;">
           <div class="vjs-card" style="height:100%; transition: transform 0.2s ease, box-shadow 0.2s ease;">
             <div class="vjs-card-img-placeholder" style="background:linear-gradient(135deg, rgba(0,245,212,0.1) 0%, rgba(0,212,255,0.15) 100%); position:relative; overflow:hidden;">
@@ -706,11 +603,11 @@
               
               <div style="margin-top:0.75rem; display:flex; flex-wrap:wrap; gap:0.35rem;">
                 
-                <span style="font-size:0.65rem; background:rgba(0,245,212,0.06); border:1px solid rgba(0,245,212,0.15); border-radius:4px; padding:2px 7px; color:var(--vjs-text-muted);">LiDAR Scanning Systems</span>
+                <span style="font-size:0.65rem; background:rgba(0,245,212,0.06); border:1px solid rgba(0,245,212,0.15); padding:2px 7px; color:var(--vjs-text-muted); border-radius:0 !important;">LiDAR Scanning Systems</span>
                 
-                <span style="font-size:0.65rem; background:rgba(0,245,212,0.06); border:1px solid rgba(0,245,212,0.15); border-radius:4px; padding:2px 7px; color:var(--vjs-text-muted);">VR Development Pipeline</span>
+                <span style="font-size:0.65rem; background:rgba(0,245,212,0.06); border:1px solid rgba(0,245,212,0.15); padding:2px 7px; color:var(--vjs-text-muted); border-radius:0 !important;">VR Development Pipeline</span>
                 
-                <span style="font-size:0.65rem; background:rgba(0,245,212,0.06); border:1px solid rgba(0,245,212,0.15); border-radius:4px; padding:2px 7px; color:var(--vjs-text-muted);">Spatial Audio Rigs</span>
+                <span style="font-size:0.65rem; background:rgba(0,245,212,0.06); border:1px solid rgba(0,245,212,0.15); padding:2px 7px; color:var(--vjs-text-muted); border-radius:0 !important;">Spatial Audio Rigs</span>
                 
               </div>
               
@@ -719,7 +616,11 @@
         </a>
       </div>
       
-      <div class="col-lg-4 col-md-6 vjs-studio-item" data-stype="multimedia-experience-studio">
+      
+      <div class="col-lg-4 col-md-6 vjs-studio-item"
+           data-stype="multimedia-experience-studio"
+           data-equipment="full-scale black box studios,1:1 stage replica test environments,custom media server clusters,multi-projector arrays,spatial audio systems"
+           data-location="montréal, canada">
         <a href="/studios/moment-factory" class="text-decoration-none" style="height:100%; display:block;">
           <div class="vjs-card" style="height:100%; transition: transform 0.2s ease, box-shadow 0.2s ease;">
             <div class="vjs-card-img-placeholder" style="background:linear-gradient(135deg, rgba(0,245,212,0.1) 0%, rgba(0,212,255,0.15) 100%); position:relative; overflow:hidden;">
@@ -740,11 +641,11 @@
               
               <div style="margin-top:0.75rem; display:flex; flex-wrap:wrap; gap:0.35rem;">
                 
-                <span style="font-size:0.65rem; background:rgba(0,245,212,0.06); border:1px solid rgba(0,245,212,0.15); border-radius:4px; padding:2px 7px; color:var(--vjs-text-muted);">Full-Scale Black Box Studios</span>
+                <span style="font-size:0.65rem; background:rgba(0,245,212,0.06); border:1px solid rgba(0,245,212,0.15); padding:2px 7px; color:var(--vjs-text-muted); border-radius:0 !important;">Full-Scale Black Box Studios</span>
                 
-                <span style="font-size:0.65rem; background:rgba(0,245,212,0.06); border:1px solid rgba(0,245,212,0.15); border-radius:4px; padding:2px 7px; color:var(--vjs-text-muted);">1:1 Stage Replica Test Environments</span>
+                <span style="font-size:0.65rem; background:rgba(0,245,212,0.06); border:1px solid rgba(0,245,212,0.15); padding:2px 7px; color:var(--vjs-text-muted); border-radius:0 !important;">1:1 Stage Replica Test Environments</span>
                 
-                <span style="font-size:0.65rem; background:rgba(0,245,212,0.06); border:1px solid rgba(0,245,212,0.15); border-radius:4px; padding:2px 7px; color:var(--vjs-text-muted);">Custom Media Server Clusters</span>
+                <span style="font-size:0.65rem; background:rgba(0,245,212,0.06); border:1px solid rgba(0,245,212,0.15); padding:2px 7px; color:var(--vjs-text-muted); border-radius:0 !important;">Custom Media Server Clusters</span>
                 
               </div>
               
@@ -753,7 +654,11 @@
         </a>
       </div>
       
-      <div class="col-lg-4 col-md-6 vjs-studio-item" data-stype="immersive-exhibition-&-site-specific-installation-studio">
+      
+      <div class="col-lg-4 col-md-6 vjs-studio-item"
+           data-stype="immersive-exhibition-&-site-specific-installation-studio"
+           data-equipment="architectural projection mapping systems,immersive dome infrastructure,custom generative content pipeline,multi-channel audio systems"
+           data-location="istanbul, turkey">
         <a href="/studios/nohlab" class="text-decoration-none" style="height:100%; display:block;">
           <div class="vjs-card" style="height:100%; transition: transform 0.2s ease, box-shadow 0.2s ease;">
             <div class="vjs-card-img-placeholder" style="background:linear-gradient(135deg, rgba(0,245,212,0.1) 0%, rgba(0,212,255,0.15) 100%); position:relative; overflow:hidden;">
@@ -774,11 +679,11 @@
               
               <div style="margin-top:0.75rem; display:flex; flex-wrap:wrap; gap:0.35rem;">
                 
-                <span style="font-size:0.65rem; background:rgba(0,245,212,0.06); border:1px solid rgba(0,245,212,0.15); border-radius:4px; padding:2px 7px; color:var(--vjs-text-muted);">Architectural Projection Mapping Systems</span>
+                <span style="font-size:0.65rem; background:rgba(0,245,212,0.06); border:1px solid rgba(0,245,212,0.15); padding:2px 7px; color:var(--vjs-text-muted); border-radius:0 !important;">Architectural Projection Mapping Systems</span>
                 
-                <span style="font-size:0.65rem; background:rgba(0,245,212,0.06); border:1px solid rgba(0,245,212,0.15); border-radius:4px; padding:2px 7px; color:var(--vjs-text-muted);">Immersive Dome Infrastructure</span>
+                <span style="font-size:0.65rem; background:rgba(0,245,212,0.06); border:1px solid rgba(0,245,212,0.15); padding:2px 7px; color:var(--vjs-text-muted); border-radius:0 !important;">Immersive Dome Infrastructure</span>
                 
-                <span style="font-size:0.65rem; background:rgba(0,245,212,0.06); border:1px solid rgba(0,245,212,0.15); border-radius:4px; padding:2px 7px; color:var(--vjs-text-muted);">Custom Generative Content Pipeline</span>
+                <span style="font-size:0.65rem; background:rgba(0,245,212,0.06); border:1px solid rgba(0,245,212,0.15); padding:2px 7px; color:var(--vjs-text-muted); border-radius:0 !important;">Custom Generative Content Pipeline</span>
                 
               </div>
               
@@ -787,7 +692,11 @@
         </a>
       </div>
       
-      <div class="col-lg-4 col-md-6 vjs-studio-item" data-stype="generative-design-&-data-art-studio">
+      
+      <div class="col-lg-4 col-md-6 vjs-studio-item"
+           data-stype="generative-design-&-data-art-studio"
+           data-equipment="custom generative code pipeline,data visualisation frameworks,large-format output systems,algorithmic animation tools"
+           data-location="berlin, germany">
         <a href="/studios/onformative" class="text-decoration-none" style="height:100%; display:block;">
           <div class="vjs-card" style="height:100%; transition: transform 0.2s ease, box-shadow 0.2s ease;">
             <div class="vjs-card-img-placeholder" style="background:linear-gradient(135deg, rgba(0,245,212,0.1) 0%, rgba(0,212,255,0.15) 100%); position:relative; overflow:hidden;">
@@ -808,11 +717,11 @@
               
               <div style="margin-top:0.75rem; display:flex; flex-wrap:wrap; gap:0.35rem;">
                 
-                <span style="font-size:0.65rem; background:rgba(0,245,212,0.06); border:1px solid rgba(0,245,212,0.15); border-radius:4px; padding:2px 7px; color:var(--vjs-text-muted);">Custom Generative Code Pipeline</span>
+                <span style="font-size:0.65rem; background:rgba(0,245,212,0.06); border:1px solid rgba(0,245,212,0.15); padding:2px 7px; color:var(--vjs-text-muted); border-radius:0 !important;">Custom Generative Code Pipeline</span>
                 
-                <span style="font-size:0.65rem; background:rgba(0,245,212,0.06); border:1px solid rgba(0,245,212,0.15); border-radius:4px; padding:2px 7px; color:var(--vjs-text-muted);">Data Visualisation Frameworks</span>
+                <span style="font-size:0.65rem; background:rgba(0,245,212,0.06); border:1px solid rgba(0,245,212,0.15); padding:2px 7px; color:var(--vjs-text-muted); border-radius:0 !important;">Data Visualisation Frameworks</span>
                 
-                <span style="font-size:0.65rem; background:rgba(0,245,212,0.06); border:1px solid rgba(0,245,212,0.15); border-radius:4px; padding:2px 7px; color:var(--vjs-text-muted);">Large-Format Output Systems</span>
+                <span style="font-size:0.65rem; background:rgba(0,245,212,0.06); border:1px solid rgba(0,245,212,0.15); padding:2px 7px; color:var(--vjs-text-muted); border-radius:0 !important;">Large-Format Output Systems</span>
                 
               </div>
               
@@ -821,7 +730,11 @@
         </a>
       </div>
       
-      <div class="col-lg-4 col-md-6 vjs-studio-item" data-stype="projection-mapping-studio">
+      
+      <div class="col-lg-4 col-md-6 vjs-studio-item"
+           data-stype="projection-mapping-studio"
+           data-equipment="projection mapping systems,multi-projector arrays,3d content design,interactive rigs,architectural rigging"
+           data-location="barcelona, spain">
         <a href="/studios/onionlab" class="text-decoration-none" style="height:100%; display:block;">
           <div class="vjs-card" style="height:100%; transition: transform 0.2s ease, box-shadow 0.2s ease;">
             <div class="vjs-card-img-placeholder" style="background:linear-gradient(135deg, rgba(0,245,212,0.1) 0%, rgba(0,212,255,0.15) 100%); position:relative; overflow:hidden;">
@@ -842,11 +755,11 @@
               
               <div style="margin-top:0.75rem; display:flex; flex-wrap:wrap; gap:0.35rem;">
                 
-                <span style="font-size:0.65rem; background:rgba(0,245,212,0.06); border:1px solid rgba(0,245,212,0.15); border-radius:4px; padding:2px 7px; color:var(--vjs-text-muted);">Projection Mapping Systems</span>
+                <span style="font-size:0.65rem; background:rgba(0,245,212,0.06); border:1px solid rgba(0,245,212,0.15); padding:2px 7px; color:var(--vjs-text-muted); border-radius:0 !important;">Projection Mapping Systems</span>
                 
-                <span style="font-size:0.65rem; background:rgba(0,245,212,0.06); border:1px solid rgba(0,245,212,0.15); border-radius:4px; padding:2px 7px; color:var(--vjs-text-muted);">Multi-projector Arrays</span>
+                <span style="font-size:0.65rem; background:rgba(0,245,212,0.06); border:1px solid rgba(0,245,212,0.15); padding:2px 7px; color:var(--vjs-text-muted); border-radius:0 !important;">Multi-projector Arrays</span>
                 
-                <span style="font-size:0.65rem; background:rgba(0,245,212,0.06); border:1px solid rgba(0,245,212,0.15); border-radius:4px; padding:2px 7px; color:var(--vjs-text-muted);">3D Content Design</span>
+                <span style="font-size:0.65rem; background:rgba(0,245,212,0.06); border:1px solid rgba(0,245,212,0.15); padding:2px 7px; color:var(--vjs-text-muted); border-radius:0 !important;">3D Content Design</span>
                 
               </div>
               
@@ -855,7 +768,11 @@
         </a>
       </div>
       
-      <div class="col-lg-4 col-md-6 vjs-studio-item" data-stype="data-painting-&-neuro-design-lab">
+      
+      <div class="col-lg-4 col-md-6 vjs-studio-item"
+           data-stype="data-painting-&-neuro-design-lab"
+           data-equipment="eeg headset integration systems,gpu generative render farms,large-scale projection arrays,real-time data api pipelines,nasa / scientific dataset archives"
+           data-location="istanbul, turkey / global">
         <a href="/studios/ouchhh" class="text-decoration-none" style="height:100%; display:block;">
           <div class="vjs-card" style="height:100%; transition: transform 0.2s ease, box-shadow 0.2s ease;">
             <div class="vjs-card-img-placeholder" style="background:linear-gradient(135deg, rgba(0,245,212,0.1) 0%, rgba(0,212,255,0.15) 100%); position:relative; overflow:hidden;">
@@ -876,11 +793,11 @@
               
               <div style="margin-top:0.75rem; display:flex; flex-wrap:wrap; gap:0.35rem;">
                 
-                <span style="font-size:0.65rem; background:rgba(0,245,212,0.06); border:1px solid rgba(0,245,212,0.15); border-radius:4px; padding:2px 7px; color:var(--vjs-text-muted);">EEG Headset Integration Systems</span>
+                <span style="font-size:0.65rem; background:rgba(0,245,212,0.06); border:1px solid rgba(0,245,212,0.15); padding:2px 7px; color:var(--vjs-text-muted); border-radius:0 !important;">EEG Headset Integration Systems</span>
                 
-                <span style="font-size:0.65rem; background:rgba(0,245,212,0.06); border:1px solid rgba(0,245,212,0.15); border-radius:4px; padding:2px 7px; color:var(--vjs-text-muted);">GPU Generative Render Farms</span>
+                <span style="font-size:0.65rem; background:rgba(0,245,212,0.06); border:1px solid rgba(0,245,212,0.15); padding:2px 7px; color:var(--vjs-text-muted); border-radius:0 !important;">GPU Generative Render Farms</span>
                 
-                <span style="font-size:0.65rem; background:rgba(0,245,212,0.06); border:1px solid rgba(0,245,212,0.15); border-radius:4px; padding:2px 7px; color:var(--vjs-text-muted);">Large-Scale Projection Arrays</span>
+                <span style="font-size:0.65rem; background:rgba(0,245,212,0.06); border:1px solid rgba(0,245,212,0.15); padding:2px 7px; color:var(--vjs-text-muted); border-radius:0 !important;">Large-Scale Projection Arrays</span>
                 
               </div>
               
@@ -889,7 +806,11 @@
         </a>
       </div>
       
-      <div class="col-lg-4 col-md-6 vjs-studio-item" data-stype="participatory-art-&-algorithmic-sociology-studio">
+      
+      <div class="col-lg-4 col-md-6 vjs-studio-item"
+           data-stype="participatory-art-&-algorithmic-sociology-studio"
+           data-equipment="computer vision camera arrays,ai motion tracking systems,large-format led displays,real-time crowd analysis software,environmental sensor networks"
+           data-location="london, uk / berlin, germany">
         <a href="/studios/random-international" class="text-decoration-none" style="height:100%; display:block;">
           <div class="vjs-card" style="height:100%; transition: transform 0.2s ease, box-shadow 0.2s ease;">
             <div class="vjs-card-img-placeholder" style="background:linear-gradient(135deg, rgba(0,245,212,0.1) 0%, rgba(0,212,255,0.15) 100%); position:relative; overflow:hidden;">
@@ -910,11 +831,11 @@
               
               <div style="margin-top:0.75rem; display:flex; flex-wrap:wrap; gap:0.35rem;">
                 
-                <span style="font-size:0.65rem; background:rgba(0,245,212,0.06); border:1px solid rgba(0,245,212,0.15); border-radius:4px; padding:2px 7px; color:var(--vjs-text-muted);">Computer Vision Camera Arrays</span>
+                <span style="font-size:0.65rem; background:rgba(0,245,212,0.06); border:1px solid rgba(0,245,212,0.15); padding:2px 7px; color:var(--vjs-text-muted); border-radius:0 !important;">Computer Vision Camera Arrays</span>
                 
-                <span style="font-size:0.65rem; background:rgba(0,245,212,0.06); border:1px solid rgba(0,245,212,0.15); border-radius:4px; padding:2px 7px; color:var(--vjs-text-muted);">AI Motion Tracking Systems</span>
+                <span style="font-size:0.65rem; background:rgba(0,245,212,0.06); border:1px solid rgba(0,245,212,0.15); padding:2px 7px; color:var(--vjs-text-muted); border-radius:0 !important;">AI Motion Tracking Systems</span>
                 
-                <span style="font-size:0.65rem; background:rgba(0,245,212,0.06); border:1px solid rgba(0,245,212,0.15); border-radius:4px; padding:2px 7px; color:var(--vjs-text-muted);">Large-format LED Displays</span>
+                <span style="font-size:0.65rem; background:rgba(0,245,212,0.06); border:1px solid rgba(0,245,212,0.15); padding:2px 7px; color:var(--vjs-text-muted); border-radius:0 !important;">Large-format LED Displays</span>
                 
               </div>
               
@@ -923,7 +844,11 @@
         </a>
       </div>
       
-      <div class="col-lg-4 col-md-6 vjs-studio-item" data-stype="machine-intelligence-art-lab">
+      
+      <div class="col-lg-4 col-md-6 vjs-studio-item"
+           data-stype="machine-intelligence-art-lab"
+           data-equipment="gpu render farm clusters,large-scale led and projection walls,custom machine learning pipelines,environmental sensor arrays"
+           data-location="los angeles, usa">
         <a href="/studios/refik-anadol-studio" class="text-decoration-none" style="height:100%; display:block;">
           <div class="vjs-card" style="height:100%; transition: transform 0.2s ease, box-shadow 0.2s ease;">
             <div class="vjs-card-img-placeholder" style="background:linear-gradient(135deg, rgba(0,245,212,0.1) 0%, rgba(0,212,255,0.15) 100%); position:relative; overflow:hidden;">
@@ -944,11 +869,11 @@
               
               <div style="margin-top:0.75rem; display:flex; flex-wrap:wrap; gap:0.35rem;">
                 
-                <span style="font-size:0.65rem; background:rgba(0,245,212,0.06); border:1px solid rgba(0,245,212,0.15); border-radius:4px; padding:2px 7px; color:var(--vjs-text-muted);">GPU Render Farm Clusters</span>
+                <span style="font-size:0.65rem; background:rgba(0,245,212,0.06); border:1px solid rgba(0,245,212,0.15); padding:2px 7px; color:var(--vjs-text-muted); border-radius:0 !important;">GPU Render Farm Clusters</span>
                 
-                <span style="font-size:0.65rem; background:rgba(0,245,212,0.06); border:1px solid rgba(0,245,212,0.15); border-radius:4px; padding:2px 7px; color:var(--vjs-text-muted);">Large-Scale LED and Projection Walls</span>
+                <span style="font-size:0.65rem; background:rgba(0,245,212,0.06); border:1px solid rgba(0,245,212,0.15); padding:2px 7px; color:var(--vjs-text-muted); border-radius:0 !important;">Large-Scale LED and Projection Walls</span>
                 
-                <span style="font-size:0.65rem; background:rgba(0,245,212,0.06); border:1px solid rgba(0,245,212,0.15); border-radius:4px; padding:2px 7px; color:var(--vjs-text-muted);">Custom Machine Learning Pipelines</span>
+                <span style="font-size:0.65rem; background:rgba(0,245,212,0.06); border:1px solid rgba(0,245,212,0.15); padding:2px 7px; color:var(--vjs-text-muted); border-radius:0 !important;">Custom Machine Learning Pipelines</span>
                 
               </div>
               
@@ -957,7 +882,11 @@
         </a>
       </div>
       
-      <div class="col-lg-4 col-md-6 vjs-studio-item" data-stype="festival-organisation-&-production">
+      
+      <div class="col-lg-4 col-md-6 vjs-studio-item"
+           data-stype="festival-organisation-&-production"
+           data-equipment="architectural projection systems,multi-projector arrays,festival production infrastructure,3d content pipeline"
+           data-location="lille, france">
         <a href="/studios/rencontres-audiovisuelles" class="text-decoration-none" style="height:100%; display:block;">
           <div class="vjs-card" style="height:100%; transition: transform 0.2s ease, box-shadow 0.2s ease;">
             <div class="vjs-card-img-placeholder" style="background:linear-gradient(135deg, rgba(0,245,212,0.1) 0%, rgba(0,212,255,0.15) 100%); position:relative; overflow:hidden;">
@@ -978,11 +907,11 @@
               
               <div style="margin-top:0.75rem; display:flex; flex-wrap:wrap; gap:0.35rem;">
                 
-                <span style="font-size:0.65rem; background:rgba(0,245,212,0.06); border:1px solid rgba(0,245,212,0.15); border-radius:4px; padding:2px 7px; color:var(--vjs-text-muted);">Architectural Projection Systems</span>
+                <span style="font-size:0.65rem; background:rgba(0,245,212,0.06); border:1px solid rgba(0,245,212,0.15); padding:2px 7px; color:var(--vjs-text-muted); border-radius:0 !important;">Architectural Projection Systems</span>
                 
-                <span style="font-size:0.65rem; background:rgba(0,245,212,0.06); border:1px solid rgba(0,245,212,0.15); border-radius:4px; padding:2px 7px; color:var(--vjs-text-muted);">Multi-projector Arrays</span>
+                <span style="font-size:0.65rem; background:rgba(0,245,212,0.06); border:1px solid rgba(0,245,212,0.15); padding:2px 7px; color:var(--vjs-text-muted); border-radius:0 !important;">Multi-projector Arrays</span>
                 
-                <span style="font-size:0.65rem; background:rgba(0,245,212,0.06); border:1px solid rgba(0,245,212,0.15); border-radius:4px; padding:2px 7px; color:var(--vjs-text-muted);">Festival Production Infrastructure</span>
+                <span style="font-size:0.65rem; background:rgba(0,245,212,0.06); border:1px solid rgba(0,245,212,0.15); padding:2px 7px; color:var(--vjs-text-muted); border-radius:0 !important;">Festival Production Infrastructure</span>
                 
               </div>
               
@@ -991,7 +920,11 @@
         </a>
       </div>
       
-      <div class="col-lg-4 col-md-6 vjs-studio-item" data-stype="tech-art-research-lab">
+      
+      <div class="col-lg-4 col-md-6 vjs-studio-item"
+           data-stype="tech-art-research-lab"
+           data-equipment="high-speed motion capture systems,custom drone fleet (licensed indoor),real-time brainwave / eeg integration,5g low-latency av pipeline,robotic control systems"
+           data-location="tokyo, japan">
         <a href="/studios/rhizomatiks" class="text-decoration-none" style="height:100%; display:block;">
           <div class="vjs-card" style="height:100%; transition: transform 0.2s ease, box-shadow 0.2s ease;">
             <div class="vjs-card-img-placeholder" style="background:linear-gradient(135deg, rgba(0,245,212,0.1) 0%, rgba(0,212,255,0.15) 100%); position:relative; overflow:hidden;">
@@ -1012,11 +945,11 @@
               
               <div style="margin-top:0.75rem; display:flex; flex-wrap:wrap; gap:0.35rem;">
                 
-                <span style="font-size:0.65rem; background:rgba(0,245,212,0.06); border:1px solid rgba(0,245,212,0.15); border-radius:4px; padding:2px 7px; color:var(--vjs-text-muted);">High-Speed Motion Capture Systems</span>
+                <span style="font-size:0.65rem; background:rgba(0,245,212,0.06); border:1px solid rgba(0,245,212,0.15); padding:2px 7px; color:var(--vjs-text-muted); border-radius:0 !important;">High-Speed Motion Capture Systems</span>
                 
-                <span style="font-size:0.65rem; background:rgba(0,245,212,0.06); border:1px solid rgba(0,245,212,0.15); border-radius:4px; padding:2px 7px; color:var(--vjs-text-muted);">Custom Drone Fleet (licensed indoor)</span>
+                <span style="font-size:0.65rem; background:rgba(0,245,212,0.06); border:1px solid rgba(0,245,212,0.15); padding:2px 7px; color:var(--vjs-text-muted); border-radius:0 !important;">Custom Drone Fleet (licensed indoor)</span>
                 
-                <span style="font-size:0.65rem; background:rgba(0,245,212,0.06); border:1px solid rgba(0,245,212,0.15); border-radius:4px; padding:2px 7px; color:var(--vjs-text-muted);">Real-time Brainwave / EEG Integration</span>
+                <span style="font-size:0.65rem; background:rgba(0,245,212,0.06); border:1px solid rgba(0,245,212,0.15); padding:2px 7px; color:var(--vjs-text-muted); border-radius:0 !important;">Real-time Brainwave / EEG Integration</span>
                 
               </div>
               
@@ -1025,7 +958,11 @@
         </a>
       </div>
       
-      <div class="col-lg-4 col-md-6 vjs-studio-item" data-stype="arts-&-technology-collective">
+      
+      <div class="col-lg-4 col-md-6 vjs-studio-item"
+           data-stype="arts-&-technology-collective"
+           data-equipment="architectural projection mapping,interactive installation rigs,computer vision systems,custom software,multi-projector arrays"
+           data-location="london, united kingdom">
         <a href="/studios/seeper" class="text-decoration-none" style="height:100%; display:block;">
           <div class="vjs-card" style="height:100%; transition: transform 0.2s ease, box-shadow 0.2s ease;">
             <div class="vjs-card-img-placeholder" style="background:linear-gradient(135deg, rgba(0,245,212,0.1) 0%, rgba(0,212,255,0.15) 100%); position:relative; overflow:hidden;">
@@ -1046,11 +983,11 @@
               
               <div style="margin-top:0.75rem; display:flex; flex-wrap:wrap; gap:0.35rem;">
                 
-                <span style="font-size:0.65rem; background:rgba(0,245,212,0.06); border:1px solid rgba(0,245,212,0.15); border-radius:4px; padding:2px 7px; color:var(--vjs-text-muted);">Architectural Projection Mapping</span>
+                <span style="font-size:0.65rem; background:rgba(0,245,212,0.06); border:1px solid rgba(0,245,212,0.15); padding:2px 7px; color:var(--vjs-text-muted); border-radius:0 !important;">Architectural Projection Mapping</span>
                 
-                <span style="font-size:0.65rem; background:rgba(0,245,212,0.06); border:1px solid rgba(0,245,212,0.15); border-radius:4px; padding:2px 7px; color:var(--vjs-text-muted);">Interactive Installation Rigs</span>
+                <span style="font-size:0.65rem; background:rgba(0,245,212,0.06); border:1px solid rgba(0,245,212,0.15); padding:2px 7px; color:var(--vjs-text-muted); border-radius:0 !important;">Interactive Installation Rigs</span>
                 
-                <span style="font-size:0.65rem; background:rgba(0,245,212,0.06); border:1px solid rgba(0,245,212,0.15); border-radius:4px; padding:2px 7px; color:var(--vjs-text-muted);">Computer Vision Systems</span>
+                <span style="font-size:0.65rem; background:rgba(0,245,212,0.06); border:1px solid rgba(0,245,212,0.15); padding:2px 7px; color:var(--vjs-text-muted); border-radius:0 !important;">Computer Vision Systems</span>
                 
               </div>
               
@@ -1059,7 +996,11 @@
         </a>
       </div>
       
-      <div class="col-lg-4 col-md-6 vjs-studio-item" data-stype="interactive-projection-studio">
+      
+      <div class="col-lg-4 col-md-6 vjs-studio-item"
+           data-stype="interactive-projection-studio"
+           data-equipment="interactive projection systems,gesture recognition hardware,architectural projection arrays,real-time rendering systems,audience participation tech"
+           data-location="moscow, russia">
         <a href="/studios/silasveta" class="text-decoration-none" style="height:100%; display:block;">
           <div class="vjs-card" style="height:100%; transition: transform 0.2s ease, box-shadow 0.2s ease;">
             <div class="vjs-card-img-placeholder" style="background:linear-gradient(135deg, rgba(0,245,212,0.1) 0%, rgba(0,212,255,0.15) 100%); position:relative; overflow:hidden;">
@@ -1080,11 +1021,11 @@
               
               <div style="margin-top:0.75rem; display:flex; flex-wrap:wrap; gap:0.35rem;">
                 
-                <span style="font-size:0.65rem; background:rgba(0,245,212,0.06); border:1px solid rgba(0,245,212,0.15); border-radius:4px; padding:2px 7px; color:var(--vjs-text-muted);">Interactive Projection Systems</span>
+                <span style="font-size:0.65rem; background:rgba(0,245,212,0.06); border:1px solid rgba(0,245,212,0.15); padding:2px 7px; color:var(--vjs-text-muted); border-radius:0 !important;">Interactive Projection Systems</span>
                 
-                <span style="font-size:0.65rem; background:rgba(0,245,212,0.06); border:1px solid rgba(0,245,212,0.15); border-radius:4px; padding:2px 7px; color:var(--vjs-text-muted);">Gesture Recognition Hardware</span>
+                <span style="font-size:0.65rem; background:rgba(0,245,212,0.06); border:1px solid rgba(0,245,212,0.15); padding:2px 7px; color:var(--vjs-text-muted); border-radius:0 !important;">Gesture Recognition Hardware</span>
                 
-                <span style="font-size:0.65rem; background:rgba(0,245,212,0.06); border:1px solid rgba(0,245,212,0.15); border-radius:4px; padding:2px 7px; color:var(--vjs-text-muted);">Architectural Projection Arrays</span>
+                <span style="font-size:0.65rem; background:rgba(0,245,212,0.06); border:1px solid rgba(0,245,212,0.15); padding:2px 7px; color:var(--vjs-text-muted); border-radius:0 !important;">Architectural Projection Arrays</span>
                 
               </div>
               
@@ -1093,7 +1034,11 @@
         </a>
       </div>
       
-      <div class="col-lg-4 col-md-6 vjs-studio-item" data-stype="xr-&-live-concert-visual-production-studio">
+      
+      <div class="col-lg-4 col-md-6 vjs-studio-item"
+           data-stype="xr-&-live-concert-visual-production-studio"
+           data-equipment="extended reality (xr) production pipeline,led volume systems,virtual production cameras,real-time game engine rendering,broadcast integration systems"
+           data-location="montréal, canada / los angeles, usa">
         <a href="/studios/silent-partners" class="text-decoration-none" style="height:100%; display:block;">
           <div class="vjs-card" style="height:100%; transition: transform 0.2s ease, box-shadow 0.2s ease;">
             <div class="vjs-card-img-placeholder" style="background:linear-gradient(135deg, rgba(0,245,212,0.1) 0%, rgba(0,212,255,0.15) 100%); position:relative; overflow:hidden;">
@@ -1114,11 +1059,11 @@
               
               <div style="margin-top:0.75rem; display:flex; flex-wrap:wrap; gap:0.35rem;">
                 
-                <span style="font-size:0.65rem; background:rgba(0,245,212,0.06); border:1px solid rgba(0,245,212,0.15); border-radius:4px; padding:2px 7px; color:var(--vjs-text-muted);">Extended Reality (XR) Production Pipeline</span>
+                <span style="font-size:0.65rem; background:rgba(0,245,212,0.06); border:1px solid rgba(0,245,212,0.15); padding:2px 7px; color:var(--vjs-text-muted); border-radius:0 !important;">Extended Reality (XR) Production Pipeline</span>
                 
-                <span style="font-size:0.65rem; background:rgba(0,245,212,0.06); border:1px solid rgba(0,245,212,0.15); border-radius:4px; padding:2px 7px; color:var(--vjs-text-muted);">LED Volume Systems</span>
+                <span style="font-size:0.65rem; background:rgba(0,245,212,0.06); border:1px solid rgba(0,245,212,0.15); padding:2px 7px; color:var(--vjs-text-muted); border-radius:0 !important;">LED Volume Systems</span>
                 
-                <span style="font-size:0.65rem; background:rgba(0,245,212,0.06); border:1px solid rgba(0,245,212,0.15); border-radius:4px; padding:2px 7px; color:var(--vjs-text-muted);">Virtual Production Cameras</span>
+                <span style="font-size:0.65rem; background:rgba(0,245,212,0.06); border:1px solid rgba(0,245,212,0.15); padding:2px 7px; color:var(--vjs-text-muted); border-radius:0 !important;">Virtual Production Cameras</span>
                 
               </div>
               
@@ -1127,7 +1072,11 @@
         </a>
       </div>
       
-      <div class="col-lg-4 col-md-6 vjs-studio-item" data-stype="biological-algorithm-&-physical-pixel-studio">
+      
+      <div class="col-lg-4 col-md-6 vjs-studio-item"
+           data-stype="biological-algorithm-&-physical-pixel-studio"
+           data-equipment="licensed indoor/outdoor drone fleet,custom industrial winch systems,biological algorithm software,high-precision formation control,environmental sensor arrays"
+           data-location="amsterdam, netherlands">
         <a href="/studios/studio-drift" class="text-decoration-none" style="height:100%; display:block;">
           <div class="vjs-card" style="height:100%; transition: transform 0.2s ease, box-shadow 0.2s ease;">
             <div class="vjs-card-img-placeholder" style="background:linear-gradient(135deg, rgba(0,245,212,0.1) 0%, rgba(0,212,255,0.15) 100%); position:relative; overflow:hidden;">
@@ -1148,11 +1097,11 @@
               
               <div style="margin-top:0.75rem; display:flex; flex-wrap:wrap; gap:0.35rem;">
                 
-                <span style="font-size:0.65rem; background:rgba(0,245,212,0.06); border:1px solid rgba(0,245,212,0.15); border-radius:4px; padding:2px 7px; color:var(--vjs-text-muted);">Licensed Indoor/Outdoor Drone Fleet</span>
+                <span style="font-size:0.65rem; background:rgba(0,245,212,0.06); border:1px solid rgba(0,245,212,0.15); padding:2px 7px; color:var(--vjs-text-muted); border-radius:0 !important;">Licensed Indoor/Outdoor Drone Fleet</span>
                 
-                <span style="font-size:0.65rem; background:rgba(0,245,212,0.06); border:1px solid rgba(0,245,212,0.15); border-radius:4px; padding:2px 7px; color:var(--vjs-text-muted);">Custom Industrial Winch Systems</span>
+                <span style="font-size:0.65rem; background:rgba(0,245,212,0.06); border:1px solid rgba(0,245,212,0.15); padding:2px 7px; color:var(--vjs-text-muted); border-radius:0 !important;">Custom Industrial Winch Systems</span>
                 
-                <span style="font-size:0.65rem; background:rgba(0,245,212,0.06); border:1px solid rgba(0,245,212,0.15); border-radius:4px; padding:2px 7px; color:var(--vjs-text-muted);">Biological Algorithm Software</span>
+                <span style="font-size:0.65rem; background:rgba(0,245,212,0.06); border:1px solid rgba(0,245,212,0.15); padding:2px 7px; color:var(--vjs-text-muted); border-radius:0 !important;">Biological Algorithm Software</span>
                 
               </div>
               
@@ -1161,7 +1110,11 @@
         </a>
       </div>
       
-      <div class="col-lg-4 col-md-6 vjs-studio-item" data-stype="architectural-projection-studio">
+      
+      <div class="col-lg-4 col-md-6 vjs-studio-item"
+           data-stype="architectural-projection-studio"
+           data-equipment="architectural projection systems,multi-projector arrays,3d content pipeline,event production infrastructure,spatial audio"
+           data-location="paris, france">
         <a href="/studios/superbien" class="text-decoration-none" style="height:100%; display:block;">
           <div class="vjs-card" style="height:100%; transition: transform 0.2s ease, box-shadow 0.2s ease;">
             <div class="vjs-card-img-placeholder" style="background:linear-gradient(135deg, rgba(0,245,212,0.1) 0%, rgba(0,212,255,0.15) 100%); position:relative; overflow:hidden;">
@@ -1182,11 +1135,11 @@
               
               <div style="margin-top:0.75rem; display:flex; flex-wrap:wrap; gap:0.35rem;">
                 
-                <span style="font-size:0.65rem; background:rgba(0,245,212,0.06); border:1px solid rgba(0,245,212,0.15); border-radius:4px; padding:2px 7px; color:var(--vjs-text-muted);">Architectural Projection Systems</span>
+                <span style="font-size:0.65rem; background:rgba(0,245,212,0.06); border:1px solid rgba(0,245,212,0.15); padding:2px 7px; color:var(--vjs-text-muted); border-radius:0 !important;">Architectural Projection Systems</span>
                 
-                <span style="font-size:0.65rem; background:rgba(0,245,212,0.06); border:1px solid rgba(0,245,212,0.15); border-radius:4px; padding:2px 7px; color:var(--vjs-text-muted);">Multi-projector Arrays</span>
+                <span style="font-size:0.65rem; background:rgba(0,245,212,0.06); border:1px solid rgba(0,245,212,0.15); padding:2px 7px; color:var(--vjs-text-muted); border-radius:0 !important;">Multi-projector Arrays</span>
                 
-                <span style="font-size:0.65rem; background:rgba(0,245,212,0.06); border:1px solid rgba(0,245,212,0.15); border-radius:4px; padding:2px 7px; color:var(--vjs-text-muted);">3D Content Pipeline</span>
+                <span style="font-size:0.65rem; background:rgba(0,245,212,0.06); border:1px solid rgba(0,245,212,0.15); padding:2px 7px; color:var(--vjs-text-muted); border-radius:0 !important;">3D Content Pipeline</span>
                 
               </div>
               
@@ -1195,7 +1148,11 @@
         </a>
       </div>
       
-      <div class="col-lg-4 col-md-6 vjs-studio-item" data-stype="scenographic-media-&-museum-installation-studio">
+      
+      <div class="col-lg-4 col-md-6 vjs-studio-item"
+           data-stype="scenographic-media-&-museum-installation-studio"
+           data-equipment="architectural media integration systems,custom content management for permanent installs,multi-surface projection mapping,spatial audio architecture"
+           data-location="berlin, germany">
         <a href="/studios/tamschick-media" class="text-decoration-none" style="height:100%; display:block;">
           <div class="vjs-card" style="height:100%; transition: transform 0.2s ease, box-shadow 0.2s ease;">
             <div class="vjs-card-img-placeholder" style="background:linear-gradient(135deg, rgba(0,245,212,0.1) 0%, rgba(0,212,255,0.15) 100%); position:relative; overflow:hidden;">
@@ -1216,11 +1173,11 @@
               
               <div style="margin-top:0.75rem; display:flex; flex-wrap:wrap; gap:0.35rem;">
                 
-                <span style="font-size:0.65rem; background:rgba(0,245,212,0.06); border:1px solid rgba(0,245,212,0.15); border-radius:4px; padding:2px 7px; color:var(--vjs-text-muted);">Architectural Media Integration Systems</span>
+                <span style="font-size:0.65rem; background:rgba(0,245,212,0.06); border:1px solid rgba(0,245,212,0.15); padding:2px 7px; color:var(--vjs-text-muted); border-radius:0 !important;">Architectural Media Integration Systems</span>
                 
-                <span style="font-size:0.65rem; background:rgba(0,245,212,0.06); border:1px solid rgba(0,245,212,0.15); border-radius:4px; padding:2px 7px; color:var(--vjs-text-muted);">Custom Content Management for Permanent Installs</span>
+                <span style="font-size:0.65rem; background:rgba(0,245,212,0.06); border:1px solid rgba(0,245,212,0.15); padding:2px 7px; color:var(--vjs-text-muted); border-radius:0 !important;">Custom Content Management for Permanent Installs</span>
                 
-                <span style="font-size:0.65rem; background:rgba(0,245,212,0.06); border:1px solid rgba(0,245,212,0.15); border-radius:4px; padding:2px 7px; color:var(--vjs-text-muted);">Multi-surface Projection Mapping</span>
+                <span style="font-size:0.65rem; background:rgba(0,245,212,0.06); border:1px solid rgba(0,245,212,0.15); padding:2px 7px; color:var(--vjs-text-muted); border-radius:0 !important;">Multi-surface Projection Mapping</span>
                 
               </div>
               
@@ -1229,7 +1186,11 @@
         </a>
       </div>
       
-      <div class="col-lg-4 col-md-6 vjs-studio-item" data-stype="motion-design-&-projection-studio">
+      
+      <div class="col-lg-4 col-md-6 vjs-studio-item"
+           data-stype="motion-design-&-projection-studio"
+           data-equipment="motion graphics pipeline,video mapping systems,live performance visuals,broadcast design tools,3d animation"
+           data-location="barcelona, spain">
         <a href="/studios/tigrelab" class="text-decoration-none" style="height:100%; display:block;">
           <div class="vjs-card" style="height:100%; transition: transform 0.2s ease, box-shadow 0.2s ease;">
             <div class="vjs-card-img-placeholder" style="background:linear-gradient(135deg, rgba(0,245,212,0.1) 0%, rgba(0,212,255,0.15) 100%); position:relative; overflow:hidden;">
@@ -1250,11 +1211,11 @@
               
               <div style="margin-top:0.75rem; display:flex; flex-wrap:wrap; gap:0.35rem;">
                 
-                <span style="font-size:0.65rem; background:rgba(0,245,212,0.06); border:1px solid rgba(0,245,212,0.15); border-radius:4px; padding:2px 7px; color:var(--vjs-text-muted);">Motion Graphics Pipeline</span>
+                <span style="font-size:0.65rem; background:rgba(0,245,212,0.06); border:1px solid rgba(0,245,212,0.15); padding:2px 7px; color:var(--vjs-text-muted); border-radius:0 !important;">Motion Graphics Pipeline</span>
                 
-                <span style="font-size:0.65rem; background:rgba(0,245,212,0.06); border:1px solid rgba(0,245,212,0.15); border-radius:4px; padding:2px 7px; color:var(--vjs-text-muted);">Video Mapping Systems</span>
+                <span style="font-size:0.65rem; background:rgba(0,245,212,0.06); border:1px solid rgba(0,245,212,0.15); padding:2px 7px; color:var(--vjs-text-muted); border-radius:0 !important;">Video Mapping Systems</span>
                 
-                <span style="font-size:0.65rem; background:rgba(0,245,212,0.06); border:1px solid rgba(0,245,212,0.15); border-radius:4px; padding:2px 7px; color:var(--vjs-text-muted);">Live Performance Visuals</span>
+                <span style="font-size:0.65rem; background:rgba(0,245,212,0.06); border:1px solid rgba(0,245,212,0.15); padding:2px 7px; color:var(--vjs-text-muted); border-radius:0 !important;">Live Performance Visuals</span>
                 
               </div>
               
@@ -1263,7 +1224,11 @@
         </a>
       </div>
       
-      <div class="col-lg-4 col-md-6 vjs-studio-item" data-stype="immersive-installation-collective">
+      
+      <div class="col-lg-4 col-md-6 vjs-studio-item"
+           data-stype="immersive-installation-collective"
+           data-equipment="custom led systems,touchdesigner,physical computing,generative systems,spatial audio"
+           data-location="international">
         <a href="/studios/tundra" class="text-decoration-none" style="height:100%; display:block;">
           <div class="vjs-card" style="height:100%; transition: transform 0.2s ease, box-shadow 0.2s ease;">
             <div class="vjs-card-img-placeholder" style="background:linear-gradient(135deg, rgba(0,245,212,0.1) 0%, rgba(0,212,255,0.15) 100%); position:relative; overflow:hidden;">
@@ -1284,11 +1249,11 @@
               
               <div style="margin-top:0.75rem; display:flex; flex-wrap:wrap; gap:0.35rem;">
                 
-                <span style="font-size:0.65rem; background:rgba(0,245,212,0.06); border:1px solid rgba(0,245,212,0.15); border-radius:4px; padding:2px 7px; color:var(--vjs-text-muted);">Custom LED Systems</span>
+                <span style="font-size:0.65rem; background:rgba(0,245,212,0.06); border:1px solid rgba(0,245,212,0.15); padding:2px 7px; color:var(--vjs-text-muted); border-radius:0 !important;">Custom LED Systems</span>
                 
-                <span style="font-size:0.65rem; background:rgba(0,245,212,0.06); border:1px solid rgba(0,245,212,0.15); border-radius:4px; padding:2px 7px; color:var(--vjs-text-muted);">TouchDesigner</span>
+                <span style="font-size:0.65rem; background:rgba(0,245,212,0.06); border:1px solid rgba(0,245,212,0.15); padding:2px 7px; color:var(--vjs-text-muted); border-radius:0 !important;">TouchDesigner</span>
                 
-                <span style="font-size:0.65rem; background:rgba(0,245,212,0.06); border:1px solid rgba(0,245,212,0.15); border-radius:4px; padding:2px 7px; color:var(--vjs-text-muted);">Physical Computing</span>
+                <span style="font-size:0.65rem; background:rgba(0,245,212,0.06); border:1px solid rgba(0,245,212,0.15); padding:2px 7px; color:var(--vjs-text-muted); border-radius:0 !important;">Physical Computing</span>
                 
               </div>
               
@@ -1297,7 +1262,11 @@
         </a>
       </div>
       
-      <div class="col-lg-4 col-md-6 vjs-studio-item" data-stype="luminous-art-&-architectural-media-studio">
+      
+      <div class="col-lg-4 col-md-6 vjs-studio-item"
+           data-stype="luminous-art-&-architectural-media-studio"
+           data-equipment="the gasometer venue (custom permanent install),high-lumen architectural projectors,custom long-form content pipeline"
+           data-location="bremen, germany">
         <a href="/studios/urban-screen" class="text-decoration-none" style="height:100%; display:block;">
           <div class="vjs-card" style="height:100%; transition: transform 0.2s ease, box-shadow 0.2s ease;">
             <div class="vjs-card-img-placeholder" style="background:linear-gradient(135deg, rgba(0,245,212,0.1) 0%, rgba(0,212,255,0.15) 100%); position:relative; overflow:hidden;">
@@ -1318,11 +1287,11 @@
               
               <div style="margin-top:0.75rem; display:flex; flex-wrap:wrap; gap:0.35rem;">
                 
-                <span style="font-size:0.65rem; background:rgba(0,245,212,0.06); border:1px solid rgba(0,245,212,0.15); border-radius:4px; padding:2px 7px; color:var(--vjs-text-muted);">The Gasometer Venue (custom permanent install)</span>
+                <span style="font-size:0.65rem; background:rgba(0,245,212,0.06); border:1px solid rgba(0,245,212,0.15); padding:2px 7px; color:var(--vjs-text-muted); border-radius:0 !important;">The Gasometer Venue (custom permanent install)</span>
                 
-                <span style="font-size:0.65rem; background:rgba(0,245,212,0.06); border:1px solid rgba(0,245,212,0.15); border-radius:4px; padding:2px 7px; color:var(--vjs-text-muted);">High-Lumen Architectural Projectors</span>
+                <span style="font-size:0.65rem; background:rgba(0,245,212,0.06); border:1px solid rgba(0,245,212,0.15); padding:2px 7px; color:var(--vjs-text-muted); border-radius:0 !important;">High-Lumen Architectural Projectors</span>
                 
-                <span style="font-size:0.65rem; background:rgba(0,245,212,0.06); border:1px solid rgba(0,245,212,0.15); border-radius:4px; padding:2px 7px; color:var(--vjs-text-muted);">Custom Long-Form Content Pipeline</span>
+                <span style="font-size:0.65rem; background:rgba(0,245,212,0.06); border:1px solid rgba(0,245,212,0.15); padding:2px 7px; color:var(--vjs-text-muted); border-radius:0 !important;">Custom Long-Form Content Pipeline</span>
                 
               </div>
               
@@ -1331,7 +1300,11 @@
         </a>
       </div>
       
-      <div class="col-lg-4 col-md-6 vjs-studio-item" data-stype="kinetic-light-art-studio">
+      
+      <div class="col-lg-4 col-md-6 vjs-studio-item"
+           data-stype="kinetic-light-art-studio"
+           data-equipment="transformator (1,000m² kinetic lab),winch-powered mirror arrays,custom kinetic led systems,high-precision laser rigs,spatial audio infrastructure"
+           data-location="berlin, germany">
         <a href="/studios/whitevoid" class="text-decoration-none" style="height:100%; display:block;">
           <div class="vjs-card" style="height:100%; transition: transform 0.2s ease, box-shadow 0.2s ease;">
             <div class="vjs-card-img-placeholder" style="background:linear-gradient(135deg, rgba(0,245,212,0.1) 0%, rgba(0,212,255,0.15) 100%); position:relative; overflow:hidden;">
@@ -1352,11 +1325,11 @@
               
               <div style="margin-top:0.75rem; display:flex; flex-wrap:wrap; gap:0.35rem;">
                 
-                <span style="font-size:0.65rem; background:rgba(0,245,212,0.06); border:1px solid rgba(0,245,212,0.15); border-radius:4px; padding:2px 7px; color:var(--vjs-text-muted);">TRANSFORMATOR (1,000m² Kinetic Lab)</span>
+                <span style="font-size:0.65rem; background:rgba(0,245,212,0.06); border:1px solid rgba(0,245,212,0.15); padding:2px 7px; color:var(--vjs-text-muted); border-radius:0 !important;">TRANSFORMATOR (1,000m² Kinetic Lab)</span>
                 
-                <span style="font-size:0.65rem; background:rgba(0,245,212,0.06); border:1px solid rgba(0,245,212,0.15); border-radius:4px; padding:2px 7px; color:var(--vjs-text-muted);">Winch-powered Mirror Arrays</span>
+                <span style="font-size:0.65rem; background:rgba(0,245,212,0.06); border:1px solid rgba(0,245,212,0.15); padding:2px 7px; color:var(--vjs-text-muted); border-radius:0 !important;">Winch-powered Mirror Arrays</span>
                 
-                <span style="font-size:0.65rem; background:rgba(0,245,212,0.06); border:1px solid rgba(0,245,212,0.15); border-radius:4px; padding:2px 7px; color:var(--vjs-text-muted);">Custom Kinetic LED Systems</span>
+                <span style="font-size:0.65rem; background:rgba(0,245,212,0.06); border:1px solid rgba(0,245,212,0.15); padding:2px 7px; color:var(--vjs-text-muted); border-radius:0 !important;">Custom Kinetic LED Systems</span>
                 
               </div>
               
@@ -1365,7 +1338,11 @@
         </a>
       </div>
       
-      <div class="col-lg-4 col-md-6 vjs-studio-item" data-stype="extended-reality-&-virtual-production-studio">
+      
+      <div class="col-lg-4 col-md-6 vjs-studio-item"
+           data-stype="extended-reality-&-virtual-production-studio"
+           data-equipment="unreal engine real-time pipeline,led volume stages,xr camera tracking systems,custom virtual stage design tools"
+           data-location="los angeles, usa">
         <a href="/studios/xitelabs" class="text-decoration-none" style="height:100%; display:block;">
           <div class="vjs-card" style="height:100%; transition: transform 0.2s ease, box-shadow 0.2s ease;">
             <div class="vjs-card-img-placeholder" style="background:linear-gradient(135deg, rgba(0,245,212,0.1) 0%, rgba(0,212,255,0.15) 100%); position:relative; overflow:hidden;">
@@ -1386,11 +1363,11 @@
               
               <div style="margin-top:0.75rem; display:flex; flex-wrap:wrap; gap:0.35rem;">
                 
-                <span style="font-size:0.65rem; background:rgba(0,245,212,0.06); border:1px solid rgba(0,245,212,0.15); border-radius:4px; padding:2px 7px; color:var(--vjs-text-muted);">Unreal Engine Real-time Pipeline</span>
+                <span style="font-size:0.65rem; background:rgba(0,245,212,0.06); border:1px solid rgba(0,245,212,0.15); padding:2px 7px; color:var(--vjs-text-muted); border-radius:0 !important;">Unreal Engine Real-time Pipeline</span>
                 
-                <span style="font-size:0.65rem; background:rgba(0,245,212,0.06); border:1px solid rgba(0,245,212,0.15); border-radius:4px; padding:2px 7px; color:var(--vjs-text-muted);">LED Volume Stages</span>
+                <span style="font-size:0.65rem; background:rgba(0,245,212,0.06); border:1px solid rgba(0,245,212,0.15); padding:2px 7px; color:var(--vjs-text-muted); border-radius:0 !important;">LED Volume Stages</span>
                 
-                <span style="font-size:0.65rem; background:rgba(0,245,212,0.06); border:1px solid rgba(0,245,212,0.15); border-radius:4px; padding:2px 7px; color:var(--vjs-text-muted);">XR Camera Tracking Systems</span>
+                <span style="font-size:0.65rem; background:rgba(0,245,212,0.06); border:1px solid rgba(0,245,212,0.15); padding:2px 7px; color:var(--vjs-text-muted); border-radius:0 !important;">XR Camera Tracking Systems</span>
                 
               </div>
               
@@ -1399,7 +1376,11 @@
         </a>
       </div>
       
-      <div class="col-lg-4 col-md-6 vjs-studio-item" data-stype="kinetic-sound-sculpture-studio">
+      
+      <div class="col-lg-4 col-md-6 vjs-studio-item"
+           data-stype="kinetic-sound-sculpture-studio"
+           data-equipment="dc motor arrays (1,000+),custom mechanical fabrication workshop,cardboard / wire / cotton assemblage,precision timing control systems"
+           data-location="bern, switzerland">
         <a href="/studios/zimoun" class="text-decoration-none" style="height:100%; display:block;">
           <div class="vjs-card" style="height:100%; transition: transform 0.2s ease, box-shadow 0.2s ease;">
             <div class="vjs-card-img-placeholder" style="background:linear-gradient(135deg, rgba(0,245,212,0.1) 0%, rgba(0,212,255,0.15) 100%); position:relative; overflow:hidden;">
@@ -1420,11 +1401,11 @@
               
               <div style="margin-top:0.75rem; display:flex; flex-wrap:wrap; gap:0.35rem;">
                 
-                <span style="font-size:0.65rem; background:rgba(0,245,212,0.06); border:1px solid rgba(0,245,212,0.15); border-radius:4px; padding:2px 7px; color:var(--vjs-text-muted);">DC Motor Arrays (1,000+)</span>
+                <span style="font-size:0.65rem; background:rgba(0,245,212,0.06); border:1px solid rgba(0,245,212,0.15); padding:2px 7px; color:var(--vjs-text-muted); border-radius:0 !important;">DC Motor Arrays (1,000+)</span>
                 
-                <span style="font-size:0.65rem; background:rgba(0,245,212,0.06); border:1px solid rgba(0,245,212,0.15); border-radius:4px; padding:2px 7px; color:var(--vjs-text-muted);">Custom Mechanical Fabrication Workshop</span>
+                <span style="font-size:0.65rem; background:rgba(0,245,212,0.06); border:1px solid rgba(0,245,212,0.15); padding:2px 7px; color:var(--vjs-text-muted); border-radius:0 !important;">Custom Mechanical Fabrication Workshop</span>
                 
-                <span style="font-size:0.65rem; background:rgba(0,245,212,0.06); border:1px solid rgba(0,245,212,0.15); border-radius:4px; padding:2px 7px; color:var(--vjs-text-muted);">Cardboard / Wire / Cotton Assemblage</span>
+                <span style="font-size:0.65rem; background:rgba(0,245,212,0.06); border:1px solid rgba(0,245,212,0.15); padding:2px 7px; color:var(--vjs-text-muted); border-radius:0 !important;">Cardboard / Wire / Cotton Assemblage</span>
                 
               </div>
               
@@ -1435,8 +1416,12 @@
       
     </div>
 
+    <div id="studios-no-results" style="display:none; text-align:center; padding:4rem; color:var(--vjs-text-muted); font-family:'Barlow Condensed',sans-serif; font-size:1rem; letter-spacing:0.1em;">
+      No studios match this filter. <a href="#" onclick="resetStudioFilters(); return false;" style="color:var(--vjs-ultraviolet);">Reset</a>
+    </div>
+
     <!-- SUBMIT STUDIO CTA -->
-    <div style="margin-top:4rem; display:grid; grid-template-columns:1fr 1fr; gap:1.5rem; align-items:center; padding:2.5rem 3rem; background:linear-gradient(135deg, rgba(0,245,212,0.05) 0%, rgba(123,47,255,0.05) 100%); border:1px solid rgba(0,245,212,0.15); border-radius:20px;">
+    <div id="studios-cta" style="margin-top:4rem; display:grid; grid-template-columns:1fr 1fr; gap:1.5rem; align-items:center; padding:2.5rem 3rem; background:linear-gradient(135deg, rgba(0,245,212,0.05) 0%, rgba(123,47,255,0.05) 100%); border:1px solid rgba(0,245,212,0.15);">
       <div>
         <div class="vjs-section-label" style="margin-bottom:0.75rem;">For Studios</div>
         <h3 style="font-family:'Space Grotesk',sans-serif; font-weight:700; font-size:1.3rem; color:#fff; margin-bottom:0.5rem;">List Your Studio</h3>
@@ -1598,16 +1583,45 @@ function vjsTipAmount(amt) {
 
 
 <script>
-document.querySelectorAll('[data-stype]').forEach(function(btn) {
-  btn.addEventListener('click', function() {
-    document.querySelectorAll('[data-stype]').forEach(function(b){ b.classList.remove('active'); });
-    btn.classList.add('active');
-    var filter = btn.dataset.stype;
-    document.querySelectorAll('.vjs-studio-item').forEach(function(item) {
-      item.style.display = (filter==='all' || item.dataset.stype===filter) ? '' : 'none';
-    });
+function applyStudioFilters() {
+  var type = document.getElementById('studio-type-select').value;
+  var eq   = document.getElementById('studio-eq-select').value;
+  var loc  = document.getElementById('studio-loc-select').value;
+
+  ['studio-type-select','studio-eq-select','studio-loc-select'].forEach(function(id){
+    var el = document.getElementById(id);
+    if (el) el.classList.toggle('active', el.value !== 'all');
   });
-});
+
+  var items = document.querySelectorAll('.vjs-studio-item');
+  var visible = 0;
+  items.forEach(function(item) {
+    var t  = item.dataset.stype    || '';
+    var e  = item.dataset.equipment|| '';
+    var l  = item.dataset.location || '';
+    var mt = type === 'all' || t === type;
+    var me = eq   === 'all' || e.indexOf(eq) !== -1;
+    var ml = loc  === 'all' || l.indexOf(loc) !== -1;
+    if (mt && me && ml) { item.style.display = ''; visible++; }
+    else                { item.style.display = 'none'; }
+  });
+
+  var cnt = document.getElementById('studios-count');
+  var nr  = document.getElementById('studios-no-results');
+  if (cnt) cnt.innerHTML = '<strong>' + visible + '</strong> Studio' + (visible !== 1 ? 's' : '');
+  if (nr)  nr.style.display = visible === 0 ? 'block' : 'none';
+}
+
+function resetStudioFilters() {
+  document.getElementById('studio-type-select').value = 'all';
+  document.getElementById('studio-eq-select').value   = 'all';
+  document.getElementById('studio-loc-select').value  = 'all';
+  ['studio-type-select','studio-eq-select','studio-loc-select'].forEach(function(id){
+    var el = document.getElementById(id);
+    if (el) el.classList.remove('active');
+  });
+  applyStudioFilters();
+}
 </script>
 
   </div>

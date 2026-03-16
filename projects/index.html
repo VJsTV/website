@@ -2,7 +2,7 @@
 layout: default
 title: "Projects - VJs TV"
 meta_title: "Audiovisual Projects - VJs TV"
-meta_description: "Explore the global index of VJ work. Filter by type: projection mapping, generative AI, immersive dome, live visuals, and more."
+meta_description: "Explore the global index of VJ work. Filter by type, sort by date, and explore every project in the network."
 ---
 
 {% include layouts/nav/nav-3.html default_logo="white" %}
@@ -11,49 +11,94 @@ meta_description: "Explore the global index of VJ work. Filter by type: projecti
   <div class="container">
     <h1 class="vjs-section-title" style="font-size:clamp(2rem,5vw,3.5rem);">Projects</h1>
     <div class="vjs-accent-line"></div>
-    <p style="color:var(--vjs-text-muted); max-width:600px; font-size:1.05rem;">The global index of VJ work. Filter by type, sort by date, and explore every project in the network.</p>
+    <p style="color:var(--vjs-text-muted); max-width:600px; font-size:1.05rem;">The global index of VJ work. Filter by type, technology, and location.</p>
   </div>
 </div>
 
 <section class="vjs-section">
   <div class="container">
 
-    <!-- TYPE FILTER -->
-    <div class="vjs-filter-bar">
-      <span class="vjs-filter-label">Type:</span>
-      <button class="vjs-filter-btn active" data-type="all">All</button>
-      {% assign types = "" %}
-      {% for project in site.projects %}
-        {% unless types contains project.project_type %}
-          {% assign types = types | append: project.project_type | append: "|" %}
-          <button class="vjs-filter-btn" data-type="{{ project.project_type | downcase | replace: ' ', '-' }}">{{ project.project_type }}</button>
-        {% endunless %}
-      {% endfor %}
+    <!-- DROPDOWN FILTERS -->
+    <div class="vjs-filter-dropdowns">
+
+      <div class="vjs-filter-group">
+        <span class="vjs-filter-drop-label">Type</span>
+        <select class="vjs-filter-select" id="proj-type-select" onchange="applyProjFilters()">
+          <option value="all">All Types</option>
+          {% assign pt_list = "" %}
+          {% for project in site.projects %}
+            {% unless pt_list contains project.project_type %}
+              {% assign pt_list = pt_list | append: project.project_type | append: "||" %}
+            {% endunless %}
+          {% endfor %}
+          {% assign pt_arr = pt_list | split: "||" | sort %}
+          {% for t in pt_arr %}{% if t != "" %}<option value="{{ t | downcase | replace: ' ', '-' }}">{{ t }}</option>{% endif %}{% endfor %}
+        </select>
+      </div>
+
+      <div class="vjs-filter-group">
+        <span class="vjs-filter-drop-label">Tech</span>
+        <select class="vjs-filter-select" id="proj-tech-select" onchange="applyProjFilters()">
+          <option value="all">All Technologies</option>
+          {% assign tech_list = "" %}
+          {% for project in site.projects %}
+            {% for t in project.technologies %}
+              {% unless tech_list contains t %}
+                {% assign tech_list = tech_list | append: t | append: "||" %}
+              {% endunless %}
+            {% endfor %}
+          {% endfor %}
+          {% assign tech_arr = tech_list | split: "||" | sort %}
+          {% for t in tech_arr %}{% if t != "" %}<option value="{{ t | downcase }}">{{ t }}</option>{% endif %}{% endfor %}
+        </select>
+      </div>
+
+      <div class="vjs-filter-group">
+        <span class="vjs-filter-drop-label">Location</span>
+        <select class="vjs-filter-select" id="proj-loc-select" onchange="applyProjFilters()">
+          <option value="all">All Locations</option>
+          {% assign loc_list = "" %}
+          {% for project in site.projects %}
+            {% assign loc = project.location | default: "" %}
+            {% unless loc_list contains loc %}
+              {% assign loc_list = loc_list | append: loc | append: "||" %}
+            {% endunless %}
+          {% endfor %}
+          {% assign loc_arr = loc_list | split: "||" | sort %}
+          {% for l in loc_arr %}{% if l != "" %}<option value="{{ l | downcase }}">{{ l }}</option>{% endif %}{% endfor %}
+        </select>
+      </div>
+
+      <button class="vjs-filter-reset" onclick="resetProjFilters()">Reset</button>
+
+      <div style="margin-left:auto; display:flex; align-items:center; gap:6px;">
+        <span class="vjs-filter-drop-label">Sort</span>
+        <button class="vjs-filter-btn active" data-sort="latest" style="font-size:0.68rem; padding:6px 14px; border-radius:0 !important;">Latest</button>
+        <button class="vjs-filter-btn" data-sort="oldest" style="font-size:0.68rem; padding:6px 14px; border-radius:0 !important;">Oldest</button>
+      </div>
+
     </div>
 
-    <!-- SORT -->
-    <div style="display:flex; align-items:center; justify-content:space-between; flex-wrap:wrap; gap:1rem; margin-bottom:2rem;">
-      <div id="projects-count" style="font-family:'Orbitron',sans-serif; font-size:0.65rem; text-transform:uppercase; letter-spacing:0.15em; color:var(--vjs-text-muted);">{{ site.projects | size }} Projects</div>
-      <div style="display:flex; gap:0.5rem; align-items:center;">
-        <span style="font-family:'Orbitron',sans-serif; font-size:0.65rem; text-transform:uppercase; letter-spacing:0.12em; color:var(--vjs-text-muted);">Sort:</span>
-        <button class="vjs-filter-btn active" data-sort="latest" style="font-size:0.7rem; padding:5px 14px;">Latest</button>
-        <button class="vjs-filter-btn" data-sort="oldest" style="font-size:0.7rem; padding:5px 14px;">Oldest</button>
-      </div>
+    <div class="vjs-filter-count" id="projects-count">
+      <strong>{{ site.projects | size }}</strong> Projects
     </div>
 
     <div id="projects-grid" style="display:grid; grid-template-columns:repeat(3,1fr); gap:1px; background:var(--vjs-border); border:1px solid var(--vjs-border);">
       {% assign sorted_projects = site.projects | sort: "year" | reverse %}
       {% for project in sorted_projects %}
+      {% assign tech_str = project.technologies | join: "," | downcase %}
       <div class="vjs-project-item"
            data-type="{{ project.project_type | downcase | replace: ' ', '-' }}"
+           data-tech="{{ tech_str }}"
+           data-location="{{ project.location | downcase }}"
            data-year="{{ project.year }}">
         {% include cards/project-card.html project=project %}
       </div>
       {% endfor %}
     </div>
 
-    <div id="projects-no-results" style="display:none; text-align:center; padding:4rem; color:var(--vjs-text-muted); font-family:'Space Grotesk',sans-serif;">
-      No projects match this filter. <a href="#" onclick="resetProjectFilter()" style="color:var(--vjs-ultraviolet);">Reset filter</a>
+    <div id="projects-no-results" style="display:none; text-align:center; padding:4rem; color:var(--vjs-text-muted); font-family:'Barlow Condensed',sans-serif; font-size:1rem; letter-spacing:0.1em;">
+      No projects match this filter. <a href="#" onclick="resetProjFilters(); return false;" style="color:var(--vjs-ultraviolet);">Reset</a>
     </div>
 
   </div>
@@ -62,47 +107,54 @@ meta_description: "Explore the global index of VJ work. Filter by type: projecti
 {% include vjstv-footer.html %}
 
 <script>
-var activeType = 'all';
+function applyProjFilters() {
+  var type = document.getElementById('proj-type-select').value;
+  var tech = document.getElementById('proj-tech-select').value;
+  var loc  = document.getElementById('proj-loc-select').value;
 
-function applyProjectFilter() {
+  ['proj-type-select','proj-tech-select','proj-loc-select'].forEach(function(id){
+    var el = document.getElementById(id);
+    if (el) el.classList.toggle('active', el.value !== 'all');
+  });
+
   var items = document.querySelectorAll('.vjs-project-item');
   var visible = 0;
   items.forEach(function(item) {
-    var type = item.dataset.type || '';
-    var match = activeType === 'all' || type === activeType;
-    item.style.display = match ? '' : 'none';
-    if(match) visible++;
+    var t  = item.dataset.type     || '';
+    var te = item.dataset.tech     || '';
+    var l  = item.dataset.location || '';
+    var mt = type === 'all' || t  === type;
+    var mte= tech === 'all' || te.indexOf(tech) !== -1;
+    var ml = loc  === 'all' || l  === loc;
+    if (mt && mte && ml) { item.style.display = ''; visible++; }
+    else                 { item.style.display = 'none'; }
   });
   var cnt = document.getElementById('projects-count');
   var nr  = document.getElementById('projects-no-results');
-  if(cnt) cnt.textContent = visible + ' Project' + (visible!==1?'s':'');
-  if(nr)  nr.style.display = visible===0 ? 'block' : 'none';
+  if (cnt) cnt.innerHTML = '<strong>' + visible + '</strong> Project' + (visible !== 1 ? 's' : '');
+  if (nr)  nr.style.display = visible === 0 ? 'block' : 'none';
 }
 
-function resetProjectFilter() {
-  activeType='all';
-  document.querySelectorAll('[data-type]').forEach(function(b){ b.classList.toggle('active', b.dataset.type==='all'); });
-  applyProjectFilter();
-}
-
-document.querySelectorAll('[data-type]').forEach(function(btn) {
-  btn.addEventListener('click', function() {
-    document.querySelectorAll('[data-type]').forEach(function(b){ b.classList.remove('active'); });
-    btn.classList.add('active');
-    activeType = btn.dataset.type;
-    applyProjectFilter();
+function resetProjFilters() {
+  document.getElementById('proj-type-select').value = 'all';
+  document.getElementById('proj-tech-select').value = 'all';
+  document.getElementById('proj-loc-select').value  = 'all';
+  ['proj-type-select','proj-tech-select','proj-loc-select'].forEach(function(id){
+    var el = document.getElementById(id);
+    if (el) el.classList.remove('active');
   });
-});
+  applyProjFilters();
+}
 
 document.querySelectorAll('[data-sort]').forEach(function(btn) {
   btn.addEventListener('click', function() {
     document.querySelectorAll('[data-sort]').forEach(function(b){ b.classList.remove('active'); });
     btn.classList.add('active');
-    var grid = document.getElementById('projects-grid');
+    var grid  = document.getElementById('projects-grid');
     var items = Array.from(grid.querySelectorAll('.vjs-project-item'));
-    items.sort(function(a,b){
-      var ya=parseInt(a.dataset.year||0), yb=parseInt(b.dataset.year||0);
-      return btn.dataset.sort==='latest' ? yb-ya : ya-yb;
+    items.sort(function(a, b) {
+      var ya = parseInt(a.dataset.year || 0), yb = parseInt(b.dataset.year || 0);
+      return btn.dataset.sort === 'latest' ? yb - ya : ya - yb;
     });
     items.forEach(function(el){ grid.appendChild(el); });
   });
@@ -110,22 +162,20 @@ document.querySelectorAll('[data-sort]').forEach(function(btn) {
 
 // Vimeo thumbnail loader
 (function() {
-  var thumbs = document.querySelectorAll('.vjs-vimeo-thumb[data-vimeo]');
-  thumbs.forEach(function(el) {
+  document.querySelectorAll('.vjs-vimeo-thumb[data-vimeo]').forEach(function(el) {
     var id = el.getAttribute('data-vimeo');
     if (!id) return;
     fetch('https://vimeo.com/api/v2/video/' + id + '.json')
-      .then(function(r) { return r.json(); })
+      .then(function(r){ return r.json(); })
       .then(function(data) {
-        var url = data[0] && (data[0].thumbnail_large || data[0].thumbnail_medium || data[0].thumbnail_small);
+        var url = data[0] && (data[0].thumbnail_large || data[0].thumbnail_medium);
         if (url) {
-          el.style.backgroundImage = 'url(' + url + ')';
-          el.style.backgroundSize  = 'cover';
+          el.style.backgroundImage    = 'url(' + url + ')';
+          el.style.backgroundSize     = 'cover';
           el.style.backgroundPosition = 'center';
           el.classList.add('loaded');
         }
-      })
-      .catch(function() {});
+      }).catch(function(){});
   });
 })();
 </script>

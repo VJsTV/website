@@ -19,23 +19,72 @@ meta_description: "Discover AV studios, immersive domes, projection labs, and vi
 <section class="vjs-section">
   <div class="container">
 
-    <!-- TYPE FILTER -->
-    <div class="vjs-filter-bar">
-      <span class="vjs-filter-label">Type:</span>
-      <button class="vjs-filter-btn active" data-stype="all">All</button>
-      {% assign types = "" %}
-      {% for studio in site.studios %}
-        {% assign stype = studio.studio_type | downcase | replace: ' ', '-' %}
-        {% unless types contains stype %}
-          {% assign types = types | append: stype | append: "|" %}
-          <button class="vjs-filter-btn" data-stype="{{ stype }}">{{ studio.studio_type }}</button>
-        {% endunless %}
-      {% endfor %}
+    <!-- DROPDOWN FILTERS -->
+    <div class="vjs-filter-dropdowns">
+
+      <div class="vjs-filter-group">
+        <span class="vjs-filter-drop-label">Type</span>
+        <select class="vjs-filter-select" id="studio-type-select" onchange="applyStudioFilters()">
+          <option value="all">All Types</option>
+          {% assign stype_list = "" %}
+          {% for studio in site.studios %}
+            {% unless stype_list contains studio.studio_type %}
+              {% assign stype_list = stype_list | append: studio.studio_type | append: "||" %}
+            {% endunless %}
+          {% endfor %}
+          {% assign stype_arr = stype_list | split: "||" | sort %}
+          {% for t in stype_arr %}{% if t != "" %}<option value="{{ t | downcase | replace: ' ', '-' }}">{{ t }}</option>{% endif %}{% endfor %}
+        </select>
+      </div>
+
+      <div class="vjs-filter-group">
+        <span class="vjs-filter-drop-label">Equipment</span>
+        <select class="vjs-filter-select" id="studio-eq-select" onchange="applyStudioFilters()">
+          <option value="all">All Equipment</option>
+          {% assign eq_list = "" %}
+          {% for studio in site.studios %}
+            {% for eq in studio.equipment %}
+              {% unless eq_list contains eq %}
+                {% assign eq_list = eq_list | append: eq | append: "||" %}
+              {% endunless %}
+            {% endfor %}
+          {% endfor %}
+          {% assign eq_arr = eq_list | split: "||" | sort %}
+          {% for e in eq_arr %}{% if e != "" %}<option value="{{ e | downcase }}">{{ e }}</option>{% endif %}{% endfor %}
+        </select>
+      </div>
+
+      <div class="vjs-filter-group">
+        <span class="vjs-filter-drop-label">Location</span>
+        <select class="vjs-filter-select" id="studio-loc-select" onchange="applyStudioFilters()">
+          <option value="all">All Locations</option>
+          {% assign sloc_list = "" %}
+          {% for studio in site.studios %}
+            {% assign sl = studio.location | default: "" %}
+            {% unless sloc_list contains sl %}
+              {% assign sloc_list = sloc_list | append: sl | append: "||" %}
+            {% endunless %}
+          {% endfor %}
+          {% assign sloc_arr = sloc_list | split: "||" | sort %}
+          {% for l in sloc_arr %}{% if l != "" %}<option value="{{ l | downcase }}">{{ l }}</option>{% endif %}{% endfor %}
+        </select>
+      </div>
+
+      <button class="vjs-filter-reset" onclick="resetStudioFilters()">Reset</button>
+
+    </div>
+
+    <div class="vjs-filter-count" id="studios-count">
+      <strong>{{ site.studios | size }}</strong> Studios
     </div>
 
     <div class="row g-4" id="studios-grid">
       {% for studio in site.studios %}
-      <div class="col-lg-4 col-md-6 vjs-studio-item" data-stype="{{ studio.studio_type | downcase | replace: ' ', '-' }}">
+      {% assign eq_str = studio.equipment | join: "," | downcase %}
+      <div class="col-lg-4 col-md-6 vjs-studio-item"
+           data-stype="{{ studio.studio_type | downcase | replace: ' ', '-' }}"
+           data-equipment="{{ eq_str }}"
+           data-location="{{ studio.location | downcase }}">
         <a href="{{ studio.url }}" class="text-decoration-none" style="height:100%; display:block;">
           <div class="vjs-card" style="height:100%; transition: transform 0.2s ease, box-shadow 0.2s ease;">
             <div class="vjs-card-img-placeholder" style="background:linear-gradient(135deg, rgba(0,245,212,0.1) 0%, rgba(0,212,255,0.15) 100%); position:relative; overflow:hidden;">
@@ -56,7 +105,7 @@ meta_description: "Discover AV studios, immersive domes, projection labs, and vi
               {% if studio.equipment %}
               <div style="margin-top:0.75rem; display:flex; flex-wrap:wrap; gap:0.35rem;">
                 {% for eq in studio.equipment limit:3 %}
-                <span style="font-size:0.65rem; background:rgba(0,245,212,0.06); border:1px solid rgba(0,245,212,0.15); border-radius:4px; padding:2px 7px; color:var(--vjs-text-muted);">{{ eq }}</span>
+                <span style="font-size:0.65rem; background:rgba(0,245,212,0.06); border:1px solid rgba(0,245,212,0.15); padding:2px 7px; color:var(--vjs-text-muted); border-radius:0 !important;">{{ eq }}</span>
                 {% endfor %}
               </div>
               {% endif %}
@@ -67,8 +116,12 @@ meta_description: "Discover AV studios, immersive domes, projection labs, and vi
       {% endfor %}
     </div>
 
+    <div id="studios-no-results" style="display:none; text-align:center; padding:4rem; color:var(--vjs-text-muted); font-family:'Barlow Condensed',sans-serif; font-size:1rem; letter-spacing:0.1em;">
+      No studios match this filter. <a href="#" onclick="resetStudioFilters(); return false;" style="color:var(--vjs-ultraviolet);">Reset</a>
+    </div>
+
     <!-- SUBMIT STUDIO CTA -->
-    <div style="margin-top:4rem; display:grid; grid-template-columns:1fr 1fr; gap:1.5rem; align-items:center; padding:2.5rem 3rem; background:linear-gradient(135deg, rgba(0,245,212,0.05) 0%, rgba(123,47,255,0.05) 100%); border:1px solid rgba(0,245,212,0.15); border-radius:20px;">
+    <div id="studios-cta" style="margin-top:4rem; display:grid; grid-template-columns:1fr 1fr; gap:1.5rem; align-items:center; padding:2.5rem 3rem; background:linear-gradient(135deg, rgba(0,245,212,0.05) 0%, rgba(123,47,255,0.05) 100%); border:1px solid rgba(0,245,212,0.15);">
       <div>
         <div class="vjs-section-label" style="margin-bottom:0.75rem;">For Studios</div>
         <h3 style="font-family:'Space Grotesk',sans-serif; font-weight:700; font-size:1.3rem; color:#fff; margin-bottom:0.5rem;">List Your Studio</h3>
@@ -85,14 +138,43 @@ meta_description: "Discover AV studios, immersive domes, projection labs, and vi
 {% include vjstv-footer.html %}
 
 <script>
-document.querySelectorAll('[data-stype]').forEach(function(btn) {
-  btn.addEventListener('click', function() {
-    document.querySelectorAll('[data-stype]').forEach(function(b){ b.classList.remove('active'); });
-    btn.classList.add('active');
-    var filter = btn.dataset.stype;
-    document.querySelectorAll('.vjs-studio-item').forEach(function(item) {
-      item.style.display = (filter==='all' || item.dataset.stype===filter) ? '' : 'none';
-    });
+function applyStudioFilters() {
+  var type = document.getElementById('studio-type-select').value;
+  var eq   = document.getElementById('studio-eq-select').value;
+  var loc  = document.getElementById('studio-loc-select').value;
+
+  ['studio-type-select','studio-eq-select','studio-loc-select'].forEach(function(id){
+    var el = document.getElementById(id);
+    if (el) el.classList.toggle('active', el.value !== 'all');
   });
-});
+
+  var items = document.querySelectorAll('.vjs-studio-item');
+  var visible = 0;
+  items.forEach(function(item) {
+    var t  = item.dataset.stype    || '';
+    var e  = item.dataset.equipment|| '';
+    var l  = item.dataset.location || '';
+    var mt = type === 'all' || t === type;
+    var me = eq   === 'all' || e.indexOf(eq) !== -1;
+    var ml = loc  === 'all' || l.indexOf(loc) !== -1;
+    if (mt && me && ml) { item.style.display = ''; visible++; }
+    else                { item.style.display = 'none'; }
+  });
+
+  var cnt = document.getElementById('studios-count');
+  var nr  = document.getElementById('studios-no-results');
+  if (cnt) cnt.innerHTML = '<strong>' + visible + '</strong> Studio' + (visible !== 1 ? 's' : '');
+  if (nr)  nr.style.display = visible === 0 ? 'block' : 'none';
+}
+
+function resetStudioFilters() {
+  document.getElementById('studio-type-select').value = 'all';
+  document.getElementById('studio-eq-select').value   = 'all';
+  document.getElementById('studio-loc-select').value  = 'all';
+  ['studio-type-select','studio-eq-select','studio-loc-select'].forEach(function(id){
+    var el = document.getElementById(id);
+    if (el) el.classList.remove('active');
+  });
+  applyStudioFilters();
+}
 </script>
