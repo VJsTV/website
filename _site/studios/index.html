@@ -304,6 +304,15 @@
 
       <button class="vjs-filter-reset" onclick="resetStudioFilters()">Reset</button>
 
+      <div class="vjs-layout-btn-group" style="margin-left:auto;">
+        <button class="vjs-layout-btn active" id="btn-grid-s" onclick="setStudioLayout('grid')" title="Grid">
+          <svg width="13" height="13" viewBox="0 0 14 14" fill="currentColor"><rect x="0" y="0" width="6" height="6"/><rect x="8" y="0" width="6" height="6"/><rect x="0" y="8" width="6" height="6"/><rect x="8" y="8" width="6" height="6"/></svg> Grid
+        </button>
+        <button class="vjs-layout-btn" id="btn-list-s" onclick="setStudioLayout('list')" title="List">
+          <svg width="13" height="13" viewBox="0 0 14 14" fill="currentColor"><rect x="0" y="0" width="4" height="4"/><rect x="6" y="1" width="8" height="2"/><rect x="0" y="5" width="4" height="4"/><rect x="6" y="6" width="8" height="2"/><rect x="0" y="10" width="4" height="4"/><rect x="6" y="11" width="8" height="2"/></svg> List
+        </button>
+      </div>
+
     </div>
 
     <div class="vjs-filter-count" id="studios-count">
@@ -1610,6 +1619,14 @@ function applyStudioFilters() {
   var nr  = document.getElementById('studios-no-results');
   if (cnt) cnt.innerHTML = '<strong>' + visible + '</strong> Studio' + (visible !== 1 ? 's' : '');
   if (nr)  nr.style.display = visible === 0 ? 'block' : 'none';
+}
+
+function setStudioLayout(mode) {
+  var grid = document.getElementById('studios-grid');
+  var bg   = document.getElementById('btn-grid-s');
+  var bl   = document.getElementById('btn-list-s');
+  if (mode === 'list') { grid.classList.add('vjs-layout-list'); bl.classList.add('active'); bg.classList.remove('active'); }
+  else                 { grid.classList.remove('vjs-layout-list'); bg.classList.add('active'); bl.classList.remove('active'); }
 }
 
 function resetStudioFilters() {

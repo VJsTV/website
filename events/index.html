@@ -18,6 +18,18 @@ meta_description: "VJs TV live sessions, festival visuals, and brand activations
 <section class="vjs-section">
   <div class="container">
 
+    <!-- LAYOUT TOGGLE -->
+    <div class="vjs-filter-dropdowns" style="justify-content:flex-end;">
+      <div class="vjs-layout-btn-group">
+        <button class="vjs-layout-btn active" id="btn-grid-e" onclick="setEventLayout('grid')" title="Grid">
+          <svg width="13" height="13" viewBox="0 0 14 14" fill="currentColor"><rect x="0" y="0" width="6" height="6"/><rect x="8" y="0" width="6" height="6"/><rect x="0" y="8" width="6" height="6"/><rect x="8" y="8" width="6" height="6"/></svg> Grid
+        </button>
+        <button class="vjs-layout-btn" id="btn-list-e" onclick="setEventLayout('list')" title="List">
+          <svg width="13" height="13" viewBox="0 0 14 14" fill="currentColor"><rect x="0" y="0" width="4" height="4"/><rect x="6" y="1" width="8" height="2"/><rect x="0" y="5" width="4" height="4"/><rect x="6" y="6" width="8" height="2"/><rect x="0" y="10" width="4" height="4"/><rect x="6" y="11" width="8" height="2"/></svg> List
+        </button>
+      </div>
+    </div>
+
     <!-- UPCOMING EVENTS -->
     {% assign today = "now" | date: "%s" | plus: 0 %}
     {% assign upcoming = "" | split: "" %}
@@ -69,3 +81,18 @@ meta_description: "VJs TV live sessions, festival visuals, and brand activations
 </section>
 
 {% include vjstv-footer.html %}
+
+<script>
+function setEventLayout(mode) {
+  var grids = document.querySelectorAll('.vjs-grid');
+  var bg = document.getElementById('btn-grid-e');
+  var bl = document.getElementById('btn-list-e');
+  if (mode === 'list') {
+    grids.forEach(function(g){ g.classList.add('vjs-layout-list'); });
+    bl.classList.add('active'); bg.classList.remove('active');
+  } else {
+    grids.forEach(function(g){ g.classList.remove('vjs-layout-list'); });
+    bg.classList.add('active'); bl.classList.remove('active');
+  }
+}
+</script>

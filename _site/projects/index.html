@@ -303,10 +303,20 @@
 
       <button class="vjs-filter-reset" onclick="resetProjFilters()">Reset</button>
 
-      <div style="margin-left:auto; display:flex; align-items:center; gap:6px;">
-        <span class="vjs-filter-drop-label">Sort</span>
-        <button class="vjs-filter-btn active" data-sort="latest" style="font-size:0.68rem; padding:6px 14px; border-radius:0 !important;">Latest</button>
-        <button class="vjs-filter-btn" data-sort="oldest" style="font-size:0.68rem; padding:6px 14px; border-radius:0 !important;">Oldest</button>
+      <div style="margin-left:auto; display:flex; align-items:center; gap:10px; flex-wrap:wrap;">
+        <div style="display:flex; align-items:center; gap:6px;">
+          <span class="vjs-filter-drop-label">Sort</span>
+          <button class="vjs-filter-btn active" data-sort="latest" style="font-size:0.68rem; padding:6px 14px; border-radius:0 !important;">Latest</button>
+          <button class="vjs-filter-btn" data-sort="oldest" style="font-size:0.68rem; padding:6px 14px; border-radius:0 !important;">Oldest</button>
+        </div>
+        <div class="vjs-layout-btn-group">
+          <button class="vjs-layout-btn active" id="btn-grid-p" onclick="setProjLayout('grid')" title="Grid">
+            <svg width="13" height="13" viewBox="0 0 14 14" fill="currentColor"><rect x="0" y="0" width="6" height="6"/><rect x="8" y="0" width="6" height="6"/><rect x="0" y="8" width="6" height="6"/><rect x="8" y="8" width="6" height="6"/></svg> Grid
+          </button>
+          <button class="vjs-layout-btn" id="btn-list-p" onclick="setProjLayout('list')" title="List">
+            <svg width="13" height="13" viewBox="0 0 14 14" fill="currentColor"><rect x="0" y="0" width="4" height="4"/><rect x="6" y="1" width="8" height="2"/><rect x="0" y="5" width="4" height="4"/><rect x="6" y="6" width="8" height="2"/><rect x="0" y="10" width="4" height="4"/><rect x="6" y="11" width="8" height="2"/></svg> List
+          </button>
+        </div>
       </div>
 
     </div>
@@ -1529,6 +1539,14 @@ document.querySelectorAll('[data-sort]').forEach(function(btn) {
     items.forEach(function(el){ grid.appendChild(el); });
   });
 });
+
+function setProjLayout(mode) {
+  var grid = document.getElementById('projects-grid');
+  var bg   = document.getElementById('btn-grid-p');
+  var bl   = document.getElementById('btn-list-p');
+  if (mode === 'list') { grid.classList.add('vjs-layout-list'); bl.classList.add('active'); bg.classList.remove('active'); }
+  else                 { grid.classList.remove('vjs-layout-list'); bg.classList.add('active'); bl.classList.remove('active'); }
+}
 
 // Vimeo thumbnail loader
 (function() {

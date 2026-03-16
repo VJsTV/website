@@ -3922,3 +3922,86 @@ svg.vjs-nts-sidebar-thumb-play {
     gap: 12px !important;
   }
 }
+
+/* ================================================================
+   LAYOUT TOGGLE BUTTONS (Grid / List)
+   ================================================================ */
+.vjs-layout-btn {
+  background: none; border: 1px solid #222; color: #444;
+  padding: 6px 10px; cursor: pointer; transition: all .15s;
+  border-radius: 0 !important; display: inline-flex; align-items: center; gap: 5px;
+  font-family: 'Barlow Condensed', sans-serif; font-size: 0.6rem; font-weight: 700;
+  letter-spacing: 0.1em; text-transform: uppercase;
+}
+.vjs-layout-btn:hover { border-color: #555; color: #aaa; }
+.vjs-layout-btn.active { border-color: var(--vjs-ultraviolet); color: var(--vjs-ultraviolet); background: rgba(157,0,255,0.08); }
+.vjs-layout-btn svg { fill: currentColor; flex-shrink: 0; }
+.vjs-layout-btn-group { display: inline-flex; gap: 4px; }
+
+/* ================================================================
+   LIST LAYOUT: Artists
+   ================================================================ */
+.vjs-nts-grid.vjs-layout-list {
+  grid-template-columns: 1fr;
+  background: transparent;
+  border: 1px solid var(--vjs-border);
+  gap: 0;
+}
+.vjs-nts-grid.vjs-layout-list .vjs-artist-item {
+  border-bottom: 1px solid var(--vjs-border);
+}
+.vjs-nts-grid.vjs-layout-list .vjs-artist-item:last-child { border-bottom: none; }
+.vjs-nts-grid.vjs-layout-list .vjs-nts-card { display: flex; flex-direction: row; }
+.vjs-nts-grid.vjs-layout-list .vjs-nts-visual {
+  width: 150px; min-width: 150px; height: 100px; aspect-ratio: unset; flex-shrink: 0;
+}
+.vjs-nts-grid.vjs-layout-list .vjs-nts-info {
+  border-top: none; border-left: 1px solid var(--vjs-border);
+  display: flex; flex-direction: column; justify-content: center;
+  padding: 0.75rem 1.25rem;
+}
+.vjs-nts-grid.vjs-layout-list .vjs-nts-name { font-size: 0.95rem; }
+
+/* ================================================================
+   LIST LAYOUT: Projects
+   ================================================================ */
+#projects-grid.vjs-layout-list { grid-template-columns: 1fr; }
+#projects-grid.vjs-layout-list .vjs-redbull-card { display: flex; flex-direction: row; }
+#projects-grid.vjs-layout-list .vjs-redbull-thumb {
+  width: 280px; min-width: 280px; flex-shrink: 0; aspect-ratio: unset; height: 155px;
+}
+#projects-grid.vjs-layout-list .vjs-project-meta-strip {
+  flex: 1; display: flex; flex-direction: column; justify-content: center;
+  padding: 1rem 1.5rem; gap: 0.5rem; height: 155px; overflow: hidden;
+  background: var(--vjs-card);
+}
+#projects-grid.vjs-layout-list .vjs-software-tag { font-size: 0.72rem; }
+#projects-grid.vjs-layout-list .vjs-tag { font-size: 0.6rem; }
+
+/* ================================================================
+   LIST LAYOUT: Studios
+   ================================================================ */
+#studios-grid.vjs-layout-list { display: flex !important; flex-direction: column !important; gap: 1px; }
+#studios-grid.vjs-layout-list > div {
+  width: 100% !important; max-width: 100% !important; flex: 0 0 100% !important;
+  padding: 0 !important;
+}
+#studios-grid.vjs-layout-list .vjs-card { display: flex; flex-direction: row; height: auto; }
+#studios-grid.vjs-layout-list .vjs-card-img-placeholder {
+  width: 200px !important; min-width: 200px !important; height: auto !important;
+  min-height: 130px; flex-shrink: 0;
+}
+#studios-grid.vjs-layout-list .vjs-card-body {
+  flex: 1; border-top: none; border-left: 1px solid var(--vjs-border) !important;
+}
+
+/* ================================================================
+   LIST LAYOUT: Events
+   ================================================================ */
+.vjs-grid.vjs-layout-list { grid-template-columns: 1fr !important; gap: 1px; }
+.vjs-grid.vjs-layout-list .vjs-card { display: flex; flex-direction: row; height: auto; }
+.vjs-grid.vjs-layout-list .vjs-card-img-placeholder {
+  width: 160px !important; min-width: 160px !important; height: auto !important;
+  min-height: 120px; flex-shrink: 0;
+}
+.vjs-grid.vjs-layout-list .vjs-card-body { flex: 1; }
