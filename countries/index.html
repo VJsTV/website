@@ -4,6 +4,12 @@ title: "Global Map - VJs TV"
 meta_title: "VJs TV Global Map — Artists, Events & Studios Worldwide"
 meta_description: "Explore the VJs TV global network. See where artists, projects, events, studios, and partners are located around the world."
 ---
+{% assign _clist = "" %}
+{% for a in site.vjs %}{% if a.location %}{% assign _c = a.location | split: ", " | last | strip %}{% unless _clist contains _c %}{% assign _clist = _clist | append: _c | append: "|" %}{% endunless %}{% endif %}{% endfor %}
+{% for p in site.projects %}{% if p.location %}{% assign _c = p.location | split: ", " | last | strip %}{% unless _clist contains _c %}{% assign _clist = _clist | append: _c | append: "|" %}{% endunless %}{% endif %}{% endfor %}
+{% for e in site.events %}{% if e.location %}{% assign _c = e.location | split: ", " | last | strip %}{% unless _clist contains _c %}{% assign _clist = _clist | append: _c | append: "|" %}{% endunless %}{% endif %}{% endfor %}
+{% for s in site.studios %}{% if s.location %}{% assign _c = s.location | split: ", " | last | strip %}{% unless _clist contains _c %}{% assign _clist = _clist | append: _c | append: "|" %}{% endunless %}{% endif %}{% endfor %}
+{% assign _country_count = _clist | split: "|" | size %}
 
 {% include layouts/nav/nav-3.html default_logo="white" %}
 
@@ -251,7 +257,7 @@ meta_description: "Explore the VJs TV global network. See where artists, project
   });
 
   var sub = document.getElementById('vjs-map-subtitle');
-  if (sub) sub.innerHTML = 'The global footprint of VJ culture — artists, projects, events, studios, and partners mapped across <strong style="color:#00f9ff;">' + sortedCountries.length + ' countries</strong> worldwide.';
+  if (sub) sub.innerHTML = 'The global footprint of VJ culture — artists, projects, events, studios, and partners mapped across <strong style="color:#00f9ff;">{{ _country_count }} countries</strong> worldwide.';
 })();
 </script>
 
