@@ -174,10 +174,17 @@ layout: default
         {% endif %}
 
         {% assign artist_projects = site.projects | where: "artist", page.title %}
-        {% if artist_projects.size > 0 %}
+        {% assign collab_projects = "" | split: "" %}
+        {% for p in site.projects %}
+          {% if p.artists contains page.title %}
+            {% assign collab_projects = collab_projects | push: p %}
+          {% endif %}
+        {% endfor %}
+        {% assign all_artist_projects = artist_projects | concat: collab_projects | uniq %}
+        {% if all_artist_projects.size > 0 %}
         <div class="vjs-sidebar-card">
           <div class="vjs-sidebar-card-heading" style="color:var(--vjs-magenta);">Projects</div>
-          {% for proj in artist_projects %}
+          {% for proj in all_artist_projects %}
           <a href="{{ proj.url }}" class="vjs-relation-item">
             <div class="vjs-relation-avatar" style="background:linear-gradient(135deg,rgba(255,0,170,0.35),rgba(157,0,255,0.2));">{{ proj.title | truncate: 2, '' }}</div>
             <div>
