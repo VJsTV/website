@@ -86,11 +86,6 @@ meta_description: "VJs TV is the global broadcast network for VJ culture. Watch 
   border-bottom:1px solid #111;
 }
 
-/* Desktop: fixed height */
-@media(min-width:901px){
-  .vjs-hero-wrap { height:520px; }
-}
-
 /* Mobile: stack player + queue vertically */
 @media(max-width:900px){
   .vjs-hero-wrap { grid-template-columns:1fr; grid-template-rows:auto auto; }
@@ -114,12 +109,7 @@ meta_description: "VJs TV is the global broadcast network for VJ culture. Watch 
 
 .vjs-hero-player {
   position:relative; overflow:hidden; background:#000;
-  /* Intrinsic 16:9 height so iframe renders properly */
   aspect-ratio:16/9;
-}
-/* On desktop, override aspect-ratio so fixed 520px height governs */
-@media(min-width:901px){
-  .vjs-hero-player { aspect-ratio:unset; height:100%; }
 }
 
 .vjs-hero-player iframe {
@@ -395,22 +385,38 @@ function heroPlay(card) {
   card.classList.add('active');
 }
 
-/* Load real Vimeo thumbnails into sidebar queue cards */
+/* Load real Vimeo thumbnails into sidebar queue cards via oEmbed */
 document.querySelectorAll('.vjs-hero-card[data-id]').forEach(function(card) {
   var id = card.dataset.id;
   var thumb = card.querySelector('.vjs-hero-card-thumb');
   if (!thumb) return;
-  fetch('https://vimeo.com/api/v2/video/' + id + '.json')
+  fetch('https://vimeo.com/api/oembed.json?url=https://vimeo.com/' + id + '&width=200')
     .then(function(r){ return r.json(); })
     .then(function(data){
-      if (data[0] && data[0].thumbnail_large) {
-        thumb.style.background = '#000';
-        thumb.style.backgroundImage = 'url(' + data[0].thumbnail_large + ')';
+      if (data.thumbnail_url) {
+        thumb.style.backgroundImage = 'url(' + data.thumbnail_url + ')';
         thumb.style.backgroundSize = 'cover';
         thumb.style.backgroundPosition = 'center';
       }
     }).catch(function(){});
 });
+
+/* Random project on every page load */
+(function(){
+  var cards = document.querySelectorAll('.vjs-hero-card[data-id]');
+  if (!cards.length) return;
+  var idx = Math.floor(Math.random() * cards.length);
+  var pick = cards[idx];
+  document.querySelectorAll('.vjs-hero-card').forEach(function(c){ c.classList.remove('active'); });
+  pick.classList.add('active');
+  document.getElementById('hero-iframe').src =
+    'https://player.vimeo.com/video/' + pick.dataset.id + '?autoplay=0&title=0&byline=0&portrait=0&color=9d00ff';
+  document.getElementById('hero-title').textContent    = pick.dataset.title;
+  document.getElementById('hero-artist').textContent   = pick.dataset.artist + ' · ' + (pick.dataset.loc||'').split(',')[0];
+  document.getElementById('hero-tag-type').textContent = pick.dataset.type;
+  document.getElementById('hero-vimeo-link').href      = 'https://vimeo.com/' + pick.dataset.id;
+  document.getElementById('hero-project-link').href    = pick.dataset.href || '/projects';
+})();
 </script>
 
 <!-- SPONSOR TICKER -->
