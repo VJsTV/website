@@ -346,6 +346,61 @@ app.get("/api/health", function (req, res) {
   res.json({ status: "ok", timestamp: new Date().toISOString() });
 });
 
+var analyticsCache = { data: null, timestamp: null };
+var CACHE_TTL = 600000;
+
+app.get("/api/analytics", async function (req, res) {
+  try {
+    var now = Date.now();
+    if (analyticsCache.data && analyticsCache.timestamp && now - analyticsCache.timestamp < CACHE_TTL) {
+      return res.json(analyticsCache.data);
+    }
+
+    var cfToken = process.env.CF_API_TOKEN;
+    var cfZoneId = process.env.CF_ZONE_ID;
+
+    if (!cfToken || !cfZoneId) {
+      console.warn("Missing Cloudflare credentials");
+      return res.json({ monthlyVisitors: 0, cached: false, error: "Cloudflare not configured" });
+    }
+
+    var query = {
+      query: '\n        query {\n          viewer {\n            zones(filter: { zoneTag: "' + cfZoneId + '" }) {\n              httpRequests1dGroups(limit: 30, orderBy: [date_DESC]) {\n                sum {\n                  pageViews\n                }\n              }\n            }\n          }\n        }\n      '
+    };
+
+    var cfRes = await fetch("https://api.cloudflare.com/client/v4/graphql", {
+      method: "POST",
+      headers: {
+        "Authorization": "Bearer " + cfToken,
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify(query)
+    });
+
+    var cfData = await cfRes.json();
+
+    if (!cfData.data || !cfData.data.viewer || !cfData.data.viewer.zones || cfData.data.viewer.zones.length === 0) {
+      console.warn("No zone data from Cloudflare");
+      return res.json({ monthlyVisitors: 0, cached: false, error: "Zone data not available" });
+    }
+
+    var monthlyVisitors = 0;
+    var groups = cfData.data.viewer.zones[0].httpRequests1dGroups || [];
+    for (var i = 0; i < groups.length; i++) {
+      monthlyVisitors += (groups[i].sum && groups[i].sum.pageViews) ? groups[i].sum.pageViews : 0;
+    }
+
+    var result = { monthlyVisitors: monthlyVisitors, cached: false };
+    analyticsCache.data = result;
+    analyticsCache.timestamp = now;
+
+    res.json(result);
+  } catch (err) {
+    console.error("Analytics error:", err.message);
+    res.status(500).json({ monthlyVisitors: 0, cached: false, error: err.message });
+  }
+});
+
 app.use(express.static(SITE_DIR, { extensions: ["html"] }));
 
 app.use(function (req, res, next) {

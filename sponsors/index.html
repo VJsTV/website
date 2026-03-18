@@ -21,6 +21,9 @@ meta_description: "Become a VJs TV sponsor. Reach 10,000+ VJ artists, visual des
   </div>
 </div>
 
+<!-- ANALYTICS LABEL -->
+<div id="vjs-analytics-label" style="text-align:center; color:var(--vjs-cyan); font-size:0.9rem; margin-bottom:1rem; display:none; font-family:'Space Grotesk',sans-serif; letter-spacing:0.05em;"></div>
+
 <!-- AUDIENCE STATS -->
 <div class="vjs-stats-bar" style="margin-bottom:0;">
   <div class="vjs-stat-item"><div class="vjs-stat-number">97+</div><div class="vjs-stat-label">Community Members</div></div>
@@ -48,7 +51,7 @@ meta_description: "Become a VJs TV sponsor. Reach 10,000+ VJ artists, visual des
         <div class="vjs-tier-icon" style="margin-top:1rem; --tier-border: rgba(255,215,0,0.4); --tier-bg: rgba(255,215,0,0.08);">&#9733;</div>
         <div class="vjs-tier-name">Title Sponsor</div>
         <div class="vjs-tier-tagline">Maximum brand presence across the entire VJs TV network — live streams, artist profiles, event coverage, and editorial integration.</div>
-        <div><span class="vjs-tier-price-from">From</span><div class="vjs-tier-price" style="color:#FFD700; text-shadow: 0 0 20px rgba(255,215,0,0.6);">$50K</div><span style="color:var(--vjs-text-muted); font-size:0.75rem;">/year</span></div>
+        <div><span class="vjs-tier-price-from">From</span><div class="vjs-tier-price vjs-price-title" style="color:#FFD700; text-shadow: 0 0 20px rgba(255,215,0,0.6);">$50K</div><span style="color:var(--vjs-text-muted); font-size:0.75rem;">/year</span></div>
         <div class="vjs-tier-cta" style="--tier-border: rgba(255,215,0,0.4); --tier-text: #FFD700;">Explore &rarr;</div>
       </div>
 
@@ -58,7 +61,7 @@ meta_description: "Become a VJs TV sponsor. Reach 10,000+ VJ artists, visual des
         <div class="vjs-tier-icon">&#9883;</div>
         <div class="vjs-tier-name">Technology Partners</div>
         <div class="vjs-tier-tagline">Get your software, hardware, or platform in front of the most active and technically engaged VJ community on the planet.</div>
-        <div><span class="vjs-tier-price-from">From</span><div class="vjs-tier-price">$25K</div><span style="color:var(--vjs-text-muted); font-size:0.75rem;">/year</span></div>
+        <div><span class="vjs-tier-price-from">From</span><div class="vjs-tier-price vjs-price-tech">$25K</div><span style="color:var(--vjs-text-muted); font-size:0.75rem;">/year</span></div>
         <div class="vjs-tier-cta">Explore &rarr;</div>
       </div>
 
@@ -68,7 +71,7 @@ meta_description: "Become a VJs TV sponsor. Reach 10,000+ VJ artists, visual des
         <div class="vjs-tier-icon" style="--tier-border: rgba(255,0,255,0.4); --tier-bg: rgba(255,0,255,0.08);">&#9670;</div>
         <div class="vjs-tier-name">Creative Partners</div>
         <div class="vjs-tier-tagline">Brands that fuel creativity — from music platforms to digital art tools. Associate your brand with the cutting edge of visual culture.</div>
-        <div><span class="vjs-tier-price-from">From</span><div class="vjs-tier-price" style="color:var(--vjs-magenta); text-shadow: 0 0 20px rgba(255,0,255,0.5);">$15K</div><span style="color:var(--vjs-text-muted); font-size:0.75rem;">/year</span></div>
+        <div><span class="vjs-tier-price-from">From</span><div class="vjs-tier-price vjs-price-creative" style="color:var(--vjs-magenta); text-shadow: 0 0 20px rgba(255,0,255,0.5);">$15K</div><span style="color:var(--vjs-text-muted); font-size:0.75rem;">/year</span></div>
         <div class="vjs-tier-cta" style="--tier-border: rgba(255,0,255,0.4); --tier-text: var(--vjs-magenta);">Explore &rarr;</div>
       </div>
 
@@ -78,7 +81,7 @@ meta_description: "Become a VJs TV sponsor. Reach 10,000+ VJ artists, visual des
         <div class="vjs-tier-icon" style="--tier-border: rgba(0,245,212,0.35); --tier-bg: rgba(0,245,212,0.07);">&#9674;</div>
         <div class="vjs-tier-name">Equipment Partners</div>
         <div class="vjs-tier-tagline">Projectors, LED walls, media servers, and production hardware. Put your equipment in the hands of the industry's most innovative performers.</div>
-        <div><span class="vjs-tier-price-from">From</span><div class="vjs-tier-price" style="color:var(--vjs-cyan); text-shadow: 0 0 20px rgba(0,245,212,0.5);">$10K</div><span style="color:var(--vjs-text-muted); font-size:0.75rem;">/year</span></div>
+        <div><span class="vjs-tier-price-from">From</span><div class="vjs-tier-price vjs-price-equipment" style="color:var(--vjs-cyan); text-shadow: 0 0 20px rgba(0,245,212,0.5);">$10K</div><span style="color:var(--vjs-text-muted); font-size:0.75rem;">/year</span></div>
         <div class="vjs-tier-cta" style="--tier-border: rgba(0,245,212,0.35); --tier-text: var(--vjs-cyan);">Explore &rarr;</div>
       </div>
 
@@ -445,6 +448,48 @@ function vjsSponsorSubmit(e) {
     btn.disabled = false;
   });
 }
+
+// Analytics & Dynamic Pricing
+var vjsPricingData = {
+  basePrices: { title: 5000, tech: 2500, creative: 1500, equipment: 1000 }
+};
+
+function vjsGetPriceMultiplier(visitors) {
+  if (visitors < 10000) return 1;
+  if (visitors < 50000) return 2;
+  if (visitors < 200000) return 3;
+  return 5;
+}
+
+function vjsLoadAnalytics() {
+  fetch('/api/analytics')
+    .then(function(res) { return res.json(); })
+    .then(function(data) {
+      if (!data.monthlyVisitors) {
+        console.log('No visitor data, using base prices');
+        return;
+      }
+      var multiplier = vjsGetPriceMultiplier(data.monthlyVisitors);
+      var prices = {
+        title: vjsPricingData.basePrices.title * multiplier,
+        tech: vjsPricingData.basePrices.tech * multiplier,
+        creative: vjsPricingData.basePrices.creative * multiplier,
+        equipment: vjsPricingData.basePrices.equipment * multiplier
+      };
+      var analyticsLabel = document.getElementById('vjs-analytics-label');
+      if (analyticsLabel) {
+        analyticsLabel.innerHTML = '🔥 Based on ' + data.monthlyVisitors.toLocaleString() + ' monthly visitors';
+        analyticsLabel.style.display = 'block';
+      }
+      document.querySelectorAll('.vjs-price-title').forEach(function(el) { el.textContent = '$' + prices.title.toLocaleString(); });
+      document.querySelectorAll('.vjs-price-tech').forEach(function(el) { el.textContent = '$' + prices.tech.toLocaleString(); });
+      document.querySelectorAll('.vjs-price-creative').forEach(function(el) { el.textContent = '$' + prices.creative.toLocaleString(); });
+      document.querySelectorAll('.vjs-price-equipment').forEach(function(el) { el.textContent = '$' + prices.equipment.toLocaleString(); });
+    })
+    .catch(function(err) { console.log('Analytics load error:', err); });
+}
+
+document.addEventListener('DOMContentLoaded', vjsLoadAnalytics);
 
 // Scroll reveal
 (function() {

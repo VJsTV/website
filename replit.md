@@ -60,6 +60,15 @@ VJs TV is a Jekyll-based platform for VJ culture and audiovisual performances. I
 - IntersectionObserver visibility gating on meter bar animation
 - `preconnect` for Google Fonts
 
+## Cloudflare Analytics & Dynamic Pricing
+- **Secrets required:** `CF_API_TOKEN` (Read Analytics permission), `CF_ZONE_ID` (Cloudflare domain)
+- **Backend:** `/api/analytics` endpoint fetches last 30 days of page views from Cloudflare GraphQL API
+- **Caching:** 10-minute in-memory cache to avoid rate limiting
+- **Frontend:** `vjsLoadAnalytics()` on sponsors page fetches analytics and updates pricing based on visitor multiplier
+- **Pricing tiers:** Base prices (Title: $5K, Tech: $2.5K, Creative: $1.5K, Equipment: $1K) × visitor multiplier
+- **Display:** Shows "🔥 Based on X monthly visitors" label above sponsorship tiers (when data available)
+- **Fallback:** If Cloudflare fails, displays base prices without multiplier
+
 ## Submission System (GitHub Issues Integration)
 - **Unified Server:** `api/server.js` — Express on port 5000 serves both static site (`_site/`) and API endpoints
 - **Jekyll Build:** Express runs `jekyll build --watch --incremental` automatically; no separate Jekyll server needed
@@ -72,6 +81,7 @@ VJs TV is a Jekyll-based platform for VJ culture and audiovisual performances. I
   - `POST /api/submit` — create submission Issue (rate limited: 3/5min)
   - `POST /api/report` — report issue on any detail page (rate limited: 3/2min)
   - `POST /api/partner` — partnership enquiry from sponsors page (rate limited: 3/5min, label: `partnership`)
+  - `GET /api/analytics` — fetch monthly visitors from Cloudflare (10-min cache); pricing multiplier: 1x (<10K), 2x (10K-50K), 3x (50K-200K), 5x (200K+)
   - `GET /api/projects` — fetch approved Issues
   - `GET /api/health` — health check
 - **Report Feature:** "Report an Issue" button in sidebar of all `vjs-detail` pages + footer of every page; modal → creates GitHub Issue with `report` label
