@@ -8,6 +8,7 @@ project_type: "Projection Sculpture"
 location: "Berlin, Germany"
 year: 2013
 video_url: "https://player.vimeo.com/video/61227321"
+image: "/assets/images/projects/robert-seidel.png"
 description: "A projection sculpture by Berlin-based artist Robert Seidel in which fragments of projection, physical sculpture, and spatial sound perfoliate the gallery space. Exhibited at 401contemporary Berlin."
 technologies:
   - Projection Sculpture
@@ -16,6 +17,12 @@ technologies:
   - Physical Sculpture
   - Custom Software
 featured: false
+social:
+  instagram: "https://www.instagram.com/studiorobertseidel"
+  facebook: "https://www.facebook.com/studiorobertseidel"
+projects:
+  - "https://vimeo.com/148470865"
+  - "https://vimeo.com/14607925"
 ---
 
 **Tearing Shadow** is a projection sculpture by **Robert Seidel**, exhibited at **401contemporary gallery in Berlin** from February to April 2013. The installation creates an environment where the boundaries between physical object, projected light, and space become deliberately unstable.
