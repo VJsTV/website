@@ -7,6 +7,7 @@ country: "Netherlands"
 visual_style: "Visual Music, Ultra-Synced Stage Design, Percussive Visuals"
 bio: "Amsterdam-based powerhouse known for creating ultra-synced stage designs where light and video are so tightly locked to the kick drum they feel like a single instrument. Specialists in Visual Music — the philosophy that sound and image are one."
 studio: "Synaesthesik"
+image: "/assets/images/artists/synaesthesik.avif"
 technologies:
   - Resolume Arena
   - TouchDesigner
@@ -14,6 +15,12 @@ technologies:
   - OSC / MIDI
   - Custom Content
 featured: false
+social:
+  instagram: "https://www.instagram.com/synaesthesik"
+  facebook: "https://www.facebook.com/synaesthesik/"
+projects:
+  - "https://vimeo.com/222637983"
+  - "https://vimeo.com/225393569"
 ---
 
 **Synaesthesik** is an Amsterdam-based collective whose central thesis is simple and radical: the light and the sound are one instrument. In their performances, video and lighting are synced to the kick drum with such precision that the visual and auditory elements become perceptually inseparable — audiences experience them not as two things happening simultaneously, but as a single phenomenon.
