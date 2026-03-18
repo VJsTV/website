@@ -222,133 +222,98 @@ meta_description: "VJs TV is the global broadcast network for VJ culture. Watch 
     </iframe>
   </div>
 
-  <!-- SIDEBAR QUEUE -->
-  <div class="vjs-hero-sidebar">
+  <!-- SIDEBAR QUEUE — built dynamically from full project pool -->
+  <div class="vjs-hero-sidebar" id="hero-sidebar">
     <div class="vjs-hero-sidebar-hdr">Popular Projects</div>
-
-    <button class="vjs-hero-card active"
-      data-id="49960413" data-title="Sagrada Familia: Ode à la Vie"
-      data-artist="Moment Factory" data-loc="Barcelona, Spain"
-      data-type="Architectural Projection" data-year="2012"
-      data-bg="rgba(57,255,20,0.35),rgba(0,60,20,0.95)"
-      data-href="/projects/sagrada-familia-moment-factory"
-      onclick="heroPlay(this)">
-      <div class="vjs-hero-card-thumb">
-      </div>
-      <div class="vjs-hero-card-info">
-        <div class="vjs-hero-card-cat">Architectural</div>
-        <div class="vjs-hero-card-title">Sagrada Familia</div>
-        <div class="vjs-hero-card-artist">Moment Factory</div>
-      </div>
-    </button>
-
-    <button class="vjs-hero-card"
-      data-id="66443975" data-title="Chiaroscuro"
-      data-artist="Sougwen Chung" data-loc="New York, USA"
-      data-type="Generative Art Installation" data-year="2013"
-      data-href="/projects/chiaroscuro-sougwen"
-      onclick="heroPlay(this)">
-      <div class="vjs-hero-card-thumb">
-      </div>
-      <div class="vjs-hero-card-info">
-        <div class="vjs-hero-card-cat">Generative Art</div>
-        <div class="vjs-hero-card-title">Chiaroscuro</div>
-        <div class="vjs-hero-card-artist">Sougwen Chung</div>
-      </div>
-    </button>
-
-    <button class="vjs-hero-card"
-      data-id="234010348" data-title="ORANGE — Show Hello!"
-      data-artist="Superbien" data-loc="Paris, France"
-      data-type="Architectural Mapping" data-year="2016"
-      data-href="/projects/orange-superbien"
-      onclick="heroPlay(this)">
-      <div class="vjs-hero-card-thumb">
-      </div>
-      <div class="vjs-hero-card-info">
-        <div class="vjs-hero-card-cat">Projection Mapping</div>
-        <div class="vjs-hero-card-title">ORANGE Show Hello!</div>
-        <div class="vjs-hero-card-artist">Superbien</div>
-      </div>
-    </button>
-
-    <button class="vjs-hero-card"
-      data-id="11767833" data-title="PTA 04"
-      data-artist="Quayola" data-loc="London, UK"
-      data-type="Live AV Performance" data-year="2008"
-      data-href="/projects/pta-04-quayola"
-      onclick="heroPlay(this)">
-      <div class="vjs-hero-card-thumb">
-      </div>
-      <div class="vjs-hero-card-info">
-        <div class="vjs-hero-card-cat">Live AV</div>
-        <div class="vjs-hero-card-title">PTA 04</div>
-        <div class="vjs-hero-card-artist">Quayola</div>
-      </div>
-    </button>
-
-    <button class="vjs-hero-card"
-      data-id="61227321" data-title="Tearing Shadows"
-      data-artist="Robert Seidel" data-loc="Berlin, Germany"
-      data-type="Generative Film" data-year="2013"
-      data-href="/projects/tearing-shadows-seidel"
-      onclick="heroPlay(this)">
-      <div class="vjs-hero-card-thumb">
-      </div>
-      <div class="vjs-hero-card-info">
-        <div class="vjs-hero-card-cat">Generative Art</div>
-        <div class="vjs-hero-card-title">Tearing Shadows</div>
-        <div class="vjs-hero-card-artist">Robert Seidel</div>
-      </div>
-    </button>
-
-    <button class="vjs-hero-card"
-      data-id="51680823" data-title="KOLOBOK"
-      data-artist="SilaSveta" data-loc="Moscow, Russia"
-      data-type="Interactive Projection" data-year="2012"
-      data-href="/projects/kolobok-silasveta"
-      onclick="heroPlay(this)">
-      <div class="vjs-hero-card-thumb">
-      </div>
-      <div class="vjs-hero-card-info">
-        <div class="vjs-hero-card-cat">Projection Mapping</div>
-        <div class="vjs-hero-card-title">KOLOBOK</div>
-        <div class="vjs-hero-card-artist">SilaSveta</div>
-      </div>
-    </button>
-
-    <button class="vjs-hero-card"
-      data-id="15887314" data-title="The LightLine of Gotham"
-      data-artist="seeper" data-loc="New York, USA"
-      data-type="Architectural Projection" data-year="2010"
-      data-href="/projects/lightline-gotham-seeper"
-      onclick="heroPlay(this)">
-      <div class="vjs-hero-card-thumb">
-      </div>
-      <div class="vjs-hero-card-info">
-        <div class="vjs-hero-card-cat">Architectural</div>
-        <div class="vjs-hero-card-title">LightLine of Gotham</div>
-        <div class="vjs-hero-card-artist">seeper</div>
-      </div>
-    </button>
-
-    <button class="vjs-hero-card"
-      data-id="26381610" data-title="A-cero XV Aniversario"
-      data-artist="Onionlab" data-loc="Madrid, Spain"
-      data-type="3D Projection Mapping" data-year="2011"
-      data-href="/projects/a-cero-xv-aniversario"
-      onclick="heroPlay(this)">
-      <div class="vjs-hero-card-thumb">
-      </div>
-      <div class="vjs-hero-card-info">
-        <div class="vjs-hero-card-cat">Projection Mapping</div>
-        <div class="vjs-hero-card-title">A-cero XV</div>
-        <div class="vjs-hero-card-artist">Onionlab</div>
-      </div>
-    </button>
-
   </div>
 </section>
+
+<script>
+/* ── Full project pool (all projects with a Vimeo ID, baked in at build time) ── */
+var VJS_PROJECT_POOL = [
+  {% assign pool = site.projects | where_exp: "p", "p.vimeo_id" %}
+  {% for p in pool %}
+  {
+    id:     "{{ p.vimeo_id }}",
+    title:  {{ p.title | jsonify }},
+    short:  {{ p.title | truncate: 22 | jsonify }},
+    artist: {{ p.artist | default: "" | jsonify }},
+    loc:    {{ p.location | default: "" | jsonify }},
+    type:   {{ p.project_type | default: "Visual Art" | jsonify }},
+    href:   {{ p.url | jsonify }}
+  }{% unless forloop.last %},{% endunless %}
+  {% endfor %}
+];
+
+/* ── Fisher-Yates shuffle → pick 8 → build cards ── */
+(function(){
+  var pool = VJS_PROJECT_POOL.slice();
+  for (var i = pool.length - 1; i > 0; i--) {
+    var j = Math.floor(Math.random() * (i + 1));
+    var t = pool[i]; pool[i] = pool[j]; pool[j] = t;
+  }
+  var picks = pool.slice(0, 8);
+  var sidebar = document.getElementById('hero-sidebar');
+
+  picks.forEach(function(p, idx) {
+    var btn = document.createElement('button');
+    btn.className = 'vjs-hero-card' + (idx === 0 ? ' active' : '');
+    btn.dataset.id     = p.id;
+    btn.dataset.title  = p.title;
+    btn.dataset.artist = p.artist;
+    btn.dataset.loc    = p.loc;
+    btn.dataset.type   = p.type;
+    btn.dataset.href   = p.href;
+    btn.setAttribute('onclick', 'heroPlay(this)');
+
+    /* Shorten type label for the category badge */
+    var cat = p.type.replace(/Projection Mapping/i,'Proj. Mapping')
+                    .replace(/Interactive /i,'')
+                    .replace(/Installation/i,'Install.')
+                    .replace(/Performance/i,'Perf.')
+                    .replace(/ Art$/i,'')
+                    .trim();
+    if (cat.length > 18) cat = cat.substring(0, 18) + '…';
+
+    btn.innerHTML =
+      '<div class="vjs-hero-card-thumb" style="background:#111;"></div>' +
+      '<div class="vjs-hero-card-info">' +
+        '<div class="vjs-hero-card-cat">' + cat + '</div>' +
+        '<div class="vjs-hero-card-title">' + p.short + '</div>' +
+        '<div class="vjs-hero-card-artist">' + p.artist + '</div>' +
+      '</div>';
+
+    sidebar.appendChild(btn);
+  });
+
+  /* Load Vimeo thumbnails for the 8 picked cards */
+  sidebar.querySelectorAll('.vjs-hero-card[data-id]').forEach(function(card) {
+    var id = card.dataset.id;
+    var thumb = card.querySelector('.vjs-hero-card-thumb');
+    if (!thumb) return;
+    fetch('https://vimeo.com/api/oembed.json?url=https://vimeo.com/' + id + '&width=200')
+      .then(function(r){ return r.json(); })
+      .then(function(d){
+        if (d.thumbnail_url) {
+          thumb.style.backgroundImage = 'url(' + d.thumbnail_url + ')';
+          thumb.style.backgroundSize  = 'cover';
+          thumb.style.backgroundPosition = 'center';
+        }
+      }).catch(function(){});
+  });
+
+  /* Activate first pick in the player */
+  var first = picks[0];
+  if (!first) return;
+  document.getElementById('hero-iframe').src =
+    'https://player.vimeo.com/video/' + first.id + '?autoplay=0&title=0&byline=0&portrait=0&color=9d00ff';
+  document.getElementById('hero-title').textContent    = first.title;
+  document.getElementById('hero-artist').textContent   = first.artist + (first.loc ? ' · ' + first.loc.split(',')[0] : '');
+  document.getElementById('hero-tag-type').textContent = first.type;
+  document.getElementById('hero-vimeo-link').href      = 'https://vimeo.com/' + first.id;
+  document.getElementById('hero-project-link').href    = first.href;
+})();
+</script>
 
 <!-- CHYRON BAR — title lives here, below the full video frame -->
 <div class="vjs-hero-chyron" id="hero-chyron">
@@ -385,52 +350,7 @@ function heroPlay(card) {
   card.classList.add('active');
 }
 
-/* Load real Vimeo thumbnails into sidebar queue cards via oEmbed */
-document.querySelectorAll('.vjs-hero-card[data-id]').forEach(function(card) {
-  var id = card.dataset.id;
-  var thumb = card.querySelector('.vjs-hero-card-thumb');
-  if (!thumb) return;
-  fetch('https://vimeo.com/api/oembed.json?url=https://vimeo.com/' + id + '&width=200')
-    .then(function(r){ return r.json(); })
-    .then(function(data){
-      if (data.thumbnail_url) {
-        thumb.style.backgroundImage = 'url(' + data.thumbnail_url + ')';
-        thumb.style.backgroundSize = 'cover';
-        thumb.style.backgroundPosition = 'center';
-      }
-    }).catch(function(){});
-});
-
-/* Shuffle sidebar + pick random active project on every page load */
-(function(){
-  var sidebar = document.querySelector('.vjs-hero-sidebar');
-  if (!sidebar) return;
-
-  /* Collect all cards (exclude the header label) */
-  var cards = Array.prototype.slice.call(sidebar.querySelectorAll('.vjs-hero-card[data-id]'));
-  if (!cards.length) return;
-
-  /* Fisher-Yates shuffle */
-  for (var i = cards.length - 1; i > 0; i--) {
-    var j = Math.floor(Math.random() * (i + 1));
-    var tmp = cards[i]; cards[i] = cards[j]; cards[j] = tmp;
-  }
-
-  /* Re-append in shuffled order (header stays fixed at top) */
-  cards.forEach(function(c) { sidebar.appendChild(c); });
-
-  /* Pick the first card after shuffle as active */
-  var pick = cards[0];
-  sidebar.querySelectorAll('.vjs-hero-card').forEach(function(c){ c.classList.remove('active'); });
-  pick.classList.add('active');
-  document.getElementById('hero-iframe').src =
-    'https://player.vimeo.com/video/' + pick.dataset.id + '?autoplay=0&title=0&byline=0&portrait=0&color=9d00ff';
-  document.getElementById('hero-title').textContent    = pick.dataset.title;
-  document.getElementById('hero-artist').textContent   = pick.dataset.artist + ' · ' + (pick.dataset.loc||'').split(',')[0];
-  document.getElementById('hero-tag-type').textContent = pick.dataset.type;
-  document.getElementById('hero-vimeo-link').href      = 'https://vimeo.com/' + pick.dataset.id;
-  document.getElementById('hero-project-link').href    = pick.dataset.href || '/projects';
-})();
+/* heroPlay is called when a sidebar card is clicked — thumbnails + init handled by VJS_PROJECT_POOL block above */
 </script>
 
 <!-- SPONSOR TICKER -->

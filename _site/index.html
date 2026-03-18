@@ -532,133 +532,598 @@
     </iframe>
   </div>
 
-  <!-- SIDEBAR QUEUE -->
-  <div class="vjs-hero-sidebar">
+  <!-- SIDEBAR QUEUE — built dynamically from full project pool -->
+  <div class="vjs-hero-sidebar" id="hero-sidebar">
     <div class="vjs-hero-sidebar-hdr">Popular Projects</div>
-
-    <button class="vjs-hero-card active"
-      data-id="49960413" data-title="Sagrada Familia: Ode à la Vie"
-      data-artist="Moment Factory" data-loc="Barcelona, Spain"
-      data-type="Architectural Projection" data-year="2012"
-      data-bg="rgba(57,255,20,0.35),rgba(0,60,20,0.95)"
-      data-href="/projects/sagrada-familia-moment-factory"
-      onclick="heroPlay(this)">
-      <div class="vjs-hero-card-thumb">
-      </div>
-      <div class="vjs-hero-card-info">
-        <div class="vjs-hero-card-cat">Architectural</div>
-        <div class="vjs-hero-card-title">Sagrada Familia</div>
-        <div class="vjs-hero-card-artist">Moment Factory</div>
-      </div>
-    </button>
-
-    <button class="vjs-hero-card"
-      data-id="66443975" data-title="Chiaroscuro"
-      data-artist="Sougwen Chung" data-loc="New York, USA"
-      data-type="Generative Art Installation" data-year="2013"
-      data-href="/projects/chiaroscuro-sougwen"
-      onclick="heroPlay(this)">
-      <div class="vjs-hero-card-thumb">
-      </div>
-      <div class="vjs-hero-card-info">
-        <div class="vjs-hero-card-cat">Generative Art</div>
-        <div class="vjs-hero-card-title">Chiaroscuro</div>
-        <div class="vjs-hero-card-artist">Sougwen Chung</div>
-      </div>
-    </button>
-
-    <button class="vjs-hero-card"
-      data-id="234010348" data-title="ORANGE — Show Hello!"
-      data-artist="Superbien" data-loc="Paris, France"
-      data-type="Architectural Mapping" data-year="2016"
-      data-href="/projects/orange-superbien"
-      onclick="heroPlay(this)">
-      <div class="vjs-hero-card-thumb">
-      </div>
-      <div class="vjs-hero-card-info">
-        <div class="vjs-hero-card-cat">Projection Mapping</div>
-        <div class="vjs-hero-card-title">ORANGE Show Hello!</div>
-        <div class="vjs-hero-card-artist">Superbien</div>
-      </div>
-    </button>
-
-    <button class="vjs-hero-card"
-      data-id="11767833" data-title="PTA 04"
-      data-artist="Quayola" data-loc="London, UK"
-      data-type="Live AV Performance" data-year="2008"
-      data-href="/projects/pta-04-quayola"
-      onclick="heroPlay(this)">
-      <div class="vjs-hero-card-thumb">
-      </div>
-      <div class="vjs-hero-card-info">
-        <div class="vjs-hero-card-cat">Live AV</div>
-        <div class="vjs-hero-card-title">PTA 04</div>
-        <div class="vjs-hero-card-artist">Quayola</div>
-      </div>
-    </button>
-
-    <button class="vjs-hero-card"
-      data-id="61227321" data-title="Tearing Shadows"
-      data-artist="Robert Seidel" data-loc="Berlin, Germany"
-      data-type="Generative Film" data-year="2013"
-      data-href="/projects/tearing-shadows-seidel"
-      onclick="heroPlay(this)">
-      <div class="vjs-hero-card-thumb">
-      </div>
-      <div class="vjs-hero-card-info">
-        <div class="vjs-hero-card-cat">Generative Art</div>
-        <div class="vjs-hero-card-title">Tearing Shadows</div>
-        <div class="vjs-hero-card-artist">Robert Seidel</div>
-      </div>
-    </button>
-
-    <button class="vjs-hero-card"
-      data-id="51680823" data-title="KOLOBOK"
-      data-artist="SilaSveta" data-loc="Moscow, Russia"
-      data-type="Interactive Projection" data-year="2012"
-      data-href="/projects/kolobok-silasveta"
-      onclick="heroPlay(this)">
-      <div class="vjs-hero-card-thumb">
-      </div>
-      <div class="vjs-hero-card-info">
-        <div class="vjs-hero-card-cat">Projection Mapping</div>
-        <div class="vjs-hero-card-title">KOLOBOK</div>
-        <div class="vjs-hero-card-artist">SilaSveta</div>
-      </div>
-    </button>
-
-    <button class="vjs-hero-card"
-      data-id="15887314" data-title="The LightLine of Gotham"
-      data-artist="seeper" data-loc="New York, USA"
-      data-type="Architectural Projection" data-year="2010"
-      data-href="/projects/lightline-gotham-seeper"
-      onclick="heroPlay(this)">
-      <div class="vjs-hero-card-thumb">
-      </div>
-      <div class="vjs-hero-card-info">
-        <div class="vjs-hero-card-cat">Architectural</div>
-        <div class="vjs-hero-card-title">LightLine of Gotham</div>
-        <div class="vjs-hero-card-artist">seeper</div>
-      </div>
-    </button>
-
-    <button class="vjs-hero-card"
-      data-id="26381610" data-title="A-cero XV Aniversario"
-      data-artist="Onionlab" data-loc="Madrid, Spain"
-      data-type="3D Projection Mapping" data-year="2011"
-      data-href="/projects/a-cero-xv-aniversario"
-      onclick="heroPlay(this)">
-      <div class="vjs-hero-card-thumb">
-      </div>
-      <div class="vjs-hero-card-info">
-        <div class="vjs-hero-card-cat">Projection Mapping</div>
-        <div class="vjs-hero-card-title">A-cero XV</div>
-        <div class="vjs-hero-card-artist">Onionlab</div>
-      </div>
-    </button>
-
   </div>
 </section>
+
+<script>
+/* ── Full project pool (all projects with a Vimeo ID, baked in at build time) ── */
+var VJS_PROJECT_POOL = [
+  
+  
+  {
+    id:     "5677104",
+    title:  "555 KUBIK — Extended Version",
+    short:  "555 KUBIK — Extende...",
+    artist: "Urban Screen",
+    loc:    "Hamburg, Germany",
+    type:   "Architectural Projection Mapping",
+    href:   "/projects/555-kubik-extended-urbanscreen"
+  },
+  
+  {
+    id:     "5595869",
+    title:  "555 KUBIK",
+    short:  "555 KUBIK",
+    artist: "Urban Screen",
+    loc:    "Hamburg, Germany",
+    type:   "Architectural Projection Mapping",
+    href:   "/projects/555-kubik-urbanscreen"
+  },
+  
+  {
+    id:     "26381610",
+    title:  "A-cero XV Aniversario",
+    short:  "A-cero XV Aniversario",
+    artist: "Onionlab",
+    loc:    "Madrid, Spain",
+    type:   "3D Projection Mapping",
+    href:   "/projects/a-cero-xv-aniversario"
+  },
+  
+  {
+    id:     "639538404",
+    title:  "Adventure Golf",
+    short:  "Adventure Golf",
+    artist: "seeper",
+    loc:    "London, United Kingdom",
+    type:   "Interactive Experience Design",
+    href:   "/projects/adventure-golf-seeper"
+  },
+  
+  {
+    id:     "1449981",
+    title:  "Augmented Sculpture Series",
+    short:  "Augmented Sculpture...",
+    artist: "Pablo Valbuena",
+    loc:    "Madrid, Spain",
+    type:   "Site-specific Projection Installation",
+    href:   "/projects/augmented-sculpture-valbuena"
+  },
+  
+  {
+    id:     "186508810",
+    title:  "BARNS",
+    short:  "BARNS",
+    artist: "Klip Collective",
+    loc:    "Longwood Gardens, Pennsylvania, USA",
+    type:   "Architectural Projection Mapping",
+    href:   "/projects/barns-klip-collective"
+  },
+  
+  {
+    id:     "277671987",
+    title:  "Borderless",
+    short:  "Borderless",
+    artist: "teamLab",
+    loc:    "Tokyo, Japan",
+    type:   "Immersive Digital Installation",
+    href:   "/projects/borderless-teamlab"
+  },
+  
+  {
+    id:     "66443975",
+    title:  "Chiaroscuro",
+    short:  "Chiaroscuro",
+    artist: "Sougwen Chung",
+    loc:    "New York, USA",
+    type:   "Immersive Installation",
+    href:   "/projects/chiaroscuro-sougwen"
+  },
+  
+  {
+    id:     "82985272",
+    title:  "Chronos",
+    short:  "Chronos",
+    artist: "Yannick Jacquet",
+    loc:    "Brussels, Belgium",
+    type:   "Projection Installation",
+    href:   "/projects/chronos-yannick-jacquet"
+  },
+  
+  {
+    id:     "2291898",
+    title:  "CINESTHESY 1.0 Full",
+    short:  "CINESTHESY 1.0 Full",
+    artist: "SATI",
+    loc:    "France",
+    type:   "Live Audiovisual Performance",
+    href:   "/projects/cinesthesy-visionsonic"
+  },
+  
+  {
+    id:     "34462583",
+    title:  "COHERENT STATES",
+    short:  "COHERENT STATES",
+    artist: "Urban Screen",
+    loc:    "Bad Rothenfelde, Germany",
+    type:   "Architectural Projection Mapping",
+    href:   "/projects/coherent-states-urbanscreen"
+  },
+  
+  {
+    id:     "193840016",
+    title:  "Column",
+    short:  "Column",
+    artist: "United Visual Artists",
+    loc:    "London, UK",
+    type:   "Light Installation",
+    href:   "/projects/column-uva"
+  },
+  
+  {
+    id:     "120757263",
+    title:  "Communion",
+    short:  "Communion",
+    artist: "Universal Everything",
+    loc:    "Sheffield, UK",
+    type:   "Digital Art / Installation",
+    href:   "/projects/communion-universal-everything"
+  },
+  
+  {
+    id:     "324872156",
+    title:  "CONSTELLATIONS",
+    short:  "CONSTELLATIONS",
+    artist: "Joanie Lemercier",
+    loc:    "Various / International",
+    type:   "Public AV Installation",
+    href:   "/projects/constellations-lemercier"
+  },
+  
+  {
+    id:     "74296099",
+    title:  "Daydream",
+    short:  "Daydream",
+    artist: "nonotak",
+    loc:    "Paris, France",
+    type:   "Light & Sound Installation",
+    href:   "/projects/daydream-nonotak"
+  },
+  
+  {
+    id:     "61063693",
+    title:  "DNA",
+    short:  "DNA",
+    artist: "DVEIN",
+    loc:    "Barcelona, Spain",
+    type:   "Motion Graphics / Art",
+    href:   "/projects/dna-dvein"
+  },
+  
+  {
+    id:     "11707350",
+    title:  "ENGHIEN",
+    short:  "ENGHIEN",
+    artist: "AntiVJ",
+    loc:    "Bains Numériques Festival, Enghien-les-Bains, France",
+    type:   "Live AV Performance",
+    href:   "/projects/enghien-antivj"
+  },
+  
+  {
+    id:     "32811205",
+    title:  "EYJAFJALLAJÖKULL",
+    short:  "EYJAFJALLAJÖKULL",
+    artist: "Joanie Lemercier",
+    loc:    "Various",
+    type:   "Light Installation",
+    href:   "/projects/eyjafjallajokull-lemercier"
+  },
+  
+  {
+    id:     "196268044",
+    title:  "2016 in Review",
+    short:  "2016 in Review",
+    artist: "seeper",
+    loc:    "London, United Kingdom",
+    type:   "Year in Review / Documentation",
+    href:   "/projects/festive-2016-seeper"
+  },
+  
+  {
+    id:     "111375287",
+    title:  "FUJI (不死)",
+    short:  "FUJI (不死)",
+    artist: "Joanie Lemercier",
+    loc:    "Various / International",
+    type:   "Audiovisual Installation",
+    href:   "/projects/fuji-lemercier"
+  },
+  
+  {
+    id:     "27489221",
+    title:  "IDOMENEO — Behind the Scenes",
+    short:  "IDOMENEO — Behind t...",
+    artist: "Urban Screen",
+    loc:    "Germany",
+    type:   "Opera Stage Design / Documentary",
+    href:   "/projects/idomeneo-urbanscreen"
+  },
+  
+  {
+    id:     "107133731",
+    title:  "Studio Reel",
+    short:  "Studio Reel",
+    artist: "Klip Collective",
+    loc:    "Philadelphia, Pennsylvania, USA",
+    type:   "Showreel / Documentation",
+    href:   "/projects/klip-reel"
+  },
+  
+  {
+    id:     "51680823",
+    title:  "KOLOBOK",
+    short:  "KOLOBOK",
+    artist: "SilaSveta",
+    loc:    "Moscow, Russia",
+    type:   "Interactive Architectural Projection",
+    href:   "/projects/kolobok-silasveta"
+  },
+  
+  {
+    id:     "27080899",
+    title:  "Labitat",
+    short:  "Labitat",
+    artist: "1024 Architecture",
+    loc:    "Paris, France",
+    type:   "Interactive Installation",
+    href:   "/projects/labitat-1024"
+  },
+  
+  {
+    id:     "260612034",
+    title:  "Learning to See",
+    short:  "Learning to See",
+    artist: "Memo Akten",
+    loc:    "Los Angeles / International",
+    type:   "Machine Learning Installation",
+    href:   "/projects/learning-to-see-akten"
+  },
+  
+  {
+    id:     "15887314",
+    title:  "The LightLine of Gotham",
+    short:  "The LightLine of Go...",
+    artist: "seeper",
+    loc:    "New York City, USA",
+    type:   "Architectural Projection Mapping",
+    href:   "/projects/lightline-gotham-seeper"
+  },
+  
+  {
+    id:     "1016061113",
+    title:  "Little Big City Beijing",
+    short:  "Little Big City Bei...",
+    artist: "seeper",
+    loc:    "Beijing, China",
+    type:   "Immersive Installation",
+    href:   "/projects/little-big-city-beijing-seeper"
+  },
+  
+  {
+    id:     "73671956",
+    title:  "Live with MiraCalix",
+    short:  "Live with MiraCalix",
+    artist: "Quayola",
+    loc:    "International",
+    type:   "Live Audiovisual Concert",
+    href:   "/projects/live-with-miracalix"
+  },
+  
+  {
+    id:     "7063106",
+    title:  "London Digital Week",
+    short:  "London Digital Week",
+    artist: "seeper",
+    loc:    "Truman Brewery, London, United Kingdom",
+    type:   "Interactive Installation",
+    href:   "/projects/london-digital-week-seeper"
+  },
+  
+  {
+    id:     "41294274",
+    title:  "Luminance",
+    short:  "Luminance",
+    artist: "Klip Collective",
+    loc:    "Longwood Gardens, Pennsylvania, USA",
+    type:   "Architectural Projection Mapping",
+    href:   "/projects/luminance-klip"
+  },
+  
+  {
+    id:     "238933303",
+    title:  "NINJA DRESSED IN NEON",
+    short:  "NINJA DRESSED IN NEON",
+    artist: "Caio Todomundo",
+    loc:    "Brazil",
+    type:   "VJ Set",
+    href:   "/projects/ninja-dressed-neon"
+  },
+  
+  {
+    id:     "2141464",
+    title:  "Nuit Blanche Bruxelles",
+    short:  "Nuit Blanche Bruxelles",
+    artist: "AntiVJ",
+    loc:    "Mont des Arts, Brussels, Belgium",
+    type:   "Public Light Installation",
+    href:   "/projects/nuit-blanche-bruxelles-antivj"
+  },
+  
+  {
+    id:     "41475403",
+    title:  "O (Omicron) — Making Of",
+    short:  "O (Omicron) — Makin...",
+    artist: "Romain Tardy",
+    loc:    "Hala Stulecia, Wrocław, Poland",
+    type:   "Documentary / Behind the Scenes",
+    href:   "/projects/o-omicron-making-of"
+  },
+  
+  {
+    id:     "41486619",
+    title:  "O (Omicron)",
+    short:  "O (Omicron)",
+    artist: "Romain Tardy",
+    loc:    "Hala Stulecia, Wrocław, Poland",
+    type:   "Permanent AV Installation",
+    href:   "/projects/o-omicron-tardy"
+  },
+  
+  {
+    id:     "82696256",
+    title:  "OLO",
+    short:  "OLO",
+    artist: "Romain Tardy / Murcof",
+    loc:    "Brussels, Belgium",
+    type:   "Projection Installation / AV Performance",
+    href:   "/projects/olo-romain-tardy"
+  },
+  
+  {
+    id:     "234010348",
+    title:  "ORANGE — Show Hello!",
+    short:  "ORANGE — Show Hello!",
+    artist: "Superbien",
+    loc:    "Paris, France",
+    type:   "Architectural Projection Mapping",
+    href:   "/projects/orange-superbien"
+  },
+  
+  {
+    id:     "405249420",
+    title:  "Origami Light Sculptures",
+    short:  "Origami Light Sculp...",
+    artist: "Joanie Lemercier",
+    loc:    "Online / International",
+    type:   "Workshop / Tutorial",
+    href:   "/projects/origami-light-lemercier"
+  },
+  
+  {
+    id:     "63167761",
+    title:  "Oscillating Continuum",
+    short:  "Oscillating Continuum",
+    artist: "Ryoichi Kurokawa",
+    loc:    "International",
+    type:   "Audiovisual Installation",
+    href:   "/projects/oscillating-continuum"
+  },
+  
+  {
+    id:     "6580885",
+    title:  "Particle",
+    short:  "Particle",
+    artist: "D-Fuse",
+    loc:    "São Paulo, Brazil",
+    type:   "Live Performance",
+    href:   "/projects/particle-dfuse"
+  },
+  
+  {
+    id:     "2981936",
+    title:  "PINWALL",
+    short:  "PINWALL",
+    artist: "Urban Screen",
+    loc:    "Bremen, Germany",
+    type:   "Interactive Facade Installation",
+    href:   "/projects/pinwall-urbanscreen"
+  },
+  
+  {
+    id:     "11767833",
+    title:  "PTA 04",
+    short:  "PTA 04",
+    artist: "Quayola",
+    loc:    "International",
+    type:   "Live Audiovisual Performance",
+    href:   "/projects/pta-04-quayola"
+  },
+  
+  {
+    id:     "49960413",
+    title:  "Sagrada Familia: Ode à la Vie",
+    short:  "Sagrada Familia: Od...",
+    artist: "Moment Factory",
+    loc:    "Barcelona, Spain",
+    type:   "Architectural Projection Mapping",
+    href:   "/projects/sagrada-familia-ode"
+  },
+  
+  {
+    id:     "131636955",
+    title:  "Sculpture Factory",
+    short:  "Sculpture Factory",
+    artist: "Quayola",
+    loc:    "Various",
+    type:   "Generative Installation",
+    href:   "/projects/sculpture-factory-quayola"
+  },
+  
+  {
+    id:     "154836280",
+    title:  "seeper Showreel 2015",
+    short:  "seeper Showreel 2015",
+    artist: "seeper",
+    loc:    "London, United Kingdom",
+    type:   "Showreel / Documentation",
+    href:   "/projects/showreel-2015-seeper"
+  },
+  
+  {
+    id:     "10165674",
+    title:  "SONGDO",
+    short:  "SONGDO",
+    artist: "AntiVJ",
+    loc:    "New Songdo City, South Korea",
+    type:   "Live AV Performance",
+    href:   "/projects/songdo-antivj"
+  },
+  
+  {
+    id:     "45835867",
+    title:  "Sydney Opera House",
+    short:  "Sydney Opera House",
+    artist: "Urban Screen",
+    loc:    "Sydney, Australia",
+    type:   "Architectural Projection Mapping",
+    href:   "/projects/sydney-opera-house-urbanscreen"
+  },
+  
+  {
+    id:     "61227321",
+    title:  "Tearing Shadows",
+    short:  "Tearing Shadows",
+    artist: "Robert Seidel",
+    loc:    "Berlin, Germany",
+    type:   "Projection Sculpture",
+    href:   "/projects/tearing-shadows-seidel"
+  },
+  
+  {
+    id:     "289764256",
+    title:  "Videodrome",
+    short:  "Videodrome",
+    artist: "Playmodes",
+    loc:    "Barcelona, Spain",
+    type:   "Live AV Performance",
+    href:   "/projects/videodrome-playmodes"
+  },
+  
+  {
+    id:     "1041069703",
+    title:  "seeper Wrapped 2024",
+    short:  "seeper Wrapped 2024",
+    artist: "seeper",
+    loc:    "London, United Kingdom",
+    type:   "Year in Review / Documentation",
+    href:   "/projects/wrapped-2024-seeper"
+  },
+  
+  {
+    id:     "17113916",
+    title:  "Xbox Kinect Launch",
+    short:  "Xbox Kinect Launch",
+    artist: "seeper",
+    loc:    "Stachus Square, Munich, Germany",
+    type:   "Interactive Projection Mapping",
+    href:   "/projects/xbox-kinect-launch-seeper"
+  },
+  
+  {
+    id:     "138240116",
+    title:  "ZORAH",
+    short:  "ZORAH",
+    artist: "Bart Kresa Studio",
+    loc:    "Burning Man, Nevada, USA",
+    type:   "Architectural Projection Mapping",
+    href:   "/projects/zorah-bart-kresa"
+  }
+  
+];
+
+/* ── Fisher-Yates shuffle → pick 8 → build cards ── */
+(function(){
+  var pool = VJS_PROJECT_POOL.slice();
+  for (var i = pool.length - 1; i > 0; i--) {
+    var j = Math.floor(Math.random() * (i + 1));
+    var t = pool[i]; pool[i] = pool[j]; pool[j] = t;
+  }
+  var picks = pool.slice(0, 8);
+  var sidebar = document.getElementById('hero-sidebar');
+
+  picks.forEach(function(p, idx) {
+    var btn = document.createElement('button');
+    btn.className = 'vjs-hero-card' + (idx === 0 ? ' active' : '');
+    btn.dataset.id     = p.id;
+    btn.dataset.title  = p.title;
+    btn.dataset.artist = p.artist;
+    btn.dataset.loc    = p.loc;
+    btn.dataset.type   = p.type;
+    btn.dataset.href   = p.href;
+    btn.setAttribute('onclick', 'heroPlay(this)');
+
+    /* Shorten type label for the category badge */
+    var cat = p.type.replace(/Projection Mapping/i,'Proj. Mapping')
+                    .replace(/Interactive /i,'')
+                    .replace(/Installation/i,'Install.')
+                    .replace(/Performance/i,'Perf.')
+                    .replace(/ Art$/i,'')
+                    .trim();
+    if (cat.length > 18) cat = cat.substring(0, 18) + '…';
+
+    btn.innerHTML =
+      '<div class="vjs-hero-card-thumb" style="background:#111;"></div>' +
+      '<div class="vjs-hero-card-info">' +
+        '<div class="vjs-hero-card-cat">' + cat + '</div>' +
+        '<div class="vjs-hero-card-title">' + p.short + '</div>' +
+        '<div class="vjs-hero-card-artist">' + p.artist + '</div>' +
+      '</div>';
+
+    sidebar.appendChild(btn);
+  });
+
+  /* Load Vimeo thumbnails for the 8 picked cards */
+  sidebar.querySelectorAll('.vjs-hero-card[data-id]').forEach(function(card) {
+    var id = card.dataset.id;
+    var thumb = card.querySelector('.vjs-hero-card-thumb');
+    if (!thumb) return;
+    fetch('https://vimeo.com/api/oembed.json?url=https://vimeo.com/' + id + '&width=200')
+      .then(function(r){ return r.json(); })
+      .then(function(d){
+        if (d.thumbnail_url) {
+          thumb.style.backgroundImage = 'url(' + d.thumbnail_url + ')';
+          thumb.style.backgroundSize  = 'cover';
+          thumb.style.backgroundPosition = 'center';
+        }
+      }).catch(function(){});
+  });
+
+  /* Activate first pick in the player */
+  var first = picks[0];
+  if (!first) return;
+  document.getElementById('hero-iframe').src =
+    'https://player.vimeo.com/video/' + first.id + '?autoplay=0&title=0&byline=0&portrait=0&color=9d00ff';
+  document.getElementById('hero-title').textContent    = first.title;
+  document.getElementById('hero-artist').textContent   = first.artist + (first.loc ? ' · ' + first.loc.split(',')[0] : '');
+  document.getElementById('hero-tag-type').textContent = first.type;
+  document.getElementById('hero-vimeo-link').href      = 'https://vimeo.com/' + first.id;
+  document.getElementById('hero-project-link').href    = first.href;
+})();
+</script>
 
 <!-- CHYRON BAR — title lives here, below the full video frame -->
 <div class="vjs-hero-chyron" id="hero-chyron">
@@ -695,52 +1160,7 @@ function heroPlay(card) {
   card.classList.add('active');
 }
 
-/* Load real Vimeo thumbnails into sidebar queue cards via oEmbed */
-document.querySelectorAll('.vjs-hero-card[data-id]').forEach(function(card) {
-  var id = card.dataset.id;
-  var thumb = card.querySelector('.vjs-hero-card-thumb');
-  if (!thumb) return;
-  fetch('https://vimeo.com/api/oembed.json?url=https://vimeo.com/' + id + '&width=200')
-    .then(function(r){ return r.json(); })
-    .then(function(data){
-      if (data.thumbnail_url) {
-        thumb.style.backgroundImage = 'url(' + data.thumbnail_url + ')';
-        thumb.style.backgroundSize = 'cover';
-        thumb.style.backgroundPosition = 'center';
-      }
-    }).catch(function(){});
-});
-
-/* Shuffle sidebar + pick random active project on every page load */
-(function(){
-  var sidebar = document.querySelector('.vjs-hero-sidebar');
-  if (!sidebar) return;
-
-  /* Collect all cards (exclude the header label) */
-  var cards = Array.prototype.slice.call(sidebar.querySelectorAll('.vjs-hero-card[data-id]'));
-  if (!cards.length) return;
-
-  /* Fisher-Yates shuffle */
-  for (var i = cards.length - 1; i > 0; i--) {
-    var j = Math.floor(Math.random() * (i + 1));
-    var tmp = cards[i]; cards[i] = cards[j]; cards[j] = tmp;
-  }
-
-  /* Re-append in shuffled order (header stays fixed at top) */
-  cards.forEach(function(c) { sidebar.appendChild(c); });
-
-  /* Pick the first card after shuffle as active */
-  var pick = cards[0];
-  sidebar.querySelectorAll('.vjs-hero-card').forEach(function(c){ c.classList.remove('active'); });
-  pick.classList.add('active');
-  document.getElementById('hero-iframe').src =
-    'https://player.vimeo.com/video/' + pick.dataset.id + '?autoplay=0&title=0&byline=0&portrait=0&color=9d00ff';
-  document.getElementById('hero-title').textContent    = pick.dataset.title;
-  document.getElementById('hero-artist').textContent   = pick.dataset.artist + ' · ' + (pick.dataset.loc||'').split(',')[0];
-  document.getElementById('hero-tag-type').textContent = pick.dataset.type;
-  document.getElementById('hero-vimeo-link').href      = 'https://vimeo.com/' + pick.dataset.id;
-  document.getElementById('hero-project-link').href    = pick.dataset.href || '/projects';
-})();
+/* heroPlay is called when a sidebar card is clicked — thumbnails + init handled by VJS_PROJECT_POOL block above */
 </script>
 
 <!-- SPONSOR TICKER -->
