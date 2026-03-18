@@ -280,6 +280,68 @@ app.post("/api/report", rateLimit(120000, 3), async (req, res) => {
   }
 });
 
+app.post("/api/partner", rateLimit(300000, 3), async (req, res) => {
+  try {
+    var data = req.body;
+
+    var fullName = (data.full_name || "").trim().slice(0, 100);
+    var company = (data.company || "").trim().slice(0, 200);
+    var email = (data.email || "").trim().slice(0, 200);
+    var tier = (data.tier || "").trim().slice(0, 100);
+    var message = (data.message || "").trim().slice(0, 3000);
+
+    if (!fullName || !email || !message) {
+      return res.status(400).json({ success: false, error: "Name, email, and message are required." });
+    }
+
+    if (data.website_url) {
+      return res.json({ success: true });
+    }
+
+    var issueTitle = "SPONSORS & PARTNERS \u2013 " + (company || fullName);
+
+    var issueBody = [
+      "## Partnership Enquiry",
+      "",
+      "**Name:** " + fullName,
+      "**Company:** " + (company || "N/A"),
+      "**Email:** " + email,
+      "**Partnership Tier:** " + (tier || "Not sure yet"),
+      "",
+      "### Brand & Goals",
+      "",
+      message,
+      "",
+      "---",
+      "*Submitted via vjstv.com sponsors page*",
+    ].join("\n");
+
+    var connectors = new ReplitConnectors();
+    var response = await connectors.proxy("github", "/repos/" + REPO_OWNER + "/" + REPO_NAME + "/issues", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({
+        title: issueTitle,
+        body: issueBody,
+        labels: ["partnership"],
+      }),
+    });
+
+    var result = await response.json();
+
+    if (result.id) {
+      console.log("Partnership enquiry created: #" + result.number + " - " + issueTitle);
+      return res.json({ success: true, issue_number: result.number });
+    } else {
+      console.error("GitHub API error:", JSON.stringify(result));
+      return res.status(502).json({ success: false, error: "Failed to send enquiry. Please try again." });
+    }
+  } catch (err) {
+    console.error("Partner enquiry error:", err.message);
+    return res.status(500).json({ success: false, error: "Server error. Please try again later." });
+  }
+});
+
 app.get("/api/health", function (req, res) {
   res.json({ status: "ok", timestamp: new Date().toISOString() });
 });

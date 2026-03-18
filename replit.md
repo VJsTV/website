@@ -71,9 +71,11 @@ VJs TV is a Jekyll-based platform for VJ culture and audiovisual performances. I
 - **Endpoints:**
   - `POST /api/submit` — create submission Issue (rate limited: 3/5min)
   - `POST /api/report` — report issue on any detail page (rate limited: 3/2min)
+  - `POST /api/partner` — partnership enquiry from sponsors page (rate limited: 3/5min, label: `partnership`)
   - `GET /api/projects` — fetch approved Issues
   - `GET /api/health` — health check
 - **Report Feature:** "Report an Issue" button in sidebar of all `vjs-detail` pages + footer of every page; modal → creates GitHub Issue with `report` label
+- **Partnership Form:** "Send Partnership Enquiry" on `/sponsors/` and "Get in Touch" on `/business-model/` both POST to `/api/partner` → creates GitHub Issue titled "SPONSORS & PARTNERS – {company}" with `partnership` label
 - **Security:** Honeypot spam field, per-IP rate limiting, input trimming/length caps, 50KB body limit
 
 ## Development

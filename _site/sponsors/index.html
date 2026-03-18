@@ -498,41 +498,43 @@
         <div style="background:var(--vjs-card); border:1px solid var(--vjs-border); border-radius:20px; padding:2.5rem;">
           <h3 style="font-family:'Space Grotesk',sans-serif; font-size:1.25rem; font-weight:700; margin-bottom:1.5rem; color:#fff;">Start a Conversation</h3>
           <form id="sponsor-contact-form" onsubmit="vjsSponsorSubmit(event)">
+            <div style="position:absolute;left:-9999px;"><input type="text" name="website_url" tabindex="-1" autocomplete="off" /></div>
             <div class="vjs-form-row">
               <div class="vjs-form-group">
                 <label class="vjs-form-label">Full Name</label>
-                <input type="text" class="vjs-form-input" placeholder="Alex Smith" required />
+                <input type="text" name="full_name" class="vjs-form-input" placeholder="Alex Smith" required />
               </div>
               <div class="vjs-form-group">
                 <label class="vjs-form-label">Company</label>
-                <input type="text" class="vjs-form-input" placeholder="Your Brand Inc." required />
+                <input type="text" name="company" class="vjs-form-input" placeholder="Your Brand Inc." required />
               </div>
             </div>
             <div class="vjs-form-row">
               <div class="vjs-form-group">
                 <label class="vjs-form-label">Email</label>
-                <input type="email" class="vjs-form-input" placeholder="you@brand.com" required />
+                <input type="email" name="email" class="vjs-form-input" placeholder="you@brand.com" required />
               </div>
               <div class="vjs-form-group">
                 <label class="vjs-form-label">Partnership Tier</label>
-                <select class="vjs-form-input" style="cursor:pointer;">
+                <select name="tier" class="vjs-form-input" style="cursor:pointer;">
                   <option value="">Not sure yet</option>
-                  <option>Title Sponsor</option>
-                  <option>Technology Partner</option>
-                  <option>Creative Partner</option>
-                  <option>Equipment Partner</option>
+                  <option value="Title Sponsor">Title Sponsor</option>
+                  <option value="Technology Partner">Technology Partner</option>
+                  <option value="Creative Partner">Creative Partner</option>
+                  <option value="Equipment Partner">Equipment Partner</option>
                 </select>
               </div>
             </div>
             <div class="vjs-form-group">
               <label class="vjs-form-label">Tell us about your brand &amp; goals</label>
-              <textarea class="vjs-form-textarea" placeholder="What are you hoping to achieve through this partnership? Any specific events, artists, or campaigns in mind?" required></textarea>
+              <textarea name="message" class="vjs-form-textarea" placeholder="What are you hoping to achieve through this partnership? Any specific events, artists, or campaigns in mind?" required></textarea>
             </div>
             <button type="submit" id="sponsor-submit-btn" class="vjs-btn vjs-btn-sponsor" style="width:100%; padding:16px 24px; font-size:0.95rem;">Send Partnership Enquiry</button>
             <div id="sponsor-contact-success" style="display:none; text-align:center; padding:2rem; color:var(--vjs-cyan); font-family:'Space Grotesk',sans-serif;">
               <div style="font-size:2rem; margin-bottom:0.75rem;">&#10003;</div>
               <strong>Thank you!</strong> We'll be in touch within 48 hours with a tailored proposal.
             </div>
+            <div id="sponsor-contact-error" style="display:none; text-align:center; padding:1rem; color:#ff4444; font-size:0.9rem; margin-top:1rem;"></div>
           </form>
         </div>
       </div>
@@ -990,12 +992,50 @@ document.addEventListener('keydown', function(e) { if (e.key === 'Escape') close
 // Form submit
 function vjsSponsorSubmit(e) {
   e.preventDefault();
+  var form = document.getElementById('sponsor-contact-form');
   var btn = document.getElementById('sponsor-submit-btn');
+  var errDiv = document.getElementById('sponsor-contact-error');
+  errDiv.style.display = 'none';
+
+  var hp = form.querySelector('[name="website_url"]');
+  if (hp && hp.value) return;
+
+  var fullName = (form.querySelector('[name="full_name"]').value || '').trim();
+  var company = (form.querySelector('[name="company"]').value || '').trim();
+  var email = (form.querySelector('[name="email"]').value || '').trim();
+  var tier = (form.querySelector('[name="tier"]').value || '').trim();
+  var message = (form.querySelector('[name="message"]').value || '').trim();
+
+  if (!fullName || !email || !message) return;
+
   btn.textContent = 'Sending...'; btn.disabled = true;
-  setTimeout(function() {
-    document.getElementById('sponsor-contact-form').style.display = 'none';
-    document.getElementById('sponsor-contact-success').style.display = 'block';
-  }, 900);
+
+  fetch('/api/partner', {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({
+      full_name: fullName,
+      company: company,
+      email: email,
+      tier: tier,
+      message: message
+    })
+  })
+  .then(function(res) { return res.json().then(function(d) { return { ok: res.ok, data: d }; }); })
+  .then(function(r) {
+    if (r.ok && r.data.success) {
+      form.style.display = 'none';
+      document.getElementById('sponsor-contact-success').style.display = 'block';
+    } else {
+      throw new Error(r.data.error || 'Something went wrong');
+    }
+  })
+  .catch(function(err) {
+    errDiv.textContent = err.message || 'Failed to send. Please try again.';
+    errDiv.style.display = 'block';
+    btn.textContent = 'Send Partnership Enquiry';
+    btn.disabled = false;
+  });
 }
 
 // Scroll reveal
