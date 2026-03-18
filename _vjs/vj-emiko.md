@@ -2,17 +2,23 @@
 layout: vjs-detail
 title: "VJ Emiko"
 name: "vj-emiko"
-location: "Europe"
-country: "International"
+location: "Warszawa, Polska"
+country: "Poland"
 visual_style: "Minimalist Techno Visuals, Long-Form Transformation, Hypnotic Dark Aesthetics"
-bio: "A respected veteran of the European techno underground, known for deep, dark, and minimalist visual sets built for marathon listening. Her approach focuses on long-form transformation over rapid cutting — visual work designed for 4-hour sets at venues like Dour Festival."
+bio: "Warszawa-based respected veteran of the European techno underground, known for deep, dark, and minimalist visual sets built for marathon listening. Her approach focuses on long-form transformation over rapid cutting — visual work designed for 4-hour sets at venues like Dour Festival."
 studio: "Independent"
+image: "/assets/images/artists/vj-emiko.avif"
 technologies:
   - Resolume Arena
   - TouchDesigner
   - Custom Content
   - Audio-reactive Systems
 featured: false
+social:
+  vimeo: "https://vimeo.com/vjemiko"
+  instagram: "https://www.instagram.com/emiko__okime/"
+projects:
+  - "https://vimeo.com/348904148"
 ---
 
 **VJ Emiko** is one of the European underground techno scene's most respected visual artists — a practitioner whose approach is as patient, considered, and deeply musical as the DJs she works alongside.
