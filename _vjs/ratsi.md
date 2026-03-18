@@ -7,6 +7,7 @@ country: "France"
 visual_style: "Generative Geometry, Data-Driven Abstraction, Controlled Chaos"
 bio: "Paris-based VJ and generative visual artist known for precisely structured abstract systems that evolve slowly across long sets. Ratsi's work lives at the intersection of mathematics and music — building visual environments from geometric primitives that respond to electronic music with rigorous intelligence."
 studio: "Independent"
+image: "/assets/images/artists/ratsi.jpg"
 technologies:
   - Processing
   - OpenFrameworks
@@ -14,9 +15,11 @@ technologies:
   - Audio-reactive Systems
   - Custom Generative Code
 featured: false
-website: "http://ratsi.com"
+website: "https://www.ratsi.com"
 social:
   vimeo: "https://vimeo.com/ratsi"
+projects:
+  - "https://vimeo.com/155308126"
 ---
 
 **Ratsi** is a Paris-based VJ and generative visual artist whose work is defined by mathematical precision and a deep relationship with electronic music. Building visual environments from geometric primitives — grids, vectors, particles, fields — Ratsi constructs performances that evolve with the patience and intelligence of live composition rather than the frenetic energy of rapid-cut video.
