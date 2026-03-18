@@ -7,6 +7,7 @@ country: "Spain"
 visual_style: "Augmented Space, Light and Architecture, Spatial Perception"
 bio: "Madrid-based artist working with time, light, and space to create site-specific interventions that augment the perception of architecture. Pablo Valbuena's 'Augmented Sculpture Series' and light installations dissolve the boundary between physical structure and projected image — revealing hidden spatial dimensions with minimal means."
 studio: "Independent"
+image: "/assets/images/artists/pablo-valbuena.avif"
 technologies:
   - Custom Projection Systems
   - Architectural Scanning
@@ -17,6 +18,8 @@ featured: true
 website: "https://pablovalbuena.com"
 social:
   vimeo: "https://vimeo.com/pablovalbuena"
+projects:
+  - "https://vimeo.com/70587267"
 ---
 
 **Pablo Valbuena** is a Madrid-based artist whose practice investigates the space between physical architecture and its digital augmentation. Working with projection, light, and time, Valbuena creates site-specific installations that reveal the hidden spatial dimensions of built environments — using light not to decorate surfaces but to expose their geometric logic.
