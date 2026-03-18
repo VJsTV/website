@@ -2,11 +2,12 @@
 layout: vjs-detail
 title: "Quayola"
 name: "quayola"
-location: "London, United Kingdom"
-country: "United Kingdom"
+location: "Roma, Italy"
+country: "Italy"
 visual_style: "Generative Art, Audiovisual Performance, Classical Reinterpretation"
-bio: "London-based Italian artist working at the intersection of computational art, classical culture, and live audiovisual performance. Quayola translates art history, music, and nature into hybrid digital experiences of extraordinary precision and beauty."
+bio: "Roma-based Italian artist working at the intersection of computational art, classical culture, and live audiovisual performance. Quayola translates art history, music, and nature into hybrid digital experiences of extraordinary precision and beauty."
 studio: "Studio Quayola"
+image: "/assets/images/artists/quayola.jpg"
 technologies:
   - Real-time Rendering
   - Custom Software
@@ -20,7 +21,7 @@ social:
   instagram: "https://instagram.com/quayola"
 ---
 
-**Quayola** is a London-based Italian artist whose practice spans audiovisual performance, installation, sculpture, and print — united by a rigorous investigation into the relationship between old and new, human and machine, classical beauty and computational process.
+**Quayola** is a Roma-based Italian artist whose practice spans audiovisual performance, installation, sculpture, and print — united by a rigorous investigation into the relationship between old and new, human and machine, classical beauty and computational process.
 
 His live performances — including the *PTA* series and collaborations with musicians like **Mira Calix** — are studies in precision: generative visuals that respond to sound with the exactness of a mathematical proof and the expressiveness of improvised music. The tension between order and emergence is the defining characteristic of his live work.
 
