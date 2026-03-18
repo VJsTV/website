@@ -29,6 +29,9 @@ future: true
 highlighter: rouge
 
 exclude:
+  - .local
+  - .replit
+  - attached_assets
   - portfolios
   - _portfolio
   - blogs
@@ -50,3 +53,6 @@ exclude:
   - README.md
   - Gemfile
   - Gemfile.lock
+  - replit.md
+  - node_modules
+  - vendor

@@ -606,17 +606,16 @@ function vjsTipAmount(amt) {
       var id = el.getAttribute('data-vimeo');
       if (!id || el.dataset.vjsThumbLoaded) return;
       el.dataset.vjsThumbLoaded = '1';
-      fetch('https://vimeo.com/api/v2/video/' + id + '.json')
+      fetch('https://vimeo.com/api/oembed.json?url=https://vimeo.com/' + id + '&width=480')
         .then(function(r) { return r.json(); })
         .then(function(data) {
-          var url = data[0] && (data[0].thumbnail_large || data[0].thumbnail_medium || data[0].thumbnail_small);
-          if (url) {
-            el.style.backgroundImage    = 'url(' + url + ')';
+          if (data.thumbnail_url) {
+            el.style.backgroundImage    = 'url(' + data.thumbnail_url + ')';
             el.style.backgroundSize     = 'cover';
             el.style.backgroundPosition = 'center';
             el.classList.add('loaded');
           }
-        }).catch(function() {});
+        }).catch(function() { el.removeAttribute('data-vjs-thumb-loaded'); });
     });
   }
   if (document.readyState === 'loading') {

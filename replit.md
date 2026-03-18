@@ -36,7 +36,7 @@ VJs TV is a Jekyll-based platform for VJ culture and audiovisual performances. I
 - `_config.yml` - Jekyll configuration with collections
 - `_data/navigation.yml` - Main navigation menu
 - `_data/general_settings.yml` - Site-wide settings and branding
-- `assets/css/vjstv.css` - Custom dark/neon theme CSS (~3170 lines)
+- `assets/css/vjstv.css` - Custom dark/neon theme CSS (~4090 lines)
 - `_layouts/default.html` - Base layout with skip-to-content link
 - `_layouts/vjs-detail.html` - Shared detail page layout for all collections
 - `_includes/vjstv-footer.html` - Custom footer with floating sidebar, tip jar modal, mobile nav
@@ -73,5 +73,18 @@ bundle exec jekyll serve --host 0.0.0.0 --port 5000
 ## Adding Content
 Each collection item uses `layout: vjs-detail` and has specific frontmatter fields. See existing items in each collection directory for examples.
 
+## Hero Section Architecture
+- `index.html` contains the hero player, sidebar, and chyron bar
+- `VJS_PROJECT_POOL` array is built at Jekyll build time from all projects with Vimeo IDs
+- Fisher-Yates shuffle picks 8 random projects for the sidebar on each page load
+- First pick is stored in `window._vjsFirstPick` and applied to the chyron AFTER chyron DOM elements exist (avoids null reference race condition)
+- `heroPlay(card)` updates the player/chyron when sidebar cards are clicked; guards against missing location data
+
+## Vimeo Thumbnail Loading
+- Global loader in `_includes/core/scripts/scripts.html` uses oEmbed API: `vimeo.com/api/oembed.json?url=...&width=480`
+- Elements with `class="vjs-vimeo-thumb" data-vimeo="ID"` auto-load thumbnails
+- Failed fetches clear the loaded flag to allow retries
+- Hero sidebar cards load thumbnails via the same oEmbed API at 200px width
+
 ## Excluded Legacy Files
-The original Snowlake theme demo content (portfolios, blogs, shop, services, etc.) is excluded via `_config.yml` exclude list but remains in the repo for reference.
+The original Snowlake theme demo content (portfolios, blogs, shop, services, etc.) is excluded via `_config.yml` exclude list but remains in the repo for reference. Also excluded: `.local`, `.replit`, `attached_assets`, `node_modules`, `vendor`, `replit.md` to prevent Jekyll watch loops.
