@@ -7,6 +7,7 @@ country: "France"
 visual_style: "Audiovisual Performance, Abstract Systems, Electronic Music"
 bio: "Paris-based VJ and visual artist creating audiovisual performances at the intersection of electronic music and abstract image-making. Thomas Vaquié builds live visual performances with the structural discipline of music composition — creating systems that evolve across a set with narrative intelligence."
 studio: "Independent"
+image: "/assets/images/artists/thomas-vaquie.avif"
 technologies:
   - TouchDesigner
   - Custom Visual Software
