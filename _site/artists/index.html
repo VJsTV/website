@@ -277,6 +277,8 @@
     <!-- DROPDOWN FILTER ROW -->
     <div class="vjs-filter-dropdowns">
 
+      <button class="vjs-filter-reset" onclick="resetDropFilters()">Reset</button>
+
       <div class="vjs-filter-group">
         <span class="vjs-filter-drop-label">Style</span>
         <select class="vjs-filter-select" id="style-select" onchange="applyDropFilters()">
@@ -755,9 +757,7 @@
         </select>
       </div>
 
-      <button class="vjs-filter-reset" onclick="resetDropFilters()">Reset</button>
-
-      <div class="vjs-layout-btn-group" style="margin-left:auto;">
+      <div class="vjs-filter-right">
         <button class="vjs-layout-btn active" id="btn-grid-a" onclick="setArtistLayout('grid')" title="Grid">
           <svg width="13" height="13" viewBox="0 0 14 14" fill="currentColor"><rect x="0" y="0" width="6" height="6"/><rect x="8" y="0" width="6" height="6"/><rect x="0" y="8" width="6" height="6"/><rect x="8" y="8" width="6" height="6"/></svg> Grid
         </button>
