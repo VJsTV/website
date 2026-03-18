@@ -7,7 +7,7 @@ country: "Germany"
 visual_style: "Glitch Aesthetics, Mathematical Visuals, Frequency-Driven Imagery"
 bio: "Carsten Nicolai, performing as Alva Noto — a legend of the glitch aesthetic and one of the definitive figures of academic audiovisual performance. His work is the gold standard for mathematical, scientific visuals where every pixel represents a specific frequency of sound."
 studio: "Raster-Noton"
-image: "/assets/images/artists/alva-noto.jpg"
+image: "/assets/images/artists/alva-noto-2.png"
 technologies:
   - Custom Software
   - Generative Systems
