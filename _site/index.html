@@ -711,13 +711,27 @@ document.querySelectorAll('.vjs-hero-card[data-id]').forEach(function(card) {
     }).catch(function(){});
 });
 
-/* Random project on every page load */
+/* Shuffle sidebar + pick random active project on every page load */
 (function(){
-  var cards = document.querySelectorAll('.vjs-hero-card[data-id]');
+  var sidebar = document.querySelector('.vjs-hero-sidebar');
+  if (!sidebar) return;
+
+  /* Collect all cards (exclude the header label) */
+  var cards = Array.prototype.slice.call(sidebar.querySelectorAll('.vjs-hero-card[data-id]'));
   if (!cards.length) return;
-  var idx = Math.floor(Math.random() * cards.length);
-  var pick = cards[idx];
-  document.querySelectorAll('.vjs-hero-card').forEach(function(c){ c.classList.remove('active'); });
+
+  /* Fisher-Yates shuffle */
+  for (var i = cards.length - 1; i > 0; i--) {
+    var j = Math.floor(Math.random() * (i + 1));
+    var tmp = cards[i]; cards[i] = cards[j]; cards[j] = tmp;
+  }
+
+  /* Re-append in shuffled order (header stays fixed at top) */
+  cards.forEach(function(c) { sidebar.appendChild(c); });
+
+  /* Pick the first card after shuffle as active */
+  var pick = cards[0];
+  sidebar.querySelectorAll('.vjs-hero-card').forEach(function(c){ c.classList.remove('active'); });
   pick.classList.add('active');
   document.getElementById('hero-iframe').src =
     'https://player.vimeo.com/video/' + pick.dataset.id + '?autoplay=0&title=0&byline=0&portrait=0&color=9d00ff';
