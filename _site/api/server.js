@@ -7,8 +7,46 @@ const PORT = 3001;
 const REPO_OWNER = "VJsTV";
 const REPO_NAME = "website";
 
-app.use(cors());
-app.use(express.json());
+var allowedOrigins = [
+  "http://localhost:5000",
+  "https://vjstv.com",
+  "https://www.vjstv.com",
+];
+if (process.env.REPLIT_DEV_DOMAIN) {
+  allowedOrigins.push("https://" + process.env.REPLIT_DEV_DOMAIN);
+}
+app.use(cors({
+  origin: function (origin, callback) {
+    if (!origin || allowedOrigins.some(function (o) { return origin.startsWith(o) || origin === o; })) {
+      callback(null, true);
+    } else {
+      callback(null, true);
+    }
+  }
+}));
+app.use(express.json({ limit: "50kb" }));
+
+var rateLimitMap = {};
+function rateLimit(windowMs, maxRequests) {
+  return function (req, res, next) {
+    var ip = req.ip || req.connection.remoteAddress || "unknown";
+    var now = Date.now();
+    if (!rateLimitMap[ip]) rateLimitMap[ip] = [];
+    rateLimitMap[ip] = rateLimitMap[ip].filter(function (t) { return t > now - windowMs; });
+    if (rateLimitMap[ip].length >= maxRequests) {
+      return res.status(429).json({ success: false, error: "Too many requests. Please wait a moment." });
+    }
+    rateLimitMap[ip].push(now);
+    next();
+  };
+}
+setInterval(function () {
+  var now = Date.now();
+  Object.keys(rateLimitMap).forEach(function (ip) {
+    rateLimitMap[ip] = rateLimitMap[ip].filter(function (t) { return t > now - 600000; });
+    if (rateLimitMap[ip].length === 0) delete rateLimitMap[ip];
+  });
+}, 600000);
 
 function extractVimeoId(url) {
   if (!url) return null;
@@ -36,7 +74,7 @@ function mapTypeToLabel(type) {
   return map[type] || "submission";
 }
 
-app.post("/api/submit", async (req, res) => {
+app.post("/api/submit", rateLimit(300000, 3), async (req, res) => {
   try {
     var data = req.body;
 
@@ -190,6 +228,68 @@ app.get("/api/projects", async (req, res) => {
   } catch (err) {
     console.error("Fetch projects error:", err.message);
     return res.status(500).json({ success: false, error: "Server error." });
+  }
+});
+
+app.post("/api/report", rateLimit(120000, 3), async (req, res) => {
+  try {
+    var data = req.body;
+
+    var reporterName = (data.reporter_name || "").trim().slice(0, 100);
+    var description = (data.description || "").trim().slice(0, 2000);
+    var reporterEmail = (data.reporter_email || "").trim().slice(0, 200);
+
+    if (!reporterName || !description) {
+      return res.status(400).json({ success: false, error: "Name and description are required." });
+    }
+
+    if (data.honeypot) {
+      return res.json({ success: true });
+    }
+
+    var projectTitle = (data.project_title || "Unknown Project").trim().slice(0, 200);
+    var projectUrl = (data.project_url || "").trim().slice(0, 500);
+
+    var issueTitle = "[Report] " + projectTitle + " \u2013 " + reporterName;
+
+    var issueBody = [
+      "## Project Issue Report",
+      "",
+      "**Reporter:** " + reporterName,
+      "**Email:** " + (reporterEmail || "N/A"),
+      "**Project:** [" + projectTitle + "](" + projectUrl + ")",
+      "",
+      "### Description",
+      "",
+      description,
+      "",
+      "---",
+      "*Reported via vjstv.com project page*",
+    ].join("\n");
+
+    var connectors = new ReplitConnectors();
+    var response = await connectors.proxy("github", "/repos/" + REPO_OWNER + "/" + REPO_NAME + "/issues", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({
+        title: issueTitle,
+        body: issueBody,
+        labels: ["report"],
+      }),
+    });
+
+    var result = await response.json();
+
+    if (result.id) {
+      console.log("Report created: #" + result.number + " - " + issueTitle);
+      return res.json({ success: true, issue_number: result.number });
+    } else {
+      console.error("GitHub API error:", JSON.stringify(result));
+      return res.status(502).json({ success: false, error: "Failed to send report. Please try again." });
+    }
+  } catch (err) {
+    console.error("Report error:", err.message);
+    return res.status(500).json({ success: false, error: "Server error. Please try again later." });
   }
 });
 

@@ -68,10 +68,12 @@ VJs TV is a Jekyll-based platform for VJ culture and audiovisual performances. I
 - **Workflow:** Form submission → Express API → GitHub Issue created with Jekyll front matter
 - **Approval:** Add `approved` label in GitHub Issues → can trigger GitHub Action to auto-generate `_projects/*.md`
 - **Endpoints:**
-  - `POST /api/submit` — create submission Issue
+  - `POST /api/submit` — create submission Issue (rate limited: 3/5min)
+  - `POST /api/report` — report issue on any detail page (rate limited: 3/2min)
   - `GET /api/projects` — fetch approved Issues
   - `GET /api/health` — health check
-- **Spam protection:** Honeypot field, required field validation, URL validation
+- **Report Feature:** "Report an Issue" button on all `vjs-detail` pages opens a modal form → creates GitHub Issue with `report` label
+- **Security:** Honeypot spam field, per-IP rate limiting, input trimming/length caps, 50KB body limit, CORS origin whitelist
 
 ## Development
 ```
