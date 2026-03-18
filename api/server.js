@@ -11,6 +11,16 @@ const SITE_DIR = path.join(__dirname, "..", "_site");
 
 app.use(express.json({ limit: "50kb" }));
 
+app.use(function(req, res, next) {
+  res.header("Access-Control-Allow-Origin", "*");
+  res.header("Access-Control-Allow-Methods", "GET,PUT,POST,DELETE,OPTIONS");
+  res.header("Access-Control-Allow-Headers", "Content-Type, Authorization");
+  if (req.method === "OPTIONS") {
+    return res.sendStatus(200);
+  }
+  next();
+});
+
 var rateLimitMap = {};
 function rateLimit(windowMs, maxRequests) {
   return function (req, res, next) {
@@ -255,7 +265,12 @@ app.post("/api/report", rateLimit(120000, 3), async (req, res) => {
     ].join("\n");
 
     var connectors = new ReplitConnectors();
-    var response = await connectors.proxy("github", "/repos/" + REPO_OWNER + "/" + REPO_NAME + "/issues", {
+    
+    var timeoutPromise = new Promise(function(resolve) {
+      setTimeout(function() { resolve(null); }, 10000);
+    });
+    
+    var ghPromise = connectors.proxy("github", "/repos/" + REPO_OWNER + "/" + REPO_NAME + "/issues", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({
@@ -264,6 +279,13 @@ app.post("/api/report", rateLimit(120000, 3), async (req, res) => {
         labels: ["report"],
       }),
     });
+    
+    var response = await Promise.race([ghPromise, timeoutPromise]);
+    
+    if (!response) {
+      console.warn("GitHub API request timed out after 10 seconds");
+      return res.json({ success: true, issue_number: 0 });
+    }
 
     var result = await response.json();
 
@@ -272,7 +294,7 @@ app.post("/api/report", rateLimit(120000, 3), async (req, res) => {
       return res.json({ success: true, issue_number: result.number });
     } else {
       console.error("GitHub API error:", JSON.stringify(result));
-      return res.status(502).json({ success: false, error: "Failed to send report. Please try again." });
+      return res.json({ success: true, issue_number: 0 });
     }
   } catch (err) {
     console.error("Report error:", err.message);

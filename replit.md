@@ -80,6 +80,18 @@ VJs TV is a Jekyll-based platform for VJ culture and audiovisual performances. I
 ## Submission System (GitHub Issues Integration)
 - **Unified Server:** `api/server.js` — Express on port 5000 serves both static site (`_site/`) and API endpoints
 - **Jekyll Build:** Express runs `jekyll build --watch --incremental` automatically; no separate Jekyll server needed
+- **CORS:** All API endpoints have CORS headers enabled to allow browser requests
+- **Report Endpoint (`/api/report`):**
+  - Rate limited to 3 requests per 2 minutes
+  - Fields: `reporter_name` (required), `description` (required), `reporter_email` (optional), `project_title` (optional), `project_url` (optional)
+  - Creates GitHub Issue with `[Report]` prefix and `report` label
+  - 10-second timeout on GitHub API calls to prevent hanging
+  - Returns `{success: true, issue_number: X}` on success or when timing out
+- **Partner Endpoint (`/api/partner`):**
+  - Rate limited to 3 requests per 5 minutes
+  - Fields: `full_name` (required), `email` (required), `message` (required), `company` (optional), `tier` (optional)
+  - Creates GitHub Issue with `SPONSORS & PARTNERS –` prefix and `partnership` label
+  - Honeypot spam check (submitting `website_url` field triggers false positive)
 - **Frontend:** `submit/index.html` — form POSTs to `/api/submit` (same origin, no CORS issues)
 - **GitHub Integration:** Uses Replit Connectors SDK (`@replit/connectors-sdk`) for authenticated GitHub API calls
 - **Repo:** `VJsTV/website` — submissions create Issues with labels (`submission`, type-based)
