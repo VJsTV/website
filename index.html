@@ -84,21 +84,63 @@ meta_description: "VJs TV is the global broadcast network for VJ culture. Watch 
   grid-template-columns:1fr 260px;
   background:#000;
   border-bottom:1px solid #111;
+  align-items:start;
 }
 
-/* Mobile: stack player + queue vertically */
+/* Large desktop sidebar: cap height at video player height to prevent gap */
+@media(min-width:1281px){
+  .vjs-hero-sidebar {
+    max-height:calc((100vw - 260px) * 9 / 16);
+    overflow-y:auto;
+  }
+}
+
+/* Medium desktop (901–1280px): convert sidebar to horizontal browsable strip */
+@media(max-width:1280px) and (min-width:901px){
+  .vjs-hero-wrap { grid-template-columns:1fr; }
+  .vjs-hero-sidebar {
+    border-left:none !important; border-top:1px solid #141414;
+    flex-direction:row !important; overflow-x:auto !important; overflow-y:hidden !important;
+    height:100px !important; flex-shrink:0;
+    scroll-snap-type:x mandatory;
+    -webkit-overflow-scrolling:touch;
+  }
+  .vjs-hero-sidebar-hdr {
+    display:flex !important; align-items:center; justify-content:center;
+    padding:0 12px !important; border-bottom:none !important; border-right:1px solid #111;
+    height:100px !important; min-width:max-content; flex-shrink:0;
+    writing-mode:vertical-rl; text-orientation:mixed; transform:rotate(180deg);
+    letter-spacing:0.15em; font-size:0.52rem !important;
+  }
+  .vjs-hero-card {
+    flex-direction:column !important; width:130px !important; min-width:130px !important;
+    flex-shrink:0; border-bottom:none !important; border-right:1px solid #0f0f0f !important;
+    height:100px !important; padding:0 !important;
+    scroll-snap-align:start;
+  }
+  .vjs-hero-card-thumb { width:130px !important; height:65px !important; }
+  .vjs-hero-card-info { padding:5px 8px !important; }
+  .vjs-hero-card-cat { font-size:0.48rem !important; margin-bottom:1px !important; }
+  .vjs-hero-card-title { font-size:0.7rem !important; }
+  .vjs-hero-card-artist { display:none !important; }
+}
+
+/* Mobile (<= 900px): same horizontal strip, smaller cards */
 @media(max-width:900px){
-  .vjs-hero-wrap { grid-template-columns:1fr; grid-template-rows:auto auto; }
+  .vjs-hero-wrap { grid-template-columns:1fr; }
   .vjs-hero-sidebar {
     border-left:none !important; border-top:1px solid #141414;
     flex-direction:row !important; overflow-x:auto !important; overflow-y:hidden !important;
     height:90px !important; flex-shrink:0;
+    scroll-snap-type:x mandatory;
+    -webkit-overflow-scrolling:touch;
   }
   .vjs-hero-sidebar-hdr { display:none; }
   .vjs-hero-card {
     flex-direction:column !important; width:110px !important; min-width:110px !important;
     flex-shrink:0; border-bottom:none !important; border-right:1px solid #0f0f0f !important;
     height:90px !important; padding:0 !important;
+    scroll-snap-align:start;
   }
   .vjs-hero-card-thumb { width:110px !important; height:60px !important; }
   .vjs-hero-card-info { padding:4px 8px !important; }
