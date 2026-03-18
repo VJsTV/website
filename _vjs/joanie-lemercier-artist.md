@@ -7,6 +7,7 @@ country: "Belgium"
 visual_style: "Geometric Light Sculpture, Projection Illusion, Environmental Minimalism"
 bio: "Belgium-based visual artist whose projection installations create geometric light sculptures from minimal hardware. Lemercier's work induces genuine perceptual shifts — using a single projector to generate the illusion of three-dimensional forms floating in space, drawing on precise optics rather than computational complexity."
 studio: "Independent"
+image: "/assets/images/artists/joanie-lemercier.avif"
 technologies:
   - Custom Max/MSP
   - Single-projector Systems
@@ -16,7 +17,8 @@ technologies:
 featured: true
 website: "https://joanielemercier.com"
 social:
-  vimeo: "https://vimeo.com/joanieslemons"
+  vimeo: "https://vimeo.com/joanielemercier"
+  facebook: "https://www.facebook.com/studiojoanielemercier/"
 ---
 
 **Joanie Lemercier** is a visual artist whose work with light and projection has helped define a genuinely new approach to the medium — one that strips away theatrical spectacle, replacing it with rigorous investigation of geometry, perception, and the fundamental physics of light.
