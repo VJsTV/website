@@ -1,29 +1,14 @@
 const express = require("express");
-const cors = require("cors");
+const path = require("path");
+const { execSync, spawn } = require("child_process");
 const { ReplitConnectors } = require("@replit/connectors-sdk");
 
 const app = express();
-const PORT = 3001;
+const PORT = 5000;
 const REPO_OWNER = "VJsTV";
 const REPO_NAME = "website";
+const SITE_DIR = path.join(__dirname, "..", "_site");
 
-var allowedOrigins = [
-  "http://localhost:5000",
-  "https://vjstv.com",
-  "https://www.vjstv.com",
-];
-if (process.env.REPLIT_DEV_DOMAIN) {
-  allowedOrigins.push("https://" + process.env.REPLIT_DEV_DOMAIN);
-}
-app.use(cors({
-  origin: function (origin, callback) {
-    if (!origin || allowedOrigins.some(function (o) { return origin.startsWith(o) || origin === o; })) {
-      callback(null, true);
-    } else {
-      callback(null, true);
-    }
-  }
-}));
 app.use(express.json({ limit: "50kb" }));
 
 var rateLimitMap = {};
@@ -299,6 +284,73 @@ app.get("/api/health", function (req, res) {
   res.json({ status: "ok", timestamp: new Date().toISOString() });
 });
 
+app.use(express.static(SITE_DIR, { extensions: ["html"] }));
+
+app.use(function (req, res, next) {
+  var fs = require("fs");
+  var urlPath = req.path;
+  if (urlPath.endsWith("/")) {
+    var indexFile = path.join(SITE_DIR, urlPath, "index.html");
+    if (fs.existsSync(indexFile)) {
+      return res.sendFile(indexFile);
+    }
+    var stripped = urlPath.slice(0, -1) + ".html";
+    var strippedFile = path.join(SITE_DIR, stripped);
+    if (fs.existsSync(strippedFile)) {
+      return res.sendFile(strippedFile);
+    }
+  }
+  var withHtml = path.join(SITE_DIR, urlPath + ".html");
+  if (fs.existsSync(withHtml)) {
+    return res.sendFile(withHtml);
+  }
+  var withIndex = path.join(SITE_DIR, urlPath, "index.html");
+  if (fs.existsSync(withIndex)) {
+    return res.sendFile(withIndex);
+  }
+  next();
+});
+
+app.use(function (req, res) {
+  var fs = require("fs");
+  var filePath = path.join(SITE_DIR, "404.html");
+  if (fs.existsSync(filePath)) {
+    res.status(404).sendFile(filePath);
+  } else {
+    res.status(404).send("Page not found");
+  }
+});
+
+function buildJekyll() {
+  console.log("Building Jekyll site...");
+  try {
+    execSync("bundle exec jekyll build", {
+      cwd: path.join(__dirname, ".."),
+      stdio: "inherit",
+    });
+    console.log("Jekyll build complete.");
+  } catch (err) {
+    console.error("Jekyll build failed:", err.message);
+  }
+}
+
+function watchJekyll() {
+  console.log("Starting Jekyll watch...");
+  var child = spawn("bundle", ["exec", "jekyll", "build", "--watch", "--incremental"], {
+    cwd: path.join(__dirname, ".."),
+    stdio: "inherit",
+  });
+  child.on("error", function (err) {
+    console.error("Jekyll watch error:", err.message);
+  });
+  child.on("exit", function (code) {
+    if (code !== 0) console.error("Jekyll watch exited with code " + code);
+  });
+}
+
+buildJekyll();
+
 app.listen(PORT, "0.0.0.0", function () {
-  console.log("VJs TV API server running on port " + PORT);
+  console.log("VJs TV server running on port " + PORT);
+  watchJekyll();
 });

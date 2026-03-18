@@ -61,8 +61,9 @@ VJs TV is a Jekyll-based platform for VJ culture and audiovisual performances. I
 - `preconnect` for Google Fonts
 
 ## Submission System (GitHub Issues Integration)
-- **API Server:** `api/server.js` — Express server on port 3001
-- **Frontend:** `submit/index.html` — form POSTs to `/api/submit`
+- **Unified Server:** `api/server.js` — Express on port 5000 serves both static site (`_site/`) and API endpoints
+- **Jekyll Build:** Express runs `jekyll build --watch --incremental` automatically; no separate Jekyll server needed
+- **Frontend:** `submit/index.html` — form POSTs to `/api/submit` (same origin, no CORS issues)
 - **GitHub Integration:** Uses Replit Connectors SDK (`@replit/connectors-sdk`) for authenticated GitHub API calls
 - **Repo:** `VJsTV/website` — submissions create Issues with labels (`submission`, type-based)
 - **Workflow:** Form submission → Express API → GitHub Issue created with Jekyll front matter
@@ -72,13 +73,12 @@ VJs TV is a Jekyll-based platform for VJ culture and audiovisual performances. I
   - `POST /api/report` — report issue on any detail page (rate limited: 3/2min)
   - `GET /api/projects` — fetch approved Issues
   - `GET /api/health` — health check
-- **Report Feature:** "Report an Issue" button on all `vjs-detail` pages opens a modal form → creates GitHub Issue with `report` label
-- **Security:** Honeypot spam field, per-IP rate limiting, input trimming/length caps, 50KB body limit, CORS origin whitelist
+- **Report Feature:** "Report an Issue" button in sidebar of all `vjs-detail` pages + footer of every page; modal → creates GitHub Issue with `report` label
+- **Security:** Honeypot spam field, per-IP rate limiting, input trimming/length caps, 50KB body limit
 
 ## Development
 ```
-bundle exec jekyll serve --host 0.0.0.0 --port 5000  # Jekyll frontend (port 5000)
-node api/server.js                                     # API server (port 3001)
+node api/server.js  # Single server: Express (API + static) + Jekyll watch on port 5000
 ```
 
 ## Deployment
