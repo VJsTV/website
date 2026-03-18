@@ -29,8 +29,14 @@
    data-tech="{{ include.artist.technologies | join: ',' | downcase }}"
    data-country="{{ country | downcase }}">
   <div class="vjs-nts-visual">
-    <div class="vjs-artist-initials {{ ai_class }}" data-letter="{{ initial }}">
-      <span>{{ initial }}</span>
+    <div class="vjs-nts-visual-inner">
+      {% if include.artist.image %}
+        <img src="{{ include.artist.image }}" alt="{{ include.artist.title }}" class="vjs-artist-photo">
+      {% else %}
+        <div class="vjs-artist-initials {{ ai_class }}" data-letter="{{ initial }}">
+          <span>{{ initial }}</span>
+        </div>
+      {% endif %}
     </div>
   </div>
   <div class="vjs-nts-info">

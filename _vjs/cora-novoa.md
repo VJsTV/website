@@ -7,6 +7,7 @@ country: "Spain"
 visual_style: "Modular AV, Physical Sound-Image Integration, Patched Synthesis"
 bio: "Spanish powerhouse currently headlining Sónar 2026. Her live AV show is a masterclass in modular synthesis where audio and visuals are physically patched together — changing a cable on her modular rack shifts the visual geometry instantly. Sound and image as one physical system."
 studio: "Independent"
+image: "/assets/images/artists/cora-novoa.jpg"
 technologies:
   - Modular Synthesiser
   - Custom Visual Software

@@ -7,6 +7,7 @@ country: "USA"
 visual_style: "Analog Hardware Visuals, High-Voltage Electronics, Underground Spectacle"
 bio: "Known for her work alongside Lady Gaga and her own underground 'High-Voltage' sets, Lady Starlight performs with raw analog hardware where visual signals are pulled directly from the voltage of her synthesisers. No software — pure electricity made visible."
 studio: "Independent"
+image: "/assets/images/artists/lady-starlight.jpg"
 technologies:
   - Analogue Synthesisers
   - Voltage-Controlled Visuals

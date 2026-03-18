@@ -73,6 +73,17 @@ bundle exec jekyll serve --host 0.0.0.0 --port 5000
 ## Adding Content
 Each collection item uses `layout: vjs-detail` and has specific frontmatter fields. See existing items in each collection directory for examples.
 
+### Artist Images
+Artists can include a profile image by adding an `image:` field to their frontmatter:
+```yaml
+image: "/assets/images/artists/artist-name.jpg"
+```
+
+If no image is provided, the artist card displays a neon initial badge instead. To add artist images:
+1. Upload image files to `assets/images/artists/` (JPEG or PNG recommended)
+2. Add `image:` field pointing to the file path
+3. The component automatically displays the image on the artists directory page
+
 ## Hero Section Architecture
 - `index.html` contains the hero player, sidebar, and chyron bar
 - `VJS_PROJECT_POOL` array is built at Jekyll build time from all projects with Vimeo IDs
