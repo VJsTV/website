@@ -268,6 +268,17 @@
   </div>
 </section>
 
+<!-- ANALYTICS LABEL -->
+<div id="vjs-analytics-label" style="text-align:center; color:var(--vjs-cyan); font-size:0.9rem; padding-top:1.5rem; display:none; font-family:'Space Grotesk',sans-serif; letter-spacing:0.05em;"></div>
+
+<!-- AUDIENCE STATS -->
+<div class="vjs-stats-bar" style="margin-bottom:0;">
+  <div class="vjs-stat-item"><div class="vjs-stat-number">97</div><div class="vjs-stat-label">Community Members</div></div>
+  <div class="vjs-stat-item"><div class="vjs-stat-number">50</div><div class="vjs-stat-label">Countries</div></div>
+  <div class="vjs-stat-item"><div class="vjs-stat-number" id="partner-stat-views">—</div><div class="vjs-stat-label">Monthly Page Views</div></div>
+  <div class="vjs-stat-item"><div class="vjs-stat-number">23</div><div class="vjs-stat-label">Live Events / Year</div></div>
+</div>
+
 <section class="vjs-section vjs-section-alt" id="technology">
   <div class="container">
     <div class="text-center" style="margin-bottom:3rem;">
@@ -427,18 +438,18 @@
         </div>
       </div>
       <div class="col-lg-5 offset-lg-1">
-        <div style="background:var(--vjs-card); border:1px solid var(--vjs-border); border-radius:16px; padding:2rem;">
+        <div style="background:var(--vjs-card); border:1px solid var(--vjs-border); border-radius:0; padding:2rem;">
           <h4 style="font-family:'Orbitron',sans-serif; font-size:0.85rem; text-transform:uppercase; letter-spacing:0.12em; color:var(--vjs-electric-blue); margin-bottom:1.5rem;">Get in Touch</h4>
           <form id="contactForm" onsubmit="handleContactSubmit(event)">
             <div style="position:absolute;left:-9999px;"><input type="text" name="website_url" tabindex="-1" autocomplete="off" /></div>
             <div style="margin-bottom:1rem;">
-              <input type="text" name="name" placeholder="Your Name" required style="width:100%; padding:12px 16px; background:var(--vjs-darker); border:1px solid var(--vjs-border); border-radius:8px; color:var(--vjs-text); font-family:'Inter',sans-serif; font-size:0.9rem; outline:none; transition:border-color 0.3s;" onfocus="this.style.borderColor='var(--vjs-ultraviolet)'" onblur="this.style.borderColor='var(--vjs-border)'" />
+              <input type="text" name="name" placeholder="Your Name" required style="width:100%; padding:12px 16px; background:var(--vjs-darker); border:1px solid var(--vjs-border); border-radius:0; color:var(--vjs-text); font-family:'Inter',sans-serif; font-size:0.9rem; outline:none; transition:border-color 0.3s;" onfocus="this.style.borderColor='var(--vjs-ultraviolet)'" onblur="this.style.borderColor='var(--vjs-border)'" />
             </div>
             <div style="margin-bottom:1rem;">
-              <input type="email" name="email" placeholder="Email Address" required style="width:100%; padding:12px 16px; background:var(--vjs-darker); border:1px solid var(--vjs-border); border-radius:8px; color:var(--vjs-text); font-family:'Inter',sans-serif; font-size:0.9rem; outline:none; transition:border-color 0.3s;" onfocus="this.style.borderColor='var(--vjs-ultraviolet)'" onblur="this.style.borderColor='var(--vjs-border)'" />
+              <input type="email" name="email" placeholder="Email Address" required style="width:100%; padding:12px 16px; background:var(--vjs-darker); border:1px solid var(--vjs-border); border-radius:0; color:var(--vjs-text); font-family:'Inter',sans-serif; font-size:0.9rem; outline:none; transition:border-color 0.3s;" onfocus="this.style.borderColor='var(--vjs-ultraviolet)'" onblur="this.style.borderColor='var(--vjs-border)'" />
             </div>
             <div style="margin-bottom:1.5rem;">
-              <textarea name="message" placeholder="Tell us about your partnership interest..." rows="4" required style="width:100%; padding:12px 16px; background:var(--vjs-darker); border:1px solid var(--vjs-border); border-radius:8px; color:var(--vjs-text); font-family:'Inter',sans-serif; font-size:0.9rem; outline:none; resize:vertical; transition:border-color 0.3s;" onfocus="this.style.borderColor='var(--vjs-ultraviolet)'" onblur="this.style.borderColor='var(--vjs-border)'"></textarea>
+              <textarea name="message" placeholder="Tell us about your partnership interest..." rows="4" required style="width:100%; padding:12px 16px; background:var(--vjs-darker); border:1px solid var(--vjs-border); border-radius:0; color:var(--vjs-text); font-family:'Inter',sans-serif; font-size:0.9rem; outline:none; resize:vertical; transition:border-color 0.3s;" onfocus="this.style.borderColor='var(--vjs-ultraviolet)'" onblur="this.style.borderColor='var(--vjs-border)'"></textarea>
             </div>
             <button type="submit" id="contactFormBtn" class="vjs-btn vjs-btn-primary" style="width:100%; text-align:center;">Send Message</button>
           </form>
@@ -460,7 +471,7 @@
 .vjs-bm-tool-card {
   background: var(--vjs-card);
   border: 1px solid var(--vjs-border);
-  border-radius: 16px;
+  border-radius: 0;
   padding: 2rem;
   text-align: center;
   transition: all 0.4s ease;
@@ -473,7 +484,7 @@
 }
 .vjs-bm-tool-icon {
   width: 70px; height: 70px;
-  border-radius: 50%;
+  border-radius: 0;
   display: flex; align-items: center; justify-content: center;
   margin: 0 auto 1.25rem;
   border: 2px solid var(--vjs-border);
@@ -481,7 +492,7 @@
 .vjs-bm-sponsor-card {
   background: var(--vjs-card);
   border: 1px solid var(--vjs-border);
-  border-radius: 16px;
+  border-radius: 0;
   padding: 2rem;
   text-align: center;
   cursor: pointer;
@@ -494,7 +505,7 @@
 }
 .vjs-bm-sponsor-badge {
   width: 60px; height: 60px;
-  border-radius: 50%;
+  border-radius: 0;
   display: flex; align-items: center; justify-content: center;
   margin: 0 auto 1.25rem;
   font-size: 1.5rem;
@@ -518,7 +529,7 @@
 .vjs-bm-modal {
   background: var(--vjs-dark);
   border: 1px solid var(--vjs-border);
-  border-radius: 20px;
+  border-radius: 0;
   max-width: 700px;
   width: 100%;
   max-height: 90vh;
@@ -548,7 +559,7 @@
 .vjs-bm-tier-card {
   background: var(--vjs-card);
   border: 1px solid var(--vjs-border);
-  border-radius: 12px;
+  border-radius: 0;
   padding: 1.25rem;
   text-align: center;
   transition: all 0.3s ease;
@@ -743,6 +754,32 @@ function handleContactSubmit(e) {
     btn.disabled = false;
   });
 }
+
+function vjsLoadAnalytics() {
+  fetch('/api/analytics')
+    .then(function(res) {
+      if (!res.ok) throw new Error('API returned ' + res.status);
+      return res.json();
+    })
+    .then(function(data) {
+      if (typeof data.monthlyVisitors !== 'number' || data.monthlyVisitors < 0) {
+        console.log('No valid visitor data available');
+        return;
+      }
+      var analyticsLabel = document.getElementById('vjs-analytics-label');
+      if (analyticsLabel) {
+        analyticsLabel.innerHTML = '🔥 Based on ' + data.monthlyVisitors.toLocaleString() + ' monthly page views';
+        analyticsLabel.style.display = 'block';
+      }
+      var viewsEl = document.getElementById('partner-stat-views');
+      if (viewsEl) {
+        viewsEl.textContent = data.monthlyVisitors.toLocaleString();
+      }
+    })
+    .catch(function(err) { console.log('Analytics load error:', err); });
+}
+
+document.addEventListener('DOMContentLoaded', vjsLoadAnalytics);
 
 (function() {
   var canvas = document.getElementById('vjs-particles');
