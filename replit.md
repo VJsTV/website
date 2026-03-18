@@ -61,20 +61,21 @@ VJs TV is a Jekyll-based platform for VJ culture and audiovisual performances. I
 - `preconnect` for Google Fonts
 
 ## Cloudflare Analytics & Dynamic Pricing
-- **Secrets required:** `CF_API_TOKEN` (Read Analytics permission), `CF_ZONE_ID` (Cloudflare domain)
-- **Backend:** `/api/analytics` endpoint fetches from Cloudflare GraphQL API:
-  - Last 30 days of page views (monthlyVisitors)
-  - Unique visitors (uniqueVisitors)
-  - Country count from events (countryCount)
+- **Secrets required:** `CF_API_TOKEN` (Read Analytics permission), `CF_ZONE_ID` (Cloudflare domain zone tag)
+- **Backend:** `/api/analytics` endpoint fetches from Cloudflare GraphQL API `httpRequests1dGroups`:
+  - Queries last 30 days of page views using dynamic date range
+  - GraphQL query: `query { viewer { zones(filter: {zoneTag: "ZONE_ID"}) { httpRequests1dGroups(limit: 30, filter: {date_geq: "DATE", date_leq: "DATE"}) { sum { pageViews } } } } }`
+  - Returns `monthlyVisitors` (sum of all page views in 30 days)
+  - Includes 8-second timeout to prevent hanging requests
 - **Caching:** 10-minute in-memory cache to avoid rate limiting
-- **Frontend:** `vjsLoadAnalytics()` on sponsors page:
+- **Frontend:** `vjsLoadAnalytics()` on sponsors/partners pages:
+  - Fetches `/api/analytics` on page load
   - Updates pricing based on visitor multiplier (1x, 2x, 3x, 5x)
-  - Displays unique visitors/month count on stats bar
-  - Updates countries count from live data
-  - Shows "🔥 Based on X monthly page views" label
+  - Shows "🔥 Based on X monthly page views" label above sponsorship tiers
+  - Gracefully handles API failures by showing base prices
 - **Pricing tiers:** Base prices (Title: $5K, Tech: $2.5K, Creative: $1.5K, Equipment: $1K) × visitor multiplier
-- **Stats bar:** Shows 97 community members, live unique visitors, live countries, 23 live events (no "+" suffix)
-- **Fallback:** If Cloudflare fails, displays static numbers and base prices
+- **Stats bar:** 97 community members, 50 countries (static), 23 events (static), unique visitors (removed from display)
+- **Testing:** API returns `{"monthlyVisitors": number, "cached": false/true}` on success; fallback on timeout/error
 
 ## Submission System (GitHub Issues Integration)
 - **Unified Server:** `api/server.js` — Express on port 5000 serves both static site (`_site/`) and API endpoints

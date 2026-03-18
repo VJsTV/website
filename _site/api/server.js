@@ -364,11 +364,20 @@ app.get("/api/analytics", async function (req, res) {
       return res.json({ monthlyVisitors: 0, cached: false, error: "Cloudflare not configured" });
     }
 
+    var today = new Date();
+    var thirtyDaysAgo = new Date(today.getTime() - (30 * 24 * 60 * 60 * 1000));
+    var dateFrom = thirtyDaysAgo.toISOString().split('T')[0];
+    var dateTo = today.toISOString().split('T')[0];
+
     var query = {
-      query: '\n        query {\n          viewer {\n            zones(filter: { zoneTag: "' + cfZoneId + '" }) {\n              httpRequests1dGroups(limit: 30, orderBy: [date_DESC]) {\n                sum {\n                  pageViews\n                  uniques {\n                    uniq\n                  }\n                }\n              }\n              firewallEventsAdaptiveGroups(limit: 1, filter: { datetime_gt: "-30d" }) {\n                dimensions {\n                  clientCountryName\n                }\n              }\n            }\n          }\n        }\n      '
+      query: 'query { viewer { zones(filter: {zoneTag: "' + cfZoneId + '"}) { httpRequests1dGroups(limit: 30, filter: {date_geq: "' + dateFrom + '", date_leq: "' + dateTo + '"}) { sum { pageViews } } } } }'
     };
 
-    var cfRes = await fetch("https://api.cloudflare.com/client/v4/graphql", {
+    var timeoutPromise = new Promise(function(resolve) {
+      setTimeout(function() { resolve(null); }, 8000);
+    });
+    
+    var fetchPromise = fetch("https://api.cloudflare.com/client/v4/graphql", {
       method: "POST",
       headers: {
         "Authorization": "Bearer " + cfToken,
@@ -376,41 +385,34 @@ app.get("/api/analytics", async function (req, res) {
       },
       body: JSON.stringify(query)
     });
+    
+    var cfRes = await Promise.race([fetchPromise, timeoutPromise]);
+    
+    if (!cfRes) {
+      console.warn("Cloudflare request timed out after 8 seconds");
+      return res.json({ monthlyVisitors: 0, cached: false, error: "Cloudflare request timeout" });
+    }
 
     var cfData = await cfRes.json();
 
+    if (cfData.errors && cfData.errors.length > 0) {
+      return res.json({ monthlyVisitors: 0, cached: false, error: cfData.errors[0].message || "GraphQL error" });
+    }
+
     if (!cfData.data || !cfData.data.viewer || !cfData.data.viewer.zones || cfData.data.viewer.zones.length === 0) {
-      console.warn("No zone data from Cloudflare");
       return res.json({ monthlyVisitors: 0, cached: false, error: "Zone data not available" });
     }
 
     var monthlyVisitors = 0;
-    var uniqueVisitors = 0;
-    var countries = {};
     var groups = cfData.data.viewer.zones[0].httpRequests1dGroups || [];
     
     for (var i = 0; i < groups.length; i++) {
       var sum = groups[i].sum || {};
       monthlyVisitors += sum.pageViews ? sum.pageViews : 0;
-      if (sum.uniques && sum.uniques.uniq) {
-        uniqueVisitors += sum.uniques.uniq;
-      }
-    }
-
-    var countryGroups = cfData.data.viewer.zones[0].firewallEventsAdaptiveGroups || [];
-    for (var j = 0; j < countryGroups.length; j++) {
-      var dims = countryGroups[j].dimensions || [];
-      for (var k = 0; k < dims.length; k++) {
-        var country = dims[k].clientCountryName || "Unknown";
-        countries[country] = (countries[country] || 0) + 1;
-      }
     }
 
     var result = {
       monthlyVisitors: monthlyVisitors,
-      uniqueVisitors: uniqueVisitors,
-      countries: Object.keys(countries),
-      countryCount: Object.keys(countries).length,
       cached: false
     };
     analyticsCache.data = result;

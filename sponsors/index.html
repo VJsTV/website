@@ -481,14 +481,6 @@ function vjsLoadAnalytics() {
         analyticsLabel.innerHTML = '🔥 Based on ' + data.monthlyVisitors.toLocaleString() + ' monthly page views';
         analyticsLabel.style.display = 'block';
       }
-      var uniqueEl = document.getElementById('stat-unique');
-      if (uniqueEl && data.uniqueVisitors) {
-        uniqueEl.textContent = data.uniqueVisitors.toLocaleString();
-      }
-      var countriesEl = document.getElementById('stat-countries');
-      if (countriesEl && data.countryCount && data.countryCount > 0) {
-        countriesEl.textContent = data.countryCount;
-      }
       document.querySelectorAll('.vjs-price-title').forEach(function(el) { el.textContent = '$' + prices.title.toLocaleString(); });
       document.querySelectorAll('.vjs-price-tech').forEach(function(el) { el.textContent = '$' + prices.tech.toLocaleString(); });
       document.querySelectorAll('.vjs-price-creative').forEach(function(el) { el.textContent = '$' + prices.creative.toLocaleString(); });
