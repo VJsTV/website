@@ -1,0 +1,175 @@
+Perfect! Here’s a **Replit-ready prompt** you can paste directly into Replit AI so it generates a full-stack submission feature **compatible with your Jekyll template and GitHub workflow**:
+
+---
+
+Build a full-stack feature for vjstv.com that allows users to submit a form, which creates a GitHub Issue in the repository [https://github.com/VJsTV/website](https://github.com/VJsTV/website), **and is compatible with the Jekyll post template for project pages**.
+
+### Stack
+
+* Frontend: HTML + JS (or integration into existing site)
+* Backend: Node.js (Express)
+* Use native fetch (no axios)
+
+---
+
+### Feature Requirements
+
+Create a submission form with the following fields:
+
+* Name (text)
+* Project Title (text)
+* Type (dropdown: VJ Set, Festival, Studio, Artist)
+* Video Link (URL)
+* Location (text)
+* Year (number, optional)
+* Description (textarea)
+* Technologies (text, comma-separated, optional)
+* Tags (text, comma-separated, optional)
+
+---
+
+### Frontend
+
+* Create a clean, responsive dark-style form (aligned with VJ culture / Boiler Room aesthetic)
+
+* On submit:
+
+  * Send POST request to `/api/submit`
+  * Show loading state
+  * Show success message: "Submission sent to VJsTV ✅"
+  * Show error if failed
+
+* Validate:
+
+  * Required fields
+  * Video Link is a valid URL
+  * Optional: honeypot field to prevent spam
+
+---
+
+### Backend
+
+* Express server with endpoint:
+
+POST `/api/submit`
+
+It should:
+
+1. Receive form data
+2. Format the GitHub Issue in a **Jekyll-compatible markdown template**, mapping:
+
+| Form Field    | Front Matter Key             |
+| ------------- | ---------------------------- |
+| Name          | `artist`                     |
+| Project Title | `title`                      |
+| Type          | `project_type`               |
+| Location      | `location`                   |
+| Year          | `year`                       |
+| Video Link    | `video_url`                  |
+| Description   | `description`                |
+| Technologies  | `technologies`               |
+| Tags          | `tags`                       |
+| Featured      | `featured` (default `false`) |
+
+* Extract Vimeo ID from video link if possible (`vimeo_id`)
+* Generate `name` slug from project title + artist
+* Issue body should include Markdown content as in the example template
+
+---
+
+### GitHub Issue Format
+
+**Title:** `[TYPE] Project Title – Name`
+
+**Body (Markdown):**
+
+```md
+**Name:** {name}
+**Project Title:** {projectTitle}
+**Type:** {type}
+**Location:** {location}
+**Year:** {year}
+**Video Link:** {videoLink}
+**Description:** 
+{description}
+**Technologies:** {technologies}
+**Tags:** {tags}
+```
+
+**Labels:**
+
+* Always include `"submission"`
+* Automatically map Type → label:
+
+  * VJ Set → "vj-set"
+  * Festival → "festival"
+  * Studio → "studio"
+  * Artist → "artist"
+
+---
+
+### Authentication
+
+* Use GitHub Personal Access Token stored in `.env`:
+
+```
+GITHUB_TOKEN=your_token_here
+```
+
+* Headers for API call:
+
+  * Authorization: Bearer TOKEN
+  * Accept: application/vnd.github+json
+
+---
+
+### Error Handling
+
+* Return JSON response: `{ success: true }` or `{ success: false, error: message }`
+* Handle GitHub API errors gracefully
+* Log errors in console
+
+---
+
+### Optional: Project Fetch Endpoint
+
+GET `/api/projects`
+
+* Fetch only approved Issues (with `approved` label)
+* Map GitHub Issues → structured project objects
+* Useful for dynamic frontend listing
+
+---
+
+### Security
+
+* Do NOT expose GitHub token in frontend
+* Backend only handles GitHub call
+
+---
+
+### Bonus
+
+* Input validation (required fields, valid URL)
+* Honeypot field or basic rate limiting to prevent spam
+* Optional clean UI animations
+
+---
+
+### Output
+
+* Full working Express server
+* Frontend submission form page
+* Clear instructions to run:
+
+  1. `npm install`
+  2. Set `.env` GitHub token
+  3. `node server.js`
+* GitHub Issues created in Jekyll-compatible format
+* Ready for GitHub Action to auto-create `_projects/*.md` files for approved issues
+
+---
+
+If you want, I can also write a **ready-to-paste GitHub Action** specifically for this Jekyll template so your Issues automatically generate project pages whenever they’re approved.
+
+Do you want me to do that next?

@@ -1,0 +1,81 @@
+Here’s how it works and where everything will appear once this system is live:
+
+---
+
+## 1️⃣ **Initial Submission**
+
+* The user fills the **submission form** on your site (`vjstv.com`).
+* When they submit:
+
+  * A **GitHub Issue** is created in your repo `https://github.com/VJsTV/website`.
+  * The Issue is labeled `"submission"` + type-based label (`vj-set`, `festival`, etc.).
+* At this stage:
+
+  * Nothing appears publicly on the website yet.
+  * It’s visible only in the **GitHub Issues** panel for review.
+
+---
+
+## 2️⃣ **Approval Process**
+
+* Admin or curator reviews the Issue in GitHub.
+* Once approved:
+
+  * Add the label `approved` to the Issue.
+  * Optionally, other labels can be used for filtering (`featured`, `generative`, etc.).
+
+---
+
+## 3️⃣ **Conversion to Jekyll Project Page**
+
+* If you set up the **GitHub Action** I mentioned:
+
+  * When `approved` label is added, the action triggers.
+  * The Issue content is converted into a **Markdown file** in `_projects/` (or your Jekyll projects folder).
+  * Fields like `title`, `artist`, `vimeo_id`, `description`, `tags` are mapped automatically to **front matter** in the Markdown file.
+
+---
+
+## 4️⃣ **Appearance on Your Website**
+
+* Jekyll rebuilds the site whenever a new Markdown file is committed.
+* The approved project **now appears as a live project page** on `vjstv.com`.
+* Example:
+
+```
+vjstv.com/projects/showreel-2015-seeper
+```
+
+* The page will use your `vjs-detail` layout and display:
+
+  * Project title
+  * Artist
+  * Vimeo video embedded
+  * Description
+  * Tags and technologies
+* Your site can also have a **projects listing page**, filtering by type, tags, or featured projects, all automatically from `_projects/*.md`.
+
+---
+
+### ✅ Summary of “Where It Appears”
+
+| Step                  | Where it appears                                 |
+| --------------------- | ------------------------------------------------ |
+| Submission            | GitHub Issues (private/public depending on repo) |
+| Approved Issue        | Still in GitHub Issues                           |
+| After GitHub Action   | `_projects/*.md` in repo                         |
+| Jekyll Build Complete | Live project page on `vjstv.com`                 |
+
+---
+
+In other words:
+
+> **User submits → GitHub → Admin approves → GitHub Action → Jekyll Markdown → Live project page**
+
+It’s fully automated once the workflow is set up, and your website always reflects the approved projects without manual editing.
+
+---
+
+If you want, I can **draw a small workflow diagram** showing submission → approval → live project page for VJsTV, which makes it super clear for your team.
+
+Do you want me to do that?

@@ -1,6 +1,7 @@
-modules = ["web", "nodejs-20", "ruby-3.2"]
+modules = ["web", "nodejs-20", "ruby-3.2", "python-3.11"]
 [agent]
 expertMode = true
+integrations = ["github:1.0.0"]
 
 [nix]
 channel = "stable-25_05"
@@ -17,6 +18,10 @@ author = "agent"
 task = "workflow.run"
 args = "Start application"
 
+[[workflows.workflow.tasks]]
+task = "workflow.run"
+args = "API Server"
+
 [[workflows.workflow]]
 name = "Start application"
 author = "agent"
@@ -28,6 +33,18 @@ outputType = "webview"
 task = "shell.exec"
 args = "bundle exec jekyll serve --host 0.0.0.0 --port 5000"
 waitForPort = 5000
+
+[[workflows.workflow]]
+name = "API Server"
+author = "agent"
+
+[[workflows.workflow.tasks]]
+task = "shell.exec"
+args = "node api/server.js"
+
+[[ports]]
+localPort = 3001
+externalPort = 80
 
 [[ports]]
 localPort = 5000

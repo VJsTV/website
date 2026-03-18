@@ -1,0 +1,83 @@
+Build a full-stack feature for vjstv.com that allows users to **report issues on individual project pages**, which automatically creates a GitHub Issue in the repository `https://github.com/VJsTV/website`.
+
+### Stack
+
+* Frontend: HTML + JS (or Jekyll template integration)
+* Backend: Node.js (Express)
+* Use native fetch (no axios)
+
+---
+
+### Frontend Requirements
+
+1. Add a **“Report an Issue” button** on each project page.
+2. Clicking the button opens a **modal with a form** containing:
+
+   * Your Name (required)
+   * Your Email (optional)
+   * Issue Description (required)
+   * Hidden fields for:
+
+     * Project Title
+     * Project URL
+3. On submit:
+
+   * Send POST request to `/api/report`
+   * Show loading state
+   * Show success message: "Report sent ✅"
+   * Show error message if submission fails
+4. Dark UI styling, aligned with Boiler Room / VJ culture aesthetic.
+5. Optional: basic input validation and spam prevention (honeypot, rate limiting).
+
+---
+
+### Backend Requirements
+
+Create an Express endpoint:
+
+**POST `/api/report`**
+
+* Receive form data
+* Create a GitHub Issue via API:
+
+  * Repository: `VJsTV/website`
+  * Title: `[Report] Project Title – Reporter Name`
+  * Body (Markdown) includes:
+
+    ```
+    ## 🔴 Project Issue Report
+
+    **Reporter Name:** {reporterName}
+    **Reporter Email:** {reporterEmail or N/A}
+    **Project:** [Project Title](Project URL)
+
+    **Description:**
+    {reportDescription}
+    ```
+  * Labels: `report`
+* Use GitHub Personal Access Token from environment variable `GITHUB_TOKEN`
+* Handle errors gracefully and return JSON `{ success: true }` or `{ success: false, error: message }`
+* Log errors in console
+
+---
+
+### Frontend + Backend Integration
+
+* Frontend fetch POSTs to `/api/report`
+* Backend creates GitHub Issue
+* No GitHub token exposed to frontend
+
+---
+
+### Output
+
+* Fully working modal and report form
+* Backend Express endpoint
+* Styled to match VJsTV dark aesthetic
+* Clear instructions to run:
+
+  1. `npm install`
+  2. Set `.env` with GitHub token
+  3. `node server.js`
+
+Goal: Every project page can report issues that appear as GitHub Issues automatically for admin review.

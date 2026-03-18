@@ -29,7 +29,7 @@ VJs TV is a Jekyll-based platform for VJ culture and audiovisual performances. I
 - `/technology` - Technology directory with JS category filter
 - `/sponsors` - Sponsors and partners
 - `/search` - Global search across all collections (client-side, no server needed)
-- `/submit` - Project submission page
+- `/submit` - Project submission page (form → Express API → GitHub Issues)
 - `/business-model` - Sponsor pitch page with interactive modals, partnership tiers, particle background, and contact form
 
 ## Key Files
@@ -60,9 +60,23 @@ VJs TV is a Jekyll-based platform for VJ culture and audiovisual performances. I
 - IntersectionObserver visibility gating on meter bar animation
 - `preconnect` for Google Fonts
 
+## Submission System (GitHub Issues Integration)
+- **API Server:** `api/server.js` — Express server on port 3001
+- **Frontend:** `submit/index.html` — form POSTs to `/api/submit`
+- **GitHub Integration:** Uses Replit Connectors SDK (`@replit/connectors-sdk`) for authenticated GitHub API calls
+- **Repo:** `VJsTV/website` — submissions create Issues with labels (`submission`, type-based)
+- **Workflow:** Form submission → Express API → GitHub Issue created with Jekyll front matter
+- **Approval:** Add `approved` label in GitHub Issues → can trigger GitHub Action to auto-generate `_projects/*.md`
+- **Endpoints:**
+  - `POST /api/submit` — create submission Issue
+  - `GET /api/projects` — fetch approved Issues
+  - `GET /api/health` — health check
+- **Spam protection:** Honeypot field, required field validation, URL validation
+
 ## Development
 ```
-bundle exec jekyll serve --host 0.0.0.0 --port 5000
+bundle exec jekyll serve --host 0.0.0.0 --port 5000  # Jekyll frontend (port 5000)
+node api/server.js                                     # API server (port 3001)
 ```
 
 ## Deployment

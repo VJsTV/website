@@ -323,7 +323,10 @@
           <span style="font-family:'Barlow Condensed',sans-serif; font-size:0.6rem; font-weight:600; text-transform:uppercase; letter-spacing:0.1em; color:rgba(255,255,255,0.2);">* Required</span>
         </div>
 
-        <form id="submit-form" action="mailto:submit@vjstv.com" method="post" enctype="text/plain">
+        <form id="submit-form">
+          <div style="position:absolute; left:-9999px;" aria-hidden="true">
+            <input type="text" name="honeypot" tabindex="-1" autocomplete="off">
+          </div>
 
           <div style="display:grid; grid-template-columns:1fr 1fr; gap:16px; margin-bottom:16px;">
             <div>
@@ -416,6 +419,10 @@
           <div style="font-size:2rem; margin-bottom:12px; color:var(--vjs-cyan);">&#10003;</div>
           <h3 style="font-family:'Barlow Condensed',sans-serif; font-size:1.1rem; font-weight:700; text-transform:uppercase; color:#fff; margin-bottom:6px;">Submission Received</h3>
           <p style="font-family:'Barlow Condensed',sans-serif; font-size:0.82rem; color:rgba(255,255,255,0.4);">We'll review your project and reply within 5–10 business days.</p>
+        </div>
+
+        <div id="submit-error" style="display:none; text-align:center; padding:20px; margin-top:12px; border:1px solid rgba(255,0,100,0.3); background:rgba(255,0,100,0.05);">
+          <p style="font-family:'Barlow Condensed',sans-serif; font-size:0.82rem; color:#ff0064; margin:0;" id="submit-error-msg">Something went wrong. Please try again.</p>
         </div>
       </div>
 
@@ -576,15 +583,49 @@ function vjsTipAmount(amt) {
 
 
 <script>
-document.getElementById('submit-form').addEventListener('submit', function(e){
+var API_URL = window.location.protocol + '//' + window.location.hostname + ':3001';
+
+document.getElementById('submit-form').addEventListener('submit', function(e) {
   e.preventDefault();
-  var btn = this.querySelector('[type=submit]');
-  btn.textContent = 'Sending…';
+  var form = this;
+  var btn = form.querySelector('[type=submit]');
+  var errorEl = document.getElementById('submit-error');
+  var errorMsg = document.getElementById('submit-error-msg');
+
+  errorEl.style.display = 'none';
+  btn.textContent = 'Sending\u2026';
   btn.disabled = true;
-  setTimeout(function(){
-    document.getElementById('submit-form').style.display = 'none';
-    document.getElementById('submit-success').style.display = 'block';
-  }, 800);
+  btn.style.opacity = '0.5';
+
+  var formData = new FormData(form);
+  var data = {};
+  formData.forEach(function(val, key) { data[key] = val; });
+
+  fetch(API_URL + '/api/submit', {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify(data)
+  })
+  .then(function(res) { return res.json(); })
+  .then(function(result) {
+    if (result.success) {
+      form.style.display = 'none';
+      document.getElementById('submit-success').style.display = 'block';
+    } else {
+      errorMsg.textContent = result.error || 'Something went wrong. Please try again.';
+      errorEl.style.display = 'block';
+      btn.textContent = 'Submit Project';
+      btn.disabled = false;
+      btn.style.opacity = '1';
+    }
+  })
+  .catch(function(err) {
+    errorMsg.textContent = 'Connection error. Please try again.';
+    errorEl.style.display = 'block';
+    btn.textContent = 'Submit Project';
+    btn.disabled = false;
+    btn.style.opacity = '1';
+  });
 });
 </script>
 
