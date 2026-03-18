@@ -1,0 +1,158 @@
+Build a secure analytics + dynamic sponsor pricing system for VJs TV.
+
+----------------------------------
+BACKEND (Node.js)
+----------------------------------
+
+1. Create endpoint: /api/analytics
+
+2. Use Cloudflare GraphQL API:
+https://api.cloudflare.com/client/v4/graphql
+
+3. Store secrets in environment variables:
+- CF_API_TOKEN
+- CF_ZONE_ID
+
+4. Fetch last 30 days of data:
+
+GraphQL query:
+{
+  viewer {
+    zones(filter: {zoneTag: "CF_ZONE_ID"}) {
+      httpRequests1dGroups(limit: 30, orderBy: [date_DESC]) {
+        sum {
+          pageViews
+        }
+      }
+    }
+  }
+}
+
+5. Compute total monthly pageviews:
+
+const monthlyViews = sum of all pageViews
+
+6. Return clean JSON:
+
+{
+  "monthlyVisitors": monthlyViews
+}
+
+7. Add caching (IMPORTANT):
+- Cache response for 10 minutes
+- Avoid hitting Cloudflare API on every request
+
+----------------------------------
+FRONTEND (Partners + Sponsors pages)
+----------------------------------
+
+1. Fetch analytics:
+
+const res = await fetch('/api/analytics');
+const data = await res.json();
+
+2. Pricing logic:
+
+function getMultiplier(visitors) {
+  if (visitors < 10000) return 1;
+  if (visitors < 50000) return 2;
+  if (visitors < 200000) return 3;
+  return 5;
+}
+
+const basePrices = {
+  title: 5000,
+  tech: 2500,
+  creative: 1500,
+  equipment: 1000
+};
+
+const multiplier = getMultiplier(data.monthlyVisitors);
+
+3. Compute prices:
+
+const prices = {
+  title: basePrices.title * multiplier,
+  tech: basePrices.tech * multiplier,
+  creative: basePrices.creative * multiplier,
+  equipment: basePrices.equipment * multiplier
+};
+
+4. Display:
+
+"From $X/month"
+
+----------------------------------
+UI COMPONENT
+----------------------------------
+
+Create reusable component: SponsorCard
+
+Each card includes:
+- Badge (MOST EXCLUSIVE for Title Sponsor)
+- Title
+- Description
+- Dynamic price
+- CTA button
+
+Cards:
+
+1. Title Sponsor
+2. Technology Partners
+3. Creative Partners
+4. Equipment Partners
+
+----------------------------------
+LIVE DATA DISPLAY
+----------------------------------
+
+Above pricing, show:
+
+"🔥 Based on {monthlyVisitors} monthly visitors"
+
+----------------------------------
+STYLING
+----------------------------------
+
+- Dark UI
+- Neon accents:
+  - Yellow (Title)
+  - Cyan (Tech)
+  - Pink (Creative)
+  - Teal (Equipment)
+- Glow hover effects
+- Smooth fade-in when prices load
+
+----------------------------------
+FALLBACK
+----------------------------------
+
+If API fails:
+- Use basePrices
+- Do not break UI
+
+----------------------------------
+PERFORMANCE
+----------------------------------
+
+- Lazy load analytics
+- Avoid blocking rendering
+- Keep UI fast
+
+----------------------------------
+REUSE
+----------------------------------
+
+- Same component used on:
+  /partners/
+  /sponsors/
+
+----------------------------------
+OUTPUT
+----------------------------------
+
+- Clean modular code
+- Separate:
+  - analytics service
+  - pricing logic
+  - UI component
