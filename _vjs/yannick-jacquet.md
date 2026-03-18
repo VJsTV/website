@@ -7,6 +7,7 @@ country: "Belgium"
 visual_style: "Light Sculpture, Geometric Projection, Material Abstraction"
 bio: "Belgian visual artist and co-founder of AntiVJ — one of the world's most influential collectives in projection art. Yannick Jacquet creates minimal, architecturally precise projection works that use light as a sculptural material, transforming physical surfaces into geometrically activated fields."
 studio: "AntiVJ / Independent"
+image: "/assets/images/artists/yannick-jacquet.jpeg"
 technologies:
   - Custom Projection Systems
   - Max/MSP
@@ -14,9 +15,14 @@ technologies:
   - Architectural Mapping
   - Generative Lighting
 featured: true
-website: "https://yannickjacquet.com"
+website: "https://www.yannickjacquet.net"
 social:
   vimeo: "https://vimeo.com/yannickjacquet"
+  instagram: "https://www.instagram.com/yannickjacquet"
+  youtube: "https://www.youtube.com/@Yannick_Jacquet_artist"
+  facebook: "https://www.facebook.com/jacquet.yannick"
+projects:
+  - "https://vimeo.com/260435736"
 ---
 
 **Yannick Jacquet** is a Belgian visual artist and one of the most important figures in the history of projection art. As a founding member of **AntiVJ**, he helped define an aesthetic approach to projection mapping that prioritised geometry, material truth, and architectural logic over spectacle — an approach that has been enormously influential on practitioners worldwide.
