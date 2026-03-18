@@ -254,6 +254,45 @@
   </div>
   <!-- /.offcanvas-info -->
 
+<style>
+.vjs-events-count {
+  font-family:'Barlow Condensed',sans-serif; font-size:0.65rem; font-weight:700;
+  letter-spacing:0.18em; text-transform:uppercase; color:#333;
+  margin-bottom:20px; display:flex; align-items:center; gap:1rem;
+}
+.vjs-events-count strong { color:var(--vjs-ultraviolet); }
+.vjs-event-search-wrap {
+  position:relative; flex:1; min-width:160px; max-width:260px;
+}
+.vjs-event-search-wrap svg {
+  position:absolute; left:10px; top:50%; transform:translateY(-50%);
+  color:var(--vjs-text-muted); pointer-events:none;
+}
+.vjs-event-search {
+  width:100%; padding:7px 10px 7px 32px;
+  background:var(--vjs-card-bg); border:1px solid var(--vjs-border);
+  color:var(--vjs-text-primary); font-family:'Barlow Condensed',sans-serif;
+  font-size:0.8rem; letter-spacing:0.05em; outline:none; border-radius:0;
+  box-sizing:border-box;
+}
+.vjs-event-search:focus { border-color:var(--vjs-ultraviolet); }
+.vjs-event-search::placeholder { color:var(--vjs-text-muted); }
+.vjs-section-divider {
+  display:flex; align-items:center; gap:1rem; margin-bottom:2rem;
+}
+.vjs-section-divider-label {
+  font-family:'Orbitron',sans-serif; font-size:0.75rem;
+  letter-spacing:0.15em; text-transform:uppercase;
+}
+.vjs-section-divider-line {
+  flex:1; height:1px; background:var(--vjs-border);
+}
+.vjs-section-divider-count {
+  font-family:'Orbitron',sans-serif; font-size:0.65rem;
+  color:var(--vjs-text-muted);
+}
+</style>
+
 <div class="vjs-page-header">
   <div class="container">
     <h1 class="vjs-section-title" style="font-size:clamp(2rem,5vw,3.5rem);">Events</h1>
@@ -265,9 +304,197 @@
 <section class="vjs-section">
   <div class="container">
 
-    <!-- LAYOUT TOGGLE -->
-    <div class="vjs-filter-dropdowns" style="justify-content:flex-end;">
-      <div class="vjs-layout-btn-group">
+    <!-- FILTER BAR -->
+    <div class="vjs-filter-dropdowns">
+
+      <button class="vjs-filter-reset" onclick="resetEventFilters()">Reset</button>
+
+      <!-- Search -->
+      <div class="vjs-filter-group">
+        <span class="vjs-filter-drop-label">Search</span>
+        <div class="vjs-event-search-wrap">
+          <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg>
+          <input type="text" class="vjs-event-search" id="event-search" placeholder="Event name…" oninput="applyEventFilters()">
+        </div>
+      </div>
+
+      <!-- Type -->
+      <div class="vjs-filter-group">
+        <span class="vjs-filter-drop-label">Type</span>
+        <select class="vjs-filter-select" id="type-select" onchange="applyEventFilters()">
+          <option value="all">All Types</option>
+          
+          
+          
+          
+          <option value="competition">Competition</option>
+          
+          <option value="festival">Festival</option>
+          
+          <option value="installation">Installation</option>
+          
+          <option value="live stream">Live Stream</option>
+          
+        </select>
+      </div>
+
+      <!-- Country -->
+      <div class="vjs-filter-group">
+        <span class="vjs-filter-drop-label">Country</span>
+        <select class="vjs-filter-select" id="country-select" onchange="applyEventFilters()">
+          <option value="all">All Countries</option>
+          
+          
+          
+          
+          <option value="austria">Austria</option>
+          
+          <option value="belgium">Belgium</option>
+          
+          <option value="canada">Canada</option>
+          
+          <option value="czech republic">Czech Republic</option>
+          
+          <option value="finland">Finland</option>
+          
+          <option value="france">France</option>
+          
+          <option value="france (venue tba)">France (venue TBA)</option>
+          
+          <option value="greece">Greece</option>
+          
+          <option value="japan">Japan</option>
+          
+          <option value="netherlands">Netherlands</option>
+          
+          <option value="online / amsterdam">Online / Amsterdam</option>
+          
+          <option value="online / berlin">Online / Berlin</option>
+          
+          <option value="spain">Spain</option>
+          
+          <option value="switzerland">Switzerland</option>
+          
+          <option value="turkey">Turkey</option>
+          
+          <option value="uk">UK</option>
+          
+          <option value="usa">USA</option>
+          
+        </select>
+      </div>
+
+      <!-- City -->
+      <div class="vjs-filter-group">
+        <span class="vjs-filter-drop-label">City</span>
+        <select class="vjs-filter-select" id="city-select" onchange="applyEventFilters()">
+          <option value="all">All Cities</option>
+          
+          
+          
+          
+          <option value="athens">Athens</option>
+          
+          <option value="black rock desert">Black Rock Desert</option>
+          
+          <option value="boom">Boom</option>
+          
+          <option value="eindhoven">Eindhoven</option>
+          
+          <option value="fira gran via">Fira Gran Via</option>
+          
+          <option value="geneva">Geneva</option>
+          
+          <option value="helsinki">Helsinki</option>
+          
+          <option value="indio">Indio</option>
+          
+          <option value="istanbul">Istanbul</option>
+          
+          <option value="las vegas motor speedway">Las Vegas Motor Speedway</option>
+          
+          <option value="lille + hauts-de-france">Lille + Hauts-de-France</option>
+          
+          <option value="linz">Linz</option>
+          
+          <option value="london">London</option>
+          
+          <option value="lyon">Lyon</option>
+          
+          <option value="montreal">Montreal</option>
+          
+          <option value="parc del fòrum">Parc del Fòrum</option>
+          
+          <option value="prague">Prague</option>
+          
+          <option value="quartier des spectacles">Quartier des spectacles</option>
+          
+          <option value="tokyo metropolitan government building">Tokyo Metropolitan Government Building</option>
+          
+        </select>
+      </div>
+
+      <!-- Artists -->
+      <div class="vjs-filter-group">
+        <span class="vjs-filter-drop-label">Artist</span>
+        <select class="vjs-filter-select" id="artist-select" onchange="applyEventFilters()">
+          <option value="all">All Artists</option>
+          
+          
+          
+          
+          <option value="aurora fractals">Aurora Fractals</option>
+          
+          <option value="ben ufo">Ben UFO</option>
+          
+          <option value="flux collective">Flux Collective</option>
+          
+          <option value="jeff mills">Jeff Mills</option>
+          
+          <option value="luna visuals">Luna Visuals</option>
+          
+          <option value="nova spectrum">Nova Spectrum</option>
+          
+          <option value="pixel storm">Pixel Storm</option>
+          
+          <option value="polygonia">Polygonia</option>
+          
+          <option value="rival consoles">Rival Consoles</option>
+          
+          <option value="vj kai">VJ Kai</option>
+          
+        </select>
+      </div>
+
+      <!-- Studios -->
+      <div class="vjs-filter-group">
+        <span class="vjs-filter-drop-label">Studio</span>
+        <select class="vjs-filter-select" id="studio-select" onchange="applyEventFilters()">
+          <option value="all">All Studios</option>
+          
+          
+          
+          
+        </select>
+      </div>
+
+      <!-- Time -->
+      <div class="vjs-filter-group">
+        <span class="vjs-filter-drop-label">When</span>
+        <select class="vjs-filter-select" id="time-select" onchange="applyEventFilters()">
+          <option value="all">All Events</option>
+          <option value="upcoming">Upcoming</option>
+          <option value="past">Past / Archive</option>
+        </select>
+      </div>
+
+      <!-- Sort + Layout -->
+      <div class="vjs-filter-right">
+        <select class="vjs-filter-select" id="sort-select" onchange="applyEventFilters()" style="min-width:130px;">
+          <option value="date-desc">Newest First</option>
+          <option value="date-asc">Oldest First</option>
+          <option value="az">A → Z</option>
+        </select>
         <button class="vjs-layout-btn active" id="btn-grid-e" onclick="setEventLayout('grid')" title="Grid">
           <svg width="13" height="13" viewBox="0 0 14 14" fill="currentColor"><rect x="0" y="0" width="6" height="6"/><rect x="8" y="0" width="6" height="6"/><rect x="0" y="8" width="6" height="6"/><rect x="8" y="8" width="6" height="6"/></svg> Grid
         </button>
@@ -275,27 +502,56 @@
           <svg width="13" height="13" viewBox="0 0 14 14" fill="currentColor"><rect x="0" y="0" width="4" height="4"/><rect x="6" y="1" width="8" height="2"/><rect x="0" y="5" width="4" height="4"/><rect x="6" y="6" width="8" height="2"/><rect x="0" y="10" width="4" height="4"/><rect x="6" y="11" width="8" height="2"/></svg> List
         </button>
       </div>
+
     </div>
 
-    <!-- UPCOMING EVENTS -->
-    
-    
-    
-    
+    <!-- RESULT COUNT -->
+    <div class="vjs-events-count" id="events-count">
+      <span><strong id="events-count-num">23</strong> Events</span>
+    </div>
 
+    <!-- UPCOMING SECTION -->
     
-    <div style="margin-bottom:3.5rem;">
-      <div style="display:flex; align-items:center; gap:1rem; margin-bottom:2rem;">
+    <div id="upcoming-section" style="margin-bottom:3.5rem;">
+      <div class="vjs-section-divider" id="upcoming-divider">
         <span style="display:inline-flex; align-items:center; gap:0.5rem;">
           <span style="width:8px; height:8px; background:var(--vjs-cyan); border-radius:50%; display:inline-block; animation:vjsPulse 1.5s infinite;"></span>
-          <span style="font-family:'Orbitron',sans-serif; font-size:0.75rem; letter-spacing:0.15em; text-transform:uppercase; color:var(--vjs-cyan);">Upcoming</span>
+          <span class="vjs-section-divider-label" style="color:var(--vjs-cyan);">Upcoming</span>
         </span>
-        <span style="flex:1; height:1px; background:var(--vjs-border);"></span>
-        <span style="font-family:'Orbitron',sans-serif; font-size:0.65rem; color:var(--vjs-text-muted);">19 Events</span>
+        <span class="vjs-section-divider-line"></span>
+        <span class="vjs-section-divider-count" id="upcoming-count-label"></span>
       </div>
-      <div class="vjs-grid vjs-grid-3">
+      <div class="vjs-grid vjs-grid-3" id="upcoming-grid">
         
         
+          
+          
+        
+          
+          
+        
+          
+          
+        
+          
+          
+        
+          
+          
+            
+            
+            
+            <div class="vjs-event-item"
+                 data-upcoming="true"
+                 data-type="festival"
+                 data-country="greece"
+                 data-city="athens"
+                 data-location="athens, greece"
+                 data-artists=""
+                 data-studios=""
+                 data-title="athens digital arts festival (adaf) 2026"
+                 data-date="1775174400">
+              
 
 
 <a href="/events/athens-digital-arts-2026" class="text-decoration-none">
@@ -321,8 +577,25 @@
   </div>
 </a>
 
+            </div>
+          
         
-        
+          
+          
+            
+            
+            
+            <div class="vjs-event-item"
+                 data-upcoming="true"
+                 data-type="festival"
+                 data-country="usa"
+                 data-city="indio"
+                 data-location="indio, california, usa"
+                 data-artists=""
+                 data-studios=""
+                 data-title="coachella valley music & arts festival 2026"
+                 data-date="1775779200">
+              
 
 
 <a href="/events/coachella-2026" class="text-decoration-none">
@@ -348,8 +621,25 @@
   </div>
 </a>
 
+            </div>
+          
         
-        
+          
+          
+            
+            
+            
+            <div class="vjs-event-item"
+                 data-upcoming="true"
+                 data-type="festival"
+                 data-country="turkey"
+                 data-city="istanbul"
+                 data-location="istanbul, turkey"
+                 data-artists=""
+                 data-studios=""
+                 data-title="sónar istanbul 2026"
+                 data-date="1775779200">
+              
 
 
 <a href="/events/sonar-istanbul-2026" class="text-decoration-none">
@@ -375,8 +665,25 @@
   </div>
 </a>
 
+            </div>
+          
         
-        
+          
+          
+            
+            
+            
+            <div class="vjs-event-item"
+                 data-upcoming="true"
+                 data-type="festival"
+                 data-country="france"
+                 data-city="lille + hauts-de-france"
+                 data-location="lille + hauts-de-france, france"
+                 data-artists=""
+                 data-studios=""
+                 data-title="video mapping festival 2026"
+                 data-date="1775779200">
+              
 
 
 <a href="/events/video-mapping-festival-2026" class="text-decoration-none">
@@ -402,8 +709,25 @@
   </div>
 </a>
 
+            </div>
+          
         
-        
+          
+          
+            
+            
+            
+            <div class="vjs-event-item"
+                 data-upcoming="true"
+                 data-type="live stream"
+                 data-country="online / amsterdam"
+                 data-city="online / amsterdam"
+                 data-location="online / amsterdam"
+                 data-artists="aurora fractals|nova spectrum"
+                 data-studios=""
+                 data-title="vjs tv live session 003"
+                 data-date="1776643200">
+              
 
 
 <a href="/events/vjstv-live-003" class="text-decoration-none">
@@ -429,8 +753,25 @@
   </div>
 </a>
 
+            </div>
+          
         
-        
+          
+          
+            
+            
+            
+            <div class="vjs-event-item"
+                 data-upcoming="true"
+                 data-type="festival"
+                 data-country="switzerland"
+                 data-city="geneva"
+                 data-location="geneva, switzerland"
+                 data-artists=""
+                 data-studios=""
+                 data-title="mapping festival 2026"
+                 data-date="1778112000">
+              
 
 
 <a href="/events/mapping-festival-2026" class="text-decoration-none">
@@ -456,8 +797,25 @@
   </div>
 </a>
 
+            </div>
+          
         
-        
+          
+          
+            
+            
+            
+            <div class="vjs-event-item"
+                 data-upcoming="true"
+                 data-type="festival"
+                 data-country="usa"
+                 data-city="las vegas motor speedway"
+                 data-location="las vegas motor speedway, nevada, usa"
+                 data-artists=""
+                 data-studios=""
+                 data-title="edc las vegas 2026"
+                 data-date="1778803200">
+              
 
 
 <a href="/events/edc-las-vegas-2026" class="text-decoration-none">
@@ -483,8 +841,25 @@
   </div>
 </a>
 
+            </div>
+          
         
-        
+          
+          
+            
+            
+            
+            <div class="vjs-event-item"
+                 data-upcoming="true"
+                 data-type="competition"
+                 data-country="japan"
+                 data-city="tokyo metropolitan government building"
+                 data-location="tokyo metropolitan government building, japan"
+                 data-artists=""
+                 data-studios=""
+                 data-title="tokyo lights 2026 — 1 minute projection mapping competition"
+                 data-date="1779494400">
+              
 
 
 <a href="/events/tokyo-lights-2026" class="text-decoration-none">
@@ -510,8 +885,25 @@
   </div>
 </a>
 
+            </div>
+          
         
-        
+          
+          
+            
+            
+            
+            <div class="vjs-event-item"
+                 data-upcoming="true"
+                 data-type="festival"
+                 data-country="spain"
+                 data-city="parc del fòrum"
+                 data-location="parc del fòrum, barcelona, spain"
+                 data-artists=""
+                 data-studios=""
+                 data-title="primavera sound barcelona 2026"
+                 data-date="1780444800">
+              
 
 
 <a href="/events/primavera-sound-2026" class="text-decoration-none">
@@ -537,8 +929,25 @@
   </div>
 </a>
 
+            </div>
+          
         
-        
+          
+          
+            
+            
+            
+            <div class="vjs-event-item"
+                 data-upcoming="true"
+                 data-type="festival"
+                 data-country="spain"
+                 data-city="fira gran via"
+                 data-location="fira gran via, barcelona, spain"
+                 data-artists=""
+                 data-studios=""
+                 data-title="sónar barcelona 2026"
+                 data-date="1781740800">
+              
 
 
 <a href="/events/sonar-barcelona-2026" class="text-decoration-none">
@@ -564,8 +973,25 @@
   </div>
 </a>
 
+            </div>
+          
         
-        
+          
+          
+            
+            
+            
+            <div class="vjs-event-item"
+                 data-upcoming="true"
+                 data-type="festival"
+                 data-country="belgium"
+                 data-city="boom"
+                 data-location="boom, belgium"
+                 data-artists=""
+                 data-studios=""
+                 data-title="tomorrowland belgium 2026"
+                 data-date="1784246400">
+              
 
 
 <a href="/events/tomorrowland-2026" class="text-decoration-none">
@@ -591,8 +1017,25 @@
   </div>
 </a>
 
+            </div>
+          
         
-        
+          
+          
+            
+            
+            
+            <div class="vjs-event-item"
+                 data-upcoming="true"
+                 data-type="festival"
+                 data-country="france (venue tba)"
+                 data-city="france (venue tba)"
+                 data-location="france (venue tba)"
+                 data-artists=""
+                 data-studios=""
+                 data-title="mo:dem festival 2026"
+                 data-date="1785715200">
+              
 
 
 <a href="/events/modem-festival-2026" class="text-decoration-none">
@@ -618,8 +1061,25 @@
   </div>
 </a>
 
+            </div>
+          
         
-        
+          
+          
+            
+            
+            
+            <div class="vjs-event-item"
+                 data-upcoming="true"
+                 data-type="festival"
+                 data-country="canada"
+                 data-city="quartier des spectacles"
+                 data-location="quartier des spectacles, montréal, canada"
+                 data-artists="jeff mills|rival consoles|ben ufo|polygonia"
+                 data-studios=""
+                 data-title="mutek montréal 2026 — edition 27"
+                 data-date="1787616000">
+              
 
 
 <a href="/events/mutek-montreal-2026" class="text-decoration-none">
@@ -645,8 +1105,25 @@
   </div>
 </a>
 
+            </div>
+          
         
-        
+          
+          
+            
+            
+            
+            <div class="vjs-event-item"
+                 data-upcoming="true"
+                 data-type="festival"
+                 data-country="usa"
+                 data-city="black rock desert"
+                 data-location="black rock desert, nevada, usa"
+                 data-artists=""
+                 data-studios=""
+                 data-title="burning man 2026"
+                 data-date="1788048000">
+              
 
 
 <a href="/events/burning-man-2026" class="text-decoration-none">
@@ -672,8 +1149,25 @@
   </div>
 </a>
 
+            </div>
+          
         
-        
+          
+          
+            
+            
+            
+            <div class="vjs-event-item"
+                 data-upcoming="true"
+                 data-type="festival"
+                 data-country="austria"
+                 data-city="linz"
+                 data-location="linz, austria"
+                 data-artists=""
+                 data-studios=""
+                 data-title="ars electronica 2026"
+                 data-date="1788912000">
+              
 
 
 <a href="/events/ars-electronica-2026" class="text-decoration-none">
@@ -699,8 +1193,25 @@
   </div>
 </a>
 
+            </div>
+          
         
-        
+          
+          
+            
+            
+            
+            <div class="vjs-event-item"
+                 data-upcoming="true"
+                 data-type="festival"
+                 data-country="finland"
+                 data-city="helsinki"
+                 data-location="helsinki, finland"
+                 data-artists=""
+                 data-studios=""
+                 data-title="aavistus festival 2026"
+                 data-date="1790812800">
+              
 
 
 <a href="/events/aavistus-festival-2026" class="text-decoration-none">
@@ -726,8 +1237,25 @@
   </div>
 </a>
 
+            </div>
+          
         
-        
+          
+          
+            
+            
+            
+            <div class="vjs-event-item"
+                 data-upcoming="true"
+                 data-type="festival"
+                 data-country="czech republic"
+                 data-city="prague"
+                 data-location="prague, czech republic"
+                 data-artists=""
+                 data-studios=""
+                 data-title="signal festival prague 2026"
+                 data-date="1792022400">
+              
 
 
 <a href="/events/signal-festival-2026" class="text-decoration-none">
@@ -753,8 +1281,25 @@
   </div>
 </a>
 
+            </div>
+          
         
-        
+          
+          
+            
+            
+            
+            <div class="vjs-event-item"
+                 data-upcoming="true"
+                 data-type="festival"
+                 data-country="netherlands"
+                 data-city="eindhoven"
+                 data-location="eindhoven, netherlands"
+                 data-artists=""
+                 data-studios=""
+                 data-title="glow eindhoven 2026"
+                 data-date="1794009600">
+              
 
 
 <a href="/events/glow-eindhoven-2026" class="text-decoration-none">
@@ -780,8 +1325,25 @@
   </div>
 </a>
 
+            </div>
+          
         
-        
+          
+          
+            
+            
+            
+            <div class="vjs-event-item"
+                 data-upcoming="true"
+                 data-type="festival"
+                 data-country="france"
+                 data-city="lyon"
+                 data-location="lyon, france"
+                 data-artists=""
+                 data-studios=""
+                 data-title="fête des lumières lyon 2026"
+                 data-date="1796428800">
+              
 
 
 <a href="/events/fete-des-lumieres-2026" class="text-decoration-none">
@@ -807,103 +1369,95 @@
   </div>
 </a>
 
+            </div>
+          
         
       </div>
     </div>
-    
 
-    <!-- PAST EVENTS -->
-    
-    <div>
-      <div style="display:flex; align-items:center; gap:1rem; margin-bottom:2rem;">
-        <span style="font-family:'Orbitron',sans-serif; font-size:0.75rem; letter-spacing:0.15em; text-transform:uppercase; color:var(--vjs-text-muted);">Archive</span>
-        <span style="flex:1; height:1px; background:var(--vjs-border);"></span>
-        <span style="font-family:'Orbitron',sans-serif; font-size:0.65rem; color:var(--vjs-text-muted);">4 Events</span>
+    <!-- PAST / ARCHIVE SECTION -->
+    <div id="past-section">
+      <div class="vjs-section-divider" id="past-divider">
+        <span class="vjs-section-divider-label" style="color:var(--vjs-text-muted);">Archive</span>
+        <span class="vjs-section-divider-line"></span>
+        <span class="vjs-section-divider-count" id="past-count-label"></span>
       </div>
-      <div class="vjs-grid vjs-grid-3">
+      <div class="vjs-grid vjs-grid-3" id="past-grid">
         
         
-
-
-<a href="/events/glitch-cathedral-premiere" class="text-decoration-none">
-  <div class="vjs-card" style="opacity:0.7;">
-    <div class="vjs-card-img-placeholder" style="background: linear-gradient(135deg, rgba(0,212,255,0.12) 0%, rgba(123,47,255,0.1) 100%); height:180px;">
-      <div style="text-align:center;">
-        <div style="font-family:'Orbitron',sans-serif; font-size:2.5rem; font-weight:700; color: var(--vjs-electric-blue); opacity:0.4; line-height:1;">31</div>
-        <div style="font-family:'Orbitron',sans-serif; font-size:0.7rem; text-transform:uppercase; letter-spacing:0.2em; color: var(--vjs-text-muted);">Oct 2024</div>
-      </div>
-    </div>
-    <div class="vjs-card-body">
-      <div class="vjs-event-past-badge">Past</div>
-      <div style="margin-bottom:0.4rem;"><span class="vjs-tag vjs-tag-blue">Installation</span></div>
-      <h4 class="vjs-card-title">Glitch Cathedral World Premiere</h4>
-      <p class="vjs-card-text" style="font-size:0.8rem; margin-bottom:0.25rem;"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" style="width:0.8em; height:0.8em; display:inline-block; vertical-align:middle; margin-right:4px;"><path d="M12 2c-4 0-7 3-7 8 0 3 2 5 5 7 2 1 3 2 2 4-.5 1-1 1-2 1-4 0-5 2-5 2h12s-1-2-5-2c-1 0-2 0-2-1-1-2 0-3 2-4 3-2 5-4 5-7 0-5-3-8-7-8Z"/></svg> London, UK</p>
-      <p class="vjs-card-text" style="font-size:0.8rem; color: var(--vjs-electric-blue);"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" style="width:0.8em; height:0.8em; display:inline-block; vertical-align:middle; margin-right:4px;"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg> 21:00 GMT</p>
-      
-      <div style="margin-top:0.5rem;">
-        <span class="vjs-tag vjs-tag-purple">Pixel Storm</span>
-      </div>
-      
-    </div>
-  </div>
-</a>
-
+          
+          
         
+          
+          
         
-
-
-<a href="/events/vjs-tv-live-01" class="text-decoration-none">
-  <div class="vjs-card" style="opacity:0.7;">
-    <div class="vjs-card-img-placeholder" style="background: linear-gradient(135deg, rgba(0,212,255,0.12) 0%, rgba(123,47,255,0.1) 100%); height:180px;">
-      <div style="text-align:center;">
-        <div style="font-family:'Orbitron',sans-serif; font-size:2.5rem; font-weight:700; color: var(--vjs-electric-blue); opacity:0.4; line-height:1;">15</div>
-        <div style="font-family:'Orbitron',sans-serif; font-size:0.7rem; text-transform:uppercase; letter-spacing:0.2em; color: var(--vjs-text-muted);">Apr 2025</div>
-      </div>
-    </div>
-    <div class="vjs-card-body">
-      <div class="vjs-event-past-badge">Past</div>
-      <div style="margin-bottom:0.4rem;"><span class="vjs-tag vjs-tag-blue">Live Stream</span></div>
-      <h4 class="vjs-card-title">VJs TV Live Session 001</h4>
-      <p class="vjs-card-text" style="font-size:0.8rem; margin-bottom:0.25rem;"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" style="width:0.8em; height:0.8em; display:inline-block; vertical-align:middle; margin-right:4px;"><path d="M12 2c-4 0-7 3-7 8 0 3 2 5 5 7 2 1 3 2 2 4-.5 1-1 1-2 1-4 0-5 2-5 2h12s-1-2-5-2c-1 0-2 0-2-1-1-2 0-3 2-4 3-2 5-4 5-7 0-5-3-8-7-8Z"/></svg> Online / Berlin</p>
-      <p class="vjs-card-text" style="font-size:0.8rem; color: var(--vjs-electric-blue);"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" style="width:0.8em; height:0.8em; display:inline-block; vertical-align:middle; margin-right:4px;"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg> 20:00 CET</p>
-      
-      <div style="margin-top:0.5rem;">
-        <span class="vjs-tag vjs-tag-purple">VJ Kai</span><span class="vjs-tag vjs-tag-purple">Nova Spectrum</span>
-      </div>
-      
-    </div>
-  </div>
-</a>
-
+          
+          
         
+          
+          
         
-
-
-<a href="/events/flux-mutek-2025" class="text-decoration-none">
-  <div class="vjs-card" style="opacity:0.7;">
-    <div class="vjs-card-img-placeholder" style="background: linear-gradient(135deg, rgba(0,212,255,0.12) 0%, rgba(123,47,255,0.1) 100%); height:180px;">
-      <div style="text-align:center;">
-        <div style="font-family:'Orbitron',sans-serif; font-size:2.5rem; font-weight:700; color: var(--vjs-electric-blue); opacity:0.4; line-height:1;">12</div>
-        <div style="font-family:'Orbitron',sans-serif; font-size:0.7rem; text-transform:uppercase; letter-spacing:0.2em; color: var(--vjs-text-muted);">Jun 2025</div>
-      </div>
-    </div>
-    <div class="vjs-card-body">
-      <div class="vjs-event-past-badge">Past</div>
-      <div style="margin-bottom:0.4rem;"><span class="vjs-tag vjs-tag-blue">Festival</span></div>
-      <h4 class="vjs-card-title">Flux @ MUTEK Montreal 2025</h4>
-      <p class="vjs-card-text" style="font-size:0.8rem; margin-bottom:0.25rem;"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" style="width:0.8em; height:0.8em; display:inline-block; vertical-align:middle; margin-right:4px;"><path d="M12 2c-4 0-7 3-7 8 0 3 2 5 5 7 2 1 3 2 2 4-.5 1-1 1-2 1-4 0-5 2-5 2h12s-1-2-5-2c-1 0-2 0-2-1-1-2 0-3 2-4 3-2 5-4 5-7 0-5-3-8-7-8Z"/></svg> Montreal, Canada</p>
-      <p class="vjs-card-text" style="font-size:0.8rem; color: var(--vjs-electric-blue);"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" style="width:0.8em; height:0.8em; display:inline-block; vertical-align:middle; margin-right:4px;"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg> 22:00 EDT</p>
-      
-      <div style="margin-top:0.5rem;">
-        <span class="vjs-tag vjs-tag-purple">Flux Collective</span><span class="vjs-tag vjs-tag-purple">Luna Visuals</span>
-      </div>
-      
-    </div>
-  </div>
-</a>
-
+          
+          
         
+          
+          
         
+          
+          
+        
+          
+          
+        
+          
+          
+        
+          
+          
+        
+          
+          
+        
+          
+          
+        
+          
+          
+        
+          
+          
+        
+          
+          
+        
+          
+          
+        
+          
+          
+        
+          
+          
+        
+          
+          
+        
+          
+          
+            
+            
+            
+            <div class="vjs-event-item"
+                 data-upcoming="false"
+                 data-type="festival"
+                 data-country="canada"
+                 data-city="montreal"
+                 data-location="montreal, canada"
+                 data-artists="luna visuals|nova spectrum"
+                 data-studios=""
+                 data-title="mutek visuals showcase"
+                 data-date="1750377600">
+              
 
 
 <a href="/events/mutek-visuals-showcase" class="text-decoration-none">
@@ -929,10 +1483,148 @@
   </div>
 </a>
 
+            </div>
+          
+        
+          
+          
+            
+            
+            
+            <div class="vjs-event-item"
+                 data-upcoming="false"
+                 data-type="festival"
+                 data-country="canada"
+                 data-city="montreal"
+                 data-location="montreal, canada"
+                 data-artists="flux collective|luna visuals"
+                 data-studios=""
+                 data-title="flux @ mutek montreal 2025"
+                 data-date="1749686400">
+              
+
+
+<a href="/events/flux-mutek-2025" class="text-decoration-none">
+  <div class="vjs-card" style="opacity:0.7;">
+    <div class="vjs-card-img-placeholder" style="background: linear-gradient(135deg, rgba(0,212,255,0.12) 0%, rgba(123,47,255,0.1) 100%); height:180px;">
+      <div style="text-align:center;">
+        <div style="font-family:'Orbitron',sans-serif; font-size:2.5rem; font-weight:700; color: var(--vjs-electric-blue); opacity:0.4; line-height:1;">12</div>
+        <div style="font-family:'Orbitron',sans-serif; font-size:0.7rem; text-transform:uppercase; letter-spacing:0.2em; color: var(--vjs-text-muted);">Jun 2025</div>
+      </div>
+    </div>
+    <div class="vjs-card-body">
+      <div class="vjs-event-past-badge">Past</div>
+      <div style="margin-bottom:0.4rem;"><span class="vjs-tag vjs-tag-blue">Festival</span></div>
+      <h4 class="vjs-card-title">Flux @ MUTEK Montreal 2025</h4>
+      <p class="vjs-card-text" style="font-size:0.8rem; margin-bottom:0.25rem;"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" style="width:0.8em; height:0.8em; display:inline-block; vertical-align:middle; margin-right:4px;"><path d="M12 2c-4 0-7 3-7 8 0 3 2 5 5 7 2 1 3 2 2 4-.5 1-1 1-2 1-4 0-5 2-5 2h12s-1-2-5-2c-1 0-2 0-2-1-1-2 0-3 2-4 3-2 5-4 5-7 0-5-3-8-7-8Z"/></svg> Montreal, Canada</p>
+      <p class="vjs-card-text" style="font-size:0.8rem; color: var(--vjs-electric-blue);"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" style="width:0.8em; height:0.8em; display:inline-block; vertical-align:middle; margin-right:4px;"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg> 22:00 EDT</p>
+      
+      <div style="margin-top:0.5rem;">
+        <span class="vjs-tag vjs-tag-purple">Flux Collective</span><span class="vjs-tag vjs-tag-purple">Luna Visuals</span>
+      </div>
+      
+    </div>
+  </div>
+</a>
+
+            </div>
+          
+        
+          
+          
+            
+            
+            
+            <div class="vjs-event-item"
+                 data-upcoming="false"
+                 data-type="live stream"
+                 data-country="online / berlin"
+                 data-city="online / berlin"
+                 data-location="online / berlin"
+                 data-artists="vj kai|nova spectrum"
+                 data-studios=""
+                 data-title="vjs tv live session 001"
+                 data-date="1744675200">
+              
+
+
+<a href="/events/vjs-tv-live-01" class="text-decoration-none">
+  <div class="vjs-card" style="opacity:0.7;">
+    <div class="vjs-card-img-placeholder" style="background: linear-gradient(135deg, rgba(0,212,255,0.12) 0%, rgba(123,47,255,0.1) 100%); height:180px;">
+      <div style="text-align:center;">
+        <div style="font-family:'Orbitron',sans-serif; font-size:2.5rem; font-weight:700; color: var(--vjs-electric-blue); opacity:0.4; line-height:1;">15</div>
+        <div style="font-family:'Orbitron',sans-serif; font-size:0.7rem; text-transform:uppercase; letter-spacing:0.2em; color: var(--vjs-text-muted);">Apr 2025</div>
+      </div>
+    </div>
+    <div class="vjs-card-body">
+      <div class="vjs-event-past-badge">Past</div>
+      <div style="margin-bottom:0.4rem;"><span class="vjs-tag vjs-tag-blue">Live Stream</span></div>
+      <h4 class="vjs-card-title">VJs TV Live Session 001</h4>
+      <p class="vjs-card-text" style="font-size:0.8rem; margin-bottom:0.25rem;"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" style="width:0.8em; height:0.8em; display:inline-block; vertical-align:middle; margin-right:4px;"><path d="M12 2c-4 0-7 3-7 8 0 3 2 5 5 7 2 1 3 2 2 4-.5 1-1 1-2 1-4 0-5 2-5 2h12s-1-2-5-2c-1 0-2 0-2-1-1-2 0-3 2-4 3-2 5-4 5-7 0-5-3-8-7-8Z"/></svg> Online / Berlin</p>
+      <p class="vjs-card-text" style="font-size:0.8rem; color: var(--vjs-electric-blue);"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" style="width:0.8em; height:0.8em; display:inline-block; vertical-align:middle; margin-right:4px;"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg> 20:00 CET</p>
+      
+      <div style="margin-top:0.5rem;">
+        <span class="vjs-tag vjs-tag-purple">VJ Kai</span><span class="vjs-tag vjs-tag-purple">Nova Spectrum</span>
+      </div>
+      
+    </div>
+  </div>
+</a>
+
+            </div>
+          
+        
+          
+          
+            
+            
+            
+            <div class="vjs-event-item"
+                 data-upcoming="false"
+                 data-type="installation"
+                 data-country="uk"
+                 data-city="london"
+                 data-location="london, uk"
+                 data-artists="pixel storm"
+                 data-studios=""
+                 data-title="glitch cathedral world premiere"
+                 data-date="1730332800">
+              
+
+
+<a href="/events/glitch-cathedral-premiere" class="text-decoration-none">
+  <div class="vjs-card" style="opacity:0.7;">
+    <div class="vjs-card-img-placeholder" style="background: linear-gradient(135deg, rgba(0,212,255,0.12) 0%, rgba(123,47,255,0.1) 100%); height:180px;">
+      <div style="text-align:center;">
+        <div style="font-family:'Orbitron',sans-serif; font-size:2.5rem; font-weight:700; color: var(--vjs-electric-blue); opacity:0.4; line-height:1;">31</div>
+        <div style="font-family:'Orbitron',sans-serif; font-size:0.7rem; text-transform:uppercase; letter-spacing:0.2em; color: var(--vjs-text-muted);">Oct 2024</div>
+      </div>
+    </div>
+    <div class="vjs-card-body">
+      <div class="vjs-event-past-badge">Past</div>
+      <div style="margin-bottom:0.4rem;"><span class="vjs-tag vjs-tag-blue">Installation</span></div>
+      <h4 class="vjs-card-title">Glitch Cathedral World Premiere</h4>
+      <p class="vjs-card-text" style="font-size:0.8rem; margin-bottom:0.25rem;"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" style="width:0.8em; height:0.8em; display:inline-block; vertical-align:middle; margin-right:4px;"><path d="M12 2c-4 0-7 3-7 8 0 3 2 5 5 7 2 1 3 2 2 4-.5 1-1 1-2 1-4 0-5 2-5 2h12s-1-2-5-2c-1 0-2 0-2-1-1-2 0-3 2-4 3-2 5-4 5-7 0-5-3-8-7-8Z"/></svg> London, UK</p>
+      <p class="vjs-card-text" style="font-size:0.8rem; color: var(--vjs-electric-blue);"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" style="width:0.8em; height:0.8em; display:inline-block; vertical-align:middle; margin-right:4px;"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg> 21:00 GMT</p>
+      
+      <div style="margin-top:0.5rem;">
+        <span class="vjs-tag vjs-tag-purple">Pixel Storm</span>
+      </div>
+      
+    </div>
+  </div>
+</a>
+
+            </div>
+          
         
       </div>
     </div>
-    
+
+    <!-- NO RESULTS -->
+    <div id="events-no-results" style="display:none; text-align:center; padding:4rem; color:var(--vjs-text-muted); font-family:'Barlow Condensed',sans-serif; font-size:1rem; letter-spacing:0.1em;">
+      No events match this filter. <a href="#" onclick="resetEventFilters(); return false;" style="color:var(--vjs-ultraviolet);">Reset filters</a>
+    </div>
 
   </div>
 </section>
@@ -1085,6 +1777,90 @@ function vjsTipAmount(amt) {
 
 
 <script>
+function applyEventFilters() {
+  var search  = (document.getElementById('event-search').value || '').toLowerCase().trim();
+  var type    = document.getElementById('type-select').value;
+  var country = document.getElementById('country-select').value;
+  var city    = document.getElementById('city-select').value;
+  var artist  = document.getElementById('artist-select').value;
+  var studio  = document.getElementById('studio-select').value;
+  var time    = document.getElementById('time-select').value;
+  var sort    = document.getElementById('sort-select').value;
+
+  // Active state on selects
+  ['type-select','country-select','city-select','artist-select','studio-select','time-select'].forEach(function(id){
+    var el = document.getElementById(id);
+    el.classList.toggle('active', el.value !== 'all');
+  });
+  var searchEl = document.getElementById('event-search');
+  searchEl.style.borderColor = search ? 'var(--vjs-ultraviolet)' : '';
+
+  var allItems = Array.from(document.querySelectorAll('.vjs-event-item'));
+  var visible = 0, upcomingVisible = 0, pastVisible = 0;
+
+  allItems.forEach(function(item) {
+    var isUpcoming = item.dataset.upcoming === 'true';
+    var matchTime   = time === 'all'
+                   || (time === 'upcoming' && isUpcoming)
+                   || (time === 'past' && !isUpcoming);
+    var matchType    = type    === 'all' || (item.dataset.type    || '').indexOf(type)    !== -1;
+    var matchCountry = country === 'all' || (item.dataset.country || '').indexOf(country) !== -1;
+    var matchCity    = city    === 'all' || (item.dataset.city    || '').indexOf(city)    !== -1;
+    var matchArtist  = artist  === 'all' || (item.dataset.artists || '').indexOf(artist)  !== -1;
+    var matchStudio  = studio  === 'all' || (item.dataset.studios || '').indexOf(studio)  !== -1;
+    var matchSearch  = !search
+                   || (item.dataset.title    || '').indexOf(search) !== -1
+                   || (item.dataset.location || '').indexOf(search) !== -1;
+
+    var show = matchTime && matchType && matchCountry && matchCity && matchArtist && matchStudio && matchSearch;
+    item.style.display = show ? '' : 'none';
+    if (show) {
+      visible++;
+      if (isUpcoming) upcomingVisible++; else pastVisible++;
+    }
+  });
+
+  // Sort visible items in each grid
+  ['upcoming-grid','past-grid'].forEach(function(gridId) {
+    var grid = document.getElementById(gridId);
+    var items = Array.from(grid.querySelectorAll('.vjs-event-item')).filter(function(i){ return i.style.display !== 'none'; });
+    items.sort(function(a, b) {
+      if (sort === 'date-asc')  return parseInt(a.dataset.date) - parseInt(b.dataset.date);
+      if (sort === 'date-desc') return parseInt(b.dataset.date) - parseInt(a.dataset.date);
+      if (sort === 'az')        return (a.dataset.title||'').localeCompare(b.dataset.title||'');
+      return 0;
+    });
+    items.forEach(function(i){ grid.appendChild(i); });
+  });
+
+  // Show/hide sections
+  var upcomingSection = document.getElementById('upcoming-section');
+  var pastSection = document.getElementById('past-section');
+  upcomingSection.style.display = upcomingVisible === 0 ? 'none' : '';
+  pastSection.style.display = pastVisible === 0 ? 'none' : '';
+
+  // Update count labels
+  document.getElementById('upcoming-count-label').textContent = upcomingVisible + ' Event' + (upcomingVisible !== 1 ? 's' : '');
+  document.getElementById('past-count-label').textContent = pastVisible + ' Event' + (pastVisible !== 1 ? 's' : '');
+
+  // Update total count
+  document.getElementById('events-count-num').textContent = visible;
+
+  // No results
+  document.getElementById('events-no-results').style.display = visible === 0 ? 'block' : 'none';
+}
+
+function resetEventFilters() {
+  document.getElementById('event-search').value = '';
+  document.getElementById('event-search').style.borderColor = '';
+  ['type-select','country-select','city-select','artist-select','studio-select','time-select'].forEach(function(id){
+    document.getElementById(id).value = 'all';
+    document.getElementById(id).classList.remove('active');
+  });
+  document.getElementById('sort-select').value = 'date-desc';
+  applyEventFilters();
+}
+
 function setEventLayout(mode) {
   var grids = document.querySelectorAll('.vjs-grid');
   var bg = document.getElementById('btn-grid-e');
@@ -1097,6 +1873,9 @@ function setEventLayout(mode) {
     bg.classList.add('active'); bl.classList.remove('active');
   }
 }
+
+// Init counts on load
+document.addEventListener('DOMContentLoaded', function(){ applyEventFilters(); });
 </script>
 
   </div>

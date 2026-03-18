@@ -7,6 +7,45 @@ meta_description: "VJs TV live sessions, festival visuals, and brand activations
 
 {% include layouts/nav/nav-3.html default_logo="white" %}
 
+<style>
+.vjs-events-count {
+  font-family:'Barlow Condensed',sans-serif; font-size:0.65rem; font-weight:700;
+  letter-spacing:0.18em; text-transform:uppercase; color:#333;
+  margin-bottom:20px; display:flex; align-items:center; gap:1rem;
+}
+.vjs-events-count strong { color:var(--vjs-ultraviolet); }
+.vjs-event-search-wrap {
+  position:relative; flex:1; min-width:160px; max-width:260px;
+}
+.vjs-event-search-wrap svg {
+  position:absolute; left:10px; top:50%; transform:translateY(-50%);
+  color:var(--vjs-text-muted); pointer-events:none;
+}
+.vjs-event-search {
+  width:100%; padding:7px 10px 7px 32px;
+  background:var(--vjs-card-bg); border:1px solid var(--vjs-border);
+  color:var(--vjs-text-primary); font-family:'Barlow Condensed',sans-serif;
+  font-size:0.8rem; letter-spacing:0.05em; outline:none; border-radius:0;
+  box-sizing:border-box;
+}
+.vjs-event-search:focus { border-color:var(--vjs-ultraviolet); }
+.vjs-event-search::placeholder { color:var(--vjs-text-muted); }
+.vjs-section-divider {
+  display:flex; align-items:center; gap:1rem; margin-bottom:2rem;
+}
+.vjs-section-divider-label {
+  font-family:'Orbitron',sans-serif; font-size:0.75rem;
+  letter-spacing:0.15em; text-transform:uppercase;
+}
+.vjs-section-divider-line {
+  flex:1; height:1px; background:var(--vjs-border);
+}
+.vjs-section-divider-count {
+  font-family:'Orbitron',sans-serif; font-size:0.65rem;
+  color:var(--vjs-text-muted);
+}
+</style>
+
 <div class="vjs-page-header">
   <div class="container">
     <h1 class="vjs-section-title" style="font-size:clamp(2rem,5vw,3.5rem);">Events</h1>
@@ -18,9 +57,146 @@ meta_description: "VJs TV live sessions, festival visuals, and brand activations
 <section class="vjs-section">
   <div class="container">
 
-    <!-- LAYOUT TOGGLE -->
-    <div class="vjs-filter-dropdowns" style="justify-content:flex-end;">
-      <div class="vjs-layout-btn-group">
+    <!-- FILTER BAR -->
+    <div class="vjs-filter-dropdowns">
+
+      <button class="vjs-filter-reset" onclick="resetEventFilters()">Reset</button>
+
+      <!-- Search -->
+      <div class="vjs-filter-group">
+        <span class="vjs-filter-drop-label">Search</span>
+        <div class="vjs-event-search-wrap">
+          <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg>
+          <input type="text" class="vjs-event-search" id="event-search" placeholder="Event name…" oninput="applyEventFilters()">
+        </div>
+      </div>
+
+      <!-- Type -->
+      <div class="vjs-filter-group">
+        <span class="vjs-filter-drop-label">Type</span>
+        <select class="vjs-filter-select" id="type-select" onchange="applyEventFilters()">
+          <option value="all">All Types</option>
+          {% assign type_list = "" %}
+          {% for event in site.events %}
+            {% assign t = event.event_type | default: "" %}
+            {% if t != "" %}
+              {% unless type_list contains t %}
+                {% assign type_list = type_list | append: t | append: "||" %}
+              {% endunless %}
+            {% endif %}
+          {% endfor %}
+          {% assign type_arr = type_list | split: "||" | sort %}
+          {% for t in type_arr %}{% if t != "" %}
+          <option value="{{ t | downcase }}">{{ t }}</option>
+          {% endif %}{% endfor %}
+        </select>
+      </div>
+
+      <!-- Country -->
+      <div class="vjs-filter-group">
+        <span class="vjs-filter-drop-label">Country</span>
+        <select class="vjs-filter-select" id="country-select" onchange="applyEventFilters()">
+          <option value="all">All Countries</option>
+          {% assign country_list = "" %}
+          {% for event in site.events %}
+            {% assign loc_parts = event.location | split: ", " %}
+            {% assign ctry = loc_parts | last | default: "" %}
+            {% if ctry != "" %}
+              {% unless country_list contains ctry %}
+                {% assign country_list = country_list | append: ctry | append: "||" %}
+              {% endunless %}
+            {% endif %}
+          {% endfor %}
+          {% assign country_arr = country_list | split: "||" | sort %}
+          {% for c in country_arr %}{% if c != "" %}
+          <option value="{{ c | downcase }}">{{ c }}</option>
+          {% endif %}{% endfor %}
+        </select>
+      </div>
+
+      <!-- City -->
+      <div class="vjs-filter-group">
+        <span class="vjs-filter-drop-label">City</span>
+        <select class="vjs-filter-select" id="city-select" onchange="applyEventFilters()">
+          <option value="all">All Cities</option>
+          {% assign city_list = "" %}
+          {% for event in site.events %}
+            {% assign loc_parts = event.location | split: ", " %}
+            {% assign city = loc_parts | first | default: "" %}
+            {% if city != "" and loc_parts.size > 1 %}
+              {% unless city_list contains city %}
+                {% assign city_list = city_list | append: city | append: "||" %}
+              {% endunless %}
+            {% endif %}
+          {% endfor %}
+          {% assign city_arr = city_list | split: "||" | sort %}
+          {% for c in city_arr %}{% if c != "" %}
+          <option value="{{ c | downcase }}">{{ c }}</option>
+          {% endif %}{% endfor %}
+        </select>
+      </div>
+
+      <!-- Artists -->
+      <div class="vjs-filter-group">
+        <span class="vjs-filter-drop-label">Artist</span>
+        <select class="vjs-filter-select" id="artist-select" onchange="applyEventFilters()">
+          <option value="all">All Artists</option>
+          {% assign artist_list = "" %}
+          {% for event in site.events %}
+            {% for a in event.artists %}
+              {% if a != "" %}
+                {% unless artist_list contains a %}
+                  {% assign artist_list = artist_list | append: a | append: "||" %}
+                {% endunless %}
+              {% endif %}
+            {% endfor %}
+          {% endfor %}
+          {% assign artist_arr = artist_list | split: "||" | sort %}
+          {% for a in artist_arr %}{% if a != "" %}
+          <option value="{{ a | downcase }}">{{ a }}</option>
+          {% endif %}{% endfor %}
+        </select>
+      </div>
+
+      <!-- Studios -->
+      <div class="vjs-filter-group">
+        <span class="vjs-filter-drop-label">Studio</span>
+        <select class="vjs-filter-select" id="studio-select" onchange="applyEventFilters()">
+          <option value="all">All Studios</option>
+          {% assign studio_list = "" %}
+          {% for event in site.events %}
+            {% for s in event.studios %}
+              {% if s != "" %}
+                {% unless studio_list contains s %}
+                  {% assign studio_list = studio_list | append: s | append: "||" %}
+                {% endunless %}
+              {% endif %}
+            {% endfor %}
+          {% endfor %}
+          {% assign studio_arr = studio_list | split: "||" | sort %}
+          {% for s in studio_arr %}{% if s != "" %}
+          <option value="{{ s | downcase }}">{{ s }}</option>
+          {% endif %}{% endfor %}
+        </select>
+      </div>
+
+      <!-- Time -->
+      <div class="vjs-filter-group">
+        <span class="vjs-filter-drop-label">When</span>
+        <select class="vjs-filter-select" id="time-select" onchange="applyEventFilters()">
+          <option value="all">All Events</option>
+          <option value="upcoming">Upcoming</option>
+          <option value="past">Past / Archive</option>
+        </select>
+      </div>
+
+      <!-- Sort + Layout -->
+      <div class="vjs-filter-right">
+        <select class="vjs-filter-select" id="sort-select" onchange="applyEventFilters()" style="min-width:130px;">
+          <option value="date-desc">Newest First</option>
+          <option value="date-asc">Oldest First</option>
+          <option value="az">A → Z</option>
+        </select>
         <button class="vjs-layout-btn active" id="btn-grid-e" onclick="setEventLayout('grid')" title="Grid">
           <svg width="13" height="13" viewBox="0 0 14 14" fill="currentColor"><rect x="0" y="0" width="6" height="6"/><rect x="8" y="0" width="6" height="6"/><rect x="0" y="8" width="6" height="6"/><rect x="8" y="8" width="6" height="6"/></svg> Grid
         </button>
@@ -28,54 +204,86 @@ meta_description: "VJs TV live sessions, festival visuals, and brand activations
           <svg width="13" height="13" viewBox="0 0 14 14" fill="currentColor"><rect x="0" y="0" width="4" height="4"/><rect x="6" y="1" width="8" height="2"/><rect x="0" y="5" width="4" height="4"/><rect x="6" y="6" width="8" height="2"/><rect x="0" y="10" width="4" height="4"/><rect x="6" y="11" width="8" height="2"/></svg> List
         </button>
       </div>
+
     </div>
 
-    <!-- UPCOMING EVENTS -->
-    {% assign today = "now" | date: "%s" | plus: 0 %}
-    {% assign upcoming = "" | split: "" %}
-    {% assign past = "" | split: "" %}
-    {% for event in site.events %}
-      {% assign event_ts = event.date | date: "%s" | plus: 0 %}
-      {% if event_ts >= today %}
-        {% assign upcoming = upcoming | push: event %}
-      {% else %}
-        {% assign past = past | push: event %}
-      {% endif %}
-    {% endfor %}
+    <!-- RESULT COUNT -->
+    <div class="vjs-events-count" id="events-count">
+      <span><strong id="events-count-num">{{ site.events | size }}</strong> Events</span>
+    </div>
 
-    {% if upcoming.size > 0 %}
-    <div style="margin-bottom:3.5rem;">
-      <div style="display:flex; align-items:center; gap:1rem; margin-bottom:2rem;">
+    <!-- UPCOMING SECTION -->
+    {% assign today_s = "now" | date: "%s" | plus: 0 %}
+    <div id="upcoming-section" style="margin-bottom:3.5rem;">
+      <div class="vjs-section-divider" id="upcoming-divider">
         <span style="display:inline-flex; align-items:center; gap:0.5rem;">
           <span style="width:8px; height:8px; background:var(--vjs-cyan); border-radius:50%; display:inline-block; animation:vjsPulse 1.5s infinite;"></span>
-          <span style="font-family:'Orbitron',sans-serif; font-size:0.75rem; letter-spacing:0.15em; text-transform:uppercase; color:var(--vjs-cyan);">Upcoming</span>
+          <span class="vjs-section-divider-label" style="color:var(--vjs-cyan);">Upcoming</span>
         </span>
-        <span style="flex:1; height:1px; background:var(--vjs-border);"></span>
-        <span style="font-family:'Orbitron',sans-serif; font-size:0.65rem; color:var(--vjs-text-muted);">{{ upcoming.size }} Event{% if upcoming.size != 1 %}s{% endif %}</span>
+        <span class="vjs-section-divider-line"></span>
+        <span class="vjs-section-divider-count" id="upcoming-count-label"></span>
       </div>
-      <div class="vjs-grid vjs-grid-3">
-        {% for event in upcoming %}
-        {% include cards/event-card.html event=event %}
+      <div class="vjs-grid vjs-grid-3" id="upcoming-grid">
+        {% assign upcoming_events = site.events | sort: "date" %}
+        {% for event in upcoming_events %}
+          {% assign event_ts = event.date | date: "%s" | plus: 0 %}
+          {% if event_ts >= today_s %}
+            {% assign loc_parts = event.location | split: ", " %}
+            {% assign ev_country = loc_parts | last | downcase %}
+            {% assign ev_city = loc_parts | first | downcase %}
+            <div class="vjs-event-item"
+                 data-upcoming="true"
+                 data-type="{{ event.event_type | downcase }}"
+                 data-country="{{ ev_country }}"
+                 data-city="{{ ev_city }}"
+                 data-location="{{ event.location | downcase }}"
+                 data-artists="{{ event.artists | join: '|' | downcase }}"
+                 data-studios="{{ event.studios | join: '|' | downcase }}"
+                 data-title="{{ event.title | downcase }}"
+                 data-date="{{ event.date | date: '%s' }}">
+              {% include cards/event-card.html event=event %}
+            </div>
+          {% endif %}
         {% endfor %}
       </div>
     </div>
-    {% endif %}
 
-    <!-- PAST EVENTS -->
-    {% if past.size > 0 %}
-    <div>
-      <div style="display:flex; align-items:center; gap:1rem; margin-bottom:2rem;">
-        <span style="font-family:'Orbitron',sans-serif; font-size:0.75rem; letter-spacing:0.15em; text-transform:uppercase; color:var(--vjs-text-muted);">Archive</span>
-        <span style="flex:1; height:1px; background:var(--vjs-border);"></span>
-        <span style="font-family:'Orbitron',sans-serif; font-size:0.65rem; color:var(--vjs-text-muted);">{{ past.size }} Event{% if past.size != 1 %}s{% endif %}</span>
+    <!-- PAST / ARCHIVE SECTION -->
+    <div id="past-section">
+      <div class="vjs-section-divider" id="past-divider">
+        <span class="vjs-section-divider-label" style="color:var(--vjs-text-muted);">Archive</span>
+        <span class="vjs-section-divider-line"></span>
+        <span class="vjs-section-divider-count" id="past-count-label"></span>
       </div>
-      <div class="vjs-grid vjs-grid-3">
-        {% for event in past %}
-        {% include cards/event-card.html event=event %}
+      <div class="vjs-grid vjs-grid-3" id="past-grid">
+        {% assign past_events = site.events | sort: "date" | reverse %}
+        {% for event in past_events %}
+          {% assign event_ts = event.date | date: "%s" | plus: 0 %}
+          {% if event_ts < today_s %}
+            {% assign loc_parts = event.location | split: ", " %}
+            {% assign ev_country = loc_parts | last | downcase %}
+            {% assign ev_city = loc_parts | first | downcase %}
+            <div class="vjs-event-item"
+                 data-upcoming="false"
+                 data-type="{{ event.event_type | downcase }}"
+                 data-country="{{ ev_country }}"
+                 data-city="{{ ev_city }}"
+                 data-location="{{ event.location | downcase }}"
+                 data-artists="{{ event.artists | join: '|' | downcase }}"
+                 data-studios="{{ event.studios | join: '|' | downcase }}"
+                 data-title="{{ event.title | downcase }}"
+                 data-date="{{ event.date | date: '%s' }}">
+              {% include cards/event-card.html event=event %}
+            </div>
+          {% endif %}
         {% endfor %}
       </div>
     </div>
-    {% endif %}
+
+    <!-- NO RESULTS -->
+    <div id="events-no-results" style="display:none; text-align:center; padding:4rem; color:var(--vjs-text-muted); font-family:'Barlow Condensed',sans-serif; font-size:1rem; letter-spacing:0.1em;">
+      No events match this filter. <a href="#" onclick="resetEventFilters(); return false;" style="color:var(--vjs-ultraviolet);">Reset filters</a>
+    </div>
 
   </div>
 </section>
@@ -83,6 +291,90 @@ meta_description: "VJs TV live sessions, festival visuals, and brand activations
 {% include vjstv-footer.html %}
 
 <script>
+function applyEventFilters() {
+  var search  = (document.getElementById('event-search').value || '').toLowerCase().trim();
+  var type    = document.getElementById('type-select').value;
+  var country = document.getElementById('country-select').value;
+  var city    = document.getElementById('city-select').value;
+  var artist  = document.getElementById('artist-select').value;
+  var studio  = document.getElementById('studio-select').value;
+  var time    = document.getElementById('time-select').value;
+  var sort    = document.getElementById('sort-select').value;
+
+  // Active state on selects
+  ['type-select','country-select','city-select','artist-select','studio-select','time-select'].forEach(function(id){
+    var el = document.getElementById(id);
+    el.classList.toggle('active', el.value !== 'all');
+  });
+  var searchEl = document.getElementById('event-search');
+  searchEl.style.borderColor = search ? 'var(--vjs-ultraviolet)' : '';
+
+  var allItems = Array.from(document.querySelectorAll('.vjs-event-item'));
+  var visible = 0, upcomingVisible = 0, pastVisible = 0;
+
+  allItems.forEach(function(item) {
+    var isUpcoming = item.dataset.upcoming === 'true';
+    var matchTime   = time === 'all'
+                   || (time === 'upcoming' && isUpcoming)
+                   || (time === 'past' && !isUpcoming);
+    var matchType    = type    === 'all' || (item.dataset.type    || '').indexOf(type)    !== -1;
+    var matchCountry = country === 'all' || (item.dataset.country || '').indexOf(country) !== -1;
+    var matchCity    = city    === 'all' || (item.dataset.city    || '').indexOf(city)    !== -1;
+    var matchArtist  = artist  === 'all' || (item.dataset.artists || '').indexOf(artist)  !== -1;
+    var matchStudio  = studio  === 'all' || (item.dataset.studios || '').indexOf(studio)  !== -1;
+    var matchSearch  = !search
+                   || (item.dataset.title    || '').indexOf(search) !== -1
+                   || (item.dataset.location || '').indexOf(search) !== -1;
+
+    var show = matchTime && matchType && matchCountry && matchCity && matchArtist && matchStudio && matchSearch;
+    item.style.display = show ? '' : 'none';
+    if (show) {
+      visible++;
+      if (isUpcoming) upcomingVisible++; else pastVisible++;
+    }
+  });
+
+  // Sort visible items in each grid
+  ['upcoming-grid','past-grid'].forEach(function(gridId) {
+    var grid = document.getElementById(gridId);
+    var items = Array.from(grid.querySelectorAll('.vjs-event-item')).filter(function(i){ return i.style.display !== 'none'; });
+    items.sort(function(a, b) {
+      if (sort === 'date-asc')  return parseInt(a.dataset.date) - parseInt(b.dataset.date);
+      if (sort === 'date-desc') return parseInt(b.dataset.date) - parseInt(a.dataset.date);
+      if (sort === 'az')        return (a.dataset.title||'').localeCompare(b.dataset.title||'');
+      return 0;
+    });
+    items.forEach(function(i){ grid.appendChild(i); });
+  });
+
+  // Show/hide sections
+  var upcomingSection = document.getElementById('upcoming-section');
+  var pastSection = document.getElementById('past-section');
+  upcomingSection.style.display = upcomingVisible === 0 ? 'none' : '';
+  pastSection.style.display = pastVisible === 0 ? 'none' : '';
+
+  // Update count labels
+  document.getElementById('upcoming-count-label').textContent = upcomingVisible + ' Event' + (upcomingVisible !== 1 ? 's' : '');
+  document.getElementById('past-count-label').textContent = pastVisible + ' Event' + (pastVisible !== 1 ? 's' : '');
+
+  // Update total count
+  document.getElementById('events-count-num').textContent = visible;
+
+  // No results
+  document.getElementById('events-no-results').style.display = visible === 0 ? 'block' : 'none';
+}
+
+function resetEventFilters() {
+  document.getElementById('event-search').value = '';
+  document.getElementById('event-search').style.borderColor = '';
+  ['type-select','country-select','city-select','artist-select','studio-select','time-select'].forEach(function(id){
+    document.getElementById(id).value = 'all';
+    document.getElementById(id).classList.remove('active');
+  });
+  document.getElementById('sort-select').value = 'date-desc';
+  applyEventFilters();
+}
+
 function setEventLayout(mode) {
   var grids = document.querySelectorAll('.vjs-grid');
   var bg = document.getElementById('btn-grid-e');
@@ -95,4 +387,7 @@ function setEventLayout(mode) {
     bg.classList.add('active'); bl.classList.remove('active');
   }
 }
+
+// Init counts on load
+document.addEventListener('DOMContentLoaded', function(){ applyEventFilters(); });
 </script>
