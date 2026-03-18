@@ -30,7 +30,7 @@ VJs TV is a Jekyll-based platform for VJ culture and audiovisual performances. I
 - `/sponsors` - Sponsors and partners
 - `/search` - Global search across all collections (client-side, no server needed)
 - `/submit` - Project submission page (form → Express API → GitHub Issues)
-- `/business-model` - Sponsor pitch page with interactive modals, partnership tiers, particle background, and contact form
+- `/partners` - Sponsor pitch page with interactive modals, partnership tiers, particle background, and contact form
 
 ## Key Files
 - `_config.yml` - Jekyll configuration with collections
@@ -75,7 +75,7 @@ VJs TV is a Jekyll-based platform for VJ culture and audiovisual performances. I
   - `GET /api/projects` — fetch approved Issues
   - `GET /api/health` — health check
 - **Report Feature:** "Report an Issue" button in sidebar of all `vjs-detail` pages + footer of every page; modal → creates GitHub Issue with `report` label
-- **Partnership Form:** "Send Partnership Enquiry" on `/sponsors/` and "Get in Touch" on `/business-model/` both POST to `/api/partner` → creates GitHub Issue titled "SPONSORS & PARTNERS – {company}" with `partnership` label
+- **Partnership Form:** "Send Partnership Enquiry" on `/sponsors/` and "Get in Touch" on `/partners/` both POST to `/api/partner` → creates GitHub Issue titled "SPONSORS & PARTNERS – {company}" with `partnership` label
 - **Security:** Honeypot spam field, per-IP rate limiting, input trimming/length caps, 50KB body limit
 
 ## Development
