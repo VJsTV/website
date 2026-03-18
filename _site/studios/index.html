@@ -267,11 +267,11 @@
   <div class="container">
 
     <!-- DROPDOWN FILTERS -->
-    <div class="vjs-filter-dropdowns" style="flex-wrap:nowrap;">
+    <div class="vjs-filter-dropdowns">
 
-      <div class="vjs-filter-group" style="flex:1; min-width:0;">
+      <div class="vjs-filter-group">
         <span class="vjs-filter-drop-label">Type</span>
-        <select class="vjs-filter-select" id="studio-type-select" onchange="applyStudioFilters()" style="min-width:0; width:100%;">
+        <select class="vjs-filter-select" id="studio-type-select" onchange="applyStudioFilters()">
           <option value="all">All Types</option>
           
           
@@ -280,9 +280,9 @@
         </select>
       </div>
 
-      <div class="vjs-filter-group" style="flex:1; min-width:0;">
+      <div class="vjs-filter-group">
         <span class="vjs-filter-drop-label">Equipment</span>
-        <select class="vjs-filter-select" id="studio-eq-select" onchange="applyStudioFilters()" style="min-width:0; width:100%;">
+        <select class="vjs-filter-select" id="studio-eq-select" onchange="applyStudioFilters()">
           <option value="all">All Equipment</option>
           
           
@@ -291,9 +291,9 @@
         </select>
       </div>
 
-      <div class="vjs-filter-group" style="flex:1; min-width:0;">
+      <div class="vjs-filter-group">
         <span class="vjs-filter-drop-label">Location</span>
-        <select class="vjs-filter-select" id="studio-loc-select" onchange="applyStudioFilters()" style="min-width:0; width:100%;">
+        <select class="vjs-filter-select" id="studio-loc-select" onchange="applyStudioFilters()">
           <option value="all">All Locations</option>
           
           
@@ -304,7 +304,7 @@
 
       <button class="vjs-filter-reset" onclick="resetStudioFilters()">Reset</button>
 
-      <div class="vjs-layout-btn-group" style="margin-left:auto;">
+      <div class="vjs-filter-right">
         <button class="vjs-layout-btn active" id="btn-grid-s" onclick="setStudioLayout('grid')" title="Grid">
           <svg width="13" height="13" viewBox="0 0 14 14" fill="currentColor"><rect x="0" y="0" width="6" height="6"/><rect x="8" y="0" width="6" height="6"/><rect x="0" y="8" width="6" height="6"/><rect x="8" y="8" width="6" height="6"/></svg> Grid
         </button>
