@@ -7,6 +7,7 @@ country: "Japan"
 visual_style: "Audiovisual Sculpture, Generative Art, Minimalism"
 bio: "Japanese audiovisual artist whose installations translate physical and mathematical phenomena into precise, meditative sensory experiences. His work operates at the intersection of sound, light, and scientific inquiry."
 studio: "Independent"
+image: "/assets/images/artists/ryoichi-kurokawa.avif"
 technologies:
   - Custom Software
   - HD Video
@@ -16,6 +17,9 @@ featured: true
 website: "https://ryoichikurokawa.com"
 social:
   vimeo: "https://vimeo.com/ryoichikurokawa"
+projects:
+  - "https://vimeo.com/823681621"
+  - "https://vimeo.com/787285875"
 ---
 
 **Ryoichi Kurokawa** is a Japanese artist working at the precise intersection of sound and image. His practice encompasses audiovisual sculpture, installation, and performance — work that exists in the space between the measurable and the felt.
