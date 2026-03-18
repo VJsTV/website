@@ -4,10 +4,10 @@ title: "fuse*"
 name: "fuse-star"
 location: "Modena, Italy"
 country: "Italy"
-visual_style: "Data Storytelling, Biometric Visuals, Live AV, Scientific Imagery"
+studio_type: "AV Studio"
 bio: "Italian masters of data-driven audiovisual art. Their 2026 project Dökk uses a dancer's heartbeat and brainwave data processed in real-time to generate the entire visual universe on stage. Pioneers of live AV performance where human biology becomes the source code."
-studio: "fuse* studio"
-technologies:
+image: "/assets/images/studios/fuse-star.webp"
+equipment:
   - TouchDesigner
   - Biometric Sensors
   - Custom Data Processing
@@ -16,8 +16,15 @@ technologies:
 featured: true
 website: "https://fuseworks.it"
 social:
-  vimeo: "https://vimeo.com/fuseworks"
-  instagram: "https://instagram.com/fuseworks.it"
+  instagram: "https://www.instagram.com/fuse_works"
+  linkedin: "https://www.linkedin.com/company/fuse-works"
+  x: "https://x.com/fuse_works"
+  vimeo: "https://vimeo.com/fusevm"
+projects:
+  - "https://vimeo.com/244174036"
+  - "https://vimeo.com/394932646"
+  - "https://vimeo.com/440951681"
+  - "https://vimeo.com/688922310"
 ---
 
 **fuse*** (pronounced "fuse star") is a Modena-based studio that has established itself as one of the most conceptually sophisticated practices in contemporary AV performance and installation. Their work consistently turns abstract data — scientific, biological, climatic, astronomical — into sensory experience: images and sounds that allow you to *feel* information that would otherwise exist only as numbers.
