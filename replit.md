@@ -62,12 +62,19 @@ VJs TV is a Jekyll-based platform for VJ culture and audiovisual performances. I
 
 ## Cloudflare Analytics & Dynamic Pricing
 - **Secrets required:** `CF_API_TOKEN` (Read Analytics permission), `CF_ZONE_ID` (Cloudflare domain)
-- **Backend:** `/api/analytics` endpoint fetches last 30 days of page views from Cloudflare GraphQL API
+- **Backend:** `/api/analytics` endpoint fetches from Cloudflare GraphQL API:
+  - Last 30 days of page views (monthlyVisitors)
+  - Unique visitors (uniqueVisitors)
+  - Country count from events (countryCount)
 - **Caching:** 10-minute in-memory cache to avoid rate limiting
-- **Frontend:** `vjsLoadAnalytics()` on sponsors page fetches analytics and updates pricing based on visitor multiplier
+- **Frontend:** `vjsLoadAnalytics()` on sponsors page:
+  - Updates pricing based on visitor multiplier (1x, 2x, 3x, 5x)
+  - Displays unique visitors/month count on stats bar
+  - Updates countries count from live data
+  - Shows "🔥 Based on X monthly page views" label
 - **Pricing tiers:** Base prices (Title: $5K, Tech: $2.5K, Creative: $1.5K, Equipment: $1K) × visitor multiplier
-- **Display:** Shows "🔥 Based on X monthly visitors" label above sponsorship tiers (when data available)
-- **Fallback:** If Cloudflare fails, displays base prices without multiplier
+- **Stats bar:** Shows 97 community members, live unique visitors, live countries, 23 live events (no "+" suffix)
+- **Fallback:** If Cloudflare fails, displays static numbers and base prices
 
 ## Submission System (GitHub Issues Integration)
 - **Unified Server:** `api/server.js` — Express on port 5000 serves both static site (`_site/`) and API endpoints

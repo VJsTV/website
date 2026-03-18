@@ -26,10 +26,10 @@ meta_description: "Become a VJs TV sponsor. Reach 10,000+ VJ artists, visual des
 
 <!-- AUDIENCE STATS -->
 <div class="vjs-stats-bar" style="margin-bottom:0;">
-  <div class="vjs-stat-item"><div class="vjs-stat-number">97+</div><div class="vjs-stat-label">Community Members</div></div>
-  <div class="vjs-stat-item"><div class="vjs-stat-number">50+</div><div class="vjs-stat-label">Countries</div></div>
-  <div class="vjs-stat-item"><div class="vjs-stat-number">23+</div><div class="vjs-stat-label">Live Events / Year</div></div>
-  <div class="vjs-stat-item"><div class="vjs-stat-number">98%</div><div class="vjs-stat-label">B2B Decision Makers</div></div>
+  <div class="vjs-stat-item"><div class="vjs-stat-number">97</div><div class="vjs-stat-label">Community Members</div></div>
+  <div class="vjs-stat-item"><div class="vjs-stat-number vjs-stat-countries" id="stat-countries">50</div><div class="vjs-stat-label">Countries</div></div>
+  <div class="vjs-stat-item"><div class="vjs-stat-number vjs-stat-unique" id="stat-unique">—</div><div class="vjs-stat-label">Unique Visitors/Month</div></div>
+  <div class="vjs-stat-item"><div class="vjs-stat-number">23</div><div class="vjs-stat-label">Live Events / Year</div></div>
 </div>
 
 <!-- TIER CARDS -->
@@ -478,8 +478,16 @@ function vjsLoadAnalytics() {
       };
       var analyticsLabel = document.getElementById('vjs-analytics-label');
       if (analyticsLabel) {
-        analyticsLabel.innerHTML = '🔥 Based on ' + data.monthlyVisitors.toLocaleString() + ' monthly visitors';
+        analyticsLabel.innerHTML = '🔥 Based on ' + data.monthlyVisitors.toLocaleString() + ' monthly page views';
         analyticsLabel.style.display = 'block';
+      }
+      var uniqueEl = document.getElementById('stat-unique');
+      if (uniqueEl && data.uniqueVisitors) {
+        uniqueEl.textContent = data.uniqueVisitors.toLocaleString();
+      }
+      var countriesEl = document.getElementById('stat-countries');
+      if (countriesEl && data.countryCount && data.countryCount > 0) {
+        countriesEl.textContent = data.countryCount;
       }
       document.querySelectorAll('.vjs-price-title').forEach(function(el) { el.textContent = '$' + prices.title.toLocaleString(); });
       document.querySelectorAll('.vjs-price-tech').forEach(function(el) { el.textContent = '$' + prices.tech.toLocaleString(); });

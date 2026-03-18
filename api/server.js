@@ -365,7 +365,7 @@ app.get("/api/analytics", async function (req, res) {
     }
 
     var query = {
-      query: '\n        query {\n          viewer {\n            zones(filter: { zoneTag: "' + cfZoneId + '" }) {\n              httpRequests1dGroups(limit: 30, orderBy: [date_DESC]) {\n                sum {\n                  pageViews\n                }\n              }\n            }\n          }\n        }\n      '
+      query: '\n        query {\n          viewer {\n            zones(filter: { zoneTag: "' + cfZoneId + '" }) {\n              httpRequests1dGroups(limit: 30, orderBy: [date_DESC]) {\n                sum {\n                  pageViews\n                  uniques {\n                    uniq\n                  }\n                }\n              }\n              firewallEventsAdaptiveGroups(limit: 1, filter: { datetime_gt: "-30d" }) {\n                dimensions {\n                  clientCountryName\n                }\n              }\n            }\n          }\n        }\n      '
     };
 
     var cfRes = await fetch("https://api.cloudflare.com/client/v4/graphql", {
@@ -385,12 +385,34 @@ app.get("/api/analytics", async function (req, res) {
     }
 
     var monthlyVisitors = 0;
+    var uniqueVisitors = 0;
+    var countries = {};
     var groups = cfData.data.viewer.zones[0].httpRequests1dGroups || [];
+    
     for (var i = 0; i < groups.length; i++) {
-      monthlyVisitors += (groups[i].sum && groups[i].sum.pageViews) ? groups[i].sum.pageViews : 0;
+      var sum = groups[i].sum || {};
+      monthlyVisitors += sum.pageViews ? sum.pageViews : 0;
+      if (sum.uniques && sum.uniques.uniq) {
+        uniqueVisitors += sum.uniques.uniq;
+      }
     }
 
-    var result = { monthlyVisitors: monthlyVisitors, cached: false };
+    var countryGroups = cfData.data.viewer.zones[0].firewallEventsAdaptiveGroups || [];
+    for (var j = 0; j < countryGroups.length; j++) {
+      var dims = countryGroups[j].dimensions || [];
+      for (var k = 0; k < dims.length; k++) {
+        var country = dims[k].clientCountryName || "Unknown";
+        countries[country] = (countries[country] || 0) + 1;
+      }
+    }
+
+    var result = {
+      monthlyVisitors: monthlyVisitors,
+      uniqueVisitors: uniqueVisitors,
+      countries: Object.keys(countries),
+      countryCount: Object.keys(countries).length,
+      cached: false
+    };
     analyticsCache.data = result;
     analyticsCache.timestamp = now;
 
