@@ -4,7 +4,7 @@ description: >-
   VJs TV is the global broadcast network for VJ culture, audiovisual performances,
   and digital visual art. Watch live performances, discover artists, and explore
   the world of visual performance.
-favicon: "/assets/images/favicon.webp"
+favicon: "/assets/images/favicon.ico"
 
 meta_og_image: "/assets/images/meta-image.webp"
 meta_twitter_image: "/assets/images/meta-image.webp"
