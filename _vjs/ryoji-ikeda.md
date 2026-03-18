@@ -7,6 +7,7 @@ country: "Japan"
 visual_style: "Data Aesthetics, Extreme Precision, Mathematical Sublime"
 bio: "Japanese electronic musician and visual artist based in Paris — the undisputed master of data aesthetics. Ikeda's work transforms raw data — binary code, mathematical sequences, scientific datasets — into audiovisual experiences of extreme precision and overwhelming sensory intensity. His 'test pattern' series and 'data.tron' are among the most important artworks of the 21st century."
 studio: "Independent"
+image: "/assets/images/artists/ryoji-ikeda.jpg"
 technologies:
   - Custom Data Processing Software
   - Ultra-high-resolution Projection
@@ -14,9 +15,19 @@ technologies:
   - Mathematical Visualisation
   - Real-time Data Rendering
 featured: true
-website: "https://ryojiikeda.com"
+website: "https://www.ryojiikeda.com"
 social:
   vimeo: "https://vimeo.com/ryojiikeda"
+  instagram: "https://www.instagram.com/ryoji_ikeda_studio/"
+  x: "https://x.com/ryojiikeda"
+  facebook: "https://www.facebook.com/ryojiikedaofficial"
+  youtube: "https://www.youtube.com/user/ryojiikedastudio"
+projects:
+  - "https://vimeo.com/49873167"
+  - "https://vimeo.com/76813693"
+  - "https://vimeo.com/87097294"
+  - "https://vimeo.com/134905817"
+  - "https://vimeo.com/62242278"
 ---
 
 **Ryoji Ikeda** is a Japanese electronic musician and visual artist based in Paris — arguably the most important figure working at the intersection of data, mathematics, and audiovisual art. His practice transforms the raw material of the digital world — binary code, mathematical sequences, scientific datasets — into audiovisual experiences of extreme precision and overwhelming sensory intensity.
