@@ -7,7 +7,7 @@ country: "Spain"
 visual_style: "Abstract Geometry, Electronic Music Visuals, Live Synthesis"
 bio: "Madrid-based VJ and visual artist creating real-time abstract visual environments for electronic music performance. Jago VJ is one of Spain's most active and respected live visual practitioners — performing at major festivals and clubs across Europe with a technically precise and musically intelligent performance practice."
 studio: "Independent"
-image: "/assets/images/artists/jago-vj.jpg"
+image: "/assets/images/artists/jago-vj.png"
 technologies:
   - Resolume Arena
   - TouchDesigner
