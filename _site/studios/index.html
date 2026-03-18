@@ -269,6 +269,8 @@
     <!-- DROPDOWN FILTERS -->
     <div class="vjs-filter-dropdowns">
 
+      <button class="vjs-filter-reset" onclick="resetStudioFilters()">Reset</button>
+
       <div class="vjs-filter-group">
         <span class="vjs-filter-drop-label">Type</span>
         <select class="vjs-filter-select" id="studio-type-select" onchange="applyStudioFilters()">
@@ -301,8 +303,6 @@
           <option value="amsterdam, netherlands">Amsterdam, Netherlands</option><option value="barcelona, spain">Barcelona, Spain</option><option value="bern, switzerland">Bern, Switzerland</option><option value="bremen, germany">Bremen, Germany</option><option value="brussels, belgium">Brussels, Belgium</option><option value="cape town, south africa">Cape Town, South Africa</option><option value="europe (distributed)">Europe (Distributed)</option><option value="global">Global</option><option value="istanbul, turkey">Istanbul, Turkey</option><option value="istanbul, turkey / global">Istanbul, Turkey / Global</option><option value="kyoto, japan">Kyoto, Japan</option><option value="las vegas, usa">Las Vegas, USA</option><option value="lille, france">Lille, France</option><option value="london, uk / berlin, germany">London, UK / Berlin, Germany</option><option value="london, uk / new york, usa">London, UK / New York, USA</option><option value="london, united kingdom">London, United Kingdom</option><option value="los angeles, usa">Los Angeles, USA</option><option value="montréal, canada">Montréal, Canada</option><option value="moscow, russia">Moscow, Russia</option><option value="nantes, france">Nantes, France</option><option value="paris, france">Paris, France</option><option value="sheffield, uk">Sheffield, UK</option><option value="somerville, massachusetts, usa">Somerville, Massachusetts, USA</option><option value="st. petersburg, russia">St. Petersburg, Russia</option><option value="tokyo, japan">Tokyo, Japan</option><option value="toronto, canada">Toronto, Canada</option><option value="warsaw, poland">Warsaw, Poland</option>
         </select>
       </div>
-
-      <button class="vjs-filter-reset" onclick="resetStudioFilters()">Reset</button>
 
       <div class="vjs-filter-right">
         <button class="vjs-layout-btn active" id="btn-grid-s" onclick="setStudioLayout('grid')" title="Grid">

@@ -22,6 +22,8 @@ meta_description: "Discover AV studios, immersive domes, projection labs, and vi
     <!-- DROPDOWN FILTERS -->
     <div class="vjs-filter-dropdowns">
 
+      <button class="vjs-filter-reset" onclick="resetStudioFilters()">Reset</button>
+
       <div class="vjs-filter-group">
         <span class="vjs-filter-drop-label">Type</span>
         <select class="vjs-filter-select" id="studio-type-select" onchange="applyStudioFilters()">
@@ -69,8 +71,6 @@ meta_description: "Discover AV studios, immersive domes, projection labs, and vi
           {% for l in sloc_arr %}{% if l != "" %}<option value="{{ l | downcase }}">{{ l }}</option>{% endif %}{% endfor %}
         </select>
       </div>
-
-      <button class="vjs-filter-reset" onclick="resetStudioFilters()">Reset</button>
 
       <div class="vjs-filter-right">
         <button class="vjs-layout-btn active" id="btn-grid-s" onclick="setStudioLayout('grid')" title="Grid">

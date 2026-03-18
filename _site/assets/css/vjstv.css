@@ -4039,48 +4039,97 @@ svg.vjs-nts-sidebar-thumb-play {
 .vjs-grid.vjs-layout-list .vjs-card-body { flex: 1; }
 
 /* ================================================================
-   MOBILE: Filter bar full-width responsive
+   MOBILE: Filter bar — uniform stacked layout across all pages
    ================================================================ */
 @media (max-width: 768px) {
+
+  /* Main filter container: strict column, no wrap */
   .vjs-filter-dropdowns {
     flex-direction: column;
     align-items: stretch;
-    flex-wrap: wrap;
-    gap: 8px;
-    padding: 14px 0 18px;
+    flex-wrap: nowrap;
+    gap: 0;
+    padding: 0 0 4px;
+    border-bottom: 1px solid #1a1a1a;
+    margin-bottom: 20px;
   }
+
+  /* RESET — full-width row, sits first */
+  .vjs-filter-reset {
+    width: 100%;
+    text-align: center;
+    padding: 10px 0;
+    margin: 0 0 2px;
+    font-size: 0.65rem;
+    letter-spacing: 0.16em;
+  }
+
+  /* Each filter group: label left, select fills rest */
   .vjs-filter-group {
     width: 100%;
     display: flex;
     align-items: center;
-    gap: 8px;
+    gap: 0;
+    border-top: 1px solid #151515;
   }
   .vjs-filter-group .vjs-filter-drop-label {
-    min-width: 64px;
+    width: 72px;
+    min-width: 72px;
     flex-shrink: 0;
+    padding: 0 10px;
+    font-size: 0.55rem;
+    letter-spacing: 0.18em;
+    color: #555;
+    text-align: right;
   }
   .vjs-filter-group .vjs-filter-select {
     flex: 1;
     min-width: 0;
     max-width: none;
     width: 100%;
+    border-left: 1px solid #151515;
+    border-top: none;
+    border-bottom: none;
+    border-right: none;
+    padding: 11px 26px 11px 10px;
+    font-size: 0.7rem;
   }
-  .vjs-filter-reset {
-    width: 100%;
-    text-align: center;
-  }
+
+  /* Layout/sort action row — wraps tightly, full-width */
   .vjs-filter-right {
     margin-left: 0;
     width: 100%;
     flex-wrap: wrap;
-    gap: 6px;
+    gap: 4px;
     justify-content: flex-start;
+    padding: 8px 0 0;
+    border-top: 1px solid #151515;
   }
+  .vjs-filter-right .vjs-filter-drop-label {
+    width: auto;
+    padding: 0 6px 0 0;
+    font-size: 0.55rem;
+    align-self: center;
+  }
+  .vjs-filter-right .vjs-filter-btn,
+  .vjs-filter-right .vjs-layout-btn {
+    flex: 1;
+    min-width: 70px;
+    text-align: center;
+    justify-content: center;
+    padding: 8px 10px;
+    font-size: 0.62rem;
+  }
+  .vjs-layout-btn-group {
+    display: contents;
+  }
+
   .vjs-filter-sort-row {
     flex-direction: column;
     align-items: stretch;
     gap: 0.5rem;
   }
+
   /* list layout on mobile: narrower thumb */
   #projects-grid.vjs-layout-list .vjs-redbull-thumb {
     width: 130px; min-width: 130px; max-width: 130px; height: 110px;
