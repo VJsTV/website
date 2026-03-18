@@ -105,14 +105,14 @@ app.post("/api/submit", rateLimit(300000, 3), async (req, res) => {
     var frontMatter = [
       "---",
       'layout: vjs-detail',
+      vimeoId ? 'vimeo_id: "' + vimeoId + '"' : null,
       'title: "' + data.project_title.replace(/"/g, '\\"') + '"',
       'name: "' + nameSlug + '"',
       'artist: "' + data.artist.replace(/"/g, '\\"') + '"',
       'project_type: "' + data.category + '"',
       'location: "' + (data.location || "").replace(/"/g, '\\"') + '"',
       'year: ' + (data.year || new Date().getFullYear()),
-      'video_url: "' + data.video_url + '"',
-      vimeoId ? 'vimeo_id: "' + vimeoId + '"' : null,
+      'video_url: "' + (vimeoId ? 'https://player.vimeo.com/video/' + vimeoId : data.video_url) + '"',
       'description: "' + data.description.replace(/"/g, '\\"').replace(/\n/g, " ") + '"',
       'featured: false',
       data.website ? 'website: "' + data.website + '"' : null,
@@ -137,6 +137,8 @@ app.post("/api/submit", rateLimit(300000, 3), async (req, res) => {
     }
 
     frontMatter.push("---");
+    frontMatter.push("");
+    frontMatter.push("**" + data.project_title.replace(/"/g, '') + "** by **" + data.artist.replace(/"/g, '') + "** \u2014 " + data.description.replace(/\n/g, " "));
 
     var issueBody = [
       "## Submission Details",
