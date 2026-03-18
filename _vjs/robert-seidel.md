@@ -18,6 +18,9 @@ featured: false
 website: "https://robertseidel.com"
 social:
   vimeo: "https://vimeo.com/robertseidel"
+projects:
+  - "https://vimeo.com/148470865"
+  - "https://vimeo.com/14607925"
 ---
 
 **Robert Seidel** is a Berlin-based artist whose work occupies a singular position in contemporary visual art: the space between generative film, projection sculpture, and expanded cinema. His practice dissolves conventional categories — his pieces are neither quite paintings, nor films, nor sculptures, but something that contains aspects of all three.
