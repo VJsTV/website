@@ -368,8 +368,8 @@ app.get("/api/health", function (req, res) {
   res.json({ status: "ok", timestamp: new Date().toISOString() });
 });
 
-var analyticsCache = { data: null, timestamp: null };
-var chartsCache = { data: null, timestamp: null };
+var analyticsCache = { data: null, timestamp: null, stale: null };
+var chartsCache = { data: null, timestamp: null, stale: null };
 var CACHE_TTL = 600000;
 
 app.get("/api/analytics/charts", async function (req, res) {
@@ -410,6 +410,7 @@ app.get("/api/analytics/charts", async function (req, res) {
 
     if (!cfRes) {
       console.warn("Cloudflare charts request timed out");
+      if (chartsCache.stale) { return res.json(Object.assign({}, chartsCache.stale, { cached: true, stale: true })); }
       return res.json({ dailyData: [], topCountries: [], totalUniques: 0, maxUniques: 0, monthlyVisitors: 0, error: "timeout" });
     }
 
@@ -417,6 +418,7 @@ app.get("/api/analytics/charts", async function (req, res) {
 
     if (cfData.errors && cfData.errors.length > 0) {
       console.error("Cloudflare charts GraphQL error:", cfData.errors[0].message);
+      if (chartsCache.stale) { return res.json(Object.assign({}, chartsCache.stale, { cached: true, stale: true })); }
       return res.json({ dailyData: [], topCountries: [], totalUniques: 0, maxUniques: 0, monthlyVisitors: 0, error: cfData.errors[0].message });
     }
 
@@ -455,10 +457,12 @@ app.get("/api/analytics/charts", async function (req, res) {
 
     var result = { dailyData: dailyData, topCountries: topCountries, totalUniques: totalUniques, maxUniques: maxUniques, monthlyVisitors: monthlyVisitors, cached: false };
     chartsCache.data = result;
+    chartsCache.stale = result;
     chartsCache.timestamp = now;
     res.json(result);
   } catch (err) {
     console.error("Charts analytics error:", err.message);
+    if (chartsCache.stale) { return res.json(Object.assign({}, chartsCache.stale, { cached: true, stale: true })); }
     res.status(500).json({ dailyData: [], topCountries: [], totalUniques: 0, maxUniques: 0, monthlyVisitors: 0, error: err.message });
   }
 });
@@ -504,6 +508,7 @@ app.get("/api/analytics", async function (req, res) {
     
     if (!cfRes) {
       console.warn("Cloudflare request timed out after 8 seconds");
+      if (analyticsCache.stale) { return res.json(Object.assign({}, analyticsCache.stale, { cached: true, stale: true })); }
       return res.json({ monthlyVisitors: 0, cached: false, error: "Cloudflare request timeout" });
     }
 
@@ -530,11 +535,13 @@ app.get("/api/analytics", async function (req, res) {
       cached: false
     };
     analyticsCache.data = result;
+    analyticsCache.stale = result;
     analyticsCache.timestamp = now;
 
     res.json(result);
   } catch (err) {
     console.error("Analytics error:", err.message);
+    if (analyticsCache.stale) { return res.json(Object.assign({}, analyticsCache.stale, { cached: true, stale: true })); }
     res.status(500).json({ monthlyVisitors: 0, cached: false, error: err.message });
   }
 });
@@ -603,9 +610,23 @@ function watchJekyll() {
   });
 }
 
+async function warmupCaches() {
+  try {
+    console.log("Warming up analytics caches...");
+    var base = "http://localhost:" + PORT;
+    await Promise.all([
+      fetch(base + "/api/analytics").then(function(r) { return r.json(); }).then(function(d) { console.log("Analytics cache warmed: " + d.monthlyVisitors + " pageviews"); }).catch(function(e) { console.warn("Analytics warmup failed:", e.message); }),
+      fetch(base + "/api/analytics/charts").then(function(r) { return r.json(); }).then(function(d) { console.log("Charts cache warmed: " + d.totalUniques + " uniques, " + (d.topCountries || []).length + " countries"); }).catch(function(e) { console.warn("Charts warmup failed:", e.message); })
+    ]);
+  } catch (e) {
+    console.warn("Cache warmup error:", e.message);
+  }
+}
+
 buildJekyll();
 
 app.listen(PORT, "0.0.0.0", function () {
   console.log("VJs TV server running on port " + PORT);
   watchJekyll();
+  setTimeout(warmupCaches, 3000);
 });
