@@ -3,7 +3,7 @@ layout: vjs-detail
 title: "Ryoji Ikeda"
 name: "ryoji-ikeda"
 location: "Paris, France"
-country: "Japan"
+country: "France"
 visual_style: "Data Aesthetics, Extreme Precision, Mathematical Sublime"
 bio: "Japanese electronic musician and visual artist based in Paris — the undisputed master of data aesthetics. Ikeda's work transforms raw data — binary code, mathematical sequences, scientific datasets — into audiovisual experiences of extreme precision and overwhelming sensory intensity. His 'test pattern' series and 'data.tron' are among the most important artworks of the 21st century."
 studio: "Independent"

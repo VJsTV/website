@@ -3,7 +3,7 @@ layout: vjs-detail
 title: "Memo Akten"
 name: "memo-akten"
 location: "Los Angeles, USA"
-country: "Turkey"
+country: "USA"
 visual_style: "Machine Learning Art, Embodied Computation, Deep Visual Systems"
 bio: "Turkish-born multidisciplinary artist based in Los Angeles whose practice spans machine learning, interactive installation, and live performance. Memo Akten's work investigates the nature of consciousness, perception, and creativity through computational systems — creating artworks that use neural networks as a medium for philosophical inquiry."
 studio: "Independent"
