@@ -7,6 +7,7 @@ country: "France"
 visual_style: "Light as Material, Projection Mapping, Geometric Minimalism"
 bio: "French visual artist and co-founder of AntiVJ — the collective that defined a generation of projection art. Romain Tardy creates large-scale projection installations that treat light as a primary material — geometric, minimal, and architecturally precise works that have been exhibited at major institutions worldwide."
 studio: "AntiVJ / Independent"
+image: "/assets/images/artists/romain-tardy.avif"
 technologies:
   - Custom Projection Systems
   - Architectural Mapping
@@ -14,9 +15,11 @@ technologies:
   - Max/MSP
   - Generative Systems
 featured: true
-website: "https://onewayto.be"
+website: "https://romaintardy.com"
 social:
   vimeo: "https://vimeo.com/romaintardy"
+  facebook: "https://www.facebook.com/atelierromaintardy/"
+  instagram: "https://www.instagram.com/romain.tardy/"
 ---
 
 **Romain Tardy** is a French visual artist and one of the founding members of **AntiVJ** — the collective that fundamentally changed the visual language of projection art in the late 2000s and early 2010s. With a practice built on treating light as a primary sculptural material, Tardy creates large-scale projection installations of extraordinary geometric precision and visual intelligence.
