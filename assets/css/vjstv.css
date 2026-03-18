@@ -1156,6 +1156,18 @@ h1, h2, h3, h4, h5, h6,
   display: flex; align-items: center; gap: 8px; flex-wrap: nowrap;
   padding: 14px 0 14px; border-bottom: 1px solid #1a1a1a; margin-bottom: 24px;
 }
+.vjs-filter-dropdowns--wrap {
+  flex-wrap: wrap;
+  row-gap: 4px;
+}
+.vjs-filter-dropdowns--wrap .vjs-filter-right {
+  width: 100%;
+  border-top: 1px solid #151515;
+  margin-top: 4px;
+  padding-top: 8px;
+  justify-content: flex-end;
+  margin-left: 0;
+}
 .vjs-filter-right {
   display: flex; align-items: center; gap: 6px; margin-left: auto; flex-shrink: 0;
 }
