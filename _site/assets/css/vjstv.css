@@ -1153,8 +1153,11 @@ h1, h2, h3, h4, h5, h6,
 
 /* ===== DROPDOWN FILTER BAR (Artists / Projects / Studios) ===== */
 .vjs-filter-dropdowns {
-  display: flex; align-items: center; gap: 10px; flex-wrap: wrap;
-  padding: 18px 0 22px; border-bottom: 1px solid #1a1a1a; margin-bottom: 24px;
+  display: flex; align-items: center; gap: 8px; flex-wrap: nowrap;
+  padding: 14px 0 14px; border-bottom: 1px solid #1a1a1a; margin-bottom: 24px;
+}
+.vjs-filter-right {
+  display: flex; align-items: center; gap: 6px; margin-left: auto; flex-shrink: 0;
 }
 .vjs-filter-group { display: flex; align-items: center; gap: 6px; }
 .vjs-filter-drop-label {
@@ -1165,11 +1168,11 @@ h1, h2, h3, h4, h5, h6,
   font-family: 'Barlow Condensed', sans-serif; font-size: 0.72rem; font-weight: 600;
   letter-spacing: 0.06em; text-transform: uppercase;
   background: #0a0a0a; color: #ccc; border: 1px solid #222;
-  padding: 7px 30px 7px 12px; appearance: none; -webkit-appearance: none;
+  padding: 7px 26px 7px 10px; appearance: none; -webkit-appearance: none;
   cursor: pointer; outline: none; transition: border-color .15s, color .15s;
   background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='6' viewBox='0 0 10 6'%3E%3Cpath d='M0 0l5 6 5-6z' fill='%23555'/%3E%3C/svg%3E");
-  background-repeat: no-repeat; background-position: right 10px center;
-  min-width: 150px; border-radius: 0 !important;
+  background-repeat: no-repeat; background-position: right 8px center;
+  min-width: 130px; max-width: 200px; border-radius: 0 !important;
 }
 .vjs-filter-select:hover, .vjs-filter-select:focus { border-color: var(--vjs-ultraviolet); color: #fff; }
 .vjs-filter-select.active { border-color: var(--vjs-ultraviolet); color: var(--vjs-ultraviolet); }
@@ -4042,6 +4045,7 @@ svg.vjs-nts-sidebar-thumb-play {
   .vjs-filter-dropdowns {
     flex-direction: column;
     align-items: stretch;
+    flex-wrap: wrap;
     gap: 8px;
     padding: 14px 0 18px;
   }
@@ -4052,30 +4056,32 @@ svg.vjs-nts-sidebar-thumb-play {
     gap: 8px;
   }
   .vjs-filter-group .vjs-filter-drop-label {
-    min-width: 60px;
+    min-width: 64px;
     flex-shrink: 0;
   }
   .vjs-filter-group .vjs-filter-select {
     flex: 1;
     min-width: 0;
+    max-width: none;
     width: 100%;
   }
   .vjs-filter-reset {
     width: 100%;
     text-align: center;
   }
-  .vjs-filter-dropdowns > div:last-child {
-    margin-left: 0 !important;
+  .vjs-filter-right {
+    margin-left: 0;
     width: 100%;
-    justify-content: space-between;
     flex-wrap: wrap;
+    gap: 6px;
+    justify-content: flex-start;
   }
   .vjs-filter-sort-row {
     flex-direction: column;
     align-items: stretch;
     gap: 0.5rem;
   }
-  /* list layout on mobile: stack to single column card */
+  /* list layout on mobile: narrower thumb */
   #projects-grid.vjs-layout-list .vjs-redbull-thumb {
     width: 130px; min-width: 130px; max-width: 130px; height: 110px;
   }
