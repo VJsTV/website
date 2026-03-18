@@ -32,7 +32,7 @@ main_menu:
     menu_type: "simple"
 
   - text: "Partners"
-    url: "/business-model"
+    url: "/partners"
     menu_type: "simple"
 
   - text: "Search"
