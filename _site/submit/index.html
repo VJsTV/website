@@ -323,7 +323,7 @@
           <span style="font-family:'Barlow Condensed',sans-serif; font-size:0.6rem; font-weight:600; text-transform:uppercase; letter-spacing:0.1em; color:rgba(255,255,255,0.2);">* Required</span>
         </div>
 
-        <form id="submit-form">
+        <form id="submit-form" novalidate>
           <div style="position:absolute; left:-9999px;" aria-hidden="true">
             <input type="text" name="honeypot" tabindex="-1" autocomplete="off">
           </div>
@@ -342,7 +342,7 @@
           <div style="display:grid; grid-template-columns:1fr 1fr; gap:16px; margin-bottom:16px;">
             <div>
               <label class="vjs-form-label">Your Email *</label>
-              <input type="email" class="vjs-form-input" name="email" placeholder="you@studio.com" required>
+              <input type="text" class="vjs-form-input" name="email" placeholder="you@studio.com" required>
             </div>
             <div>
               <label class="vjs-form-label">Location</label>
@@ -569,7 +569,7 @@
       </div>
       <button onclick="closeReportModal()" style="background:none; border:none; color:#555; font-size:1.4rem; cursor:pointer; padding:4px 8px; line-height:1;">&times;</button>
     </div>
-    <form id="report-form-global" style="padding:24px;">
+    <form id="report-form-global" style="padding:24px;" novalidate>
       <input type="hidden" name="project_title" id="report-field-title" value="">
       <input type="hidden" name="project_url" id="report-field-url" value="">
       <div style="position:absolute; left:-9999px;" aria-hidden="true">
@@ -581,7 +581,7 @@
       </div>
       <div style="margin-bottom:14px;">
         <label class="vjs-form-label">Email (optional)</label>
-        <input type="email" class="vjs-form-input" name="reporter_email" placeholder="you@email.com">
+        <input type="text" class="vjs-form-input" name="reporter_email" placeholder="you@email.com">
       </div>
       <div style="margin-bottom:20px;">
         <label class="vjs-form-label">What's the issue? *</label>
@@ -681,7 +681,11 @@ document.getElementById('report-form-global').addEventListener('submit', functio
     headers: { 'Content-Type': 'application/json' },
     body: JSON.stringify(data)
   })
-  .then(function(r) { return r.json(); })
+  .then(function(r) {
+    var ct = r.headers.get('content-type') || '';
+    if (!ct.includes('application/json')) { throw new Error('Server returned an unexpected response. Please try again.'); }
+    return r.json();
+  })
   .then(function(result) {
     if (result.success) {
       form.style.display = 'none';
@@ -692,8 +696,8 @@ document.getElementById('report-form-global').addEventListener('submit', functio
       btn.textContent = 'Send Report'; btn.disabled = false; btn.style.opacity = '1';
     }
   })
-  .catch(function() {
-    document.getElementById('report-error-msg-global').textContent = 'Connection error. Please try again.';
+  .catch(function(err) {
+    document.getElementById('report-error-msg-global').textContent = err.message || 'Connection error. Please try again.';
     errorEl.style.display = 'block';
     btn.textContent = 'Send Report'; btn.disabled = false; btn.style.opacity = '1';
   });
@@ -720,12 +724,24 @@ document.getElementById('submit-form').addEventListener('submit', function(e) {
   var data = {};
   formData.forEach(function(val, key) { data[key] = val; });
 
+  var emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+  if (data.email && !emailRegex.test(data.email.trim())) {
+    errorMsg.textContent = 'Please enter a valid email address.';
+    errorEl.style.display = 'block';
+    btn.textContent = 'Submit Project'; btn.disabled = false; btn.style.opacity = '1';
+    return;
+  }
+
   fetch(API_URL + '/api/submit', {
     method: 'POST',
     headers: { 'Content-Type': 'application/json' },
     body: JSON.stringify(data)
   })
-  .then(function(res) { return res.json(); })
+  .then(function(res) {
+    var ct = res.headers.get('content-type') || '';
+    if (!ct.includes('application/json')) { throw new Error('Server returned an unexpected response. Please try again.'); }
+    return res.json();
+  })
   .then(function(result) {
     if (result.success) {
       form.style.display = 'none';
@@ -739,7 +755,7 @@ document.getElementById('submit-form').addEventListener('submit', function(e) {
     }
   })
   .catch(function(err) {
-    errorMsg.textContent = 'Connection error. Please try again.';
+    errorMsg.textContent = err.message || 'Connection error. Please try again.';
     errorEl.style.display = 'block';
     btn.textContent = 'Submit Project';
     btn.disabled = false;
