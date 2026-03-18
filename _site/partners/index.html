@@ -279,6 +279,263 @@
   <div class="vjs-stat-item"><div class="vjs-stat-number">23</div><div class="vjs-stat-label">Live Events / Year</div></div>
 </div>
 
+<section style="background:var(--vjs-darker); border-top:1px solid var(--vjs-border); border-bottom:1px solid var(--vjs-border); padding:2.5rem 0;">
+  <div class="container">
+    <div style="display:flex; align-items:center; gap:1rem; margin-bottom:2rem; flex-wrap:wrap; justify-content:space-between;">
+      <div style="display:flex; align-items:center; gap:0.75rem;">
+        <div style="width:3px; height:1.4rem; background:var(--vjs-gradient-1);"></div>
+        <h3 style="font-family:'Orbitron',sans-serif; font-size:0.85rem; text-transform:uppercase; letter-spacing:0.18em; color:#fff; margin:0;">Live Audience Data</h3>
+      </div>
+      <div style="font-family:'Space Grotesk',sans-serif; font-size:0.73rem; color:var(--vjs-text-muted); letter-spacing:0.06em; text-transform:uppercase;">Previous 30 days · Cloudflare Analytics</div>
+    </div>
+
+    <div class="row" style="gap:1.5rem 0; align-items:stretch;">
+
+      <!-- Unique Visitors Line Chart -->
+      <div class="col-lg-7" style="padding:0 0.75rem;">
+        <div style="background:var(--vjs-card); border:1px solid var(--vjs-border); padding:1.75rem; height:100%; display:flex; flex-direction:column; box-sizing:border-box;">
+          <div style="font-family:'Orbitron',sans-serif; font-size:0.7rem; text-transform:uppercase; letter-spacing:0.15em; color:var(--vjs-text-muted); margin-bottom:1rem;">Unique Visitors</div>
+          <div style="display:flex; gap:2.5rem; align-items:flex-end; margin-bottom:1.5rem; flex-wrap:wrap; gap:1.5rem;">
+            <div>
+              <div style="font-family:'Barlow Condensed',sans-serif; font-size:2.8rem; font-weight:700; color:#fff; line-height:1;" id="vjs-stat-total-uniques">—</div>
+              <div style="font-size:0.65rem; color:var(--vjs-text-muted); text-transform:uppercase; letter-spacing:0.08em; margin-top:0.25rem;">Total</div>
+            </div>
+            <div>
+              <div style="font-family:'Barlow Condensed',sans-serif; font-size:2.8rem; font-weight:700; color:var(--vjs-cyan); line-height:1;" id="vjs-stat-max-uniques">—</div>
+              <div style="font-size:0.65rem; color:var(--vjs-text-muted); text-transform:uppercase; letter-spacing:0.08em; margin-top:0.25rem;">Peak / day</div>
+            </div>
+            <div>
+              <div style="font-family:'Barlow Condensed',sans-serif; font-size:2.8rem; font-weight:700; color:var(--vjs-ultraviolet); line-height:1;" id="vjs-stat-page-views">—</div>
+              <div style="font-size:0.65rem; color:var(--vjs-text-muted); text-transform:uppercase; letter-spacing:0.08em; margin-top:0.25rem;">Page Views</div>
+            </div>
+          </div>
+          <div style="position:relative; height:170px; flex:1; min-height:120px;">
+            <canvas id="vjs-visitors-chart" style="display:block;"></canvas>
+            <div id="vjs-chart-loading" style="position:absolute; inset:0; display:flex; align-items:center; justify-content:center; color:var(--vjs-text-muted); font-size:0.8rem; font-family:'Space Grotesk',sans-serif; letter-spacing:0.05em;">Loading...</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Country Traffic -->
+      <div class="col-lg-5" style="padding:0 0.75rem;">
+        <div style="background:var(--vjs-card); border:1px solid var(--vjs-border); padding:1.75rem; height:100%; box-sizing:border-box;">
+          <div style="font-family:'Orbitron',sans-serif; font-size:0.7rem; text-transform:uppercase; letter-spacing:0.15em; color:var(--vjs-text-muted); margin-bottom:1.5rem;">Top Traffic Countries</div>
+          <div id="vjs-countries-list">
+            <div style="color:var(--vjs-text-muted); font-size:0.82rem; padding:2rem 0; text-align:center; font-family:'Space Grotesk',sans-serif;">Loading...</div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<script>
+(function() {
+  var vjsChartInstance = null;
+
+  var COUNTRY_NAMES = {
+    AF:'Afghanistan',AL:'Albania',DZ:'Algeria',AR:'Argentina',AU:'Australia',AT:'Austria',AZ:'Azerbaijan',
+    BD:'Bangladesh',BE:'Belgium',BG:'Bulgaria',BR:'Brazil',CA:'Canada',CL:'Chile',CN:'China',CO:'Colombia',
+    HR:'Croatia',CZ:'Czech Republic',DK:'Denmark',EG:'Egypt',FI:'Finland',FR:'France',GE:'Georgia',
+    DE:'Germany',GH:'Ghana',GR:'Greece',HK:'Hong Kong',HU:'Hungary',IN:'India',ID:'Indonesia',IE:'Ireland',
+    IL:'Israel',IT:'Italy',JP:'Japan',KZ:'Kazakhstan',KE:'Kenya',KR:'South Korea',MX:'Mexico',MA:'Morocco',
+    NL:'Netherlands',NZ:'New Zealand',NG:'Nigeria',NO:'Norway',PK:'Pakistan',PE:'Peru',PH:'Philippines',
+    PL:'Poland',PT:'Portugal',RO:'Romania',RU:'Russia',SA:'Saudi Arabia',SG:'Singapore',ZA:'South Africa',
+    ES:'Spain',SE:'Sweden',CH:'Switzerland',TW:'Taiwan',TH:'Thailand',TR:'Turkey',UA:'Ukraine',
+    AE:'United Arab Emirates',GB:'United Kingdom',US:'United States',UZ:'Uzbekistan',VN:'Vietnam',
+    XX:'Unknown'
+  };
+
+  function countryName(code) {
+    if (!code) return 'Unknown';
+    if (code.length > 3) return code;
+    return COUNTRY_NAMES[code.toUpperCase()] || code;
+  }
+
+  function fillDailyGaps(dailyData) {
+    if (!dailyData || dailyData.length === 0) return [];
+    var map = {};
+    dailyData.forEach(function(d) { if (d.date) map[d.date] = d; });
+    var result = [];
+    var end = new Date();
+    var start = new Date(end.getTime() - 29 * 86400000);
+    for (var d = new Date(start); d <= end; d = new Date(d.getTime() + 86400000)) {
+      var key = d.toISOString().split('T')[0];
+      result.push(map[key] || { date: key, uniques: 0, pageViews: 0 });
+    }
+    return result;
+  }
+
+  function loadChartJs(cb) {
+    if (window.Chart) { cb(); return; }
+    var s = document.createElement('script');
+    s.src = 'https://cdn.jsdelivr.net/npm/chart.js@4.4.3/dist/chart.umd.min.js';
+    s.onload = cb;
+    s.onerror = function() { cb(); };
+    document.head.appendChild(s);
+  }
+
+  function renderVisitorsChart(rawData) {
+    var loadingEl = document.getElementById('vjs-chart-loading');
+    var filled = fillDailyGaps(rawData);
+
+    if (!filled || filled.length === 0) {
+      if (loadingEl) { loadingEl.textContent = 'No data available'; }
+      return;
+    }
+
+    loadChartJs(function() {
+      if (!window.Chart) {
+        if (loadingEl) loadingEl.textContent = 'Chart unavailable';
+        return;
+      }
+      if (loadingEl) loadingEl.style.display = 'none';
+
+      var canvas = document.getElementById('vjs-visitors-chart');
+      if (!canvas) return;
+      var ctx = canvas.getContext('2d');
+
+      var labels = filled.map(function(d) {
+        var parts = d.date.split('-');
+        return (parts[1] || '') + '/' + (parts[2] || '');
+      });
+      var values = filled.map(function(d) { return d.uniques || 0; });
+
+      if (vjsChartInstance) { try { vjsChartInstance.destroy(); } catch(e) {} }
+      vjsChartInstance = new Chart(ctx, {
+        type: 'line',
+        data: {
+          labels: labels,
+          datasets: [{
+            label: 'Unique Visitors',
+            data: values,
+            borderColor: '#00f9ff',
+            backgroundColor: function(context) {
+              var chart = context.chart;
+              var ctx2 = chart.ctx;
+              var gradient = ctx2.createLinearGradient(0, 0, 0, chart.height);
+              gradient.addColorStop(0, 'rgba(0,249,255,0.18)');
+              gradient.addColorStop(1, 'rgba(0,249,255,0.01)');
+              return gradient;
+            },
+            borderWidth: 2,
+            pointRadius: 0,
+            pointHoverRadius: 4,
+            pointHoverBackgroundColor: '#00f9ff',
+            pointHoverBorderColor: '#050505',
+            pointHoverBorderWidth: 2,
+            tension: 0.35,
+            fill: true
+          }]
+        },
+        options: {
+          responsive: true,
+          maintainAspectRatio: false,
+          animation: { duration: 600 },
+          plugins: {
+            legend: { display: false },
+            tooltip: {
+              backgroundColor: 'rgba(5,5,5,0.95)',
+              borderColor: 'rgba(0,249,255,0.25)',
+              borderWidth: 1,
+              titleColor: '#00f9ff',
+              bodyColor: 'rgba(255,255,255,0.8)',
+              padding: 10,
+              displayColors: false,
+              callbacks: {
+                title: function(items) { return items[0].label; },
+                label: function(item) { return item.raw + ' unique visitors'; }
+              }
+            }
+          },
+          scales: {
+            x: {
+              grid: { color: 'rgba(255,255,255,0.04)', drawBorder: false },
+              ticks: {
+                color: 'rgba(255,255,255,0.28)',
+                font: { size: 10, family: "'Space Grotesk', sans-serif" },
+                maxTicksLimit: 8,
+                maxRotation: 0
+              }
+            },
+            y: {
+              beginAtZero: true,
+              grid: { color: 'rgba(255,255,255,0.04)', drawBorder: false },
+              ticks: {
+                color: 'rgba(255,255,255,0.28)',
+                font: { size: 10, family: "'Space Grotesk', sans-serif" },
+                maxTicksLimit: 5
+              }
+            }
+          }
+        }
+      });
+    });
+  }
+
+  function renderCountries(countries) {
+    var list = document.getElementById('vjs-countries-list');
+    if (!list) return;
+    if (!countries || countries.length === 0) {
+      list.innerHTML = '<div style="color:var(--vjs-text-muted); font-size:0.82rem; text-align:center; padding:2rem 0; font-family:\'Space Grotesk\',sans-serif;">No country data available</div>';
+      return;
+    }
+    var maxReqs = countries[0].requests || 1;
+    var accentColors = ['#00f9ff','#9d00ff','#ff00aa','#00d4ff','#00f9ff','#9d00ff','#ff00aa','#00d4ff','#00f9ff','#9d00ff'];
+    var html = '';
+    countries.forEach(function(c, i) {
+      var name = countryName(c.country);
+      var pct = Math.max(5, Math.round((c.requests / maxReqs) * 100));
+      var color = accentColors[i % accentColors.length];
+      html += '<div style="margin-bottom:0.85rem;">' +
+        '<div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:0.3rem;">' +
+        '<span style="color:rgba(255,255,255,0.8); font-size:0.82rem; font-family:\'Space Grotesk\',sans-serif;">' +
+        '<span style="color:rgba(255,255,255,0.3); font-size:0.7rem; margin-right:0.5rem;">' + (i + 1) + '</span>' + name +
+        '</span>' +
+        '<span style="color:' + color + '; font-size:0.82rem; font-weight:700; font-family:\'Space Grotesk\',sans-serif; font-variant-numeric:tabular-nums; min-width:2.5rem; text-align:right;">' + c.requests.toLocaleString() + '</span>' +
+        '</div>' +
+        '<div style="height:2px; background:rgba(255,255,255,0.07); overflow:hidden;">' +
+        '<div style="height:100%; width:' + pct + '%; background:' + color + ';"></div>' +
+        '</div>' +
+        '</div>';
+    });
+    list.innerHTML = html;
+  }
+
+  function showError() {
+    var loadingEl = document.getElementById('vjs-chart-loading');
+    if (loadingEl) { loadingEl.textContent = 'Data unavailable'; }
+    var list = document.getElementById('vjs-countries-list');
+    if (list) list.innerHTML = '<div style="color:var(--vjs-text-muted); font-size:0.82rem; text-align:center; padding:2rem 0; font-family:\'Space Grotesk\',sans-serif;">Data temporarily unavailable</div>';
+  }
+
+  document.addEventListener('DOMContentLoaded', function() {
+    fetch('/api/analytics/charts')
+      .then(function(res) {
+        if (!res.ok) throw new Error('HTTP ' + res.status);
+        return res.json();
+      })
+      .then(function(data) {
+        var totalEl = document.getElementById('vjs-stat-total-uniques');
+        var maxEl = document.getElementById('vjs-stat-max-uniques');
+        var pvEl = document.getElementById('vjs-stat-page-views');
+        if (totalEl) totalEl.textContent = (data.totalUniques || 0).toLocaleString();
+        if (maxEl) maxEl.textContent = (data.maxUniques || 0).toLocaleString();
+        if (pvEl) pvEl.textContent = (data.monthlyVisitors || 0).toLocaleString();
+
+        renderVisitorsChart(data.dailyData || []);
+        renderCountries(data.topCountries || []);
+      })
+      .catch(function(err) {
+        console.log('Charts load error:', err.message);
+        showError();
+      });
+  });
+})();
+</script>
+
+
 <section class="vjs-section vjs-section-alt" id="technology">
   <div class="container">
     <div class="text-center" style="margin-bottom:3rem;">

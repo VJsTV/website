@@ -369,7 +369,99 @@ app.get("/api/health", function (req, res) {
 });
 
 var analyticsCache = { data: null, timestamp: null };
+var chartsCache = { data: null, timestamp: null };
 var CACHE_TTL = 600000;
+
+app.get("/api/analytics/charts", async function (req, res) {
+  try {
+    var now = Date.now();
+    if (chartsCache.data && chartsCache.timestamp && now - chartsCache.timestamp < CACHE_TTL) {
+      return res.json(chartsCache.data);
+    }
+
+    var cfToken = process.env.CF_API_TOKEN;
+    var cfZoneId = process.env.CF_ZONE_ID;
+
+    if (!cfToken || !cfZoneId) {
+      return res.json({ dailyData: [], topCountries: [], totalUniques: 0, maxUniques: 0, monthlyVisitors: 0, error: "Cloudflare not configured" });
+    }
+
+    var today = new Date();
+    var thirtyDaysAgo = new Date(today.getTime() - (30 * 24 * 60 * 60 * 1000));
+    var dateFrom = thirtyDaysAgo.toISOString().split('T')[0];
+    var dateTo = today.toISOString().split('T')[0];
+
+    var query = {
+      query: 'query { viewer { zones(filter: {zoneTag: "' + cfZoneId + '"}) { httpRequests1dGroups(limit: 31, orderBy: [date_ASC], filter: {date_geq: "' + dateFrom + '", date_leq: "' + dateTo + '"}) { dimensions { date } sum { pageViews requests countryMap { clientCountryName requests } } uniq { uniques } } } } }'
+    };
+
+    var timeoutPromise = new Promise(function(resolve) {
+      setTimeout(function() { resolve(null); }, 10000);
+    });
+
+    var cfRes = await Promise.race([
+      fetch("https://api.cloudflare.com/client/v4/graphql", {
+        method: "POST",
+        headers: { "Authorization": "Bearer " + cfToken, "Content-Type": "application/json" },
+        body: JSON.stringify(query)
+      }),
+      timeoutPromise
+    ]);
+
+    if (!cfRes) {
+      console.warn("Cloudflare charts request timed out");
+      return res.json({ dailyData: [], topCountries: [], totalUniques: 0, maxUniques: 0, monthlyVisitors: 0, error: "timeout" });
+    }
+
+    var cfData = await cfRes.json();
+
+    if (cfData.errors && cfData.errors.length > 0) {
+      console.error("Cloudflare charts GraphQL error:", cfData.errors[0].message);
+      return res.json({ dailyData: [], topCountries: [], totalUniques: 0, maxUniques: 0, monthlyVisitors: 0, error: cfData.errors[0].message });
+    }
+
+    var groups = (cfData.data && cfData.data.viewer && cfData.data.viewer.zones && cfData.data.viewer.zones[0] && cfData.data.viewer.zones[0].httpRequests1dGroups) || [];
+
+    var dailyData = [];
+    var totalUniques = 0;
+    var maxUniques = 0;
+    var monthlyVisitors = 0;
+    var countryTotals = {};
+
+    for (var i = 0; i < groups.length; i++) {
+      var g = groups[i];
+      var date = (g.dimensions && g.dimensions.date) || '';
+      var uniques = (g.uniq && g.uniq.uniques) || 0;
+      var pageViews = (g.sum && g.sum.pageViews) || 0;
+      var requests = (g.sum && g.sum.requests) || 0;
+
+      dailyData.push({ date: date, uniques: uniques, pageViews: pageViews });
+      totalUniques += uniques;
+      monthlyVisitors += pageViews;
+      if (uniques > maxUniques) maxUniques = uniques;
+
+      var countryMap = (g.sum && g.sum.countryMap) || [];
+      for (var j = 0; j < countryMap.length; j++) {
+        var c = countryMap[j];
+        var cname = c.clientCountryName || 'Unknown';
+        countryTotals[cname] = (countryTotals[cname] || 0) + (c.requests || 0);
+      }
+    }
+
+    var topCountries = Object.keys(countryTotals)
+      .map(function(k) { return { country: k, requests: countryTotals[k] }; })
+      .sort(function(a, b) { return b.requests - a.requests; })
+      .slice(0, 10);
+
+    var result = { dailyData: dailyData, topCountries: topCountries, totalUniques: totalUniques, maxUniques: maxUniques, monthlyVisitors: monthlyVisitors, cached: false };
+    chartsCache.data = result;
+    chartsCache.timestamp = now;
+    res.json(result);
+  } catch (err) {
+    console.error("Charts analytics error:", err.message);
+    res.status(500).json({ dailyData: [], topCountries: [], totalUniques: 0, maxUniques: 0, monthlyVisitors: 0, error: err.message });
+  }
+});
 
 app.get("/api/analytics", async function (req, res) {
   try {
