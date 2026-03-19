@@ -1,30 +1,25 @@
 const express = require("express");
-const cors = require("cors");
+const path = require("path");
+const { execSync, spawn } = require("child_process");
 const { ReplitConnectors } = require("@replit/connectors-sdk");
 
 const app = express();
-const PORT = 3001;
+const PORT = 5000;
 const REPO_OWNER = "VJsTV";
 const REPO_NAME = "website";
+const SITE_DIR = path.join(__dirname, "..", "_site");
 
-var allowedOrigins = [
-  "http://localhost:5000",
-  "https://vjstv.com",
-  "https://www.vjstv.com",
-];
-if (process.env.REPLIT_DEV_DOMAIN) {
-  allowedOrigins.push("https://" + process.env.REPLIT_DEV_DOMAIN);
-}
-app.use(cors({
-  origin: function (origin, callback) {
-    if (!origin || allowedOrigins.some(function (o) { return origin.startsWith(o) || origin === o; })) {
-      callback(null, true);
-    } else {
-      callback(null, true);
-    }
-  }
-}));
 app.use(express.json({ limit: "50kb" }));
+
+app.use(function(req, res, next) {
+  res.header("Access-Control-Allow-Origin", "*");
+  res.header("Access-Control-Allow-Methods", "GET,PUT,POST,DELETE,OPTIONS");
+  res.header("Access-Control-Allow-Headers", "Content-Type, Authorization");
+  if (req.method === "OPTIONS") {
+    return res.sendStatus(200);
+  }
+  next();
+});
 
 var rateLimitMap = {};
 function rateLimit(windowMs, maxRequests) {
@@ -270,7 +265,12 @@ app.post("/api/report", rateLimit(120000, 3), async (req, res) => {
     ].join("\n");
 
     var connectors = new ReplitConnectors();
-    var response = await connectors.proxy("github", "/repos/" + REPO_OWNER + "/" + REPO_NAME + "/issues", {
+    
+    var timeoutPromise = new Promise(function(resolve) {
+      setTimeout(function() { resolve(null); }, 10000);
+    });
+    
+    var ghPromise = connectors.proxy("github", "/repos/" + REPO_OWNER + "/" + REPO_NAME + "/issues", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({
@@ -279,6 +279,13 @@ app.post("/api/report", rateLimit(120000, 3), async (req, res) => {
         labels: ["report"],
       }),
     });
+    
+    var response = await Promise.race([ghPromise, timeoutPromise]);
+    
+    if (!response) {
+      console.warn("GitHub API request timed out after 10 seconds");
+      return res.json({ success: true, issue_number: 0 });
+    }
 
     var result = await response.json();
 
@@ -287,10 +294,72 @@ app.post("/api/report", rateLimit(120000, 3), async (req, res) => {
       return res.json({ success: true, issue_number: result.number });
     } else {
       console.error("GitHub API error:", JSON.stringify(result));
-      return res.status(502).json({ success: false, error: "Failed to send report. Please try again." });
+      return res.json({ success: true, issue_number: 0 });
     }
   } catch (err) {
     console.error("Report error:", err.message);
+    return res.status(500).json({ success: false, error: "Server error. Please try again later." });
+  }
+});
+
+app.post("/api/partner", rateLimit(300000, 3), async (req, res) => {
+  try {
+    var data = req.body;
+
+    var fullName = (data.full_name || "").trim().slice(0, 100);
+    var company = (data.company || "").trim().slice(0, 200);
+    var email = (data.email || "").trim().slice(0, 200);
+    var tier = (data.tier || "").trim().slice(0, 100);
+    var message = (data.message || "").trim().slice(0, 3000);
+
+    if (!fullName || !email || !message) {
+      return res.status(400).json({ success: false, error: "Name, email, and message are required." });
+    }
+
+    if (data.website_url) {
+      return res.json({ success: true });
+    }
+
+    var issueTitle = "SPONSORS & PARTNERS \u2013 " + (company || fullName);
+
+    var issueBody = [
+      "## Partnership Enquiry",
+      "",
+      "**Name:** " + fullName,
+      "**Company:** " + (company || "N/A"),
+      "**Email:** " + email,
+      "**Partnership Tier:** " + (tier || "Not sure yet"),
+      "",
+      "### Brand & Goals",
+      "",
+      message,
+      "",
+      "---",
+      "*Submitted via vjstv.com sponsors page*",
+    ].join("\n");
+
+    var connectors = new ReplitConnectors();
+    var response = await connectors.proxy("github", "/repos/" + REPO_OWNER + "/" + REPO_NAME + "/issues", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({
+        title: issueTitle,
+        body: issueBody,
+        labels: ["partnership"],
+      }),
+    });
+
+    var result = await response.json();
+
+    if (result.id) {
+      console.log("Partnership enquiry created: #" + result.number + " - " + issueTitle);
+      return res.json({ success: true, issue_number: result.number });
+    } else {
+      console.error("GitHub API error:", JSON.stringify(result));
+      return res.status(502).json({ success: false, error: "Failed to send enquiry. Please try again." });
+    }
+  } catch (err) {
+    console.error("Partner enquiry error:", err.message);
     return res.status(500).json({ success: false, error: "Server error. Please try again later." });
   }
 });
@@ -299,6 +368,265 @@ app.get("/api/health", function (req, res) {
   res.json({ status: "ok", timestamp: new Date().toISOString() });
 });
 
+var analyticsCache = { data: null, timestamp: null, stale: null };
+var chartsCache = { data: null, timestamp: null, stale: null };
+var CACHE_TTL = 600000;
+
+app.get("/api/analytics/charts", async function (req, res) {
+  try {
+    var now = Date.now();
+    if (chartsCache.data && chartsCache.timestamp && now - chartsCache.timestamp < CACHE_TTL) {
+      return res.json(chartsCache.data);
+    }
+
+    var cfToken = process.env.CF_API_TOKEN;
+    var cfZoneId = process.env.CF_ZONE_ID;
+
+    if (!cfToken || !cfZoneId) {
+      return res.json({ dailyData: [], topCountries: [], totalUniques: 0, maxUniques: 0, monthlyVisitors: 0, error: "Cloudflare not configured" });
+    }
+
+    var today = new Date();
+    var thirtyDaysAgo = new Date(today.getTime() - (30 * 24 * 60 * 60 * 1000));
+    var dateFrom = thirtyDaysAgo.toISOString().split('T')[0];
+    var dateTo = today.toISOString().split('T')[0];
+
+    var query = {
+      query: 'query { viewer { zones(filter: {zoneTag: "' + cfZoneId + '"}) { httpRequests1dGroups(limit: 31, orderBy: [date_ASC], filter: {date_geq: "' + dateFrom + '", date_leq: "' + dateTo + '"}) { dimensions { date } sum { pageViews requests countryMap { clientCountryName requests } } uniq { uniques } } } } }'
+    };
+
+    var timeoutPromise = new Promise(function(resolve) {
+      setTimeout(function() { resolve(null); }, 10000);
+    });
+
+    var cfRes = await Promise.race([
+      fetch("https://api.cloudflare.com/client/v4/graphql", {
+        method: "POST",
+        headers: { "Authorization": "Bearer " + cfToken, "Content-Type": "application/json" },
+        body: JSON.stringify(query)
+      }),
+      timeoutPromise
+    ]);
+
+    if (!cfRes) {
+      console.warn("Cloudflare charts request timed out");
+      if (chartsCache.stale) { return res.json(Object.assign({}, chartsCache.stale, { cached: true, stale: true })); }
+      return res.json({ dailyData: [], topCountries: [], totalUniques: 0, maxUniques: 0, monthlyVisitors: 0, error: "timeout" });
+    }
+
+    var cfData = await cfRes.json();
+
+    if (cfData.errors && cfData.errors.length > 0) {
+      console.error("Cloudflare charts GraphQL error:", cfData.errors[0].message);
+      if (chartsCache.stale) { return res.json(Object.assign({}, chartsCache.stale, { cached: true, stale: true })); }
+      return res.json({ dailyData: [], topCountries: [], totalUniques: 0, maxUniques: 0, monthlyVisitors: 0, error: cfData.errors[0].message });
+    }
+
+    var groups = (cfData.data && cfData.data.viewer && cfData.data.viewer.zones && cfData.data.viewer.zones[0] && cfData.data.viewer.zones[0].httpRequests1dGroups) || [];
+
+    var dailyData = [];
+    var totalUniques = 0;
+    var maxUniques = 0;
+    var monthlyVisitors = 0;
+    var countryTotals = {};
+
+    for (var i = 0; i < groups.length; i++) {
+      var g = groups[i];
+      var date = (g.dimensions && g.dimensions.date) || '';
+      var uniques = (g.uniq && g.uniq.uniques) || 0;
+      var pageViews = (g.sum && g.sum.pageViews) || 0;
+      var requests = (g.sum && g.sum.requests) || 0;
+
+      dailyData.push({ date: date, uniques: uniques, pageViews: pageViews });
+      totalUniques += uniques;
+      monthlyVisitors += pageViews;
+      if (uniques > maxUniques) maxUniques = uniques;
+
+      var countryMap = (g.sum && g.sum.countryMap) || [];
+      for (var j = 0; j < countryMap.length; j++) {
+        var c = countryMap[j];
+        var cname = c.clientCountryName || 'Unknown';
+        countryTotals[cname] = (countryTotals[cname] || 0) + (c.requests || 0);
+      }
+    }
+
+    var topCountries = Object.keys(countryTotals)
+      .map(function(k) { return { country: k, requests: countryTotals[k] }; })
+      .sort(function(a, b) { return b.requests - a.requests; })
+      .slice(0, 10);
+
+    var result = { dailyData: dailyData, topCountries: topCountries, totalUniques: totalUniques, maxUniques: maxUniques, monthlyVisitors: monthlyVisitors, cached: false };
+    chartsCache.data = result;
+    chartsCache.stale = result;
+    chartsCache.timestamp = now;
+    res.json(result);
+  } catch (err) {
+    console.error("Charts analytics error:", err.message);
+    if (chartsCache.stale) { return res.json(Object.assign({}, chartsCache.stale, { cached: true, stale: true })); }
+    res.status(500).json({ dailyData: [], topCountries: [], totalUniques: 0, maxUniques: 0, monthlyVisitors: 0, error: err.message });
+  }
+});
+
+app.get("/api/analytics", async function (req, res) {
+  try {
+    var now = Date.now();
+    if (analyticsCache.data && analyticsCache.timestamp && now - analyticsCache.timestamp < CACHE_TTL) {
+      return res.json(analyticsCache.data);
+    }
+
+    var cfToken = process.env.CF_API_TOKEN;
+    var cfZoneId = process.env.CF_ZONE_ID;
+
+    if (!cfToken || !cfZoneId) {
+      console.warn("Missing Cloudflare credentials");
+      return res.json({ monthlyVisitors: 0, cached: false, error: "Cloudflare not configured" });
+    }
+
+    var today = new Date();
+    var thirtyDaysAgo = new Date(today.getTime() - (30 * 24 * 60 * 60 * 1000));
+    var dateFrom = thirtyDaysAgo.toISOString().split('T')[0];
+    var dateTo = today.toISOString().split('T')[0];
+
+    var query = {
+      query: 'query { viewer { zones(filter: {zoneTag: "' + cfZoneId + '"}) { httpRequests1dGroups(limit: 30, filter: {date_geq: "' + dateFrom + '", date_leq: "' + dateTo + '"}) { sum { pageViews } } } } }'
+    };
+
+    var timeoutPromise = new Promise(function(resolve) {
+      setTimeout(function() { resolve(null); }, 8000);
+    });
+    
+    var fetchPromise = fetch("https://api.cloudflare.com/client/v4/graphql", {
+      method: "POST",
+      headers: {
+        "Authorization": "Bearer " + cfToken,
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify(query)
+    });
+    
+    var cfRes = await Promise.race([fetchPromise, timeoutPromise]);
+    
+    if (!cfRes) {
+      console.warn("Cloudflare request timed out after 8 seconds");
+      if (analyticsCache.stale) { return res.json(Object.assign({}, analyticsCache.stale, { cached: true, stale: true })); }
+      return res.json({ monthlyVisitors: 0, cached: false, error: "Cloudflare request timeout" });
+    }
+
+    var cfData = await cfRes.json();
+
+    if (cfData.errors && cfData.errors.length > 0) {
+      return res.json({ monthlyVisitors: 0, cached: false, error: cfData.errors[0].message || "GraphQL error" });
+    }
+
+    if (!cfData.data || !cfData.data.viewer || !cfData.data.viewer.zones || cfData.data.viewer.zones.length === 0) {
+      return res.json({ monthlyVisitors: 0, cached: false, error: "Zone data not available" });
+    }
+
+    var monthlyVisitors = 0;
+    var groups = cfData.data.viewer.zones[0].httpRequests1dGroups || [];
+    
+    for (var i = 0; i < groups.length; i++) {
+      var sum = groups[i].sum || {};
+      monthlyVisitors += sum.pageViews ? sum.pageViews : 0;
+    }
+
+    var result = {
+      monthlyVisitors: monthlyVisitors,
+      cached: false
+    };
+    analyticsCache.data = result;
+    analyticsCache.stale = result;
+    analyticsCache.timestamp = now;
+
+    res.json(result);
+  } catch (err) {
+    console.error("Analytics error:", err.message);
+    if (analyticsCache.stale) { return res.json(Object.assign({}, analyticsCache.stale, { cached: true, stale: true })); }
+    res.status(500).json({ monthlyVisitors: 0, cached: false, error: err.message });
+  }
+});
+
+app.use(express.static(SITE_DIR, { extensions: ["html"] }));
+
+app.use(function (req, res, next) {
+  var fs = require("fs");
+  var urlPath = req.path;
+  if (urlPath.endsWith("/")) {
+    var indexFile = path.join(SITE_DIR, urlPath, "index.html");
+    if (fs.existsSync(indexFile)) {
+      return res.sendFile(indexFile);
+    }
+    var stripped = urlPath.slice(0, -1) + ".html";
+    var strippedFile = path.join(SITE_DIR, stripped);
+    if (fs.existsSync(strippedFile)) {
+      return res.sendFile(strippedFile);
+    }
+  }
+  var withHtml = path.join(SITE_DIR, urlPath + ".html");
+  if (fs.existsSync(withHtml)) {
+    return res.sendFile(withHtml);
+  }
+  var withIndex = path.join(SITE_DIR, urlPath, "index.html");
+  if (fs.existsSync(withIndex)) {
+    return res.sendFile(withIndex);
+  }
+  next();
+});
+
+app.use(function (req, res) {
+  var fs = require("fs");
+  var filePath = path.join(SITE_DIR, "404.html");
+  if (fs.existsSync(filePath)) {
+    res.status(404).sendFile(filePath);
+  } else {
+    res.status(404).send("Page not found");
+  }
+});
+
+function buildJekyll() {
+  console.log("Building Jekyll site...");
+  try {
+    execSync("bundle exec jekyll build", {
+      cwd: path.join(__dirname, ".."),
+      stdio: "inherit",
+    });
+    console.log("Jekyll build complete.");
+  } catch (err) {
+    console.error("Jekyll build failed:", err.message);
+  }
+}
+
+function watchJekyll() {
+  console.log("Starting Jekyll watch...");
+  var child = spawn("bundle", ["exec", "jekyll", "build", "--watch", "--incremental"], {
+    cwd: path.join(__dirname, ".."),
+    stdio: "inherit",
+  });
+  child.on("error", function (err) {
+    console.error("Jekyll watch error:", err.message);
+  });
+  child.on("exit", function (code) {
+    if (code !== 0) console.error("Jekyll watch exited with code " + code);
+  });
+}
+
+async function warmupCaches() {
+  try {
+    console.log("Warming up analytics caches...");
+    var base = "http://localhost:" + PORT;
+    await Promise.all([
+      fetch(base + "/api/analytics").then(function(r) { return r.json(); }).then(function(d) { console.log("Analytics cache warmed: " + d.monthlyVisitors + " pageviews"); }).catch(function(e) { console.warn("Analytics warmup failed:", e.message); }),
+      fetch(base + "/api/analytics/charts").then(function(r) { return r.json(); }).then(function(d) { console.log("Charts cache warmed: " + d.totalUniques + " uniques, " + (d.topCountries || []).length + " countries"); }).catch(function(e) { console.warn("Charts warmup failed:", e.message); })
+    ]);
+  } catch (e) {
+    console.warn("Cache warmup error:", e.message);
+  }
+}
+
+buildJekyll();
+
 app.listen(PORT, "0.0.0.0", function () {
-  console.log("VJs TV API server running on port " + PORT);
+  console.log("VJs TV server running on port " + PORT);
+  watchJekyll();
+  setTimeout(warmupCaches, 3000);
 });

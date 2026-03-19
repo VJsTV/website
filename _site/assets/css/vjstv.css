@@ -726,6 +726,49 @@ h1, h2, h3, h4, h5, h6,
   transition: background 0.15s;
 }
 .vjs-sidebar-btn:hover { background: var(--vjs-cyan); }
+.vjs-report-btn {
+  display: block;
+  width: 100%;
+  padding: 10px 16px;
+  margin-top: 8px;
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 0.72rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  text-align: center;
+  text-decoration: none;
+  background: transparent;
+  color: rgba(255, 255, 255, 0.55);
+  border: 1px solid rgba(255, 0, 100, 0.4);
+  cursor: pointer;
+  transition: border-color 0.15s, color 0.15s, background 0.15s;
+}
+.vjs-report-btn:hover {
+  border-color: #ff0064;
+  color: #ff0064;
+  background: rgba(255, 0, 100, 0.06);
+}
+.vjs-footer-report-btn {
+  display: inline-block;
+  padding: 7px 18px;
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 0.68rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  text-decoration: none;
+  background: transparent;
+  color: rgba(255, 255, 255, 0.4);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  cursor: pointer;
+  transition: border-color 0.15s, color 0.15s;
+  margin-top: 10px;
+}
+.vjs-footer-report-btn:hover {
+  border-color: #ff0064;
+  color: #ff0064;
+}
 .vjs-sidebar-social {
   display: flex;
   border-bottom: 1px solid #222;

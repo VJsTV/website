@@ -30,7 +30,7 @@ VJs TV is a Jekyll-based platform for VJ culture and audiovisual performances. I
 - `/sponsors` - Sponsors and partners
 - `/search` - Global search across all collections (client-side, no server needed)
 - `/submit` - Project submission page (form → Express API → GitHub Issues)
-- `/business-model` - Sponsor pitch page with interactive modals, partnership tiers, particle background, and contact form
+- `/partners` - Sponsor pitch page with interactive modals, partnership tiers, particle background, contact form, Cloudflare analytics stats bar, live page view counter, and live audience charts (unique visitors line chart + country traffic table)
 
 ## Key Files
 - `_config.yml` - Jekyll configuration with collections
@@ -60,9 +60,39 @@ VJs TV is a Jekyll-based platform for VJ culture and audiovisual performances. I
 - IntersectionObserver visibility gating on meter bar animation
 - `preconnect` for Google Fonts
 
+## Cloudflare Analytics & Dynamic Pricing
+- **Secrets required:** `CF_API_TOKEN` (Read Analytics permission), `CF_ZONE_ID` (Cloudflare domain zone tag)
+- **Backend:** `/api/analytics` endpoint fetches from Cloudflare GraphQL API `httpRequests1dGroups`:
+  - Queries last 30 days of page views using dynamic date range
+  - GraphQL query: `query { viewer { zones(filter: {zoneTag: "ZONE_ID"}) { httpRequests1dGroups(limit: 30, filter: {date_geq: "DATE", date_leq: "DATE"}) { sum { pageViews } } } } }`
+  - Returns `monthlyVisitors` (sum of all page views in 30 days)
+  - Includes 8-second timeout to prevent hanging requests
+- **Caching:** 10-minute in-memory cache to avoid rate limiting
+- **Frontend:** `vjsLoadAnalytics()` on sponsors/partners pages:
+  - Fetches `/api/analytics` on page load
+  - Updates pricing based on visitor multiplier (1x, 2x, 3x, 5x)
+  - Shows "🔥 Based on X monthly page views" label above sponsorship tiers
+  - Gracefully handles API failures by showing base prices
+- **Pricing tiers:** Base prices (Title: $5K, Tech: $2.5K, Creative: $1.5K, Equipment: $1K) × visitor multiplier
+- **Stats bar:** 97 community members, 50 countries (static), 23 events (static), unique visitors (removed from display)
+- **Testing:** API returns `{"monthlyVisitors": number, "cached": false/true}` on success; fallback on timeout/error
+
 ## Submission System (GitHub Issues Integration)
-- **API Server:** `api/server.js` — Express server on port 3001
-- **Frontend:** `submit/index.html` — form POSTs to `/api/submit`
+- **Unified Server:** `api/server.js` — Express on port 5000 serves both static site (`_site/`) and API endpoints
+- **Jekyll Build:** Express runs `jekyll build --watch --incremental` automatically; no separate Jekyll server needed
+- **CORS:** All API endpoints have CORS headers enabled to allow browser requests
+- **Report Endpoint (`/api/report`):**
+  - Rate limited to 3 requests per 2 minutes
+  - Fields: `reporter_name` (required), `description` (required), `reporter_email` (optional), `project_title` (optional), `project_url` (optional)
+  - Creates GitHub Issue with `[Report]` prefix and `report` label
+  - 10-second timeout on GitHub API calls to prevent hanging
+  - Returns `{success: true, issue_number: X}` on success or when timing out
+- **Partner Endpoint (`/api/partner`):**
+  - Rate limited to 3 requests per 5 minutes
+  - Fields: `full_name` (required), `email` (required), `message` (required), `company` (optional), `tier` (optional)
+  - Creates GitHub Issue with `SPONSORS & PARTNERS –` prefix and `partnership` label
+  - Honeypot spam check (submitting `website_url` field triggers false positive)
+- **Frontend:** `submit/index.html` — form POSTs to `/api/submit` (same origin, no CORS issues)
 - **GitHub Integration:** Uses Replit Connectors SDK (`@replit/connectors-sdk`) for authenticated GitHub API calls
 - **Repo:** `VJsTV/website` — submissions create Issues with labels (`submission`, type-based)
 - **Workflow:** Form submission → Express API → GitHub Issue created with Jekyll front matter
@@ -70,15 +100,17 @@ VJs TV is a Jekyll-based platform for VJ culture and audiovisual performances. I
 - **Endpoints:**
   - `POST /api/submit` — create submission Issue (rate limited: 3/5min)
   - `POST /api/report` — report issue on any detail page (rate limited: 3/2min)
+  - `POST /api/partner` — partnership enquiry from sponsors page (rate limited: 3/5min, label: `partnership`)
+  - `GET /api/analytics` — fetch monthly visitors from Cloudflare (10-min cache); pricing multiplier: 1x (<10K), 2x (10K-50K), 3x (50K-200K), 5x (200K+)
   - `GET /api/projects` — fetch approved Issues
   - `GET /api/health` — health check
-- **Report Feature:** "Report an Issue" button on all `vjs-detail` pages opens a modal form → creates GitHub Issue with `report` label
-- **Security:** Honeypot spam field, per-IP rate limiting, input trimming/length caps, 50KB body limit, CORS origin whitelist
+- **Report Feature:** "Report an Issue" button in sidebar of all `vjs-detail` pages + footer of every page; modal → creates GitHub Issue with `report` label
+- **Partnership Form:** "Send Partnership Enquiry" on `/sponsors/` and "Get in Touch" on `/partners/` both POST to `/api/partner` → creates GitHub Issue titled "SPONSORS & PARTNERS – {company}" with `partnership` label
+- **Security:** Honeypot spam field, per-IP rate limiting, input trimming/length caps, 50KB body limit
 
 ## Development
 ```
-bundle exec jekyll serve --host 0.0.0.0 --port 5000  # Jekyll frontend (port 5000)
-node api/server.js                                     # API server (port 3001)
+node api/server.js  # Single server: Express (API + static) + Jekyll watch on port 5000
 ```
 
 ## Deployment

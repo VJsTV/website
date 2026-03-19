@@ -84,21 +84,63 @@ meta_description: "VJs TV is the global broadcast network for VJ culture. Watch 
   grid-template-columns:1fr 260px;
   background:#000;
   border-bottom:1px solid #111;
+  align-items:start;
 }
 
-/* Mobile: stack player + queue vertically */
+/* Large desktop sidebar: cap height at video player height to prevent gap */
+@media(min-width:1281px){
+  .vjs-hero-sidebar {
+    max-height:calc((100vw - 260px) * 9 / 16);
+    overflow-y:auto;
+  }
+}
+
+/* Medium desktop (901–1280px): convert sidebar to horizontal browsable strip */
+@media(max-width:1280px) and (min-width:901px){
+  .vjs-hero-wrap { grid-template-columns:1fr; }
+  .vjs-hero-sidebar {
+    border-left:none !important; border-top:1px solid #141414;
+    flex-direction:row !important; overflow-x:auto !important; overflow-y:hidden !important;
+    height:100px !important; flex-shrink:0;
+    scroll-snap-type:x mandatory;
+    -webkit-overflow-scrolling:touch;
+  }
+  .vjs-hero-sidebar-hdr {
+    display:flex !important; align-items:center; justify-content:center;
+    padding:0 12px !important; border-bottom:none !important; border-right:1px solid #111;
+    height:100px !important; min-width:max-content; flex-shrink:0;
+    writing-mode:vertical-rl; text-orientation:mixed; transform:rotate(180deg);
+    letter-spacing:0.15em; font-size:0.52rem !important;
+  }
+  .vjs-hero-card {
+    flex-direction:column !important; width:130px !important; min-width:130px !important;
+    flex-shrink:0; border-bottom:none !important; border-right:1px solid #0f0f0f !important;
+    height:100px !important; padding:0 !important;
+    scroll-snap-align:start;
+  }
+  .vjs-hero-card-thumb { width:130px !important; height:65px !important; }
+  .vjs-hero-card-info { padding:5px 8px !important; }
+  .vjs-hero-card-cat { font-size:0.48rem !important; margin-bottom:1px !important; }
+  .vjs-hero-card-title { font-size:0.7rem !important; }
+  .vjs-hero-card-artist { display:none !important; }
+}
+
+/* Mobile (<= 900px): same horizontal strip, smaller cards */
 @media(max-width:900px){
-  .vjs-hero-wrap { grid-template-columns:1fr; grid-template-rows:auto auto; }
+  .vjs-hero-wrap { grid-template-columns:1fr; }
   .vjs-hero-sidebar {
     border-left:none !important; border-top:1px solid #141414;
     flex-direction:row !important; overflow-x:auto !important; overflow-y:hidden !important;
     height:90px !important; flex-shrink:0;
+    scroll-snap-type:x mandatory;
+    -webkit-overflow-scrolling:touch;
   }
   .vjs-hero-sidebar-hdr { display:none; }
   .vjs-hero-card {
     flex-direction:column !important; width:110px !important; min-width:110px !important;
     flex-shrink:0; border-bottom:none !important; border-right:1px solid #0f0f0f !important;
     height:90px !important; padding:0 !important;
+    scroll-snap-align:start;
   }
   .vjs-hero-card-thumb { width:110px !important; height:60px !important; }
   .vjs-hero-card-info { padding:4px 8px !important; }
@@ -574,27 +616,27 @@ function heroPlay(card) {
           <div style="font-family:'Barlow Condensed',sans-serif; font-size:0.65rem; text-transform:uppercase; letter-spacing:0.12em; color:var(--vjs-ultraviolet); margin-bottom:1rem;">Technology Partner</div>
           <h3 style="font-size:1.1rem; margin:0 0 0.75rem; color:#fff; font-family:'Barlow Condensed',sans-serif; font-weight:700; text-transform:uppercase; letter-spacing:0.04em;">Your Brand Here</h3>
           <p style="font-size:0.82rem; color:var(--vjs-text-muted); margin:0 0 1.5rem; line-height:1.6;">Reach VJs, live visuals artists, and AV professionals worldwide. Be the tool they trust on stage.</p>
-          <a href="/business-model" style="font-family:'Barlow Condensed',sans-serif; font-size:0.72rem; text-transform:uppercase; letter-spacing:0.1em; color:var(--vjs-ultraviolet); text-decoration:none; border-bottom:1px solid var(--vjs-ultraviolet); padding-bottom:2px;">Apply as Technology Partner →</a>
+          <a href="/partners" style="font-family:'Barlow Condensed',sans-serif; font-size:0.72rem; text-transform:uppercase; letter-spacing:0.1em; color:var(--vjs-ultraviolet); text-decoration:none; border-bottom:1px solid var(--vjs-ultraviolet); padding-bottom:2px;">Apply as Technology Partner →</a>
         </div>
 
         <div style="background:var(--vjs-card); padding:2.5rem 2rem; border-top:2px solid var(--vjs-cyan);">
           <div style="font-family:'Barlow Condensed',sans-serif; font-size:0.65rem; text-transform:uppercase; letter-spacing:0.12em; color:var(--vjs-cyan); margin-bottom:1rem;">Broadcast Sponsor</div>
           <h3 style="font-size:1.1rem; margin:0 0 0.75rem; color:#fff; font-family:'Barlow Condensed',sans-serif; font-weight:700; text-transform:uppercase; letter-spacing:0.04em;">Sponsor a Live Session</h3>
           <p style="font-size:0.82rem; color:var(--vjs-text-muted); margin:0 0 1.5rem; line-height:1.6;">Put your brand inside every VJs TV live broadcast. Full-screen logo placement across the global stream.</p>
-          <a href="/business-model" style="font-family:'Barlow Condensed',sans-serif; font-size:0.72rem; text-transform:uppercase; letter-spacing:0.1em; color:var(--vjs-cyan); text-decoration:none; border-bottom:1px solid var(--vjs-cyan); padding-bottom:2px;">Become a Broadcast Sponsor →</a>
+          <a href="/partners" style="font-family:'Barlow Condensed',sans-serif; font-size:0.72rem; text-transform:uppercase; letter-spacing:0.1em; color:var(--vjs-cyan); text-decoration:none; border-bottom:1px solid var(--vjs-cyan); padding-bottom:2px;">Become a Broadcast Sponsor →</a>
         </div>
 
         <div style="background:var(--vjs-card); padding:2.5rem 2rem; border-top:2px solid var(--vjs-magenta);">
           <div style="font-family:'Barlow Condensed',sans-serif; font-size:0.65rem; text-transform:uppercase; letter-spacing:0.12em; color:var(--vjs-magenta); margin-bottom:1rem;">Festival Partner</div>
           <h3 style="font-size:1.1rem; margin:0 0 0.75rem; color:#fff; font-family:'Barlow Condensed',sans-serif; font-weight:700; text-transform:uppercase; letter-spacing:0.04em;">Partner Your Event</h3>
           <p style="font-size:0.82rem; color:var(--vjs-text-muted); margin:0 0 1.5rem; line-height:1.6;">Festival or event organiser? Get listed on VJs TV and connect with global visual artists for your line-up.</p>
-          <a href="/business-model" style="font-family:'Barlow Condensed',sans-serif; font-size:0.72rem; text-transform:uppercase; letter-spacing:0.1em; color:var(--vjs-magenta); text-decoration:none; border-bottom:1px solid var(--vjs-magenta); padding-bottom:2px;">Apply as Festival Partner →</a>
+          <a href="/partners" style="font-family:'Barlow Condensed',sans-serif; font-size:0.72rem; text-transform:uppercase; letter-spacing:0.1em; color:var(--vjs-magenta); text-decoration:none; border-bottom:1px solid var(--vjs-magenta); padding-bottom:2px;">Apply as Festival Partner →</a>
         </div>
 
       </div>
       <div style="margin-top:1px; background:var(--vjs-card); padding:1.5rem 2rem; display:flex; align-items:center; justify-content:space-between; flex-wrap:wrap; gap:1rem; background:#0a0a0a; border:1px solid #222; border-top:none;">
         <p style="margin:0; font-family:'Barlow Condensed',sans-serif; font-size:0.85rem; color:var(--vjs-text-muted); text-transform:uppercase; letter-spacing:0.06em;">No partners signed yet — <strong style="color:#fff;">be the first to appear here.</strong></p>
-        <a href="/business-model" class="vjs-btn vjs-btn-primary" style="font-size:0.78rem; padding:9px 28px;">View Partnership Options</a>
+        <a href="/partners" class="vjs-btn vjs-btn-primary" style="font-size:0.78rem; padding:9px 28px;">View Partnership Options</a>
       </div>
     </div>
   </div>
