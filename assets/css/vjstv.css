@@ -2536,6 +2536,11 @@ select.vjs-form-input {
 .vjs-project-item {
   display: block;
   height: 100%;
+  background: var(--vjs-card);
+}
+.vjs-project-item .vjs-project-meta-strip {
+  height: 32px;
+  overflow: hidden;
 }
 .vjs-artist-item > .vjs-nts-card,
 .vjs-artist-item > a {

@@ -1,0 +1,781 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <!-- Meta Tags-->
+  <meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<meta name="theme-color" content="#050505" />
+<meta name="color-scheme" content="dark" />
+<meta name="robots" content="index, follow" />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<title>faderTouch Processing - BeiJing studio 1</title>
+<meta name="title" content="faderTouch Processing - BeiJing studio 1">
+<meta name="description" content="VJ Fader demoing faderTouch (rear-projection touchscreen controller) in a Beijing studio, running custom Processing sketches synced to Kraftwerk's Mega Mix. Showcases real-time generative visuals manipulated via the portable interface, highlighting early integration of custom hardware with coding-based VJ tools for live performances.">
+
+  <meta property="og:type" content="website">
+<meta property="og:url" content="https://vjstv.com/projects/2009-fadertouch-processing-beijing-studio-1">
+<meta property="og:site_name" content="VJs TV">
+<meta property="og:title" content="faderTouch Processing - BeiJing studio 1">
+<meta property="og:description" content="VJ Fader demoing faderTouch (rear-projection touchscreen controller) in a Beijing studio, running custom Processing sketches synced to Kraftwerk's Mega Mix. Showcases real-time generative visuals manipulated via the portable interface, highlighting early integration of custom hardware with coding-based VJ tools for live performances.">
+
+<meta property="og:image" content="/assets/images/meta-image.webp" />
+
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:site" content="@vjs_tv">
+<meta name="twitter:title" content="faderTouch Processing - BeiJing studio 1">
+<meta name="twitter:description" content="VJ Fader demoing faderTouch (rear-projection touchscreen controller) in a Beijing studio, running custom Processing sketches synced to Kraftwerk's Mega Mix. Showcases real-time generative visuals manipulated via the portable interface, highlighting early integration of custom hardware with coding-based VJ tools for live performances.">
+
+<meta name="twitter:image" content="/assets/images/meta-image.webp" />
+
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"WebSite","name":"VJs TV","url":"https://vjstv.com/","description":"VJs TV is the global broadcast network for VJ culture, audiovisual performances, and digital visual art. Watch live performances, discover artists, and explore the world of visual performance.","potentialAction":{"@type":"SearchAction","target":"https://vjstv.com/search?q={search_term_string}","query-input":"required name=search_term_string"}}
+</script>
+  <!-- Favicons-->
+  <link rel="icon" type="image/x-icon" href="/assets/images/favicon.ico">
+  <link rel="icon" type="image/png" sizes="16x16" href="/assets/images/favicon-16x16.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/assets/images/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="96x96" href="/assets/images/favicon-96x96.png">
+  <!-- Stylesheets-->
+  <link rel="shortcut icon" href="/assets/images/favicon.ico" />
+<link rel="stylesheet" type="text/css" href="/assets/css/bootstrap.min.css" />
+<link rel="stylesheet" type="text/css" href="/assets/css/plugins.css" />
+<link rel="stylesheet" type="text/css" href="/assets/revolution/css/settings.css" />
+<link rel="stylesheet" type="text/css" href="/assets/revolution/css/layers.css" />
+<link rel="stylesheet" type="text/css" href="/assets/revolution/css/navigation.css" />
+<link rel="stylesheet" type="text/css" href="/assets/type/type.css" />
+<link rel="stylesheet" type="text/css" href="/assets/css/style.css" />
+<!-- Global Color Scheme for all Pages-->
+
+<!-- Global Font Scheme font-->
+
+<link rel="stylesheet" type="text/css" href="/assets/css/vjstv.css" />
+
+  <!-- Google Analytics-->
+  
+</head>
+<body >
+  <a href="#main-content" class="skip-to-content">Skip to content</a>
+  <div class="content-wrapper" id="main-content" tabindex="-1">
+    <!--  Nav Name :Classic Dark Header -->
+<nav
+  class="navbar  dark-wrapper inverse-text navbar-hover-opacity navbar-expand-lg nav-uppercase ">
+  <div class="container ">
+    <div class="navbar-brand" data-default-logo="white">
+      <!-- White Logo -->
+        <a href="https://vjstv.com"><img 
+        src="/assets/images/logo-vjstv.svg" 
+        srcset="/assets/images/logo-vjstv.svg 1x, /assets/images/logo-vjstv.svg 2x"
+        class="logo-light " 
+        alt="VJs TV - Global Broadcast Network for VJ Culture" /></a>
+  
+      <!-- Black Logo -->
+      <a href="https://vjstv.com"><img 
+        src="/assets/images/logo-vjstv.svg" 
+        srcset="/assets/images/logo-vjstv.svg 1x, /assets/images/logo-vjstv.svg 2x"
+        class="logo-dark d-none" 
+        alt="VJs TV - Global Broadcast Network for VJ Culture" /></a> 
+    </div>
+    <div class="navbar-other ms-auto order-lg-3">
+      <ul class="navbar-nav flex-row align-items-center" data-sm-skip="true">
+        <li class="nav-item">
+          <div class="navbar-hamburger d-lg-none d-xl-none ms-auto">
+            <button class="hamburger animate plain" data-bs-toggle="offcanvas-nav"><span></span></button>
+          </div>
+        </li>
+        
+      
+      
+      </ul>
+      <!-- /.navbar-nav -->
+    </div>
+    <!-- /.navbar-other -->
+    <div class="navbar-collapse offcanvas-nav">
+      <div class="offcanvas-header d-lg-none d-xl-none">
+        <a href="https://vjstv.com">
+          <img src="/assets/images/logo-vjstv.svg"
+            srcset="/assets/images/logo-vjstv.svg 1x, /assets/images/logo-vjstv.svg 2x"
+            alt="VJs TV - Global Broadcast Network for VJ Culture" /></a>
+        <button class="plain offcanvas-close offcanvas-nav-close"><i class="jam jam-close"></i></button>
+      </div>
+      <ul
+        class="navbar-nav  ms-auto " data-sm-skip-collapsible-behavior="true">
+        
+        
+        
+          <li class="nav-item">
+          <a class="nav-link" href="/">Home</a>
+        </li>
+        
+        
+        
+        
+          <li class="nav-item">
+          <a class="nav-link" href="/live">Live</a>
+        </li>
+        
+        
+        
+        
+          <li class="nav-item">
+          <a class="nav-link" href="/artists">Artists</a>
+        </li>
+        
+        
+        
+        
+          <li class="nav-item">
+          <a class="nav-link" href="/projects">Projects</a>
+        </li>
+        
+        
+        
+        
+          <li class="nav-item">
+          <a class="nav-link" href="/events">Events</a>
+        </li>
+        
+        
+        
+        
+          <li class="nav-item">
+          <a class="nav-link" href="/studios">Studios</a>
+        </li>
+        
+        
+        
+        
+          <li class="nav-item">
+          <a class="nav-link" href="/technology">Technology</a>
+        </li>
+        
+        
+        
+        
+          <li class="nav-item">
+          <a class="nav-link" href="/sponsors">Sponsors</a>
+        </li>
+        
+        
+        
+        
+          <li class="nav-item">
+          <a class="nav-link" href="/partners">Partners</a>
+        </li>
+        
+        
+        
+        
+          <li class="nav-item">
+          <a class="nav-link" href="/search">Search</a>
+        </li>
+        
+        
+        
+        
+          <li class="nav-item">
+          <a class="nav-link" href="/submit">Submit</a>
+        </li>
+        
+        
+        
+        
+          <li class="nav-item">
+          <a class="nav-link" href="https://vjsmag.com">Magazine</a>
+        </li>
+        
+        
+      </ul>
+      <!-- /.navbar-nav -->
+    </div>
+    <!-- /.navbar-collapse -->
+  </div>
+  <!-- /.container-fluid -->
+</nav>
+<!-- /.navbar -->
+<div class="offcanvas-info inverse-text">
+    <button class="plain offcanvas-close offcanvas-info-close"><i class="jam jam-close"></i></button>
+    <a href="https://vjstv.com">
+      <img src="/assets/images/logo-vjstv.svg"
+        srcset="/assets/images/logo-vjstv.svg 1x, /assets/images/logo-vjstv.svg 2x"
+        class=" logo-light "
+        alt="VJs TV - Global Broadcast Network for VJ Culture" />
+    </a>
+    <div class="space30"></div>
+    <p>VJs TV is the global broadcast network for VJ culture, audiovisual performances, and digital visual art. Watch live performances, discover artists, and explore the world of visual performance.</p>
+    <div class="space20"></div>
+    <div class="widget">
+      <h5 class="widget-title">Contact Info</h5>
+      <address> Global Network<br/>VJs TV HQ<div class="space20"></div>
+        <a href="mailto:hello@vjstv.com" class="nocolor"></a><br />
+        
+      </address>
+    </div>
+    <!-- /.widget -->
+    <div class="widget">
+      
+      <h3 class="widget-title">Platform</h3>
+      
+      <ul class="list-unstyled">
+        
+        <li><a href="/live" class="nocolor">Live</a></li>
+        
+        <li><a href="/artists" class="nocolor">Artists</a></li>
+        
+        <li><a href="/projects" class="nocolor">Projects</a></li>
+        
+        <li><a href="/events" class="nocolor">Events</a></li>
+        
+      </ul>
+    </div>
+    <!-- /.widget -->
+    <div class="widget">
+      
+      <h3 class="widget-title">Follow Us</h3>
+      
+      <ul class="social social-mute social-s ms-auto">
+        
+        <li><a href="https://instagram.com/vjstv"><i class="jam jam-instagram"></i></a></li>
+        
+        <li><a href="https://facebook.com/vjstv"><i class="jam jam-facebook"></i></a></li>
+        
+        <li><a href="https://twitter.com/vjs_tv"><i class="jam jam-twitter"></i></a></li>
+        
+        <li><a href="https://www.linkedin.com/company/vjstv"><i class="jam jam-linkedin"></i></a></li>
+        
+        <li><a href="https://vimeo.com/vjstv"><i class="jam jam-vimeo"></i></a></li>
+        
+        <li><a href="https://tiktok.com/@vjs.tv"><i class="jam jam-tiktok"></i></a></li>
+        
+      </ul>
+    </div>
+    <!-- /.widget -->
+  </div>
+  <!-- /.offcanvas-info -->
+
+<div class="vjs-detail-header">
+  <div class="vjs-detail-header-inner">
+    
+    <div class="vjs-detail-tags">
+      
+      <span class="vjs-detail-tag">faderTouch Rear Projection Controller</span>
+      
+      <span class="vjs-detail-tag">Processing (Generative Coding)</span>
+      
+      <span class="vjs-detail-tag">Live VJ Performance</span>
+      
+      <span class="vjs-detail-tag">Touchscreen Interaction</span>
+      
+      <span class="vjs-detail-tag">Portable VJ Setup</span>
+      
+    </div>
+    
+    <h1 class="vjs-detail-title">faderTouch Processing - BeiJing studio 1</h1>
+    <div class="vjs-detail-meta">
+      
+      <div class="vjs-detail-meta-item">
+        <span class="vjs-detail-meta-label">Location</span>
+        <span class="vjs-detail-meta-value">Beijing, China</span>
+      </div>
+      
+      
+      <div class="vjs-detail-meta-item">
+        <span class="vjs-detail-meta-label">Artist</span>
+        <span class="vjs-detail-meta-value">VJ Fader</span>
+      </div>
+      
+      
+      <div class="vjs-detail-meta-item">
+        <span class="vjs-detail-meta-label">Year</span>
+        <span class="vjs-detail-meta-value">2009</span>
+      </div>
+      
+      
+      <div class="vjs-detail-meta-item">
+        <span class="vjs-detail-meta-label">Type</span>
+        <span class="vjs-detail-meta-value">VJ Performance Demo / Custom Controller + Generative Visuals</span>
+      </div>
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+    </div>
+  </div>
+</div>
+
+
+<section style="padding:40px 0 0; background:#000;">
+  <div style="max-width:1100px; margin:0 auto; padding:0 24px;">
+    <div class="vjs-live-player">
+      <iframe src="https://player.vimeo.com/video/5623028" frameborder="0" allowfullscreen allow="autoplay; encrypted-media"></iframe>
+    </div>
+  </div>
+</section>
+
+
+<section style="padding:40px 0 60px; background:#000;">
+  <div style="max-width:1100px; margin:0 auto; padding:0 24px;">
+    <div class="vjs-detail-grid">
+      <div class="vjs-detail-body">
+        <p><strong>faderTouch Processing - BeiJing studio 1</strong> by <strong>VJ Fader</strong> — VJ Fader demonstrating the faderTouch rear-projection controller with latest Processing sketches, performed to Kraftwerk’s Mega Mix in a Beijing studio. An early showcase of custom hardware enabling real-time generative VJ manipulation.</p>
+
+      </div>
+      <div class="vjs-detail-sidebar">
+
+        
+
+        
+
+        
+
+        
+
+        
+
+
+
+<div class="vjs-share-block">
+  <div class="vjs-share-label">SHARE</div>
+  <div class="vjs-share-buttons">
+
+    <a class="vjs-share-btn vjs-share-x"
+       href="https://twitter.com/intent/tweet?url=https%3A%2F%2Fvjstv.com%2Fprojects%2F2009-fadertouch-processing-beijing-studio-1&text=faderTouch+Processing+-+BeiJing+studio+1&via=vjs_tv"
+       target="_blank" rel="noopener" aria-label="Share on X">
+      <svg viewBox="0 0 24 24" fill="currentColor" width="16" height="16">
+        <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-4.714-6.231-5.401 6.231H2.746l7.73-8.835L1.254 2.25H8.08l4.259 5.63L18.244 2.25zm-1.161 17.52h1.833L7.084 4.126H5.117z"/>
+      </svg>
+      <span>X</span>
+    </a>
+
+    <a class="vjs-share-btn vjs-share-fb"
+       href="https://www.facebook.com/sharer/sharer.php?u=https%3A%2F%2Fvjstv.com%2Fprojects%2F2009-fadertouch-processing-beijing-studio-1"
+       target="_blank" rel="noopener" aria-label="Share on Facebook">
+      <svg viewBox="0 0 24 24" fill="currentColor" width="16" height="16">
+        <path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/>
+      </svg>
+      <span>Facebook</span>
+    </a>
+
+    <a class="vjs-share-btn vjs-share-li"
+       href="https://www.linkedin.com/sharing/share-offsite/?url=https%3A%2F%2Fvjstv.com%2Fprojects%2F2009-fadertouch-processing-beijing-studio-1"
+       target="_blank" rel="noopener" aria-label="Share on LinkedIn">
+      <svg viewBox="0 0 24 24" fill="currentColor" width="16" height="16">
+        <path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 01-2.063-2.065 2.064 2.064 0 112.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/>
+      </svg>
+      <span>LinkedIn</span>
+    </a>
+
+    <a class="vjs-share-btn vjs-share-wa"
+       href="https://wa.me/?text=faderTouch+Processing+-+BeiJing+studio+1%20https%3A%2F%2Fvjstv.com%2Fprojects%2F2009-fadertouch-processing-beijing-studio-1"
+       target="_blank" rel="noopener" aria-label="Share on WhatsApp">
+      <svg viewBox="0 0 24 24" fill="currentColor" width="16" height="16">
+        <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/>
+      </svg>
+      <span>WhatsApp</span>
+    </a>
+
+    <button class="vjs-share-btn vjs-share-copy" onclick="vjsCopyLink(this, 'https://vjstv.com/projects/2009-fadertouch-processing-beijing-studio-1')" aria-label="Copy link">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="16" height="16">
+        <rect x="9" y="9" width="13" height="13" rx="0" ry="0"></rect>
+        <path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1"></path>
+      </svg>
+      <span>Copy Link</span>
+    </button>
+
+  </div>
+</div>
+
+<script>
+function vjsCopyLink(btn, url) {
+  navigator.clipboard.writeText(url).then(function() {
+    var span = btn.querySelector('span');
+    var prev = span.textContent;
+    span.textContent = 'Copied!';
+    btn.classList.add('vjs-share-copied');
+    setTimeout(function() {
+      span.textContent = prev;
+      btn.classList.remove('vjs-share-copied');
+    }, 2000);
+  });
+}
+</script>
+
+
+        <button onclick="openReportModal()" class="vjs-report-btn">Report an Issue</button>
+
+        
+
+        
+
+        
+        
+        
+        
+        
+
+        
+        
+        
+
+        
+        
+        
+        <div class="vjs-sidebar-card">
+          <div class="vjs-sidebar-card-heading" style="color:var(--vjs-ultraviolet);">Artist</div>
+          <a href="/artists/vj-fader" class="vjs-relation-item">
+            <div class="vjs-relation-avatar">VJ</div>
+            <div>
+              <div class="vjs-relation-name">VJ Fader</div>
+              <div class="vjs-relation-meta">Berlin, Germany</div>
+            </div>
+          </a>
+        </div>
+        
+        
+
+        
+
+        
+
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer class="vjstv-footer" role="contentinfo" aria-label="Site footer">
+  <div class="vjstv-footer-top">
+    <div class="vjstv-footer-brand">
+      <div class="vjstv-footer-logo">VJs TV</div>
+      <p class="vjstv-footer-tagline">The global broadcast network for VJ culture. Live performances, artist discovery, and the technology powering visual art worldwide.</p>
+    </div>
+    <div class="vjstv-footer-cols">
+      <div class="vjstv-footer-col">
+        <div class="vjstv-footer-heading">Platform</div>
+        <a href="/">Home</a>
+        <a href="/live">Live</a>
+        <a href="/artists">Artists</a>
+        <a href="/projects">Projects</a>
+        <a href="/events">Events</a>
+      </div>
+      <div class="vjstv-footer-col">
+        <div class="vjstv-footer-heading">Discover</div>
+        <a href="/studios">Studios</a>
+        <a href="/technology">Technology</a>
+        <a href="/search">Search</a>
+        <a href="/sponsors">Sponsors</a>
+        <a href="https://vjsmag.com" target="_blank" rel="noopener">VJSMag <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" style="width:0.8em; height:0.8em; display:inline-block; vertical-align:middle; margin-left:3px;"><path d="M7 17L17 7M17 7H9M17 7v8"/></svg></a>
+      </div>
+      <div class="vjstv-footer-col">
+        <div class="vjstv-footer-heading">Connect</div>
+        <a href="/submit">Submit Project</a>
+        <a href="/partners">Partner With Us</a>
+        <a href="https://discord.gg/vjstv" target="_blank" rel="noopener">Discord <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" style="width:0.8em; height:0.8em; display:inline-block; vertical-align:middle; margin-left:3px;"><path d="M7 17L17 7M17 7H9M17 7v8"/></svg></a>
+        <a href="https://vjsmag.com" target="_blank" rel="noopener">Magazine <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" style="width:0.8em; height:0.8em; display:inline-block; vertical-align:middle; margin-left:3px;"><path d="M7 17L17 7M17 7H9M17 7v8"/></svg></a>
+        <button onclick="openReportModal()" class="vjs-footer-report-btn">Report an Issue</button>
+      </div>
+    </div>
+  </div>
+
+  <div class="vjstv-footer-newsletter-row">
+    <div class="vjstv-footer-newsletter-inner">
+      <div class="vjstv-footer-newsletter-label">
+        <span class="vjstv-footer-newsletter-title">Stay Updated</span>
+        <span class="vjstv-footer-newsletter-sub">New artists, events & live sessions — straight to your inbox.</span>
+      </div>
+      <form class="vjstv-footer-newsletter-form" onsubmit="event.preventDefault(); this.querySelector('button').textContent='✓ Subscribed'; this.querySelector('input').disabled=true; this.querySelector('button').disabled=true;" autocomplete="off">
+        <input type="email" placeholder="your@email.com" required />
+        <button type="submit">Subscribe</button>
+      </form>
+    </div>
+  </div>
+
+  <div class="vjstv-footer-bar">
+    <div class="vjstv-footer-social">
+      <a href="https://instagram.com/vjstv" target="_blank" rel="noopener" title="Instagram">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 100 12.324 6.162 6.162 0 000-12.324zM12 16a4 4 0 110-8 4 4 0 010 8zm6.406-11.845a1.44 1.44 0 100 2.881 1.44 1.44 0 000-2.881z"/></svg>
+      </a>
+      <a href="https://facebook.com/vjstv" target="_blank" rel="noopener" title="Facebook">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/></svg>
+      </a>
+      <a href="https://twitter.com/vjs_tv" target="_blank" rel="noopener" title="X">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>
+      </a>
+      <a href="https://www.linkedin.com/company/vjstv" target="_blank" rel="noopener" title="LinkedIn">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 01-2.063-2.065 2.064 2.064 0 112.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>
+      </a>
+      <a href="https://vimeo.com/vjstv" target="_blank" rel="noopener" title="Vimeo">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M23.977 6.416c-.105 2.338-1.739 5.543-4.894 9.609-3.268 4.247-6.026 6.37-8.29 6.37-1.409 0-2.578-1.294-3.553-3.881L5.322 11.4C4.603 8.816 3.834 7.522 3.01 7.522c-.179 0-.806.378-1.881 1.132L0 7.197c1.185-1.044 2.351-2.084 3.501-3.128C5.08 2.701 6.266 1.984 7.055 1.91c1.867-.18 3.016 1.1 3.447 3.838.465 2.953.789 4.789.971 5.507.539 2.45 1.131 3.674 1.776 3.674.502 0 1.256-.796 2.265-2.385 1.004-1.589 1.54-2.797 1.612-3.628.144-1.371-.395-2.061-1.612-2.061-.574 0-1.167.121-1.777.391 1.186-3.868 3.434-5.757 6.762-5.637 2.473.06 3.628 1.664 3.478 4.807z"/></svg>
+      </a>
+      <a href="https://tiktok.com/@vjs.tv" target="_blank" rel="noopener" title="TikTok">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M12.525.02c1.31-.02 2.61-.01 3.91-.02.08 1.53.63 3.09 1.75 4.17 1.12 1.11 2.7 1.62 4.24 1.79v4.03c-1.44-.05-2.89-.35-4.2-.97-.57-.26-1.1-.59-1.62-.93-.01 2.92.01 5.84-.02 8.75-.08 1.4-.54 2.79-1.35 3.94-1.31 1.92-3.58 3.17-5.91 3.21-1.43.08-2.86-.31-4.08-1.03-2.02-1.19-3.44-3.37-3.65-5.71-.02-.5-.03-1-.01-1.49.18-1.9 1.12-3.72 2.58-4.96 1.66-1.44 3.98-2.13 6.15-1.72.02 1.48-.04 2.96-.04 4.44-.99-.32-2.15-.23-3.02.37-.63.41-1.11 1.04-1.36 1.75-.21.51-.15 1.07-.14 1.61.24 1.64 1.82 3.02 3.5 2.87 1.12-.01 2.19-.66 2.77-1.61.19-.33.4-.67.41-1.06.1-1.79.06-3.57.07-5.36.01-4.03-.01-8.05.02-12.07z"/></svg>
+      </a>
+      <a href="https://www.youtube.com/@vjs_tv" target="_blank" rel="noopener" title="YouTube">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/></svg>
+      </a>
+      <a href="https://luma.com/vjstv" target="_blank" rel="noopener" title="Luma">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8zm3.5-9c.83 0 1.5-.67 1.5-1.5S16.33 8 15.5 8 14 8.67 14 9.5s.67 1.5 1.5 1.5zm-7 0c.83 0 1.5-.67 1.5-1.5S9.33 8 8.5 8 7 8.67 7 9.5 7.67 11 8.5 11zm3.5 6.5c2.33 0 4.31-1.46 5.11-3.5H6.89c.8 2.04 2.78 3.5 5.11 3.5z"/></svg>
+      </a>
+    </div>
+    <span class="vjstv-footer-copyright">&copy; 2026 VJs TV</span>
+    <span class="vjstv-footer-sep">&middot;</span>
+    <span class="vjstv-footer-network">Part of <a href="https://vjsmag.com" target="_blank" rel="noopener">VJs Mag</a> Network</span>
+    <span class="vjstv-footer-sep">&middot;</span>
+    <a href="/privacy" class="vjstv-footer-link">Privacy Policy</a>
+    <span class="vjstv-footer-sep">&middot;</span>
+    <a href="/terms" class="vjstv-footer-link">Terms &amp; Conditions</a>
+  </div>
+</footer>
+
+
+<!-- TIP JAR MODAL -->
+<div class="vjs-tip-modal" id="vjs-tip-modal" role="dialog" aria-label="Visual Tip Jar" onclick="if(event.target===this)vjsCloseTip()">
+  <div class="vjs-tip-modal-inner">
+    <div style="margin-bottom:1rem;"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" style="width:2.5rem; height:2.5rem;"><path d="M9 3h6v2H9V3z"/><path d="M8 5h8c1 0 2 1 2 2v10c0 2-1 4-2 4H8c-1 0-2-2-2-4V7c0-1 1-2 2-2Z"/><circle cx="12" cy="12" r="2"/></svg></div>
+    <h3 style="font-family:'Barlow Condensed',sans-serif; font-size:1rem; font-weight:700; letter-spacing:0.08em; text-transform:uppercase; color:#fff; margin-bottom:0.5rem;">Visual Tip Jar</h3>
+    <p style="font-size:0.82rem; color:var(--vjs-text-muted); margin-bottom:1.75rem; line-height:1.6;">Support the VJs in the network directly. 100% goes to the artists.</p>
+    <div style="display:grid; grid-template-columns:1fr 1fr; gap:8px; margin-bottom:1.25rem;">
+      <button type="button" onclick="vjsTipAmount('€5')"  class="vjs-tip-btn">€5</button>
+      <button type="button" onclick="vjsTipAmount('€10')" class="vjs-tip-btn">€10</button>
+      <button type="button" onclick="vjsTipAmount('€25')" class="vjs-tip-btn">€25</button>
+      <button type="button" onclick="vjsTipAmount('€50')" class="vjs-tip-btn featured">€50 <svg viewBox="0 0 24 24" fill="currentColor" style="width:0.8em; height:0.8em; display:inline-block; vertical-align:middle; margin-left:2px;"><polygon points="12,2 15,10 23,10 17,15 19,23 12,18 5,23 7,15 1,10 9,10"/></svg></button>
+    </div>
+    <button type="button" onclick="vjsCloseTip()" style="background:none; border:none; color:var(--vjs-text-muted); font-family:'Barlow Condensed',sans-serif; font-size:0.7rem; letter-spacing:0.1em; cursor:pointer; text-transform:uppercase;">Close</button>
+  </div>
+</div>
+
+<!-- MOBILE BOTTOM NAV -->
+<nav class="vjs-mobile-nav" id="vjs-mobile-nav" aria-label="Mobile navigation">
+  <div class="vjs-mobile-nav-items">
+    <a href="/" class="vjs-mobile-nav-item">
+      <svg class="vjs-mobile-nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M3 10h2v10H3z"/><path d="M19 10h2v10h-2z"/><path d="M6 10L12 3l6 7v10H6z"/><rect x="10" y="13" width="4" height="4"/></svg>
+      <span class="vjs-mobile-nav-label">Home</span>
+    </a>
+    <a href="/live" class="vjs-mobile-nav-item live-item">
+      <svg class="vjs-mobile-nav-icon" viewBox="0 0 24 24" fill="currentColor"><polygon points="5,3 5,21 21,12"/></svg>
+      <span class="vjs-mobile-nav-label">Live</span>
+    </a>
+    <a href="/artists" class="vjs-mobile-nav-item">
+      <svg class="vjs-mobile-nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="12" cy="8" r="3"/><path d="M12 14c-4 0-6 2-6 4v3h12v-3c0-2-2-4-6-4Z"/></svg>
+      <span class="vjs-mobile-nav-label">Artists</span>
+    </a>
+    <a href="/events" class="vjs-mobile-nav-item">
+      <svg class="vjs-mobile-nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="4" y="3" width="16" height="18" rx="1"/><path d="M7 7h10M7 11h10M7 15h10"/><path d="M8 3v3M16 3v3"/></svg>
+      <span class="vjs-mobile-nav-label">Events</span>
+    </a>
+    <a href="/submit" class="vjs-mobile-nav-item">
+      <svg class="vjs-mobile-nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M12 5v14M5 12h14"/></svg>
+      <span class="vjs-mobile-nav-label">Submit</span>
+    </a>
+  </div>
+</nav>
+
+<!-- REPORT ISSUE MODAL (global) -->
+<div id="report-modal-global" role="dialog" aria-label="Report an issue" style="display:none; position:fixed; inset:0; z-index:9999; background:rgba(0,0,0,0.85); align-items:center; justify-content:center;">
+  <div style="background:#0a0a0a; border:1px solid #222; max-width:480px; width:90%; margin:auto; position:relative;">
+    <div style="padding:20px 24px; border-bottom:1px solid #222; display:flex; align-items:center; justify-content:space-between;">
+      <div>
+        <div style="font-family:'Barlow Condensed',sans-serif; font-size:0.95rem; font-weight:800; text-transform:uppercase; color:#fff;">Report an Issue</div>
+        <div style="font-family:'Barlow Condensed',sans-serif; font-size:0.7rem; color:rgba(255,255,255,0.35); margin-top:2px;" id="report-modal-subtitle"></div>
+      </div>
+      <button onclick="closeReportModal()" style="background:none; border:none; color:#555; font-size:1.4rem; cursor:pointer; padding:4px 8px; line-height:1;">&times;</button>
+    </div>
+    <form id="report-form-global" style="padding:24px;" novalidate>
+      <input type="hidden" name="project_title" id="report-field-title" value="">
+      <input type="hidden" name="project_url" id="report-field-url" value="">
+      <div style="position:absolute; left:-9999px;" aria-hidden="true">
+        <input type="text" name="honeypot" tabindex="-1" autocomplete="off">
+      </div>
+      <div style="margin-bottom:14px;">
+        <label class="vjs-form-label">Your Name *</label>
+        <input type="text" class="vjs-form-input" name="reporter_name" placeholder="Your name" required>
+      </div>
+      <div style="margin-bottom:14px;">
+        <label class="vjs-form-label">Email (optional)</label>
+        <input type="text" class="vjs-form-input" name="reporter_email" placeholder="you@email.com">
+      </div>
+      <div style="margin-bottom:20px;">
+        <label class="vjs-form-label">What's the issue? *</label>
+        <textarea class="vjs-form-input" name="description" rows="4" placeholder="Describe the issue: broken link, incorrect info, missing content..." required style="resize:vertical; min-height:90px;"></textarea>
+      </div>
+      <div style="display:flex; align-items:center; justify-content:space-between; gap:12px;">
+        <button type="button" onclick="closeReportModal()" style="font-family:'Barlow Condensed',sans-serif; font-size:0.75rem; font-weight:600; text-transform:uppercase; letter-spacing:0.06em; background:none; border:1px solid #333; color:#666; padding:8px 20px; cursor:pointer;">Cancel</button>
+        <button type="submit" id="report-submit-btn-global" style="font-family:'Barlow Condensed',sans-serif; font-size:0.75rem; font-weight:700; text-transform:uppercase; letter-spacing:0.06em; background:#fff; color:#000; border:none; padding:8px 24px; cursor:pointer; transition:opacity 0.15s;">Send Report</button>
+      </div>
+    </form>
+    <div id="report-success-global" style="display:none; text-align:center; padding:40px 24px;">
+      <div style="font-size:1.5rem; margin-bottom:10px; color:var(--vjs-cyan);">&#10003;</div>
+      <div style="font-family:'Barlow Condensed',sans-serif; font-size:0.95rem; font-weight:700; text-transform:uppercase; color:#fff; margin-bottom:4px;">Report Sent</div>
+      <p style="font-family:'Barlow Condensed',sans-serif; font-size:0.78rem; color:rgba(255,255,255,0.4); margin:0;">Thank you. We'll review this shortly.</p>
+    </div>
+    <div id="report-error-global" style="display:none; padding:12px 24px; border-top:1px solid rgba(255,0,100,0.3); background:rgba(255,0,100,0.05);">
+      <p style="font-family:'Barlow Condensed',sans-serif; font-size:0.78rem; color:#ff0064; margin:0;" id="report-error-msg-global">Something went wrong.</p>
+    </div>
+  </div>
+</div>
+
+<script>
+function vjsToggleGlitch() {
+  var active = document.body.classList.toggle('glitch-mode');
+  var btn = document.getElementById('glitch-btn');
+  if(btn) btn.classList.toggle('glitch-active', active);
+}
+
+function vjsOpenTip()  { document.getElementById('vjs-tip-modal').classList.add('open'); }
+function vjsCloseTip() { document.getElementById('vjs-tip-modal').classList.remove('open'); }
+function vjsTipAmount(amt) {
+  vjsCloseTip();
+  alert('Thank you for supporting VJs TV! ' + amt + ' tip — payment integration coming soon.');
+}
+
+
+(function() {
+  var path = window.location.pathname;
+  document.querySelectorAll('.vjs-mobile-nav-item').forEach(function(a) {
+    var href = a.getAttribute('href');
+    if(href && (path === href || (href !== '/' && path.startsWith(href)))) {
+      a.classList.add('active');
+    }
+  });
+})();
+
+var REPORT_API = '';
+
+function openReportModal() {
+  var m = document.getElementById('report-modal-global');
+  var subtitle = document.getElementById('report-modal-subtitle');
+  var titleField = document.getElementById('report-field-title');
+  var urlField = document.getElementById('report-field-url');
+  var pageTitle = document.title.replace(' - VJs TV', '').replace(' | VJs TV', '');
+  subtitle.textContent = pageTitle;
+  titleField.value = pageTitle;
+  urlField.value = window.location.href;
+  m.style.display = 'flex';
+  document.body.style.overflow = 'hidden';
+}
+function closeReportModal() {
+  var m = document.getElementById('report-modal-global');
+  m.style.display = 'none';
+  document.body.style.overflow = '';
+  document.getElementById('report-form-global').style.display = '';
+  document.getElementById('report-success-global').style.display = 'none';
+  document.getElementById('report-error-global').style.display = 'none';
+  document.getElementById('report-form-global').reset();
+  var btn = document.getElementById('report-submit-btn-global');
+  btn.textContent = 'Send Report';
+  btn.disabled = false;
+  btn.style.opacity = '1';
+}
+document.getElementById('report-modal-global').addEventListener('click', function(e) {
+  if (e.target === this) closeReportModal();
+});
+document.addEventListener('keydown', function(e) {
+  if (e.key === 'Escape' && document.getElementById('report-modal-global').style.display === 'flex') closeReportModal();
+});
+
+document.getElementById('report-form-global').addEventListener('submit', function(e) {
+  e.preventDefault();
+  var form = this;
+  var btn = document.getElementById('report-submit-btn-global');
+  var errorEl = document.getElementById('report-error-global');
+  errorEl.style.display = 'none';
+  btn.textContent = 'Sending\u2026';
+  btn.disabled = true;
+  btn.style.opacity = '0.5';
+
+  var fd = new FormData(form);
+  var data = {};
+  fd.forEach(function(v, k) { data[k] = v; });
+
+  fetch(REPORT_API + '/api/report', {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify(data)
+  })
+  .then(function(r) {
+    var ct = r.headers.get('content-type') || '';
+    if (!ct.includes('application/json')) { throw new Error('Server returned an unexpected response. Please try again.'); }
+    return r.json();
+  })
+  .then(function(result) {
+    if (result.success) {
+      form.style.display = 'none';
+      document.getElementById('report-success-global').style.display = 'block';
+    } else {
+      document.getElementById('report-error-msg-global').textContent = result.error || 'Something went wrong.';
+      errorEl.style.display = 'block';
+      btn.textContent = 'Send Report'; btn.disabled = false; btn.style.opacity = '1';
+    }
+  })
+  .catch(function(err) {
+    document.getElementById('report-error-msg-global').textContent = err.message || 'Connection error. Please try again.';
+    errorEl.style.display = 'block';
+    btn.textContent = 'Send Report'; btn.disabled = false; btn.style.opacity = '1';
+  });
+});
+</script>
+
+
+  </div>
+  <!-- Site Scripts-->
+  <script src="/assets/js/jquery.min.js"></script>
+<script src="/assets/js/popper.min.js"></script>
+<script src="/assets/js/bootstrap.min.js"></script>
+<script src="/assets/revolution/js/jquery.themepunch.tools.min.js"></script>
+<script src="/assets/revolution/js/jquery.themepunch.revolution.min.js"></script>
+<script src="/assets/revolution/js/extensions/revolution.extension.actions.min.js"></script>
+<script src="/assets/revolution/js/extensions/revolution.extension.carousel.min.js"></script>
+<script src="/assets/revolution/js/extensions/revolution.extension.kenburn.min.js"></script>
+<script src="/assets/revolution/js/extensions/revolution.extension.layeranimation.min.js"></script>
+<script src="/assets/revolution/js/extensions/revolution.extension.migration.min.js"></script>
+<script src="/assets/revolution/js/extensions/revolution.extension.navigation.min.js"></script>
+<script src="/assets/revolution/js/extensions/revolution.extension.parallax.min.js"></script>
+<script src="/assets/revolution/js/extensions/revolution.extension.slideanims.min.js"></script>
+<script src="/assets/revolution/js/extensions/revolution.extension.video.min.js"></script>
+<script src="/assets/js/plugins.js"></script>
+<script src="/assets/js/simple-jekyll-search.min.js"></script>
+<script src="/assets/js/scripts.js"></script>
+
+<script>
+/* ── VJS GLOBAL VIMEO THUMBNAIL LOADER ──────────────────────────
+   Any element with class="vjs-vimeo-thumb" and data-vimeo="ID"
+   will automatically receive its Vimeo thumbnail as background.
+   Add those two attributes to any card/div to get auto-images.
+──────────────────────────────────────────────────────────────── */
+(function() {
+  function vjsLoadVimeoThumbs() {
+    document.querySelectorAll('.vjs-vimeo-thumb[data-vimeo]').forEach(function(el) {
+      var id = el.getAttribute('data-vimeo');
+      if (!id || el.dataset.vjsThumbLoaded) return;
+      el.dataset.vjsThumbLoaded = '1';
+      fetch('https://vimeo.com/api/oembed.json?url=https://vimeo.com/' + id + '&width=480')
+        .then(function(r) { return r.json(); })
+        .then(function(data) {
+          if (data.thumbnail_url) {
+            el.style.backgroundImage    = 'url(' + data.thumbnail_url + ')';
+            el.style.backgroundSize     = 'cover';
+            el.style.backgroundPosition = 'center';
+            el.classList.add('loaded');
+          }
+        }).catch(function() { el.removeAttribute('data-vjs-thumb-loaded'); });
+    });
+  }
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', vjsLoadVimeoThumbs);
+  } else {
+    vjsLoadVimeoThumbs();
+  }
+  window.vjsLoadVimeoThumbs = vjsLoadVimeoThumbs;
+})();
+</script>
+
+  
+</body>
+</html>

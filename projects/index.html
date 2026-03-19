@@ -91,7 +91,7 @@ meta_description: "Explore the global index of VJ work. Filter by type, sort by 
       <strong>{{ site.projects | size }}</strong> Projects
     </div>
 
-    <div id="projects-grid" style="display:grid; grid-template-columns:repeat(3,1fr); gap:1px; background:var(--vjs-border); border:1px solid var(--vjs-border);">
+    <div id="projects-grid" style="display:grid; grid-template-columns:repeat(3,1fr); gap:2px; background:var(--vjs-border); border:1px solid var(--vjs-border);">
       {% assign sorted_projects = site.projects | sort: "year" | reverse %}
       {% for project in sorted_projects %}
       {% assign tech_str = project.technologies | join: "," | downcase %}
