@@ -516,7 +516,7 @@ function heroPlay(card) {
     <div class="vjs-reveal">
       <div class="vjs-redbull-grid">
         {% assign featured_projects = site.projects | where: "featured", true %}
-        {% for project in featured_projects limit:4 %}
+        {% for project in featured_projects limit:5 %}
         {% if forloop.first %}
         <a href="{{ project.url }}" class="text-decoration-none vjs-redbull-card featured">
           <div class="vjs-redbull-thumb">
