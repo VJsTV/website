@@ -17,7 +17,7 @@ technologies:
 featured: true
 website: "https://refikanadolstudio.com"
 social:
-  vimeo: "https://vimeo.com/refikanadol"
+  vimeo: "https://vimeo.com/refo"
   facebook: "https://www.facebook.com/refikanadolstudio/"
   x: "https://x.com/refikanadol/"
   instagram: "https://www.instagram.com/refikanadol/"
