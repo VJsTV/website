@@ -3335,6 +3335,7 @@ body.cinema-mode .col-lg-8 { flex: 0 0 100% !important; max-width: 100% !importa
   display: flex;
   flex-direction: column;
   justify-content: flex-end;
+  background: #050505;
 }
 .vjs-nts-hero-bg {
   position: absolute;
