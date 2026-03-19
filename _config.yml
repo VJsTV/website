@@ -56,3 +56,5 @@ exclude:
   - replit.md
   - node_modules
   - vendor
+  - functions
+  - api

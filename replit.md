@@ -77,36 +77,42 @@ VJs TV is a Jekyll-based platform for VJ culture and audiovisual performances. I
 - **Stats bar:** 97 community members, 50 countries (static), 23 events (static), unique visitors (removed from display)
 - **Testing:** API returns `{"monthlyVisitors": number, "cached": false/true}` on success; fallback on timeout/error
 
-## Submission System (GitHub Issues Integration)
-- **Unified Server:** `api/server.js` — Express on port 5000 serves both static site (`_site/`) and API endpoints
-- **Jekyll Build:** Express runs `jekyll build --watch --incremental` automatically; no separate Jekyll server needed
-- **CORS:** All API endpoints have CORS headers enabled to allow browser requests
-- **Report Endpoint (`/api/report`):**
-  - Rate limited to 3 requests per 2 minutes
-  - Fields: `reporter_name` (required), `description` (required), `reporter_email` (optional), `project_title` (optional), `project_url` (optional)
-  - Creates GitHub Issue with `[Report]` prefix and `report` label
-  - 10-second timeout on GitHub API calls to prevent hanging
-  - Returns `{success: true, issue_number: X}` on success or when timing out
-- **Partner Endpoint (`/api/partner`):**
-  - Rate limited to 3 requests per 5 minutes
-  - Fields: `full_name` (required), `email` (required), `message` (required), `company` (optional), `tier` (optional)
-  - Creates GitHub Issue with `SPONSORS & PARTNERS –` prefix and `partnership` label
-  - Honeypot spam check (submitting `website_url` field triggers false positive)
-- **Frontend:** `submit/index.html` — form POSTs to `/api/submit` (same origin, no CORS issues)
-- **GitHub Integration:** Uses Replit Connectors SDK (`@replit/connectors-sdk`) for authenticated GitHub API calls
-- **Repo:** `VJsTV/website` — submissions create Issues with labels (`submission`, type-based)
-- **Workflow:** Form submission → Express API → GitHub Issue created with Jekyll front matter
-- **Approval:** Add `approved` label in GitHub Issues → can trigger GitHub Action to auto-generate `_projects/*.md`
-- **Endpoints:**
-  - `POST /api/submit` — create submission Issue (rate limited: 3/5min)
-  - `POST /api/report` — report issue on any detail page (rate limited: 3/2min)
-  - `POST /api/partner` — partnership enquiry from sponsors page (rate limited: 3/5min, label: `partnership`)
-  - `GET /api/analytics` — fetch monthly visitors from Cloudflare (10-min cache); pricing multiplier: 1x (<10K), 2x (10K-50K), 3x (50K-200K), 5x (200K+)
-  - `GET /api/projects` — fetch approved Issues
-  - `GET /api/health` — health check
-- **Report Feature:** "Report an Issue" button in sidebar of all `vjs-detail` pages + footer of every page; modal → creates GitHub Issue with `report` label
-- **Partnership Form:** "Send Partnership Enquiry" on `/sponsors/` and "Get in Touch" on `/partners/` both POST to `/api/partner` → creates GitHub Issue titled "SPONSORS & PARTNERS – {company}" with `partnership` label
-- **Security:** Honeypot spam field, per-IP rate limiting, input trimming/length caps, 50KB body limit
+## API & Form System (Dual Architecture)
+
+### Production: Cloudflare Pages Functions (`functions/api/`)
+- **Deployment:** `functions/` directory auto-detected by Cloudflare Pages, runs as serverless Workers
+- **GitHub API:** Uses `GITHUB_TOKEN` environment variable (set in Cloudflare Pages dashboard)
+- **Analytics:** Uses `CF_API_TOKEN` and `CF_ZONE_ID` environment variables
+- **Files:**
+  - `functions/api/submit.js` → `POST /api/submit` — project submission → GitHub Issue
+  - `functions/api/report.js` → `POST /api/report` — issue report → GitHub Issue
+  - `functions/api/partner.js` → `POST /api/partner` — partnership enquiry → GitHub Issue
+  - `functions/api/analytics.js` → `GET /api/analytics` — Cloudflare monthly page views
+  - `functions/api/analytics/charts.js` → `GET /api/analytics/charts` — daily traffic + country data
+  - `functions/api/health.js` → `GET /api/health` — health check
+
+### Development: Express Server (`api/server.js`)
+- **Local dev:** `node api/server.js` on port 5000, serves static `_site/` + API endpoints
+- **Uses:** Replit Connectors SDK for GitHub API (only works in Replit environment)
+- **Jekyll:** Auto-runs `jekyll build --watch --incremental`
+
+### Required Cloudflare Pages Environment Variables
+- `GITHUB_TOKEN` — GitHub Personal Access Token with `repo` scope (for creating Issues)
+- `CF_API_TOKEN` — Cloudflare API token with Analytics read permission
+- `CF_ZONE_ID` — Cloudflare zone ID for vjstv.com
+
+### Endpoints
+- `POST /api/submit` — create submission Issue (fields: artist, project_title, email, video_url, description, category)
+- `POST /api/report` — report issue (fields: reporter_name, description, reporter_email, project_title, project_url)
+- `POST /api/partner` — partnership enquiry (fields: full_name, email, message, company, tier)
+- `GET /api/analytics` — monthly page views from Cloudflare
+- `GET /api/analytics/charts` — daily traffic chart data + top countries
+- `GET /api/health` — health check
+
+### Security
+- Honeypot spam fields on all forms
+- Input trimming and length caps
+- CORS headers on all endpoints
 
 ## Development
 ```
