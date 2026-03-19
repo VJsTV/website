@@ -58,3 +58,7 @@ exclude:
   - vendor
   - functions
   - api
+  - _site
+  - wrangler.jsonc
+  - wrangler.json
+  - .gitignore
