@@ -33,6 +33,7 @@ body {
   font-family: 'Barlow Condensed', 'Inter', sans-serif !important;
   background-color: var(--vjs-black) !important;
   color: var(--vjs-text) !important;
+  overflow-x: hidden;
 }
 
 h1, h2, h3, h4, h5, h6,
@@ -1738,11 +1739,20 @@ h1, h2, h3, h4, h5, h6,
   line-height: 1.25;
   margin-bottom: 0.35rem;
   text-shadow: 0 2px 8px rgba(0,0,0,0.8);
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  word-break: break-word;
 }
 .vjs-redbull-card.featured .vjs-redbull-title { font-size: 1.6rem; }
 .vjs-redbull-artist {
   font-size: 0.75rem;
   color: rgba(255,255,255,0.5);
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
 }
 /* Play button in corner on hover */
 .vjs-redbull-play {
@@ -2537,10 +2547,13 @@ select.vjs-form-input {
   display: block;
   height: 100%;
   background: var(--vjs-card);
+  min-width: 0;
+  overflow: hidden;
 }
 .vjs-project-item .vjs-project-meta-strip {
   height: 32px;
   overflow: hidden;
+  min-width: 0;
 }
 .vjs-artist-item > .vjs-nts-card,
 .vjs-artist-item > a {
@@ -2553,17 +2566,22 @@ select.vjs-form-input {
   height: 100%;
   display: flex;
   flex-direction: column;
+  min-width: 0;
 }
 .vjs-project-item > a > .vjs-redbull-thumb {
   flex: 1;
+  min-width: 0;
 }
 
-/* Responsive grid — mobile */
-@media (max-width: 640px) {
+/* Responsive grid — projects page */
+#projects-grid {
+  overflow: hidden;
+}
+@media (max-width: 599px) {
   #projects-grid { grid-template-columns: 1fr !important; }
 }
-@media (max-width: 900px) and (min-width: 641px) {
-  #projects-grid { grid-template-columns: repeat(2,1fr) !important; }
+@media (min-width: 600px) and (max-width: 899px) {
+  #projects-grid { grid-template-columns: repeat(2, 1fr) !important; }
 }
 
 /* ================================================================
