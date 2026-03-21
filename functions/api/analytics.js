@@ -1,4 +1,24 @@
-export async function onRequestGet(context) {
+export async function onRequest(context) {
+  const { request } = context;
+
+  if (request.method === "OPTIONS") {
+    return new Response(null, {
+      headers: {
+        "Access-Control-Allow-Origin": "*",
+        "Access-Control-Allow-Methods": "GET, OPTIONS",
+        "Access-Control-Allow-Headers": "Content-Type",
+      },
+    });
+  }
+
+  if (request.method !== "GET") {
+    return new Response(JSON.stringify({ error: "Method not allowed" }), { status: 405 });
+  }
+
+  return onRequestGetImpl(context);
+}
+
+async function onRequestGetImpl(context) {
   const { env } = context;
   const CF_API_TOKEN = env.CF_API_TOKEN;
   const CF_ZONE_ID = env.CF_ZONE_ID;
@@ -56,12 +76,3 @@ export async function onRequestGet(context) {
   }
 }
 
-export async function onRequestOptions() {
-  return new Response(null, {
-    headers: {
-      "Access-Control-Allow-Origin": "*",
-      "Access-Control-Allow-Methods": "GET, OPTIONS",
-      "Access-Control-Allow-Headers": "Content-Type",
-    },
-  });
-}
