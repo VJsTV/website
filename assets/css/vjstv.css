@@ -5124,3 +5124,283 @@ svg.vjs-nts-sidebar-thumb-play {
   letter-spacing: 0.15em;
   color: #444;
 }
+
+/* ================================================================
+   BOOKING BUTTON (SIDEBAR)
+   ================================================================ */
+.vjs-book-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  font-family: 'Orbitron', sans-serif;
+  font-size: 0.65rem;
+  letter-spacing: 0.12em;
+  padding: 14px 16px;
+  background: rgba(157,0,255,0.12);
+  border: 1px solid rgba(157,0,255,0.55);
+  border-radius: 0;
+  color: var(--vjs-ultraviolet);
+  cursor: pointer;
+  transition: all 0.25s;
+  margin-bottom: 12px;
+  position: relative;
+  overflow: hidden;
+}
+.vjs-book-btn::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(90deg, transparent 0%, rgba(157,0,255,0.08) 50%, transparent 100%);
+  transform: translateX(-100%);
+  transition: transform 0.5s;
+}
+.vjs-book-btn:hover {
+  background: rgba(157,0,255,0.22);
+  border-color: rgba(157,0,255,0.8);
+  box-shadow: 0 0 24px rgba(157,0,255,0.25), inset 0 0 12px rgba(157,0,255,0.06);
+  color: #c44dff;
+}
+.vjs-book-btn:hover::before { transform: translateX(100%); }
+
+/* ================================================================
+   BOOKING MODAL OVERLAY
+   ================================================================ */
+.vjs-book-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,0.75);
+  backdrop-filter: blur(6px);
+  z-index: 2000;
+  display: flex;
+  align-items: stretch;
+  justify-content: flex-end;
+  opacity: 0;
+  transition: opacity 0.3s;
+}
+.vjs-book-overlay.active { opacity: 1; }
+
+.vjs-book-panel {
+  width: 100%;
+  max-width: 580px;
+  background: #090909;
+  border-left: 1px solid #222;
+  display: flex;
+  flex-direction: column;
+  overflow-y: auto;
+  transform: translateX(100%);
+  transition: transform 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+}
+.vjs-book-overlay.active .vjs-book-panel { transform: translateX(0); }
+
+@media (max-width: 620px) {
+  .vjs-book-overlay { align-items: flex-end; justify-content: center; }
+  .vjs-book-panel {
+    max-width: 100%;
+    max-height: 92vh;
+    border-left: none;
+    border-top: 1px solid #222;
+    transform: translateY(100%);
+  }
+  .vjs-book-overlay.active .vjs-book-panel { transform: translateY(0); }
+}
+
+/* PANEL HEADER */
+.vjs-book-panel-header {
+  padding: 28px 28px 20px;
+  border-bottom: 1px solid #1a1a1a;
+  position: relative;
+  background: #0a0a0a;
+  flex-shrink: 0;
+}
+.vjs-book-panel-eyebrow {
+  font-family: 'Orbitron', sans-serif;
+  font-size: 0.52rem;
+  letter-spacing: 0.2em;
+  color: var(--vjs-ultraviolet);
+  margin-bottom: 6px;
+}
+.vjs-book-panel-title {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 1.6rem;
+  font-weight: 800;
+  text-transform: uppercase;
+  color: #fff;
+  letter-spacing: 0.02em;
+  line-height: 1.1;
+}
+.vjs-book-panel-sub {
+  font-size: 0.75rem;
+  color: var(--vjs-text-muted);
+  margin-top: 4px;
+}
+.vjs-book-close {
+  position: absolute;
+  top: 20px; right: 20px;
+  background: none;
+  border: 1px solid #222;
+  border-radius: 0;
+  color: var(--vjs-text-muted);
+  cursor: pointer;
+  padding: 6px;
+  line-height: 0;
+  transition: all 0.2s;
+  width: 34px; height: 34px;
+  display: flex; align-items: center; justify-content: center;
+}
+.vjs-book-close svg { width: 14px; height: 14px; }
+.vjs-book-close:hover { border-color: #555; color: #fff; background: #111; }
+
+/* FORM */
+.vjs-book-form {
+  padding: 24px 28px 36px;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  flex: 1;
+}
+.vjs-book-field { display: flex; flex-direction: column; gap: 8px; }
+.vjs-book-label {
+  font-family: 'Orbitron', sans-serif;
+  font-size: 0.52rem;
+  letter-spacing: 0.14em;
+  color: #555;
+  text-transform: uppercase;
+}
+.vjs-book-req { color: var(--vjs-ultraviolet); }
+.vjs-book-optional { color: #333; font-size: 0.46rem; letter-spacing: 0.08em; }
+.vjs-book-row-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+@media (max-width: 480px) { .vjs-book-row-2 { grid-template-columns: 1fr; } }
+
+/* SERVICE TYPE BUTTONS */
+.vjs-book-service-grid {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  transition: outline 0.2s;
+}
+.vjs-book-service-btn {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 0.8rem;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  padding: 7px 14px;
+  background: transparent;
+  border: 1px solid #222;
+  border-radius: 0;
+  color: var(--vjs-text-muted);
+  cursor: pointer;
+  transition: all 0.18s;
+  text-transform: uppercase;
+}
+.vjs-book-service-btn:hover {
+  border-color: rgba(157,0,255,0.4);
+  color: #c44dff;
+  background: rgba(157,0,255,0.06);
+}
+.vjs-book-service-btn.selected {
+  background: rgba(157,0,255,0.15);
+  border-color: rgba(157,0,255,0.7);
+  color: #c44dff;
+  box-shadow: 0 0 10px rgba(157,0,255,0.15);
+}
+
+/* INPUTS */
+.vjs-book-input,
+.vjs-book-select,
+.vjs-book-textarea {
+  background: #0d0d0d;
+  border: 1px solid #1e1e1e;
+  border-radius: 0;
+  padding: 11px 14px;
+  color: #e0e0e0;
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 0.95rem;
+  width: 100%;
+  outline: none;
+  transition: border-color 0.2s;
+  appearance: none;
+}
+.vjs-book-input::placeholder { color: #333; }
+.vjs-book-input:focus,
+.vjs-book-select:focus,
+.vjs-book-textarea:focus { border-color: rgba(157,0,255,0.45); }
+.vjs-book-select { cursor: pointer; background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 24 24' fill='none' stroke='%23555' stroke-width='2' xmlns='http://www.w3.org/2000/svg'%3E%3Cpolyline points='6 9 12 15 18 9'/%3E%3C/svg%3E"); background-repeat: no-repeat; background-position: right 12px center; background-size: 14px; padding-right: 36px; }
+.vjs-book-select option { background: #111; }
+.vjs-book-textarea { resize: vertical; min-height: 90px; line-height: 1.5; }
+
+/* ACTIONS */
+.vjs-book-actions {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  padding-top: 4px;
+  border-top: 1px solid #1a1a1a;
+}
+.vjs-book-privacy {
+  font-size: 0.68rem;
+  color: #333;
+  line-height: 1.5;
+}
+.vjs-book-submit {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: 'Orbitron', sans-serif;
+  font-size: 0.68rem;
+  letter-spacing: 0.14em;
+  padding: 15px 24px;
+  background: rgba(157,0,255,0.15);
+  border: 1px solid rgba(157,0,255,0.6);
+  border-radius: 0;
+  color: #c44dff;
+  cursor: pointer;
+  transition: all 0.2s;
+  width: 100%;
+}
+.vjs-book-submit:hover {
+  background: rgba(157,0,255,0.28);
+  box-shadow: 0 0 24px rgba(157,0,255,0.2);
+}
+.vjs-book-submit:disabled { opacity: 0.5; cursor: not-allowed; }
+
+/* SUCCESS STATE */
+.vjs-book-success {
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  gap: 16px;
+  padding: 40px 0;
+}
+.vjs-book-success-icon {
+  width: 56px;
+  filter: drop-shadow(0 0 12px rgba(57,255,20,0.4));
+}
+.vjs-book-success-title {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 1.6rem;
+  font-weight: 800;
+  text-transform: uppercase;
+  color: #fff;
+}
+.vjs-book-success-body {
+  font-size: 0.85rem;
+  color: var(--vjs-text-muted);
+  max-width: 360px;
+  line-height: 1.6;
+}
+.vjs-book-success-body strong { color: #fff; }
+.vjs-book-close-success {
+  font-family: 'Orbitron', sans-serif;
+  font-size: 0.62rem;
+  letter-spacing: 0.12em;
+  padding: 10px 24px;
+  background: transparent;
+  border: 1px solid #333;
+  border-radius: 0;
+  color: var(--vjs-text-muted);
+  cursor: pointer;
+  transition: all 0.2s;
+  margin-top: 8px;
+}
+.vjs-book-close-success:hover { border-color: #555; color: #fff; }

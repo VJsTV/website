@@ -347,6 +347,14 @@
 
         
 
+        <!-- BOOK NOW -->
+        
+        <button class="vjs-book-btn" onclick="openBookingModal()">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" style="width:0.9em;height:0.9em;vertical-align:middle;margin-right:7px;flex-shrink:0;"><rect x="3" y="4" width="18" height="18" rx="0"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
+          COMMISSION SIMILAR WORK
+        </button>
+        
+
         
 
 
@@ -458,6 +466,201 @@ function vjsCopyLink(btn, url) {
     </div>
   </div>
 </section>
+
+
+<!-- BOOKING MODAL -->
+<div class="vjs-book-overlay" id="bookingModal" role="dialog" aria-modal="true" aria-label="Booking enquiry" style="display:none;">
+  <div class="vjs-book-panel">
+
+    <div class="vjs-book-panel-header">
+      <div class="vjs-book-panel-eyebrow">
+        COMMISSION REQUEST
+      </div>
+      <div class="vjs-book-panel-title">Representa Corisco 2011</div>
+      <div class="vjs-book-panel-sub">Various (project developed in Belo Horizonte, São Paulo, Barcelona, etc.; this likely from a 2011 event/festival performance)</div>
+      <button class="vjs-book-close" onclick="closeBookingModal()" aria-label="Close">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+      </button>
+    </div>
+
+    <form class="vjs-book-form" id="bookingForm" novalidate>
+      <input type="hidden" name="subject" value="Representa Corisco 2011">
+      <input type="hidden" name="profile_type" value="project">
+
+      <!-- SERVICE TYPE -->
+      <div class="vjs-book-field">
+        <label class="vjs-book-label">SERVICE TYPE <span class="vjs-book-req">*</span></label>
+        <div class="vjs-book-service-grid" id="serviceGrid">
+          
+          <button type="button" class="vjs-book-service-btn" data-val="Custom Commission">Custom Commission</button>
+          <button type="button" class="vjs-book-service-btn" data-val="Permanent Installation">Permanent Installation</button>
+          <button type="button" class="vjs-book-service-btn" data-val="Temporary Installation">Temporary Installation</button>
+          <button type="button" class="vjs-book-service-btn" data-val="Live Performance">Live Performance</button>
+          <button type="button" class="vjs-book-service-btn" data-val="Broadcast / TV">Broadcast / TV</button>
+          <button type="button" class="vjs-book-service-btn" data-val="General Enquiry">General Enquiry</button>
+          
+        </div>
+        <input type="hidden" name="service_type" id="serviceTypeInput" required>
+      </div>
+
+      <!-- EVENT / PROJECT NAME -->
+      <div class="vjs-book-row-2">
+        <div class="vjs-book-field">
+          <label class="vjs-book-label">PROJECT NAME <span class="vjs-book-req">*</span></label>
+          <input type="text" class="vjs-book-input" name="event_name" placeholder="Your project title" required>
+        </div>
+        <div class="vjs-book-field">
+          <label class="vjs-book-label">DATE / TIMEFRAME <span class="vjs-book-req">*</span></label>
+          <input type="text" class="vjs-book-input" name="event_date" placeholder="e.g. June 2025 or TBD" required>
+        </div>
+      </div>
+
+      <!-- LOCATION + BUDGET -->
+      <div class="vjs-book-row-2">
+        <div class="vjs-book-field">
+          <label class="vjs-book-label">LOCATION</label>
+          <input type="text" class="vjs-book-input" name="location" placeholder="City, Country">
+        </div>
+        <div class="vjs-book-field">
+          <label class="vjs-book-label">BUDGET RANGE</label>
+          <select class="vjs-book-select" name="budget">
+            <option value="" disabled selected>Select range</option>
+            <option>Under €500</option>
+            <option>€500 – €2,000</option>
+            <option>€2,000 – €5,000</option>
+            <option>€5,000 – €15,000</option>
+            <option>€15,000 – €50,000</option>
+            <option>€50,000+</option>
+            <option>To be discussed</option>
+          </select>
+        </div>
+      </div>
+
+      <!-- DESCRIPTION -->
+      <div class="vjs-book-field">
+        <label class="vjs-book-label">DESCRIBE YOUR PROJECT</label>
+        <textarea class="vjs-book-textarea" name="description" rows="4" placeholder="Tell us about the event, venue size, technical requirements, creative vision, or any other relevant details…"></textarea>
+      </div>
+
+      <!-- CONTACT -->
+      <div class="vjs-book-row-2">
+        <div class="vjs-book-field">
+          <label class="vjs-book-label">YOUR NAME <span class="vjs-book-req">*</span></label>
+          <input type="text" class="vjs-book-input" name="contact_name" placeholder="Full name" required>
+        </div>
+        <div class="vjs-book-field">
+          <label class="vjs-book-label">EMAIL ADDRESS <span class="vjs-book-req">*</span></label>
+          <input type="email" class="vjs-book-input" name="contact_email" placeholder="you@example.com" required>
+        </div>
+      </div>
+
+      <!-- ORGANISATION (optional) -->
+      <div class="vjs-book-field">
+        <label class="vjs-book-label">ORGANISATION / COMPANY <span class="vjs-book-optional">(optional)</span></label>
+        <input type="text" class="vjs-book-input" name="organisation" placeholder="Festival, venue, agency, or individual">
+      </div>
+
+      <!-- SUBMIT -->
+      <div class="vjs-book-actions">
+        <div class="vjs-book-privacy">By submitting you agree this enquiry is forwarded to Representa Corisco 2011. We do not share your data.</div>
+        <button type="submit" class="vjs-book-submit" id="bookSubmitBtn">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" style="width:0.9em;height:0.9em;vertical-align:middle;margin-right:6px;"><line x1="22" y1="2" x2="11" y2="13"/><polygon points="22 2 15 22 11 13 2 9 22 2"/></svg>
+          SEND ENQUIRY
+        </button>
+      </div>
+
+      <!-- SUCCESS STATE -->
+      <div class="vjs-book-success" id="bookSuccess" style="display:none;">
+        <div class="vjs-book-success-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="#39ff14" stroke-width="1.5"><circle cx="12" cy="12" r="10"/><polyline points="8 12 11 15 16 9"/></svg>
+        </div>
+        <div class="vjs-book-success-title">Enquiry Sent</div>
+        <div class="vjs-book-success-body">Your request has been forwarded to <strong>Representa Corisco 2011</strong>. They'll be in touch at your email address.</div>
+        <button type="button" class="vjs-book-close-success" onclick="closeBookingModal()">CLOSE</button>
+      </div>
+
+    </form>
+  </div>
+</div>
+
+
+<script>
+(function() {
+  function openBookingModal() {
+    var modal = document.getElementById('bookingModal');
+    if (!modal) return;
+    modal.style.display = 'flex';
+    document.body.style.overflow = 'hidden';
+    setTimeout(function() { modal.classList.add('active'); }, 10);
+  }
+  function closeBookingModal() {
+    var modal = document.getElementById('bookingModal');
+    if (!modal) return;
+    modal.classList.remove('active');
+    setTimeout(function() {
+      modal.style.display = 'none';
+      document.body.style.overflow = '';
+    }, 300);
+  }
+  window.openBookingModal = openBookingModal;
+  window.closeBookingModal = closeBookingModal;
+
+  document.addEventListener('DOMContentLoaded', function() {
+    var modal = document.getElementById('bookingModal');
+    if (!modal) return;
+
+    modal.addEventListener('click', function(e) {
+      if (e.target === modal) closeBookingModal();
+    });
+    document.addEventListener('keydown', function(e) {
+      if (e.key === 'Escape') closeBookingModal();
+    });
+
+    var serviceBtns = document.querySelectorAll('.vjs-book-service-btn');
+    var serviceInput = document.getElementById('serviceTypeInput');
+    serviceBtns.forEach(function(btn) {
+      btn.addEventListener('click', function() {
+        serviceBtns.forEach(function(b) { b.classList.remove('selected'); });
+        btn.classList.add('selected');
+        if (serviceInput) serviceInput.value = btn.dataset.val;
+      });
+    });
+
+    var form = document.getElementById('bookingForm');
+    var submitBtn = document.getElementById('bookSubmitBtn');
+    var successPanel = document.getElementById('bookSuccess');
+
+    if (form) {
+      form.addEventListener('submit', function(e) {
+        e.preventDefault();
+        var serviceType = serviceInput ? serviceInput.value : '';
+        if (!serviceType) {
+          var grid = document.getElementById('serviceGrid');
+          if (grid) {
+            grid.style.outline = '1px solid rgba(255,0,170,0.6)';
+            setTimeout(function() { grid.style.outline = ''; }, 1500);
+          }
+          return;
+        }
+        if (submitBtn) {
+          submitBtn.textContent = 'SENDING…';
+          submitBtn.disabled = true;
+        }
+        var data = {};
+        new FormData(form).forEach(function(v, k) { data[k] = v; });
+        fetch('/api/partner', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(data)
+        }).catch(function() {}).finally(function() {
+          if (form) form.style.display = 'none';
+          if (successPanel) successPanel.style.display = 'flex';
+        });
+      });
+    }
+  });
+})();
+</script>
 
 <footer class="vjstv-footer" role="contentinfo" aria-label="Site footer">
   <div class="vjstv-footer-top">

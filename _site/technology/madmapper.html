@@ -329,6 +329,9 @@
 
         
 
+        <!-- BOOK NOW -->
+        
+
         
 
 
@@ -432,6 +435,86 @@ function vjsCopyLink(btn, url) {
     </div>
   </div>
 </section>
+
+
+
+<script>
+(function() {
+  function openBookingModal() {
+    var modal = document.getElementById('bookingModal');
+    if (!modal) return;
+    modal.style.display = 'flex';
+    document.body.style.overflow = 'hidden';
+    setTimeout(function() { modal.classList.add('active'); }, 10);
+  }
+  function closeBookingModal() {
+    var modal = document.getElementById('bookingModal');
+    if (!modal) return;
+    modal.classList.remove('active');
+    setTimeout(function() {
+      modal.style.display = 'none';
+      document.body.style.overflow = '';
+    }, 300);
+  }
+  window.openBookingModal = openBookingModal;
+  window.closeBookingModal = closeBookingModal;
+
+  document.addEventListener('DOMContentLoaded', function() {
+    var modal = document.getElementById('bookingModal');
+    if (!modal) return;
+
+    modal.addEventListener('click', function(e) {
+      if (e.target === modal) closeBookingModal();
+    });
+    document.addEventListener('keydown', function(e) {
+      if (e.key === 'Escape') closeBookingModal();
+    });
+
+    var serviceBtns = document.querySelectorAll('.vjs-book-service-btn');
+    var serviceInput = document.getElementById('serviceTypeInput');
+    serviceBtns.forEach(function(btn) {
+      btn.addEventListener('click', function() {
+        serviceBtns.forEach(function(b) { b.classList.remove('selected'); });
+        btn.classList.add('selected');
+        if (serviceInput) serviceInput.value = btn.dataset.val;
+      });
+    });
+
+    var form = document.getElementById('bookingForm');
+    var submitBtn = document.getElementById('bookSubmitBtn');
+    var successPanel = document.getElementById('bookSuccess');
+
+    if (form) {
+      form.addEventListener('submit', function(e) {
+        e.preventDefault();
+        var serviceType = serviceInput ? serviceInput.value : '';
+        if (!serviceType) {
+          var grid = document.getElementById('serviceGrid');
+          if (grid) {
+            grid.style.outline = '1px solid rgba(255,0,170,0.6)';
+            setTimeout(function() { grid.style.outline = ''; }, 1500);
+          }
+          return;
+        }
+        if (submitBtn) {
+          submitBtn.textContent = 'SENDING…';
+          submitBtn.disabled = true;
+        }
+        var data = {};
+        new FormData(form).forEach(function(v, k) { data[k] = v; });
+        fetch('/api/partner', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(data)
+        }).catch(function() {}).finally(function() {
+          if (form) form.style.display = 'none';
+          if (successPanel) successPanel.style.display = 'flex';
+        });
+      });
+    }
+  });
+})();
+</script>
 
 <footer class="vjstv-footer" role="contentinfo" aria-label="Site footer">
   <div class="vjstv-footer-top">
