@@ -2,6 +2,10 @@ baseurl: ""
 url: "https://vjstv.com"
 permalink: "/:title"
 
+include:
+  - _routes.json
+  - _headers
+
 plugins:
   - jekyll-feed
 
