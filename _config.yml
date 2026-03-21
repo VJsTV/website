@@ -28,6 +28,9 @@ collections:
   sponsors:
     output: true
     permalink: /sponsors/:name
+  loop_packs:
+    output: true
+    permalink: /marketplace/:name
 
 future: true
 highlighter: rouge

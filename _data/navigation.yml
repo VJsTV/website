@@ -39,6 +39,10 @@ main_menu:
     url: "/search"
     menu_type: "simple"
 
+  - text: "Marketplace"
+    url: "/marketplace"
+    menu_type: "simple"
+
   - text: "Submit"
     url: "/submit"
     menu_type: "simple"

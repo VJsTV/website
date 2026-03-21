@@ -1,0 +1,265 @@
+---
+layout: default
+---
+{% include layouts/nav/nav-3.html default_logo="white" %}
+
+<div class="vjs-mp-detail-page">
+
+  <!-- BREADCRUMB -->
+  <div class="vjs-mp-breadcrumb">
+    <div class="vjs-mp-breadcrumb-inner">
+      <a href="/marketplace" class="vjs-mp-breadcrumb-link">← Marketplace</a>
+      <span class="vjs-mp-breadcrumb-sep">/</span>
+      <span class="vjs-mp-breadcrumb-cur">{{ page.title }}</span>
+    </div>
+  </div>
+
+  <!-- HERO -->
+  <div class="vjs-mp-hero" style="background: linear-gradient(135deg, {{ page.gradient }});">
+    <div class="vjs-mp-hero-bg-pattern"></div>
+    <div class="vjs-mp-hero-inner">
+
+      <!-- LEFT: THUMB + PREVIEW -->
+      <div class="vjs-mp-hero-thumb">
+        <div class="vjs-mp-thumb-art" style="background: linear-gradient(135deg, {{ page.gradient }});">
+          <div class="vjs-mp-thumb-grid-overlay"></div>
+          <div class="vjs-mp-thumb-play-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+              <circle cx="12" cy="12" r="10"/>
+              <polygon points="10,8 16,12 10,16" fill="currentColor" stroke="none"/>
+            </svg>
+          </div>
+          <div class="vjs-mp-thumb-clip-badge">{{ page.clip_count }} CLIPS</div>
+          <div class="vjs-mp-thumb-res-badge">{{ page.resolution }}</div>
+        </div>
+
+        <!-- PREVIEW CLIPS ROW -->
+        <div class="vjs-mp-preview-row">
+          {% for i in (1..4) %}
+          <div class="vjs-mp-preview-clip" style="background: linear-gradient({{ i | times: 45 }}deg, {{ page.gradient }});">
+            <div class="vjs-mp-preview-clip-num">{{ i | prepend: '0' | slice: -2, 2 }}</div>
+          </div>
+          {% endfor %}
+          <div class="vjs-mp-preview-more">+{{ page.clip_count | minus: 4 }} more</div>
+        </div>
+      </div>
+
+      <!-- RIGHT: PACK INFO -->
+      <div class="vjs-mp-hero-info">
+        <div class="vjs-mp-category-tag">{{ page.category }}</div>
+        <h1 class="vjs-mp-pack-title">{{ page.title }}</h1>
+        <div class="vjs-mp-pack-byline">
+          by <a href="/artists/{{ page.artist_slug }}" class="vjs-mp-artist-link">{{ page.artist }}</a>
+        </div>
+
+        <div class="vjs-mp-tag-row">
+          {% for tag in page.tags %}
+          <span class="vjs-mp-tag">{{ tag }}</span>
+          {% endfor %}
+        </div>
+
+        <p class="vjs-mp-description">{{ page.description }}</p>
+
+        <!-- SPECS GRID -->
+        <div class="vjs-mp-specs">
+          <div class="vjs-mp-spec">
+            <span class="vjs-mp-spec-label">CLIPS</span>
+            <span class="vjs-mp-spec-val">{{ page.clip_count }}</span>
+          </div>
+          <div class="vjs-mp-spec">
+            <span class="vjs-mp-spec-label">RESOLUTION</span>
+            <span class="vjs-mp-spec-val">{{ page.resolution }}</span>
+          </div>
+          <div class="vjs-mp-spec">
+            <span class="vjs-mp-spec-label">FPS</span>
+            <span class="vjs-mp-spec-val">{{ page.fps }}</span>
+          </div>
+          <div class="vjs-mp-spec">
+            <span class="vjs-mp-spec-label">SIZE</span>
+            <span class="vjs-mp-spec-val">{{ page.file_size }}</span>
+          </div>
+          <div class="vjs-mp-spec">
+            <span class="vjs-mp-spec-label">LICENSE</span>
+            <span class="vjs-mp-spec-val">{{ page.license }}</span>
+          </div>
+          <div class="vjs-mp-spec">
+            <span class="vjs-mp-spec-label">FORMATS</span>
+            <span class="vjs-mp-spec-val">{{ page.formats | join: " · " }}</span>
+          </div>
+        </div>
+
+        <!-- PURCHASE BLOCK -->
+        <div class="vjs-mp-purchase-block">
+          <div class="vjs-mp-price-display">
+            {% if page.price == 0 %}
+            <span class="vjs-mp-price-big free">FREE</span>
+            {% else %}
+            <span class="vjs-mp-price-big">{{ page.price_display }}</span>
+            {% endif %}
+          </div>
+          {% if page.price == 0 %}
+          <a href="/marketplace/download?pack={{ page.name }}&title={{ page.title | uri_escape }}&artist={{ page.artist | uri_escape }}&clips={{ page.clip_count }}&size={{ page.file_size | uri_escape }}&free=true"
+             class="vjs-mp-btn-primary">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" style="width:1em;height:1em;vertical-align:middle;margin-right:6px;"><path d="M12 3v14M5 11l7 7 7-7"/><path d="M4 20h16"/></svg>
+            FREE DOWNLOAD
+          </a>
+          {% else %}
+          <button class="vjs-mp-btn-primary vjs-mp-buy-btn"
+                  data-pack="{{ page.name }}"
+                  data-title="{{ page.title }}"
+                  data-artist="{{ page.artist }}"
+                  data-price="{{ page.price_display }}"
+                  data-clips="{{ page.clip_count }}"
+                  data-size="{{ page.file_size }}">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" style="width:1em;height:1em;vertical-align:middle;margin-right:6px;"><rect x="2" y="5" width="20" height="14" rx="0"/><path d="M2 10h20"/></svg>
+            BUY NOW · {{ page.price_display }}
+          </button>
+          {% endif %}
+          <div class="vjs-mp-guarantee">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" style="width:0.85em;height:0.85em;vertical-align:middle;margin-right:4px;"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+            Instant download · Commercial use · No DRM
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- WHAT YOU GET -->
+  <div class="vjs-mp-what-section">
+    <div class="vjs-mp-section-inner">
+      <h2 class="vjs-mp-section-title">What's Included</h2>
+      <ul class="vjs-mp-included-list">
+        {% for item in page.what_you_get %}
+        <li class="vjs-mp-included-item">
+          <svg viewBox="0 0 24 24" fill="none" stroke="#39ff14" stroke-width="2" style="width:0.9em;height:0.9em;flex-shrink:0;margin-top:2px;"><polyline points="20 6 9 17 4 12"/></svg>
+          {{ item }}
+        </li>
+        {% endfor %}
+      </ul>
+    </div>
+
+    <!-- MORE PACKS -->
+    <div class="vjs-mp-section-inner" style="margin-top:48px;">
+      <h2 class="vjs-mp-section-title">More Packs</h2>
+      <div class="vjs-mp-more-grid">
+        {% assign other_packs = site.loop_packs | where_exp: "p", "p.title != page.title" | limit: 4 %}
+        {% for pack in other_packs limit:4 %}
+        <a href="{{ pack.url }}" class="vjs-pack-card text-decoration-none">
+          <div class="vjs-pack-thumb" style="background: linear-gradient(135deg, {{ pack.gradient }});">
+            <div style="position:absolute;inset:0;background:repeating-linear-gradient(45deg,transparent,transparent 6px,rgba(0,0,0,0.08) 6px,rgba(0,0,0,0.08) 7px);"></div>
+            <div class="vjs-pack-count">{{ pack.clip_count }} clips</div>
+            <div class="vjs-pack-icon"><svg viewBox="0 0 24 24" fill="currentColor"><rect x="4" y="4" width="16" height="16"/></svg></div>
+          </div>
+          <div class="vjs-pack-info">
+            <div class="vjs-pack-name">{{ pack.title }}</div>
+            <div class="vjs-pack-artist">by {{ pack.artist }}</div>
+            <div class="vjs-pack-footer">
+              <span class="vjs-pack-price">{{ pack.price_display }}</span>
+              <span class="vjs-pack-dl">VIEW →</span>
+            </div>
+          </div>
+        </a>
+        {% endfor %}
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<!-- PURCHASE MODAL -->
+<div class="vjs-mp-modal-overlay" id="mpModal" style="display:none;">
+  <div class="vjs-mp-modal">
+    <button class="vjs-mp-modal-close" onclick="document.getElementById('mpModal').style.display='none'">×</button>
+    <div class="vjs-mp-modal-header">
+      <div class="vjs-mp-modal-title" id="mpModalTitle"></div>
+      <div class="vjs-mp-modal-artist" id="mpModalArtist"></div>
+    </div>
+    <form class="vjs-mp-checkout-form" id="mpCheckoutForm">
+      <div class="vjs-mp-form-row">
+        <label class="vjs-mp-form-label">EMAIL ADDRESS</label>
+        <input type="email" class="vjs-mp-form-input" id="mpEmail" placeholder="you@example.com" required>
+      </div>
+      <div class="vjs-mp-form-row">
+        <label class="vjs-mp-form-label">CARD NUMBER</label>
+        <input type="text" class="vjs-mp-form-input" id="mpCard" placeholder="4242 4242 4242 4242" maxlength="19">
+      </div>
+      <div class="vjs-mp-form-row-2">
+        <div class="vjs-mp-form-row">
+          <label class="vjs-mp-form-label">EXPIRY</label>
+          <input type="text" class="vjs-mp-form-input" id="mpExpiry" placeholder="MM/YY" maxlength="5">
+        </div>
+        <div class="vjs-mp-form-row">
+          <label class="vjs-mp-form-label">CVC</label>
+          <input type="text" class="vjs-mp-form-input" id="mpCVC" placeholder="123" maxlength="4">
+        </div>
+      </div>
+      <div class="vjs-mp-order-summary">
+        <span>Order Total</span>
+        <span id="mpModalPrice" style="color:#39ff14; font-weight:700;"></span>
+      </div>
+      <button type="submit" class="vjs-mp-btn-primary" style="width:100%;">
+        PAY &amp; DOWNLOAD
+      </button>
+      <div class="vjs-mp-guarantee" style="text-align:center; margin-top:12px;">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" style="width:0.85em;height:0.85em;vertical-align:middle;margin-right:4px;"><rect x="3" y="11" width="18" height="11"/><path d="M7 11V7a5 5 0 0110 0v4"/></svg>
+        Secure payment · Instant download after payment
+      </div>
+    </form>
+  </div>
+</div>
+
+{% include vjstv-footer.html %}
+
+<script>
+(function() {
+  var buyBtns = document.querySelectorAll('.vjs-mp-buy-btn');
+  buyBtns.forEach(function(btn) {
+    btn.addEventListener('click', function() {
+      var modal = document.getElementById('mpModal');
+      document.getElementById('mpModalTitle').textContent = btn.dataset.title;
+      document.getElementById('mpModalArtist').textContent = 'by ' + btn.dataset.artist;
+      document.getElementById('mpModalPrice').textContent = btn.dataset.price;
+      modal.style.display = 'flex';
+    });
+  });
+
+  document.getElementById('mpModal').addEventListener('click', function(e) {
+    if (e.target === this) this.style.display = 'none';
+  });
+
+  var form = document.getElementById('mpCheckoutForm');
+  if (form) {
+    var cardInput = document.getElementById('mpCard');
+    var expiryInput = document.getElementById('mpExpiry');
+    if (cardInput) {
+      cardInput.addEventListener('input', function() {
+        var v = this.value.replace(/\D/g, '').slice(0, 16);
+        this.value = v.replace(/(.{4})/g, '$1 ').trim();
+      });
+    }
+    if (expiryInput) {
+      expiryInput.addEventListener('input', function() {
+        var v = this.value.replace(/\D/g, '').slice(0, 4);
+        if (v.length >= 2) v = v.slice(0, 2) + '/' + v.slice(2);
+        this.value = v;
+      });
+    }
+    form.addEventListener('submit', function(e) {
+      e.preventDefault();
+      var btn = form.querySelector('[type="submit"]');
+      btn.textContent = 'PROCESSING...';
+      btn.disabled = true;
+      setTimeout(function() {
+        document.getElementById('mpModal').style.display = 'none';
+        var packName = document.querySelector('.vjs-mp-buy-btn') ? document.querySelector('.vjs-mp-buy-btn').dataset.pack : '';
+        var title = document.querySelector('.vjs-mp-buy-btn') ? document.querySelector('.vjs-mp-buy-btn').dataset.title : '';
+        var artist = document.querySelector('.vjs-mp-buy-btn') ? document.querySelector('.vjs-mp-buy-btn').dataset.artist : '';
+        var clips = document.querySelector('.vjs-mp-buy-btn') ? document.querySelector('.vjs-mp-buy-btn').dataset.clips : '';
+        var size = document.querySelector('.vjs-mp-buy-btn') ? document.querySelector('.vjs-mp-buy-btn').dataset.size : '';
+        window.location.href = '/marketplace/download?pack=' + encodeURIComponent(packName) + '&title=' + encodeURIComponent(title) + '&artist=' + encodeURIComponent(artist) + '&clips=' + encodeURIComponent(clips) + '&size=' + encodeURIComponent(size);
+      }, 1800);
+    });
+  }
+})();
+</script>

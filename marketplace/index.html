@@ -1,0 +1,150 @@
+---
+layout: default
+title: "VJ Loop Packs — Marketplace"
+description: "Buy and download professional VJ loop packs. Thousands of seamlessly looping clips for live performance, broadcast, and installation."
+---
+{% include layouts/nav/nav-3.html default_logo="white" %}
+
+<div class="vjs-mp-page">
+
+  <!-- PAGE HEADER -->
+  <div class="vjs-mp-page-header">
+    <div class="vjs-mp-page-header-inner">
+      <div class="vjs-mp-page-eyebrow">VJs TV</div>
+      <h1 class="vjs-mp-page-title">VJ Loop Packs</h1>
+      <p class="vjs-mp-page-subtitle">Professional loops for live performance, broadcast & installation. Every pack includes commercial rights.</p>
+      <div class="vjs-mp-page-stats">
+        <span>{{ site.loop_packs | size }} PACKS</span>
+        <span class="vjs-mp-stat-dot"></span>
+        {% assign total_clips = 0 %}{% for p in site.loop_packs %}{% assign total_clips = total_clips | plus: p.clip_count %}{% endfor %}
+        <span>{{ total_clips }}+ CLIPS</span>
+        <span class="vjs-mp-stat-dot"></span>
+        <span>INSTANT DOWNLOAD</span>
+        <span class="vjs-mp-stat-dot"></span>
+        <span>COMMERCIAL LICENSE</span>
+      </div>
+    </div>
+    <a href="/submit" class="vjs-mp-submit-pack-btn">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" style="width:0.9em;height:0.9em;vertical-align:middle;margin-right:5px;"><path d="M12 5v14M5 12l7-7 7 7"/></svg>
+      Submit Your Pack
+    </a>
+  </div>
+
+  <!-- FILTER BAR -->
+  <div class="vjs-mp-filter-bar">
+    <div class="vjs-mp-filter-inner">
+      <button class="vjs-mp-filter-btn active" data-filter="all">ALL</button>
+      <button class="vjs-mp-filter-btn" data-filter="free">FREE</button>
+      <button class="vjs-mp-filter-btn" data-filter="paid">PAID</button>
+      <button class="vjs-mp-filter-btn" data-filter="Glitch">GLITCH</button>
+      <button class="vjs-mp-filter-btn" data-filter="Abstract">ABSTRACT</button>
+      <button class="vjs-mp-filter-btn" data-filter="Ambient">AMBIENT</button>
+      <button class="vjs-mp-filter-btn" data-filter="Club">CLUB</button>
+      <button class="vjs-mp-filter-btn" data-filter="Urban">URBAN</button>
+      <button class="vjs-mp-filter-btn" data-filter="Dome">DOME</button>
+    </div>
+    <div class="vjs-mp-pack-count-label"><span id="mpVisibleCount">{{ site.loop_packs | size }}</span> packs</div>
+  </div>
+
+  <!-- PACKS GRID -->
+  <div class="vjs-mp-grid" id="mpGrid">
+    {% for pack in site.loop_packs %}
+    <a href="{{ pack.url }}"
+       class="vjs-mp-grid-card text-decoration-none"
+       data-category="{{ pack.category }}"
+       data-price="{{ pack.price }}">
+
+      <!-- THUMB -->
+      <div class="vjs-mp-grid-thumb" style="background: linear-gradient(135deg, {{ pack.gradient }});">
+        <div class="vjs-mp-grid-thumb-pattern"></div>
+        <div class="vjs-mp-grid-thumb-icon">
+          <svg viewBox="0 0 24 24" fill="currentColor" style="width:2.5rem;height:2.5rem;opacity:0.35;"><rect x="4" y="4" width="16" height="16"/></svg>
+        </div>
+        <div class="vjs-mp-grid-clip-badge">{{ pack.clip_count }} clips</div>
+        {% if pack.price == 0 %}
+        <div class="vjs-mp-grid-free-badge">FREE</div>
+        {% endif %}
+        <div class="vjs-mp-grid-hover-overlay">
+          <span class="vjs-mp-grid-view-label">VIEW PACK →</span>
+        </div>
+      </div>
+
+      <!-- INFO -->
+      <div class="vjs-mp-grid-info">
+        <div class="vjs-mp-grid-cat">{{ pack.category }}</div>
+        <div class="vjs-mp-grid-name">{{ pack.title }}</div>
+        <div class="vjs-mp-grid-artist">by {{ pack.artist }}</div>
+        <div class="vjs-mp-grid-specs">
+          <span>{{ pack.resolution }}</span>
+          <span class="vjs-mp-grid-spec-dot">·</span>
+          <span>{{ pack.fps }}fps</span>
+          <span class="vjs-mp-grid-spec-dot">·</span>
+          <span>{{ pack.formats | first }}</span>
+        </div>
+        <div class="vjs-mp-grid-footer">
+          {% if pack.price == 0 %}
+          <span class="vjs-mp-grid-price free">FREE</span>
+          <span class="vjs-mp-grid-action free">↓ GET</span>
+          {% else %}
+          <span class="vjs-mp-grid-price">{{ pack.price_display }}</span>
+          <span class="vjs-mp-grid-action">BUY →</span>
+          {% endif %}
+        </div>
+      </div>
+    </a>
+    {% endfor %}
+  </div>
+
+  <!-- EMPTY STATE -->
+  <div class="vjs-mp-empty" id="mpEmpty" style="display:none;">
+    <div>No packs match this filter.</div>
+    <button class="vjs-mp-filter-btn" onclick="mpSetFilter('all')">SHOW ALL</button>
+  </div>
+
+  <!-- SUBMIT CTA -->
+  <div class="vjs-mp-submit-cta">
+    <div class="vjs-mp-submit-cta-inner">
+      <h2 class="vjs-mp-submit-cta-title">Sell Your Loops Here</h2>
+      <p class="vjs-mp-submit-cta-body">Are you a VJ with a loop pack worth sharing? Submit it to the VJsTV marketplace. Keep 80% of every sale. We handle hosting, delivery, and licensing.</p>
+      <a href="/submit" class="vjs-mp-btn-primary">SUBMIT A PACK</a>
+    </div>
+  </div>
+
+</div>
+
+{% include vjstv-footer.html %}
+
+<script>
+(function() {
+  var activeFilter = 'all';
+  var cards = document.querySelectorAll('.vjs-mp-grid-card');
+  var countLabel = document.getElementById('mpVisibleCount');
+  var emptyState = document.getElementById('mpEmpty');
+
+  function mpSetFilter(f) {
+    activeFilter = f;
+    document.querySelectorAll('.vjs-mp-filter-btn').forEach(function(b) {
+      b.classList.toggle('active', b.dataset.filter === f);
+    });
+    var visible = 0;
+    cards.forEach(function(card) {
+      var show = true;
+      if (f === 'free') show = parseInt(card.dataset.price) === 0;
+      else if (f === 'paid') show = parseInt(card.dataset.price) > 0;
+      else if (f !== 'all') show = card.dataset.category === f;
+      card.style.display = show ? '' : 'none';
+      if (show) visible++;
+    });
+    if (countLabel) countLabel.textContent = visible;
+    if (emptyState) emptyState.style.display = visible === 0 ? 'block' : 'none';
+  }
+
+  window.mpSetFilter = mpSetFilter;
+
+  document.querySelectorAll('.vjs-mp-filter-btn').forEach(function(btn) {
+    btn.addEventListener('click', function() {
+      mpSetFilter(this.dataset.filter || 'all');
+    });
+  });
+})();
+</script>

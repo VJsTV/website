@@ -1,0 +1,136 @@
+---
+layout: default
+title: "Download — VJ Loop Packs"
+description: "Your VJ loop pack download is ready."
+---
+{% include layouts/nav/nav-3.html default_logo="white" %}
+
+<div class="vjs-mp-download-page" id="mpDownloadPage">
+
+  <div class="vjs-mp-download-wrap">
+
+    <!-- SUCCESS ICON -->
+    <div class="vjs-mp-dl-icon">
+      <svg viewBox="0 0 24 24" fill="none" stroke="#39ff14" stroke-width="1.5">
+        <circle cx="12" cy="12" r="10"/>
+        <polyline points="8 12 11 15 16 9"/>
+      </svg>
+    </div>
+
+    <div class="vjs-mp-dl-eyebrow">DOWNLOAD READY</div>
+    <h1 class="vjs-mp-dl-title" id="dlTitle">VJ Loop Pack</h1>
+    <div class="vjs-mp-dl-artist" id="dlArtist"></div>
+
+    <!-- PACK META -->
+    <div class="vjs-mp-dl-meta" id="dlMeta">
+      <div class="vjs-mp-dl-meta-item">
+        <span class="vjs-mp-dl-meta-label">CLIPS</span>
+        <span class="vjs-mp-dl-meta-val" id="dlClips">—</span>
+      </div>
+      <div class="vjs-mp-dl-meta-item">
+        <span class="vjs-mp-dl-meta-label">FILE SIZE</span>
+        <span class="vjs-mp-dl-meta-val" id="dlSize">—</span>
+      </div>
+      <div class="vjs-mp-dl-meta-item">
+        <span class="vjs-mp-dl-meta-label">FORMAT</span>
+        <span class="vjs-mp-dl-meta-val">MP4 + HAP-Q</span>
+      </div>
+      <div class="vjs-mp-dl-meta-item">
+        <span class="vjs-mp-dl-meta-label">LICENSE</span>
+        <span class="vjs-mp-dl-meta-val">Commercial</span>
+      </div>
+    </div>
+
+    <a href="#" class="vjs-mp-btn-primary vjs-mp-dl-btn" id="dlBtn">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" style="width:1em;height:1em;vertical-align:middle;margin-right:8px;"><path d="M12 3v14M5 11l7 7 7-7"/><path d="M4 20h16"/></svg>
+      DOWNLOAD NOW
+    </a>
+
+    <div class="vjs-mp-dl-note">
+      This link is valid for 24 hours. Save the file to your drive before it expires.
+    </div>
+
+    <!-- PROGRESS BAR (demo) -->
+    <div class="vjs-mp-dl-progress-wrap" id="dlProgress" style="display:none;">
+      <div class="vjs-mp-dl-progress-label">Downloading… <span id="dlPct">0%</span></div>
+      <div class="vjs-mp-dl-progress-bar">
+        <div class="vjs-mp-dl-progress-fill" id="dlFill" style="width:0%"></div>
+      </div>
+    </div>
+
+    <!-- INSTRUCTIONS -->
+    <div class="vjs-mp-dl-instructions">
+      <div class="vjs-mp-dl-instr-title">HOW TO USE YOUR LOOPS</div>
+      <div class="vjs-mp-dl-instr-grid">
+        <div class="vjs-mp-dl-instr-step">
+          <div class="vjs-mp-dl-step-num">01</div>
+          <div class="vjs-mp-dl-step-text">Extract the ZIP to your media drive</div>
+        </div>
+        <div class="vjs-mp-dl-instr-step">
+          <div class="vjs-mp-dl-step-num">02</div>
+          <div class="vjs-mp-dl-step-text">Load MP4s into Resolume, VDMX, or TouchDesigner</div>
+        </div>
+        <div class="vjs-mp-dl-instr-step">
+          <div class="vjs-mp-dl-step-num">03</div>
+          <div class="vjs-mp-dl-step-text">Use HAP-Q files for GPU-accelerated playback on high res outputs</div>
+        </div>
+        <div class="vjs-mp-dl-instr-step">
+          <div class="vjs-mp-dl-step-num">04</div>
+          <div class="vjs-mp-dl-step-text">All clips loop seamlessly — set loop mode in your software</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- MORE PACKS -->
+    <div class="vjs-mp-dl-more">
+      <div class="vjs-mp-dl-more-title">EXPLORE MORE PACKS</div>
+      <a href="/marketplace" class="vjs-mp-filter-btn">BROWSE MARKETPLACE →</a>
+    </div>
+
+  </div>
+</div>
+
+{% include vjstv-footer.html %}
+
+<script>
+(function() {
+  var params = new URLSearchParams(window.location.search);
+  var title = params.get('title') || 'VJ Loop Pack';
+  var artist = params.get('artist') || '';
+  var clips = params.get('clips') || '—';
+  var size = params.get('size') || '—';
+  var isFree = params.get('free') === 'true';
+
+  document.getElementById('dlTitle').textContent = decodeURIComponent(title);
+  if (artist) document.getElementById('dlArtist').textContent = 'by ' + decodeURIComponent(artist);
+  document.getElementById('dlClips').textContent = clips;
+  document.getElementById('dlSize').textContent = decodeURIComponent(size);
+
+  var dlBtn = document.getElementById('dlBtn');
+  dlBtn.addEventListener('click', function(e) {
+    e.preventDefault();
+    var progress = document.getElementById('dlProgress');
+    var fill = document.getElementById('dlFill');
+    var pct = document.getElementById('dlPct');
+    progress.style.display = 'block';
+    dlBtn.style.opacity = '0.5';
+    dlBtn.style.pointerEvents = 'none';
+    var val = 0;
+    var interval = setInterval(function() {
+      val += Math.random() * 12 + 4;
+      if (val >= 100) {
+        val = 100;
+        clearInterval(interval);
+        pct.textContent = '100%';
+        fill.style.width = '100%';
+        setTimeout(function() {
+          progress.innerHTML = '<div class="vjs-mp-dl-progress-label" style="color:#39ff14;text-align:center;">Download complete!</div>';
+        }, 400);
+      } else {
+        pct.textContent = Math.round(val) + '%';
+        fill.style.width = val + '%';
+      }
+    }, 200);
+  });
+})();
+</script>
