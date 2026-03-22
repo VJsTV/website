@@ -157,7 +157,7 @@ layout: default
         {% endif %}
 
         <!-- BOOK NOW -->
-        {% unless page.category or page.tier %}
+        {% unless page.category or page.tier or page.event_type %}
         <button class="vjs-book-btn" onclick="openBookingModal()">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" style="width:0.9em;height:0.9em;vertical-align:middle;margin-right:7px;flex-shrink:0;"><rect x="3" y="4" width="18" height="18" rx="0"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
           {% if page.project_type %}COMMISSION SIMILAR WORK{% elsif page.studio_type %}ENQUIRE THIS STUDIO{% else %}BOOK THIS ARTIST{% endif %}
