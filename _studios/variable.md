@@ -12,6 +12,7 @@ equipment:
   - "LED and Projection Integration"
   - "Sensor Arrays"
 featured: false
+image: "/assets/images/studios/variable.jpg"
 website: "https://variable.io"
 vimeo_channel: "https://vimeo.com/variable"
 ---

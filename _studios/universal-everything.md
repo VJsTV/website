@@ -12,6 +12,7 @@ equipment:
   - "LED Wall Systems"
   - "Custom Algorithmic Tools"
 featured: true
+image: "/assets/images/studios/universal-everything.jpg"
 website: "https://universaleverything.com"
 vimeo_channel: "https://vimeo.com/universaleverything"
 ---

@@ -11,6 +11,7 @@ equipment:
   - "Custom Machine Learning Pipelines"
   - "Environmental Sensor Arrays"
 featured: true
+image: "/assets/images/studios/refik-anadol-studio.png"
 website: "https://refikanadol.com"
 ---
 

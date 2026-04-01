@@ -10,6 +10,7 @@ equipment:
   - "High-Lumen Architectural Projectors"
   - "Custom Long-Form Content Pipeline"
 featured: false
+image: "/assets/images/studios/urban-screen.jpeg"
 website: "https://urbanscreen.com"
 ---
 
