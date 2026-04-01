@@ -12,6 +12,7 @@ equipment:
   - "High-precision Laser Rigs"
   - "Spatial Audio Infrastructure"
 featured: true
+image: "/assets/images/studios/whitevoid.jpg"
 website: "https://whitevoid.com"
 ---
 

@@ -2,7 +2,7 @@
 layout: vjs-detail
 title: "SilaSveta"
 name: "silasveta"
-location: "Moscow, Russia"
+location: "Dubai, UAE"
 studio_type: "Interactive Projection Studio"
 description: "Moscow-based creative studio and one of Russia's foremost practitioners of interactive projection mapping. SilaSveta combine architectural spectacle with participatory narrative, creating works that invite audiences inside the story."
 equipment:
@@ -12,6 +12,7 @@ equipment:
   - Real-time Rendering Systems
   - Audience Participation Tech
 featured: false
+image: "/assets/images/studios/silasveta-studio.png"
 website: "https://silasveta.com"
 ---
 

@@ -12,6 +12,7 @@ equipment:
   - "VR Rendering Pipeline"
   - "Mobile Scanning Rigs"
 featured: false
+image: "/assets/images/studios/scanlab-projects.png"
 website: "https://scanlabprojects.co.uk"
 vimeo_channel: "https://vimeo.com/scanlabprojects"
 ---

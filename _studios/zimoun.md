@@ -11,6 +11,7 @@ equipment:
   - "Cardboard / Wire / Cotton Assemblage"
   - "Precision Timing Control Systems"
 featured: false
+image: "/assets/images/studios/maxresdefault.jpg"
 website: "https://zimoun.net"
 ---
 

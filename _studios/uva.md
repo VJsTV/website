@@ -12,6 +12,7 @@ equipment:
   - "Spatial Audio"
   - "Architectural-scale Installation Infrastructure"
 featured: true
+image: "/assets/images/studios/uva.png"
 website: "https://uva.co.uk"
 vimeo_channel: "https://vimeo.com/unitedvisualartists"
 ---

@@ -11,6 +11,7 @@ equipment:
   - "XR Camera Tracking Systems"
   - "Custom Virtual Stage Design Tools"
 featured: false
+image: "/assets/images/studios/xitelabs.jpeg"
 website: "https://xitelabs.com"
 ---
 
