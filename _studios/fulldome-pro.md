@@ -12,6 +12,7 @@ equipment:
   - "Fisheye Lens Systems"
   - "Dome Content Mastering Tools"
 featured: false
+image: "/assets/images/studios/fulldome-pro.jpg"
 website: "https://fulldome.pro"
 ---
 

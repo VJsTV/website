@@ -6,7 +6,7 @@ location: "Modena, Italy"
 country: "Italy"
 studio_type: "AV Studio"
 bio: "Italian masters of data-driven audiovisual art. Their 2026 project Dökk uses a dancer's heartbeat and brainwave data processed in real-time to generate the entire visual universe on stage. Pioneers of live AV performance where human biology becomes the source code."
-image: "/assets/images/studios/fuse-star.webp"
+image: "/assets/images/studios/fuse-star.jpeg"
 equipment:
   - TouchDesigner
   - Biometric Sensors

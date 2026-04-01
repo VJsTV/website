@@ -12,6 +12,7 @@ equipment:
   - "Custom Point Cloud Processing"
   - "Multi-sensory Environmental Systems"
 featured: true
+image: "/assets/images/studios/marshmallow-laser-feast.png"
 website: "https://marshmallowlaserfeast.com"
 ---
 

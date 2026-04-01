@@ -12,6 +12,7 @@ equipment:
   - "Multi-projector Arrays"
   - "Spatial Audio Systems"
 featured: true
+image: "/assets/images/studios/moment-factory.png"
 website: "https://momentfactory.com"
 ---
 

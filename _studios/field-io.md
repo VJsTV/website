@@ -11,6 +11,7 @@ equipment:
   - "Real-time Rendering Infrastructure"
   - "Research Collaboration Networks"
 featured: false
+image: "/assets/images/studios/field-io.jpeg"
 website: "https://field.io"
 ---
 
