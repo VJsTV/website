@@ -12,7 +12,7 @@ equipment:
   - "Multi-channel Audio"
   - "Architectural Projection Arrays"
 featured: false
-image: "/assets/images/studios/1024-architecture.avif"
+image: "/assets/images/studios/1024-architecture.jpeg"
 website: "https://1024architecture.net"
 social:
   vimeo: "https://vimeo.com/the1024"

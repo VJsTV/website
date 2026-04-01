@@ -12,6 +12,7 @@ equipment:
   - Custom Software
   - Multichannel Audio
 featured: true
+image: "/assets/images/studios/d-fuse.jpeg"
 website: "https://dfuse.com"
 ---
 

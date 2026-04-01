@@ -10,6 +10,7 @@ equipment:
   - "Custom Mapping Software"
   - "Generative Visuals Pipeline"
 featured: true
+image: "/assets/images/studios/antivj.jpeg"
 website: "https://antivj.com"
 ---
 

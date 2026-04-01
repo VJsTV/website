@@ -11,7 +11,7 @@ equipment:
   - "LED and Projection Hybrid Systems"
   - "Theatrical Lighting Integration"
 featured: true
-image: "/assets/images/studios/59-productions.avif"
+image: "/assets/images/studios/59-productions.jpeg"
 website: "https://59productions.co.uk"
 ---
 
