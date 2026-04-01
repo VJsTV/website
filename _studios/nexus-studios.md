@@ -12,6 +12,7 @@ equipment:
   - "Real-time Rendering"
   - "Interactive Installation Rigs"
 featured: false
+image: "/assets/images/studios/nexus-studios.png"
 website: "https://nexusstudios.com"
 vimeo_channel: "https://vimeo.com/nexusstudios"
 ---

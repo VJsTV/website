@@ -11,6 +11,7 @@ equipment:
   - "Large-Format Output Systems"
   - "Algorithmic Animation Tools"
 featured: false
+image: "/assets/images/studios/onformative.png"
 website: "https://onformative.com"
 ---
 

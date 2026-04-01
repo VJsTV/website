@@ -12,6 +12,7 @@ equipment:
   - "Digital Fabrication Pipeline"
   - "Simulation Software"
 featured: false
+image: "/assets/images/studios/nervous-system.jpg"
 website: "https://n-e-r-v-o-u-s.com"
 vimeo_channel: "https://vimeo.com/nervoussystem"
 ---

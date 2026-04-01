@@ -12,6 +12,7 @@ equipment:
   - "Haze Machines"
   - "Custom Control Software"
 featured: true
+image: "/assets/images/studios/nonotak.jpg"
 website: "https://nonotak.com"
 vimeo_channel: "https://vimeo.com/nonotak"
 ---

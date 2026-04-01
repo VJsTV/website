@@ -11,6 +11,7 @@ equipment:
   - "Custom Generative Content Pipeline"
   - "Multi-channel Audio Systems"
 featured: false
+image: "/assets/images/studios/nohlab.png"
 website: "https://nohlab.com"
 ---
 
