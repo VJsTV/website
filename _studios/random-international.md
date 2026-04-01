@@ -12,6 +12,7 @@ equipment:
   - "Real-time Crowd Analysis Software"
   - "Environmental Sensor Networks"
 featured: false
+image: "/assets/images/studios/random-international.png"
 website: "https://random-international.com"
 ---
 
