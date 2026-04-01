@@ -12,6 +12,7 @@ equipment:
   - "Custom Node Networks"
   - "Real-time Performance Tools"
 featured: true
+image: "/assets/images/studios/derivative.png"
 website: "https://derivative.ca"
 vimeo_channel: "https://vimeo.com/derivative"
 ---

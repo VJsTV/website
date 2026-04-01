@@ -12,6 +12,7 @@ equipment:
   - "3D Scanning Systems"
   - "Macro Photography Rigs"
 featured: false
+image: "/assets/images/studios/dvein.jpg"
 website: "https://dvein.com"
 vimeo_channel: "https://vimeo.com/dvein"
 ---
