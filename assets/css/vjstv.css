@@ -4144,6 +4144,10 @@ svg.vjs-nts-sidebar-thumb-play {
   width: 200px !important; min-width: 200px !important; height: auto !important;
   min-height: 130px; flex-shrink: 0;
 }
+#studios-grid.vjs-layout-list .vjs-card-img {
+  width: 200px !important; min-width: 200px !important; max-width: 200px !important;
+  height: 100% !important; min-height: 130px; object-fit: cover; flex-shrink: 0;
+}
 #studios-grid.vjs-layout-list .vjs-card-body {
   flex: 1; border-top: none; border-left: 1px solid var(--vjs-border) !important;
 }
