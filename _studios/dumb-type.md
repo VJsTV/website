@@ -12,6 +12,7 @@ equipment:
   - "Custom Software"
   - "Physical Computing Systems"
 featured: false
+image: "/assets/images/studios/dumb-type.jpg"
 website: "https://dumbtype.com"
 vimeo_channel: "https://vimeo.com/dumbtype"
 ---

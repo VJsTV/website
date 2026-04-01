@@ -12,6 +12,7 @@ equipment:
   - "Live Video Processing"
   - "Multi-site Control Systems"
 featured: false
+image: "/assets/images/studios/bart-kresa.jpg"
 website: "https://bartkresa.com"
 vimeo_channel: "https://vimeo.com/bartkresa"
 ---
