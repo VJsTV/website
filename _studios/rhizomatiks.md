@@ -12,6 +12,7 @@ equipment:
   - "5G Low-Latency AV Pipeline"
   - "Robotic Control Systems"
 featured: true
+image: "/assets/images/studios/rhizomatiks.png"
 website: "https://rhizomatiks.com"
 ---
 

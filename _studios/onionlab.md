@@ -12,6 +12,7 @@ equipment:
   - Interactive Rigs
   - Architectural Rigging
 featured: false
+image: "/assets/images/studios/onionlab.png"
 website: "https://onionlab.com"
 ---
 

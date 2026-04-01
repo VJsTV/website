@@ -12,6 +12,7 @@ equipment:
   - "Interactive Floor Systems"
   - "Multi-room Environmental Control"
 featured: true
+image: "/assets/images/studios/teamlab.png"
 website: "https://teamlab.art"
 vimeo_channel: "https://vimeo.com/teamlab"
 ---

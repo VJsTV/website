@@ -12,6 +12,7 @@ equipment:
   - "Fog and Laser Systems"
   - "Custom Hardware Controllers"
 featured: false
+image: "/assets/images/studios/playmodes.png"
 website: "https://playmodes.com"
 vimeo_channel: "https://vimeo.com/playmodes"
 ---

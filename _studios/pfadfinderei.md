@@ -12,6 +12,7 @@ equipment:
   - "Graphic Design Toolchain"
   - "Resolume Integration"
 featured: false
+image: "/assets/images/studios/pfadfinderei.jpg"
 website: "https://pfadfinderei.com"
 vimeo_channel: "https://vimeo.com/pfadfinderei"
 ---

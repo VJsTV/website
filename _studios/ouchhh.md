@@ -12,6 +12,7 @@ equipment:
   - "Real-time Data API Pipelines"
   - "NASA / Scientific Dataset Archives"
 featured: false
+image: "/assets/images/studios/ouchhh.png"
 website: "https://ouchhh.tv"
 ---
 

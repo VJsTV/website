@@ -12,6 +12,7 @@ equipment:
   - Event Production Infrastructure
   - Spatial Audio
 featured: false
+image: "/assets/images/studios/superbien.png"
 website: "https://superbien.studio"
 ---
 

@@ -12,6 +12,7 @@ equipment:
   - "Spatial Audio Systems"
   - "Real-time Rendering Pipelines"
 featured: true
+image: "/assets/images/studios/quayola-studio.jpeg"
 website: "https://quayola.com"
 vimeo_channel: "https://vimeo.com/quayola"
 ---

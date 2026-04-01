@@ -12,6 +12,7 @@ equipment:
   - Custom Software
   - Multi-projector Arrays
 featured: false
+image: "/assets/images/studios/seeper.jpg"
 website: "https://seeper.com"
 ---
 
