@@ -11,6 +11,7 @@ equipment:
   - "Multi-surface Projection Mapping"
   - "Spatial Audio Architecture"
 featured: false
+image: "/assets/images/studios/tamschick-media.jpg"
 website: "https://tamschick.com"
 ---
 

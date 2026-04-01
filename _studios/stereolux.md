@@ -12,6 +12,7 @@ equipment:
   - "Residency Studio Space"
   - "Fabrication Workshop"
 featured: false
+image: "/assets/images/studios/stereolux.png"
 website: "https://stereolux.org"
 vimeo_channel: "https://vimeo.com/stereolux"
 ---

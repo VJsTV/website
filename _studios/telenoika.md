@@ -12,6 +12,7 @@ equipment:
   - "Audio-reactive Processing"
   - "Open-source Tools"
 featured: false
+image: "/assets/images/studios/telenoika.png"
 website: "https://telenoika.net"
 vimeo_channel: "https://vimeo.com/telenoika"
 ---

@@ -12,6 +12,7 @@ equipment:
   - "High-precision Formation Control"
   - "Environmental Sensor Arrays"
 featured: true
+image: "/assets/images/studios/drift.jpg"
 website: "https://studiodrift.com"
 ---
 

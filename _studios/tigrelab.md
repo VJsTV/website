@@ -12,6 +12,7 @@ equipment:
   - Broadcast Design Tools
   - 3D Animation
 featured: false
+image: "/assets/images/studios/tigrelab.jpeg"
 website: "https://tigrelab.com"
 ---
 
