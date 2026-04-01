@@ -96,6 +96,9 @@ meta_description: "Discover AV studios, immersive domes, projection labs, and vi
            data-location="{{ studio.location | downcase }}">
         <a href="{{ studio.url }}" class="text-decoration-none" style="height:100%; display:block;">
           <div class="vjs-card" style="height:100%; transition: transform 0.2s ease, box-shadow 0.2s ease;">
+            {% if studio.image %}
+            <img src="{{ studio.image }}" alt="{{ studio.title }}" class="vjs-card-img">
+            {% else %}
             <div class="vjs-card-img-placeholder" style="background:linear-gradient(135deg, rgba(0,245,212,0.1) 0%, rgba(0,212,255,0.15) 100%); position:relative; overflow:hidden;">
               <div style="position:absolute; inset:0; background:linear-gradient(135deg, rgba(0,245,212,0.06), rgba(123,47,255,0.08));"></div>
               <div style="position:relative; z-index:1; text-align:center;">
@@ -103,6 +106,7 @@ meta_description: "Discover AV studios, immersive domes, projection labs, and vi
                 <span style="font-family:'Orbitron',sans-serif; font-size:0.55rem; letter-spacing:0.2em; text-transform:uppercase; color:rgba(255,255,255,0.35);">{{ studio.location }}</span>
               </div>
             </div>
+            {% endif %}
             <div class="vjs-card-body">
               <div style="display:flex; align-items:center; justify-content:space-between; margin-bottom:0.75rem; flex-wrap:wrap; gap:0.5rem;">
                 <span class="vjs-tag vjs-tag-cyan">{{ studio.studio_type }}</span>
