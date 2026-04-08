@@ -83,8 +83,13 @@ VJs TV is a Jekyll-based platform for VJ culture and audiovisual performances. I
 - **No API routes:** All API calls go directly to the Cloudflare Worker (even in dev)
 - **Jekyll:** Auto-runs `jekyll build --watch --incremental`
 
+### Complete Worker File (`functions/worker.js`)
+- **This is the complete, deployable Worker code** — paste into Cloudflare Worker editor
+- Contains ALL routes: `/api/submit`, `/api/report`, `/api/partner`, `/api/booking`, `/api/analytics`, `/api/analytics/charts`, `/api/health`
+- Includes AI moderation, GitHub Issue creation, and Cloudflare Email Service confirmation on all form endpoints
+
 ### Reference: Cloudflare Pages Functions (`functions/api/`)
-- Legacy reference files for individual endpoint logic (not deployed)
+- Individual endpoint reference files (not deployed directly — use `functions/worker.js` instead)
 - `functions/api/submit.js`, `report.js`, `partner.js`, `booking.js`
 
 ### Required Cloudflare Worker Secrets
