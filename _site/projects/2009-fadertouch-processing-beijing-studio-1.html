@@ -484,6 +484,7 @@ function vjsCopyLink(btn, url) {
     <form class="vjs-book-form" id="bookingForm" novalidate>
       <input type="hidden" name="subject" value="faderTouch Processing - BeiJing studio 1">
       <input type="hidden" name="profile_type" value="project">
+      <div style="position:absolute;left:-9999px;opacity:0;height:0;overflow:hidden;" aria-hidden="true"><input type="text" name="honeypot" tabindex="-1" autocomplete="off"><input type="text" name="website_url" tabindex="-1" autocomplete="off"></div>
 
       <!-- SERVICE TYPE -->
       <div class="vjs-book-field">
@@ -558,6 +559,9 @@ function vjsCopyLink(btn, url) {
         <input type="text" class="vjs-book-input" name="organisation" placeholder="Festival, venue, agency, or individual">
       </div>
 
+      <!-- ERROR STATE -->
+      <div class="vjs-book-error" id="bookError" style="display:none;background:rgba(255,0,68,0.1);border:1px solid rgba(255,0,68,0.3);color:#ff4488;padding:12px 16px;font-size:13px;margin-bottom:16px;"></div>
+
       <!-- SUBMIT -->
       <div class="vjs-book-actions">
         <div class="vjs-book-privacy">By submitting you agree this enquiry is forwarded to faderTouch Processing - BeiJing studio 1. We do not share your data.</div>
@@ -573,7 +577,8 @@ function vjsCopyLink(btn, url) {
           <svg viewBox="0 0 24 24" fill="none" stroke="#39ff14" stroke-width="1.5"><circle cx="12" cy="12" r="10"/><polyline points="8 12 11 15 16 9"/></svg>
         </div>
         <div class="vjs-book-success-title">Enquiry Sent</div>
-        <div class="vjs-book-success-body">Your request has been forwarded to <strong>faderTouch Processing - BeiJing studio 1</strong>. They'll be in touch at your email address.</div>
+        <div class="vjs-book-success-body">Your request has been forwarded to <strong>faderTouch Processing - BeiJing studio 1</strong>. A confirmation email has been sent to your address.</div>
+        <div class="vjs-book-success-ref" id="bookRef" style="display:none;margin-top:8px;font-size:12px;color:#555;"></div>
         <button type="button" class="vjs-book-close-success" onclick="closeBookingModal()">CLOSE</button>
       </div>
 
@@ -646,13 +651,30 @@ function vjsCopyLink(btn, url) {
         }
         var data = {};
         new FormData(form).forEach(function(v, k) { data[k] = v; });
-        fetch('https://website.guillaumelauzier.workers.dev/api/partner', {
+        var errDiv = document.getElementById('bookError');
+        if (errDiv) errDiv.style.display = 'none';
+        fetch('https://website.guillaumelauzier.workers.dev/api/booking', {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify(data)
-        }).catch(function() {}).finally(function() {
-          if (form) form.style.display = 'none';
-          if (successPanel) successPanel.style.display = 'flex';
+        })
+        .then(function(res) { return res.json().catch(function() { return { success: false, error: 'Unexpected server response.' }; }).then(function(d) { return { ok: res.ok, data: d }; }); })
+        .then(function(result) {
+          if (result.data.success) {
+            if (form) form.style.display = 'none';
+            if (successPanel) successPanel.style.display = 'flex';
+            if (result.data.issue_number) {
+              var refDiv = document.getElementById('bookRef');
+              if (refDiv) { refDiv.textContent = 'Tracking reference: #' + result.data.issue_number; refDiv.style.display = 'block'; }
+            }
+          } else {
+            if (errDiv) { errDiv.textContent = result.data.error || 'Something went wrong. Please try again.'; errDiv.style.display = 'block'; }
+            if (submitBtn) { submitBtn.textContent = 'SEND ENQUIRY'; submitBtn.disabled = false; }
+          }
+        })
+        .catch(function() {
+          if (errDiv) { errDiv.textContent = 'Network error. Please check your connection and try again.'; errDiv.style.display = 'block'; }
+          if (submitBtn) { submitBtn.textContent = 'SEND ENQUIRY'; submitBtn.disabled = false; }
         });
       });
     }

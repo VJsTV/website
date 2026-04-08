@@ -67,10 +67,12 @@ VJs TV is a Jekyll-based platform for VJ culture and audiovisual performances. I
 - **GitHub API:** Uses `GITHUB_TOKEN` secret (set in Worker Settings > Variables and Secrets)
 - **Analytics:** Uses `CF_API_TOKEN` and `CF_ZONE_ID` secrets
 - **AI Moderation:** Uses Workers AI binding (variable name: `AI`) for auto-moderating submissions
+- **Email Confirmation:** Uses Cloudflare Email Service binding (variable name: `SEB`, Unrestricted destination) with `cloudflare:email` module
 - **Form endpoints:**
-  - `POST /api/submit` — project submission → AI moderation → GitHub Issue
-  - `POST /api/report` — issue report → AI moderation → GitHub Issue
-  - `POST /api/partner` — partnership enquiry → AI moderation → GitHub Issue
+  - `POST /api/submit` — project submission → AI moderation → GitHub Issue + email confirmation
+  - `POST /api/report` — issue report → AI moderation → GitHub Issue + email confirmation
+  - `POST /api/partner` — partnership enquiry → AI moderation → GitHub Issue + email confirmation
+  - `POST /api/booking` — booking request / studio enquiry / commission → AI moderation → GitHub Issue + email confirmation
 - **Analytics endpoints:**
   - `GET /api/analytics` — Cloudflare monthly page views
   - `GET /api/analytics/charts` — daily traffic + country data
@@ -83,7 +85,7 @@ VJs TV is a Jekyll-based platform for VJ culture and audiovisual performances. I
 
 ### Reference: Cloudflare Pages Functions (`functions/api/`)
 - Legacy reference files for individual endpoint logic (not deployed)
-- `functions/api/submit.js`, `report.js`, `partner.js`
+- `functions/api/submit.js`, `report.js`, `partner.js`, `booking.js`
 
 ### Required Cloudflare Worker Secrets
 - `GITHUB_TOKEN` — GitHub Personal Access Token with `repo` scope (for creating Issues)
@@ -92,11 +94,13 @@ VJs TV is a Jekyll-based platform for VJ culture and audiovisual performances. I
 
 ### Required Cloudflare Worker Bindings
 - `AI` — Workers AI binding (for content moderation)
+- `SEB` — Email Service binding, Unrestricted destination (for email confirmations via `cloudflare:email`)
 
 ### Endpoints
 - `POST /api/submit` — create submission Issue (fields: artist, project_title, email, video_url, description, category)
 - `POST /api/report` — report issue (fields: reporter_name, description, reporter_email, project_title, project_url)
 - `POST /api/partner` — partnership enquiry (fields: full_name, email, message, company, tier)
+- `POST /api/booking` — booking/studio/commission enquiry (fields: subject, profile_type, service_type, event_name, event_date, location, budget, description, contact_name, contact_email, organisation)
 - `GET /api/analytics` — monthly page views from Cloudflare
 - `GET /api/analytics/charts` — daily traffic chart data + top countries
 

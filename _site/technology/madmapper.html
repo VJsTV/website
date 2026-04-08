@@ -502,13 +502,30 @@ function vjsCopyLink(btn, url) {
         }
         var data = {};
         new FormData(form).forEach(function(v, k) { data[k] = v; });
-        fetch('https://website.guillaumelauzier.workers.dev/api/partner', {
+        var errDiv = document.getElementById('bookError');
+        if (errDiv) errDiv.style.display = 'none';
+        fetch('https://website.guillaumelauzier.workers.dev/api/booking', {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify(data)
-        }).catch(function() {}).finally(function() {
-          if (form) form.style.display = 'none';
-          if (successPanel) successPanel.style.display = 'flex';
+        })
+        .then(function(res) { return res.json().catch(function() { return { success: false, error: 'Unexpected server response.' }; }).then(function(d) { return { ok: res.ok, data: d }; }); })
+        .then(function(result) {
+          if (result.data.success) {
+            if (form) form.style.display = 'none';
+            if (successPanel) successPanel.style.display = 'flex';
+            if (result.data.issue_number) {
+              var refDiv = document.getElementById('bookRef');
+              if (refDiv) { refDiv.textContent = 'Tracking reference: #' + result.data.issue_number; refDiv.style.display = 'block'; }
+            }
+          } else {
+            if (errDiv) { errDiv.textContent = result.data.error || 'Something went wrong. Please try again.'; errDiv.style.display = 'block'; }
+            if (submitBtn) { submitBtn.textContent = 'SEND ENQUIRY'; submitBtn.disabled = false; }
+          }
+        })
+        .catch(function() {
+          if (errDiv) { errDiv.textContent = 'Network error. Please check your connection and try again.'; errDiv.style.display = 'block'; }
+          if (submitBtn) { submitBtn.textContent = 'SEND ENQUIRY'; submitBtn.disabled = false; }
         });
       });
     }
