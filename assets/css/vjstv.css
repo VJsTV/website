@@ -2976,31 +2976,41 @@ body.cinema-mode .col-lg-8 { flex: 0 0 100% !important; max-width: 100% !importa
    MOBILE OFFCANVAS DRAWER — logo, search, submit, social
    ================================================================ */
 
-/* Header row: brand+search on left, close btn on right */
+/* Header: centered logo + search, close button pinned top-right */
 .vjs-mobile-drawer-header {
+  position: relative !important;
   display: flex !important;
-  align-items: flex-start !important;
-  justify-content: space-between !important;
-  gap: 12px !important;
-  padding: 20px 20px 16px !important;
+  flex-direction: column !important;
+  align-items: center !important;
+  justify-content: flex-start !important;
+  gap: 0 !important;
+  padding: 28px 20px 20px !important;
   border-bottom: 1px solid rgba(255,255,255,0.08) !important;
   background: var(--vjs-black) !important;
 }
 
-/* Left column: logo stacked above search */
+/* Pin the close button top-right, out of flow */
+.vjs-mobile-drawer-header .offcanvas-nav-close {
+  position: absolute !important;
+  top: 14px !important;
+  right: 14px !important;
+}
+
+/* Center column: logo stacked above search */
 .vjs-mobile-drawer-brand-wrap {
   display: flex;
   flex-direction: column;
-  gap: 14px;
-  flex: 1;
-  min-width: 0;
+  align-items: center;
+  gap: 28px;
+  width: 100%;
 }
 
 /* Logo */
 .vjs-mobile-drawer-brand img {
-  height: 28px;
+  height: 32px;
   width: auto;
   display: block;
+  margin: 0 auto;
 }
 
 /* Search bar */
@@ -3031,14 +3041,18 @@ body.cinema-mode .col-lg-8 { flex: 0 0 100% !important; max-width: 100% !importa
 
 /* Wide Submit link in mobile drawer */
 @media (max-width: 768px) {
+  .vjs-mobile-drawer-menu .nav-link {
+    text-align: center !important;
+  }
   .vjs-mobile-submit-item {
     padding: 4px 0 !important;
+    width: 100% !important;
   }
   .vjs-mobile-submit-link {
     display: block !important;
-    width: calc(100% - 40px) !important;
-    margin: 0 20px !important;
-    padding: 12px 20px !important;
+    width: calc(100% - 16px) !important;
+    margin: 0 auto !important;
+    padding: 14px 20px !important;
     background: #fff !important;
     color: #050505 !important;
     font-family: 'Orbitron', sans-serif !important;
@@ -3066,6 +3080,7 @@ body.cinema-mode .col-lg-8 { flex: 0 0 100% !important; max-width: 100% !importa
 .vjs-mobile-drawer-social {
   display: flex;
   align-items: center;
+  justify-content: center;
   gap: 20px;
   flex-wrap: wrap;
 }
