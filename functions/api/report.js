@@ -1,6 +1,13 @@
 const REPO_OWNER = "VJsTV";
 const REPO_NAME = "website";
 
+async function readBody(request) {
+  var contentType = request.headers.get("content-type") || "";
+  if (contentType.includes("application/json")) return await request.json();
+  var formData = await request.formData();
+  return Object.fromEntries(formData.entries());
+}
+
 export async function onRequest(context) {
   const { request, env } = context;
 
@@ -32,7 +39,7 @@ export async function onRequest(context) {
   }
 
   try {
-    const data = await request.json();
+    const data = await readBody(request);
 
     var reporterName = (data.reporter_name || "").trim().slice(0, 100);
     var description = (data.description || "").trim().slice(0, 2000);
@@ -91,4 +98,3 @@ export async function onRequest(context) {
     return new Response(JSON.stringify({ success: false, error: "Server error. Please try again later." }), { status: 500, headers });
   }
 }
-
