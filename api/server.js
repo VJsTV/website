@@ -62,6 +62,7 @@ function mapTypeToLabel(type) {
     "Projection Mapping": "projection-mapping",
     "AI & Generative": "ai-generative",
     "Immersive Installation": "immersive-installation",
+    "Immersive Installations": "immersive-installation",
     "Stage Production": "stage-production",
     "Experimental": "experimental",
     "Dome Visuals": "dome-visuals",

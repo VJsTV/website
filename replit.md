@@ -93,7 +93,7 @@ VJs TV is a Jekyll-based platform for VJ culture and audiovisual performances. I
 
 ### Development: Express Server (`api/server.js`)
 - **Local dev:** `node api/server.js` on port 5000, serves static `_site/` + API endpoints
-- **Uses:** Replit Connectors SDK for GitHub API (only works in Replit environment)
+- **Uses:** Replit Connectors SDK for GitHub API (requires GitHub integration to be connected via Replit integrations panel — OAuth must be completed for form submissions to create GitHub issues)
 - **Jekyll:** Auto-runs `jekyll build --watch --incremental`
 
 ### Required Cloudflare Pages Environment Variables
