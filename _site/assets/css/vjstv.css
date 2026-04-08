@@ -2445,6 +2445,7 @@ select.vjs-form-input {
   .vjstv-footer-bar {
     flex-wrap: wrap;
     padding: 12px 16px;
+    padding-bottom: max(80px, calc(60px + env(safe-area-inset-bottom)));
     gap: 0;
     row-gap: 6px;
     align-items: center;
