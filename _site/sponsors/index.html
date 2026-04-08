@@ -518,7 +518,7 @@
   }
 
   document.addEventListener('DOMContentLoaded', function() {
-    fetch('/api/analytics/charts')
+    fetch('https://website.guillaumelauzier.workers.dev/api/analytics/charts')
       .then(function(res) {
         if (!res.ok) throw new Error('HTTP ' + res.status);
         return res.json();
@@ -1006,7 +1006,7 @@ function vjsTipAmount(amt) {
   });
 })();
 
-var REPORT_API = '';
+var REPORT_API = 'https://website.guillaumelauzier.workers.dev';
 
 function openReportModal() {
   var m = document.getElementById('report-modal-global');
@@ -1296,7 +1296,7 @@ function vjsSponsorSubmit(e) {
     return;
   }
 
-  fetch('/api/partner', {
+  fetch('https://website.guillaumelauzier.workers.dev/api/partner', {
     method: 'POST',
     headers: { 'Content-Type': 'application/json' },
     body: JSON.stringify({
@@ -1341,7 +1341,7 @@ function vjsGetPriceMultiplier(visitors) {
 }
 
 function vjsLoadAnalytics() {
-  fetch('/api/analytics')
+  fetch('https://website.guillaumelauzier.workers.dev/api/analytics')
     .then(function(res) {
       if (!res.ok) throw new Error('API returned ' + res.status);
       return res.json();

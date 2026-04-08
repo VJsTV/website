@@ -432,7 +432,7 @@ function vjsSponsorSubmit(e) {
     return;
   }
 
-  fetch('/api/partner', {
+  fetch('{{ site.api_url }}/api/partner', {
     method: 'POST',
     headers: { 'Content-Type': 'application/json' },
     body: JSON.stringify({
@@ -477,7 +477,7 @@ function vjsGetPriceMultiplier(visitors) {
 }
 
 function vjsLoadAnalytics() {
-  fetch('/api/analytics')
+  fetch('{{ site.api_url }}/api/analytics')
     .then(function(res) {
       if (!res.ok) throw new Error('API returned ' + res.status);
       return res.json();

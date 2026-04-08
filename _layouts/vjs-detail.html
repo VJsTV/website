@@ -490,7 +490,7 @@ layout: default
         }
         var data = {};
         new FormData(form).forEach(function(v, k) { data[k] = v; });
-        fetch('/api/partner', {
+        fetch('{{ site.api_url }}/api/partner', {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify(data)

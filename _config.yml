@@ -1,5 +1,6 @@
 baseurl: ""
 url: "https://vjstv.com"
+api_url: "https://website.guillaumelauzier.workers.dev"
 permalink: "/:title"
 
 include:

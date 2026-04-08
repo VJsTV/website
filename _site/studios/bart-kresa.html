@@ -624,7 +624,7 @@ function vjsCopyLink(btn, url) {
         }
         var data = {};
         new FormData(form).forEach(function(v, k) { data[k] = v; });
-        fetch('/api/partner', {
+        fetch('https://website.guillaumelauzier.workers.dev/api/partner', {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify(data)
@@ -834,7 +834,7 @@ function vjsTipAmount(amt) {
   });
 })();
 
-var REPORT_API = '';
+var REPORT_API = 'https://website.guillaumelauzier.workers.dev';
 
 function openReportModal() {
   var m = document.getElementById('report-modal-global');

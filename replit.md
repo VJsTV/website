@@ -29,11 +29,11 @@ VJs TV is a Jekyll-based platform for VJ culture and audiovisual performances. I
 - `/technology` - Technology directory with JS category filter
 - `/sponsors` - Sponsors and partners
 - `/search` - Global search across all collections (client-side, no server needed)
-- `/submit` - Project submission page (form → Express API → GitHub Issues)
+- `/submit` - Project submission page (form → Cloudflare Worker → GitHub Issues)
 - `/partners` - Sponsor pitch page with interactive modals, partnership tiers, particle background, contact form, Cloudflare analytics stats bar, live page view counter, and live audience charts (unique visitors line chart + country traffic table)
 
 ## Key Files
-- `_config.yml` - Jekyll configuration with collections
+- `_config.yml` - Jekyll configuration with collections and `api_url` setting
 - `_data/navigation.yml` - Main navigation menu
 - `_data/general_settings.yml` - Site-wide settings and branding
 - `assets/css/vjstv.css` - Custom dark/neon theme CSS (~4090 lines)
@@ -60,46 +60,38 @@ VJs TV is a Jekyll-based platform for VJ culture and audiovisual performances. I
 - IntersectionObserver visibility gating on meter bar animation
 - `preconnect` for Google Fonts
 
-## Cloudflare Analytics & Dynamic Pricing
-- **Secrets required:** `CF_API_TOKEN` (Read Analytics permission), `CF_ZONE_ID` (Cloudflare domain zone tag)
-- **Backend:** `/api/analytics` endpoint fetches from Cloudflare GraphQL API `httpRequests1dGroups`:
-  - Queries last 30 days of page views using dynamic date range
-  - GraphQL query: `query { viewer { zones(filter: {zoneTag: "ZONE_ID"}) { httpRequests1dGroups(limit: 30, filter: {date_geq: "DATE", date_leq: "DATE"}) { sum { pageViews } } } } }`
-  - Returns `monthlyVisitors` (sum of all page views in 30 days)
-  - Includes 8-second timeout to prevent hanging requests
-- **Caching:** 10-minute in-memory cache to avoid rate limiting
-- **Frontend:** `vjsLoadAnalytics()` on sponsors/partners pages:
-  - Fetches `/api/analytics` on page load
-  - Updates pricing based on visitor multiplier (1x, 2x, 3x, 5x)
-  - Shows "🔥 Based on X monthly page views" label above sponsorship tiers
-  - Gracefully handles API failures by showing base prices
-- **Pricing tiers:** Base prices (Title: $5K, Tech: $2.5K, Creative: $1.5K, Equipment: $1K) × visitor multiplier
-- **Stats bar:** 97 community members, 50 countries (static), 23 events (static), unique visitors (removed from display)
-- **Testing:** API returns `{"monthlyVisitors": number, "cached": false/true}` on success; fallback on timeout/error
+## API Architecture
 
-## API & Form System (Dual Architecture)
-
-### Production: Cloudflare Pages Functions (`functions/api/`)
-- **Deployment:** `functions/` directory auto-detected by Cloudflare Pages, runs as serverless Workers
-- **GitHub API:** Uses `GITHUB_TOKEN` environment variable (set in Cloudflare Pages dashboard)
-- **Analytics:** Uses `CF_API_TOKEN` and `CF_ZONE_ID` environment variables
-- **Files:**
-  - `functions/api/submit.js` → `POST /api/submit` — project submission → GitHub Issue
-  - `functions/api/report.js` → `POST /api/report` — issue report → GitHub Issue
-  - `functions/api/partner.js` → `POST /api/partner` — partnership enquiry → GitHub Issue
-  - `functions/api/analytics.js` → `GET /api/analytics` — Cloudflare monthly page views
-  - `functions/api/analytics/charts.js` → `GET /api/analytics/charts` — daily traffic + country data
-  - `functions/api/health.js` → `GET /api/health` — health check
+### Production: Cloudflare Worker (`website.guillaumelauzier.workers.dev`)
+- **All API endpoints** are served by a single Cloudflare Worker
+- **GitHub API:** Uses `GITHUB_TOKEN` secret (set in Worker Settings > Variables and Secrets)
+- **Analytics:** Uses `CF_API_TOKEN` and `CF_ZONE_ID` secrets
+- **AI Moderation:** Uses Workers AI binding (variable name: `AI`) for auto-moderating submissions
+- **Form endpoints:**
+  - `POST /api/submit` — project submission → AI moderation → GitHub Issue
+  - `POST /api/report` — issue report → AI moderation → GitHub Issue
+  - `POST /api/partner` — partnership enquiry → AI moderation → GitHub Issue
+- **Analytics endpoints:**
+  - `GET /api/analytics` — Cloudflare monthly page views
+  - `GET /api/analytics/charts` — daily traffic + country data
+- **Jekyll config:** `api_url` in `_config.yml` sets the Worker URL; all forms use `{{ site.api_url }}` in templates
 
 ### Development: Express Server (`api/server.js`)
-- **Local dev:** `node api/server.js` on port 5000, serves static `_site/` + API endpoints
-- **Uses:** Replit Connectors SDK for GitHub API (requires GitHub integration to be connected via Replit integrations panel — OAuth must be completed for form submissions to create GitHub issues)
+- **Local dev only:** `node api/server.js` on port 5000, serves static `_site/` files
+- **No API routes:** All API calls go directly to the Cloudflare Worker (even in dev)
 - **Jekyll:** Auto-runs `jekyll build --watch --incremental`
 
-### Required Cloudflare Pages Environment Variables
+### Reference: Cloudflare Pages Functions (`functions/api/`)
+- Legacy reference files for individual endpoint logic (not deployed)
+- `functions/api/submit.js`, `report.js`, `partner.js`
+
+### Required Cloudflare Worker Secrets
 - `GITHUB_TOKEN` — GitHub Personal Access Token with `repo` scope (for creating Issues)
-- `CF_API_TOKEN` — Cloudflare API token with Analytics read permission
-- `CF_ZONE_ID` — Cloudflare zone ID for vjstv.com
+- `CF_API_TOKEN` — Cloudflare API token with Analytics read permission (for analytics endpoints)
+- `CF_ZONE_ID` — Cloudflare zone ID for vjstv.com (for analytics endpoints)
+
+### Required Cloudflare Worker Bindings
+- `AI` — Workers AI binding (for content moderation)
 
 ### Endpoints
 - `POST /api/submit` — create submission Issue (fields: artist, project_title, email, video_url, description, category)
@@ -107,20 +99,29 @@ VJs TV is a Jekyll-based platform for VJ culture and audiovisual performances. I
 - `POST /api/partner` — partnership enquiry (fields: full_name, email, message, company, tier)
 - `GET /api/analytics` — monthly page views from Cloudflare
 - `GET /api/analytics/charts` — daily traffic chart data + top countries
-- `GET /api/health` — health check
 
 ### Security
+- Workers AI moderation on all form submissions (spam, offensive content, phishing, bot detection)
 - Honeypot spam fields on all forms
 - Input trimming and length caps
 - CORS headers on all endpoints
 
+## Cloudflare Analytics & Dynamic Pricing
+- **Backend:** `/api/analytics` endpoint fetches from Cloudflare GraphQL API
+- **Caching:** 10-minute in-memory cache in Worker
+- **Frontend:** `vjsLoadAnalytics()` on sponsors/partners pages
+- **Pricing tiers:** Base prices × visitor multiplier
+- **Stats bar:** 97 community members, 50 countries, 23 events
+
 ## Development
 ```
-node api/server.js  # Single server: Express (API + static) + Jekyll watch on port 5000
+node api/server.js  # Dev server: static files + Jekyll watch on port 5000
 ```
+All API calls go to `https://website.guillaumelauzier.workers.dev` (configured in `_config.yml` as `api_url`).
 
 ## Deployment
-- Target: static
+- **Site:** Static Jekyll build, deploy to GitHub Pages / Cloudflare Pages / any static host
+- **API:** Cloudflare Worker at `website.guillaumelauzier.workers.dev`
 - Build: `bundle exec jekyll build`
 - Public directory: `_site`
 
@@ -133,23 +134,19 @@ Artists can include a profile image by adding an `image:` field to their frontma
 image: "/assets/images/artists/artist-name.jpg"
 ```
 
-If no image is provided, the artist card displays a neon initial badge instead. To add artist images:
-1. Upload image files to `assets/images/artists/` (JPEG or PNG recommended)
-2. Add `image:` field pointing to the file path
-3. The component automatically displays the image on the artists directory page
+If no image is provided, the artist card displays a neon initial badge instead.
 
 ## Hero Section Architecture
 - `index.html` contains the hero player, sidebar, and chyron bar
 - `VJS_PROJECT_POOL` array is built at Jekyll build time from all projects with Vimeo IDs
 - Fisher-Yates shuffle picks 8 random projects for the sidebar on each page load
-- First pick is stored in `window._vjsFirstPick` and applied to the chyron AFTER chyron DOM elements exist (avoids null reference race condition)
-- `heroPlay(card)` updates the player/chyron when sidebar cards are clicked; guards against missing location data
+- First pick is stored in `window._vjsFirstPick` and applied to the chyron AFTER chyron DOM elements exist
+- `heroPlay(card)` updates the player/chyron when sidebar cards are clicked
 
 ## Vimeo Thumbnail Loading
-- Global loader in `_includes/core/scripts/scripts.html` uses oEmbed API: `vimeo.com/api/oembed.json?url=...&width=480`
+- Global loader in `_includes/core/scripts/scripts.html` uses oEmbed API
 - Elements with `class="vjs-vimeo-thumb" data-vimeo="ID"` auto-load thumbnails
-- Failed fetches clear the loaded flag to allow retries
 - Hero sidebar cards load thumbnails via the same oEmbed API at 200px width
 
 ## Excluded Legacy Files
-The original Snowlake theme demo content (portfolios, blogs, shop, services, etc.) is excluded via `_config.yml` exclude list but remains in the repo for reference. Also excluded: `.local`, `.replit`, `attached_assets`, `node_modules`, `vendor`, `replit.md` to prevent Jekyll watch loops.
+The original Snowlake theme demo content (portfolios, blogs, shop, services, etc.) is excluded via `_config.yml` exclude list but remains in the repo for reference.

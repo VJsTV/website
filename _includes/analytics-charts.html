@@ -230,7 +230,7 @@
   }
 
   document.addEventListener('DOMContentLoaded', function() {
-    fetch('/api/analytics/charts')
+    fetch('{{ site.api_url }}/api/analytics/charts')
       .then(function(res) {
         if (!res.ok) throw new Error('HTTP ' + res.status);
         return res.json();

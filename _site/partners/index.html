@@ -518,7 +518,7 @@
   }
 
   document.addEventListener('DOMContentLoaded', function() {
-    fetch('/api/analytics/charts')
+    fetch('https://website.guillaumelauzier.workers.dev/api/analytics/charts')
       .then(function(res) {
         if (!res.ok) throw new Error('HTTP ' + res.status);
         return res.json();
@@ -997,7 +997,7 @@ function handleContactSubmit(e) {
 
   btn.textContent = 'Sending...'; btn.disabled = true;
 
-  fetch('/api/partner', {
+  fetch('https://website.guillaumelauzier.workers.dev/api/partner', {
     method: 'POST',
     headers: { 'Content-Type': 'application/json' },
     body: JSON.stringify({ full_name: name, email: email, message: message })
@@ -1020,7 +1020,7 @@ function handleContactSubmit(e) {
 }
 
 function vjsLoadAnalytics() {
-  fetch('/api/analytics')
+  fetch('https://website.guillaumelauzier.workers.dev/api/analytics')
     .then(function(res) {
       if (!res.ok) throw new Error('API returned ' + res.status);
       return res.json();

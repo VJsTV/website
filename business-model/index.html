@@ -475,7 +475,7 @@ function handleContactSubmit(e) {
 
   btn.textContent = 'Sending...'; btn.disabled = true;
 
-  fetch('/api/partner', {
+  fetch('{{ site.api_url }}/api/partner', {
     method: 'POST',
     headers: { 'Content-Type': 'application/json' },
     body: JSON.stringify({ full_name: name, email: email, message: message })
