@@ -36,21 +36,27 @@
     </div>
     <!-- /.navbar-other -->
     <div class="navbar-collapse offcanvas-nav">
-      <div class="offcanvas-header d-lg-none d-xl-none">
-        <a href="{{site.url}}">
-          <img src="{{site.data.general_settings.light_logo_1x}}"
-            srcset="{{site.data.general_settings.light_logo_1x}} 1x, {{site.data.general_settings.light_logo_2x}} 2x"
-            alt="{{site.data.general_settings.title}}" /></a>
+      <div class="offcanvas-header d-lg-none d-xl-none vjs-mobile-drawer-header">
+        <div class="vjs-mobile-drawer-brand-wrap">
+          <a href="{{site.url}}" class="vjs-mobile-drawer-brand">
+            <img src="{{site.data.general_settings.light_logo_1x}}"
+              srcset="{{site.data.general_settings.light_logo_1x}} 1x, {{site.data.general_settings.light_logo_2x}} 2x"
+              alt="{{site.data.general_settings.title}}" />
+          </a>
+          <form action="/search/" method="get" class="vjs-mobile-drawer-search" role="search">
+            <input type="search" name="query" placeholder="Search" aria-label="Search VJs TV" />
+          </form>
+        </div>
         <button class="plain offcanvas-close offcanvas-nav-close"><i class="jam jam-close"></i></button>
       </div>
       <ul
-        class="navbar-nav {% if include.alignment_class %} {{include.alignment_class}} {% else %} ms-auto {% endif %}" data-sm-skip-collapsible-behavior="true">
+        class="navbar-nav {% if include.alignment_class %} {{include.alignment_class}} {% else %} ms-auto {% endif %} vjs-mobile-drawer-menu" data-sm-skip-collapsible-behavior="true">
         {% for menu in site.data.navigation.main_menu %}
         {% assign check_menu = menu.menu_type %}
         {% case check_menu %}
         {% when "simple" %}
-          <li class="nav-item">
-          <a class="nav-link" href="{{menu.url}}">{{menu.text}}</a>
+          <li class="nav-item {% if menu.text == 'Submit' %}vjs-mobile-submit-item{% endif %}">
+          <a class="nav-link {% if menu.text == 'Submit' %}vjs-mobile-submit-link{% endif %}" href="{{menu.url}}">{{menu.text}}</a>
         </li>
         {% when "megamenu" %}
         <li class="nav-item">
@@ -116,6 +122,16 @@
         {% endcase %}
         {% endfor %}
       </ul>
+      <div class="vjs-mobile-drawer-footer d-lg-none d-xl-none">
+        <div class="vjs-mobile-drawer-social">
+          <a href="https://instagram.com/vjstv" target="_blank" rel="noopener" aria-label="Instagram"><i class="jam jam-instagram"></i></a>
+          <a href="https://facebook.com/vjstv" target="_blank" rel="noopener" aria-label="Facebook"><i class="jam jam-facebook"></i></a>
+          <a href="https://twitter.com/vjs_tv" target="_blank" rel="noopener" aria-label="X"><i class="jam jam-twitter"></i></a>
+          <a href="https://www.linkedin.com/company/vjstv" target="_blank" rel="noopener" aria-label="LinkedIn"><i class="jam jam-linkedin"></i></a>
+          <a href="https://vimeo.com/vjstv" target="_blank" rel="noopener" aria-label="Vimeo"><i class="jam jam-vimeo"></i></a>
+          <a href="https://tiktok.com/@vjs.tv" target="_blank" rel="noopener" aria-label="TikTok"><i class="jam jam-tiktok"></i></a>
+        </div>
+      </div>
       <!-- /.navbar-nav -->
     </div>
     <!-- /.navbar-collapse -->

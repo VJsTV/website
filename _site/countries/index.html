@@ -99,108 +99,124 @@
     </div>
     <!-- /.navbar-other -->
     <div class="navbar-collapse offcanvas-nav">
-      <div class="offcanvas-header d-lg-none d-xl-none">
-        <a href="https://vjstv.com">
-          <img src="/assets/images/logo-vjstv.svg"
-            srcset="/assets/images/logo-vjstv.svg 1x, /assets/images/logo-vjstv.svg 2x"
-            alt="VJs TV - Global Broadcast Network for VJ Culture" /></a>
+      <div class="offcanvas-header d-lg-none d-xl-none vjs-mobile-drawer-header">
+        <div class="vjs-mobile-drawer-brand-wrap">
+          <a href="https://vjstv.com" class="vjs-mobile-drawer-brand">
+            <img src="/assets/images/logo-vjstv.svg"
+              srcset="/assets/images/logo-vjstv.svg 1x, /assets/images/logo-vjstv.svg 2x"
+              alt="VJs TV - Global Broadcast Network for VJ Culture" />
+          </a>
+          <form action="/search/" method="get" class="vjs-mobile-drawer-search" role="search">
+            <input type="search" name="query" placeholder="Search" aria-label="Search VJs TV" />
+          </form>
+        </div>
         <button class="plain offcanvas-close offcanvas-nav-close"><i class="jam jam-close"></i></button>
       </div>
       <ul
-        class="navbar-nav  ms-auto " data-sm-skip-collapsible-behavior="true">
+        class="navbar-nav  ms-auto  vjs-mobile-drawer-menu" data-sm-skip-collapsible-behavior="true">
         
         
         
-          <li class="nav-item">
-          <a class="nav-link" href="/">Home</a>
+          <li class="nav-item ">
+          <a class="nav-link " href="/">Home</a>
         </li>
         
         
         
         
-          <li class="nav-item">
-          <a class="nav-link" href="/live">Live</a>
+          <li class="nav-item ">
+          <a class="nav-link " href="/live">Live</a>
         </li>
         
         
         
         
-          <li class="nav-item">
-          <a class="nav-link" href="/artists">Artists</a>
+          <li class="nav-item ">
+          <a class="nav-link " href="/artists">Artists</a>
         </li>
         
         
         
         
-          <li class="nav-item">
-          <a class="nav-link" href="/projects">Projects</a>
+          <li class="nav-item ">
+          <a class="nav-link " href="/projects">Projects</a>
         </li>
         
         
         
         
-          <li class="nav-item">
-          <a class="nav-link" href="/events">Events</a>
+          <li class="nav-item ">
+          <a class="nav-link " href="/events">Events</a>
         </li>
         
         
         
         
-          <li class="nav-item">
-          <a class="nav-link" href="/studios">Studios</a>
+          <li class="nav-item ">
+          <a class="nav-link " href="/studios">Studios</a>
         </li>
         
         
         
         
-          <li class="nav-item">
-          <a class="nav-link" href="/technology">Technology</a>
+          <li class="nav-item ">
+          <a class="nav-link " href="/technology">Technology</a>
         </li>
         
         
         
         
-          <li class="nav-item">
-          <a class="nav-link" href="/sponsors">Sponsors</a>
+          <li class="nav-item ">
+          <a class="nav-link " href="/sponsors">Sponsors</a>
         </li>
         
         
         
         
-          <li class="nav-item">
-          <a class="nav-link" href="/partners">Partners</a>
+          <li class="nav-item ">
+          <a class="nav-link " href="/partners">Partners</a>
         </li>
         
         
         
         
-          <li class="nav-item">
-          <a class="nav-link" href="/search">Search</a>
+          <li class="nav-item ">
+          <a class="nav-link " href="/search">Search</a>
         </li>
         
         
         
         
-          <li class="nav-item">
-          <a class="nav-link" href="/marketplace">Marketplace</a>
+          <li class="nav-item ">
+          <a class="nav-link " href="/marketplace">Marketplace</a>
         </li>
         
         
         
         
-          <li class="nav-item">
-          <a class="nav-link" href="/submit">Submit</a>
+          <li class="nav-item vjs-mobile-submit-item">
+          <a class="nav-link vjs-mobile-submit-link" href="/submit">Submit</a>
         </li>
         
         
         
         
-          <li class="nav-item">
-          <a class="nav-link" href="https://vjsmag.com">Magazine</a>
+          <li class="nav-item ">
+          <a class="nav-link " href="https://vjsmag.com">Magazine</a>
         </li>
         
         
       </ul>
+      <div class="vjs-mobile-drawer-footer d-lg-none d-xl-none">
+        <div class="vjs-mobile-drawer-social">
+          <a href="https://instagram.com/vjstv" target="_blank" rel="noopener" aria-label="Instagram"><i class="jam jam-instagram"></i></a>
+          <a href="https://facebook.com/vjstv" target="_blank" rel="noopener" aria-label="Facebook"><i class="jam jam-facebook"></i></a>
+          <a href="https://twitter.com/vjs_tv" target="_blank" rel="noopener" aria-label="X"><i class="jam jam-twitter"></i></a>
+          <a href="https://www.linkedin.com/company/vjstv" target="_blank" rel="noopener" aria-label="LinkedIn"><i class="jam jam-linkedin"></i></a>
+          <a href="https://vimeo.com/vjstv" target="_blank" rel="noopener" aria-label="Vimeo"><i class="jam jam-vimeo"></i></a>
+          <a href="https://tiktok.com/@vjs.tv" target="_blank" rel="noopener" aria-label="TikTok"><i class="jam jam-tiktok"></i></a>
+        </div>
+      </div>
       <!-- /.navbar-nav -->
     </div>
     <!-- /.navbar-collapse -->
