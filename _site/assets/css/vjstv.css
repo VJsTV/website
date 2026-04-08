@@ -2976,41 +2976,43 @@ body.cinema-mode .col-lg-8 { flex: 0 0 100% !important; max-width: 100% !importa
    MOBILE OFFCANVAS DRAWER — logo, search, submit, social
    ================================================================ */
 
-/* Header: centered logo + search, close button pinned top-right */
-.vjs-mobile-drawer-header {
-  position: relative !important;
-  display: flex !important;
-  flex-direction: column !important;
-  align-items: center !important;
-  justify-content: flex-start !important;
-  gap: 0 !important;
-  padding: 28px 20px 20px !important;
-  border-bottom: 1px solid rgba(255,255,255,0.08) !important;
-  background: var(--vjs-black) !important;
-}
+/* Header: centered logo + search, close button pinned top-right — MOBILE ONLY */
+@media (max-width: 991.98px) {
+  .vjs-mobile-drawer-header {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+    gap: 0;
+    padding: 28px 20px 20px;
+    border-bottom: 1px solid rgba(255,255,255,0.08);
+    background: var(--vjs-black);
+  }
 
-/* Pin the close button top-right, out of flow */
-.vjs-mobile-drawer-header .offcanvas-nav-close {
-  position: absolute !important;
-  top: 14px !important;
-  right: 14px !important;
-}
+  /* Pin the close button top-right, out of flow */
+  .vjs-mobile-drawer-header .offcanvas-nav-close {
+    position: absolute;
+    top: 14px;
+    right: 14px;
+  }
 
-/* Center column: logo stacked above search */
-.vjs-mobile-drawer-brand-wrap {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 28px;
-  width: 100%;
-}
+  /* Center column: logo stacked above search */
+  .vjs-mobile-drawer-brand-wrap {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 28px;
+    width: 100%;
+  }
 
-/* Logo */
-.vjs-mobile-drawer-brand img {
-  height: 32px;
-  width: auto;
-  display: block;
-  margin: 0 auto;
+  /* Logo */
+  .vjs-mobile-drawer-brand img {
+    height: 32px;
+    width: auto;
+    display: block;
+    margin: 0 auto;
+  }
 }
 
 /* Search bar */
