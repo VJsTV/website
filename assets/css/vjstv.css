@@ -5370,41 +5370,38 @@ svg.vjs-nts-sidebar-thumb-play {
 
 /* SUCCESS STATE */
 .vjs-book-success {
+  display: flex;
   flex-direction: column;
   align-items: center;
+  justify-content: center;
   text-align: center;
-  gap: 16px;
-  padding: 40px 0;
+  gap: 8px;
+  padding: 80px 24px;
+  min-height: 300px;
 }
-.vjs-book-success-icon {
-  width: 56px;
-  filter: drop-shadow(0 0 12px rgba(57,255,20,0.4));
+.vjs-book-success-check {
+  font-size: 2.2rem;
+  color: var(--vjs-cyan, #00e5ff);
+  line-height: 1;
+  margin-bottom: 8px;
 }
 .vjs-book-success-title {
   font-family: 'Barlow Condensed', sans-serif;
-  font-size: 1.6rem;
+  font-size: 1.4rem;
   font-weight: 800;
   text-transform: uppercase;
+  letter-spacing: 0.06em;
   color: #fff;
 }
 .vjs-book-success-body {
   font-size: 0.85rem;
   color: var(--vjs-text-muted);
-  max-width: 360px;
+  max-width: 400px;
   line-height: 1.6;
 }
-.vjs-book-success-body strong { color: #fff; }
-.vjs-book-close-success {
-  font-family: 'Orbitron', sans-serif;
-  font-size: 0.62rem;
-  letter-spacing: 0.12em;
-  padding: 10px 24px;
-  background: transparent;
-  border: 1px solid #333;
-  border-radius: 0;
-  color: var(--vjs-text-muted);
-  cursor: pointer;
-  transition: all 0.2s;
+.vjs-book-success-ref {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 0.75rem;
+  color: #555;
   margin-top: 8px;
 }
-.vjs-book-close-success:hover { border-color: #555; color: #fff; }
