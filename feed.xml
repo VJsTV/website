@@ -1,0 +1,99 @@
+---
+layout: null
+permalink: /feed.xml
+---
+<?xml version="1.0" encoding="UTF-8"?>
+<rss version="2.0"
+  xmlns:atom="http://www.w3.org/2005/Atom"
+  xmlns:media="http://search.yahoo.com/mrss/"
+  xmlns:content="http://purl.org/rss/1.0/modules/content/">
+  <channel>
+    <title>VJs TV</title>
+    <link>{{ site.url }}</link>
+    <atom:link href="{{ site.url }}/feed.xml" rel="self" type="application/rss+xml"/>
+    <description>The global broadcast network for VJ culture. Live performances, artist discovery, and the technology powering visual art worldwide.</description>
+    <language>en-us</language>
+    <lastBuildDate>{{ site.time | date_to_rfc822 }}</lastBuildDate>
+    <image>
+      <url>{{ site.url }}/assets/images/vjstv-og.jpg</url>
+      <title>VJs TV</title>
+      <link>{{ site.url }}</link>
+    </image>
+
+    {% comment %}— EVENTS (sorted by date, most recent first) —{% endcomment %}
+    {% assign events_sorted = site.events | sort: "date" | reverse %}
+    {% for item in events_sorted limit: 30 %}{% if item.title %}
+    <item>
+      <title><![CDATA[{{ item.title }}{% if item.location %} — {{ item.location }}{% endif %}]]></title>
+      <link>{{ site.url }}{{ item.url }}</link>
+      <guid isPermaLink="true">{{ site.url }}{{ item.url }}</guid>
+      {% if item.date %}<pubDate>{{ item.date | date_to_rfc822 }}</pubDate>{% else %}<pubDate>{{ site.time | date_to_rfc822 }}</pubDate>{% endif %}
+      <category>Events</category>
+      {% if item.event_type %}<category>{{ item.event_type | xml_escape }}</category>{% endif %}
+      <description><![CDATA[{{ item.description | default: item.excerpt | strip_html | truncatewords: 100 }}]]></description>
+      {% if item.image %}<media:thumbnail url="{{ site.url }}{{ item.image }}"/>{% endif %}
+    </item>
+    {% endif %}{% endfor %}
+
+    {% comment %}— ARTISTS —{% endcomment %}
+    {% assign artists_featured = site.vjs | where: "featured", true %}
+    {% assign artists_rest = site.vjs | where: "featured", false %}
+    {% assign artists_all = artists_featured | concat: artists_rest %}
+    {% for item in artists_all limit: 20 %}{% if item.title %}
+    <item>
+      <title><![CDATA[{{ item.title }}{% if item.location %} — {{ item.location }}{% endif %}]]></title>
+      <link>{{ site.url }}{{ item.url }}</link>
+      <guid isPermaLink="true">{{ site.url }}{{ item.url }}</guid>
+      <pubDate>{{ site.time | date_to_rfc822 }}</pubDate>
+      <category>Artists</category>
+      <description><![CDATA[{{ item.bio | default: item.description | strip_html | truncatewords: 100 }}]]></description>
+      {% if item.image %}<media:thumbnail url="{{ site.url }}{{ item.image }}"/>{% endif %}
+    </item>
+    {% endif %}{% endfor %}
+
+    {% comment %}— PROJECTS (sorted by year, newest first) —{% endcomment %}
+    {% assign projects_sorted = site.projects | sort: "year" | reverse %}
+    {% for item in projects_sorted limit: 30 %}{% if item.title %}
+    <item>
+      <title><![CDATA[{{ item.title }}{% if item.artist %} by {{ item.artist }}{% endif %}{% if item.year %} ({{ item.year }}){% endif %}]]></title>
+      <link>{{ site.url }}{{ item.url }}</link>
+      <guid isPermaLink="true">{{ site.url }}{{ item.url }}</guid>
+      {% if item.year %}<pubDate>{{ item.year | append: "-01-01" | date: "%a, %d %b %Y 00:00:00 +0000" }}</pubDate>{% else %}<pubDate>{{ site.time | date_to_rfc822 }}</pubDate>{% endif %}
+      <category>Projects</category>
+      {% if item.project_type %}<category>{{ item.project_type | xml_escape }}</category>{% endif %}
+      <description><![CDATA[{{ item.description | default: item.excerpt | strip_html | truncatewords: 100 }}]]></description>
+    </item>
+    {% endif %}{% endfor %}
+
+    {% comment %}— STUDIOS —{% endcomment %}
+    {% assign studios_featured = site.studios | where: "featured", true %}
+    {% assign studios_rest = site.studios | where: "featured", false %}
+    {% assign studios_all = studios_featured | concat: studios_rest %}
+    {% for item in studios_all limit: 20 %}{% if item.title %}
+    <item>
+      <title><![CDATA[{{ item.title }}{% if item.location %} — {{ item.location }}{% endif %}]]></title>
+      <link>{{ site.url }}{{ item.url }}</link>
+      <guid isPermaLink="true">{{ site.url }}{{ item.url }}</guid>
+      <pubDate>{{ site.time | date_to_rfc822 }}</pubDate>
+      <category>Studios</category>
+      {% if item.studio_type %}<category>{{ item.studio_type | xml_escape }}</category>{% endif %}
+      <description><![CDATA[{{ item.description | default: item.excerpt | strip_html | truncatewords: 100 }}]]></description>
+      {% if item.image %}<media:thumbnail url="{{ site.url }}{{ item.image }}"/>{% endif %}
+    </item>
+    {% endif %}{% endfor %}
+
+    {% comment %}— TECHNOLOGY —{% endcomment %}
+    {% for item in site.technology limit: 20 %}{% if item.title %}
+    <item>
+      <title><![CDATA[{{ item.title }}{% if item.developer %} by {{ item.developer }}{% endif %}]]></title>
+      <link>{{ site.url }}{{ item.url }}</link>
+      <guid isPermaLink="true">{{ site.url }}{{ item.url }}</guid>
+      <pubDate>{{ site.time | date_to_rfc822 }}</pubDate>
+      <category>Technology</category>
+      {% if item.category %}<category>{{ item.category | xml_escape }}</category>{% endif %}
+      <description><![CDATA[{{ item.description | default: item.excerpt | strip_html | truncatewords: 100 }}]]></description>
+    </item>
+    {% endif %}{% endfor %}
+
+  </channel>
+</rss>
