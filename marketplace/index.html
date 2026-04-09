@@ -56,6 +56,9 @@ description: "Buy and download professional VJ loop packs. Thousands of seamless
 
       <!-- THUMB -->
       <div class="vjs-mp-grid-thumb" style="background: linear-gradient(135deg, {{ pack.gradient }});">
+        {% if pack.thumbnail %}
+        <img src="{{ pack.thumbnail }}" alt="{{ pack.title }}" class="vjs-mp-grid-thumb-img" loading="lazy">
+        {% endif %}
         <div class="vjs-mp-grid-thumb-pattern"></div>
         <div class="vjs-mp-grid-thumb-icon">
           <svg viewBox="0 0 24 24" fill="currentColor" style="width:2.5rem;height:2.5rem;opacity:0.35;"><rect x="4" y="4" width="16" height="16"/></svg>

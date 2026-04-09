@@ -21,7 +21,7 @@ layout: default
 
       <!-- LEFT: THUMB + PREVIEW -->
       <div class="vjs-mp-hero-thumb">
-        <div class="vjs-mp-thumb-art" style="background: linear-gradient(135deg, {{ page.gradient }});">
+        <div class="vjs-mp-thumb-art" style="background: linear-gradient(135deg, {{ page.gradient }});{% if page.thumbnail %} background-image: url('{{ page.thumbnail }}'); background-size: cover; background-position: center;{% endif %}">
           <div class="vjs-mp-thumb-grid-overlay"></div>
             <video class="vjs-mp-thumb-video" autoplay muted loop playsinline preload="metadata" poster="{{ page.video_poster | default: '' }}">
               <source src="/assets/videos/loop-packs/{{ page.name }}/preview.mp4" type="video/mp4">

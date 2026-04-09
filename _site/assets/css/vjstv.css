@@ -4685,6 +4685,18 @@ svg.vjs-nts-sidebar-thumb-play {
   border: 1px solid rgba(57,255,20,0.5);
   color: #39ff14;
 }
+.vjs-mp-grid-thumb-img {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+  z-index: 0;
+  opacity: 0.9;
+  transition: opacity 0.3s;
+}
+.vjs-mp-grid-card:hover .vjs-mp-grid-thumb-img { opacity: 0.7; }
 .vjs-mp-grid-hover-overlay {
   position: absolute;
   inset: 0;
@@ -5606,4 +5618,151 @@ svg.vjs-nts-sidebar-thumb-play {
   font-size: 0.75rem;
   color: #555;
   margin-top: 8px;
+}
+
+/* ================================================================
+   LICENSE PAGE
+   ================================================================ */
+.vjs-license-doc {
+  max-width: 860px;
+  margin: 0 auto;
+  padding-bottom: 5rem;
+}
+.vjs-license-meta {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  margin-bottom: 2rem;
+  flex-wrap: wrap;
+}
+.vjs-license-badge {
+  font-family: 'Orbitron', sans-serif;
+  font-size: 0.58rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  padding: 4px 12px;
+  border: 1px solid var(--vjs-ultraviolet);
+  color: var(--vjs-ultraviolet);
+  background: rgba(123,47,255,0.1);
+}
+.vjs-license-updated {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 0.75rem;
+  color: var(--vjs-text-muted);
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+}
+.vjs-license-intro {
+  font-size: 1.05rem;
+  line-height: 1.75;
+  color: rgba(255,255,255,0.8);
+  border-left: 3px solid var(--vjs-ultraviolet);
+  padding-left: 1.25rem;
+  margin-bottom: 3rem;
+}
+.vjs-license-section {
+  margin-bottom: 2.5rem;
+  border-top: 1px solid var(--vjs-border);
+  padding-top: 2rem;
+}
+.vjs-license-heading {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 1.3rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: #fff;
+  display: flex;
+  align-items: baseline;
+  gap: 0.75rem;
+  margin-bottom: 1rem;
+}
+.vjs-license-num {
+  font-family: 'Orbitron', sans-serif;
+  font-size: 0.7rem;
+  color: var(--vjs-cyan);
+  letter-spacing: 0.1em;
+}
+.vjs-license-section p {
+  font-size: 0.95rem;
+  line-height: 1.8;
+  color: rgba(255,255,255,0.7);
+  margin: 0;
+}
+.vjs-license-table-wrap {
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+}
+.vjs-license-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.88rem;
+  margin-top: 0.5rem;
+}
+.vjs-license-table th,
+.vjs-license-table td {
+  padding: 0.85rem 1rem;
+  border: 1px solid var(--vjs-border);
+  vertical-align: top;
+  line-height: 1.6;
+  color: rgba(255,255,255,0.7);
+}
+.vjs-license-th-allow {
+  background: rgba(57,255,20,0.08);
+  color: #39ff14;
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 0.78rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  font-weight: 700;
+}
+.vjs-license-th-deny {
+  background: rgba(255,0,100,0.08);
+  color: #ff0064;
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 0.78rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  font-weight: 700;
+}
+.vjs-license-table tr:nth-child(even) td {
+  background: rgba(255,255,255,0.02);
+}
+.vjs-license-note {
+  display: flex;
+  gap: 1rem;
+  align-items: flex-start;
+  background: rgba(0,212,255,0.05);
+  border: 1px solid rgba(0,212,255,0.2);
+  padding: 1.25rem 1.5rem;
+  margin: 2.5rem 0;
+  color: rgba(255,255,255,0.75);
+  font-size: 0.9rem;
+  line-height: 1.7;
+  color: var(--vjs-cyan);
+}
+.vjs-license-note strong { color: #fff; }
+.vjs-license-link {
+  color: var(--vjs-ultraviolet);
+  text-decoration: none;
+  border-bottom: 1px solid rgba(123,47,255,0.4);
+  transition: border-color 0.2s;
+}
+.vjs-license-link:hover {
+  border-color: var(--vjs-ultraviolet);
+  color: var(--vjs-ultraviolet);
+}
+.vjs-license-cta {
+  display: flex;
+  gap: 1rem;
+  align-items: center;
+  flex-wrap: wrap;
+  margin-top: 3rem;
+  padding-top: 2rem;
+  border-top: 1px solid var(--vjs-border);
+}
+@media (max-width: 640px) {
+  .vjs-license-table { font-size: 0.78rem; }
+  .vjs-license-table th, .vjs-license-table td { padding: 0.6rem 0.75rem; }
+  .vjs-license-cta { flex-direction: column; align-items: flex-start; }
 }
