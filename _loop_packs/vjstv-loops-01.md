@@ -17,6 +17,11 @@ file_size: "1.2 GB"
 license: "Commercial"
 thumbnail: "/assets/images/loop-packs/vjstv-loops-01.png"
 download_url: "/assets/videos/loop-packs/vjstv-loops-01/vjstv-loops-01.zip"
+clip_previews:
+  - "/assets/images/loop-packs/vjstv-loops-01/preview-01.png"
+  - "/assets/images/loop-packs/vjstv-loops-01/preview-02.png"
+  - "/assets/images/loop-packs/vjstv-loops-01/preview-03.png"
+  - "/assets/images/loop-packs/vjstv-loops-01/preview-04.png"
 preview_vimeo: ""
 description: "The first official free loop library from VJs TV. 20 seamlessly looping abstract clips — UV geometry, glitch textures, and cyberpunk light trails — built for live performance, broadcast, and installation. Commercial use included. No strings attached."
 what_you_get:

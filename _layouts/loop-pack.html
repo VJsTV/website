@@ -39,8 +39,12 @@ layout: default
         <!-- PREVIEW CLIPS ROW -->
         <div class="vjs-mp-preview-row">
           {% for i in (1..4) %}
-          <div class="vjs-mp-preview-clip" style="background: linear-gradient({{ i | times: 45 }}deg, {{ page.gradient }});">
-            <div class="vjs-mp-preview-clip-num">{{ i | prepend: '0' | slice: -2, 2 }}</div>
+          {% assign preview_img = page.clip_previews[forloop.index0] %}
+          <div class="vjs-mp-preview-clip" style="background: linear-gradient({{ i | times: 45 }}deg, {{ page.gradient }}); position:relative; overflow:hidden;">
+            {% if preview_img %}
+            <img src="{{ preview_img }}" alt="Clip {{ i | prepend: '0' | slice: -2, 2 }}" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;z-index:0;">
+            {% endif %}
+            <div class="vjs-mp-preview-clip-num" style="position:relative;z-index:1;">{{ i | prepend: '0' | slice: -2, 2 }}</div>
           </div>
           {% endfor %}
           <div class="vjs-mp-preview-more">+{{ page.clip_count | minus: 4 }} more</div>
