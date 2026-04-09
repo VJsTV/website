@@ -1,22 +1,142 @@
-<meta property="og:type" content="website">
+{% assign seo_title = page.meta_title | default: page.title | default: site.data.general_settings.title %}
+{% assign seo_description = page.meta_description | default: page.description | default: site.data.general_settings.description %}
+{% assign seo_image = page.image | default: page.thumbnail | default: site.data.general_settings.meta_og_image %}
+<meta property="og:type" content="{% if page.video_url %}video.other{% elsif page.event_type %}event{% else %}website{% endif %}">
 <meta property="og:url" content="{{ page.url | absolute_url }}">
 <meta property="og:site_name" content="VJs TV">
-<meta property="og:title" content="{% if page.meta_title %}{{ page.meta_title }}{% elsif page.title %}{{ page.title }}{% else %}{{ site.data.general_settings.title }}{% endif %}">
-<meta property="og:description" content="{% if page.meta_description %}{{ page.meta_description }}{% elsif page.description %}{{ page.description }}{% else %}{{ site.data.general_settings.description }}{% endif %}">
-{% if page.image %}
-<meta property="og:image" content="{{ page.image | relative_url }}" />
-{% elsif site.data.general_settings.meta_og_image %}
-<meta property="og:image" content="{{ site.data.general_settings.meta_og_image | relative_url }}" />
+<meta property="og:locale" content="en_US">
+<meta property="og:title" content="{{ seo_title }}">
+<meta property="og:description" content="{{ seo_description | strip_newlines | truncate: 200 }}">
+{% if seo_image %}
+<meta property="og:image" content="{{ seo_image | absolute_url }}" />
+<meta property="og:image:width" content="1200" />
+<meta property="og:image:height" content="630" />
 {% endif %}
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:site" content="@vjs_tv">
-<meta name="twitter:title" content="{% if page.meta_title %}{{ page.meta_title }}{% elsif page.title %}{{ page.title }}{% else %}{{ site.data.general_settings.title }}{% endif %}">
-<meta name="twitter:description" content="{% if page.meta_description %}{{ page.meta_description }}{% elsif page.description %}{{ page.description }}{% else %}{{ site.data.general_settings.description }}{% endif %}">
-{% if page.image %}
-<meta name="twitter:image" content="{{ page.image | relative_url }}" />
-{% elsif site.data.general_settings.meta_twitter_image %}
-<meta name="twitter:image" content="{{ site.data.general_settings.meta_twitter_image | relative_url }}" />
+<meta name="twitter:creator" content="@vjs_tv">
+<meta name="twitter:title" content="{{ seo_title }}">
+<meta name="twitter:description" content="{{ seo_description | strip_newlines | truncate: 200 }}">
+{% if seo_image %}
+<meta name="twitter:image" content="{{ seo_image | absolute_url }}" />
 {% endif %}
+
 <script type="application/ld+json">
-{"@context":"https://schema.org","@type":"WebSite","name":"VJs TV","url":"{{ '/' | absolute_url }}","description":"{{ site.data.general_settings.description | strip_newlines | escape }}","potentialAction":{"@type":"SearchAction","target":"{{ '/search' | absolute_url }}?q={search_term_string}","query-input":"required name=search_term_string"}}
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "Organization",
+      "@id": "{{ site.url }}/#organization",
+      "name": "VJs TV",
+      "url": "{{ site.url }}",
+      "logo": {
+        "@type": "ImageObject",
+        "url": "{{ '/assets/images/logo-vjstv.svg' | absolute_url }}"
+      },
+      "description": "{{ site.data.general_settings.description | strip_newlines | escape }}",
+      "sameAs": [
+        "https://instagram.com/vjstv",
+        "https://facebook.com/vjstv",
+        "https://twitter.com/vjs_tv",
+        "https://www.linkedin.com/company/vjstv",
+        "https://vimeo.com/vjstv",
+        "https://tiktok.com/@vjs.tv",
+        "https://www.youtube.com/@vjs_tv"
+      ]
+    },
+    {
+      "@type": "WebSite",
+      "@id": "{{ site.url }}/#website",
+      "name": "VJs TV",
+      "url": "{{ site.url }}",
+      "description": "{{ site.data.general_settings.description | strip_newlines | escape }}",
+      "publisher": { "@id": "{{ site.url }}/#organization" },
+      "potentialAction": {
+        "@type": "SearchAction",
+        "target": "{{ site.url }}/search?q={search_term_string}",
+        "query-input": "required name=search_term_string"
+      }
+    },
+    {
+      "@type": "WebPage",
+      "@id": "{{ page.url | absolute_url }}#webpage",
+      "url": "{{ page.url | absolute_url }}",
+      "name": "{{ seo_title | escape }}",
+      "description": "{{ seo_description | strip_newlines | truncate: 200 | escape }}",
+      "isPartOf": { "@id": "{{ site.url }}/#website" },
+      "about": { "@id": "{{ site.url }}/#organization" }
+      {% if page.url == "/" %},
+      "primaryImageOfPage": {
+        "@type": "ImageObject",
+        "url": "{{ site.data.general_settings.meta_og_image | absolute_url }}"
+      }
+      {% endif %}
+    }
+    {% if page.collection == "vjs" %},
+    {
+      "@type": "Person",
+      "@id": "{{ page.url | absolute_url }}/#person",
+      "name": "{{ page.title | escape }}",
+      "url": "{{ page.url | absolute_url }}",
+      "description": "{{ page.description | default: page.visual_style | escape }}",
+      "jobTitle": "Visual Artist / VJ"
+      {% if page.location %}, "address": { "@type": "PostalAddress", "addressLocality": "{{ page.location | escape }}" }{% endif %}
+      {% if page.website %}, "sameAs": ["{{ page.website }}"]{% endif %}
+      {% if page.image %}, "image": "{{ page.image | absolute_url }}"{% endif %}
+    }
+    {% endif %}
+    {% if page.collection == "projects" %},
+    {
+      "@type": "CreativeWork",
+      "@id": "{{ page.url | absolute_url }}/#creativework",
+      "name": "{{ page.title | escape }}",
+      "url": "{{ page.url | absolute_url }}",
+      "description": "{{ page.description | default: seo_description | strip_newlines | truncate: 200 | escape }}",
+      "creator": { "@type": "Person", "name": "{{ page.artist | escape }}" }
+      {% if page.year %}, "dateCreated": "{{ page.year }}"{% endif %}
+      {% if page.image %}, "image": "{{ page.image | absolute_url }}"{% endif %}
+      {% if page.video_url %}, "video": { "@type": "VideoObject", "name": "{{ page.title | escape }}", "embedUrl": "{{ page.video_url }}", "thumbnailUrl": "{{ seo_image | absolute_url }}", "uploadDate": "{{ page.year | default: '2024' }}-01-01" }{% endif %}
+    }
+    {% endif %}
+    {% if page.collection == "events" %},
+    {
+      "@type": "Event",
+      "@id": "{{ page.url | absolute_url }}/#event",
+      "name": "{{ page.title | escape }}",
+      "url": "{{ page.url | absolute_url }}",
+      "description": "{{ page.description | default: seo_description | strip_newlines | truncate: 200 | escape }}",
+      "eventAttendanceMode": "https://schema.org/OfflineEventAttendanceMode",
+      "eventStatus": "https://schema.org/EventScheduled"
+      {% if page.date %}, "startDate": "{{ page.date | date: '%Y-%m-%d' }}"{% endif %}
+      {% if page.location %}, "location": { "@type": "Place", "name": "{{ page.location | escape }}" }{% endif %}
+      {% if page.image %}, "image": "{{ page.image | absolute_url }}"{% endif %}
+      , "organizer": { "@id": "{{ site.url }}/#organization" }
+    }
+    {% endif %}
+    {% if page.collection == "studios" %},
+    {
+      "@type": "Organization",
+      "@id": "{{ page.url | absolute_url }}/#studio",
+      "name": "{{ page.title | escape }}",
+      "url": "{{ page.url | absolute_url }}",
+      "description": "{{ page.description | default: seo_description | strip_newlines | truncate: 200 | escape }}"
+      {% if page.location %}, "address": { "@type": "PostalAddress", "addressLocality": "{{ page.location | escape }}" }{% endif %}
+      {% if page.website %}, "sameAs": ["{{ page.website }}"]{% endif %}
+      {% if page.image %}, "image": "{{ page.image | absolute_url }}"{% endif %}
+    }
+    {% endif %}
+    {% if page.collection == "technology" %},
+    {
+      "@type": "SoftwareApplication",
+      "@id": "{{ page.url | absolute_url }}/#software",
+      "name": "{{ page.title | escape }}",
+      "url": "{{ page.url | absolute_url }}",
+      "description": "{{ page.description | default: seo_description | strip_newlines | truncate: 200 | escape }}",
+      "applicationCategory": "{{ page.category | default: 'Multimedia' | escape }}"
+      {% if page.website %}, "sameAs": ["{{ page.website }}"]{% endif %}
+    }
+    {% endif %}
+  ]
+}
 </script>

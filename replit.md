@@ -36,14 +36,18 @@ VJs TV is a Jekyll-based platform for VJ culture and audiovisual performances. I
 - `_config.yml` - Jekyll configuration with collections and `api_url` setting
 - `_data/navigation.yml` - Main navigation menu
 - `_data/general_settings.yml` - Site-wide settings and branding
-- `assets/css/vjstv.css` - Custom dark/neon theme CSS (~4090 lines)
+- `assets/css/vjstv.css` - Custom dark/neon theme CSS (~5780 lines)
 - `_layouts/default.html` - Base layout with skip-to-content link
-- `_layouts/vjs-detail.html` - Shared detail page layout for all collections
+- `_layouts/vjs-detail.html` - Shared detail page layout for all collections (semantic h2 sidebar headings)
 - `_includes/vjstv-footer.html` - Custom footer with floating sidebar, tip jar modal, mobile nav
 - `_includes/cards/` - Reusable card components (artist, project, event, studio, technology, sponsor)
 - `_includes/layouts/nav/nav-3.html` - Dark navigation bar (used across all pages)
-- `_includes/core/head/meta-seo-tags.html` - SEO meta tags, JSON-LD schema
-- `_includes/core/head/meta-og-tags.html` - Open Graph + Twitter Card meta
+- `_includes/core/head/meta-seo-tags.html` - SEO meta tags, canonical URL, robots directives
+- `_includes/core/head/meta-og-tags.html` - Open Graph, Twitter Cards, JSON-LD @graph structured data
+- `robots.txt` - Auto-generated robots.txt with sitemap reference
+- `sitemap.xml` - Auto-generated XML sitemap (192 URLs across all collections)
+- `sitemap.html` - Human-readable HTML sitemap with structured sections
+- `_headers` - Cloudflare security + caching headers
 
 ## Accessibility
 - Skip-to-content link (keyboard-accessible, cyan highlight)
@@ -53,12 +57,33 @@ VJs TV is a Jekyll-based platform for VJ culture and audiovisual performances. I
 - `role="dialog"` on tip jar modal
 - `prefers-reduced-motion` media query disables all animations
 
+## SEO
+- **Canonical URLs** on every page (`<link rel="canonical">`)
+- **Meta robots** with `max-image-preview:large`, `max-snippet:-1`, `max-video-preview:-1`
+- **404 pages** have `noindex, follow` to prevent index pollution
+- **robots.txt** at `/robots.txt` — auto-generated, references sitemap
+- **XML sitemap** at `/sitemap.xml` — auto-generated from all collections (192 URLs)
+- **JSON-LD structured data** (`@graph`): Organization, WebSite, WebPage on every page, plus:
+  - `Person` for artist pages (`_vjs/`)
+  - `CreativeWork` + `VideoObject` for project pages (`_projects/`)
+  - `Event` for event pages (`_events/`)
+  - `Organization` for studio pages (`_studios/`)
+  - `SoftwareApplication` for technology pages (`_technology/`)
+- **Open Graph** with dynamic `og:type` (website/video.other/event), absolute image URLs, locale
+- **Twitter Cards** with `summary_large_image`, creator handle
+- **Heading hierarchy**: One H1 per page, semantic H2 sidebar headings
+- **Security headers**: HSTS, X-Content-Type-Options, Permissions-Policy, immutable caching
+
 ## Performance
 - `requestAnimationFrame` throttled scroll handler for progress bar
 - Passive scroll event listeners
 - `will-change` hints on animated elements
 - IntersectionObserver visibility gating on meter bar animation
-- `preconnect` for Google Fonts
+- `preconnect` for Google Fonts and Vimeo
+- `preload` for critical CSS (vjstv.css)
+- `defer` on all non-critical scripts (jQuery loads synchronously, everything else deferred)
+- Runtime lazy loading for below-fold images via `loading="lazy"` attribute
+- Immutable cache headers for static assets (CSS, JS, images, fonts)
 
 ## API Architecture
 

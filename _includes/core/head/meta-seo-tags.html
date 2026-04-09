@@ -2,12 +2,24 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 <meta name="theme-color" content="#050505" />
 <meta name="color-scheme" content="dark" />
-<meta name="robots" content="index, follow" />
+{% if page.url == "/404.html" or page.noindex %}
+<meta name="robots" content="noindex, follow" />
+{% else %}
+<meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1" />
+<link rel="canonical" href="{{ page.url | absolute_url }}" />
+{% endif %}
 <link rel="preconnect" href="https://fonts.googleapis.com" />
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-<title>{% if page.meta_title %}{{ page.meta_title }}{% elsif page.title %}{{ page.title }}{% else %}{{ site.data.general_settings.title }}{% endif %}</title>
-<meta name="title" content="{% if page.meta_title %}{{ page.meta_title }}{% elsif page.title %}{{ page.title }}{% else %}{{ site.data.general_settings.title }}{% endif %}">
-<meta name="description" content="{% if page.meta_description %}{{ page.meta_description }}{% elsif page.description %}{{ page.description }}{% else %}{{ site.data.general_settings.description }}{% endif %}">
+<link rel="preconnect" href="https://vimeo.com" />
+{% assign seo_title = page.meta_title | default: page.title | default: site.data.general_settings.title %}
+{% assign seo_description = page.meta_description | default: page.description | default: site.data.general_settings.description %}
+<title>{{ seo_title }}</title>
+<meta name="title" content="{{ seo_title }}">
+<meta name="description" content="{{ seo_description | strip_newlines | truncate: 160 }}">
 {% if page.meta_keywords %}
 <meta name="keywords" content="{{ page.meta_keywords }}">
 {% endif %}
+<meta name="author" content="VJs TV">
+<link rel="sitemap" type="application/xml" href="/sitemap.xml" />
+<link rel="alternate" type="application/rss+xml" title="VJs TV RSS" href="/feed.xml" />
+<link rel="alternate" type="application/atom+xml" title="VJs TV Atom" href="/atom.xml" />

@@ -122,7 +122,7 @@ layout: default
 
         {% if page.equipment %}
         <div class="vjs-sidebar-card">
-          <div class="vjs-sidebar-card-heading">Equipment</div>
+          <h2 class="vjs-sidebar-card-heading">Equipment</h2>
           {% for item in page.equipment %}
           <div class="vjs-sidebar-card-row">{{ item }}</div>
           {% endfor %}
@@ -131,7 +131,7 @@ layout: default
 
         {% if page.used_by %}
         <div class="vjs-sidebar-card">
-          <div class="vjs-sidebar-card-heading">Used By</div>
+          <h2 class="vjs-sidebar-card-heading">Used By</h2>
           {% for name in page.used_by %}
           <div class="vjs-sidebar-card-row">{{ name }}</div>
           {% endfor %}
@@ -140,7 +140,7 @@ layout: default
 
         {% if page.artists %}
         <div class="vjs-sidebar-card">
-          <div class="vjs-sidebar-card-heading">Artists</div>
+          <h2 class="vjs-sidebar-card-heading">Artists</h2>
           {% for name in page.artists %}
           <div class="vjs-sidebar-card-row">{{ name }}</div>
           {% endfor %}
@@ -149,7 +149,7 @@ layout: default
 
         {% if page.sponsored_artists %}
         <div class="vjs-sidebar-card">
-          <div class="vjs-sidebar-card-heading">Sponsored Artists</div>
+          <h2 class="vjs-sidebar-card-heading">Sponsored Artists</h2>
           {% for name in page.sponsored_artists %}
           <div class="vjs-sidebar-card-row">{{ name }}</div>
           {% endfor %}
@@ -193,7 +193,7 @@ layout: default
         {% assign all_artist_projects = artist_projects | concat: collab_projects | uniq %}
         {% if all_artist_projects.size > 0 %}
         <div class="vjs-sidebar-card">
-          <div class="vjs-sidebar-card-heading" style="color:var(--vjs-magenta);">Projects</div>
+          <h2 class="vjs-sidebar-card-heading" style="color:var(--vjs-magenta);">Projects</h2>
           {% for proj in all_artist_projects %}
           <a href="{{ proj.url }}" class="vjs-relation-item">
             <div class="vjs-relation-avatar" style="background:linear-gradient(135deg,rgba(255,0,170,0.35),rgba(157,0,255,0.2));">{{ proj.title | truncate: 2, '' }}</div>
@@ -214,7 +214,7 @@ layout: default
         {% endfor %}
         {% if artist_events.size > 0 %}
         <div class="vjs-sidebar-card">
-          <div class="vjs-sidebar-card-heading" style="color:var(--vjs-cyan);">Events</div>
+          <h2 class="vjs-sidebar-card-heading" style="color:var(--vjs-cyan);">Events</h2>
           {% for ev in artist_events %}
           <a href="{{ ev.url }}" class="vjs-relation-item">
             <div class="vjs-relation-avatar" style="background:linear-gradient(135deg,rgba(0,249,255,0.3),rgba(0,212,255,0.15));">{{ ev.date | date: "%d" }}</div>
@@ -231,7 +231,7 @@ layout: default
         {% assign project_artist = site.vjs | where: "title", page.artist | first %}
         {% if project_artist %}
         <div class="vjs-sidebar-card">
-          <div class="vjs-sidebar-card-heading" style="color:var(--vjs-ultraviolet);">Artist</div>
+          <h2 class="vjs-sidebar-card-heading" style="color:var(--vjs-ultraviolet);">Artist</h2>
           <a href="{{ project_artist.url }}" class="vjs-relation-item">
             <div class="vjs-relation-avatar">{{ project_artist.title | truncate: 2, '' }}</div>
             <div>
@@ -251,7 +251,7 @@ layout: default
         {% endfor %}
         {% if linked_artists.size > 0 %}
         <div class="vjs-sidebar-card">
-          <div class="vjs-sidebar-card-heading" style="color:var(--vjs-ultraviolet);">Artist Profiles</div>
+          <h2 class="vjs-sidebar-card-heading" style="color:var(--vjs-ultraviolet);">Artist Profiles</h2>
           {% for a in linked_artists %}
           <a href="{{ a.url }}" class="vjs-relation-item">
             <div class="vjs-relation-avatar">{{ a.title | truncate: 2, '' }}</div>
@@ -274,7 +274,7 @@ layout: default
         {% endfor %}
         {% if tech_artists.size > 0 %}
         <div class="vjs-sidebar-card">
-          <div class="vjs-sidebar-card-heading" style="color:var(--vjs-cyan);">Artists Using This</div>
+          <h2 class="vjs-sidebar-card-heading" style="color:var(--vjs-cyan);">Artists Using This</h2>
           {% for a in tech_artists %}
           <a href="{{ a.url }}" class="vjs-relation-item">
             <div class="vjs-relation-avatar" style="background:linear-gradient(135deg,rgba(0,249,255,0.3),rgba(0,212,255,0.15));">{{ a.title | truncate: 2, '' }}</div>

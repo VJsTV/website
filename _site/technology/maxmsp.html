@@ -7,31 +7,113 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 <meta name="theme-color" content="#050505" />
 <meta name="color-scheme" content="dark" />
-<meta name="robots" content="index, follow" />
+
+<meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1" />
+<link rel="canonical" href="https://vjstv.com/technology/maxmsp" />
+
 <link rel="preconnect" href="https://fonts.googleapis.com" />
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link rel="preconnect" href="https://vimeo.com" />
+
+
 <title>Max/MSP</title>
 <meta name="title" content="Max/MSP">
 <meta name="description" content="Visual programming language for music and multimedia. Used to build custom audio-reactive visuals, interactive installations, and real-time AV systems.">
 
-  <meta property="og:type" content="website">
+<meta name="author" content="VJs TV">
+<link rel="sitemap" type="application/xml" href="/sitemap.xml" />
+<link rel="alternate" type="application/rss+xml" title="VJs TV RSS" href="/feed.xml" />
+<link rel="alternate" type="application/atom+xml" title="VJs TV Atom" href="/atom.xml" />
+
+  
+
+
+<meta property="og:type" content="website">
 <meta property="og:url" content="https://vjstv.com/technology/maxmsp">
 <meta property="og:site_name" content="VJs TV">
+<meta property="og:locale" content="en_US">
 <meta property="og:title" content="Max/MSP">
 <meta property="og:description" content="Visual programming language for music and multimedia. Used to build custom audio-reactive visuals, interactive installations, and real-time AV systems.">
 
-<meta property="og:image" content="/assets/images/meta-image.webp" />
+<meta property="og:image" content="https://vjstv.com/assets/images/meta-image.webp" />
+<meta property="og:image:width" content="1200" />
+<meta property="og:image:height" content="630" />
 
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:site" content="@vjs_tv">
+<meta name="twitter:creator" content="@vjs_tv">
 <meta name="twitter:title" content="Max/MSP">
 <meta name="twitter:description" content="Visual programming language for music and multimedia. Used to build custom audio-reactive visuals, interactive installations, and real-time AV systems.">
 
-<meta name="twitter:image" content="/assets/images/meta-image.webp" />
+<meta name="twitter:image" content="https://vjstv.com/assets/images/meta-image.webp" />
+
 
 <script type="application/ld+json">
-{"@context":"https://schema.org","@type":"WebSite","name":"VJs TV","url":"https://vjstv.com/","description":"VJs TV is the global broadcast network for VJ culture, audiovisual performances, and digital visual art. Watch live performances, discover artists, and explore the world of visual performance.","potentialAction":{"@type":"SearchAction","target":"https://vjstv.com/search?q={search_term_string}","query-input":"required name=search_term_string"}}
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "Organization",
+      "@id": "https://vjstv.com/#organization",
+      "name": "VJs TV",
+      "url": "https://vjstv.com",
+      "logo": {
+        "@type": "ImageObject",
+        "url": "https://vjstv.com/assets/images/logo-vjstv.svg"
+      },
+      "description": "VJs TV is the global broadcast network for VJ culture, audiovisual performances, and digital visual art. Watch live performances, discover artists, and explore the world of visual performance.",
+      "sameAs": [
+        "https://instagram.com/vjstv",
+        "https://facebook.com/vjstv",
+        "https://twitter.com/vjs_tv",
+        "https://www.linkedin.com/company/vjstv",
+        "https://vimeo.com/vjstv",
+        "https://tiktok.com/@vjs.tv",
+        "https://www.youtube.com/@vjs_tv"
+      ]
+    },
+    {
+      "@type": "WebSite",
+      "@id": "https://vjstv.com/#website",
+      "name": "VJs TV",
+      "url": "https://vjstv.com",
+      "description": "VJs TV is the global broadcast network for VJ culture, audiovisual performances, and digital visual art. Watch live performances, discover artists, and explore the world of visual performance.",
+      "publisher": { "@id": "https://vjstv.com/#organization" },
+      "potentialAction": {
+        "@type": "SearchAction",
+        "target": "https://vjstv.com/search?q={search_term_string}",
+        "query-input": "required name=search_term_string"
+      }
+    },
+    {
+      "@type": "WebPage",
+      "@id": "https://vjstv.com/technology/maxmsp#webpage",
+      "url": "https://vjstv.com/technology/maxmsp",
+      "name": "Max/MSP",
+      "description": "Visual programming language for music and multimedia. Used to build custom audio-reactive visuals, interactive installations, and real-time AV systems.",
+      "isPartOf": { "@id": "https://vjstv.com/#website" },
+      "about": { "@id": "https://vjstv.com/#organization" }
+      
+    }
+    
+    
+    
+    
+    ,
+    {
+      "@type": "SoftwareApplication",
+      "@id": "https://vjstv.com/technology/maxmsp/#software",
+      "name": "Max/MSP",
+      "url": "https://vjstv.com/technology/maxmsp",
+      "description": "Visual programming language for music and multimedia. Used to build custom audio-reactive visuals, interactive installations, and real-time AV systems.",
+      "applicationCategory": "Visual Programming"
+      , "sameAs": ["https://cycling74.com"]
+    }
+    
+  ]
+}
 </script>
+
   <!-- Favicons-->
   <link rel="icon" type="image/x-icon" href="/assets/images/favicon.ico">
   <link rel="icon" type="image/png" sizes="16x16" href="/assets/images/favicon-16x16.png">
@@ -39,6 +121,7 @@
   <link rel="icon" type="image/png" sizes="96x96" href="/assets/images/favicon-96x96.png">
   <!-- Stylesheets-->
   <link rel="shortcut icon" href="/assets/images/favicon.ico" />
+<link rel="preload" href="/assets/css/vjstv.css" as="style" />
 <link rel="stylesheet" type="text/css" href="/assets/css/bootstrap.min.css" />
 <link rel="stylesheet" type="text/css" href="/assets/css/plugins.css" />
 <link rel="stylesheet" type="text/css" href="/assets/revolution/css/settings.css" />
@@ -348,7 +431,7 @@
 
         
         <div class="vjs-sidebar-card">
-          <div class="vjs-sidebar-card-heading">Used By</div>
+          <h2 class="vjs-sidebar-card-heading">Used By</h2>
           
           <div class="vjs-sidebar-card-row">Experimental AV artists</div>
           
@@ -462,7 +545,7 @@ function vjsCopyLink(btn, url) {
         
         
         <div class="vjs-sidebar-card">
-          <div class="vjs-sidebar-card-heading" style="color:var(--vjs-cyan);">Artists Using This</div>
+          <h2 class="vjs-sidebar-card-heading" style="color:var(--vjs-cyan);">Artists Using This</h2>
           
           <a href="/artists/pablo-valbuena" class="vjs-relation-item">
             <div class="vjs-relation-avatar" style="background:linear-gradient(135deg,rgba(0,249,255,0.3),rgba(0,212,255,0.15));">Pa</div>
@@ -873,29 +956,24 @@ document.getElementById('report-form-global').addEventListener('submit', functio
   </div>
   <!-- Site Scripts-->
   <script src="/assets/js/jquery.min.js"></script>
-<script src="/assets/js/popper.min.js"></script>
-<script src="/assets/js/bootstrap.min.js"></script>
-<script src="/assets/revolution/js/jquery.themepunch.tools.min.js"></script>
-<script src="/assets/revolution/js/jquery.themepunch.revolution.min.js"></script>
-<script src="/assets/revolution/js/extensions/revolution.extension.actions.min.js"></script>
-<script src="/assets/revolution/js/extensions/revolution.extension.carousel.min.js"></script>
-<script src="/assets/revolution/js/extensions/revolution.extension.kenburn.min.js"></script>
-<script src="/assets/revolution/js/extensions/revolution.extension.layeranimation.min.js"></script>
-<script src="/assets/revolution/js/extensions/revolution.extension.migration.min.js"></script>
-<script src="/assets/revolution/js/extensions/revolution.extension.navigation.min.js"></script>
-<script src="/assets/revolution/js/extensions/revolution.extension.parallax.min.js"></script>
-<script src="/assets/revolution/js/extensions/revolution.extension.slideanims.min.js"></script>
-<script src="/assets/revolution/js/extensions/revolution.extension.video.min.js"></script>
-<script src="/assets/js/plugins.js"></script>
-<script src="/assets/js/simple-jekyll-search.min.js"></script>
-<script src="/assets/js/scripts.js"></script>
+<script src="/assets/js/popper.min.js" defer></script>
+<script src="/assets/js/bootstrap.min.js" defer></script>
+<script src="/assets/revolution/js/jquery.themepunch.tools.min.js" defer></script>
+<script src="/assets/revolution/js/jquery.themepunch.revolution.min.js" defer></script>
+<script src="/assets/revolution/js/extensions/revolution.extension.actions.min.js" defer></script>
+<script src="/assets/revolution/js/extensions/revolution.extension.carousel.min.js" defer></script>
+<script src="/assets/revolution/js/extensions/revolution.extension.kenburn.min.js" defer></script>
+<script src="/assets/revolution/js/extensions/revolution.extension.layeranimation.min.js" defer></script>
+<script src="/assets/revolution/js/extensions/revolution.extension.migration.min.js" defer></script>
+<script src="/assets/revolution/js/extensions/revolution.extension.navigation.min.js" defer></script>
+<script src="/assets/revolution/js/extensions/revolution.extension.parallax.min.js" defer></script>
+<script src="/assets/revolution/js/extensions/revolution.extension.slideanims.min.js" defer></script>
+<script src="/assets/revolution/js/extensions/revolution.extension.video.min.js" defer></script>
+<script src="/assets/js/plugins.js" defer></script>
+<script src="/assets/js/simple-jekyll-search.min.js" defer></script>
+<script src="/assets/js/scripts.js" defer></script>
 
 <script>
-/* ── VJS GLOBAL VIMEO THUMBNAIL LOADER ──────────────────────────
-   Any element with class="vjs-vimeo-thumb" and data-vimeo="ID"
-   will automatically receive its Vimeo thumbnail as background.
-   Add those two attributes to any card/div to get auto-images.
-──────────────────────────────────────────────────────────────── */
 (function() {
   function vjsLoadVimeoThumbs() {
     document.querySelectorAll('.vjs-vimeo-thumb[data-vimeo]').forEach(function(el) {
@@ -921,8 +999,15 @@ document.getElementById('report-form-global').addEventListener('submit', functio
   }
   window.vjsLoadVimeoThumbs = vjsLoadVimeoThumbs;
 })();
+
+document.addEventListener('DOMContentLoaded', function() {
+  document.querySelectorAll('img:not([loading])').forEach(function(img) {
+    if (!img.closest('header') && !img.closest('nav') && !img.closest('.hero')) {
+      img.setAttribute('loading', 'lazy');
+    }
+  });
+});
 </script>
 
-  
 </body>
 </html>

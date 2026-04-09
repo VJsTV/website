@@ -1,0 +1,10 @@
+---
+layout: null
+permalink: /robots.txt
+---
+User-agent: *
+Allow: /
+
+Disallow: /search?q=
+
+Sitemap: {{ site.url }}/sitemap.xml
