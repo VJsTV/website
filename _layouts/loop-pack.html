@@ -23,6 +23,9 @@ layout: default
       <div class="vjs-mp-hero-thumb">
         <div class="vjs-mp-thumb-art" style="background: linear-gradient(135deg, {{ page.gradient }});">
           <div class="vjs-mp-thumb-grid-overlay"></div>
+            <video class="vjs-mp-thumb-video" autoplay muted loop playsinline preload="metadata" poster="{{ page.video_poster | default: '' }}">
+              <source src="/assets/videos/loop-packs/{{ page.name }}/preview.mp4" type="video/mp4">
+            </video>
           <div class="vjs-mp-thumb-play-icon">
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
               <circle cx="12" cy="12" r="10"/>
