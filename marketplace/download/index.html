@@ -100,6 +100,7 @@ description: "Your VJ loop pack download is ready."
   var clips = params.get('clips') || '—';
   var size = params.get('size') || '—';
   var isFree = params.get('free') === 'true';
+  var downloadUrl = params.get('url') ? decodeURIComponent(params.get('url')) : null;
 
   document.getElementById('dlTitle').textContent = decodeURIComponent(title);
   if (artist) document.getElementById('dlArtist').textContent = 'by ' + decodeURIComponent(artist);
@@ -107,8 +108,14 @@ description: "Your VJ loop pack download is ready."
   document.getElementById('dlSize').textContent = decodeURIComponent(size);
 
   var dlBtn = document.getElementById('dlBtn');
+
+  if (downloadUrl) {
+    dlBtn.setAttribute('href', downloadUrl);
+    dlBtn.setAttribute('download', '');
+  }
+
   dlBtn.addEventListener('click', function(e) {
-    e.preventDefault();
+    if (!downloadUrl) { e.preventDefault(); return; }
     var progress = document.getElementById('dlProgress');
     var fill = document.getElementById('dlFill');
     var pct = document.getElementById('dlPct');
@@ -124,7 +131,7 @@ description: "Your VJ loop pack download is ready."
         pct.textContent = '100%';
         fill.style.width = '100%';
         setTimeout(function() {
-          progress.innerHTML = '<div class="vjs-mp-dl-progress-label" style="color:#39ff14;text-align:center;">Download complete!</div>';
+          progress.innerHTML = '<div class="vjs-mp-dl-progress-label" style="color:#39ff14;text-align:center;">Download started!</div>';
         }, 400);
       } else {
         pct.textContent = Math.round(val) + '%';
