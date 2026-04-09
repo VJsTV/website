@@ -1,6 +1,6 @@
 ---
 layout: vjs-detail
-vimeo_id: null
+vimeo_id: 70587267
 title: "Time Tilings [STUK]"
 name: "time-tilings-stuk-pablo-valbuena"
 artist: "Pablo Valbuena"
