@@ -105,7 +105,7 @@ layout: default
             {% endif %}
           </div>
           {% if page.price == 0 %}
-          <a href="/marketplace/download?pack={{ page.name }}&title={{ page.title | uri_escape }}&artist={{ page.artist | uri_escape }}&clips={{ page.clip_count }}&size={{ page.file_size | uri_escape }}&free=true&url={{ page.download_url | uri_escape }}"
+          <a href="/marketplace/download?pack={{ page.name }}&title={{ page.title | uri_escape }}&artist={{ page.artist | uri_escape }}&clips={{ page.clip_count }}&size={{ page.file_size | uri_escape }}&free=true&url={{ page.download_url | uri_escape }}&license={{ page.license_url | uri_escape }}"
              class="vjs-mp-btn-primary">
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" style="width:1em;height:1em;vertical-align:middle;margin-right:6px;"><path d="M12 3v14M5 11l7 7 7-7"/><path d="M4 20h16"/></svg>
             FREE DOWNLOAD

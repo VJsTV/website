@@ -33,7 +33,7 @@ description: "Your VJ loop pack download is ready."
       </div>
       <div class="vjs-mp-dl-meta-item">
         <span class="vjs-mp-dl-meta-label">FORMAT</span>
-        <span class="vjs-mp-dl-meta-val">MP4 + HAP-Q</span>
+        <span class="vjs-mp-dl-meta-val">MP4</span>
       </div>
       <div class="vjs-mp-dl-meta-item">
         <span class="vjs-mp-dl-meta-label">LICENSE</span>
@@ -41,21 +41,20 @@ description: "Your VJ loop pack download is ready."
       </div>
     </div>
 
-    <a href="#" class="vjs-mp-btn-primary vjs-mp-dl-btn" id="dlBtn">
+    <!-- PRIMARY DOWNLOAD — loops (Google Drive) -->
+    <a href="#" id="dlBtn" class="vjs-mp-btn-primary vjs-mp-dl-btn" target="_blank" rel="noopener noreferrer">
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" style="width:1em;height:1em;vertical-align:middle;margin-right:8px;"><path d="M12 3v14M5 11l7 7 7-7"/><path d="M4 20h16"/></svg>
-      DOWNLOAD NOW
+      DOWNLOAD VJ LOOPS
+    </a>
+
+    <!-- SECONDARY DOWNLOAD — commercial license -->
+    <a href="#" id="dlLicenseBtn" class="vjs-mp-dl-license-btn" download="vjstv-commercial-license.txt">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" style="width:0.9em;height:0.9em;vertical-align:middle;margin-right:6px;"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="12" y1="18" x2="12" y2="12"/><line x1="9" y1="15" x2="15" y2="15"/></svg>
+      Download Commercial License
     </a>
 
     <div class="vjs-mp-dl-note">
-      This link is valid for 24 hours. Save the file to your drive before it expires.
-    </div>
-
-    <!-- PROGRESS BAR (demo) -->
-    <div class="vjs-mp-dl-progress-wrap" id="dlProgress" style="display:none;">
-      <div class="vjs-mp-dl-progress-label">Downloading… <span id="dlPct">0%</span></div>
-      <div class="vjs-mp-dl-progress-bar">
-        <div class="vjs-mp-dl-progress-fill" id="dlFill" style="width:0%"></div>
-      </div>
+      Hosted on Google Drive — your browser will open the download automatically.
     </div>
 
     <!-- INSTRUCTIONS -->
@@ -64,15 +63,15 @@ description: "Your VJ loop pack download is ready."
       <div class="vjs-mp-dl-instr-grid">
         <div class="vjs-mp-dl-instr-step">
           <div class="vjs-mp-dl-step-num">01</div>
-          <div class="vjs-mp-dl-step-text">Extract the ZIP to your media drive</div>
+          <div class="vjs-mp-dl-step-text">Click "Download VJ Loops" — Google Drive will prepare a ZIP</div>
         </div>
         <div class="vjs-mp-dl-instr-step">
           <div class="vjs-mp-dl-step-num">02</div>
-          <div class="vjs-mp-dl-step-text">Load MP4s into Resolume, VDMX, or TouchDesigner</div>
+          <div class="vjs-mp-dl-step-text">Extract the ZIP to your media drive</div>
         </div>
         <div class="vjs-mp-dl-instr-step">
           <div class="vjs-mp-dl-step-num">03</div>
-          <div class="vjs-mp-dl-step-text">Use HAP-Q files for GPU-accelerated playback on high res outputs</div>
+          <div class="vjs-mp-dl-step-text">Load MP4s into Resolume, VDMX, or TouchDesigner</div>
         </div>
         <div class="vjs-mp-dl-instr-step">
           <div class="vjs-mp-dl-step-num">04</div>
@@ -90,6 +89,39 @@ description: "Your VJ loop pack download is ready."
   </div>
 </div>
 
+<style>
+.vjs-mp-dl-license-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  margin-top: 12px;
+  padding: 10px 24px;
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 0.75rem;
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: #888;
+  background: transparent;
+  border: 1px solid #2a2a2a;
+  text-decoration: none;
+  transition: color 0.15s, border-color 0.15s;
+  cursor: pointer;
+}
+.vjs-mp-dl-license-btn:hover {
+  color: #ccc;
+  border-color: #444;
+}
+.vjs-mp-dl-btn {
+  display: flex;
+  width: 100%;
+  max-width: 420px;
+  margin: 0 auto;
+  justify-content: center;
+  align-items: center;
+}
+</style>
+
 {% include vjstv-footer.html %}
 
 <script>
@@ -99,8 +131,8 @@ description: "Your VJ loop pack download is ready."
   var artist = params.get('artist') || '';
   var clips = params.get('clips') || '—';
   var size = params.get('size') || '—';
-  var isFree = params.get('free') === 'true';
   var downloadUrl = params.get('url') ? decodeURIComponent(params.get('url')) : null;
+  var licenseUrl = params.get('license') ? decodeURIComponent(params.get('license')) : '/assets/downloads/vjstv-commercial-license.txt';
 
   document.getElementById('dlTitle').textContent = decodeURIComponent(title);
   if (artist) document.getElementById('dlArtist').textContent = 'by ' + decodeURIComponent(artist);
@@ -108,36 +140,16 @@ description: "Your VJ loop pack download is ready."
   document.getElementById('dlSize').textContent = decodeURIComponent(size);
 
   var dlBtn = document.getElementById('dlBtn');
-
   if (downloadUrl) {
     dlBtn.setAttribute('href', downloadUrl);
-    dlBtn.setAttribute('download', '');
+  } else {
+    dlBtn.style.opacity = '0.4';
+    dlBtn.style.pointerEvents = 'none';
   }
 
-  dlBtn.addEventListener('click', function(e) {
-    if (!downloadUrl) { e.preventDefault(); return; }
-    var progress = document.getElementById('dlProgress');
-    var fill = document.getElementById('dlFill');
-    var pct = document.getElementById('dlPct');
-    progress.style.display = 'block';
-    dlBtn.style.opacity = '0.5';
-    dlBtn.style.pointerEvents = 'none';
-    var val = 0;
-    var interval = setInterval(function() {
-      val += Math.random() * 12 + 4;
-      if (val >= 100) {
-        val = 100;
-        clearInterval(interval);
-        pct.textContent = '100%';
-        fill.style.width = '100%';
-        setTimeout(function() {
-          progress.innerHTML = '<div class="vjs-mp-dl-progress-label" style="color:#39ff14;text-align:center;">Download started!</div>';
-        }, 400);
-      } else {
-        pct.textContent = Math.round(val) + '%';
-        fill.style.width = val + '%';
-      }
-    }, 200);
-  });
+  var licenseBtn = document.getElementById('dlLicenseBtn');
+  if (licenseUrl) {
+    licenseBtn.setAttribute('href', licenseUrl);
+  }
 })();
 </script>
