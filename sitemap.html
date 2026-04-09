@@ -1,27 +1,289 @@
 ---
 layout: default
 permalink: /sitemap/
-title: Sitemap
+title: "Sitemap — VJs TV"
+meta_title: "Sitemap — VJs TV"
+meta_description: "Full sitemap of VJs TV — browse artists, projects, events, studios, technology, and more."
 ---
 
-<section class="page-section sitemap-page">
-  <div class="container">
-    <h1 class="page-title">Sitemap</h1>
-    <p class="page-subtitle">A quick overview of the main areas of VJs TV.</p>
-    <div class="sitemap-grid">
-      <a href="/" class="sitemap-link">Home</a>
-      <a href="/live" class="sitemap-link">Live</a>
-      <a href="/artists" class="sitemap-link">Artists</a>
-      <a href="/projects" class="sitemap-link">Projects</a>
-      <a href="/events" class="sitemap-link">Events</a>
-      <a href="/studios" class="sitemap-link">Studios</a>
-      <a href="/technology" class="sitemap-link">Technology</a>
-      <a href="/sponsors" class="sitemap-link">Sponsors</a>
-      <a href="/search" class="sitemap-link">Search</a>
-      <a href="/submit" class="sitemap-link">Submit Project</a>
-      <a href="/partners" class="sitemap-link">Partner With Us</a>
-      <a href="/privacy" class="sitemap-link">Privacy Policy</a>
-      <a href="/terms" class="sitemap-link">Terms &amp; Conditions</a>
-    </div>
+{% include layouts/nav/nav-3.html default_logo="white" %}
+
+<style>
+.vjs-sitemap-hero {
+  background: #050505;
+  border-bottom: 1px solid #1a1a1a;
+  padding: 56px 24px 40px;
+}
+.vjs-sitemap-hero-inner {
+  max-width: 1400px;
+  margin: 0 auto;
+}
+.vjs-sitemap-eyebrow {
+  font-family: 'Orbitron', sans-serif;
+  font-size: 0.55rem;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--vjs-cyan, #00e5ff);
+  margin-bottom: 14px;
+}
+.vjs-sitemap-title {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: clamp(2rem, 5vw, 3.2rem);
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  color: #fff;
+  margin: 0 0 10px;
+  line-height: 1;
+}
+.vjs-sitemap-sub {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 0.95rem;
+  color: rgba(255,255,255,0.35);
+  margin: 0;
+  letter-spacing: 0.02em;
+}
+
+.vjs-sitemap-body {
+  background: #050505;
+  padding: 0 24px 80px;
+}
+.vjs-sitemap-body-inner {
+  max-width: 1400px;
+  margin: 0 auto;
+}
+
+.vjs-sitemap-section {
+  border-top: 1px solid #1a1a1a;
+  padding: 40px 0 0;
+  margin-bottom: 40px;
+}
+.vjs-sitemap-section-header {
+  display: flex;
+  align-items: baseline;
+  gap: 12px;
+  margin-bottom: 20px;
+}
+.vjs-sitemap-section-label {
+  font-family: 'Orbitron', sans-serif;
+  font-size: 0.55rem;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--vjs-cyan, #00e5ff);
+}
+.vjs-sitemap-section-title {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 1.1rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: #fff;
+  margin: 0;
+}
+.vjs-sitemap-section-count {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 0.75rem;
+  color: #333;
+  margin-left: auto;
+}
+
+.vjs-sitemap-links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+}
+.vjs-sitemap-link {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 0.8rem;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  color: rgba(255,255,255,0.55);
+  text-decoration: none;
+  padding: 5px 12px;
+  border: 1px solid #1a1a1a;
+  background: #0a0a0a;
+  transition: color 0.15s, border-color 0.15s;
+  white-space: nowrap;
+}
+.vjs-sitemap-link:hover {
+  color: #fff;
+  border-color: #333;
+}
+.vjs-sitemap-link.primary {
+  font-size: 0.85rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  color: rgba(255,255,255,0.75);
+  letter-spacing: 0.08em;
+  padding: 7px 16px;
+  border-color: #222;
+}
+.vjs-sitemap-link.primary:hover {
+  color: #fff;
+  border-color: var(--vjs-cyan, #00e5ff);
+}
+</style>
+
+<div class="vjs-sitemap-hero">
+  <div class="vjs-sitemap-hero-inner">
+    <div class="vjs-sitemap-eyebrow">Navigation</div>
+    <h1 class="vjs-sitemap-title">Sitemap</h1>
+    <p class="vjs-sitemap-sub">Full index of all pages, artists, projects, events, studios, and technology on VJs TV.</p>
   </div>
-</section>
+</div>
+
+<div class="vjs-sitemap-body">
+  <div class="vjs-sitemap-body-inner">
+
+    <!-- PLATFORM -->
+    <div class="vjs-sitemap-section">
+      <div class="vjs-sitemap-section-header">
+        <span class="vjs-sitemap-section-label">01</span>
+        <h2 class="vjs-sitemap-section-title">Platform</h2>
+      </div>
+      <div class="vjs-sitemap-links">
+        <a href="/" class="vjs-sitemap-link primary">Home</a>
+        <a href="/live" class="vjs-sitemap-link primary">Live</a>
+        <a href="/artists" class="vjs-sitemap-link primary">Artists</a>
+        <a href="/projects" class="vjs-sitemap-link primary">Projects</a>
+        <a href="/events" class="vjs-sitemap-link primary">Events</a>
+        <a href="/studios" class="vjs-sitemap-link primary">Studios</a>
+        <a href="/technology" class="vjs-sitemap-link primary">Technology</a>
+        <a href="/marketplace" class="vjs-sitemap-link primary">Marketplace</a>
+        <a href="/search" class="vjs-sitemap-link primary">Search</a>
+      </div>
+    </div>
+
+    <!-- ARTISTS -->
+    <div class="vjs-sitemap-section">
+      <div class="vjs-sitemap-section-header">
+        <span class="vjs-sitemap-section-label">02</span>
+        <h2 class="vjs-sitemap-section-title">Artists</h2>
+        <span class="vjs-sitemap-section-count">{{ site.vjs | size }} entries</span>
+      </div>
+      <div class="vjs-sitemap-links">
+        {% assign sorted_vjs = site.vjs | sort: "title" %}
+        {% for artist in sorted_vjs %}
+          <a href="{{ artist.url }}" class="vjs-sitemap-link">{{ artist.title }}</a>
+        {% endfor %}
+      </div>
+    </div>
+
+    <!-- PROJECTS -->
+    <div class="vjs-sitemap-section">
+      <div class="vjs-sitemap-section-header">
+        <span class="vjs-sitemap-section-label">03</span>
+        <h2 class="vjs-sitemap-section-title">Projects</h2>
+        <span class="vjs-sitemap-section-count">{{ site.projects | size }} entries</span>
+      </div>
+      <div class="vjs-sitemap-links">
+        {% assign sorted_projects = site.projects | sort: "title" %}
+        {% for project in sorted_projects %}
+          <a href="{{ project.url }}" class="vjs-sitemap-link">{{ project.title }}</a>
+        {% endfor %}
+      </div>
+    </div>
+
+    <!-- EVENTS -->
+    <div class="vjs-sitemap-section">
+      <div class="vjs-sitemap-section-header">
+        <span class="vjs-sitemap-section-label">04</span>
+        <h2 class="vjs-sitemap-section-title">Events</h2>
+        <span class="vjs-sitemap-section-count">{{ site.events | size }} entries</span>
+      </div>
+      <div class="vjs-sitemap-links">
+        {% assign sorted_events = site.events | sort: "title" %}
+        {% for event in sorted_events %}
+          <a href="{{ event.url }}" class="vjs-sitemap-link">{{ event.title }}</a>
+        {% endfor %}
+      </div>
+    </div>
+
+    <!-- STUDIOS -->
+    <div class="vjs-sitemap-section">
+      <div class="vjs-sitemap-section-header">
+        <span class="vjs-sitemap-section-label">05</span>
+        <h2 class="vjs-sitemap-section-title">Studios</h2>
+        <span class="vjs-sitemap-section-count">{{ site.studios | size }} entries</span>
+      </div>
+      <div class="vjs-sitemap-links">
+        {% assign sorted_studios = site.studios | sort: "title" %}
+        {% for studio in sorted_studios %}
+          <a href="{{ studio.url }}" class="vjs-sitemap-link">{{ studio.title }}</a>
+        {% endfor %}
+      </div>
+    </div>
+
+    <!-- TECHNOLOGY -->
+    <div class="vjs-sitemap-section">
+      <div class="vjs-sitemap-section-header">
+        <span class="vjs-sitemap-section-label">06</span>
+        <h2 class="vjs-sitemap-section-title">Technology</h2>
+        <span class="vjs-sitemap-section-count">{{ site.technology | size }} entries</span>
+      </div>
+      <div class="vjs-sitemap-links">
+        {% assign sorted_tech = site.technology | sort: "title" %}
+        {% for tech in sorted_tech %}
+          <a href="{{ tech.url }}" class="vjs-sitemap-link">{{ tech.title }}</a>
+        {% endfor %}
+      </div>
+    </div>
+
+    <!-- MARKETPLACE -->
+    <div class="vjs-sitemap-section">
+      <div class="vjs-sitemap-section-header">
+        <span class="vjs-sitemap-section-label">07</span>
+        <h2 class="vjs-sitemap-section-title">Marketplace</h2>
+        <span class="vjs-sitemap-section-count">{{ site.loop_packs | size }} packs</span>
+      </div>
+      <div class="vjs-sitemap-links">
+        <a href="/marketplace" class="vjs-sitemap-link primary">All Packs</a>
+        {% for pack in site.loop_packs %}
+          <a href="{{ pack.url }}" class="vjs-sitemap-link">{{ pack.title }}</a>
+        {% endfor %}
+      </div>
+    </div>
+
+    <!-- CONNECT -->
+    <div class="vjs-sitemap-section">
+      <div class="vjs-sitemap-section-header">
+        <span class="vjs-sitemap-section-label">08</span>
+        <h2 class="vjs-sitemap-section-title">Connect</h2>
+      </div>
+      <div class="vjs-sitemap-links">
+        <a href="/submit" class="vjs-sitemap-link primary">Submit Project</a>
+        <a href="/partners" class="vjs-sitemap-link primary">Partner With Us</a>
+        <a href="/sponsors" class="vjs-sitemap-link primary">Sponsors</a>
+        <a href="https://vjsmag.com" target="_blank" rel="noopener" class="vjs-sitemap-link primary">VJs Mag ↗</a>
+      </div>
+    </div>
+
+    <!-- LEGAL -->
+    <div class="vjs-sitemap-section">
+      <div class="vjs-sitemap-section-header">
+        <span class="vjs-sitemap-section-label">09</span>
+        <h2 class="vjs-sitemap-section-title">Legal</h2>
+      </div>
+      <div class="vjs-sitemap-links">
+        <a href="/privacy" class="vjs-sitemap-link primary">Privacy Policy</a>
+        <a href="/terms" class="vjs-sitemap-link primary">Terms &amp; Conditions</a>
+        <a href="/license" class="vjs-sitemap-link primary">Commercial License</a>
+      </div>
+    </div>
+
+    <!-- FEEDS -->
+    <div class="vjs-sitemap-section">
+      <div class="vjs-sitemap-section-header">
+        <span class="vjs-sitemap-section-label">10</span>
+        <h2 class="vjs-sitemap-section-title">Feeds</h2>
+      </div>
+      <div class="vjs-sitemap-links">
+        <a href="/feed.xml" class="vjs-sitemap-link primary">RSS Feed</a>
+        <a href="/atom.xml" class="vjs-sitemap-link primary">Atom Feed</a>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+{% include vjstv-footer.html %}
