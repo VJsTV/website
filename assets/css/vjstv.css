@@ -4954,6 +4954,13 @@ svg.vjs-nts-sidebar-thumb-play {
   border: 1px solid #1a1a1a;
   padding: 0 8px;
   white-space: nowrap;
+  cursor: pointer;
+  transition: color 0.15s, border-color 0.15s, background 0.15s;
+}
+.vjs-mp-preview-more:hover {
+  color: var(--vjs-cyan);
+  border-color: var(--vjs-cyan);
+  background: rgba(0,249,255,0.06);
 }
 
 /* PACK INFO COLUMN */

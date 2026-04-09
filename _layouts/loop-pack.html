@@ -47,7 +47,7 @@ layout: default
             <div class="vjs-mp-preview-clip-num" style="position:relative;z-index:1;">{{ i | prepend: '0' | slice: -2, 2 }}</div>
           </div>
           {% endfor %}
-          <div class="vjs-mp-preview-more">+{{ page.clip_count | minus: 4 }} more</div>
+          <button class="vjs-mp-preview-more" onclick="document.getElementById('vjs-whats-included').scrollIntoView({behavior:'smooth',block:'start'})">+{{ page.clip_count | minus: 4 }} more</button>
         </div>
       </div>
 
@@ -133,7 +133,7 @@ layout: default
   </div>
 
   <!-- WHAT YOU GET -->
-  <div class="vjs-mp-what-section">
+  <div class="vjs-mp-what-section" id="vjs-whats-included">
     <div class="vjs-mp-section-inner">
       <h2 class="vjs-mp-section-title">What's Included</h2>
       <ul class="vjs-mp-included-list">
