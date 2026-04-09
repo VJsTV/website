@@ -37,10 +37,11 @@
     <span class="vjs-software-tag">{{ include.project.technologies | first }}</span>
     {% endif %}
     {% if include.project.technologies and include.project.technologies.size > 1 %}
-    <span style="color:var(--vjs-border); font-size:0.7rem; margin-left:auto;">|</span>
-    {% for tech in include.project.technologies limit:2 offset:1 %}
-    <span class="vjs-tag vjs-tag-purple" style="font-size:0.55rem; padding:2px 6px; margin-left:auto;">{{ tech }}</span>
-    {% endfor %}
+    <div class="vjs-tech-tags-group">
+      {% for tech in include.project.technologies limit:2 offset:1 %}
+      <span class="vjs-tag vjs-tag-purple vjs-tech-tag-sm">{{ tech }}</span>
+      {% endfor %}
+    </div>
     {% endif %}
   </div>
 </a>
