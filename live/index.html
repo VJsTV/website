@@ -649,6 +649,12 @@ function switchChannel(ch) {
     var labels = { 1:'LIVE BROADCAST', 2:'LOOP GALLERY — CH.2', 3:'VJ EDUCATION — CH.3' };
     badge.innerHTML = '<span class="vjs-live-dot"></span>' + labels[ch];
   }
+  // Lazy-init the player for this channel the first time it becomes visible
+  var chKey = 'ch' + ch;
+  if (YT_CH_CONFIG[chKey] && !YT_CH_CONFIG[chKey]._init) {
+    YT_CH_CONFIG[chKey]._init = true;
+    initSingleYtPlayer(chKey);
+  }
 }
 
 if(scheduleSection) scheduleSection.style.display = 'block';
@@ -716,12 +722,13 @@ var YT_CH_CONFIG = {
   },
   ch3: {
     videos: [
-      { id: 'mGPk2ftagQY' }
+      { id: 'mGPk2ftagQY', title: 'VJ Education — CH.3', author: 'VJs TV Academy' }
     ],
     nowTitleEl: 'ch3-now-title',
     nowMetaEl: null,
     nowLinkEl: 'ch3-yt-link',
-    iframeEl: 'yt-player-ch3'
+    iframeEl: 'yt-player-ch3',
+    skipTitleFetch: true
   }
 };
 
@@ -732,25 +739,24 @@ function buildYtEmbedUrl(videoId, start, playlist) {
   return 'https://www.youtube-nocookie.com/embed/' + videoId + '?' + params;
 }
 
-function initYtPlayers() {
-  Object.keys(YT_CH_CONFIG).forEach(function(ch) {
-    var cfg = YT_CH_CONFIG[ch];
-    var container = document.getElementById(cfg.iframeEl);
-    if (!container) return;
+function initSingleYtPlayer(ch) {
+  var cfg = YT_CH_CONFIG[ch];
+  if (!cfg) return;
+  var container = document.getElementById(cfg.iframeEl);
+  if (!container) return;
 
-    var firstVideo = cfg.videos[0];
-    var playlistIds = cfg.videos.map(function(v) { return v.id; }).join(',');
-    var embedUrl = buildYtEmbedUrl(firstVideo.id, firstVideo.start || null, playlistIds);
+  var firstVideo = cfg.videos[0];
+  var playlistIds = cfg.videos.map(function(v) { return v.id; }).join(',');
+  var embedUrl = buildYtEmbedUrl(firstVideo.id, firstVideo.start || null, playlistIds);
 
-    var iframe = document.createElement('iframe');
-    iframe.style.cssText = 'position:absolute;inset:0;width:100%;height:100%;border:none;';
-    iframe.src = embedUrl;
-    iframe.allow = 'autoplay; fullscreen; picture-in-picture';
-    iframe.setAttribute('allowfullscreen', '');
-    container.appendChild(iframe);
+  var iframe = document.createElement('iframe');
+  iframe.style.cssText = 'position:absolute;inset:0;width:100%;height:100%;border:none;';
+  iframe.src = embedUrl;
+  iframe.allow = 'autoplay; fullscreen; picture-in-picture';
+  iframe.setAttribute('allowfullscreen', '');
+  container.appendChild(iframe);
 
-    fetchYtTitles(ch, cfg);
-  });
+  fetchYtTitles(ch, cfg);
 }
 
 function fetchYtTitles(ch, cfg) {
@@ -810,7 +816,13 @@ function startOnAirCycle(ch, cfg, titles) {
   }
 }
 
-document.addEventListener('DOMContentLoaded', initYtPlayers);
+document.addEventListener('DOMContentLoaded', function() {
+  // Only initialise CH.1 at page load — it is already visible.
+  // CH.2 and CH.3 are lazily initialised inside switchChannel() to avoid
+  // the zero-height container bug that happens with display:none iframes.
+  YT_CH_CONFIG['ch1']._init = true;
+  initSingleYtPlayer('ch1');
+});
 
 // ── PROGRAMMING GRID ────────────────────────────────────────
 (function(){
