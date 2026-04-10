@@ -188,16 +188,10 @@ export default {
       "Content-Type": "application/json",
     };
 
-    // ──────────────────────────────────────────────
-    // GET /api/health
-    // ──────────────────────────────────────────────
     if (url.pathname === "/api/health") {
       return new Response(JSON.stringify({ status: "ok", timestamp: new Date().toISOString() }), { headers });
     }
 
-    // ──────────────────────────────────────────────
-    // GET /api/analytics
-    // ──────────────────────────────────────────────
     if (url.pathname === "/api/analytics" && request.method === "GET") {
       const analyticsHeaders = {
         "Access-Control-Allow-Origin": "*",
@@ -245,9 +239,6 @@ export default {
       }
     }
 
-    // ──────────────────────────────────────────────
-    // GET /api/analytics/charts
-    // ──────────────────────────────────────────────
     if (url.pathname === "/api/analytics/charts" && request.method === "GET") {
       const chartsHeaders = {
         "Access-Control-Allow-Origin": "*",
@@ -324,9 +315,6 @@ export default {
       }
     }
 
-    // ──────────────────────────────────────────────
-    // All remaining routes require POST
-    // ──────────────────────────────────────────────
     if (request.method !== "POST") {
       return new Response(JSON.stringify({ error: "Not found" }), { status: 404, headers });
     }
@@ -338,9 +326,6 @@ export default {
     try {
       const data = await readBody(request);
 
-      // ──────────────────────────────────────────────
-      // POST /api/submit
-      // ──────────────────────────────────────────────
       if (url.pathname === "/api/submit") {
         if (!data.artist || !data.project_title || !data.email || !data.video_url || !data.description || !data.category) {
           return new Response(JSON.stringify({ success: false, error: "Missing required fields." }), { status: 400, headers });
@@ -473,9 +458,6 @@ export default {
         return new Response(JSON.stringify({ success: false, error: "Failed to create submission. Please try again." }), { status: 502, headers });
       }
 
-      // ──────────────────────────────────────────────
-      // POST /api/report
-      // ──────────────────────────────────────────────
       if (url.pathname === "/api/report") {
         var reporterName = (data.reporter_name || "").trim().slice(0, 100);
         var description = (data.description || "").trim().slice(0, 2000);
@@ -545,9 +527,6 @@ export default {
         return new Response(JSON.stringify({ success: true, issue_number: 0 }), { headers });
       }
 
-      // ──────────────────────────────────────────────
-      // POST /api/partner
-      // ──────────────────────────────────────────────
       if (url.pathname === "/api/partner") {
         var fullName = (data.full_name || "").trim().slice(0, 100);
         var company = (data.company || "").trim().slice(0, 200);
@@ -615,9 +594,6 @@ export default {
         return new Response(JSON.stringify({ success: false, error: "Failed to send enquiry. Please try again." }), { status: 502, headers });
       }
 
-      // ──────────────────────────────────────────────
-      // POST /api/booking
-      // ──────────────────────────────────────────────
       if (url.pathname === "/api/booking") {
         var subject = (data.subject || "").trim().slice(0, 200);
         var profileType = (data.profile_type || "artist").trim().slice(0, 50);
@@ -725,11 +701,7 @@ export default {
         return new Response(JSON.stringify({ success: false, error: "Failed to send enquiry. Please try again." }), { status: 502, headers });
       }
 
-      // ──────────────────────────────────────────────
-      // Unknown route
-      // ──────────────────────────────────────────────
       return new Response(JSON.stringify({ error: "Not found" }), { status: 404, headers });
-
     } catch (err) {
       return new Response(JSON.stringify({ success: false, error: "Server error. Please try again later." }), { status: 500, headers });
     }
