@@ -279,33 +279,56 @@ meta_description: "Watch live VJ performances and browse the 24/7 Loop Gallery �
     <!-- ══════════════ CH.2 — LOOP GALLERY ══════════════ -->
     <div id="ch2-content">
 
-      <!-- Header -->
-      <div class="lg-header">
-        <div class="lg-badge">
-          <span class="lg-dot"></span>
-          LOOP GALLERY — CH.2 — 24/7 ON AIR
+      <div class="row g-4 align-items-start">
+        <div class="col-lg-8">
+          <div class="vjs-live-player" style="margin-bottom:0;">
+            <div id="yt-player-ch2" style="position:absolute;inset:0;width:100%;height:100%;"></div>
+          </div>
+          <div style="background:rgba(0,249,255,0.08); border:1px solid rgba(0,249,255,0.2); border-top:none; padding:0.75rem 1rem; display:flex; align-items:center; justify-content:space-between; flex-wrap:wrap; gap:0.5rem;">
+            <div>
+              <span style="font-family:'Barlow Condensed',sans-serif; font-size:0.55rem; letter-spacing:0.2em; text-transform:uppercase; color:var(--vjs-text-muted);">Now Playing</span>
+              <div style="font-family:'Barlow Condensed',sans-serif; font-weight:700; font-size:1rem; color:#fff; margin-top:2px;" id="lg-now-title">VJS TV LOOPS 01</div>
+              <div style="font-family:'Barlow Condensed',sans-serif; font-size:0.72rem; color:#555; margin-top:2px;" id="lg-now-meta">by VJs TV</div>
+            </div>
+            <div style="display:flex; gap:0.75rem; align-items:center; flex-wrap:wrap;">
+              <a id="lg-now-vimeo" href="https://www.youtube.com/watch?v=vIiw_YZnrM8" target="_blank" rel="noopener" class="vjs-btn vjs-btn-primary" style="font-size:0.75rem; padding:6px 16px;">Watch on YouTube</a>
+            </div>
+          </div>
         </div>
+
+        <div class="col-lg-4">
+          <div style="background:var(--vjs-card); border:1px solid var(--vjs-border); border-top:2px solid var(--vjs-cyan); padding:1.75rem; margin-bottom:1.25rem;">
+            <div class="vjs-section-label" style="color:var(--vjs-cyan); margin-bottom:1rem;">Loop Gallery</div>
+            <div style="display:grid; grid-template-columns:1fr 1fr; gap:1rem; margin-bottom:1.5rem;">
+              <div style="text-align:center; padding:1rem; background:#080808; border:1px solid #1a1a1a;">
+                <div style="font-family:'Barlow Condensed',sans-serif; font-size:1.6rem; font-weight:700; color:var(--vjs-cyan); line-height:1;">11</div>
+                <div style="font-family:'Barlow Condensed',sans-serif; font-size:0.5rem; letter-spacing:0.15em; color:var(--vjs-text-muted); text-transform:uppercase; margin-top:3px;">Loops</div>
+              </div>
+              <div style="text-align:center; padding:1rem; background:#080808; border:1px solid #1a1a1a;">
+                <div style="font-family:'Barlow Condensed',sans-serif; font-size:1.6rem; font-weight:700; color:var(--vjs-ultraviolet); line-height:1;">4</div>
+                <div style="font-family:'Barlow Condensed',sans-serif; font-size:0.5rem; letter-spacing:0.15em; color:var(--vjs-text-muted); text-transform:uppercase; margin-top:3px;">Genres</div>
+              </div>
+              <div style="text-align:center; padding:1rem; background:#080808; border:1px solid #1a1a1a;">
+                <div style="font-family:'Barlow Condensed',sans-serif; font-size:1.6rem; font-weight:700; color:var(--vjs-magenta); line-height:1;">10</div>
+                <div style="font-family:'Barlow Condensed',sans-serif; font-size:0.5rem; letter-spacing:0.15em; color:var(--vjs-text-muted); text-transform:uppercase; margin-top:3px;">Artists</div>
+              </div>
+              <div style="text-align:center; padding:1rem; background:#080808; border:1px solid #1a1a1a;">
+                <div style="font-family:'Barlow Condensed',sans-serif; font-size:1rem; font-weight:700; color:var(--vjs-electric-blue); line-height:1.2;">24/7</div>
+                <div style="font-family:'Barlow Condensed',sans-serif; font-size:0.5rem; letter-spacing:0.15em; color:var(--vjs-text-muted); text-transform:uppercase; margin-top:3px;">On Air</div>
+              </div>
+            </div>
+            <p style="font-size:0.78rem; color:#555; line-height:1.6; margin-bottom:1.25rem;">Curated generative art, projection mapping, and live AV works on continuous rotation. Archive spanning 2008–2016.</p>
+            <a href="/submit" class="vjs-btn vjs-btn-outline" style="font-size:0.72rem; padding:8px 20px; width:100%; text-align:center; display:block;">Submit Your Work ↗</a>
+          </div>
+        </div>
+      </div>
+
+      <!-- Browse Archive -->
+      <div style="padding:1.5rem 0 0.5rem; border-top:1px solid #111; margin-top:1.5rem; display:flex; align-items:center; justify-content:space-between; flex-wrap:wrap; gap:10px;">
+        <div class="lg-badge"><span class="lg-dot"></span>Browse Archive</div>
         <div class="lg-stats">
-          <span><strong>11</strong> LOOPS</span>
-          <span><strong>4</strong> GENRES</span>
-          <span><strong>10</strong> ARTISTS</span>
           <span><strong>2008–2016</strong></span>
         </div>
-      </div>
-
-      <!-- Featured Player -->
-      <div class="lg-featured" id="lg-featured-player">
-        <div id="yt-player-ch2" style="position:absolute;inset:0;width:100%;height:100%;"></div>
-      </div>
-
-      <!-- Now Playing Bar -->
-      <div class="lg-now-bar">
-        <div>
-          <div class="lg-now-label">&#9679; Now On Air</div>
-          <div class="lg-now-title" id="lg-now-title">Sagrada Familia: Ode à la Vie</div>
-          <div class="lg-now-meta" id="lg-now-meta">Moment Factory &nbsp;·&nbsp; ARCHITECTURAL &nbsp;·&nbsp; 2012</div>
-        </div>
-        <a class="lg-now-vimeo" id="lg-now-vimeo" href="https://www.youtube.com/watch?v=p66h1kD_UU4" target="_blank" rel="noopener">Watch on YouTube ↗</a>
       </div>
 
       <!-- Filters -->
@@ -531,31 +554,56 @@ meta_description: "Watch live VJ performances and browse the 24/7 Loop Gallery �
 
     <!-- ══════════════ CH.3 — VJ EDUCATION ══════════════ -->
     <div id="ch3-content">
-      <div style="padding:16px 0 14px; border-bottom:1px solid #141414; margin-bottom:20px; display:flex; align-items:center; justify-content:space-between; flex-wrap:wrap; gap:10px;">
-        <div class="lg-badge" style="color:var(--vjs-neon);">
-          <span class="lg-dot" style="background:var(--vjs-neon);"></span>
-          VJ EDUCATION — CH.3 — ON AIR
+
+      <div class="row g-4 align-items-start">
+        <div class="col-lg-8">
+          <div class="vjs-live-player" style="margin-bottom:0;">
+            <div id="yt-player-ch3" style="position:absolute;inset:0;width:100%;height:100%;"></div>
+          </div>
+          <div style="background:rgba(57,255,20,0.06); border:1px solid rgba(57,255,20,0.2); border-top:none; padding:0.75rem 1rem; display:flex; align-items:center; justify-content:space-between; flex-wrap:wrap; gap:0.5rem;">
+            <div>
+              <span style="font-family:'Barlow Condensed',sans-serif; font-size:0.55rem; letter-spacing:0.2em; text-transform:uppercase; color:var(--vjs-text-muted);">Now Playing</span>
+              <div style="font-family:'Barlow Condensed',sans-serif; font-weight:700; font-size:1rem; color:#fff; margin-top:2px;" id="ch3-now-title">VJ Education — CH.3</div>
+            </div>
+            <div style="display:flex; gap:0.75rem; align-items:center; flex-wrap:wrap;">
+              <a id="ch3-yt-link" href="https://www.youtube.com/watch?v=mGPk2ftagQY" target="_blank" rel="noopener" class="vjs-btn vjs-btn-primary" style="font-size:0.75rem; padding:6px 16px;">Watch on YouTube</a>
+            </div>
+          </div>
+        </div>
+
+        <div class="col-lg-4">
+          <div style="background:var(--vjs-card); border:1px solid var(--vjs-border); border-top:2px solid var(--vjs-neon); padding:1.75rem;">
+            <div class="vjs-section-label" style="color:var(--vjs-neon); margin-bottom:1rem;">Resources & Tools</div>
+            <div style="display:flex; flex-direction:column; gap:2px; margin-bottom:1.5rem;">
+              <a href="/technology/resolume-arena" style="display:flex; align-items:center; gap:12px; padding:10px 12px; background:#080808; border:1px solid #181818; text-decoration:none; transition:border-color .15s;" onmouseover="this.style.borderColor='var(--vjs-neon)'" onmouseout="this.style.borderColor='#181818'">
+                <span style="font-size:1.1rem;">&#9684;</span>
+                <span style="font-family:'Barlow Condensed',sans-serif; font-size:0.82rem; font-weight:700; color:#ccc; letter-spacing:0.04em;">Resolume Arena</span>
+              </a>
+              <a href="/technology/touchdesigner" style="display:flex; align-items:center; gap:12px; padding:10px 12px; background:#080808; border:1px solid #181818; text-decoration:none; transition:border-color .15s;" onmouseover="this.style.borderColor='var(--vjs-neon)'" onmouseout="this.style.borderColor='#181818'">
+                <span style="font-size:1.1rem;">&#9685;</span>
+                <span style="font-family:'Barlow Condensed',sans-serif; font-size:0.82rem; font-weight:700; color:#ccc; letter-spacing:0.04em;">TouchDesigner</span>
+              </a>
+              <a href="/technology/madmapper" style="display:flex; align-items:center; gap:12px; padding:10px 12px; background:#080808; border:1px solid #181818; text-decoration:none; transition:border-color .15s;" onmouseover="this.style.borderColor='var(--vjs-neon)'" onmouseout="this.style.borderColor='#181818'">
+                <span style="font-size:1.1rem;">&#9632;</span>
+                <span style="font-family:'Barlow Condensed',sans-serif; font-size:0.82rem; font-weight:700; color:#ccc; letter-spacing:0.04em;">MadMapper</span>
+              </a>
+              <a href="/technology/vdmx" style="display:flex; align-items:center; gap:12px; padding:10px 12px; background:#080808; border:1px solid #181818; text-decoration:none; transition:border-color .15s;" onmouseover="this.style.borderColor='var(--vjs-neon)'" onmouseout="this.style.borderColor='#181818'">
+                <span style="font-size:1.1rem;">&#9670;</span>
+                <span style="font-family:'Barlow Condensed',sans-serif; font-size:0.82rem; font-weight:700; color:#ccc; letter-spacing:0.04em;">VDMX</span>
+              </a>
+              <a href="/technology/notch" style="display:flex; align-items:center; gap:12px; padding:10px 12px; background:#080808; border:1px solid #181818; text-decoration:none; transition:border-color .15s;" onmouseover="this.style.borderColor='var(--vjs-neon)'" onmouseout="this.style.borderColor='#181818'">
+                <span style="font-size:1.1rem;">&#9651;</span>
+                <span style="font-family:'Barlow Condensed',sans-serif; font-size:0.82rem; font-weight:700; color:#ccc; letter-spacing:0.04em;">Notch</span>
+              </a>
+            </div>
+            <a href="/technology" class="vjs-btn vjs-btn-outline" style="font-size:0.72rem; padding:8px 20px; width:100%; text-align:center; display:block; border-color:rgba(57,255,20,0.3); color:var(--vjs-neon);">Browse All Technology →</a>
+          </div>
         </div>
       </div>
 
-      <!-- CH.3 Featured Player -->
-      <div class="lg-featured" id="ch3-featured-player">
-        <div id="yt-player-ch3" style="position:absolute;inset:0;width:100%;height:100%;"></div>
-      </div>
-
-      <!-- CH.3 Now Playing Bar -->
-      <div class="lg-now-bar" style="border-top-color:var(--vjs-neon);">
-        <div>
-          <div class="lg-now-label" style="color:var(--vjs-neon);">&#9679; Now On Air</div>
-          <div class="lg-now-title" id="ch3-now-title">VJ Education — CH.3</div>
-          <div class="lg-now-meta">YouTube · CH.3 VJ EDUCATION · 24/7</div>
-        </div>
-        <a class="lg-now-vimeo" id="ch3-yt-link" href="https://www.youtube.com/watch?v=mGPk2ftagQY" target="_blank" rel="noopener" style="border-color:#333; color:var(--vjs-neon);">Watch on YouTube ↗</a>
-      </div>
-
-      <div style="padding:16px 0 20px; border-bottom:1px solid #141414; margin-bottom:24px; display:flex; align-items:center; gap:10px;">
-        <span style="font-family:'Barlow Condensed',sans-serif; font-size:0.7rem; font-weight:700; letter-spacing:0.15em; color:var(--vjs-neon); text-transform:uppercase;">Resources & Tools</span>
-        <span style="font-family:'Barlow Condensed',sans-serif; font-size:0.6rem; letter-spacing:0.1em; color:#333; text-transform:uppercase;">tutorials & technology</span>
+      <!-- Education Cards -->
+      <div style="padding:1.5rem 0 0.5rem; border-top:1px solid #111; margin-top:1.5rem;">
+        <span style="font-family:'Barlow Condensed',sans-serif; font-size:0.7rem; font-weight:700; letter-spacing:0.15em; color:var(--vjs-neon); text-transform:uppercase;">Deep Dives</span>
       </div>
 
       <div class="lg-edu-grid">
@@ -840,28 +888,8 @@ function toggleCinema() {
 
 // ── LOOP GALLERY ────────────────────────────────────────────
 function lgPlay(card) {
-  var id    = card.dataset.id;
-  var title = card.dataset.title;
-  var artist= card.dataset.artist;
-  var year  = card.dataset.year;
-  var type  = card.dataset.type;
-
-  // Update featured iframe
-  var iframe = document.getElementById('lg-featured-iframe');
-  if(iframe) iframe.src = 'https://player.vimeo.com/video/' + id + '?autoplay=1&title=0&byline=0&portrait=0&color=00f9ff';
-
-  // Update now-playing bar
-  document.getElementById('lg-now-title').textContent = title;
-  document.getElementById('lg-now-meta').textContent  = artist + '  ·  ' + type + '  ·  ' + year;
-  document.getElementById('lg-now-vimeo').href = 'https://vimeo.com/' + id;
-
-  // Highlight active card
-  document.querySelectorAll('.lg-card').forEach(function(c){ c.classList.remove('active-card'); });
-  card.classList.add('active-card');
-
-  // Scroll to featured player
-  var fp = document.getElementById('lg-featured-player');
-  if(fp) fp.scrollIntoView({ behavior:'smooth', block:'start' });
+  var id = card.dataset.id;
+  window.open('https://vimeo.com/' + id, '_blank', 'noopener');
 }
 
 function lgFilter(cat, btn) {
@@ -904,13 +932,13 @@ var YT_CH_CONFIG = {
   },
   ch2: {
     videos: [
-      { id: 'p66h1kD_UU4' },
-      { id: 'smZWUTzttDw' }
+      { id: 'vIiw_YZnrM8', title: 'VJS TV LOOPS 01', author: 'VJs TV' }
     ],
     nowTitleEl: 'lg-now-title',
     nowMetaEl: 'lg-now-meta',
     nowLinkEl: 'lg-now-vimeo',
-    iframeEl: 'yt-player-ch2'
+    iframeEl: 'yt-player-ch2',
+    skipTitleFetch: true
   },
   ch3: {
     videos: [
@@ -952,6 +980,13 @@ function initYtPlayers() {
 }
 
 function fetchYtTitles(ch, cfg) {
+  if (cfg.skipTitleFetch) {
+    var titles = cfg.videos.map(function(v) {
+      return { title: v.title || v.id, author: v.author || '', id: v.id };
+    });
+    startOnAirCycle(ch, cfg, titles);
+    return;
+  }
   var titles = [];
   var fetched = 0;
   cfg.videos.forEach(function(v, i) {
