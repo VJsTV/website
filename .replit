@@ -42,3 +42,10 @@ externalPort = 80
 deploymentTarget = "static"
 build = ["bundle", "exec", "jekyll", "build"]
 publicDir = "_site"
+
+[userenv]
+
+[userenv.shared]
+STREAM_KEY_1 = "haap-vwh4-urs4-hmc3-8hg1"
+STREAM_KEY_2 = "f4r7-peq5-peam-w5vh-9hbh"
+STREAM_KEY_3 = "gfae-mu6y-mxm1-tk0k-2the"
