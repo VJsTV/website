@@ -20,6 +20,27 @@ app.get("/api/health", function (req, res) {
   res.json({ status: "ok", timestamp: new Date().toISOString() });
 });
 
+app.get("/api/yt-info", function (req, res) {
+  var videoId = (req.query.v || "").replace(/[^a-zA-Z0-9_-]/g, "");
+  if (!videoId) return res.status(400).json({ error: "missing v param" });
+  var https = require("https");
+  var url = "https://www.youtube.com/oembed?url=https%3A%2F%2Fwww.youtube.com%2Fwatch%3Fv%3D" + videoId + "&format=json";
+  https.get(url, function (r) {
+    var data = "";
+    r.on("data", function (chunk) { data += chunk; });
+    r.on("end", function () {
+      try {
+        var parsed = JSON.parse(data);
+        res.json({ title: parsed.title || "", author: parsed.author_name || "" });
+      } catch (e) {
+        res.status(500).json({ error: "parse error" });
+      }
+    });
+  }).on("error", function (e) {
+    res.status(500).json({ error: e.message });
+  });
+});
+
 app.use(express.static(SITE_DIR, { extensions: ["html"] }));
 
 app.use(function (req, res, next) {
