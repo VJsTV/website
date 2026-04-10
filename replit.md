@@ -21,7 +21,7 @@ VJs TV is a Jekyll-based platform for VJ culture and audiovisual performances. I
 
 ## Pages
 - `/` - Homepage: NTS-style live broadcast strip (2 channels), full-bleed hero with sidebar thumbnails, VJs TV Picks horizontal scroll, scrolling sponsor ticker, animated stats counters, featured artists grid, loop packs marketplace, editorial project grid, technology section, sponsors, CTA
-- `/live` - Live broadcast page with player and schedule
+- `/live` - Live broadcast page with 3-channel tabs (CH.1 LIVE, CH.2 LOOP GALLERY, CH.3 VJ EDUCATION), dynamic programming grid fetching schedule.json, NOW PLAYING/NEXT UP per channel, Vimeo-powered loop gallery with genre filters, countdown timer, cinema mode
 - `/artists` - Artist directory with 3-dropdown JS filter (Style / Tech / Country), neon initials cards, country flags
 - `/projects` - Project index with JS filter by type + sort by date; all 24 projects have real Vimeo IDs → thumbnails fetched live via Vimeo API
 - `/events` - Events split into Upcoming / Archive sections, with date badges
@@ -48,6 +48,8 @@ VJs TV is a Jekyll-based platform for VJ culture and audiovisual performances. I
 - `sitemap.xml` - Auto-generated XML sitemap (192 URLs across all collections)
 - `sitemap.html` - Human-readable HTML sitemap with structured sections
 - `_headers` - Cloudflare security + caching headers
+- `schedule/schedule.json` - Central programming schedule for all 3 live channels (UTC time blocks, special events)
+- `vjstv-docker/` - Docker + FFmpeg infrastructure scaffold for 24/7 multi-channel streaming (docker-compose, scheduler, playlists)
 
 ## Accessibility
 - Skip-to-content link (keyboard-accessible, cyan highlight)

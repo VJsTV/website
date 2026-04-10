@@ -1006,6 +1006,142 @@
   </div><!-- /container -->
 </section>
 
+<!-- ══════════════ PROGRAMMING GRID — ALL CHANNELS ══════════════ -->
+<section class="vjs-section" id="programming-grid" style="display:block; padding-top:2rem; padding-bottom:2rem; background:#030303; border-top:1px solid #111;">
+  <div class="container">
+    <div style="display:flex; align-items:center; justify-content:space-between; flex-wrap:wrap; gap:10px; margin-bottom:1.5rem;">
+      <div>
+        <div class="vjs-section-label" style="margin-bottom:4px;">Programming</div>
+        <h2 class="vjs-section-title" style="font-size:clamp(1.2rem,2.5vw,1.8rem); margin-bottom:0;">Now On Air</h2>
+      </div>
+      <div style="display:flex; align-items:center; gap:8px;">
+        <span class="pgrid-live-indicator"></span>
+        <span style="font-family:'Barlow Condensed',sans-serif; font-size:0.6rem; letter-spacing:0.15em; color:#555; text-transform:uppercase;" id="pgrid-clock">UTC 00:00</span>
+      </div>
+    </div>
+
+    <div class="pgrid-channels" id="pgrid-channels">
+      <div class="pgrid-loading">Loading programming data...</div>
+    </div>
+
+    <div class="pgrid-special" id="pgrid-special" style="display:none;">
+      <div class="pgrid-special-label">UPCOMING LIVE EVENTS</div>
+      <div id="pgrid-special-list"></div>
+    </div>
+  </div>
+</section>
+
+<style>
+.pgrid-live-indicator {
+  width:6px; height:6px; background:#ff003c; display:inline-block;
+  animation:pgpulse 1.4s ease-in-out infinite;
+}
+@keyframes pgpulse { 0%,100%{opacity:1;} 50%{opacity:0.3;} }
+
+.pgrid-channels {
+  display:grid; grid-template-columns:repeat(3,1fr); gap:2px;
+}
+@media(max-width:992px) { .pgrid-channels { grid-template-columns:1fr; } }
+
+.pgrid-loading {
+  grid-column:1/-1; text-align:center; padding:3rem;
+  font-family:'Barlow Condensed',sans-serif; font-size:0.75rem;
+  letter-spacing:0.12em; color:#333; text-transform:uppercase;
+}
+
+.pgrid-ch {
+  background:#0a0a0a; border:1px solid #151515; padding:0;
+  display:flex; flex-direction:column;
+}
+.pgrid-ch-header {
+  padding:14px 18px 12px; border-bottom:1px solid #1a1a1a;
+  display:flex; align-items:center; justify-content:space-between;
+}
+.pgrid-ch-name {
+  font-family:'Orbitron',sans-serif; font-size:0.6rem;
+  letter-spacing:0.15em; text-transform:uppercase;
+}
+.pgrid-ch-status {
+  font-family:'Barlow Condensed',sans-serif; font-size:0.55rem;
+  letter-spacing:0.1em; text-transform:uppercase; color:#333;
+}
+
+.pgrid-now {
+  padding:18px; border-bottom:1px solid #111; flex:1;
+}
+.pgrid-now-label {
+  font-family:'Barlow Condensed',sans-serif; font-size:0.5rem;
+  letter-spacing:0.2em; text-transform:uppercase; margin-bottom:6px;
+}
+.pgrid-now-title {
+  font-family:'Barlow Condensed',sans-serif; font-size:1.1rem;
+  font-weight:700; color:#fff; letter-spacing:0.03em;
+  margin-bottom:4px; line-height:1.3;
+}
+.pgrid-now-artist {
+  font-family:'Barlow Condensed',sans-serif; font-size:0.75rem;
+  color:#555; letter-spacing:0.04em;
+}
+.pgrid-now-time {
+  font-family:'Barlow Condensed',sans-serif; font-size:0.65rem;
+  color:#333; letter-spacing:0.08em; margin-top:8px;
+}
+
+.pgrid-next {
+  padding:14px 18px; background:#070707;
+}
+.pgrid-next-label {
+  font-family:'Barlow Condensed',sans-serif; font-size:0.5rem;
+  letter-spacing:0.2em; text-transform:uppercase; color:#333;
+  margin-bottom:4px;
+}
+.pgrid-next-title {
+  font-family:'Barlow Condensed',sans-serif; font-size:0.85rem;
+  font-weight:600; color:#888; letter-spacing:0.03em;
+}
+.pgrid-next-time {
+  font-family:'Barlow Condensed',sans-serif; font-size:0.6rem;
+  color:#2a2a2a; letter-spacing:0.08em; margin-top:3px;
+}
+.pgrid-countdown {
+  font-family:'Barlow Condensed',sans-serif; font-size:0.6rem;
+  letter-spacing:0.1em; margin-top:4px; color:#333;
+}
+
+.pgrid-special {
+  margin-top:20px; border:1px solid #151515; background:#0a0a0a;
+}
+.pgrid-special-label {
+  font-family:'Orbitron',sans-serif; font-size:0.55rem;
+  letter-spacing:0.15em; color:#555; padding:12px 18px;
+  border-bottom:1px solid #151515;
+}
+.pgrid-event {
+  display:flex; align-items:center; justify-content:space-between;
+  padding:12px 18px; border-bottom:1px solid #111;
+  gap:12px; flex-wrap:wrap;
+}
+.pgrid-event:last-child { border-bottom:none; }
+.pgrid-event-date {
+  font-family:'Barlow Condensed',sans-serif; font-size:0.65rem;
+  letter-spacing:0.1em; color:#555; text-transform:uppercase;
+  min-width:100px;
+}
+.pgrid-event-title {
+  font-family:'Barlow Condensed',sans-serif; font-size:0.85rem;
+  font-weight:700; color:#fff; flex:1; min-width:180px;
+}
+.pgrid-event-artist {
+  font-family:'Barlow Condensed',sans-serif; font-size:0.72rem;
+  color:#555;
+}
+.pgrid-event-badge {
+  font-family:'Barlow Condensed',sans-serif; font-size:0.55rem;
+  font-weight:700; letter-spacing:0.12em; text-transform:uppercase;
+  padding:3px 10px; border:1px solid;
+}
+</style>
+
 <!-- SCHEDULE — only shown on CH.1 -->
 <section class="vjs-section" id="schedule" style="display:block;">
   <div class="container">
@@ -1772,6 +1908,7 @@ document.getElementById('report-form-global').addEventListener('submit', functio
 
 // ── CHANNEL SWITCHING ───────────────────────────────────────
 var scheduleSection = document.getElementById('schedule');
+var programmingGrid = document.getElementById('programming-grid');
 
 function switchChannel(ch) {
   [1,2,3].forEach(function(n){
@@ -1780,9 +1917,8 @@ function switchChannel(ch) {
     if(t) t.classList.toggle('active', n===ch);
     if(c) c.style.display = (n===ch) ? 'block' : 'none';
   });
-  // Show schedule only on CH.1
   if(scheduleSection) scheduleSection.style.display = (ch===1) ? 'block' : 'none';
-  // Update badge
+  if(programmingGrid) programmingGrid.style.display = 'block';
   var badge = document.getElementById('channel-badge');
   if(badge) {
     var labels = { 1:'LIVE BROADCAST', 2:'LOOP GALLERY — CH.2', 3:'VJ EDUCATION — CH.3' };
@@ -1790,7 +1926,6 @@ function switchChannel(ch) {
   }
 }
 
-// Init: hide schedule on load (it defaults to CH.1 which shows it)
 if(scheduleSection) scheduleSection.style.display = 'block';
 
 // ── CINEMA MODE ─────────────────────────────────────────────
@@ -1851,6 +1986,208 @@ document.querySelectorAll('.lg-card[data-id]').forEach(function(card) {
       }
     }).catch(function(){});
 });
+
+// ── PROGRAMMING GRID ────────────────────────────────────────
+(function(){
+  var SCHEDULE_URL = '/schedule/schedule.json';
+  var pgridEl = document.getElementById('pgrid-channels');
+  var clockEl = document.getElementById('pgrid-clock');
+  var specialEl = document.getElementById('pgrid-special');
+  var specialList = document.getElementById('pgrid-special-list');
+  var scheduleData = null;
+
+  function timeToMinutes(t) {
+    var parts = t.split(':');
+    return parseInt(parts[0],10) * 60 + parseInt(parts[1],10);
+  }
+
+  function formatTime(t) {
+    return t;
+  }
+
+  function getCurrentBlock(blocks, nowMins) {
+    for (var i = 0; i < blocks.length; i++) {
+      var startM = timeToMinutes(blocks[i].start);
+      var endM = timeToMinutes(blocks[i].end);
+      if (endM === 0) endM = 1440;
+      if (nowMins >= startM && nowMins < endM) return { current: blocks[i], index: i };
+    }
+    return { current: blocks[0], index: 0 };
+  }
+
+  function getNextBlock(blocks, currentIndex) {
+    var nextIdx = (currentIndex + 1) % blocks.length;
+    return blocks[nextIdx];
+  }
+
+  function getCountdown(nextStart, nowMins) {
+    var nextM = timeToMinutes(nextStart);
+    if (nextM === 0) nextM = 1440;
+    var diff = nextM - nowMins;
+    if (diff <= 0) diff += 1440;
+    var h = Math.floor(diff / 60);
+    var m = diff % 60;
+    if (h > 0) return h + 'h ' + m + 'm';
+    return m + 'm';
+  }
+
+  function checkSpecialEvent(channel, nowDate) {
+    if (!channel.special_events) return null;
+    var today = nowDate.toISOString().slice(0,10);
+    var nowMins = nowDate.getUTCHours() * 60 + nowDate.getUTCMinutes();
+    for (var i = 0; i < channel.special_events.length; i++) {
+      var ev = channel.special_events[i];
+      if (ev.date === today) {
+        var startM = timeToMinutes(ev.start);
+        var endM = timeToMinutes(ev.end);
+        if (endM === 0) endM = 1440;
+        if (nowMins >= startM && nowMins < endM) return ev;
+      }
+    }
+    return null;
+  }
+
+  function renderGrid() {
+    if (!scheduleData) return;
+    var now = new Date();
+    var nowMins = now.getUTCHours() * 60 + now.getUTCMinutes();
+    var hh = String(now.getUTCHours()).padStart(2,'0');
+    var mm = String(now.getUTCMinutes()).padStart(2,'0');
+    if (clockEl) clockEl.textContent = 'UTC ' + hh + ':' + mm;
+
+    var html = '';
+    var channels = scheduleData.channels;
+    var keys = Object.keys(channels);
+
+    for (var k = 0; k < keys.length; k++) {
+      var key = keys[k];
+      var ch = channels[key];
+      var color = ch.color || '#fff';
+
+      var specialEv = checkSpecialEvent(ch, now);
+
+      var currentTitle, currentArtist, currentTime, nextTitle, nextTime, countdown;
+
+      if (specialEv) {
+        currentTitle = specialEv.title;
+        currentArtist = specialEv.artist;
+        currentTime = specialEv.start + ' — ' + specialEv.end + ' UTC';
+        var result = getCurrentBlock(ch.blocks, nowMins);
+        var next = getNextBlock(ch.blocks, result.index);
+        nextTitle = next.title;
+        nextTime = formatTime(next.start) + ' UTC';
+        countdown = getCountdown(specialEv.end, nowMins);
+      } else {
+        var result = getCurrentBlock(ch.blocks, nowMins);
+        var current = result.current;
+        var next = getNextBlock(ch.blocks, result.index);
+        currentTitle = current.title;
+        currentArtist = current.artist;
+        currentTime = formatTime(current.start) + ' — ' + formatTime(current.end) + ' UTC';
+        nextTitle = next.title;
+        nextTime = formatTime(next.start) + ' UTC';
+        countdown = getCountdown(next.start, nowMins);
+      }
+
+      var isLive = specialEv && specialEv.type === 'live';
+      var statusHtml = isLive
+        ? '<span class="pgrid-ch-status" style="color:#ff003c;">● LIVE NOW</span>'
+        : '<span class="pgrid-ch-status" style="color:' + color + ';">ON AIR</span>';
+
+      html += '<div class="pgrid-ch">'
+        + '<div class="pgrid-ch-header">'
+        + '<span class="pgrid-ch-name" style="color:' + color + ';">' + ch.name + '</span>'
+        + statusHtml
+        + '</div>'
+        + '<div class="pgrid-now">'
+        + '<div class="pgrid-now-label" style="color:' + color + ';">NOW PLAYING</div>'
+        + '<div class="pgrid-now-title">' + currentTitle + '</div>'
+        + '<div class="pgrid-now-artist">' + currentArtist + '</div>'
+        + '<div class="pgrid-now-time">' + currentTime + '</div>'
+        + '</div>'
+        + '<div class="pgrid-next">'
+        + '<div class="pgrid-next-label">NEXT UP</div>'
+        + '<div class="pgrid-next-title">' + nextTitle + '</div>'
+        + '<div class="pgrid-next-time">Starts at ' + nextTime + '</div>'
+        + '<div class="pgrid-countdown" style="color:' + color + ';">in ' + countdown + '</div>'
+        + '</div>'
+        + '</div>';
+    }
+
+    pgridEl.innerHTML = html;
+
+    renderSpecialEvents(channels, now);
+  }
+
+  function renderSpecialEvents(channels, now) {
+    var allEvents = [];
+    var keys = Object.keys(channels);
+    for (var k = 0; k < keys.length; k++) {
+      var ch = channels[keys[k]];
+      if (!ch.special_events) continue;
+      for (var i = 0; i < ch.special_events.length; i++) {
+        var ev = ch.special_events[i];
+        var evDate = new Date(ev.date + 'T' + ev.start + ':00Z');
+        if (evDate > now) {
+          allEvents.push({ event: ev, channel: ch.name, color: ch.color, date: evDate });
+        }
+      }
+    }
+
+    if (allEvents.length === 0) {
+      specialEl.style.display = 'none';
+      return;
+    }
+
+    allEvents.sort(function(a,b){ return a.date - b.date; });
+    specialEl.style.display = 'block';
+
+    var html = '';
+    for (var j = 0; j < allEvents.length; j++) {
+      var item = allEvents[j];
+      var ev = item.event;
+      var months = ['JAN','FEB','MAR','APR','MAY','JUN','JUL','AUG','SEP','OCT','NOV','DEC'];
+      var d = item.date;
+      var dateStr = months[d.getUTCMonth()] + ' ' + d.getUTCDate() + ', ' + d.getUTCFullYear();
+
+      html += '<div class="pgrid-event">'
+        + '<div class="pgrid-event-date">' + dateStr + ' · ' + ev.start + ' UTC</div>'
+        + '<div class="pgrid-event-title">' + ev.title + '</div>'
+        + '<div class="pgrid-event-artist">' + ev.artist + '</div>'
+        + '<span class="pgrid-event-badge" style="color:' + item.color + '; border-color:' + item.color + ';">LIVE</span>'
+        + '</div>';
+    }
+    specialList.innerHTML = html;
+  }
+
+  function fetchSchedule() {
+    fetch(SCHEDULE_URL + '?t=' + Date.now())
+      .then(function(r){ return r.json(); })
+      .then(function(data){
+        scheduleData = data;
+        renderGrid();
+        var liveTitle = document.getElementById('live-now-title');
+        if (liveTitle && data.channels['ch1-live']) {
+          var now = new Date();
+          var nowM = now.getUTCHours() * 60 + now.getUTCMinutes();
+          var sp = checkSpecialEvent(data.channels['ch1-live'], now);
+          if (sp) { liveTitle.textContent = sp.title; }
+          else {
+            var r = getCurrentBlock(data.channels['ch1-live'].blocks, nowM);
+            if (r.current) liveTitle.textContent = r.current.title;
+          }
+        }
+      })
+      .catch(function(err){
+        console.error('Failed to load schedule:', err);
+        pgridEl.innerHTML = '<div class="pgrid-loading" style="color:#333;">Schedule unavailable</div>';
+      });
+  }
+
+  fetchSchedule();
+  setInterval(renderGrid, 60000);
+  setInterval(fetchSchedule, 300000);
+})();
 
 // ── SCROLL REVEAL ───────────────────────────────────────────
 var ro = new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting){e.target.classList.add('is-visible');ro.unobserve(e.target);}});},{threshold:.1});

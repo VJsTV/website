@@ -69,6 +69,7 @@ exclude:
   - vendor
   - functions
   - api
+  - vjstv-docker
   - _site
   - wrangler.jsonc
   - wrangler.json

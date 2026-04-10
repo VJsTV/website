@@ -1,0 +1,8 @@
+{
+  "name": "vjstv-scheduler",
+  "version": "1.0.0",
+  "private": true,
+  "dependencies": {
+    "node-cron": "^3.0.3"
+  }
+}

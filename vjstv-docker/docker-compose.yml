@@ -1,0 +1,88 @@
+version: '3.8'
+
+x-ffmpeg-base: &ffmpeg-base
+  image: jrottenberg/ffmpeg:4.4-ubuntu
+  restart: always
+  volumes:
+    - ./:/app
+  working_dir: /app
+
+services:
+  ch1-live:
+    <<: *ffmpeg-base
+    container_name: vjstv_ch1
+    command: >
+      -stream_loop -1 -re -f concat -safe 0 -i /app/channels/ch1-live/playlist.txt
+      -c:v libx264 -preset veryfast -b:v 4000k -maxrate 5000k -bufsize 8000k
+      -pix_fmt yuv420p -g 50
+      -c:a aac -b:a 128k
+      -f flv rtmp://a.rtmp.youtube.com/live2/${STREAM_KEY_1}
+    healthcheck:
+      test: ["CMD-SHELL", "pgrep ffmpeg || exit 1"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+
+  ch2-loop-gallery:
+    <<: *ffmpeg-base
+    container_name: vjstv_ch2
+    command: >
+      -stream_loop -1 -re -f concat -safe 0 -i /app/channels/ch2-loop-gallery/playlist.txt
+      -c:v libx264 -preset veryfast -b:v 4000k -maxrate 5000k -bufsize 8000k
+      -pix_fmt yuv420p -g 50
+      -c:a aac -b:a 128k
+      -f flv rtmp://a.rtmp.youtube.com/live2/${STREAM_KEY_2}
+    healthcheck:
+      test: ["CMD-SHELL", "pgrep ffmpeg || exit 1"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+
+  ch3-vj-education:
+    <<: *ffmpeg-base
+    container_name: vjstv_ch3
+    command: >
+      -stream_loop -1 -re -f concat -safe 0 -i /app/channels/ch3-vj-education/playlist.txt
+      -c:v libx264 -preset veryfast -b:v 4000k -maxrate 5000k -bufsize 8000k
+      -pix_fmt yuv420p -g 50
+      -c:a aac -b:a 128k
+      -f flv rtmp://a.rtmp.youtube.com/live2/${STREAM_KEY_3}
+    healthcheck:
+      test: ["CMD-SHELL", "pgrep ffmpeg || exit 1"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+
+  scheduler:
+    image: node:18-alpine
+    container_name: vjstv_scheduler
+    restart: always
+    volumes:
+      - ./:/app
+      - /var/run/docker.sock:/var/run/docker.sock
+    working_dir: /app/scripts
+    command: sh -c "apk add --no-cache docker-cli git && npm install && node scheduler.js"
+    environment:
+      - TZ=${TZ:-UTC}
+
+  git-sync:
+    image: alpine/git
+    container_name: vjstv_git_sync
+    restart: always
+    volumes:
+      - ./:/app
+    working_dir: /app
+    command: sh -c "while true; do git pull origin main 2>/dev/null || true; sleep 600; done"
+
+  portainer:
+    image: portainer/portainer-ce:latest
+    container_name: vjstv_portainer
+    restart: always
+    ports:
+      - "127.0.0.1:9000:9000"
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+      - portainer_data:/data
+
+volumes:
+  portainer_data:

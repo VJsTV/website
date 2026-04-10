@@ -1,0 +1,44 @@
+{
+  "timezone": "UTC",
+  "updated": "2026-04-10T00:00:00Z",
+  "channels": {
+    "ch1-live": {
+      "name": "CH.1 LIVE",
+      "color": "#7b2fff",
+      "blocks": [
+        { "start": "00:00", "end": "06:00", "playlist": "night.txt", "title": "Midnight Dark Techno Loops", "artist": "VJs TV Rotation", "type": "automated" },
+        { "start": "06:00", "end": "10:00", "playlist": "morning.txt", "title": "Morning Ambient Patterns", "artist": "VJs TV Rotation", "type": "automated" },
+        { "start": "10:00", "end": "14:00", "playlist": "midday.txt", "title": "Midday Generative Flow", "artist": "VJs TV Rotation", "type": "automated" },
+        { "start": "14:00", "end": "18:00", "playlist": "afternoon.txt", "title": "Afternoon Abstract Sessions", "artist": "VJs TV Rotation", "type": "automated" },
+        { "start": "18:00", "end": "22:00", "playlist": "evening.txt", "title": "High-Energy Live Sets", "artist": "VJs TV Rotation", "type": "automated" },
+        { "start": "22:00", "end": "00:00", "playlist": "latenight.txt", "title": "Late Night Experimental", "artist": "VJs TV Rotation", "type": "automated" }
+      ],
+      "special_events": [
+        { "date": "2026-04-15", "start": "20:00", "end": "22:00", "title": "Live Session: Refik Anadol x Data Sculptures", "artist": "Refik Anadol", "type": "live" },
+        { "date": "2026-04-22", "start": "21:00", "end": "23:00", "title": "Live Session: Ryoji Ikeda — Test Pattern", "artist": "Ryoji Ikeda", "type": "live" },
+        { "date": "2026-05-01", "start": "19:00", "end": "21:00", "title": "VJs TV Launch Night — Global VJ Relay", "artist": "Various Artists", "type": "live" }
+      ]
+    },
+    "ch2-loop-gallery": {
+      "name": "CH.2 LOOP GALLERY",
+      "color": "#00d4ff",
+      "blocks": [
+        { "start": "00:00", "end": "06:00", "playlist": "ambient_loops.txt", "title": "Ambient & Slow Motion", "artist": "Curated Selection", "type": "automated" },
+        { "start": "06:00", "end": "12:00", "playlist": "generative_loops.txt", "title": "Generative Art Showcase", "artist": "Curated Selection", "type": "automated" },
+        { "start": "12:00", "end": "18:00", "playlist": "mapping_loops.txt", "title": "Projection Mapping Reel", "artist": "Curated Selection", "type": "automated" },
+        { "start": "18:00", "end": "00:00", "playlist": "liveav_loops.txt", "title": "Live AV Performance Archive", "artist": "Curated Selection", "type": "automated" }
+      ]
+    },
+    "ch3-vj-education": {
+      "name": "CH.3 VJ EDUCATION",
+      "color": "#39ff14",
+      "blocks": [
+        { "start": "00:00", "end": "09:00", "playlist": "ambient_edu.txt", "title": "Ambient Visual Theory", "artist": "VJs TV Academy", "type": "automated" },
+        { "start": "09:00", "end": "13:00", "playlist": "tutorials.txt", "title": "Resolume & TouchDesigner Tutorials", "artist": "VJs TV Academy", "type": "automated" },
+        { "start": "13:00", "end": "17:00", "playlist": "tools.txt", "title": "Tools & Workflow Masterclass", "artist": "VJs TV Academy", "type": "automated" },
+        { "start": "17:00", "end": "20:00", "playlist": "interviews.txt", "title": "VJ Industry Interviews", "artist": "VJs TV Academy", "type": "automated" },
+        { "start": "20:00", "end": "00:00", "playlist": "showcase.txt", "title": "Student Showcase & Breakdowns", "artist": "VJs TV Academy", "type": "automated" }
+      ]
+    }
+  }
+}
