@@ -280,17 +280,6 @@ meta_description: "Watch live VJ performances and browse the 24/7 Loop Gallery â
             </div>
             {% endif %}
           </div>
-          <div style="background:var(--vjs-card); border:1px solid var(--vjs-border); padding:1.75rem;">
-            <div class="vjs-section-label" style="margin-bottom:1.25rem;">Featured Artists</div>
-            {% assign featured_artists = site.vjs | where: "featured", true | limit: 4 %}
-            {% for artist in featured_artists %}
-            <a href="{{ artist.url }}" class="text-decoration-none" style="display:flex; align-items:center; gap:0.85rem; padding:0.6rem 0; border-bottom:1px solid var(--vjs-border);">
-              <div style="width:40px; height:40px; background:linear-gradient(135deg, rgba(123,47,255,0.4), rgba(0,212,255,0.2)); display:flex; align-items:center; justify-content:center; font-family:'Barlow Condensed',sans-serif; font-size:0.7rem; color:#fff; flex-shrink:0;">{{ artist.title | truncate: 2, '' }}</div>
-              <div style="min-width:0;"><div style="font-weight:600; color:#fff; font-size:0.85rem; white-space:nowrap; overflow:hidden; text-overflow:ellipsis;">{{ artist.title }}</div><div style="font-size:0.72rem; color:var(--vjs-text-muted);">{{ artist.location }}</div></div>
-            </a>
-            {% endfor %}
-            <a href="/artists" style="display:block; text-align:center; margin-top:1rem; font-family:'Barlow Condensed',sans-serif; font-size:0.6rem; letter-spacing:0.15em; color:var(--vjs-ultraviolet); text-transform:uppercase;">All Artists â†’</a>
-          </div>
         </div>
       </div>
     </div>
