@@ -16,18 +16,18 @@ meta_description: "VJs TV is the global broadcast network for VJ culture. Watch 
     <div class="vjs-live-strip-ch-info">
       {% assign featured_artists = site.vjs | where: "featured", true %}
       {% assign on_air = featured_artists | first %}
-      <span class="title">{% if on_air %}{{ on_air.title }} — {{ on_air.visual_style }}{% else %}VJs TV Live Stream{% endif %}</span>
+      <span class="title" id="live-strip-ch1-title">{% if on_air %}{{ on_air.title }} — {{ on_air.visual_style }}{% else %}VJs TV Live Stream{% endif %}</span>
     </div>
-    <div class="vjs-live-strip-loc">{% if on_air %}{{ on_air.location }}{% else %}WORLDWIDE{% endif %}</div>
+    <div class="vjs-live-strip-loc" id="live-strip-ch1-loc">{% if on_air %}{{ on_air.location }}{% else %}WORLDWIDE{% endif %}</div>
   </div>
   <div class="vjs-live-strip-ch">
     <div class="vjs-live-strip-ch-num">2</div>
     <a href="/live" class="vjs-live-strip-ch-play"><svg viewBox="0 0 10 12"><polygon points="0,0 10,6 0,12"/></svg></a>
     <div class="vjs-live-strip-ch-info">
       {% assign second_artist = featured_artists | last %}
-      <span class="title">{% if second_artist %}{{ second_artist.title }} — {{ second_artist.visual_style }}{% else %}Loop Gallery{% endif %}</span>
+      <span class="title" id="live-strip-ch2-title">{% if second_artist %}{{ second_artist.title }} — {{ second_artist.visual_style }}{% else %}Loop Gallery{% endif %}</span>
     </div>
-    <div class="vjs-live-strip-loc">{% if second_artist %}{{ second_artist.location }}{% else %}24/7{% endif %}</div>
+    <div class="vjs-live-strip-loc" id="live-strip-ch2-loc">{% if second_artist %}{{ second_artist.location }}{% else %}24/7{% endif %}</div>
   </div>
   <div class="vjs-live-strip-right">
     <button type="button" id="vjs-schedule-btn" class="vjs-live-strip-icon" title="Broadcast Schedule" aria-label="View broadcast schedule" onclick="vjsToggleSchedule()">
@@ -345,6 +345,85 @@ var VJS_PROJECT_POOL = [
   });
 
   window._vjsFirstPick = picks[0];
+})();
+
+// ── LIVE STRIP SCHEDULE AUTO-UPDATE ─────────────────────────
+(function() {
+  var SCHEDULE_URL = '/schedule/schedule.json';
+  var UPDATE_INTERVAL = 60 * 1000;
+
+  function utcMins(date) {
+    return date.getUTCHours() * 60 + date.getUTCMinutes();
+  }
+
+  function parseTime(t) {
+    var parts = t.split(':');
+    var m = parseInt(parts[0], 10) * 60 + parseInt(parts[1], 10);
+    return m === 0 ? 1440 : m;
+  }
+
+  function getActiveBlock(blocks, nowMins, nowDate) {
+    for (var i = 0; i < blocks.length; i++) {
+      var s = parseInt(blocks[i].start.split(':')[0], 10) * 60 + parseInt(blocks[i].start.split(':')[1], 10);
+      var e = parseTime(blocks[i].end);
+      if (nowMins >= s && nowMins < e) return blocks[i];
+    }
+    return blocks[0];
+  }
+
+  function getActiveSpecial(specials, nowDate) {
+    if (!specials || !specials.length) return null;
+    var today = nowDate.toISOString().slice(0, 10);
+    var nowMins = utcMins(nowDate);
+    for (var i = 0; i < specials.length; i++) {
+      var sp = specials[i];
+      if (sp.date === today) {
+        var s = parseInt(sp.start.split(':')[0], 10) * 60 + parseInt(sp.start.split(':')[1], 10);
+        var e = parseTime(sp.end);
+        if (nowMins >= s && nowMins < e) return sp;
+      }
+    }
+    return null;
+  }
+
+  function updateStrip(data) {
+    var now = new Date();
+    var nowMins = utcMins(now);
+    var channels = data.channels;
+
+    // CH.1 — check special event first, then regular block
+    var ch1 = channels['ch1-live'];
+    if (ch1) {
+      var special = getActiveSpecial(ch1.special_events, now);
+      var block = special || getActiveBlock(ch1.blocks, nowMins, now);
+      var title = block.title || '';
+      var artist = block.artist || 'VJs TV Rotation';
+      var t1 = document.getElementById('live-strip-ch1-title');
+      var l1 = document.getElementById('live-strip-ch1-loc');
+      if (t1) t1.textContent = title + (artist ? ' \u2014 ' + artist : '');
+      if (l1) l1.textContent = special ? 'LIVE EVENT' : 'CH.1 LIVE';
+    }
+
+    // CH.2 — regular block
+    var ch2 = channels['ch2-loop-gallery'];
+    if (ch2) {
+      var block2 = getActiveBlock(ch2.blocks, nowMins, now);
+      var t2 = document.getElementById('live-strip-ch2-title');
+      var l2 = document.getElementById('live-strip-ch2-loc');
+      if (t2) t2.textContent = (block2.title || '') + (block2.artist ? ' \u2014 ' + block2.artist : '');
+      if (l2) l2.textContent = 'CH.2 LOOP GALLERY';
+    }
+  }
+
+  function fetchAndUpdate() {
+    fetch(SCHEDULE_URL + '?_=' + Date.now())
+      .then(function(r) { return r.json(); })
+      .then(function(data) { updateStrip(data); })
+      .catch(function() {});
+  }
+
+  fetchAndUpdate();
+  setInterval(fetchAndUpdate, UPDATE_INTERVAL);
 })();
 </script>
 
