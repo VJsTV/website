@@ -49,7 +49,6 @@ VJs TV is a Jekyll-based platform for VJ culture and audiovisual performances. I
 - `sitemap.html` - Human-readable HTML sitemap with structured sections
 - `_headers` - Cloudflare security + caching headers
 - `schedule/schedule.json` - Central programming schedule for all 3 live channels (UTC time blocks, special events)
-- `vjstv-docker/` - Docker + FFmpeg infrastructure scaffold for 24/7 multi-channel streaming (docker-compose, scheduler, playlists)
 
 ## Accessibility
 - Skip-to-content link (keyboard-accessible, cyan highlight)
