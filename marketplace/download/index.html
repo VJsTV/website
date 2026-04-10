@@ -9,7 +9,6 @@ description: "Your VJ loop pack download is ready."
 
   <div class="vjs-mp-download-wrap">
 
-    <!-- SUCCESS ICON -->
     <div class="vjs-mp-dl-icon">
       <svg viewBox="0 0 24 24" fill="none" stroke="#39ff14" stroke-width="1.5">
         <circle cx="12" cy="12" r="10"/>
@@ -21,7 +20,6 @@ description: "Your VJ loop pack download is ready."
     <h1 class="vjs-mp-dl-title" id="dlTitle">VJ Loop Pack</h1>
     <div class="vjs-mp-dl-artist" id="dlArtist"></div>
 
-    <!-- PACK META -->
     <div class="vjs-mp-dl-meta" id="dlMeta">
       <div class="vjs-mp-dl-meta-item">
         <span class="vjs-mp-dl-meta-label">CLIPS</span>
@@ -41,33 +39,42 @@ description: "Your VJ loop pack download is ready."
       </div>
     </div>
 
-    <!-- PRIMARY DOWNLOAD — loops (Google Drive) -->
-    <a href="#" id="dlBtn" class="vjs-mp-btn-primary vjs-mp-dl-btn" target="_blank" rel="noopener noreferrer">
+    <button id="dlBtn" class="vjs-mp-btn-primary vjs-mp-dl-btn" type="button">
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" style="width:1em;height:1em;vertical-align:middle;margin-right:8px;"><path d="M12 3v14M5 11l7 7 7-7"/><path d="M4 20h16"/></svg>
-      DOWNLOAD VJ LOOPS
-    </a>
+      DOWNLOAD ALL FILES
+    </button>
 
-    <!-- SECONDARY DOWNLOAD — commercial license -->
+    <div class="vjs-mp-dl-progress" id="dlProgress" style="display:none;">
+      <div class="vjs-mp-dl-progress-bar-bg">
+        <div class="vjs-mp-dl-progress-bar" id="dlProgressBar"></div>
+      </div>
+      <div class="vjs-mp-dl-progress-text" id="dlProgressText">Preparing downloads...</div>
+    </div>
+
+    <div class="vjs-mp-dl-file-list" id="dlFileList" style="display:none;">
+      <div class="vjs-mp-dl-file-title">FILES</div>
+      <div id="dlFiles"></div>
+    </div>
+
     <a href="#" id="dlLicenseBtn" class="vjs-mp-dl-license-btn" download="vjstv-commercial-license.txt">
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" style="width:0.9em;height:0.9em;vertical-align:middle;margin-right:6px;"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="12" y1="18" x2="12" y2="12"/><line x1="9" y1="15" x2="15" y2="15"/></svg>
       Download Commercial License
     </a>
 
     <div class="vjs-mp-dl-note">
-      Hosted on Google Drive — your browser will open the download automatically.
+      Hosted on GitHub — files download directly to your computer.
     </div>
 
-    <!-- INSTRUCTIONS -->
     <div class="vjs-mp-dl-instructions">
       <div class="vjs-mp-dl-instr-title">HOW TO USE YOUR LOOPS</div>
       <div class="vjs-mp-dl-instr-grid">
         <div class="vjs-mp-dl-instr-step">
           <div class="vjs-mp-dl-step-num">01</div>
-          <div class="vjs-mp-dl-step-text">Click "Download VJ Loops" — Google Drive will prepare a ZIP</div>
+          <div class="vjs-mp-dl-step-text">Click "Download All Files" — each clip downloads individually</div>
         </div>
         <div class="vjs-mp-dl-instr-step">
           <div class="vjs-mp-dl-step-num">02</div>
-          <div class="vjs-mp-dl-step-text">Extract the ZIP to your media drive</div>
+          <div class="vjs-mp-dl-step-text">Move the MP4 files to your media drive</div>
         </div>
         <div class="vjs-mp-dl-instr-step">
           <div class="vjs-mp-dl-step-num">03</div>
@@ -80,7 +87,6 @@ description: "Your VJ loop pack download is ready."
       </div>
     </div>
 
-    <!-- MORE PACKS -->
     <div class="vjs-mp-dl-more">
       <div class="vjs-mp-dl-more-title">EXPLORE MORE PACKS</div>
       <a href="/marketplace" class="vjs-mp-filter-btn">BROWSE MARKETPLACE →</a>
@@ -119,6 +125,83 @@ description: "Your VJ loop pack download is ready."
   margin: 0 auto;
   justify-content: center;
   align-items: center;
+  cursor: pointer;
+}
+.vjs-mp-dl-progress {
+  width: 100%;
+  max-width: 420px;
+  margin: 16px auto 0;
+}
+.vjs-mp-dl-progress-bar-bg {
+  width: 100%;
+  height: 4px;
+  background: #1a1a1a;
+  overflow: hidden;
+}
+.vjs-mp-dl-progress-bar {
+  height: 100%;
+  width: 0%;
+  background: #39ff14;
+  transition: width 0.3s ease;
+}
+.vjs-mp-dl-progress-text {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 0.7rem;
+  letter-spacing: 0.08em;
+  color: #666;
+  text-transform: uppercase;
+  margin-top: 6px;
+  text-align: center;
+}
+.vjs-mp-dl-file-list {
+  width: 100%;
+  max-width: 420px;
+  margin: 24px auto 0;
+  border: 1px solid #1a1a1a;
+  background: #0a0a0a;
+}
+.vjs-mp-dl-file-title {
+  font-family: 'Orbitron', sans-serif;
+  font-size: 0.65rem;
+  letter-spacing: 0.12em;
+  color: #555;
+  padding: 10px 14px;
+  border-bottom: 1px solid #1a1a1a;
+}
+.vjs-mp-dl-file-item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 8px 14px;
+  border-bottom: 1px solid #111;
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 0.78rem;
+  color: #888;
+}
+.vjs-mp-dl-file-item:last-child {
+  border-bottom: none;
+}
+.vjs-mp-dl-file-name {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  flex: 1;
+  margin-right: 10px;
+}
+.vjs-mp-dl-file-status {
+  font-size: 0.65rem;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  flex-shrink: 0;
+}
+.vjs-mp-dl-file-status.done {
+  color: #39ff14;
+}
+.vjs-mp-dl-file-status.downloading {
+  color: var(--vjs-cyan, #00d4ff);
+}
+.vjs-mp-dl-file-status.pending {
+  color: #333;
 }
 </style>
 
@@ -131,7 +214,7 @@ description: "Your VJ loop pack download is ready."
   var artist = params.get('artist') || '';
   var clips = params.get('clips') || '—';
   var size = params.get('size') || '—';
-  var downloadUrl = params.get('url') ? decodeURIComponent(params.get('url')) : null;
+  var ghUrl = params.get('url') ? decodeURIComponent(params.get('url')) : null;
   var licenseUrl = params.get('license') ? decodeURIComponent(params.get('license')) : '/assets/downloads/vjstv-commercial-license.txt';
 
   document.getElementById('dlTitle').textContent = decodeURIComponent(title);
@@ -139,17 +222,131 @@ description: "Your VJ loop pack download is ready."
   document.getElementById('dlClips').textContent = clips;
   document.getElementById('dlSize').textContent = decodeURIComponent(size);
 
-  var dlBtn = document.getElementById('dlBtn');
-  if (downloadUrl) {
-    dlBtn.setAttribute('href', downloadUrl);
-  } else {
-    dlBtn.style.opacity = '0.4';
-    dlBtn.style.pointerEvents = 'none';
+  var licenseBtn = document.getElementById('dlLicenseBtn');
+  if (licenseUrl) licenseBtn.setAttribute('href', licenseUrl);
+
+  function parseGitHubUrl(url) {
+    var match = url.match(/github\.com\/([^/]+)\/([^/]+)\/tree\/([^/]+)\/(.+)/);
+    if (match) return { owner: match[1], repo: match[2], branch: match[3], path: decodeURIComponent(match[4]) };
+    return null;
   }
 
-  var licenseBtn = document.getElementById('dlLicenseBtn');
-  if (licenseUrl) {
-    licenseBtn.setAttribute('href', licenseUrl);
+  function downloadFile(url, filename) {
+    return fetch(url)
+      .then(function(r) { return r.blob(); })
+      .then(function(blob) {
+        var a = document.createElement('a');
+        a.href = URL.createObjectURL(blob);
+        a.download = filename;
+        document.body.appendChild(a);
+        a.click();
+        document.body.removeChild(a);
+        setTimeout(function() { URL.revokeObjectURL(a.href); }, 1000);
+      });
   }
+
+  var dlBtn = document.getElementById('dlBtn');
+
+  if (!ghUrl) {
+    dlBtn.style.opacity = '0.4';
+    dlBtn.style.pointerEvents = 'none';
+    return;
+  }
+
+  var gh = parseGitHubUrl(ghUrl);
+
+  dlBtn.addEventListener('click', function() {
+    if (!gh) {
+      window.open(ghUrl, '_blank');
+      return;
+    }
+
+    dlBtn.disabled = true;
+    dlBtn.innerHTML = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" style="width:1em;height:1em;vertical-align:middle;margin-right:8px;animation:vjsDlSpin 1s linear infinite;"><path d="M12 2v4M12 18v4M4.93 4.93l2.83 2.83M16.24 16.24l2.83 2.83M2 12h4M18 12h4M4.93 19.07l2.83-2.83M16.24 7.76l2.83-2.83"/></svg> FETCHING FILE LIST...';
+
+    var apiUrl = 'https://api.github.com/repos/' + gh.owner + '/' + gh.repo + '/contents/' + encodeURIComponent(gh.path) + '?ref=' + gh.branch;
+
+    fetch(apiUrl)
+      .then(function(r) { return r.json(); })
+      .then(function(files) {
+        if (!Array.isArray(files)) throw new Error('Could not list files');
+
+        var videoFiles = files.filter(function(f) {
+          return f.type === 'file' && /\.(mp4|mov|webm|avi)$/i.test(f.name);
+        });
+
+        if (videoFiles.length === 0) throw new Error('No video files found');
+
+        var progress = document.getElementById('dlProgress');
+        var progressBar = document.getElementById('dlProgressBar');
+        var progressText = document.getElementById('dlProgressText');
+        var fileList = document.getElementById('dlFileList');
+        var filesContainer = document.getElementById('dlFiles');
+        progress.style.display = 'block';
+        fileList.style.display = 'block';
+
+        videoFiles.forEach(function(f) {
+          var item = document.createElement('div');
+          item.className = 'vjs-mp-dl-file-item';
+          item.id = 'file-' + f.name.replace(/[^a-zA-Z0-9]/g, '-');
+          item.innerHTML = '<span class="vjs-mp-dl-file-name">' + f.name + '</span><span class="vjs-mp-dl-file-status pending">waiting</span>';
+          filesContainer.appendChild(item);
+        });
+
+        dlBtn.innerHTML = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" style="width:1em;height:1em;vertical-align:middle;margin-right:8px;"><path d="M12 3v14M5 11l7 7 7-7"/><path d="M4 20h16"/></svg> DOWNLOADING...';
+
+        var completed = 0;
+        var total = videoFiles.length;
+
+        function downloadNext(index) {
+          if (index >= total) {
+            dlBtn.innerHTML = '<svg viewBox="0 0 24 24" fill="none" stroke="#39ff14" stroke-width="1.5" style="width:1em;height:1em;vertical-align:middle;margin-right:8px;"><polyline points="8 12 11 15 16 9"/></svg> ALL FILES DOWNLOADED';
+            dlBtn.style.borderColor = '#39ff14';
+            dlBtn.style.color = '#39ff14';
+            progressBar.style.width = '100%';
+            progressText.textContent = total + ' of ' + total + ' files downloaded';
+            return;
+          }
+
+          var f = videoFiles[index];
+          var itemEl = document.getElementById('file-' + f.name.replace(/[^a-zA-Z0-9]/g, '-'));
+          if (itemEl) itemEl.querySelector('.vjs-mp-dl-file-status').textContent = 'downloading';
+          if (itemEl) itemEl.querySelector('.vjs-mp-dl-file-status').className = 'vjs-mp-dl-file-status downloading';
+          progressText.textContent = 'Downloading ' + (index + 1) + ' of ' + total + '...';
+
+          var rawUrl = 'https://raw.githubusercontent.com/' + gh.owner + '/' + gh.repo + '/' + gh.branch + '/' + gh.path + '/' + f.name;
+
+          downloadFile(rawUrl, f.name)
+            .then(function() {
+              completed++;
+              progressBar.style.width = Math.round((completed / total) * 100) + '%';
+              if (itemEl) itemEl.querySelector('.vjs-mp-dl-file-status').textContent = 'done';
+              if (itemEl) itemEl.querySelector('.vjs-mp-dl-file-status').className = 'vjs-mp-dl-file-status done';
+              setTimeout(function() { downloadNext(index + 1); }, 800);
+            })
+            .catch(function() {
+              if (itemEl) itemEl.querySelector('.vjs-mp-dl-file-status').textContent = 'failed';
+              if (itemEl) itemEl.querySelector('.vjs-mp-dl-file-status').style.color = '#ff4444';
+              completed++;
+              progressBar.style.width = Math.round((completed / total) * 100) + '%';
+              setTimeout(function() { downloadNext(index + 1); }, 400);
+            });
+        }
+
+        downloadNext(0);
+      })
+      .catch(function(err) {
+        dlBtn.disabled = false;
+        dlBtn.innerHTML = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" style="width:1em;height:1em;vertical-align:middle;margin-right:8px;"><path d="M12 3v14M5 11l7 7 7-7"/><path d="M4 20h16"/></svg> DOWNLOAD ALL FILES';
+        window.open(ghUrl, '_blank');
+      });
+  });
 })();
 </script>
+
+<style>
+@keyframes vjsDlSpin {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+</style>
