@@ -92,11 +92,13 @@ permalink: /sitemap.xml
   </url>
   {% endfor %}
   {% for project in site.projects %}
+  {% unless project.name == "time-tilings-stuk-pablo-valbuena" or project.name == "visions-of-america-ameriques-refik-anadol" or project.name == "rawtekk-heres-to-them-denial-of-service" or project.name == "pii-expansion-arquitectonica-zaragoza" %}
   <url>
     <loc>{{ site.url }}{{ project.url }}</loc>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
+  {% endunless %}
   {% endfor %}
   {% for event in site.events %}
   <url>
