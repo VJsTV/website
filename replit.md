@@ -142,11 +142,27 @@ VJs TV is a Jekyll-based platform for VJ culture and audiovisual performances. I
 - CORS headers on all endpoints
 
 ## Cloudflare Analytics & Dynamic Pricing
-- **Backend:** `/api/analytics` endpoint fetches from Cloudflare GraphQL API
+- **Backend:** `/api/analytics` endpoint fetches Cloudflare page views
+- **Charts:** `/api/analytics/charts` returns daily traffic + top countries
 - **Caching:** 10-minute in-memory cache in Worker
 - **Frontend:** `vjsLoadAnalytics()` on sponsors/partners pages
 - **Pricing tiers:** Base prices × visitor multiplier
-- **Stats bar:** 97 community members, 50 countries, 23 events
+- **Stats bar:** live page-view totals from Cloudflare
+
+## How to get Cloudflare live analytics
+1. Log in to Cloudflare and open your **VJs TV** zone.
+2. Go to **Analytics & Logs** → **Web Analytics** or **Traffic Analytics**.
+3. Make sure analytics is enabled for the site.
+4. In your Worker, set:
+   - `CF_API_TOKEN`
+   - `CF_ZONE_ID`
+5. The site reads analytics from:
+   - `GET /api/analytics`
+   - `GET /api/analytics/charts`
+6. The sponsors/partners pages display:
+   - monthly page views
+   - daily traffic
+   - top countries
 
 ## Development
 ```
