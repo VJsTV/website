@@ -43,6 +43,14 @@ app.use(function (req, res, next) {
   res.header("Access-Control-Allow-Origin", "*");
   res.header("Access-Control-Allow-Methods", "GET,OPTIONS");
   res.header("Access-Control-Allow-Headers", "Content-Type");
+  res.header("Strict-Transport-Security", "max-age=31536000; includeSubDomains; preload");
+  res.header("X-Content-Type-Options", "nosniff");
+  res.header("X-Frame-Options", "SAMEORIGIN");
+  res.header("X-XSS-Protection", "1; mode=block");
+  res.header("Referrer-Policy", "strict-origin-when-cross-origin");
+  res.header("Permissions-Policy", "interest-cohort=(), geolocation=(), microphone=(), camera=(), payment=(), usb=()");
+  res.header("Cross-Origin-Opener-Policy", "same-origin-allow-popups");
+  res.header("Content-Security-Policy", "default-src 'self'; script-src 'self' 'unsafe-inline' 'unsafe-eval' https://www.youtube-nocookie.com https://player.vimeo.com https://challenges.cloudflare.com https://static.cloudflareinsights.com https://cdnjs.cloudflare.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; img-src 'self' data: https: blob:; font-src 'self' https://fonts.gstatic.com; frame-src https://www.youtube-nocookie.com https://www.youtube.com https://player.vimeo.com https://challenges.cloudflare.com; connect-src 'self' https://vimeo.com https://player.vimeo.com https://website.guillaumelauzier.workers.dev https://www.youtube.com https://cloudflareinsights.com; media-src 'self' https:; object-src 'none'; base-uri 'self'; form-action 'self' https://website.guillaumelauzier.workers.dev; upgrade-insecure-requests");
   if (req.method === "OPTIONS") return res.sendStatus(200);
   next();
 });
@@ -108,7 +116,7 @@ app.use(express.static(SITE_DIR, {
   extensions: ["html"],
   maxAge: IS_PROD ? "1h" : 0,
   setHeaders: function (res, filePath) {
-    if (/\.(js|css|woff2?|ttf|eot|svg|png|jpg|jpeg|gif|webp|ico)$/.test(filePath)) {
+    if (/\.(js|css|woff2?|ttf|eot|svg|png|jpg|jpeg|gif|webp|avif|ico)$/.test(filePath)) {
       res.setHeader("Cache-Control", "public, max-age=604800, immutable");
     }
   }

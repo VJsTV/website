@@ -78,7 +78,16 @@ VJs TV is a Jekyll-based platform for VJ culture and audiovisual performances. I
 - **Open Graph** with dynamic `og:type` (website/video.other/event), absolute image URLs, locale
 - **Twitter Cards** with `summary_large_image`, creator handle
 - **Heading hierarchy**: One H1 per page, semantic H2 sidebar headings
-- **Security headers**: HSTS, X-Content-Type-Options, Permissions-Policy, immutable caching
+- **Security headers** (both `_headers` for Cloudflare Pages and Express middleware):
+  - HSTS (`max-age=31536000; includeSubDomains; preload`)
+  - X-Content-Type-Options (`nosniff`)
+  - X-Frame-Options (`SAMEORIGIN`)
+  - X-XSS-Protection (`1; mode=block`)
+  - Referrer-Policy (`strict-origin-when-cross-origin`)
+  - Permissions-Policy (blocks geolocation, microphone, camera, payment, USB, FLoC)
+  - Cross-Origin-Opener-Policy (`same-origin-allow-popups`)
+  - Content-Security-Policy (whitelists YouTube, Vimeo, Cloudflare, Google Fonts; blocks `object-src`; enforces `upgrade-insecure-requests`)
+  - Immutable caching on all static assets (CSS, JS, images, fonts, .avif)
 
 ## Performance
 - `requestAnimationFrame` throttled scroll handler for progress bar
@@ -86,7 +95,8 @@ VJs TV is a Jekyll-based platform for VJ culture and audiovisual performances. I
 - `will-change` hints on animated elements
 - IntersectionObserver visibility gating on meter bar animation
 - `preconnect` for Google Fonts and Vimeo
-- `preload` for critical CSS (vjstv.css)
+- `dns-prefetch` for YouTube, Vimeo CDN, Cloudflare, Google Fonts (6 domains)
+- `preload` for critical CSS (vjstv.css, bootstrap.min.css)
 - `defer` on all non-critical scripts (jQuery loads synchronously, everything else deferred)
 - Runtime lazy loading for below-fold images via `loading="lazy"` attribute
 - Immutable cache headers for static assets (CSS, JS, images, fonts)

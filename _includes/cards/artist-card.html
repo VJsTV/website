@@ -31,7 +31,7 @@
   <div class="vjs-nts-visual">
     <div class="vjs-nts-visual-inner">
       {% if include.artist.image %}
-        <img src="{{ include.artist.image }}" alt="{{ include.artist.title }}" class="vjs-artist-photo">
+        <img src="{{ include.artist.image }}" alt="{{ include.artist.title }}" class="vjs-artist-photo" loading="lazy" decoding="async" width="400" height="400">
       {% else %}
         <div class="vjs-artist-initials {{ ai_class }}" data-letter="{{ initial }}">
           <span>{{ initial }}</span>
