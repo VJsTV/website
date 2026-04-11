@@ -2,4 +2,14 @@
 layout: default
 ---
 
-<!-- live page content preserved -->
+{% include layouts/nav/nav-3.html default_logo="white" %}
+
+<div class="vjs-page-header">
+  <div class="container">
+    <h1 class="vjs-section-title" style="font-size:clamp(2rem,5vw,3.5rem);">Live</h1>
+    <div class="vjs-accent-line"></div>
+    <h2 style="font-family:'Barlow Condensed',sans-serif; font-size:1.05rem; font-weight:400; color:var(--vjs-text-muted); max-width:700px; margin:0;">Watch the three-channel broadcast network, loop gallery, and VJ education stream.</h2>
+  </div>
+</div>
+
+{% include vjstv-footer.html %}
