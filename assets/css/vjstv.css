@@ -71,10 +71,14 @@ h1, h2, h3, h4, h5, h6,
   will-change: position;
 }
 
-.navbar-brand {
+.navbar-brand,
+.navbar-brand a,
+.navbar-brand > a {
   display: flex;
   align-items: center;
   min-width: 60px;
+  background: transparent !important;
+  background-color: transparent !important;
 }
 
 .navbar-hamburger {
@@ -96,6 +100,9 @@ h1, h2, h3, h4, h5, h6,
   max-width: none !important;
   filter: none !important;
   transition: opacity 0.2s ease !important;
+  background: transparent !important;
+  background-color: transparent !important;
+  image-rendering: auto !important;
 }
 .navbar-brand:hover img {
   opacity: 0.8;
@@ -2279,6 +2286,21 @@ select.vjs-form-input {
   letter-spacing: 0.08em;
   color: #fff;
   margin-bottom: 12px;
+}
+.vjstv-footer-logo-link {
+  display: inline-block;
+  margin-bottom: 14px;
+  background: transparent !important;
+  text-decoration: none;
+  line-height: 1;
+}
+.vjstv-footer-logo-img {
+  height: 23px;
+  width: auto;
+  display: block;
+  background: transparent !important;
+  background-color: transparent !important;
+  image-rendering: auto;
 }
 .vjstv-footer-tagline {
   font-family: 'Barlow Condensed', sans-serif;
