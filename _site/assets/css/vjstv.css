@@ -173,10 +173,15 @@ h1, h2, h3, h4, h5, h6,
 
 .navbar .nav-link[href="https://vjsmag.com"] {
   color: rgba(255,255,255,0.5) !important;
+  padding-right: 0 !important;
+  margin-right: 0 !important;
 }
 .navbar .nav-link[href="https://vjsmag.com"]:hover {
   color: #fff !important;
   text-shadow: none !important;
+}
+.navbar .nav-link[href="https://vjsmag.com"]::after {
+  display: none !important;
 }
 
 .navbar > .container {
