@@ -2431,9 +2431,11 @@ select.vjs-form-input {
   padding: 0 14px;
   flex: 1;
   min-width: 0;
+  height: 100%;
   outline: none !important;
   box-shadow: none !important;
   border-radius: 0 !important;
+  box-sizing: border-box;
 }
 .vjstv-footer-newsletter-form input::placeholder { color: rgba(255,255,255,0.25); }
 .vjstv-footer-newsletter-form button {
@@ -2449,6 +2451,8 @@ select.vjs-form-input {
   cursor: pointer;
   transition: background 0.15s;
   white-space: nowrap;
+  height: 100%;
+  box-sizing: border-box;
 }
 .vjstv-footer-newsletter-form button:hover { background: #b81aff; }
 
