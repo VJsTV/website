@@ -1305,6 +1305,7 @@ h2.vjs-sidebar-card-heading,
 .vjs-filter-count {
   font-family: 'Barlow Condensed', sans-serif; font-size: 0.65rem; font-weight: 700;
   letter-spacing: 0.18em; text-transform: uppercase; color: #333; margin-bottom: 20px;
+  max-width: 1100px; margin-left: auto; margin-right: auto;
 }
 .vjs-filter-count strong { color: var(--vjs-ultraviolet); }
 .vjs-filter-sort-row {
