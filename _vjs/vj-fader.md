@@ -25,4 +25,4 @@ projects:
   - "https://vimeo.com/5623028"
 ---
 
-**VJ Fader** is a Berlin-based VJ and visual artist whose technically accomplished live visual performances have established him as a respected figure in the European and international electronic music circuit. Creating visual environments of flowing abstraction, VJ Fader brings musicality and directness to live performance — building systems that respond to electronic music with genuine sensitivity.
+**VJ Fader** is a Berlin-based VJ and visual artist known for technically accomplished live visual performances across the European and international electronic music circuit. Creating visual environments of flowing abstraction, VJ Fader brings musicality and directness to live performance.

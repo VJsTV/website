@@ -30,7 +30,7 @@ projects:
   - "https://vimeo.com/62242278"
 ---
 
-**Ryoji Ikeda** is a Japanese electronic musician and visual artist based in Paris — arguably the most important figure working at the intersection of data, mathematics, and audiovisual art. His practice transforms the raw material of the digital world — binary code, mathematical sequences, scientific datasets — into audiovisual experiences of extreme precision and overwhelming sensory intensity.
+**Ryoji Ikeda** is a Japanese electronic musician and visual artist based in Paris working at the intersection of data, mathematics, and audiovisual art. His practice transforms binary code, mathematical sequences, and scientific datasets into audiovisual experiences of extreme precision.
 
 His landmark *test pattern* series — presenting data as dense, rapidly scrolling barcodes on enormous screens, accompanied by precisely engineered audio — creates experiences that are simultaneously overwhelming in their sensory density and rigorous in their formal logic. The work asks the viewer to confront the actual materiality of digital information: not its content but its structure, its density, its speed.
 

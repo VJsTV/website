@@ -22,7 +22,7 @@ projects:
   - "https://vimeo.com/787285875"
 ---
 
-**Ryoichi Kurokawa** is a Japanese artist working at the precise intersection of sound and image. His practice encompasses audiovisual sculpture, installation, and performance — work that exists in the space between the measurable and the felt.
+**Ryoichi Kurokawa** is a Japanese artist working at the intersection of sound and image. His practice encompasses audiovisual sculpture, installation, and performance.
 
 Kurokawa's installations are characterised by an almost scientific restraint: minimal in their physical presence, maximal in their perceptual effect. Works like *oscillating continuum* (2013) use the most economical means — two screens, embedded sound — to create experiences of genuine phenomenological depth.
 

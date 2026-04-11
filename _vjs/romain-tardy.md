@@ -22,7 +22,7 @@ social:
   instagram: "https://www.instagram.com/romain.tardy/"
 ---
 
-**Romain Tardy** is a French visual artist and one of the founding members of **AntiVJ** — the collective that fundamentally changed the visual language of projection art in the late 2000s and early 2010s. With a practice built on treating light as a primary sculptural material, Tardy creates large-scale projection installations of extraordinary geometric precision and visual intelligence.
+**Romain Tardy** is a French visual artist and one of the founding members of **AntiVJ**. With a practice built on treating light as a sculptural material, Tardy creates large-scale projection installations of geometric precision and visual intelligence.
 
 His work *Olo* (2013), created with musician Murcof, is among the most celebrated projection installations of the past decade — transforming a former industrial space into a field of luminous geometric events, precisely scored to an orchestral electronic score. The integration of light, space, and music is so complete that the work functions simultaneously as architecture, visual art, and musical composition.
 

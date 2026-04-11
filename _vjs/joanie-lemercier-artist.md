@@ -21,7 +21,7 @@ social:
   facebook: "https://www.facebook.com/studiojoanielemercier/"
 ---
 
-**Joanie Lemercier** is a visual artist whose work with light and projection has helped define a genuinely new approach to the medium — one that strips away theatrical spectacle, replacing it with rigorous investigation of geometry, perception, and the fundamental physics of light.
+**Joanie Lemercier** is a visual artist whose work with light and projection defines a rigorous approach to geometry, perception, and the physics of light.
 
 Working with remarkably minimal hardware — often a single projector — Lemercier creates installations that transform how viewers experience space. His best works generate the illusion of three-dimensional forms floating in space: not through computational complexity but through a precise understanding of how human visual perception can be deceived and redirected.
 

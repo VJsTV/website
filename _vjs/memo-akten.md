@@ -25,7 +25,7 @@ projects:
   - "https://vimeo.com/132462576"
 ---
 
-**Memo Akten** is a Turkish-born multidisciplinary artist based in Los Angeles whose practice spans machine learning, interactive installation, live performance, and theoretical writing. His work investigates the nature of consciousness, perception, and creativity — using computational systems, and particularly neural networks, as tools for philosophical inquiry as much as artistic production.
+**Memo Akten** is a Turkish-born multidisciplinary artist based in Los Angeles whose practice spans machine learning, interactive installation, live performance, and theoretical writing. His work investigates consciousness, perception, and creativity through computational systems.
 
 His project *Aggregate* (2014) — a real-time system that analyses and responds to the movement of performers using custom machine learning algorithms — was an early and influential demonstration of how machine learning could function as a creative medium rather than a technical instrument.
 

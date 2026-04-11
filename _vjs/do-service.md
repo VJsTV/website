@@ -25,6 +25,6 @@ projects:
   - "https://vimeo.com/75846005"
 ---
 
-**denial of service** is a Berlin-based visual studio creating motion graphics, visual identities, and moving image work for cultural clients, music artists, and events internationally.
+**denial of service** is a Berlin-based visual studio creating motion graphics, visual identities, and moving image work for cultural clients, music artists, and events.
 
 With a practice rooted in graphic design, denial of service brings formal precision and typographic intelligence to moving image work — creating pieces that are visually coherent and conceptually sharp across print, screen, and motion contexts. Their work for music and cultural clients demonstrates a consistent ability to translate creative vision into compelling visual identity.

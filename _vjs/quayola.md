@@ -21,7 +21,7 @@ social:
   instagram: "https://instagram.com/quayola"
 ---
 
-**Quayola** is a Roma-based Italian artist whose practice spans audiovisual performance, installation, sculpture, and print — united by a rigorous investigation into the relationship between old and new, human and machine, classical beauty and computational process.
+**Quayola** is a Roma-based Italian artist whose practice spans audiovisual performance, installation, sculpture, and print — exploring the relationship between old and new, human and machine, classical beauty and computational process.
 
 His live performances — including the *PTA* series and collaborations with musicians like **Mira Calix** — are studies in precision: generative visuals that respond to sound with the exactness of a mathematical proof and the expressiveness of improvised music. The tension between order and emergence is the defining characteristic of his live work.
 
