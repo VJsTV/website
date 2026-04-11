@@ -56,8 +56,11 @@ h1, h2, h3, h4, h5, h6,
 /* ============================================================
    NTS-STYLE NAVBAR — VJs TV
    ============================================================ */
-.navbar {
-  background: #000 !important;
+.navbar,
+.navbar.dark-wrapper,
+nav.navbar {
+  background: var(--vjs-black, #050505) !important;
+  background-color: var(--vjs-black, #050505) !important;
   border-bottom: 1px solid #222 !important;
   padding-top: 0 !important;
   padding-bottom: 0 !important;
