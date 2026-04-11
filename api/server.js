@@ -139,9 +139,10 @@ app.use(express.static(SITE_DIR, {
 }));
 
 app.use(function (req, res, next) {
+  var siteRoot = path.resolve(SITE_DIR);
   var urlPath = path.normalize(req.path).replace(/\\/g, "/");
-  var resolved = path.resolve(SITE_DIR, urlPath.replace(/^\//, ""));
-  if (resolved.indexOf(path.resolve(SITE_DIR)) !== 0) return next();
+  var resolved = path.resolve(siteRoot, urlPath.replace(/^\//, ""));
+  if (resolved !== siteRoot && resolved.indexOf(siteRoot + path.sep) !== 0) return next();
   var withHtml = resolved + ".html";
   if (fs.existsSync(withHtml)) return res.sendFile(withHtml);
   var withIndex = path.join(resolved, "index.html");
@@ -150,8 +151,9 @@ app.use(function (req, res, next) {
 });
 
 app.use(function (req, res) {
-  var filePath = path.resolve(SITE_DIR, "404.html");
-  if (filePath.indexOf(path.resolve(SITE_DIR)) === 0 && fs.existsSync(filePath)) {
+  var siteRoot = path.resolve(SITE_DIR);
+  var filePath = path.resolve(siteRoot, "404.html");
+  if (filePath.indexOf(siteRoot + path.sep) === 0 || filePath === siteRoot + path.sep + "404.html") {
     res.status(404).sendFile(filePath);
   } else {
     res.status(404).send("Page not found");
