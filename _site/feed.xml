@@ -9,7 +9,7 @@
     <atom:link href="https://vjstv.com/feed.xml" rel="self" type="application/rss+xml"/>
     <description>The global broadcast network for VJ culture. Live performances, artist discovery, and the technology powering visual art worldwide.</description>
     <language>en-us</language>
-    <lastBuildDate>Sat, 11 Apr 2026 09:38:30 +0000</lastBuildDate>
+    <lastBuildDate>Sat, 11 Apr 2026 09:38:58 +0000</lastBuildDate>
     <image>
       <url>https://vjstv.com/assets/images/vjstv-og.jpg</url>
       <title>VJs TV</title>
@@ -282,7 +282,7 @@
       <title><![CDATA[Joanie Lemercier — Brussels, Belgium]]></title>
       <link>https://vjstv.com/artists/joanie-lemercier-artist</link>
       <guid isPermaLink="true">https://vjstv.com/artists/joanie-lemercier-artist</guid>
-      <pubDate>Sat, 11 Apr 2026 09:38:30 +0000</pubDate>
+      <pubDate>Sat, 11 Apr 2026 09:38:58 +0000</pubDate>
       <category>Artists</category>
       <description><![CDATA[Belgium-based visual artist whose projection installations create geometric light sculptures from minimal hardware. Lemercier's work induces genuine perceptual shifts — using a single projector to generate the illusion of three-dimensional forms floating in space, drawing on precise optics rather than computational complexity.]]></description>
       <media:thumbnail url="https://vjstv.com/assets/images/artists/joanie-lemercier.avif"/>
@@ -292,7 +292,7 @@
       <title><![CDATA[Memo Akten — Los Angeles, USA]]></title>
       <link>https://vjstv.com/artists/memo-akten</link>
       <guid isPermaLink="true">https://vjstv.com/artists/memo-akten</guid>
-      <pubDate>Sat, 11 Apr 2026 09:38:30 +0000</pubDate>
+      <pubDate>Sat, 11 Apr 2026 09:38:58 +0000</pubDate>
       <category>Artists</category>
       <description><![CDATA[Turkish-born multidisciplinary artist based in Los Angeles whose practice spans machine learning, interactive installation, and live performance. Memo Akten's work investigates the nature of consciousness, perception, and creativity through computational systems — creating artworks that use neural networks as a medium for philosophical inquiry.]]></description>
       <media:thumbnail url="https://vjstv.com/assets/images/artists/memo-akten.avif"/>
@@ -302,7 +302,7 @@
       <title><![CDATA[Pablo Valbuena — Madrid, Spain]]></title>
       <link>https://vjstv.com/artists/pablo-valbuena</link>
       <guid isPermaLink="true">https://vjstv.com/artists/pablo-valbuena</guid>
-      <pubDate>Sat, 11 Apr 2026 09:38:30 +0000</pubDate>
+      <pubDate>Sat, 11 Apr 2026 09:38:58 +0000</pubDate>
       <category>Artists</category>
       <description><![CDATA[Madrid-based artist working with time, light, and space to create site-specific interventions that augment the perception of architecture. Pablo Valbuena's 'Augmented Sculpture Series' and light installations dissolve the boundary between physical structure and projected image — revealing hidden spatial dimensions with minimal means.]]></description>
       <media:thumbnail url="https://vjstv.com/assets/images/artists/pablo-valbuena.avif"/>
@@ -312,7 +312,7 @@
       <title><![CDATA[Quayola — Roma, Italy]]></title>
       <link>https://vjstv.com/artists/quayola</link>
       <guid isPermaLink="true">https://vjstv.com/artists/quayola</guid>
-      <pubDate>Sat, 11 Apr 2026 09:38:30 +0000</pubDate>
+      <pubDate>Sat, 11 Apr 2026 09:38:58 +0000</pubDate>
       <category>Artists</category>
       <description><![CDATA[Roma-based Italian artist working at the intersection of computational art, classical culture, and live audiovisual performance. Quayola translates art history, music, and nature into hybrid digital experiences of extraordinary precision and beauty.]]></description>
       <media:thumbnail url="https://vjstv.com/assets/images/artists/quayola.jpg"/>
@@ -322,7 +322,7 @@
       <title><![CDATA[Refik Anadol — Los Angeles, CA, USA]]></title>
       <link>https://vjstv.com/artists/refo</link>
       <guid isPermaLink="true">https://vjstv.com/artists/refo</guid>
-      <pubDate>Sat, 11 Apr 2026 09:38:30 +0000</pubDate>
+      <pubDate>Sat, 11 Apr 2026 09:38:58 +0000</pubDate>
       <category>Artists</category>
       <description><![CDATA[Turkish-American artist and director working with artificial intelligence and machine learning to create monumental immersive installations and live performances. Refik Anadol's work explores the intersection of art, technology, and human consciousness — transforming data into visual poetry at unprecedented scale.]]></description>
       <media:thumbnail url="https://vjstv.com/assets/images/artists/refik-anadol.jpg"/>
@@ -332,7 +332,7 @@
       <title><![CDATA[Romain Tardy — Paris, France]]></title>
       <link>https://vjstv.com/artists/romain-tardy</link>
       <guid isPermaLink="true">https://vjstv.com/artists/romain-tardy</guid>
-      <pubDate>Sat, 11 Apr 2026 09:38:30 +0000</pubDate>
+      <pubDate>Sat, 11 Apr 2026 09:38:58 +0000</pubDate>
       <category>Artists</category>
       <description><![CDATA[French visual artist and co-founder of AntiVJ — the collective that defined a generation of projection art. Romain Tardy creates large-scale projection installations that treat light as a primary material — geometric, minimal, and architecturally precise works that have been exhibited at major institutions worldwide.]]></description>
       <media:thumbnail url="https://vjstv.com/assets/images/artists/romain-tardy.avif"/>
@@ -342,7 +342,7 @@
       <title><![CDATA[Ryoichi Kurokawa — Japan / International]]></title>
       <link>https://vjstv.com/artists/ryoichi-kurokawa</link>
       <guid isPermaLink="true">https://vjstv.com/artists/ryoichi-kurokawa</guid>
-      <pubDate>Sat, 11 Apr 2026 09:38:30 +0000</pubDate>
+      <pubDate>Sat, 11 Apr 2026 09:38:58 +0000</pubDate>
       <category>Artists</category>
       <description><![CDATA[Japanese audiovisual artist whose installations translate physical and mathematical phenomena into precise, meditative sensory experiences. His work operates at the intersection of sound, light, and scientific inquiry.]]></description>
       <media:thumbnail url="https://vjstv.com/assets/images/artists/ryoichi-kurokawa.avif"/>
@@ -352,7 +352,7 @@
       <title><![CDATA[Ryoji Ikeda — Paris, France]]></title>
       <link>https://vjstv.com/artists/ryoji-ikeda</link>
       <guid isPermaLink="true">https://vjstv.com/artists/ryoji-ikeda</guid>
-      <pubDate>Sat, 11 Apr 2026 09:38:30 +0000</pubDate>
+      <pubDate>Sat, 11 Apr 2026 09:38:58 +0000</pubDate>
       <category>Artists</category>
       <description><![CDATA[Japanese electronic musician and visual artist based in Paris — the undisputed master of data aesthetics. Ikeda's work transforms raw data — binary code, mathematical sequences, scientific datasets — into audiovisual experiences of extreme precision and overwhelming sensory intensity. His 'test pattern' series and 'data.tron' are among the most important artworks of the 21st century.]]></description>
       <media:thumbnail url="https://vjstv.com/assets/images/artists/ryoji-ikeda.jpg"/>
@@ -362,7 +362,7 @@
       <title><![CDATA[Sougwen Chung — London, UK]]></title>
       <link>https://vjstv.com/artists/sougwen-chung</link>
       <guid isPermaLink="true">https://vjstv.com/artists/sougwen-chung</guid>
-      <pubDate>Sat, 11 Apr 2026 09:38:30 +0000</pubDate>
+      <pubDate>Sat, 11 Apr 2026 09:38:58 +0000</pubDate>
       <category>Artists</category>
       <description><![CDATA[London-based artist and researcher whose practice explores the intersection of hand-drawn mark-making and machine learning, creating large-scale installations and performances where human and algorithmic creativity become indistinguishable.]]></description>
       <media:thumbnail url="https://vjstv.com/assets/images/artists/sougwen-chung.avif"/>
@@ -372,7 +372,7 @@
       <title><![CDATA[Yannick Jacquet — Brussels, Belgium]]></title>
       <link>https://vjstv.com/artists/yannick-jacquet</link>
       <guid isPermaLink="true">https://vjstv.com/artists/yannick-jacquet</guid>
-      <pubDate>Sat, 11 Apr 2026 09:38:30 +0000</pubDate>
+      <pubDate>Sat, 11 Apr 2026 09:38:58 +0000</pubDate>
       <category>Artists</category>
       <description><![CDATA[Belgian visual artist and co-founder of AntiVJ — one of the world's most influential collectives in projection art. Yannick Jacquet creates minimal, architecturally precise projection works that use light as a sculptural material, transforming physical surfaces into geometrically activated fields.]]></description>
       <media:thumbnail url="https://vjstv.com/assets/images/artists/yannick-jacquet.jpeg"/>
@@ -382,7 +382,7 @@
       <title><![CDATA[denial of service — Berlin, Germany]]></title>
       <link>https://vjstv.com/artists/do-service</link>
       <guid isPermaLink="true">https://vjstv.com/artists/do-service</guid>
-      <pubDate>Sat, 11 Apr 2026 09:38:30 +0000</pubDate>
+      <pubDate>Sat, 11 Apr 2026 09:38:58 +0000</pubDate>
       <category>Artists</category>
       <description><![CDATA[Berlin-based visual studio creating motion graphics, visual identities, and moving image work for cultural clients, music artists, and events. denial of service brings a strong graphic design sensibility to moving image — creating work that is typographically precise and formally intelligent.]]></description>
       <media:thumbnail url="https://vjstv.com/assets/images/artists/denial-of-service.avif"/>
@@ -392,7 +392,7 @@
       <title><![CDATA[Jago VJ — Madrid, Spain]]></title>
       <link>https://vjstv.com/artists/jago-vj</link>
       <guid isPermaLink="true">https://vjstv.com/artists/jago-vj</guid>
-      <pubDate>Sat, 11 Apr 2026 09:38:30 +0000</pubDate>
+      <pubDate>Sat, 11 Apr 2026 09:38:58 +0000</pubDate>
       <category>Artists</category>
       <description><![CDATA[Madrid-based VJ and visual artist creating real-time abstract visual environments for electronic music performance. Jago VJ is one of Spain's most active and respected live visual practitioners — performing at major festivals and clubs across Europe with a technically precise and musically intelligent performance practice.]]></description>
       <media:thumbnail url="https://vjstv.com/assets/images/artists/jago-vj.avif"/>
@@ -402,7 +402,7 @@
       <title><![CDATA[Néstor Lizalde — Zaragoza, España]]></title>
       <link>https://vjstv.com/artists/nestor-lizalde</link>
       <guid isPermaLink="true">https://vjstv.com/artists/nestor-lizalde</guid>
-      <pubDate>Sat, 11 Apr 2026 09:38:30 +0000</pubDate>
+      <pubDate>Sat, 11 Apr 2026 09:38:58 +0000</pubDate>
       <category>Artists</category>
       <description><![CDATA[Spanish-born Zaragoza-based artist and researcher working with machine learning, computer vision, and neural networks to create artworks that investigate how computational systems see and represent the world. Néstor Lizalde's practice combines technical research rigour with a strong visual intelligence.]]></description>
       <media:thumbnail url="https://vjstv.com/assets/images/artists/nestor-lizalde.avif"/>
@@ -412,7 +412,7 @@
       <title><![CDATA[Ratsi — Paris, France]]></title>
       <link>https://vjstv.com/artists/ratsi</link>
       <guid isPermaLink="true">https://vjstv.com/artists/ratsi</guid>
-      <pubDate>Sat, 11 Apr 2026 09:38:30 +0000</pubDate>
+      <pubDate>Sat, 11 Apr 2026 09:38:58 +0000</pubDate>
       <category>Artists</category>
       <description><![CDATA[Paris-based VJ and generative visual artist known for precisely structured abstract systems that evolve slowly across long sets. Ratsi's work lives at the intersection of mathematics and music — building visual environments from geometric primitives that respond to electronic music with rigorous intelligence.]]></description>
       <media:thumbnail url="https://vjstv.com/assets/images/artists/ratsi.jpg"/>
@@ -422,7 +422,7 @@
       <title><![CDATA[Robert Seidel — Berlin, Germany]]></title>
       <link>https://vjstv.com/artists/robert-seidel</link>
       <guid isPermaLink="true">https://vjstv.com/artists/robert-seidel</guid>
-      <pubDate>Sat, 11 Apr 2026 09:38:30 +0000</pubDate>
+      <pubDate>Sat, 11 Apr 2026 09:38:58 +0000</pubDate>
       <category>Artists</category>
       <description><![CDATA[Berlin-based artist working at the intersection of generative imagery, projection sculpture, and expanded cinema. Seidel creates works that dissolve the boundary between screen and space, image and object.]]></description>
       <media:thumbnail url="https://vjstv.com/assets/images/artists/robert-seidel.png"/>
@@ -432,7 +432,7 @@
       <title><![CDATA[Synaesthesik — Amsterdam, Netherlands]]></title>
       <link>https://vjstv.com/artists/synaesthesik</link>
       <guid isPermaLink="true">https://vjstv.com/artists/synaesthesik</guid>
-      <pubDate>Sat, 11 Apr 2026 09:38:30 +0000</pubDate>
+      <pubDate>Sat, 11 Apr 2026 09:38:58 +0000</pubDate>
       <category>Artists</category>
       <description><![CDATA[Amsterdam-based powerhouse known for creating ultra-synced stage designs where light and video are so tightly locked to the kick drum they feel like a single instrument. Specialists in Visual Music — the philosophy that sound and image are one.]]></description>
       <media:thumbnail url="https://vjstv.com/assets/images/artists/synaesthesik.avif"/>
@@ -442,7 +442,7 @@
       <title><![CDATA[Thomas Vaquié — Paris, France]]></title>
       <link>https://vjstv.com/artists/thomas-vaquie</link>
       <guid isPermaLink="true">https://vjstv.com/artists/thomas-vaquie</guid>
-      <pubDate>Sat, 11 Apr 2026 09:38:30 +0000</pubDate>
+      <pubDate>Sat, 11 Apr 2026 09:38:58 +0000</pubDate>
       <category>Artists</category>
       <description><![CDATA[Paris-based VJ and visual artist creating audiovisual performances at the intersection of electronic music and abstract image-making. Thomas Vaquié builds live visual performances with the structural discipline of music composition — creating systems that evolve across a set with narrative intelligence.]]></description>
       <media:thumbnail url="https://vjstv.com/assets/images/artists/thomas-vaquie.avif"/>
@@ -452,7 +452,7 @@
       <title><![CDATA[VJ Eletroiman — Rio de Janeiro, Brazil]]></title>
       <link>https://vjstv.com/artists/vj-eletroiman</link>
       <guid isPermaLink="true">https://vjstv.com/artists/vj-eletroiman</guid>
-      <pubDate>Sat, 11 Apr 2026 09:38:30 +0000</pubDate>
+      <pubDate>Sat, 11 Apr 2026 09:38:58 +0000</pubDate>
       <category>Artists</category>
       <description><![CDATA[Rio de Janeiro-based VJ creating psychedelic abstract visual performances for electronic music events across Brazil and Latin America. A central figure in Brazil's vibrant VJ and audiovisual culture, VJ Eletroiman brings vivid colour and rhythmic precision to live visual performance.]]></description>
       <media:thumbnail url="https://vjstv.com/assets/images/artists/vj-eletroiman.avif"/>
@@ -462,7 +462,7 @@
       <title><![CDATA[VJ Emiko — Warszawa, Polska]]></title>
       <link>https://vjstv.com/artists/vj-emiko</link>
       <guid isPermaLink="true">https://vjstv.com/artists/vj-emiko</guid>
-      <pubDate>Sat, 11 Apr 2026 09:38:30 +0000</pubDate>
+      <pubDate>Sat, 11 Apr 2026 09:38:58 +0000</pubDate>
       <category>Artists</category>
       <description><![CDATA[Warszawa-based respected veteran of the European techno underground, known for deep, dark, and minimalist visual sets built for marathon listening. Her approach focuses on long-form transformation over rapid cutting — visual work designed for 4-hour sets at venues like Dour Festival.]]></description>
       <media:thumbnail url="https://vjstv.com/assets/images/artists/vj-emiko.avif"/>
@@ -472,7 +472,7 @@
       <title><![CDATA[VJ Fader — Berlin, Germany]]></title>
       <link>https://vjstv.com/artists/vj-fader</link>
       <guid isPermaLink="true">https://vjstv.com/artists/vj-fader</guid>
-      <pubDate>Sat, 11 Apr 2026 09:38:30 +0000</pubDate>
+      <pubDate>Sat, 11 Apr 2026 09:38:58 +0000</pubDate>
       <category>Artists</category>
       <description><![CDATA[Berlin-based VJ and visual artist known for technically accomplished live visual performances across the European and international electronic music circuit. VJ Fader creates visual environments of flowing abstraction — real-time systems that move with the musicality and directness of live performance.]]></description>
       <media:thumbnail url="https://vjstv.com/assets/images/artists/vj-fader.avif"/>
@@ -792,7 +792,7 @@
       <title><![CDATA[59 Productions — London, UK / New York, USA]]></title>
       <link>https://vjstv.com/studios/59-productions</link>
       <guid isPermaLink="true">https://vjstv.com/studios/59-productions</guid>
-      <pubDate>Sat, 11 Apr 2026 09:38:30 +0000</pubDate>
+      <pubDate>Sat, 11 Apr 2026 09:38:58 +0000</pubDate>
       <category>Studios</category>
       <category>Projection Design &amp; Live Experience Studio</category>
       <description><![CDATA[The kings of projection design for theatre and large-scale cultural events. 59 Productions bridge high-art storytelling and technical projection mapping, with landmark commissions including the Sydney Opera House sails and the Tower of London.]]></description>
@@ -803,7 +803,7 @@
       <title><![CDATA[AntiVJ — Europe (Distributed)]]></title>
       <link>https://vjstv.com/studios/antivj</link>
       <guid isPermaLink="true">https://vjstv.com/studios/antivj</guid>
-      <pubDate>Sat, 11 Apr 2026 09:38:30 +0000</pubDate>
+      <pubDate>Sat, 11 Apr 2026 09:38:58 +0000</pubDate>
       <category>Studios</category>
       <category>Visual Label / AV Collective</category>
       <description><![CDATA[Founded by artists including Joanie Lemercier and Yannick Jacquet, AntiVJ is the gold standard for minimalist geometric projection mapping. More a visual label than a studio, it operates as a collective of independent masters of light united by a shared aesthetic philosophy.]]></description>
@@ -814,7 +814,7 @@
       <title><![CDATA[D-Fuse — London, United Kingdom]]></title>
       <link>https://vjstv.com/studios/d-fuse</link>
       <guid isPermaLink="true">https://vjstv.com/studios/d-fuse</guid>
-      <pubDate>Sat, 11 Apr 2026 09:38:30 +0000</pubDate>
+      <pubDate>Sat, 11 Apr 2026 09:38:58 +0000</pubDate>
       <category>Studios</category>
       <category>Audiovisual Collective</category>
       <description><![CDATA[London-based audiovisual collective founded by Mike Faulkner. Pioneers of live cinema and VJ culture since the mid-1990s, D-Fuse have shaped the language of moving image performance across three decades.]]></description>
@@ -825,7 +825,7 @@
       <title><![CDATA[Derivative — Toronto, Canada]]></title>
       <link>https://vjstv.com/studios/derivative</link>
       <guid isPermaLink="true">https://vjstv.com/studios/derivative</guid>
-      <pubDate>Sat, 11 Apr 2026 09:38:30 +0000</pubDate>
+      <pubDate>Sat, 11 Apr 2026 09:38:58 +0000</pubDate>
       <category>Studios</category>
       <category>Creative Software Studio</category>
       <description><![CDATA[Toronto-based software studio and creators of TouchDesigner — the real-time visual development platform that has become the standard tool for live AV performance, interactive installation, and projection mapping worldwide. Derivative's influence on the field is incalculable.]]></description>
@@ -836,7 +836,7 @@
       <title><![CDATA[fuse* — Modena, Italy]]></title>
       <link>https://vjstv.com/studios/fuse-star</link>
       <guid isPermaLink="true">https://vjstv.com/studios/fuse-star</guid>
-      <pubDate>Sat, 11 Apr 2026 09:38:30 +0000</pubDate>
+      <pubDate>Sat, 11 Apr 2026 09:38:58 +0000</pubDate>
       <category>Studios</category>
       <category>AV Studio</category>
       <description><![CDATA[fuse* (pronounced “fuse star”) is a Modena-based studio that has established itself as one of the most conceptually sophisticated practices in contemporary AV performance and installation. Their work consistently turns abstract data — scientific, biological, climatic, astronomical — into sensory experience: images and sounds that allow you to feel information that would otherwise exist only as numbers.
@@ -848,7 +848,7 @@
       <title><![CDATA[Marshmallow Laser Feast — London, UK]]></title>
       <link>https://vjstv.com/studios/marshmallow-laser-feast</link>
       <guid isPermaLink="true">https://vjstv.com/studios/marshmallow-laser-feast</guid>
-      <pubDate>Sat, 11 Apr 2026 09:38:30 +0000</pubDate>
+      <pubDate>Sat, 11 Apr 2026 09:38:58 +0000</pubDate>
       <category>Studios</category>
       <category>Immersive Experience Studio</category>
       <description><![CDATA[UK pioneers of immersive installation combining VR, LiDAR scanning, spatial audio, and biological data to create experiences that let audiences see invisible forces — from oxygen molecules to ancient forests. Creators of the landmark 'We Live in an Ocean of Air'.]]></description>
@@ -859,7 +859,7 @@
       <title><![CDATA[Moment Factory — Montréal, Canada]]></title>
       <link>https://vjstv.com/studios/moment-factory</link>
       <guid isPermaLink="true">https://vjstv.com/studios/moment-factory</guid>
-      <pubDate>Sat, 11 Apr 2026 09:38:30 +0000</pubDate>
+      <pubDate>Sat, 11 Apr 2026 09:38:58 +0000</pubDate>
       <category>Studios</category>
       <category>Multimedia Experience Studio</category>
       <description><![CDATA[The undisputed heavyweight of large-scale multimedia experience production. With offices in Paris, Tokyo, LA, London, and NYC, Moment Factory creates stadium-scale visual worlds for the world's biggest artists and most iconic public spaces.]]></description>
@@ -870,7 +870,7 @@
       <title><![CDATA[nonotak — Paris, France]]></title>
       <link>https://vjstv.com/studios/nonotak</link>
       <guid isPermaLink="true">https://vjstv.com/studios/nonotak</guid>
-      <pubDate>Sat, 11 Apr 2026 09:38:30 +0000</pubDate>
+      <pubDate>Sat, 11 Apr 2026 09:38:58 +0000</pubDate>
       <category>Studios</category>
       <category>Light &amp; Sound Art Studio</category>
       <description><![CDATA[Paris-based light and sound art studio creating extraordinary immersive installations that use stroboscopic lighting, mirror systems, and spatial audio to generate near-hallucinatory perceptual experiences. Exhibited at Ars Electronica, Nuit Blanche, and KIKK Festival.]]></description>
@@ -881,7 +881,7 @@
       <title><![CDATA[Quayola — London, UK]]></title>
       <link>https://vjstv.com/studios/quayola-studio</link>
       <guid isPermaLink="true">https://vjstv.com/studios/quayola-studio</guid>
-      <pubDate>Sat, 11 Apr 2026 09:38:30 +0000</pubDate>
+      <pubDate>Sat, 11 Apr 2026 09:38:58 +0000</pubDate>
       <category>Studios</category>
       <category>Digital Art &amp; Live AV Studio</category>
       <description><![CDATA[London-based Italian artist creating digital paintings, live AV performances, and immersive installations that reinterpret classical art and music through algorithmic processes. One of the most consistently rigorous figures in contemporary digital art.]]></description>
@@ -892,7 +892,7 @@
       <title><![CDATA[Refik Anadol Studio — Los Angeles, USA]]></title>
       <link>https://vjstv.com/studios/refik-anadol-studio</link>
       <guid isPermaLink="true">https://vjstv.com/studios/refik-anadol-studio</guid>
-      <pubDate>Sat, 11 Apr 2026 09:38:30 +0000</pubDate>
+      <pubDate>Sat, 11 Apr 2026 09:38:58 +0000</pubDate>
       <category>Studios</category>
       <category>Machine Intelligence Art Lab</category>
       <description><![CDATA[A Machine Intelligence lab rather than a conventional studio. Refik Anadol Studio turns massive datasets — from NASA archives to MoMA's collection — into fluid, hallucinatory 'Data Paintings'. In 2026, their permanent home Dataland opens in Los Angeles with 20,000 sq ft of AI-driven exhibition space.]]></description>
@@ -903,7 +903,7 @@
       <title><![CDATA[Rhizomatiks — Tokyo, Japan]]></title>
       <link>https://vjstv.com/studios/rhizomatiks</link>
       <guid isPermaLink="true">https://vjstv.com/studios/rhizomatiks</guid>
-      <pubDate>Sat, 11 Apr 2026 09:38:30 +0000</pubDate>
+      <pubDate>Sat, 11 Apr 2026 09:38:58 +0000</pubDate>
       <category>Studios</category>
       <category>Tech-Art Research Lab</category>
       <description><![CDATA[Led by Daito Manabe, Rhizomatiks is arguably the world's most advanced tech-art laboratory. Specialising in the intersection of drones, robotics, motion capture, and real-time AI, their 2026 projects involve live performances driven by dancers' brainwaves (ELEVENPLAY).]]></description>
@@ -914,7 +914,7 @@
       <title><![CDATA[Studio DRIFT — Amsterdam, Netherlands]]></title>
       <link>https://vjstv.com/studios/studio-drift</link>
       <guid isPermaLink="true">https://vjstv.com/studios/studio-drift</guid>
-      <pubDate>Sat, 11 Apr 2026 09:38:30 +0000</pubDate>
+      <pubDate>Sat, 11 Apr 2026 09:38:58 +0000</pubDate>
       <category>Studios</category>
       <category>Biological Algorithm &amp; Physical Pixel Studio</category>
       <description><![CDATA[Amsterdam studio focused on 'Coded Nature' — using biological algorithms and industrial engineering to create kinetic light works. Famous for Shylight (flowers controlled by winches) and massive drone performances like 'Wind of Change' (2026), where light-emitting drones form 3D sculptures in night sky.]]></description>
@@ -925,7 +925,7 @@
       <title><![CDATA[teamLab — Tokyo, Japan]]></title>
       <link>https://vjstv.com/studios/teamlab</link>
       <guid isPermaLink="true">https://vjstv.com/studios/teamlab</guid>
-      <pubDate>Sat, 11 Apr 2026 09:38:30 +0000</pubDate>
+      <pubDate>Sat, 11 Apr 2026 09:38:58 +0000</pubDate>
       <category>Studios</category>
       <category>Immersive Digital Art Collective</category>
       <description><![CDATA[Tokyo-based interdisciplinary art collective creating immersive digital art installations that blur boundaries between artwork and viewer. With permanent museums in Tokyo, Singapore, Shanghai, and beyond, teamLab are the most visited digital art institution in the world.]]></description>
@@ -936,7 +936,7 @@
       <title><![CDATA[Universal Everything — Sheffield, UK]]></title>
       <link>https://vjstv.com/studios/universal-everything</link>
       <guid isPermaLink="true">https://vjstv.com/studios/universal-everything</guid>
-      <pubDate>Sat, 11 Apr 2026 09:38:30 +0000</pubDate>
+      <pubDate>Sat, 11 Apr 2026 09:38:58 +0000</pubDate>
       <category>Studios</category>
       <category>Digital Art &amp; Creative Studio</category>
       <description><![CDATA[Sheffield-based digital art studio whose 'Future Self' series of animated walking figures has shaped the visual language of contemporary digital art. Collaborators with Kanye West, Nike, and Mercedes-Benz — exhibited at the Tate and galleries worldwide.]]></description>
@@ -947,7 +947,7 @@
       <title><![CDATA[United Visual Artists — London, UK]]></title>
       <link>https://vjstv.com/studios/uva</link>
       <guid isPermaLink="true">https://vjstv.com/studios/uva</guid>
-      <pubDate>Sat, 11 Apr 2026 09:38:30 +0000</pubDate>
+      <pubDate>Sat, 11 Apr 2026 09:38:58 +0000</pubDate>
       <category>Studios</category>
       <category>Art &amp; Technology Studio</category>
       <description><![CDATA[London-based art and technology studio creating large-scale light installations, live AV environments, and public commissions. Collaborators with Massive Attack, Chemical Brothers, and U2 — and creators of the permanent 'Volume' installation at the V&A.]]></description>
@@ -958,7 +958,7 @@
       <title><![CDATA[VeeMee Visuals — Tilburg, Nederland]]></title>
       <link>https://vjstv.com/studios/veemee-visuals</link>
       <guid isPermaLink="true">https://vjstv.com/studios/veemee-visuals</guid>
-      <pubDate>Sat, 11 Apr 2026 09:38:30 +0000</pubDate>
+      <pubDate>Sat, 11 Apr 2026 09:38:58 +0000</pubDate>
       <category>Studios</category>
       <category>Festival VJ Collective</category>
       <description><![CDATA[VeeMee Visuals is a Dutch collective operating at the very top of the festival VJ hierarchy. In a field full of talented practitioners, VeeMee have consistently set the benchmark for what high-end festival visual production looks like — combining studio-quality 3D content with the technical infrastructure required to deliver it flawlessly in front of tens of thousands of people.
@@ -970,7 +970,7 @@
       <title><![CDATA[WHITEvoid / DARK MATTER — Berlin, Germany]]></title>
       <link>https://vjstv.com/studios/whitevoid</link>
       <guid isPermaLink="true">https://vjstv.com/studios/whitevoid</guid>
-      <pubDate>Sat, 11 Apr 2026 09:38:30 +0000</pubDate>
+      <pubDate>Sat, 11 Apr 2026 09:38:58 +0000</pubDate>
       <category>Studios</category>
       <category>Kinetic Light Art Studio</category>
       <description><![CDATA[Founded by Christopher Bauder, WHITEvoid operates DARK MATTER — a 1,000m² former factory in East Berlin housing the TRANSFORMATOR, a permanent kinetic light installation used to prototype SKALAR, VEKTOR, and other landmark works. The gold standard for kinetic light art.]]></description>
@@ -981,7 +981,7 @@
       <title><![CDATA[1024 Architecture — Paris, France]]></title>
       <link>https://vjstv.com/studios/1024-architecture</link>
       <guid isPermaLink="true">https://vjstv.com/studios/1024-architecture</guid>
-      <pubDate>Sat, 11 Apr 2026 09:38:30 +0000</pubDate>
+      <pubDate>Sat, 11 Apr 2026 09:38:58 +0000</pubDate>
       <category>Studios</category>
       <category>Architecture &amp; Interactive Art Studio</category>
       <description><![CDATA[Paris-based studio creating interactive installations, live AV performances, and generative architectural projections. Founded by architects Pier Schneider and Francois Wunschel — bringing genuine spatial intelligence to digital art at Nuit Blanche, Scopitone, and major European electronic venues.]]></description>
@@ -992,7 +992,7 @@
       <title><![CDATA[Bart Kresa Studio — Los Angeles, USA]]></title>
       <link>https://vjstv.com/studios/bart-kresa</link>
       <guid isPermaLink="true">https://vjstv.com/studios/bart-kresa</guid>
-      <pubDate>Sat, 11 Apr 2026 09:38:30 +0000</pubDate>
+      <pubDate>Sat, 11 Apr 2026 09:38:58 +0000</pubDate>
       <category>Studios</category>
       <category>Projection Design Studio</category>
       <description><![CDATA[LA-based projection design studio specialising in large-scale architectural projections and live event visuals. Bart Kresa's studio has created seminal works for the Burning Man festival, major architectural commissions in the US and internationally, and landmark live production visuals.]]></description>
@@ -1003,7 +1003,7 @@
       <title><![CDATA[Dumb Type — Kyoto, Japan]]></title>
       <link>https://vjstv.com/studios/dumb-type</link>
       <guid isPermaLink="true">https://vjstv.com/studios/dumb-type</guid>
-      <pubDate>Sat, 11 Apr 2026 09:38:30 +0000</pubDate>
+      <pubDate>Sat, 11 Apr 2026 09:38:58 +0000</pubDate>
       <category>Studios</category>
       <category>Performance &amp; Installation Collective</category>
       <description><![CDATA[Kyoto-based interdisciplinary performance and installation collective creating technologically sophisticated works exploring language, identity, and the body in post-industrial society. One of the most important groups in the history of Japanese media art, representing Japan at the Venice Biennale.]]></description>
@@ -1017,7 +1017,7 @@
       <title><![CDATA[Adobe After Effects by Adobe]]></title>
       <link>https://vjstv.com/technology/after-effects</link>
       <guid isPermaLink="true">https://vjstv.com/technology/after-effects</guid>
-      <pubDate>Sat, 11 Apr 2026 09:38:30 +0000</pubDate>
+      <pubDate>Sat, 11 Apr 2026 09:38:58 +0000</pubDate>
       <category>Technology</category>
       <category>3D &amp; Motion Design</category>
       <description><![CDATA[Industry-standard motion graphics and visual effects software. VJs use After Effects to create animated loops, effects, and visual content for live performance.]]></description>
@@ -1027,7 +1027,7 @@
       <title><![CDATA[Akai APC40 by Akai Professional]]></title>
       <link>https://vjstv.com/technology/akai-apc40</link>
       <guid isPermaLink="true">https://vjstv.com/technology/akai-apc40</guid>
-      <pubDate>Sat, 11 Apr 2026 09:38:30 +0000</pubDate>
+      <pubDate>Sat, 11 Apr 2026 09:38:58 +0000</pubDate>
       <category>Technology</category>
       <category>Controllers</category>
       <description><![CDATA[Professional MIDI controller built for Ableton Live but widely adopted by VJs. Its clip launch grid and fader bank map perfectly to visual performance workflows.]]></description>
@@ -1037,7 +1037,7 @@
       <title><![CDATA[ArKaos GrandVJ by ArKaos]]></title>
       <link>https://vjstv.com/technology/arkaos</link>
       <guid isPermaLink="true">https://vjstv.com/technology/arkaos</guid>
-      <pubDate>Sat, 11 Apr 2026 09:38:30 +0000</pubDate>
+      <pubDate>Sat, 11 Apr 2026 09:38:58 +0000</pubDate>
       <category>Technology</category>
       <category>VJ Software</category>
       <description><![CDATA[Professional VJ software and media server for live events. Layer-based mixing, effects, DMX control, and pixel mapping for clubs, touring, and broadcast.]]></description>
@@ -1047,7 +1047,7 @@
       <title><![CDATA[Blackmagic Design by Blackmagic Design]]></title>
       <link>https://vjstv.com/technology/blackmagic</link>
       <guid isPermaLink="true">https://vjstv.com/technology/blackmagic</guid>
-      <pubDate>Sat, 11 Apr 2026 09:38:30 +0000</pubDate>
+      <pubDate>Sat, 11 Apr 2026 09:38:58 +0000</pubDate>
       <category>Technology</category>
       <category>Hardware</category>
       <description><![CDATA[Professional video hardware manufacturer. DeckLink capture cards, ATEM switchers, and HyperDeck recorders are standard in VJ and live production setups.]]></description>
@@ -1057,7 +1057,7 @@
       <title><![CDATA[Blender by Blender Foundation]]></title>
       <link>https://vjstv.com/technology/blender</link>
       <guid isPermaLink="true">https://vjstv.com/technology/blender</guid>
-      <pubDate>Sat, 11 Apr 2026 09:38:30 +0000</pubDate>
+      <pubDate>Sat, 11 Apr 2026 09:38:58 +0000</pubDate>
       <category>Technology</category>
       <category>3D &amp; Motion Design</category>
       <description><![CDATA[Free, open-source 3D creation suite. VJs and motion designers use Blender for modelling, animation, rendering, and creating visual content for live performance.]]></description>
@@ -1067,7 +1067,7 @@
       <title><![CDATA[Cinema 4D by Maxon]]></title>
       <link>https://vjstv.com/technology/cinema4d</link>
       <guid isPermaLink="true">https://vjstv.com/technology/cinema4d</guid>
-      <pubDate>Sat, 11 Apr 2026 09:38:30 +0000</pubDate>
+      <pubDate>Sat, 11 Apr 2026 09:38:58 +0000</pubDate>
       <category>Technology</category>
       <category>3D &amp; Motion Design</category>
       <description><![CDATA[Professional 3D motion design software. The industry standard for motion graphics and visual content creation used in broadcast, film, and live event visuals.]]></description>
@@ -1077,7 +1077,7 @@
       <title><![CDATA[Disguise by Disguise]]></title>
       <link>https://vjstv.com/technology/disguise</link>
       <guid isPermaLink="true">https://vjstv.com/technology/disguise</guid>
-      <pubDate>Sat, 11 Apr 2026 09:38:30 +0000</pubDate>
+      <pubDate>Sat, 11 Apr 2026 09:38:58 +0000</pubDate>
       <category>Technology</category>
       <category>Media Server</category>
       <description><![CDATA[Industry-leading media server and virtual production platform used in world tours, broadcast, and XR stages. Trusted by the biggest names in live entertainment.]]></description>
@@ -1087,7 +1087,7 @@
       <title><![CDATA[HeavyM by HeavyM]]></title>
       <link>https://vjstv.com/technology/heavym</link>
       <guid isPermaLink="true">https://vjstv.com/technology/heavym</guid>
-      <pubDate>Sat, 11 Apr 2026 09:38:30 +0000</pubDate>
+      <pubDate>Sat, 11 Apr 2026 09:38:58 +0000</pubDate>
       <category>Technology</category>
       <category>Projection Mapping</category>
       <description><![CDATA[User-friendly yet pro-level projection mapping software with built-in effects library. Ideal for beginners and pros mapping onto stages, facades, and objects.]]></description>
@@ -1097,7 +1097,7 @@
       <title><![CDATA[Hippotizer by Green Hippo]]></title>
       <link>https://vjstv.com/technology/hippotizer</link>
       <guid isPermaLink="true">https://vjstv.com/technology/hippotizer</guid>
-      <pubDate>Sat, 11 Apr 2026 09:38:30 +0000</pubDate>
+      <pubDate>Sat, 11 Apr 2026 09:38:58 +0000</pubDate>
       <category>Technology</category>
       <category>Media Server</category>
       <description><![CDATA[Tour-grade media server delivering rock-solid 4K/8K playback, pixel mapping, and real-time effects. The industry standard for live event and concert visual playback.]]></description>
@@ -1107,7 +1107,7 @@
       <title><![CDATA[KREA AI by KREA]]></title>
       <link>https://vjstv.com/technology/krea-ai</link>
       <guid isPermaLink="true">https://vjstv.com/technology/krea-ai</guid>
-      <pubDate>Sat, 11 Apr 2026 09:38:30 +0000</pubDate>
+      <pubDate>Sat, 11 Apr 2026 09:38:58 +0000</pubDate>
       <category>Technology</category>
       <category>AI Visual Tools</category>
       <description><![CDATA[Real-time AI generative canvas used by VJs to create unique looping visual content. Generates imagery from prompts in real time — perfect for building custom VJ loop libraries.]]></description>
@@ -1117,7 +1117,7 @@
       <title><![CDATA[MadMapper by GarageCube]]></title>
       <link>https://vjstv.com/technology/madmapper</link>
       <guid isPermaLink="true">https://vjstv.com/technology/madmapper</guid>
-      <pubDate>Sat, 11 Apr 2026 09:38:30 +0000</pubDate>
+      <pubDate>Sat, 11 Apr 2026 09:38:58 +0000</pubDate>
       <category>Technology</category>
       <category>Projection Mapping</category>
       <description><![CDATA[Advanced projection mapping and LED mapping software for creating spatial augmented reality experiences and architectural projections.]]></description>
@@ -1127,7 +1127,7 @@
       <title><![CDATA[Magic Music Visuals by Color & Music LLC]]></title>
       <link>https://vjstv.com/technology/magic-music-visuals</link>
       <guid isPermaLink="true">https://vjstv.com/technology/magic-music-visuals</guid>
-      <pubDate>Sat, 11 Apr 2026 09:38:30 +0000</pubDate>
+      <pubDate>Sat, 11 Apr 2026 09:38:58 +0000</pubDate>
       <category>Technology</category>
       <category>VJ Software</category>
       <description><![CDATA[Generative and audio-reactive VJ software with a visual patching system. Creates stunning real-time visuals that respond to music — ideal for live performance.]]></description>
@@ -1137,7 +1137,7 @@
       <title><![CDATA[Max/MSP by Cycling '74]]></title>
       <link>https://vjstv.com/technology/maxmsp</link>
       <guid isPermaLink="true">https://vjstv.com/technology/maxmsp</guid>
-      <pubDate>Sat, 11 Apr 2026 09:38:30 +0000</pubDate>
+      <pubDate>Sat, 11 Apr 2026 09:38:58 +0000</pubDate>
       <category>Technology</category>
       <category>Visual Programming</category>
       <description><![CDATA[Visual programming language for music and multimedia. Used to build custom audio-reactive visuals, interactive installations, and real-time AV systems.]]></description>
@@ -1147,7 +1147,7 @@
       <title><![CDATA[Midjourney by Midjourney Inc.]]></title>
       <link>https://vjstv.com/technology/midjourney</link>
       <guid isPermaLink="true">https://vjstv.com/technology/midjourney</guid>
-      <pubDate>Sat, 11 Apr 2026 09:38:30 +0000</pubDate>
+      <pubDate>Sat, 11 Apr 2026 09:38:58 +0000</pubDate>
       <category>Technology</category>
       <category>AI Visual Tools</category>
       <description><![CDATA[AI image generation platform producing stunning visual assets. VJs use Midjourney to create unique still frames, textures, and base images turned into video loops.]]></description>
@@ -1157,7 +1157,7 @@
       <title><![CDATA[Millumin by Anomes]]></title>
       <link>https://vjstv.com/technology/millumin</link>
       <guid isPermaLink="true">https://vjstv.com/technology/millumin</guid>
-      <pubDate>Sat, 11 Apr 2026 09:38:30 +0000</pubDate>
+      <pubDate>Sat, 11 Apr 2026 09:38:58 +0000</pubDate>
       <category>Technology</category>
       <category>Media Server</category>
       <description><![CDATA[Mac-based media server ideal for theater, live events, and immersive installations. Multi-output playback with real-time effects, OSC, MIDI, and timecode sync.]]></description>
@@ -1167,7 +1167,7 @@
       <title><![CDATA[Modul8 by GarageCube]]></title>
       <link>https://vjstv.com/technology/modul8</link>
       <guid isPermaLink="true">https://vjstv.com/technology/modul8</guid>
-      <pubDate>Sat, 11 Apr 2026 09:38:30 +0000</pubDate>
+      <pubDate>Sat, 11 Apr 2026 09:38:58 +0000</pubDate>
       <category>Technology</category>
       <category>VJ Software</category>
       <description><![CDATA[Pioneering Mac-based VJ software with layer-based mixing, Quartz Composer integration, and audio-reactive visuals. A classic in the VJ software ecosystem.]]></description>
@@ -1177,7 +1177,7 @@
       <title><![CDATA[Notch by Notch]]></title>
       <link>https://vjstv.com/technology/notch</link>
       <guid isPermaLink="true">https://vjstv.com/technology/notch</guid>
-      <pubDate>Sat, 11 Apr 2026 09:38:30 +0000</pubDate>
+      <pubDate>Sat, 11 Apr 2026 09:38:58 +0000</pubDate>
       <category>Technology</category>
       <category>Real-Time 3D</category>
       <description><![CDATA[Real-time 3D motion graphics, VFX, and interactive content creation tool used at the world's largest live events and music performances.]]></description>
@@ -1187,7 +1187,7 @@
       <title><![CDATA[Novation Launchpad by Novation]]></title>
       <link>https://vjstv.com/technology/novation-launchpad</link>
       <guid isPermaLink="true">https://vjstv.com/technology/novation-launchpad</guid>
-      <pubDate>Sat, 11 Apr 2026 09:38:30 +0000</pubDate>
+      <pubDate>Sat, 11 Apr 2026 09:38:58 +0000</pubDate>
       <category>Technology</category>
       <category>Controllers</category>
       <description><![CDATA[Iconic grid-based MIDI controller used by VJs and producers. Its RGB pad matrix maps perfectly to Resolume's clip launching and effect triggering workflow.]]></description>
@@ -1197,7 +1197,7 @@
       <title><![CDATA[OBS Studio by OBS Project]]></title>
       <link>https://vjstv.com/technology/obs-studio</link>
       <guid isPermaLink="true">https://vjstv.com/technology/obs-studio</guid>
-      <pubDate>Sat, 11 Apr 2026 09:38:30 +0000</pubDate>
+      <pubDate>Sat, 11 Apr 2026 09:38:58 +0000</pubDate>
       <category>Technology</category>
       <category>VJ Software</category>
       <description><![CDATA[Free and open-source streaming and recording software. Used by VJs for live streaming visual performances, scene switching, and webcam/source mixing.]]></description>
@@ -1207,7 +1207,7 @@
       <title><![CDATA[Pandoras Box by Christie Digital]]></title>
       <link>https://vjstv.com/technology/pandoras-box</link>
       <guid isPermaLink="true">https://vjstv.com/technology/pandoras-box</guid>
-      <pubDate>Sat, 11 Apr 2026 09:38:30 +0000</pubDate>
+      <pubDate>Sat, 11 Apr 2026 09:38:58 +0000</pubDate>
       <category>Technology</category>
       <category>Media Server</category>
       <description><![CDATA[Professional media server and show control platform for large-scale events, theme parks, and permanent installations. Supports 4K/8K, pixel mapping, and timeline control.]]></description>
