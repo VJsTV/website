@@ -1,6 +1,6 @@
 ---
 layout: vjs-detail
-title: "VDMX"
+title: "VDMX — Real-Time VJ Software"
 name: "vdmx"
 category: "VJ Software"
 developer: "Vidvox"

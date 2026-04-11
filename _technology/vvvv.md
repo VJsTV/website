@@ -1,6 +1,6 @@
 ---
 layout: vjs-detail
-title: "vvvv"
+title: "vvvv — Visual Programming Environment"
 name: "vvvv"
 category: "Visual Programming"
 developer: "vvvv group"
