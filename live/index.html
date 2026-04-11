@@ -186,28 +186,103 @@ meta_description: "Watch live VJ performances and browse the 24/7 Loop Gallery �
 .cat-architectural .lg-card-bg { background:linear-gradient(135deg,rgba(57,255,20,0.3) 0%,rgba(0,20,10,0.9) 100%); }
 .cat-architectural .lg-card-cat { background:rgba(40,180,10,0.55); }
 
-/* CH.3 Education */
-.lg-edu-grid {
-  display:grid; grid-template-columns:repeat(auto-fit,minmax(260px,1fr));
-  gap:16px; padding:24px 0;
+/* CH.3 Education — Now Playing Bar */
+.ch3-now-bar {
+  background:rgba(57,255,20,0.06); border:1px solid rgba(57,255,20,0.15);
+  border-top:2px solid var(--vjs-neon); padding:12px 18px;
+  display:flex; align-items:center; justify-content:space-between;
+  flex-wrap:wrap; gap:10px; margin-bottom:0;
 }
-.lg-edu-card {
-  background:#0a0a0a; border:1px solid #1a1a1a; padding:24px;
-  transition:border-color .15s;
+.ch3-now-label {
+  font-family:'Barlow Condensed',sans-serif; font-size:0.6rem;
+  letter-spacing:0.15em; color:var(--vjs-neon); text-transform:uppercase;
 }
-.lg-edu-card:hover { border-color:#333; }
-.lg-edu-icon { font-size:1.8rem; margin-bottom:12px; }
-.lg-edu-title {
+.ch3-now-title {
   font-family:'Barlow Condensed',sans-serif; font-size:1rem;
+  font-weight:700; color:#fff; letter-spacing:0.03em; margin-top:2px;
+}
+.ch3-yt-btn {
+  font-family:'Barlow Condensed',sans-serif; font-size:0.65rem;
+  font-weight:700; letter-spacing:0.12em; text-transform:uppercase;
+  color:#444; text-decoration:none; border:1px solid #222;
+  padding:5px 14px; transition:color .15s,border-color .15s;
+}
+.ch3-yt-btn:hover { color:var(--vjs-neon); border-color:var(--vjs-neon); }
+
+/* CH.3 Section Headers */
+.ch3-section-header {
+  display:flex; align-items:baseline; gap:12px; flex-wrap:wrap;
+  padding:1.75rem 0 0.5rem; border-top:1px solid #111; margin-top:1.75rem;
+}
+.ch3-section-label {
+  font-family:'Barlow Condensed',sans-serif; font-size:0.72rem;
+  font-weight:700; letter-spacing:0.15em; color:var(--vjs-neon);
+  text-transform:uppercase;
+}
+.ch3-section-sub {
+  font-family:'Barlow Condensed',sans-serif; font-size:0.62rem;
+  letter-spacing:0.1em; color:#333; text-transform:uppercase;
+}
+
+/* CH.3 Deep Dives Grid */
+.lg-edu-grid {
+  display:grid; grid-template-columns:repeat(3,1fr);
+  gap:3px; padding:16px 0 0;
+}
+@media(max-width:991px) { .lg-edu-grid { grid-template-columns:repeat(2,1fr); } }
+@media(max-width:480px) { .lg-edu-grid { grid-template-columns:1fr; } }
+.lg-edu-card {
+  background:#0a0a0a; border:1px solid #141414; padding:24px 20px;
+  transition:border-color .15s; display:flex; flex-direction:column;
+}
+.lg-edu-card:hover { border-color:rgba(57,255,20,0.25); }
+.lg-edu-card--browse { border-style:dashed; }
+.lg-edu-card--browse:hover { border-color:var(--vjs-neon); }
+.lg-edu-icon { font-size:1.6rem; margin-bottom:10px; color:#555; }
+.lg-edu-title {
+  font-family:'Barlow Condensed',sans-serif; font-size:0.95rem;
   font-weight:700; letter-spacing:0.05em; color:#fff; margin-bottom:6px;
 }
-.lg-edu-desc { font-size:0.78rem; color:#555; line-height:1.6; margin-bottom:14px; }
+.lg-edu-desc {
+  font-size:0.75rem; color:#444; line-height:1.6; margin-bottom:14px; flex:1;
+}
 .lg-edu-link {
-  font-family:'Barlow Condensed',sans-serif; font-size:0.65rem;
+  font-family:'Barlow Condensed',sans-serif; font-size:0.62rem;
   font-weight:700; letter-spacing:0.12em; text-transform:uppercase;
   color:var(--vjs-neon); text-decoration:none;
 }
 .lg-edu-link:hover { color:#fff; }
+
+/* CH.3 Resources Row */
+.ch3-resources {
+  margin-top:1.75rem; border-top:1px solid #111; padding-top:1.25rem;
+}
+.ch3-resources-header { margin-bottom:12px; }
+.ch3-resources-grid {
+  display:flex; flex-wrap:wrap; gap:3px;
+}
+.ch3-resource-item {
+  display:flex; align-items:center; gap:10px; flex:1 1 180px;
+  padding:12px 16px; background:#080808; border:1px solid #141414;
+  text-decoration:none; transition:border-color .15s;
+}
+.ch3-resource-item:hover { border-color:var(--vjs-neon); }
+.ch3-resource-icon { font-size:1rem; color:#555; }
+.ch3-resource-name {
+  font-family:'Barlow Condensed',sans-serif; font-size:0.78rem;
+  font-weight:700; color:#aaa; letter-spacing:0.04em;
+}
+.ch3-resource-item:hover .ch3-resource-name { color:#fff; }
+.ch3-resource-item--all {
+  border-color:rgba(57,255,20,0.2); justify-content:center;
+}
+.ch3-resource-item--all .ch3-resource-name {
+  color:var(--vjs-neon); font-size:0.68rem; letter-spacing:0.12em; text-transform:uppercase;
+}
+.ch3-resource-item--all:hover { background:rgba(57,255,20,0.04); }
+@media(max-width:768px) {
+  .ch3-resource-item { flex:1 1 100%; }
+}
 </style>
 
 <!-- LIVE HERO -->
@@ -555,55 +630,22 @@ meta_description: "Watch live VJ performances and browse the 24/7 Loop Gallery �
     <!-- ══════════════ CH.3 — VJ EDUCATION ══════════════ -->
     <div id="ch3-content">
 
-      <div class="row g-4 align-items-start">
-        <div class="col-lg-8">
-          <div class="vjs-live-player" style="margin-bottom:0;">
-            <div id="yt-player-ch3" style="position:absolute;inset:0;width:100%;height:100%;"></div>
-          </div>
-          <div style="background:rgba(57,255,20,0.06); border:1px solid rgba(57,255,20,0.2); border-top:none; padding:0.75rem 1rem; display:flex; align-items:center; justify-content:space-between; flex-wrap:wrap; gap:0.5rem;">
-            <div>
-              <span style="font-family:'Barlow Condensed',sans-serif; font-size:0.55rem; letter-spacing:0.2em; text-transform:uppercase; color:var(--vjs-text-muted);">Now Playing</span>
-              <div style="font-family:'Barlow Condensed',sans-serif; font-weight:700; font-size:1rem; color:#fff; margin-top:2px;" id="ch3-now-title">VJ Education — CH.3</div>
-            </div>
-            <div style="display:flex; gap:0.75rem; align-items:center; flex-wrap:wrap;">
-              <a id="ch3-yt-link" href="https://www.youtube.com/watch?v=mGPk2ftagQY" target="_blank" rel="noopener" class="vjs-btn vjs-btn-primary" style="font-size:0.75rem; padding:6px 16px;">Watch on YouTube</a>
-            </div>
-          </div>
+      <!-- Video Player — full width -->
+      <div class="vjs-live-player" style="margin-bottom:0;">
+        <div id="yt-player-ch3" style="position:absolute;inset:0;width:100%;height:100%;"></div>
+      </div>
+      <div class="ch3-now-bar">
+        <div>
+          <span class="ch3-now-label">Now Playing</span>
+          <div class="ch3-now-title" id="ch3-now-title">VJ Education — CH.3</div>
         </div>
-
-        <div class="col-lg-4">
-          <div style="background:var(--vjs-card); border:1px solid var(--vjs-border); border-top:2px solid var(--vjs-neon); padding:1.75rem;">
-            <div class="vjs-section-label" style="color:var(--vjs-neon); margin-bottom:1rem;">Resources & Tools</div>
-            <div style="display:flex; flex-direction:column; gap:2px; margin-bottom:1.5rem;">
-              <a href="/technology/resolume-arena" style="display:flex; align-items:center; gap:12px; padding:10px 12px; background:#080808; border:1px solid #181818; text-decoration:none; transition:border-color .15s;" onmouseover="this.style.borderColor='var(--vjs-neon)'" onmouseout="this.style.borderColor='#181818'">
-                <span style="font-size:1.1rem;">&#9684;</span>
-                <span style="font-family:'Barlow Condensed',sans-serif; font-size:0.82rem; font-weight:700; color:#ccc; letter-spacing:0.04em;">Resolume Arena</span>
-              </a>
-              <a href="/technology/touchdesigner" style="display:flex; align-items:center; gap:12px; padding:10px 12px; background:#080808; border:1px solid #181818; text-decoration:none; transition:border-color .15s;" onmouseover="this.style.borderColor='var(--vjs-neon)'" onmouseout="this.style.borderColor='#181818'">
-                <span style="font-size:1.1rem;">&#9685;</span>
-                <span style="font-family:'Barlow Condensed',sans-serif; font-size:0.82rem; font-weight:700; color:#ccc; letter-spacing:0.04em;">TouchDesigner</span>
-              </a>
-              <a href="/technology/madmapper" style="display:flex; align-items:center; gap:12px; padding:10px 12px; background:#080808; border:1px solid #181818; text-decoration:none; transition:border-color .15s;" onmouseover="this.style.borderColor='var(--vjs-neon)'" onmouseout="this.style.borderColor='#181818'">
-                <span style="font-size:1.1rem;">&#9632;</span>
-                <span style="font-family:'Barlow Condensed',sans-serif; font-size:0.82rem; font-weight:700; color:#ccc; letter-spacing:0.04em;">MadMapper</span>
-              </a>
-              <a href="/technology/vdmx" style="display:flex; align-items:center; gap:12px; padding:10px 12px; background:#080808; border:1px solid #181818; text-decoration:none; transition:border-color .15s;" onmouseover="this.style.borderColor='var(--vjs-neon)'" onmouseout="this.style.borderColor='#181818'">
-                <span style="font-size:1.1rem;">&#9670;</span>
-                <span style="font-family:'Barlow Condensed',sans-serif; font-size:0.82rem; font-weight:700; color:#ccc; letter-spacing:0.04em;">VDMX</span>
-              </a>
-              <a href="/technology/notch" style="display:flex; align-items:center; gap:12px; padding:10px 12px; background:#080808; border:1px solid #181818; text-decoration:none; transition:border-color .15s;" onmouseover="this.style.borderColor='var(--vjs-neon)'" onmouseout="this.style.borderColor='#181818'">
-                <span style="font-size:1.1rem;">&#9651;</span>
-                <span style="font-family:'Barlow Condensed',sans-serif; font-size:0.82rem; font-weight:700; color:#ccc; letter-spacing:0.04em;">Notch</span>
-              </a>
-            </div>
-            <a href="/technology" class="vjs-btn vjs-btn-outline" style="font-size:0.72rem; padding:8px 20px; width:100%; text-align:center; display:block; border-color:rgba(57,255,20,0.3); color:var(--vjs-neon);">Browse All Technology →</a>
-          </div>
-        </div>
+        <a id="ch3-yt-link" href="https://www.youtube.com/watch?v=mGPk2ftagQY" target="_blank" rel="noopener" class="ch3-yt-btn">Watch on YouTube</a>
       </div>
 
-      <!-- Education Cards -->
-      <div style="padding:1.5rem 0 0.5rem; border-top:1px solid #111; margin-top:1.5rem;">
-        <span style="font-family:'Barlow Condensed',sans-serif; font-size:0.7rem; font-weight:700; letter-spacing:0.15em; color:var(--vjs-neon); text-transform:uppercase;">Deep Dives</span>
+      <!-- Deep Dives — Technology Cards -->
+      <div class="ch3-section-header">
+        <span class="ch3-section-label">Deep Dives</span>
+        <span class="ch3-section-sub">Explore the tools shaping VJ culture</span>
       </div>
 
       <div class="lg-edu-grid">
@@ -637,11 +679,43 @@ meta_description: "Watch live VJ performances and browse the 24/7 Loop Gallery �
           <div class="lg-edu-desc">Real-time 3D and motion graphics for broadcast, live events, and XR — the tool behind some of the world's biggest stage shows.</div>
           <a href="/technology/notch" class="lg-edu-link">View Profile →</a>
         </div>
-        <div class="lg-edu-card">
+        <div class="lg-edu-card lg-edu-card--browse">
           <div class="lg-edu-icon">&#9675;</div>
           <div class="lg-edu-title">All Technology</div>
           <div class="lg-edu-desc">Browse the complete VJs TV technology index — hardware, software, protocols, and the tools shaping visual performance globally.</div>
           <a href="/technology" class="lg-edu-link">Browse All →</a>
+        </div>
+      </div>
+
+      <!-- Resources & Tools — full-width row -->
+      <div class="ch3-resources">
+        <div class="ch3-resources-header">
+          <span class="ch3-section-label">Resources & Tools</span>
+        </div>
+        <div class="ch3-resources-grid">
+          <a href="/technology/resolume-arena" class="ch3-resource-item">
+            <span class="ch3-resource-icon">&#9684;</span>
+            <span class="ch3-resource-name">Resolume Arena</span>
+          </a>
+          <a href="/technology/touchdesigner" class="ch3-resource-item">
+            <span class="ch3-resource-icon">&#9685;</span>
+            <span class="ch3-resource-name">TouchDesigner</span>
+          </a>
+          <a href="/technology/madmapper" class="ch3-resource-item">
+            <span class="ch3-resource-icon">&#9632;</span>
+            <span class="ch3-resource-name">MadMapper</span>
+          </a>
+          <a href="/technology/vdmx" class="ch3-resource-item">
+            <span class="ch3-resource-icon">&#9670;</span>
+            <span class="ch3-resource-name">VDMX</span>
+          </a>
+          <a href="/technology/notch" class="ch3-resource-item">
+            <span class="ch3-resource-icon">&#9651;</span>
+            <span class="ch3-resource-name">Notch</span>
+          </a>
+          <a href="/technology" class="ch3-resource-item ch3-resource-item--all">
+            <span class="ch3-resource-name">Browse All Technology →</span>
+          </a>
         </div>
       </div>
     </div>
