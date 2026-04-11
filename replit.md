@@ -1,227 +1,41 @@
 # VJs TV - Global Broadcast Network for VJ Culture
 
 ## Overview
-VJs TV is a Jekyll-based platform for VJ culture and audiovisual performances. It serves as the platform/stage layer (broadcasting, discovery, project infrastructure), while VJSMag (vjsmag.com) handles editorial/media content.
+VJs TV is a Jekyll-based platform dedicated to VJ culture and audiovisual performances. It serves as the broadcasting, discovery, and project infrastructure layer, complementing VJSMag (vjsmag.com) which focuses on editorial content. The project aims to be a central hub for VJ artists, projects, events, and technology, offering a dynamic and interactive experience for the VJ community.
 
-## Tech Stack
-- **Language:** Ruby 3.2
-- **Framework:** Jekyll 4.3.x (static site generator)
-- **Plugins:** jekyll-feed
-- **Styling:** Bootstrap + custom CSS (assets/css/vjstv.css)
-- **Fonts:** Barlow Condensed (primary), Orbitron (accents) (Google Fonts)
-- **Design:** NTS.live-inspired dark cyberpunk — flat design, 0px border-radius, dense layouts, #050505 black, ultraviolet/cyan/magenta accents
+## User Preferences
+I prefer clear and concise communication. When making changes, prioritize high-level architectural improvements over minor code tweaks. For significant modifications, please ask for confirmation before proceeding. Ensure all explanations are direct and focused on the impact on the system.
 
-## Collections
-- `_vjs/` - VJ artist profiles (renders to /artists/:name)
-- `_projects/` - Audiovisual projects (renders to /projects/:name)
-- `_events/` - Events and performances (renders to /events/:name)
-- `_studios/` - Studios and installations (renders to /studios/:name)
-- `_technology/` - VJ technology and tools (renders to /technology/:name)
-- `_sponsors/` - Sponsors and brand partners (renders to /sponsors/:name)
+## System Architecture
+VJs TV is built with Ruby 3.2 and Jekyll 4.3.x, leveraging a static site generation approach. The UI/UX features an NTS.live-inspired dark cyberpunk design with a flat aesthetic, 0px border-radius, dense layouts, #050505 black, and ultraviolet/cyan/magenta accents. Fonts include Barlow Condensed and Orbitron.
 
-## Pages
-- `/` - Homepage: NTS-style live broadcast strip (2 channels), full-bleed hero with sidebar thumbnails, VJs TV Picks horizontal scroll, scrolling sponsor ticker, animated stats counters, featured artists grid, loop packs marketplace, editorial project grid, technology section, sponsors, CTA
-- `/live` - Live broadcast page with 3-channel tabs (CH.1 LIVE, CH.2 LOOP GALLERY, CH.3 VJ EDUCATION), dynamic programming grid fetching schedule.json, NOW PLAYING/NEXT UP per channel, Vimeo-powered loop gallery with genre filters, countdown timer, cinema mode
-- `/artists` - Artist directory with 3-dropdown JS filter (Style / Tech / Country), neon initials cards, country flags
-- `/projects` - Project index with JS filter by type + sort by date; all 24 projects have real Vimeo IDs → thumbnails fetched live via Vimeo API
-- `/events` - Events split into Upcoming / Archive sections, with date badges
-- `/studios` - Studios and installations
-- `/technology` - Technology directory with JS category filter
-- `/sponsors` - Sponsors and partners
-- `/search` - Global search across all collections (client-side, no server needed)
-- `/submit` - Project submission page (form → Cloudflare Worker → GitHub Issues)
-- `/partners` - Sponsor pitch page with interactive modals, partnership tiers, particle background, contact form, Cloudflare analytics stats bar, live page view counter, and live audience charts (unique visitors line chart + country traffic table)
+The site is structured around several Jekyll collections:
+- `_vjs/`: VJ artist profiles
+- `_projects/`: Audiovisual projects
+- `_events/`: Events and performances
+- `_studios/`: Studios and installations
+- `_technology/`: VJ technology and tools
+- `_sponsors/`: Sponsors and brand partners
 
-## Key Files
-- `_config.yml` - Jekyll configuration with collections and `api_url` setting
-- `_data/navigation.yml` - Main navigation menu
-- `_data/general_settings.yml` - Site-wide settings and branding
-- `assets/css/vjstv.css` - Custom dark/neon theme CSS (~5780 lines)
-- `_layouts/default.html` - Base layout with skip-to-content link
-- `_layouts/vjs-detail.html` - Shared detail page layout for all collections (semantic h2 sidebar headings)
-- `_includes/vjstv-footer.html` - Custom footer with floating sidebar, tip jar modal, mobile nav
-- `_includes/cards/` - Reusable card components (artist, project, event, studio, technology, sponsor)
-- `_includes/layouts/nav/nav-3.html` - Dark navigation bar (used across all pages)
-- `_includes/core/head/meta-seo-tags.html` - SEO meta tags, canonical URL, robots directives
-- `_includes/core/head/meta-og-tags.html` - Open Graph, Twitter Cards, JSON-LD @graph structured data
-- `robots.txt` - Auto-generated robots.txt with sitemap reference
-- `sitemap.xml` - Auto-generated XML sitemap (192 URLs across all collections)
-- `sitemap.html` - Human-readable HTML sitemap with structured sections
-- `_headers` - Cloudflare security + caching headers
-- `schedule/schedule.json` - Central programming schedule for all 3 live channels (UTC time blocks, special events)
+Key pages include:
+- **Homepage (`/`)**: Features a live broadcast strip, full-bleed hero section, VJs TV Picks, sponsor ticker, animated stats, and various content grids.
+- **Live Broadcast Page (`/live`)**: Offers three channels (CH.1 LIVE, CH.2 LOOP GALLERY, CH.3 VJ EDUCATION) with dynamic programming, Vimeo-powered loop galleries, and a cinema mode.
+- **Directory Pages (`/artists`, `/projects`, `/events`, `/studios`, `/technology`, `/sponsors`)**: Provide filtered and sortable listings of content.
+- **Utility Pages (`/search`, `/submit`, `/partners`)**: Client-side search, project submission form, and a sponsor pitch page with interactive elements and real-time analytics.
 
-## Accessibility
-- Skip-to-content link (keyboard-accessible, cyan highlight)
-- `:focus-visible` outlines on all interactive elements (cyan)
-- ARIA labels on buttons, modals, navigation landmarks
-- `aria-hidden="true"` on decorative icons
-- `role="dialog"` on tip jar modal
-- `prefers-reduced-motion` media query disables all animations
+Accessibility features include skip-to-content links, `:focus-visible` outlines, ARIA labels, and `prefers-reduced-motion` support. SEO is a core focus, implemented through canonical URLs, meta robots tags, XML/HTML sitemaps, comprehensive JSON-LD structured data for various content types, dynamic meta descriptions, Open Graph, Twitter Cards, and strict heading hierarchy. Performance is optimized with `requestAnimationFrame` throttling, passive scroll listeners, `will-change` hints, `IntersectionObserver`, `preconnect`/`dns-prefetch`/`preload` for critical assets, `defer` for non-critical scripts, and runtime lazy loading.
 
-## SEO
-- **Canonical URLs** on every page (`<link rel="canonical">`)
-- **Meta robots** with `max-image-preview:large`, `max-snippet:-1`, `max-video-preview:-1`
-- **404 pages** have `noindex, follow` to prevent index pollution
-- **robots.txt** at `/robots.txt` — auto-generated, references sitemap
-- **XML sitemap** at `/sitemap.xml` — auto-generated from all collections (188 URLs) with `<lastmod>` timestamps, video sitemap entries for all 55 projects with Vimeo embeds
-- **JSON-LD structured data** (`@graph`): Organization (with `knowsAbout`), WebSite, WebPage on every page, plus:
-  - `Person` (with `knowsAbout`, `nationality`, `sameAs`) for artist pages (`_vjs/`)
-  - `CreativeWork` + `VisualArtwork` + `VideoObject` for project pages (`_projects/`) — includes `genre`, `artMedium`, `artform`, `keywords`
-  - `Event` (with `about` topics) for event pages (`_events/`)
-  - `Organization` (with `knowsAbout`) for studio pages (`_studios/`)
-  - `SoftwareApplication` (with `author`) for technology pages (`_technology/`)
-  - `Product` for loop pack pages (`_loop_packs/`)
-  - `BroadcastChannel` ×3 for the /live page (CH.1 Live, CH.2 Loop Gallery, CH.3 Education)
-  - `ItemList` on listing pages (artists, projects, events, studios, technology) for rich results
-- **Meta keywords** auto-generated per collection type (artist technologies, project types, event locations, etc.)
-- **Title optimization**: All collection items get " | VJs TV" brand suffix; site-wide default title uses target keywords
-- **Open Graph** with dynamic `og:type` (website/video.other/event), absolute image URLs, locale
-- **Twitter Cards** with `summary_large_image`, creator handle
-- **Heading hierarchy**: One H1 per page, H2 subheadings on all index pages, semantic H2 sidebar headings on detail pages
-- **Trailing-slash canonicalization**: Server 301-redirects all trailing-slash URLs to non-slash versions; all internal links use non-slash URLs
-- **Auto-generated meta descriptions**: Collection items without explicit `description:` get unique descriptions built from frontmatter fields (title, location, visual_style, project_type, etc.)
-- **Security headers** (both `_headers` for Cloudflare Pages and Express middleware):
-  - HSTS (`max-age=31536000; includeSubDomains; preload`)
-  - X-Content-Type-Options (`nosniff`)
-  - X-Frame-Options (`SAMEORIGIN`)
-  - X-XSS-Protection (`1; mode=block`)
-  - Referrer-Policy (`strict-origin-when-cross-origin`)
-  - Permissions-Policy (blocks geolocation, microphone, camera, payment, USB, FLoC)
-  - Cross-Origin-Opener-Policy (`same-origin-allow-popups`)
-  - Content-Security-Policy (whitelists YouTube, Vimeo, Cloudflare, Google Fonts; blocks `object-src`; enforces `upgrade-insecure-requests`)
-  - Immutable caching on all static assets (CSS, JS, images, fonts, .avif)
+The API architecture is dual-mode:
+- **Production**: A single Cloudflare Worker handles all API endpoints, including form submissions (moderated by Workers AI, creating GitHub Issues, and sending email confirmations), and Cloudflare Analytics data retrieval.
+- **Development**: An Express server (`api/server.js`) runs locally, serving static files and managing Jekyll watch. It includes health checks, gzip compression, caching, and graceful shutdown.
 
-## Performance
-- `requestAnimationFrame` throttled scroll handler for progress bar
-- Passive scroll event listeners
-- `will-change` hints on animated elements
-- IntersectionObserver visibility gating on meter bar animation
-- `preconnect` for Google Fonts and Vimeo
-- `dns-prefetch` for YouTube, Vimeo CDN, Cloudflare, Google Fonts (6 domains)
-- `preload` for critical CSS (vjstv.css, bootstrap.min.css)
-- `defer` on all non-critical scripts (jQuery loads synchronously, everything else deferred)
-- Runtime lazy loading for below-fold images via `loading="lazy"` attribute
-- Immutable cache headers for static assets (CSS, JS, images, fonts)
-
-## API Architecture
-
-### Production: Cloudflare Worker (`website.guillaumelauzier.workers.dev`)
-- **All API endpoints** are served by a single Cloudflare Worker
-- **GitHub API:** Uses `GITHUB_TOKEN` secret (set in Worker Settings > Variables and Secrets)
-- **Analytics:** Uses `CF_API_TOKEN` and `CF_ZONE_ID` secrets
-- **AI Moderation:** Uses Workers AI binding (variable name: `AI`) for auto-moderating submissions
-- **Email Confirmation:** Uses Cloudflare Email Service binding (variable name: `SEB`, Unrestricted destination) with `cloudflare:email` module
-- **Form endpoints:**
-  - `POST /api/submit` — project submission → AI moderation → GitHub Issue + email confirmation
-  - `POST /api/report` — issue report → AI moderation → GitHub Issue + email confirmation
-  - `POST /api/partner` — partnership enquiry → AI moderation → GitHub Issue + email confirmation
-  - `POST /api/booking` — booking request / studio enquiry / commission → AI moderation → GitHub Issue + email confirmation
-- **Analytics endpoints:**
-  - `GET /api/analytics` — Cloudflare monthly page views
-  - `GET /api/analytics/charts` — daily traffic + country data
-- **Jekyll config:** `api_url` in `_config.yml` sets the Worker URL; all forms use `{{ site.api_url }}` in templates
-
-### Development & Production: Express Server (`api/server.js`)
-- **Dual mode:** `node api/server.js` on port 5000, serves static `_site/` files
-- **Health check:** `GET /api/health` — returns status, uptime, memory usage; always responds immediately (even during Jekyll build)
-- **Zero-downtime startup:** If a previous `_site/` build exists, server marks itself ready immediately and serves stale content while Jekyll rebuilds; 503 only occurs on first-ever cold start with no cached build
-- **Compression:** gzip enabled via `compression` middleware
-- **Caching:** 1-hour `Cache-Control` on HTML in production; 7-day immutable cache on static assets (JS, CSS, images, fonts)
-- **Graceful shutdown:** Handles SIGTERM/SIGINT, cleans up Jekyll watch child process
-- **Error safety:** Global handlers for uncaughtException and unhandledRejection prevent silent crashes
-- **Jekyll watch:** Runs in dev only; disabled in production to conserve memory
-- **oEmbed proxy:** `GET /api/yt-info?v=VIDEO_ID` with 8-second upstream timeout
-- **Deployment:** Configured as `autoscale` target with `bundle exec jekyll build` as build step
-
-### Complete Worker File (`functions/worker.js`)
-- **This is the complete, deployable Worker code** — paste into Cloudflare Worker editor
-- Contains ALL routes: `/api/submit`, `/api/report`, `/api/partner`, `/api/booking`, `/api/analytics`, `/api/analytics/charts`, `/api/health`
-- Includes AI moderation, GitHub Issue creation, and Cloudflare Email Service confirmation on all form endpoints
-
-### Reference: Cloudflare Pages Functions (`functions/api/`)
-- Individual endpoint reference files (not deployed directly — use `functions/worker.js` instead)
-- `functions/api/submit.js`, `report.js`, `partner.js`, `booking.js`
-
-### Required Cloudflare Worker Secrets
-- `GITHUB_TOKEN` — GitHub Personal Access Token with `repo` scope (for creating Issues)
-- `CF_API_TOKEN` — Cloudflare API token with Analytics read permission (for analytics endpoints)
-- `CF_ZONE_ID` — Cloudflare zone ID for vjstv.com (for analytics endpoints)
-
-### Required Cloudflare Worker Bindings
-- `AI` — Workers AI binding (for content moderation)
-- `SEB` — Email Service binding, Unrestricted destination (for email confirmations via `cloudflare:email`)
-
-### Endpoints
-- `POST /api/submit` — create submission Issue (fields: artist, project_title, email, video_url, description, category)
-- `POST /api/report` — report issue (fields: reporter_name, description, reporter_email, project_title, project_url)
-- `POST /api/partner` — partnership enquiry (fields: full_name, email, message, company, tier)
-- `POST /api/booking` — booking/studio/commission enquiry (fields: subject, profile_type, service_type, event_name, event_date, location, budget, description, contact_name, contact_email, organisation)
-- `GET /api/analytics` — monthly page views from Cloudflare
-- `GET /api/analytics/charts` — daily traffic chart data + top countries
-
-### Security
-- Workers AI moderation on all form submissions (spam, offensive content, phishing, bot detection)
-- Honeypot spam fields on all forms
-- Input trimming and length caps
-- CORS headers on all endpoints
-
-## Cloudflare Analytics & Dynamic Pricing
-- **Backend:** `/api/analytics` endpoint fetches Cloudflare page views
-- **Charts:** `/api/analytics/charts` returns daily traffic + top countries
-- **Caching:** 10-minute in-memory cache in Worker
-- **Frontend:** `vjsLoadAnalytics()` on sponsors/partners pages
-- **Pricing tiers:** Base prices × visitor multiplier
-- **Stats bar:** live page-view totals from Cloudflare
-
-## How to get Cloudflare live analytics
-1. Log in to Cloudflare and open your **VJs TV** zone.
-2. Go to **Analytics & Logs** → **Web Analytics** or **Traffic Analytics**.
-3. Make sure analytics is enabled for the site.
-4. In your Worker, set:
-   - `CF_API_TOKEN`
-   - `CF_ZONE_ID`
-5. The site reads analytics from:
-   - `GET /api/analytics`
-   - `GET /api/analytics/charts`
-6. The sponsors/partners pages display:
-   - monthly page views
-   - daily traffic
-   - top countries
-
-## Development
-```
-node api/server.js  # Dev server: static files + Jekyll watch on port 5000
-```
-All API calls go to `https://website.guillaumelauzier.workers.dev` (configured in `_config.yml` as `api_url`).
-
-## Deployment
-- **Site:** Static Jekyll build, deploy to GitHub Pages / Cloudflare Pages / any static host
-- **API:** Cloudflare Worker at `website.guillaumelauzier.workers.dev`
-- Build: `bundle exec jekyll build`
-- Public directory: `_site`
-
-## Adding Content
-Each collection item uses `layout: vjs-detail` and has specific frontmatter fields. See existing items in each collection directory for examples.
-
-### Artist Images
-Artists can include a profile image by adding an `image:` field to their frontmatter:
-```yaml
-image: "/assets/images/artists/artist-name.jpg"
-```
-
-If no image is provided, the artist card displays a neon initial badge instead.
-
-## Hero Section Architecture
-- `index.html` contains the hero player, sidebar, and chyron bar
-- `VJS_PROJECT_POOL` array is built at Jekyll build time from all projects with Vimeo IDs
-- Fisher-Yates shuffle picks 8 random projects for the sidebar on each page load
-- First pick is stored in `window._vjsFirstPick` and applied to the chyron AFTER chyron DOM elements exist
-- `heroPlay(card)` updates the player/chyron when sidebar cards are clicked
-
-## Vimeo Thumbnail Loading
-- Global loader in `_includes/core/scripts/scripts.html` uses oEmbed API
-- Elements with `class="vjs-vimeo-thumb" data-vimeo="ID"` auto-load thumbnails
-- Hero sidebar cards load thumbnails via the same oEmbed API at 200px width
-
-## Excluded Legacy Files
-The original Snowlake theme demo content (portfolios, blogs, shop, services, etc.) is excluded via `_config.yml` exclude list but remains in the repo for reference.
+## External Dependencies
+- **Jekyll Plugins**: `jekyll-feed`
+- **Styling**: Bootstrap
+- **Fonts**: Google Fonts (Barlow Condensed, Orbitron)
+- **Video Hosting/Embedding**: Vimeo, YouTube
+- **Form Submission/Backend**: Cloudflare Workers, GitHub Issues (for submissions), Cloudflare Email Service
+- **Analytics**: Cloudflare Analytics API
+- **AI Moderation**: Cloudflare Workers AI
+- **Image/Thumbnail Loading**: Vimeo oEmbed API
+- **Deployment**: GitHub Pages, Cloudflare Pages

@@ -45,27 +45,688 @@ meta_description: "VJs TV is the global broadcast network for VJ culture. Watch 
   </div>
 </div>
 
-<!-- HERO SECTION -->
-<div class="vjs-hero-section">
-  <div class="vjs-hero-background"></div>
-  <div class="vjs-hero-content">
-    <h2 style="position:absolute; left:-9999px; width:1px; height:1px; overflow:hidden;">Global broadcast network for VJ culture</h2>
+<!-- SCHEDULE PANEL -->
+<div id="vjs-schedule-panel" class="vjs-schedule-panel" aria-hidden="true">
+  <div class="vjs-schedule-panel-inner">
+    <div class="vjs-schedule-panel-header">
+      <span class="vjs-schedule-panel-title">Broadcast Schedule</span>
+      <button type="button" class="vjs-schedule-panel-close" onclick="vjsToggleSchedule()" aria-label="Close schedule">&times;</button>
+    </div>
+    <div class="vjs-schedule-panel-body">
+      {% assign upcoming = site.events | sort: "date" %}
+      {% assign now_ts = site.time | date: "%s" | plus: 0 %}
+      {% for ev in upcoming limit:8 %}
+      {% assign ev_ts = ev.date | date: "%s" | plus: 0 %}
+      {% if ev_ts >= now_ts %}
+      <a href="{{ ev.url }}" class="vjs-sched-row" onclick="vjsToggleSchedule()">
+        <div class="vjs-sched-date">
+          <span class="vjs-sched-month">{{ ev.date | date: "%b" | upcase }}</span>
+          <span class="vjs-sched-day">{{ ev.date | date: "%-d" }}</span>
+        </div>
+        <div class="vjs-sched-info">
+          <div class="vjs-sched-name">{{ ev.title }}</div>
+          <div class="vjs-sched-meta">{% if ev.time %}{{ ev.time }} · {% endif %}{{ ev.location }}</div>
+        </div>
+        {% if ev.event_type %}
+        <span class="vjs-sched-type">{{ ev.event_type }}</span>
+        {% endif %}
+      </a>
+      {% endif %}
+      {% endfor %}
+    </div>
     <a href="/events" class="vjs-schedule-panel-footer">View All Events →</a>
-    <a class="vjs-hero-chyron-project" id="hero-project-link" href="/projects">Project →</a>
-    <a href="/projects" class="vjs-picks-link">View All <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="width:0.8em; height:0.8em; display:inline-block; vertical-align:middle; margin-left:3px;"><path d="M9 18l6-6-6-6"/></svg></a>
-    <a href="/artists" class="vjs-stat-item vjs-stat-link"><div class="vjs-stat-number" id="stat-artists">0</div><div class="vjs-stat-label">Artists</div></a>
-    <a href="/projects" class="vjs-stat-item vjs-stat-link"><div class="vjs-stat-number" id="stat-projects">0</div><div class="vjs-stat-label">Projects</div></a>
-    <a href="/events" class="vjs-stat-item vjs-stat-link"><div class="vjs-stat-number" id="stat-events">0</div><div class="vjs-stat-label">Events</div></a>
-    <a href="/studios" class="vjs-stat-item vjs-stat-link"><div class="vjs-stat-number" id="stat-studios">0</div><div class="vjs-stat-label">Studios</div></a>
-    <a href="/sponsors" class="vjs-stat-item vjs-stat-link"><div class="vjs-stat-number" id="stat-sponsors">0</div><div class="vjs-stat-label">Partners</div></a>
-    <a href="/countries" class="vjs-stat-item vjs-stat-link"><div class="vjs-stat-number" id="stat-countries">24</div><div class="vjs-stat-label">Countries</div></a>
-    <a href="/artists" class="vjs-picks-link">View All <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="width:0.8em; height:0.8em; display:inline-block; vertical-align:middle; margin-left:3px;"><path d="M9 18l6-6-6-6"/></svg></a>
-    <a href="/submit" class="vjs-picks-link" style="color:#39ff14;">Submit Pack <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="width:0.8em; height:0.8em; display:inline-block; vertical-align:middle; margin-left:3px; color:#39ff14;"><path d="M9 18l6-6-6-6"/></svg></a>
-    <a href="/marketplace" style="font-family:'Barlow Condensed',sans-serif; font-size:0.72rem; color:var(--vjs-text-muted); text-transform:uppercase; letter-spacing:0.06em; text-decoration:none;">Marketplace →</a>
-    <a href="/projects" class="vjs-picks-link">View All <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="width:0.8em; height:0.8em; display:inline-block; vertical-align:middle; margin-left:3px;"><path d="M9 18l6-6-6-6"/></svg></a>
-    <a href="/technology" class="vjs-picks-link">View All <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="width:0.8em; height:0.8em; display:inline-block; vertical-align:middle; margin-left:3px;"><path d="M9 18l6-6-6-6"/></svg></a>
-    <a href="/sponsors" class="vjs-btn vjs-btn-sponsor" style="font-size:0.8rem; padding:8px 24px;">Become a Partner</a>
-    <a href="/partners" style="font-family:'Barlow Condensed',sans-serif; font-size:0.72rem; text-transform:uppercase; letter-spacing:0.1em; color:var(--vjs-ultraviolet); text-decoration:none; border-bottom:1px solid var(--vjs-ultraviolet); padding-bottom:2px;">Apply as Technology Partner →</a>
-    <a href="/partners" style="font-family:'Barlow Condensed',sans-serif; font-size:0.72rem; text-transform:uppercase; letter-spacing:0.1em; color:var(--vjs-cyan); text-decoration:none; border-bottom:1px solid var(--vjs-cyan); padding-bottom:2px;">Become a Broadcast Sponsor →</a>
   </div>
 </div>
+
+<div class="vjs-progress-bar" id="vjs-progress-bar"></div>
+
+<!-- HERO — WATCHABLE VIDEO PLAYER -->
+<style>
+.vjs-hero-wrap {
+  display:grid;
+  grid-template-columns:1fr 260px;
+  background:#000;
+  border-bottom:1px solid #111;
+  align-items:start;
+}
+
+/* Large desktop sidebar: cap height at video player height to prevent gap */
+@media(min-width:1281px){
+  .vjs-hero-sidebar {
+    max-height:calc((100vw - 260px) * 9 / 16);
+    overflow-y:auto;
+  }
+}
+
+/* Medium desktop (901–1280px): convert sidebar to horizontal browsable strip */
+@media(max-width:1280px) and (min-width:901px){
+  .vjs-hero-wrap { grid-template-columns:1fr; }
+  .vjs-hero-sidebar {
+    border-left:none !important; border-top:1px solid #141414;
+    flex-direction:row !important; overflow-x:auto !important; overflow-y:hidden !important;
+    height:100px !important; flex-shrink:0;
+    scroll-snap-type:x mandatory;
+    -webkit-overflow-scrolling:touch;
+  }
+  .vjs-hero-sidebar-hdr {
+    display:flex !important; align-items:center; justify-content:center;
+    padding:0 12px !important; border-bottom:none !important; border-right:1px solid #111;
+    height:100px !important; min-width:max-content; flex-shrink:0;
+    writing-mode:vertical-rl; text-orientation:mixed; transform:rotate(180deg);
+    letter-spacing:0.15em; font-size:0.52rem !important;
+  }
+  .vjs-hero-card {
+    flex-direction:column !important; width:130px !important; min-width:130px !important;
+    flex-shrink:0; border-bottom:none !important; border-right:1px solid #0f0f0f !important;
+    height:100px !important; padding:0 !important;
+    scroll-snap-align:start;
+  }
+  .vjs-hero-card-thumb { width:130px !important; height:65px !important; }
+  .vjs-hero-card-info { padding:5px 8px !important; }
+  .vjs-hero-card-cat { font-size:0.48rem !important; margin-bottom:1px !important; }
+  .vjs-hero-card-title { font-size:0.7rem !important; }
+  .vjs-hero-card-artist { display:none !important; }
+}
+
+/* Mobile (<= 900px): same horizontal strip, smaller cards */
+@media(max-width:900px){
+  .vjs-hero-wrap { grid-template-columns:1fr; }
+  .vjs-hero-sidebar {
+    border-left:none !important; border-top:1px solid #141414;
+    flex-direction:row !important; overflow-x:auto !important; overflow-y:hidden !important;
+    height:90px !important; flex-shrink:0;
+    scroll-snap-type:x mandatory;
+    -webkit-overflow-scrolling:touch;
+  }
+  .vjs-hero-sidebar-hdr { display:none; }
+  .vjs-hero-card {
+    flex-direction:column !important; width:110px !important; min-width:110px !important;
+    flex-shrink:0; border-bottom:none !important; border-right:1px solid #0f0f0f !important;
+    height:90px !important; padding:0 !important;
+    scroll-snap-align:start;
+  }
+  .vjs-hero-card-thumb { width:110px !important; height:60px !important; }
+  .vjs-hero-card-info { padding:4px 8px !important; }
+  .vjs-hero-card-cat { font-size:0.45rem !important; margin-bottom:1px !important; }
+  .vjs-hero-card-title { font-size:0.65rem !important; }
+  .vjs-hero-card-artist { display:none !important; }
+}
+
+.vjs-hero-player {
+  position:relative; overflow:hidden; background:#000;
+  aspect-ratio:16/9;
+}
+
+.vjs-hero-player iframe {
+  position:absolute; inset:0; width:100%; height:100%; border:none; display:block; background:#000;
+}
+
+/* ── CHYRON BAR — below the video, never overlapping ── */
+.vjs-hero-chyron {
+  background:#030303; border-top:2px solid #111; border-bottom:1px solid #0f0f0f;
+  padding:12px 20px; display:flex; align-items:center;
+  justify-content:space-between; gap:16px; flex-wrap:wrap;
+}
+.vjs-hero-chyron-left { display:flex; align-items:center; gap:10px; min-width:0; flex:1; overflow:hidden; }
+.vjs-hero-chyron-tag {
+  font-family:'Barlow Condensed',sans-serif; font-size:0.54rem; font-weight:700;
+  letter-spacing:0.15em; text-transform:uppercase;
+  color:var(--vjs-ultraviolet); border:1px solid rgba(157,0,255,0.4);
+  padding:2px 8px; flex-shrink:0; white-space:nowrap;
+}
+.vjs-hero-chyron-type {
+  font-family:'Barlow Condensed',sans-serif; font-size:0.54rem; font-weight:700;
+  letter-spacing:0.13em; text-transform:uppercase; color:#333; flex-shrink:0; white-space:nowrap;
+}
+.vjs-hero-chyron-title {
+  font-family:'Barlow Condensed',sans-serif; font-size:1rem; font-weight:800;
+  letter-spacing:0.06em; text-transform:uppercase;
+  background:linear-gradient(90deg,#9d00ff 0%,#00f9ff 100%);
+  -webkit-background-clip:text; -webkit-text-fill-color:transparent;
+  background-clip:text;
+  white-space:nowrap; overflow:hidden; text-overflow:ellipsis;
+}
+.vjs-hero-chyron-right { display:flex; align-items:center; gap:14px; flex-shrink:0; }
+.vjs-hero-chyron-artist {
+  font-family:'Barlow Condensed',sans-serif; font-size:0.68rem;
+  color:#444; letter-spacing:0.04em; white-space:nowrap;
+}
+.vjs-hero-chyron-vimeo {
+  font-family:'Barlow Condensed',sans-serif; font-size:0.58rem; font-weight:700;
+  letter-spacing:0.12em; text-transform:uppercase; color:#555; text-decoration:none;
+  border:1px solid #222; padding:4px 12px; transition:color .15s,border-color .15s;
+}
+.vjs-hero-chyron-vimeo:hover { color:var(--vjs-cyan); border-color:var(--vjs-cyan); }
+.vjs-hero-chyron-project {
+  font-family:'Barlow Condensed',sans-serif; font-size:0.58rem; font-weight:700;
+  letter-spacing:0.1em; text-transform:uppercase; color:#2a2a2a; text-decoration:none;
+  transition:color .15s;
+}
+.vjs-hero-chyron-project:hover { color:#fff; }
+@media(max-width:600px){
+  .vjs-hero-chyron { padding:10px 14px; }
+  .vjs-hero-chyron-type, .vjs-hero-chyron-artist { display:none; }
+  .vjs-hero-chyron-project { display:none; }
+}
+
+/* Sidebar */
+.vjs-hero-sidebar {
+  background:#070707; border-left:1px solid #141414;
+  display:flex; flex-direction:column; overflow-y:auto;
+}
+.vjs-hero-sidebar-hdr {
+  font-family:'Barlow Condensed',sans-serif; font-size:0.58rem; font-weight:700;
+  letter-spacing:0.18em; text-transform:uppercase; color:#333;
+  padding:12px 14px 10px; border-bottom:1px solid #111;
+  flex-shrink:0;
+}
+.vjs-hero-card {
+  display:flex; align-items:stretch; gap:0; cursor:pointer;
+  border-bottom:1px solid #0f0f0f; transition:background .12s;
+  padding:0; background:none; border-left:none; border-right:none; border-top:none; text-align:left; width:100%;
+}
+.vjs-hero-card:hover { background:#0e0e0e; }
+.vjs-hero-card.active { background:#0e0e0e; border-left:2px solid var(--vjs-cyan); }
+.vjs-hero-card-thumb {
+  width:72px; height:54px; flex-shrink:0; overflow:hidden;
+  background:#111 center/cover no-repeat;
+}
+.vjs-hero-card-thumb-bg { position:absolute; inset:0; }
+.vjs-hero-card-play {
+  position:absolute; inset:0; display:flex; align-items:center; justify-content:center;
+  color:rgba(255,255,255,0.6); font-size:10px;
+}
+.vjs-hero-card:hover .vjs-hero-card-play,
+.vjs-hero-card.active .vjs-hero-card-play { color:#fff; }
+.vjs-hero-card-info { padding:8px 10px; min-width:0; }
+.vjs-hero-card-cat {
+  font-family:'Barlow Condensed',sans-serif; font-size:0.52rem; font-weight:700;
+  letter-spacing:0.13em; text-transform:uppercase; color:#444; margin-bottom:3px;
+}
+.vjs-hero-card.active .vjs-hero-card-cat { color:var(--vjs-cyan); }
+.vjs-hero-card-title {
+  font-family:'Barlow Condensed',sans-serif; font-size:0.8rem; font-weight:700;
+  color:#ccc; letter-spacing:0.02em; line-height:1.2;
+  white-space:nowrap; overflow:hidden; text-overflow:ellipsis;
+}
+.vjs-hero-card:hover .vjs-hero-card-title,
+.vjs-hero-card.active .vjs-hero-card-title { color:#fff; }
+.vjs-hero-card-artist {
+  font-family:'Barlow Condensed',sans-serif; font-size:0.65rem;
+  color:#333; margin-top:2px;
+}
+</style>
+
+<section class="vjs-hero-wrap">
+  <h2 style="position:absolute; left:-9999px; width:1px; height:1px; overflow:hidden;">Global broadcast network for VJ culture</h2>
+
+  <!-- MAIN PLAYER — clean, no overlay -->
+  <div class="vjs-hero-player" id="hero-player">
+    <iframe id="hero-iframe"
+      src="https://player.vimeo.com/video/49960413?autoplay=0&title=0&byline=0&portrait=0&color=9d00ff"
+      allow="autoplay; fullscreen; picture-in-picture" allowfullscreen>
+    </iframe>
+  </div>
+
+  <!-- SIDEBAR QUEUE — built dynamically from full project pool -->
+  <div class="vjs-hero-sidebar" id="hero-sidebar">
+    <div class="vjs-hero-sidebar-hdr">Popular Projects</div>
+  </div>
+</section>
+
+<script>
+/* ── Full project pool (all projects with a Vimeo ID, baked in at build time) ── */
+var VJS_PROJECT_POOL = [
+  {% assign pool = site.projects | where_exp: "p", "p.vimeo_id" %}
+  {% for p in pool %}
+  {
+    id:     "{{ p.vimeo_id }}",
+    title:  {{ p.title | jsonify }},
+    short:  {{ p.title | truncate: 22 | jsonify }},
+    artist: {{ p.artist | default: "" | jsonify }},
+    loc:    {{ p.location | default: "" | jsonify }},
+    type:   {{ p.project_type | default: "Visual Art" | jsonify }},
+    href:   {{ p.url | jsonify }}
+  }{% unless forloop.last %},{% endunless %}
+  {% endfor %}
+];
+
+/* ── Fisher-Yates shuffle → pick 8 → build cards ── */
+(function(){
+  var pool = VJS_PROJECT_POOL.slice();
+  for (var i = pool.length - 1; i > 0; i--) {
+    var j = Math.floor(Math.random() * (i + 1));
+    var t = pool[i]; pool[i] = pool[j]; pool[j] = t;
+  }
+  var picks = pool.slice(0, 8);
+  var sidebar = document.getElementById('hero-sidebar');
+
+  picks.forEach(function(p, idx) {
+    var btn = document.createElement('button');
+    btn.className = 'vjs-hero-card' + (idx === 0 ? ' active' : '');
+    btn.dataset.id     = p.id;
+    btn.dataset.title  = p.title;
+    btn.dataset.artist = p.artist;
+    btn.dataset.loc    = p.loc;
+    btn.dataset.type   = p.type;
+    btn.dataset.href   = p.href;
+    btn.setAttribute('onclick', 'heroPlay(this)');
+
+    /* Shorten type label for the category badge */
+    var cat = p.type.replace(/Projection Mapping/i,'Proj. Mapping')
+                    .replace(/Interactive /i,'')
+                    .replace(/Installation/i,'Install.')
+                    .replace(/Performance/i,'Perf.')
+                    .replace(/ Art$/i,'')
+                    .trim();
+    if (cat.length > 18) cat = cat.substring(0, 18) + '…';
+
+    btn.innerHTML =
+      '<div class="vjs-hero-card-thumb" style="background:#111;"></div>' +
+      '<div class="vjs-hero-card-info">' +
+        '<div class="vjs-hero-card-cat">' + cat + '</div>' +
+        '<div class="vjs-hero-card-title">' + p.short + '</div>' +
+        '<div class="vjs-hero-card-artist">' + p.artist + '</div>' +
+      '</div>';
+
+    sidebar.appendChild(btn);
+  });
+
+  /* Load Vimeo thumbnails for the 8 picked cards */
+  sidebar.querySelectorAll('.vjs-hero-card[data-id]').forEach(function(card) {
+    var id = card.dataset.id;
+    var thumb = card.querySelector('.vjs-hero-card-thumb');
+    if (!thumb) return;
+    fetch('https://vimeo.com/api/oembed.json?url=https://vimeo.com/' + id + '&width=200')
+      .then(function(r){ return r.json(); })
+      .then(function(d){
+        if (d.thumbnail_url) {
+          thumb.style.backgroundImage = 'url(' + d.thumbnail_url + ')';
+          thumb.style.backgroundSize  = 'cover';
+          thumb.style.backgroundPosition = 'center';
+        }
+      }).catch(function(){});
+  });
+
+  window._vjsFirstPick = picks[0];
+})();
+</script>
+
+<!-- CHYRON BAR — title lives here, below the full video frame -->
+<div class="vjs-hero-chyron" id="hero-chyron">
+  <div class="vjs-hero-chyron-left">
+    <span class="vjs-hero-chyron-tag">&#9679; Featured</span>
+    <span class="vjs-hero-chyron-type" id="hero-tag-type">Architectural Projection</span>
+    <span class="vjs-hero-chyron-title" id="hero-title">Sagrada Familia: Ode à la Vie</span>
+  </div>
+  <div class="vjs-hero-chyron-right">
+    <span class="vjs-hero-chyron-artist" id="hero-artist">Moment Factory · Barcelona</span>
+    <a class="vjs-hero-chyron-vimeo" id="hero-vimeo-link" href="https://vimeo.com/49960413" target="_blank" rel="noopener">Vimeo</a>
+    <a class="vjs-hero-chyron-project" id="hero-project-link" href="/projects">Project →</a>
+  </div>
+</div>
+
+<script>
+(function(){
+  var first = window._vjsFirstPick;
+  if (!first) return;
+  document.getElementById('hero-iframe').src =
+    'https://player.vimeo.com/video/' + first.id + '?autoplay=0&title=0&byline=0&portrait=0&color=9d00ff';
+  document.getElementById('hero-title').textContent    = first.title;
+  document.getElementById('hero-artist').textContent   = first.artist + (first.loc ? ' · ' + first.loc.split(',')[0] : '');
+  document.getElementById('hero-tag-type').textContent = first.type;
+  document.getElementById('hero-vimeo-link').href      = 'https://vimeo.com/' + first.id;
+  document.getElementById('hero-project-link').href    = first.href;
+})();
+
+function heroPlay(card) {
+  var id    = card.dataset.id;
+  var title = card.dataset.title;
+  var artist= card.dataset.artist;
+  var loc   = card.dataset.loc;
+  var type  = card.dataset.type;
+  var href  = card.dataset.href;
+
+  document.getElementById('hero-iframe').src =
+    'https://player.vimeo.com/video/' + id + '?autoplay=1&title=0&byline=0&portrait=0&color=9d00ff';
+  document.getElementById('hero-title').textContent    = title;
+  document.getElementById('hero-artist').textContent   = artist + (loc ? ' · ' + loc.split(',')[0] : '');
+  document.getElementById('hero-tag-type').textContent = type;
+  document.getElementById('hero-vimeo-link').href      = 'https://vimeo.com/' + id;
+  document.getElementById('hero-project-link').href    = href;
+
+  document.querySelectorAll('.vjs-hero-card').forEach(function(c){ c.classList.remove('active'); });
+  card.classList.add('active');
+}
+</script>
+
+<!-- SPONSOR TICKER -->
+<div class="vjs-sponsor-bar">
+  <div class="vjs-sponsor-bar-track">
+    <span class="vjs-sponsor-bar-item" style="color:var(--vjs-ultraviolet);">Become a Partner</span><span class="vjs-sponsor-bar-dot"> &diams; </span><span class="vjs-sponsor-bar-item">Technology Partners Wanted</span><span class="vjs-sponsor-bar-dot"> &diams; </span><span class="vjs-sponsor-bar-item">Broadcast Sponsors Wanted</span><span class="vjs-sponsor-bar-dot"> &diams; </span><span class="vjs-sponsor-bar-item">Festival Partners Wanted</span><span class="vjs-sponsor-bar-dot"> &diams; </span>
+    <span class="vjs-sponsor-bar-item" style="color:var(--vjs-ultraviolet);">Become a Partner</span><span class="vjs-sponsor-bar-dot"> &diams; </span><span class="vjs-sponsor-bar-item">Technology Partners Wanted</span><span class="vjs-sponsor-bar-dot"> &diams; </span><span class="vjs-sponsor-bar-item">Broadcast Sponsors Wanted</span><span class="vjs-sponsor-bar-dot"> &diams; </span><span class="vjs-sponsor-bar-item">Festival Partners Wanted</span><span class="vjs-sponsor-bar-dot"> &diams; </span>
+    <span class="vjs-sponsor-bar-item" style="color:var(--vjs-ultraviolet);">Become a Partner</span><span class="vjs-sponsor-bar-dot"> &diams; </span><span class="vjs-sponsor-bar-item">Technology Partners Wanted</span><span class="vjs-sponsor-bar-dot"> &diams; </span><span class="vjs-sponsor-bar-item">Broadcast Sponsors Wanted</span><span class="vjs-sponsor-bar-dot"> &diams; </span><span class="vjs-sponsor-bar-item">Festival Partners Wanted</span><span class="vjs-sponsor-bar-dot"> &diams; </span>
+  </div>
+</div>
+
+<!-- VJS TV PICKS — NTS PICKS STYLE -->
+<section class="vjs-picks-section">
+  <div class="vjs-picks-header">
+    <span class="vjs-picks-title">VJs TV Picks</span>
+    <a href="/projects" class="vjs-picks-link">View All <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="width:0.8em; height:0.8em; display:inline-block; vertical-align:middle; margin-left:3px;"><path d="M9 18l6-6-6-6"/></svg></a>
+  </div>
+  <div class="vjs-sets-scroll" style="padding-left:16px; padding-right:16px;">
+    {% assign set_gradients = "rgba(157,0,255,0.5) 0%,rgba(0,212,255,0.25) 100%|rgba(255,0,170,0.4) 0%,rgba(157,0,255,0.4) 100%|rgba(0,212,255,0.4) 0%,rgba(157,0,255,0.35) 100%|rgba(157,0,255,0.35) 0%,rgba(255,0,170,0.35) 100%|rgba(0,245,255,0.3) 0%,rgba(157,0,255,0.5) 100%|rgba(255,0,170,0.5) 0%,rgba(0,212,255,0.3) 100%" | split: "|" %}
+    {% for project in site.projects %}
+    {% assign gi = forloop.index0 | modulo: 6 %}
+    <a href="{{ project.url }}" class="vjs-set-card">
+      <div class="vjs-set-thumb">
+        <div class="vjs-set-thumb-bg vjs-vimeo-thumb"
+             data-vimeo="{{ project.vimeo_id }}"
+             style="background: linear-gradient(135deg, {{ set_gradients[gi] }}); position:relative; width:100%; height:100%;">
+          <div class="vjs-proj-thumb-shimmer"></div>
+        </div>
+      </div>
+      <div class="vjs-set-info">
+        <div class="vjs-set-location">{{ project.project_type }}</div>
+        <div class="vjs-set-title">{{ project.title }}</div>
+        <div class="vjs-set-meta">{{ project.artist }} &middot; {{ project.location }}</div>
+      </div>
+    </a>
+    {% endfor %}
+  </div>
+</section>
+
+<!-- STATS -->
+<div class="vjs-stats-bar vjs-reveal">
+  <a href="/artists" class="vjs-stat-item vjs-stat-link"><div class="vjs-stat-number" id="stat-artists">0</div><div class="vjs-stat-label">Artists</div></a>
+  <a href="/projects" class="vjs-stat-item vjs-stat-link"><div class="vjs-stat-number" id="stat-projects">0</div><div class="vjs-stat-label">Projects</div></a>
+  <a href="/events" class="vjs-stat-item vjs-stat-link"><div class="vjs-stat-number" id="stat-events">0</div><div class="vjs-stat-label">Events</div></a>
+  <a href="/studios" class="vjs-stat-item vjs-stat-link"><div class="vjs-stat-number" id="stat-studios">0</div><div class="vjs-stat-label">Studios</div></a>
+  <a href="/sponsors" class="vjs-stat-item vjs-stat-link"><div class="vjs-stat-number" id="stat-sponsors">0</div><div class="vjs-stat-label">Partners</div></a>
+  <a href="/countries" class="vjs-stat-item vjs-stat-link"><div class="vjs-stat-number" id="stat-countries">24</div><div class="vjs-stat-label">Countries</div></a>
+</div>
+
+<!-- ARTISTS — NTS GRID -->
+<section style="padding:50px 0; background:var(--vjs-darker); border-bottom:1px solid #222;">
+  <div style="padding:0 16px; max-width:1400px; margin:0 auto;">
+    <div class="vjs-reveal" style="display:flex; align-items:baseline; justify-content:space-between; flex-wrap:wrap; gap:1rem; margin-bottom:24px;">
+      <div style="display:flex; align-items:baseline; gap:12px;">
+        <h2 class="vjs-section-title" style="margin:0;">Featured Artists</h2>
+        <a href="/artists" class="vjs-picks-link">View All <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="width:0.8em; height:0.8em; display:inline-block; vertical-align:middle; margin-left:3px;"><path d="M9 18l6-6-6-6"/></svg></a>
+      </div>
+    </div>
+  </div>
+  <div style="max-width:1400px; margin:0 auto;">
+    <div class="vjs-reveal">
+      <div class="vjs-nts-grid">
+        {% assign featured_artists = site.vjs | where: "featured", true %}
+        {% for artist in featured_artists limit:6 %}
+        {% include cards/artist-card.html artist=artist %}
+        {% endfor %}
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- LOOP PACKS MARKETPLACE -->
+<section style="padding:50px 0; background:#000; border-bottom:1px solid #222;">
+  <div style="padding:0 16px; max-width:1400px; margin:0 auto; margin-bottom:24px;">
+    <div class="vjs-reveal" style="display:flex; align-items:baseline; justify-content:space-between; flex-wrap:wrap; gap:1rem;">
+      <div style="display:flex; align-items:baseline; gap:12px;">
+        <h2 class="vjs-section-title" style="margin:0;">VJ Loop Packs</h2>
+        <a href="/submit" class="vjs-picks-link" style="color:#39ff14;">Submit Pack <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="width:0.8em; height:0.8em; display:inline-block; vertical-align:middle; margin-left:3px; color:#39ff14;"><path d="M9 18l6-6-6-6"/></svg></a>
+      </div>
+      <a href="/marketplace" style="font-family:'Barlow Condensed',sans-serif; font-size:0.72rem; color:var(--vjs-text-muted); text-transform:uppercase; letter-spacing:0.06em; text-decoration:none;">Marketplace →</a>
+    </div>
+  </div>
+  <div class="vjs-sets-scroll" style="padding-left:16px; padding-right:16px;">
+    {% for pack in site.loop_packs limit:8 %}
+    <a href="{{ pack.url }}" class="vjs-pack-card text-decoration-none">
+      <div class="vjs-pack-thumb" style="background: linear-gradient(135deg, {{ pack.gradient }});">
+        {% if pack.thumbnail %}
+        <img src="{{ pack.thumbnail }}" alt="{{ pack.title }}" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;z-index:0;">
+        {% endif %}
+        <div style="position:absolute; inset:0; background:repeating-linear-gradient(45deg, transparent, transparent 6px, rgba(0,0,0,0.08) 6px, rgba(0,0,0,0.08) 7px); z-index:1;"></div>
+        <div class="vjs-pack-count" style="position:relative;z-index:2;">{{ pack.clip_count }} clips</div>
+        <div class="vjs-pack-icon" style="position:relative;z-index:2;"><svg viewBox="0 0 24 24" fill="currentColor"><rect x="4" y="4" width="16" height="16"/></svg></div>
+      </div>
+      <div class="vjs-pack-info">
+        <div class="vjs-pack-name">{{ pack.title }}</div>
+        <div class="vjs-pack-artist">by {{ pack.artist }}</div>
+        <div class="vjs-pack-footer">
+          <span class="vjs-pack-price">{{ pack.price_display }}</span>
+          <span class="vjs-pack-dl"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" style="width:0.8em; height:0.8em; display:inline-block; vertical-align:middle; margin-right:4px;"><path d="M12 3v14M5 11l7 7 7-7"/></svg> GET</span>
+        </div>
+      </div>
+    </a>
+    {% endfor %}
+  </div>
+</section>
+
+<!-- PROJECTS — EDITORIAL GRID -->
+<section style="padding:50px 0; background:var(--vjs-darker); border-bottom:1px solid #222;">
+  <div style="padding:0 16px; max-width:1400px; margin:0 auto;">
+    <div class="vjs-reveal" style="display:flex; align-items:baseline; justify-content:space-between; flex-wrap:wrap; gap:1rem; margin-bottom:24px;">
+      <div style="display:flex; align-items:baseline; gap:12px;">
+        <h2 class="vjs-section-title" style="margin:0;">Latest Projects</h2>
+        <a href="/projects" class="vjs-picks-link">View All <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="width:0.8em; height:0.8em; display:inline-block; vertical-align:middle; margin-left:3px;"><path d="M9 18l6-6-6-6"/></svg></a>
+      </div>
+    </div>
+    <div class="vjs-reveal">
+      <div class="vjs-redbull-grid">
+        {% assign featured_projects = site.projects | where: "featured", true %}
+        {% for project in featured_projects limit:5 %}
+        {% if forloop.first %}
+        <a href="{{ project.url }}" class="text-decoration-none vjs-redbull-card featured">
+          <div class="vjs-redbull-thumb">
+            <div class="vjs-redbull-thumb-bg vjs-vimeo-thumb"
+                 data-vimeo="{{ project.vimeo_id }}"
+                 style="background: linear-gradient(135deg, rgba(255,0,170,0.4) 0%, rgba(157,0,255,0.5) 50%, rgba(0,212,255,0.25) 100%); position:relative; width:100%; height:100%;">
+              <div class="vjs-proj-thumb-shimmer"></div>
+            </div>
+            <div class="vjs-redbull-overlay">
+              <div class="vjs-redbull-cat">{{ project.project_type }}</div>
+              <div class="vjs-redbull-title">{{ project.title }}</div>
+              <div class="vjs-redbull-artist">{{ project.artist }} &middot; {{ project.location }} &middot; {{ project.year }}</div>
+            </div>
+          </div>
+        </a>
+        {% else %}
+        <a href="{{ project.url }}" class="text-decoration-none vjs-redbull-card">
+          <div class="vjs-redbull-thumb">
+            <div class="vjs-redbull-thumb-bg vjs-vimeo-thumb"
+                 data-vimeo="{{ project.vimeo_id }}"
+                 style="background: linear-gradient(135deg, rgba(157,0,255,0.4) 0%, rgba(0,212,255,0.25) 50%, rgba(255,0,170,0.2) 100%); position:relative; width:100%; height:100%;">
+              <div class="vjs-proj-thumb-shimmer"></div>
+            </div>
+            <div class="vjs-redbull-overlay">
+              <div class="vjs-redbull-cat">{{ project.project_type }}</div>
+              <div class="vjs-redbull-title">{{ project.title }}</div>
+              <div class="vjs-redbull-artist">{{ project.artist }} &middot; {{ project.year }}</div>
+            </div>
+          </div>
+        </a>
+        {% endif %}
+        {% endfor %}
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- TECHNOLOGY -->
+<section style="padding:50px 0; background:#000; border-bottom:1px solid #222;">
+  <div style="padding:0 16px; max-width:1400px; margin:0 auto;">
+    <div class="vjs-reveal" style="display:flex; align-items:baseline; justify-content:space-between; flex-wrap:wrap; gap:1rem; margin-bottom:24px;">
+      <div style="display:flex; align-items:baseline; gap:12px;">
+        <h2 class="vjs-section-title" style="margin:0;">Technology</h2>
+        <a href="/technology" class="vjs-picks-link">View All <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="width:0.8em; height:0.8em; display:inline-block; vertical-align:middle; margin-left:3px;"><path d="M9 18l6-6-6-6"/></svg></a>
+      </div>
+      <span style="font-family:'Barlow Condensed',sans-serif; font-size:0.72rem; color:var(--vjs-text-muted); text-transform:uppercase; letter-spacing:0.06em;">The Tools Powering VJ Culture</span>
+    </div>
+    <div class="vjs-grid vjs-grid-3">
+      {% assign featured_tech = site.technology | where: "featured", true %}
+      {% for tech in featured_tech limit:3 %}
+      <div class="vjs-reveal vjs-reveal-delay-{{ forloop.index }}">
+        <a href="{{ tech.url }}" class="text-decoration-none">
+          <div class="vjs-tool-card"
+               style="--tc-color: linear-gradient(90deg, {{ tech.logo_color | default: 'var(--vjs-ultraviolet)' }}, transparent);
+                      --tc-border: {{ tech.logo_border | default: 'rgba(123,47,255,0.4)' }};
+                      --tc-glow: {{ tech.logo_glow | default: 'rgba(123,47,255,0.25)' }};
+                      --tc-text: {{ tech.logo_color | default: 'var(--vjs-cyan)' }};
+                      --tc-bg: {{ tech.logo_bg | default: 'rgba(0,245,212,0.06)' }};
+                      --tc-border-light: {{ tech.logo_border | default: 'rgba(0,245,212,0.2)' }};">
+            <div class="vjs-tool-logo" style="background:{{ tech.logo_bg | default: 'rgba(123,47,255,0.12)' }}; border:1px solid {{ tech.logo_border | default: 'rgba(123,47,255,0.3)' }}; color:{{ tech.logo_color | default: 'var(--vjs-ultraviolet)' }};">{{ tech.logo_abbr | default: tech.title | truncate: 3, '' }}</div>
+            <div class="vjs-tool-category">{{ tech.category }}</div>
+            <div class="vjs-tool-name">{{ tech.title }}</div>
+            <p class="vjs-tool-desc">{{ tech.description | truncate: 130 }}</p>
+            {% if tech.sponsor_value %}
+            <div class="vjs-tool-sponsor-value" style="--tc-text:{{ tech.logo_color | default: 'var(--vjs-cyan)' }}; --tc-bg:{{ tech.logo_bg | default: 'rgba(0,245,212,0.06)' }}; --tc-border-light:{{ tech.logo_border | default: 'rgba(0,245,212,0.2)' }}; color:{{ tech.logo_color | default: 'var(--vjs-cyan)' }}; background:{{ tech.logo_bg | default: 'rgba(0,245,212,0.06)' }}; border-color:{{ tech.logo_border | default: 'rgba(0,245,212,0.2)' }};">{{ tech.sponsor_value }}</div>
+            {% endif %}
+            {% if tech.used_by %}
+            <div class="vjs-tool-users">
+              <span style="font-family:'Barlow Condensed',sans-serif; font-size:0.65rem; text-transform:uppercase; letter-spacing:0.08em; color:var(--vjs-text-muted);">Used by: </span>
+              {% for name in tech.used_by limit:3 %}<span class="vjs-tag vjs-tag-purple" style="font-size:0.65rem;">{{ name }}</span>{% endfor %}
+            </div>
+            {% endif %}
+          </div>
+        </a>
+      </div>
+      {% endfor %}
+    </div>
+    <div class="vjs-reveal" style="margin-top:24px; padding:20px; background:var(--vjs-card); border:1px solid var(--vjs-border);">
+      <div style="display:flex; align-items:center; justify-content:space-between; flex-wrap:wrap; gap:1rem;">
+        <p style="color:var(--vjs-text-muted); margin:0; font-size:0.85rem;">Is your technology used by VJs worldwide? <strong style="color:#fff;">Get featured on VJs TV.</strong></p>
+        <a href="/sponsors" class="vjs-btn vjs-btn-sponsor" style="font-size:0.8rem; padding:8px 24px;">Become a Partner</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PARTNERS CTA -->
+<section style="padding:50px 0; background:var(--vjs-darker); border-bottom:1px solid #222;">
+  <div style="padding:0 16px; max-width:1400px; margin:0 auto;">
+    <div class="vjs-reveal" style="display:flex; align-items:baseline; justify-content:space-between; flex-wrap:wrap; gap:1rem; margin-bottom:32px;">
+      <h2 class="vjs-section-title" style="margin:0;">Partners & Sponsors</h2>
+    </div>
+    <div class="vjs-reveal">
+      <div style="display:grid; grid-template-columns:1fr 1fr 1fr; gap:1px; background:#222;">
+
+        <div style="background:var(--vjs-card); padding:2.5rem 2rem; border-top:2px solid var(--vjs-ultraviolet);">
+          <div style="font-family:'Barlow Condensed',sans-serif; font-size:0.65rem; text-transform:uppercase; letter-spacing:0.12em; color:var(--vjs-ultraviolet); margin-bottom:1rem;">Technology Partner</div>
+          <h3 style="font-size:1.1rem; margin:0 0 0.75rem; color:#fff; font-family:'Barlow Condensed',sans-serif; font-weight:700; text-transform:uppercase; letter-spacing:0.04em;">Your Brand Here</h3>
+          <p style="font-size:0.82rem; color:var(--vjs-text-muted); margin:0 0 1.5rem; line-height:1.6;">Reach VJs, live visuals artists, and AV professionals worldwide. Be the tool they trust on stage.</p>
+          <a href="/partners" style="font-family:'Barlow Condensed',sans-serif; font-size:0.72rem; text-transform:uppercase; letter-spacing:0.1em; color:var(--vjs-ultraviolet); text-decoration:none; border-bottom:1px solid var(--vjs-ultraviolet); padding-bottom:2px;">Apply as Technology Partner →</a>
+        </div>
+
+        <div style="background:var(--vjs-card); padding:2.5rem 2rem; border-top:2px solid var(--vjs-cyan);">
+          <div style="font-family:'Barlow Condensed',sans-serif; font-size:0.65rem; text-transform:uppercase; letter-spacing:0.12em; color:var(--vjs-cyan); margin-bottom:1rem;">Broadcast Sponsor</div>
+          <h3 style="font-size:1.1rem; margin:0 0 0.75rem; color:#fff; font-family:'Barlow Condensed',sans-serif; font-weight:700; text-transform:uppercase; letter-spacing:0.04em;">Sponsor a Live Session</h3>
+          <p style="font-size:0.82rem; color:var(--vjs-text-muted); margin:0 0 1.5rem; line-height:1.6;">Put your brand inside every VJs TV live broadcast. Full-screen logo placement across the global stream.</p>
+          <a href="/partners" style="font-family:'Barlow Condensed',sans-serif; font-size:0.72rem; text-transform:uppercase; letter-spacing:0.1em; color:var(--vjs-cyan); text-decoration:none; border-bottom:1px solid var(--vjs-cyan); padding-bottom:2px;">Become a Broadcast Sponsor →</a>
+        </div>
+
+        <div style="background:var(--vjs-card); padding:2.5rem 2rem; border-top:2px solid var(--vjs-magenta);">
+          <div style="font-family:'Barlow Condensed',sans-serif; font-size:0.65rem; text-transform:uppercase; letter-spacing:0.12em; color:var(--vjs-magenta); margin-bottom:1rem;">Festival Partner</div>
+          <h3 style="font-size:1.1rem; margin:0 0 0.75rem; color:#fff; font-family:'Barlow Condensed',sans-serif; font-weight:700; text-transform:uppercase; letter-spacing:0.04em;">Partner Your Event</h3>
+          <p style="font-size:0.82rem; color:var(--vjs-text-muted); margin:0 0 1.5rem; line-height:1.6;">Festival or event organiser? Get listed on VJs TV and connect with global visual artists for your line-up.</p>
+          <a href="/partners" style="font-family:'Barlow Condensed',sans-serif; font-size:0.72rem; text-transform:uppercase; letter-spacing:0.1em; color:var(--vjs-magenta); text-decoration:none; border-bottom:1px solid var(--vjs-magenta); padding-bottom:2px;">Apply as Festival Partner →</a>
+        </div>
+
+      </div>
+      <div style="margin-top:1px; background:var(--vjs-card); padding:1.5rem 2rem; display:flex; align-items:center; justify-content:space-between; flex-wrap:wrap; gap:1rem; background:#0a0a0a; border:1px solid #222; border-top:none;">
+        <p style="margin:0; font-family:'Barlow Condensed',sans-serif; font-size:0.85rem; color:var(--vjs-text-muted); text-transform:uppercase; letter-spacing:0.06em;">No partners signed yet — <strong style="color:#fff;">be the first to appear here.</strong></p>
+        <a href="/partners" class="vjs-btn vjs-btn-primary" style="font-size:0.78rem; padding:9px 28px;">View Partnership Options</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CTA -->
+<section style="padding:40px 0; background:#000; border-bottom:1px solid #222;">
+  <div style="padding:0 16px; max-width:1400px; margin:0 auto; text-align:center;">
+    <div class="vjs-reveal">
+      <h2 class="vjs-section-title" style="margin-bottom:8px;">Join the Network</h2>
+      <p style="color:var(--vjs-text-muted); max-width:600px; margin:0 auto 20px; font-size:0.9rem;">Submit your visual performance projects and become part of the global VJ community.</p>
+      <div style="display:flex; gap:10px; justify-content:center; flex-wrap:wrap;">
+        <a href="/submit" class="vjs-btn vjs-btn-primary">Submit Project</a>
+        <a href="https://vjsmag.com" target="_blank" class="vjs-btn vjs-btn-outline">Read VJs Mag</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+{% include vjstv-footer.html %}
+
+<script>
+var vjsMuted = false;
+
+function vjsToggleMute() {
+  vjsMuted = !vjsMuted;
+  var btn = document.getElementById('vjs-mute-btn');
+  var icon = document.getElementById('vjs-vol-icon');
+  if (vjsMuted) {
+    icon.innerHTML = '<path d="M3 9v6h4l5 5V4L7 9H3Z"/><line x1="22" y1="9" x2="16" y2="15"/><line x1="16" y1="9" x2="22" y2="15"/>';
+    btn.style.color = 'rgba(255,0,170,0.7)';
+    btn.title = 'Unmute';
+  } else {
+    icon.innerHTML = '<path d="M3 9v6h4l5 5V4L7 9H3Z"/><path d="M16 5c2 2 2 6 0 8M19 2c3 3 3 9 0 12"/>';
+    btn.style.color = '';
+    btn.title = 'Mute';
+  }
+}
+
+function vjsToggleSchedule() {
+  var panel = document.getElementById('vjs-schedule-panel');
+  var btn = document.getElementById('vjs-schedule-btn');
+  var open = panel.classList.toggle('open');
+  panel.setAttribute('aria-hidden', open ? 'false' : 'true');
+  btn.classList.toggle('active', open);
+  if (open) {
+    document.addEventListener('click', vjsScheduleOutside, true);
+  } else {
+    document.removeEventListener('click', vjsScheduleOutside, true);
+  }
+}
+
+function vjsScheduleOutside(e) {
+  var panel = document.getElementById('vjs-schedule-panel');
+  var btn = document.getElementById('vjs-schedule-btn');
+  if (!panel.contains(e.target) && e.target !== btn && !btn.contains(e.target)) {
+    panel.classList.remove('open');
+    panel.setAttribute('aria-hidden', 'true');
+    btn.classList.remove('active');
+    document.removeEventListener('click', vjsScheduleOutside, true);
+  }
+}
+
+(function() {
+  {% assign _countries = "" %}{% for a in site.vjs %}{% if a.location %}{% assign _c = a.location | split: ", " | last | strip %}{% unless _countries contains _c %}{% assign _countries = _countries | append: _c | append: "|" %}{% endunless %}{% endif %}{% endfor %}{% for p in site.projects %}{% if p.location %}{% assign _c = p.location | split: ", " | last | strip %}{% unless _countries contains _c %}{% assign _countries = _countries | append: _c | append: "|" %}{% endunless %}{% endif %}{% endfor %}{% for e in site.events %}{% if e.location %}{% assign _c = e.location | split: ", " | last | strip %}{% unless _countries contains _c %}{% assign _countries = _countries | append: _c | append: "|" %}{% endunless %}{% endif %}{% endfor %}{% for s in site.studios %}{% if s.location %}{% assign _c = s.location | split: ", " | last | strip %}{% unless _countries contains _c %}{% assign _countries = _countries | append: _c | append: "|" %}{% endunless %}{% endif %}{% endfor %}{% assign _country_arr = _countries | split: "|" %}
+  var statsTargets = { 'stat-artists': {{ site.vjs | size }}, 'stat-projects': {{ site.projects | size }}, 'stat-events': {{ site.events | size }}, 'stat-studios': {{ site.studios | size | default: 0 }}, 'stat-sponsors': {{ site.sponsors | size | default: 0 }}, 'stat-countries': {{ _country_arr | size }} };
+  var started = false;
+  function startCounters() {
+    if(started) return; started=true;
+    Object.keys(statsTargets).forEach(function(id) {
+      var el=document.getElementById(id), t=statsTargets[id], n=0, s=Math.max(1,Math.ceil(t/40));
+      var tmr=setInterval(function(){n=Math.min(n+s,t); el.textContent=n; if(n>=t)clearInterval(tmr);},35);
+    });
+  }
+  var so = new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting)startCounters();});},{threshold:.3});
+  var sb = document.querySelector('.vjs-stats-bar'); if(sb) so.observe(sb);
+
+  var ro = new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting){e.target.classList.add('is-visible');ro.unobserve(e.target);}});},{threshold:.1});
+  document.querySelectorAll('.vjs-reveal').forEach(function(el){ro.observe(el);});
+
+  var bar = document.getElementById('vjs-progress-bar');
+  if(bar) {
+    var ticking = false;
+    window.addEventListener('scroll', function() {
+      if(!ticking) { requestAnimationFrame(function() {
+        var t = document.documentElement.scrollHeight - window.innerHeight;
+        bar.style.width = (t > 0 ? (window.scrollY / t * 100) : 0) + '%';
+        ticking = false;
+      }); ticking = true; }
+    }, {passive: true});
+  }
+})();
+</script>
