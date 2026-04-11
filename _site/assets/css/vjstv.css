@@ -3083,7 +3083,7 @@ body.cinema-mode .col-lg-8 { flex: 0 0 100% !important; max-width: 100% !importa
 
 /* Header: centered logo + search, close button pinned top-right — MOBILE ONLY */
 .vjs-mobile-drawer-header {
-  display: none;
+  display: none !important;
 }
 @media (max-width: 991.98px) {
   .vjs-mobile-drawer-header {
