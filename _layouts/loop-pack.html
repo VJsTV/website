@@ -259,12 +259,11 @@ layout: default
       btn.disabled = true;
       setTimeout(function() {
         document.getElementById('mpModal').style.display = 'none';
-        var packName = document.querySelector('.vjs-mp-buy-btn') ? document.querySelector('.vjs-mp-buy-btn').dataset.pack : '';
         var title = document.querySelector('.vjs-mp-buy-btn') ? document.querySelector('.vjs-mp-buy-btn').dataset.title : '';
         var artist = document.querySelector('.vjs-mp-buy-btn') ? document.querySelector('.vjs-mp-buy-btn').dataset.artist : '';
         var clips = document.querySelector('.vjs-mp-buy-btn') ? document.querySelector('.vjs-mp-buy-btn').dataset.clips : '';
         var size = document.querySelector('.vjs-mp-buy-btn') ? document.querySelector('.vjs-mp-buy-btn').dataset.size : '';
-        window.location.href = '/marketplace/download?pack=' + encodeURIComponent(packName) + '&title=' + encodeURIComponent(title) + '&artist=' + encodeURIComponent(artist) + '&clips=' + encodeURIComponent(clips) + '&size=' + encodeURIComponent(size);
+        window.location.href = '/marketplace/download?title=' + encodeURIComponent(title) + '&artist=' + encodeURIComponent(artist) + '&clips=' + encodeURIComponent(clips) + '&size=' + encodeURIComponent(size);
       }, 1800);
     });
   }
