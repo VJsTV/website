@@ -1480,6 +1480,21 @@ h2.vjs-sidebar-card-heading,
 .vjs-live-dot {
   box-shadow: 0 0 8px rgba(255,0,60,0.8);
 }
+.vjstv-live-indicator {
+  display: inline-block;
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  margin-right: 6px;
+  background: #ff1736;
+  box-shadow: 0 0 8px rgba(255, 23, 54, 0.85);
+  animation: vjstvLivePulse 2.8s ease-in-out infinite;
+  vertical-align: middle;
+}
+@keyframes vjstvLivePulse {
+  0%, 100% { opacity: 0.35; transform: scale(0.9); }
+  50% { opacity: 1; transform: scale(1.12); }
+}
 
 /* ================================================================
    BOILER ROOM — ARCHIVE SETS SCROLL
