@@ -104,7 +104,22 @@ app.get("/api/yt-info", function (req, res) {
 });
 
 app.use(function (req, res, next) {
+  var urlPath = req.path;
+  if (urlPath !== "/" && urlPath.endsWith("/")) {
+    var clean = urlPath.slice(0, -1);
+    var query = req.originalUrl.indexOf("?") !== -1 ? req.originalUrl.slice(req.originalUrl.indexOf("?")) : "";
+    return res.redirect(301, clean + query);
+  }
+  next();
+});
+
+app.use(function (req, res, next) {
   if (!siteReady) {
+    if (fs.existsSync(path.join(SITE_DIR, "index.html"))) {
+      siteReady = true;
+      console.log("Previous build detected — serving stale content while rebuilding.");
+      return next();
+    }
     return res.status(503)
       .header("Retry-After", "10")
       .send("<!DOCTYPE html><html><head><meta charset='utf-8'><meta http-equiv='refresh' content='5'><title>VJs TV — Loading</title></head><body style='background:#0a0a0a;color:#0f0;font-family:monospace;display:flex;align-items:center;justify-content:center;height:100vh;margin:0'><div style='text-align:center'><h1>VJs TV</h1><p>Broadcast starting up…</p></div></body></html>");
@@ -114,6 +129,7 @@ app.use(function (req, res, next) {
 
 app.use(express.static(SITE_DIR, {
   extensions: ["html"],
+  redirect: false,
   maxAge: IS_PROD ? "1h" : 0,
   setHeaders: function (res, filePath) {
     if (/\.(js|css|woff2?|ttf|eot|svg|png|jpg|jpeg|gif|webp|avif|ico)$/.test(filePath)) {
@@ -123,24 +139,19 @@ app.use(express.static(SITE_DIR, {
 }));
 
 app.use(function (req, res, next) {
-  var urlPath = req.path;
-  if (urlPath.endsWith("/")) {
-    var indexFile = path.join(SITE_DIR, urlPath, "index.html");
-    if (fs.existsSync(indexFile)) return res.sendFile(indexFile);
-    var stripped = urlPath.slice(0, -1) + ".html";
-    var strippedFile = path.join(SITE_DIR, stripped);
-    if (fs.existsSync(strippedFile)) return res.sendFile(strippedFile);
-  }
-  var withHtml = path.join(SITE_DIR, urlPath + ".html");
+  var urlPath = path.normalize(req.path).replace(/\\/g, "/");
+  var resolved = path.resolve(SITE_DIR, urlPath.replace(/^\//, ""));
+  if (resolved.indexOf(path.resolve(SITE_DIR)) !== 0) return next();
+  var withHtml = resolved + ".html";
   if (fs.existsSync(withHtml)) return res.sendFile(withHtml);
-  var withIndex = path.join(SITE_DIR, urlPath, "index.html");
+  var withIndex = path.join(resolved, "index.html");
   if (fs.existsSync(withIndex)) return res.sendFile(withIndex);
   next();
 });
 
 app.use(function (req, res) {
-  var filePath = path.join(SITE_DIR, "404.html");
-  if (fs.existsSync(filePath)) {
+  var filePath = path.resolve(SITE_DIR, "404.html");
+  if (filePath.indexOf(path.resolve(SITE_DIR)) === 0 && fs.existsSync(filePath)) {
     res.status(404).sendFile(filePath);
   } else {
     res.status(404).send("Page not found");
@@ -184,6 +195,11 @@ function watchJekyll() {
 
 app.listen(PORT, "0.0.0.0", function () {
   console.log("VJs TV server listening on port " + PORT);
+
+  if (fs.existsSync(path.join(SITE_DIR, "index.html"))) {
+    siteReady = true;
+    console.log("Previous build available — serving immediately while rebuilding.");
+  }
 
   buildJekyllAsync(function (err) {
     if (!err) {

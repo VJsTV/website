@@ -6,7 +6,8 @@
 <meta name="robots" content="noindex, follow" />
 {% else %}
 <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1" />
-<link rel="canonical" href="{{ page.url | absolute_url }}" />
+{% assign _canon = page.url | absolute_url | replace: "index.html", "" %}{% if _canon != "/" and _canon != "" %}{% assign _last = _canon | slice: -1 %}{% if _last == "/" %}{% assign _len = _canon.size | minus: 1 %}{% assign _canon = _canon | slice: 0, _len %}{% endif %}{% endif %}
+<link rel="canonical" href="{{ _canon }}" />
 {% endif %}
 <link rel="preconnect" href="https://fonts.googleapis.com" />
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />

@@ -77,7 +77,9 @@ VJs TV is a Jekyll-based platform for VJ culture and audiovisual performances. I
 - **Title optimization**: All collection items get " | VJs TV" brand suffix; site-wide default title uses target keywords
 - **Open Graph** with dynamic `og:type` (website/video.other/event), absolute image URLs, locale
 - **Twitter Cards** with `summary_large_image`, creator handle
-- **Heading hierarchy**: One H1 per page, semantic H2 sidebar headings
+- **Heading hierarchy**: One H1 per page, H2 subheadings on all index pages, semantic H2 sidebar headings on detail pages
+- **Trailing-slash canonicalization**: Server 301-redirects all trailing-slash URLs to non-slash versions; all internal links use non-slash URLs
+- **Auto-generated meta descriptions**: Collection items without explicit `description:` get unique descriptions built from frontmatter fields (title, location, visual_style, project_type, etc.)
 - **Security headers** (both `_headers` for Cloudflare Pages and Express middleware):
   - HSTS (`max-age=31536000; includeSubDomains; preload`)
   - X-Content-Type-Options (`nosniff`)
@@ -122,7 +124,7 @@ VJs TV is a Jekyll-based platform for VJ culture and audiovisual performances. I
 ### Development & Production: Express Server (`api/server.js`)
 - **Dual mode:** `node api/server.js` on port 5000, serves static `_site/` files
 - **Health check:** `GET /api/health` — returns status, uptime, memory usage; always responds immediately (even during Jekyll build)
-- **503 protection:** Server starts listening *before* Jekyll builds; during build, non-API requests receive a 503 with `Retry-After` header and auto-refresh page
+- **Zero-downtime startup:** If a previous `_site/` build exists, server marks itself ready immediately and serves stale content while Jekyll rebuilds; 503 only occurs on first-ever cold start with no cached build
 - **Compression:** gzip enabled via `compression` middleware
 - **Caching:** 1-hour `Cache-Control` on HTML in production; 7-day immutable cache on static assets (JS, CSS, images, fonts)
 - **Graceful shutdown:** Handles SIGTERM/SIGINT, cleans up Jekyll watch child process
