@@ -15,7 +15,40 @@
 {% unless seo_title contains "VJs TV" %}
   {% assign seo_title = seo_title | append: " | VJs TV" %}
 {% endunless %}
-{% assign seo_description = page.meta_description | default: page.description | default: site.data.general_settings.description %}
+{% assign seo_description = page.meta_description | default: page.description %}
+{% unless seo_description %}
+  {% if page.collection == "vjs" %}
+    {% assign seo_description = page.title | append: " — VJ artist" %}
+    {% if page.visual_style %}{% assign seo_description = seo_description | append: " specialising in " | append: page.visual_style %}{% endif %}
+    {% if page.location %}{% assign seo_description = seo_description | append: ". Based in " | append: page.location %}{% endif %}
+    {% assign seo_description = seo_description | append: ". Explore their work on VJs TV." %}
+  {% elsif page.collection == "projects" %}
+    {% assign seo_description = page.title | append: " — " | append: page.project_type | default: "audiovisual project" %}
+    {% if page.artist %}{% assign seo_description = seo_description | append: " by " | append: page.artist %}{% endif %}
+    {% if page.year %}{% assign seo_description = seo_description | append: " (" | append: page.year | append: ")" %}{% endif %}
+    {% assign seo_description = seo_description | append: ". Watch on VJs TV." %}
+  {% elsif page.collection == "events" %}
+    {% assign seo_description = page.title | append: " — " | append: page.event_type | default: "VJ event" %}
+    {% if page.location %}{% assign seo_description = seo_description | append: " in " | append: page.location %}{% endif %}
+    {% if page.date %}{% assign seo_description = seo_description | append: ". " | append: page.date | date: "%B %Y" %}{% endif %}
+    {% assign seo_description = seo_description | append: ". Details on VJs TV." %}
+  {% elsif page.collection == "studios" %}
+    {% assign seo_description = page.title | append: " — " | append: page.studio_type | default: "visual arts studio" %}
+    {% if page.location %}{% assign seo_description = seo_description | append: " in " | append: page.location %}{% endif %}
+    {% assign seo_description = seo_description | append: ". Explore on VJs TV." %}
+  {% elsif page.collection == "technology" %}
+    {% assign seo_description = page.title | append: " — " | append: page.category | default: "VJ tool" %}
+    {% assign seo_description = seo_description | append: " for visual performance" %}
+    {% if page.developer %}{% assign seo_description = seo_description | append: " by " | append: page.developer %}{% endif %}
+    {% assign seo_description = seo_description | append: ". Learn more on VJs TV." %}
+  {% elsif page.collection == "loop_packs" %}
+    {% assign seo_description = page.title | append: " — professional VJ loop pack" %}
+    {% if page.clip_count %}{% assign seo_description = seo_description | append: " with " | append: page.clip_count | append: " clips" %}{% endif %}
+    {% assign seo_description = seo_description | append: ". Download on VJs TV." %}
+  {% else %}
+    {% assign seo_description = site.data.general_settings.description %}
+  {% endif %}
+{% endunless %}
 <title>{{ seo_title }}</title>
 <meta name="title" content="{{ seo_title }}">
 <meta name="description" content="{{ seo_description | strip_newlines | truncate: 160 }}">
