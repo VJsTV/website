@@ -50,9 +50,11 @@ meta_description: "VJs TV is the global broadcast network for VJ culture. Watch 
         <path d="M16 5c2 2 2 6 0 8M19 2c3 3 3 9 0 12"/>
       </svg>
     </button>
-    <a href="/projects" class="vjs-live-strip-icon vjs-live-strip-count" title="Featured Projects">
-      {{ site.projects | size }}
-    </a>
+    {% assign _sc = "" %}{% for a in site.vjs %}{% if a.location %}{% assign _c = a.location | split: ", " | last | strip %}{% unless _sc contains _c %}{% assign _sc = _sc | append: _c | append: "|" %}{% endunless %}{% endif %}{% endfor %}{% for p in site.projects %}{% if p.location %}{% assign _c = p.location | split: ", " | last | strip %}{% unless _sc contains _c %}{% assign _sc = _sc | append: _c | append: "|" %}{% endunless %}{% endif %}{% endfor %}{% for e in site.events %}{% if e.location %}{% assign _c = e.location | split: ", " | last | strip %}{% unless _sc contains _c %}{% assign _sc = _sc | append: _c | append: "|" %}{% endunless %}{% endif %}{% endfor %}{% for s in site.studios %}{% if s.location %}{% assign _c = s.location | split: ", " | last | strip %}{% unless _sc contains _c %}{% assign _sc = _sc | append: _c | append: "|" %}{% endunless %}{% endif %}{% endfor %}{% assign _sc_arr = _sc | split: "|" %}
+    <a href="/projects" class="vjs-strip-stat vjs-strip-stat--uv" title="Projects">{{ site.projects | size }}</a>
+    <a href="/events" class="vjs-strip-stat vjs-strip-stat--cyan" title="Events">{{ site.events | size }}</a>
+    <a href="/studios" class="vjs-strip-stat vjs-strip-stat--magenta" title="Studios">{{ site.studios | size }}</a>
+    <a href="/countries" class="vjs-strip-stat vjs-strip-stat--grad" title="Countries">{{ _sc_arr | size }}</a>
   </div>
 </div>
 

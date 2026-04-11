@@ -18,7 +18,7 @@ The site is structured around several Jekyll collections:
 - `_sponsors/`: Sponsors and brand partners
 
 Key pages include:
-- **Homepage (`/`)**: Features a live broadcast strip (CH.1/CH.2 sourced from `site.events` filtered by `event_type: "Live Stream"`, matching the live page schedule), full-bleed hero section, VJs TV Picks, sponsor ticker, animated stats, and various content grids.
+- **Homepage (`/`)**: Features a live broadcast strip (CH.1/CH.2 sourced from `site.events` filtered by `event_type: "Live Stream"`, matching the live page schedule) with clickable stat counters (Projects, Events, Studios, Countries) in distinct colors (ultraviolet, cyan, magenta, gradient) auto-calculated from Jekyll collections. Below: full-bleed hero section, VJs TV Picks, sponsor ticker, animated stats bar, and various content grids. CSS cache-busting via `?v={{site.time | date: '%s'}}` on vjstv.css.
 - **Live Broadcast Page (`/live`)**: Offers three channels (CH.1 LIVE, CH.2 LOOP GALLERY, CH.3 VJ EDUCATION) with dynamic programming, Vimeo-powered loop galleries, and a cinema mode.
 - **Directory Pages (`/artists`, `/projects`, `/events`, `/studios`, `/technology`, `/sponsors`)**: Provide filtered and sortable listings of content.
 - **Utility Pages (`/search`, `/submit`, `/partners`)**: Client-side search, project submission form, and a sponsor pitch page with interactive elements and real-time analytics.
