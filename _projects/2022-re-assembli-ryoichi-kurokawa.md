@@ -1,7 +1,7 @@
 ---
 layout: vjs-detail
 vimeo_id: 924065138
-title: "re-assembli"
+title: "Re-Assembli"
 name: "re-assembli-ryoichi-kurokawa"
 artist: "Ryoichi Kurokawa"
 project_type: "Audiovisual Installation / Data Reconstruction"

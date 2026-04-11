@@ -1,6 +1,6 @@
 ---
 layout: vjs-detail
-title: "denial of service"
+title: "Denial of Service"
 name: "do-service"
 location: "Berlin, Germany"
 country: "Germany"

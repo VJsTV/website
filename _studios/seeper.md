@@ -1,6 +1,6 @@
 ---
 layout: vjs-detail
-title: "seeper"
+title: "Seeper"
 name: "seeper"
 location: "London, United Kingdom"
 studio_type: "Arts & Technology Collective"

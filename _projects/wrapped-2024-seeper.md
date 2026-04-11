@@ -1,7 +1,7 @@
 ---
 layout: vjs-detail
 vimeo_id: 1041069703
-title: "seeper Wrapped 2024"
+title: "Seeper Wrapped 2024"
 name: "wrapped-2024-seeper"
 artist: "seeper"
 project_type: "Year in Review / Documentation"

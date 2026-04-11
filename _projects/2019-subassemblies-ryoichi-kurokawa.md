@@ -1,7 +1,7 @@
 ---
 layout: vjs-detail
 vimeo_id: 787285875
-title: "subassemblies"
+title: "Subassemblies"
 name: "subassemblies-ryoichi-kurokawa"
 artist: "Ryoichi Kurokawa"
 project_type: "Live Audiovisual Concert / Performance"

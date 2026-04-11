@@ -1,7 +1,7 @@
 ---
 layout: vjs-detail
 vimeo_id: 823681621
-title: "in s.asmbli"
+title: "In S.Asmbli"
 name: "in-s-asmbli-ryoichi-kurokawa"
 artist: "Ryoichi Kurokawa"
 project_type: "VR Audiovisual Installation / 360 Video Rendering"

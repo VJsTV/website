@@ -1,7 +1,7 @@
 ---
 layout: vjs-detail
 vimeo_id: 154836280
-title: "seeper Showreel 2015"
+title: "Seeper Showreel 2015"
 name: "showreel-2015-seeper"
 artist: "seeper"
 project_type: "Showreel / Documentation"

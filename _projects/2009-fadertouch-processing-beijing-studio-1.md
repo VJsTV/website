@@ -1,7 +1,7 @@
 ---
 layout: vjs-detail
 vimeo_id: 5623028
-title: "faderTouch Processing - BeiJing studio 1"
+title: "FaderTouch Processing - Beijing Studio 1"
 name: "fadertouch-processing-beijing-studio-1"
 artist: "VJ Fader"
 project_type: "VJ Performance Demo / Custom Controller + Generative Visuals"

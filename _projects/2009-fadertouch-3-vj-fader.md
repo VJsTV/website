@@ -1,7 +1,7 @@
 ---
 layout: vjs-detail
 vimeo_id: 8704754
-title: "faderTouch 3.0 & Audio Visual Instruments"
+title: "FaderTouch 3.0 & Audio Visual Instruments"
 name: "fadertouch-3-vj-fader"
 artist: "VJ Fader"
 project_type: "VJ Interface / Custom Controller"
