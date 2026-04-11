@@ -104,16 +104,6 @@ app.get("/api/yt-info", function (req, res) {
 });
 
 app.use(function (req, res, next) {
-  var urlPath = req.path;
-  if (urlPath !== "/" && urlPath.endsWith("/")) {
-    var clean = urlPath.slice(0, -1);
-    var query = req.originalUrl.indexOf("?") !== -1 ? req.originalUrl.slice(req.originalUrl.indexOf("?")) : "";
-    return res.redirect(301, clean + query);
-  }
-  next();
-});
-
-app.use(function (req, res, next) {
   if (!siteReady) {
     if (fs.existsSync(path.join(SITE_DIR, "index.html"))) {
       siteReady = true;
