@@ -104,10 +104,17 @@ VJs TV is a Jekyll-based platform for VJ culture and audiovisual performances. I
   - `GET /api/analytics/charts` — daily traffic + country data
 - **Jekyll config:** `api_url` in `_config.yml` sets the Worker URL; all forms use `{{ site.api_url }}` in templates
 
-### Development: Express Server (`api/server.js`)
-- **Local dev only:** `node api/server.js` on port 5000, serves static `_site/` files
-- **No API routes:** All API calls go directly to the Cloudflare Worker (even in dev)
-- **Jekyll:** Auto-runs `jekyll build --watch --incremental`
+### Development & Production: Express Server (`api/server.js`)
+- **Dual mode:** `node api/server.js` on port 5000, serves static `_site/` files
+- **Health check:** `GET /api/health` — returns status, uptime, memory usage; always responds immediately (even during Jekyll build)
+- **503 protection:** Server starts listening *before* Jekyll builds; during build, non-API requests receive a 503 with `Retry-After` header and auto-refresh page
+- **Compression:** gzip enabled via `compression` middleware
+- **Caching:** 1-hour `Cache-Control` on HTML in production; 7-day immutable cache on static assets (JS, CSS, images, fonts)
+- **Graceful shutdown:** Handles SIGTERM/SIGINT, cleans up Jekyll watch child process
+- **Error safety:** Global handlers for uncaughtException and unhandledRejection prevent silent crashes
+- **Jekyll watch:** Runs in dev only; disabled in production to conserve memory
+- **oEmbed proxy:** `GET /api/yt-info?v=VIDEO_ID` with 8-second upstream timeout
+- **Deployment:** Configured as `autoscale` target with `bundle exec jekyll build` as build step
 
 ### Complete Worker File (`functions/worker.js`)
 - **This is the complete, deployable Worker code** — paste into Cloudflare Worker editor
