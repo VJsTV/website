@@ -63,13 +63,18 @@ VJs TV is a Jekyll-based platform for VJ culture and audiovisual performances. I
 - **Meta robots** with `max-image-preview:large`, `max-snippet:-1`, `max-video-preview:-1`
 - **404 pages** have `noindex, follow` to prevent index pollution
 - **robots.txt** at `/robots.txt` — auto-generated, references sitemap
-- **XML sitemap** at `/sitemap.xml` — auto-generated from all collections (192 URLs)
-- **JSON-LD structured data** (`@graph`): Organization, WebSite, WebPage on every page, plus:
-  - `Person` for artist pages (`_vjs/`)
-  - `CreativeWork` + `VideoObject` for project pages (`_projects/`)
-  - `Event` for event pages (`_events/`)
-  - `Organization` for studio pages (`_studios/`)
-  - `SoftwareApplication` for technology pages (`_technology/`)
+- **XML sitemap** at `/sitemap.xml` — auto-generated from all collections (188 URLs) with `<lastmod>` timestamps, video sitemap entries for all 55 projects with Vimeo embeds
+- **JSON-LD structured data** (`@graph`): Organization (with `knowsAbout`), WebSite, WebPage on every page, plus:
+  - `Person` (with `knowsAbout`, `nationality`, `sameAs`) for artist pages (`_vjs/`)
+  - `CreativeWork` + `VisualArtwork` + `VideoObject` for project pages (`_projects/`) — includes `genre`, `artMedium`, `artform`, `keywords`
+  - `Event` (with `about` topics) for event pages (`_events/`)
+  - `Organization` (with `knowsAbout`) for studio pages (`_studios/`)
+  - `SoftwareApplication` (with `author`) for technology pages (`_technology/`)
+  - `Product` for loop pack pages (`_loop_packs/`)
+  - `BroadcastChannel` ×3 for the /live page (CH.1 Live, CH.2 Loop Gallery, CH.3 Education)
+  - `ItemList` on listing pages (artists, projects, events, studios, technology) for rich results
+- **Meta keywords** auto-generated per collection type (artist technologies, project types, event locations, etc.)
+- **Title optimization**: All collection items get " | VJs TV" brand suffix; site-wide default title uses target keywords
 - **Open Graph** with dynamic `og:type` (website/video.other/event), absolute image URLs, locale
 - **Twitter Cards** with `summary_large_image`, creator handle
 - **Heading hierarchy**: One H1 per page, semantic H2 sidebar headings

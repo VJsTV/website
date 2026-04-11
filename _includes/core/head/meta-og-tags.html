@@ -1,4 +1,7 @@
 {% assign seo_title = page.meta_title | default: page.title | default: site.data.general_settings.title %}
+{% unless seo_title contains "VJs TV" %}
+  {% assign seo_title = seo_title | append: " | VJs TV" %}
+{% endunless %}
 {% assign seo_description = page.meta_description | default: page.description | default: site.data.general_settings.description %}
 {% assign seo_image = page.image | default: page.thumbnail | default: site.data.general_settings.meta_og_image %}
 <meta property="og:type" content="{% if page.video_url %}video.other{% elsif page.event_type %}event{% else %}website{% endif %}">
@@ -35,6 +38,8 @@
         "url": "{{ '/assets/images/logo-vjstv.svg' | absolute_url }}"
       },
       "description": "{{ site.data.general_settings.description | strip_newlines | escape }}",
+      "foundingDate": "2024",
+      "knowsAbout": ["VJ Culture", "Live Visual Performances", "Audiovisual Art", "Projection Mapping", "Generative Art", "Real-Time Visuals"],
       "sameAs": [
         "https://instagram.com/vjstv",
         "https://facebook.com/vjstv",
@@ -52,6 +57,7 @@
       "url": "{{ site.url }}",
       "description": "{{ site.data.general_settings.description | strip_newlines | escape }}",
       "publisher": { "@id": "{{ site.url }}/#organization" },
+      "inLanguage": "en",
       "potentialAction": {
         "@type": "SearchAction",
         "target": "{{ site.url }}/search?q={search_term_string}",
@@ -65,7 +71,8 @@
       "name": "{{ seo_title | escape }}",
       "description": "{{ seo_description | strip_newlines | truncate: 200 | escape }}",
       "isPartOf": { "@id": "{{ site.url }}/#website" },
-      "about": { "@id": "{{ site.url }}/#organization" }
+      "about": { "@id": "{{ site.url }}/#organization" },
+      "inLanguage": "en"
       {% if page.url == "/" %},
       "primaryImageOfPage": {
         "@type": "ImageObject",
@@ -73,30 +80,85 @@
       }
       {% endif %}
     }
+    {% if page.url == "/live/" or page.url == "/live" %},
+    {
+      "@type": "BroadcastChannel",
+      "@id": "{{ site.url }}/live/#broadcastchannel",
+      "name": "VJs TV Live — CH.1",
+      "broadcastChannelId": "ch1-live",
+      "inBroadcastLineup": {
+        "@type": "CableOrSatelliteService",
+        "name": "VJs TV Broadcast Network",
+        "provider": { "@id": "{{ site.url }}/#organization" }
+      },
+      "genre": ["Live Visual Performances", "VJ Sets", "Audiovisual Art", "Projection Mapping"]
+    },
+    {
+      "@type": "BroadcastChannel",
+      "@id": "{{ site.url }}/live/#ch2",
+      "name": "VJs TV — CH.2 Loop Gallery",
+      "broadcastChannelId": "ch2-loop-gallery",
+      "genre": ["Generative Art", "VJ Loops", "Visual Art Broadcast"]
+    },
+    {
+      "@type": "BroadcastChannel",
+      "@id": "{{ site.url }}/live/#ch3",
+      "name": "VJs TV — CH.3 VJ Education",
+      "broadcastChannelId": "ch3-education",
+      "genre": ["VJ Education", "Visual Performance Tutorials", "VJ Software Training"]
+    }
+    {% endif %}
     {% if page.collection == "vjs" %},
     {
       "@type": "Person",
       "@id": "{{ page.url | absolute_url }}/#person",
       "name": "{{ page.title | escape }}",
       "url": "{{ page.url | absolute_url }}",
-      "description": "{{ page.description | default: page.visual_style | escape }}",
-      "jobTitle": "Visual Artist / VJ"
+      "description": "{{ page.description | default: page.bio | default: page.visual_style | strip_newlines | truncate: 200 | escape }}",
+      "jobTitle": "Visual Artist / VJ",
+      "knowsAbout": [{% if page.technologies %}{% for tech in page.technologies %}"{{ tech | escape }}"{% unless forloop.last %}, {% endunless %}{% endfor %}{% else %}"VJ Performance"{% endif %}]
       {% if page.location %}, "address": { "@type": "PostalAddress", "addressLocality": "{{ page.location | escape }}" }{% endif %}
-      {% if page.website %}, "sameAs": ["{{ page.website }}"]{% endif %}
+      {% if page.country %}, "nationality": { "@type": "Country", "name": "{{ page.country | escape }}" }{% endif %}
+      {% assign person_links = "" | split: "" %}
+      {% if page.website %}{% assign person_links = person_links | push: page.website %}{% endif %}
+      {% if page.social.vimeo %}{% assign person_links = person_links | push: page.social.vimeo %}{% endif %}
+      {% if page.social.instagram %}{% assign person_links = person_links | push: page.social.instagram %}{% endif %}
+      {% if person_links.size > 0 %}, "sameAs": [{% for link in person_links %}"{{ link }}"{% unless forloop.last %}, {% endunless %}{% endfor %}]{% endif %}
       {% if page.image %}, "image": "{{ page.image | absolute_url }}"{% endif %}
     }
     {% endif %}
     {% if page.collection == "projects" %},
     {
-      "@type": "CreativeWork",
+      "@type": ["CreativeWork", "VisualArtwork"],
       "@id": "{{ page.url | absolute_url }}/#creativework",
       "name": "{{ page.title | escape }}",
       "url": "{{ page.url | absolute_url }}",
       "description": "{{ page.description | default: seo_description | strip_newlines | truncate: 200 | escape }}",
-      "creator": { "@type": "Person", "name": "{{ page.artist | escape }}" }
+      "creator": {
+        "@type": "Person",
+        "name": "{{ page.artist | escape }}"
+        {% if page.artist %}, "url": "{{ site.url }}/artists/"{% endif %}
+      },
+      "genre": ["Live Visual Performance", "Audiovisual Art", "{{ page.project_type | default: 'Creative Work' | escape }}"],
+      "artMedium": "Digital / Real-Time Visuals",
+      "artform": "Audiovisual Performance"
       {% if page.year %}, "dateCreated": "{{ page.year }}"{% endif %}
+      {% if page.location and page.location != "N/A" and page.location != "N/A (Studio / Digital Work)" and page.location != "N/A (Studio/Prototype; presented in various international contexts post-2006)" %}, "locationCreated": { "@type": "Place", "name": "{{ page.location | escape }}" }{% endif %}
       {% if page.image %}, "image": "{{ page.image | absolute_url }}"{% endif %}
-      {% if page.video_url %}, "video": { "@type": "VideoObject", "name": "{{ page.title | escape }}", "embedUrl": "{{ page.video_url }}", "thumbnailUrl": "{{ seo_image | absolute_url }}", "uploadDate": "{{ page.year | default: '2024' }}-01-01" }{% endif %}
+      {% if page.technologies %}, "keywords": "{% for tech in page.technologies %}{{ tech | escape }}{% unless forloop.last %}, {% endunless %}{% endfor %}"{% endif %}
+      {% if page.tags %}, "about": [{% for tag in page.tags %}{"@type": "Thing", "name": "{{ tag | escape }}"}{% unless forloop.last %}, {% endunless %}{% endfor %}]{% endif %}
+      {% if page.video_url %},
+      "video": {
+        "@type": "VideoObject",
+        "name": "{{ page.title | escape }}",
+        "description": "{{ page.description | default: page.title | strip_newlines | truncate: 200 | escape }}",
+        "embedUrl": "{{ page.video_url }}",
+        "thumbnailUrl": "{{ seo_image | absolute_url }}",
+        "uploadDate": "{{ page.year | default: '2024' }}-01-01",
+        "contentUrl": "{{ page.video_url }}",
+        "inLanguage": "en"
+      }
+      {% endif %}
     }
     {% endif %}
     {% if page.collection == "events" %},
@@ -107,7 +169,8 @@
       "url": "{{ page.url | absolute_url }}",
       "description": "{{ page.description | default: seo_description | strip_newlines | truncate: 200 | escape }}",
       "eventAttendanceMode": "https://schema.org/OfflineEventAttendanceMode",
-      "eventStatus": "https://schema.org/EventScheduled"
+      "eventStatus": "https://schema.org/EventScheduled",
+      "about": [{"@type": "Thing", "name": "VJ Culture"}, {"@type": "Thing", "name": "Live Visual Performances"}, {"@type": "Thing", "name": "{{ page.event_type | default: 'Audiovisual Event' | escape }}"}]
       {% if page.date %}, "startDate": "{{ page.date | date: '%Y-%m-%d' }}"{% endif %}
       {% if page.location %}, "location": { "@type": "Place", "name": "{{ page.location | escape }}" }{% endif %}
       {% if page.image %}, "image": "{{ page.image | absolute_url }}"{% endif %}
@@ -120,7 +183,8 @@
       "@id": "{{ page.url | absolute_url }}/#studio",
       "name": "{{ page.title | escape }}",
       "url": "{{ page.url | absolute_url }}",
-      "description": "{{ page.description | default: seo_description | strip_newlines | truncate: 200 | escape }}"
+      "description": "{{ page.description | default: seo_description | strip_newlines | truncate: 200 | escape }}",
+      "knowsAbout": ["Visual Performance", "Audiovisual Art", "VJ Culture"]
       {% if page.location %}, "address": { "@type": "PostalAddress", "addressLocality": "{{ page.location | escape }}" }{% endif %}
       {% if page.website %}, "sameAs": ["{{ page.website }}"]{% endif %}
       {% if page.image %}, "image": "{{ page.image | absolute_url }}"{% endif %}
@@ -133,8 +197,117 @@
       "name": "{{ page.title | escape }}",
       "url": "{{ page.url | absolute_url }}",
       "description": "{{ page.description | default: seo_description | strip_newlines | truncate: 200 | escape }}",
-      "applicationCategory": "{{ page.category | default: 'Multimedia' | escape }}"
+      "applicationCategory": "{{ page.category | default: 'Multimedia' | escape }}",
+      "operatingSystem": "Cross-platform"
+      {% if page.developer %}, "author": { "@type": "Organization", "name": "{{ page.developer | escape }}" }{% endif %}
       {% if page.website %}, "sameAs": ["{{ page.website }}"]{% endif %}
+    }
+    {% endif %}
+    {% if page.collection == "loop_packs" %},
+    {
+      "@type": "Product",
+      "@id": "{{ page.url | absolute_url }}/#product",
+      "name": "{{ page.title | escape }}",
+      "url": "{{ page.url | absolute_url }}",
+      "description": "{{ page.description | default: seo_description | strip_newlines | truncate: 200 | escape }}",
+      "category": "VJ Loops / Visual Content",
+      "brand": { "@id": "{{ site.url }}/#organization" }
+      {% if page.image %}, "image": "{{ page.image | absolute_url }}"{% endif %}
+    }
+    {% endif %}
+    {% if page.url == "/artists/" %},
+    {
+      "@type": "ItemList",
+      "@id": "{{ site.url }}/artists/#itemlist",
+      "name": "VJ Artists Directory",
+      "description": "Global directory of VJ artists and visual performers",
+      "numberOfItems": {{ site.vjs | size }},
+      "itemListElement": [
+        {% for artist in site.vjs %}
+        {
+          "@type": "ListItem",
+          "position": {{ forloop.index }},
+          "name": "{{ artist.title | escape }}",
+          "url": "{{ site.url }}{{ artist.url }}"
+        }{% unless forloop.last %},{% endunless %}
+        {% endfor %}
+      ]
+    }
+    {% endif %}
+    {% if page.url == "/projects/" %},
+    {
+      "@type": "ItemList",
+      "@id": "{{ site.url }}/projects/#itemlist",
+      "name": "Audiovisual Projects",
+      "description": "Curated index of audiovisual projects, VJ performances, and creative works",
+      "numberOfItems": {{ site.projects | size }},
+      "itemListElement": [
+        {% for project in site.projects %}
+        {
+          "@type": "ListItem",
+          "position": {{ forloop.index }},
+          "name": "{{ project.title | escape }}",
+          "url": "{{ site.url }}{{ project.url }}"
+        }{% unless forloop.last %},{% endunless %}
+        {% endfor %}
+      ]
+    }
+    {% endif %}
+    {% if page.url == "/events/" %},
+    {
+      "@type": "ItemList",
+      "@id": "{{ site.url }}/events/#itemlist",
+      "name": "VJ Events & Performances",
+      "description": "Live visual performance events, festivals, and audiovisual showcases worldwide",
+      "numberOfItems": {{ site.events | size }},
+      "itemListElement": [
+        {% for event in site.events %}
+        {
+          "@type": "ListItem",
+          "position": {{ forloop.index }},
+          "name": "{{ event.title | escape }}",
+          "url": "{{ site.url }}{{ event.url }}"
+        }{% unless forloop.last %},{% endunless %}
+        {% endfor %}
+      ]
+    }
+    {% endif %}
+    {% if page.url == "/studios/" %},
+    {
+      "@type": "ItemList",
+      "@id": "{{ site.url }}/studios/#itemlist",
+      "name": "Audiovisual Studios Directory",
+      "description": "Studios, immersive spaces, and visual arts collectives",
+      "numberOfItems": {{ site.studios | size }},
+      "itemListElement": [
+        {% for studio in site.studios %}
+        {
+          "@type": "ListItem",
+          "position": {{ forloop.index }},
+          "name": "{{ studio.title | escape }}",
+          "url": "{{ site.url }}{{ studio.url }}"
+        }{% unless forloop.last %},{% endunless %}
+        {% endfor %}
+      ]
+    }
+    {% endif %}
+    {% if page.url == "/technology/" %},
+    {
+      "@type": "ItemList",
+      "@id": "{{ site.url }}/technology/#itemlist",
+      "name": "VJ Technology & Tools",
+      "description": "Software, hardware, and tools used by VJ artists and visual performers",
+      "numberOfItems": {{ site.technology | size }},
+      "itemListElement": [
+        {% for tech in site.technology %}
+        {
+          "@type": "ListItem",
+          "position": {{ forloop.index }},
+          "name": "{{ tech.title | escape }}",
+          "url": "{{ site.url }}{{ tech.url }}"
+        }{% unless forloop.last %},{% endunless %}
+        {% endfor %}
+      ]
     }
     {% endif %}
   ]

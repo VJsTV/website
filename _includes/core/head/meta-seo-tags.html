@@ -12,12 +12,29 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
 <link rel="preconnect" href="https://vimeo.com" />
 {% assign seo_title = page.meta_title | default: page.title | default: site.data.general_settings.title %}
+{% unless seo_title contains "VJs TV" %}
+  {% assign seo_title = seo_title | append: " | VJs TV" %}
+{% endunless %}
 {% assign seo_description = page.meta_description | default: page.description | default: site.data.general_settings.description %}
 <title>{{ seo_title }}</title>
 <meta name="title" content="{{ seo_title }}">
 <meta name="description" content="{{ seo_description | strip_newlines | truncate: 160 }}">
 {% if page.meta_keywords %}
 <meta name="keywords" content="{{ page.meta_keywords }}">
+{% elsif page.collection == "projects" %}
+<meta name="keywords" content="VJ, visual performance, audiovisual project, {{ page.artist | default: '' }}, {{ page.project_type | default: 'creative work' }}, {{ page.technologies | default: '' | join: ', ' }}">
+{% elsif page.collection == "vjs" %}
+<meta name="keywords" content="VJ artist, visual performer, {{ page.title }}, {{ page.visual_style | default: '' }}, {{ page.location | default: '' }}">
+{% elsif page.collection == "events" %}
+<meta name="keywords" content="VJ event, live visual performance, {{ page.title }}, {{ page.event_type | default: 'performance' }}, {{ page.location | default: '' }}">
+{% elsif page.collection == "studios" %}
+<meta name="keywords" content="VJ studio, visual arts studio, {{ page.title }}, {{ page.location | default: '' }}">
+{% elsif page.collection == "technology" %}
+<meta name="keywords" content="VJ software, visual performance tool, {{ page.title }}, {{ page.category | default: 'multimedia' }}">
+{% elsif page.collection == "loop_packs" %}
+<meta name="keywords" content="VJ loops, visual loops, loop pack, {{ page.title }}">
+{% else %}
+<meta name="keywords" content="VJs TV, VJ, visual performance, audiovisual art, live visuals, projection mapping, VJ artists, VJ software">
 {% endif %}
 <meta name="author" content="VJs TV">
 <link rel="sitemap" type="application/xml" href="/sitemap.xml" />
