@@ -20,7 +20,7 @@ meta_description: "Discover AV studios, immersive domes, projection labs, and vi
   <div class="container">
 
     <!-- DROPDOWN FILTERS -->
-    <div class="vjs-filter-dropdowns">
+    <div class="vjs-filter-dropdowns" style="max-width:1100px; margin:0 auto;">
 
       <button class="vjs-filter-reset" onclick="resetStudioFilters()">Reset</button>
 
@@ -87,7 +87,7 @@ meta_description: "Discover AV studios, immersive domes, projection labs, and vi
       <strong>{{ site.studios | size }}</strong> Studios
     </div>
 
-    <div class="row g-4" id="studios-grid">
+    <div class="row g-4" id="studios-grid" style="max-width:1100px; margin:0 auto;">
       {% for studio in site.studios %}
       {% assign eq_str = studio.equipment | join: "," | downcase %}
       <div class="col-lg-4 col-md-6 vjs-studio-item"

@@ -28,7 +28,7 @@ meta_description: "Discover visual artists and VJs from around the world. Filter
   <div class="container">
 
     <!-- DROPDOWN FILTER ROW -->
-    <div class="vjs-filter-dropdowns">
+    <div class="vjs-filter-dropdowns" style="max-width:1100px; margin:0 auto;">
 
       <button class="vjs-filter-reset" onclick="resetDropFilters()">Reset</button>
 
@@ -107,7 +107,7 @@ meta_description: "Discover visual artists and VJs from around the world. Filter
       <strong>{{ site.vjs | size }}</strong> Artists
     </div>
 
-    <div class="vjs-nts-grid" id="artists-grid">
+    <div class="vjs-nts-grid" id="artists-grid" style="max-width:1100px; margin:0 auto;">
       {% for artist in site.vjs %}
       {% assign country = artist.country | default: artist.location %}
       <div class="vjs-artist-item"
