@@ -1,6 +1,7 @@
 ---
 layout: vjs-detail
 title: "Néstor Lizalde"
+description: "Spanish artist and researcher working with machine learning and computer vision to investigate how computational systems see and represent the world."
 name: "nestor-lizalde"
 location: "Zaragoza, España"
 country: "Spain"

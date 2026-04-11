@@ -1,6 +1,7 @@
 ---
 layout: vjs-detail
 title: "Quayola"
+description: "Roma-based artist working at the intersection of computational art, classical culture, and live audiovisual performance. Translates art history into hybrid..."
 name: "quayola"
 location: "Roma, Italy"
 country: "Italy"

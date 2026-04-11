@@ -1,6 +1,7 @@
 ---
 layout: vjs-detail
 title: "Memo Akten"
+description: "Turkish-American artist based in Los Angeles whose practice spans machine learning, interactive installation, and live performance investigating..."
 name: "memo-akten"
 location: "Los Angeles, USA"
 country: "USA"

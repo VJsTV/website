@@ -1,6 +1,7 @@
 ---
 layout: vjs-detail
 title: "Sougwen Chung"
+description: "London-based artist exploring hand-drawn mark-making and machine learning, creating large-scale installations where human and algorithmic creativity become..."
 name: "sougwen-chung"
 location: "London, UK"
 country: "UK"

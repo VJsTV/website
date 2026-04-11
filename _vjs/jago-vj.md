@@ -1,6 +1,7 @@
 ---
 layout: vjs-detail
 title: "Jago VJ"
+description: "Madrid-based VJ creating real-time abstract visual environments for electronic music. One of Spain's most respected and active live visual practitioners."
 name: "jago-vj"
 location: "Madrid, Spain"
 country: "Spain"

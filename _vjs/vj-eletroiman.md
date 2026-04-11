@@ -1,6 +1,7 @@
 ---
 layout: vjs-detail
 title: "VJ Eletroiman"
+description: "Rio de Janeiro-based VJ creating psychedelic abstract visual performances for electronic music events across Brazil and Latin America. A central figure in..."
 name: "vj-eletroiman"
 location: "Rio de Janeiro, Brazil"
 country: "Brazil"

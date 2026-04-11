@@ -1,6 +1,7 @@
 ---
 layout: vjs-detail
 title: "Thomas Vaquié"
+description: "Paris-based VJ and visual artist creating audiovisual performances at the intersection of electronic music and abstract image-making with structural musical..."
 name: "thomas-vaquie"
 location: "Paris, France"
 country: "France"

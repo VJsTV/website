@@ -1,6 +1,7 @@
 ---
 layout: vjs-detail
 title: "Joanie Lemercier"
+description: "Belgium-based visual artist whose projection installations create geometric light sculptures from minimal hardware, inducing genuine perceptual shifts."
 name: "joanie-lemercier-artist"
 location: "Brussels, Belgium"
 country: "Belgium"

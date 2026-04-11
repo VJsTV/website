@@ -1,6 +1,7 @@
 ---
 layout: vjs-detail
 title: "Refik Anadol"
+description: "Turkish-American artist using AI and machine learning to create monumental immersive installations and performances, transforming data into visual poetry at..."
 name: "refo"
 location: "Los Angeles, CA, USA"
 country: "USA"

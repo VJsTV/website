@@ -1,6 +1,7 @@
 ---
 layout: vjs-detail
 title: "VeeMee Visuals"
+description: "Dutch collective regarded as the gold standard for high-end festival VJing — managing visual identity for top DJs with flawless 3D content and stadium-scale..."
 name: "veemee-visuals"
 location: "Tilburg, Nederland"
 country: "Netherlands"

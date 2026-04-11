@@ -1,6 +1,7 @@
 ---
 layout: vjs-detail
 title: "Yannick Jacquet"
+description: "Belgian visual artist and AntiVJ co-founder creating minimal, architecturally precise projection works that use light as a sculptural material transforming..."
 name: "yannick-jacquet"
 location: "Brussels, Belgium"
 country: "Belgium"

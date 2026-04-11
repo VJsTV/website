@@ -1,6 +1,7 @@
 ---
 layout: vjs-detail
 title: "Ryoji Ikeda"
+description: "Japanese electronic musician and visual artist — master of data aesthetics. Transforms raw data into audiovisual experiences of extreme precision and..."
 name: "ryoji-ikeda"
 location: "Paris, France"
 country: "France"

@@ -1,6 +1,7 @@
 ---
 layout: vjs-detail
 title: "Denial of Service"
+description: "Berlin-based visual studio creating motion graphics, visual identities, and moving image work for cultural clients with typographic precision and formal..."
 name: "do-service"
 location: "Berlin, Germany"
 country: "Germany"

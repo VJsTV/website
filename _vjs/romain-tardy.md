@@ -1,6 +1,7 @@
 ---
 layout: vjs-detail
 title: "Romain Tardy"
+description: "French visual artist and AntiVJ co-founder creating large-scale projection installations that treat light as a primary sculptural material exhibited at..."
 name: "romain-tardy"
 location: "Paris, France"
 country: "France"

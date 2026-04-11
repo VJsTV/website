@@ -1,6 +1,7 @@
 ---
 layout: vjs-detail
 title: "Robert Seidel"
+description: "Berlin-based artist working at the intersection of generative film, projection sculpture, and expanded cinema. His custom software produces organic,..."
 name: "robert-seidel"
 location: "Berlin, Germany"
 country: "Germany"

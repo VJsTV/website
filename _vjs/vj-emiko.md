@@ -1,6 +1,7 @@
 ---
 layout: vjs-detail
 title: "VJ Emiko"
+description: "Warsaw-based veteran of the European techno underground known for deep, dark, minimalist visual sets built for marathon listening at major festivals and clubs."
 name: "vj-emiko"
 location: "Warszawa, Polska"
 country: "Poland"

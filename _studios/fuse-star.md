@@ -1,6 +1,7 @@
 ---
 layout: vjs-detail
 title: "fuse*"
+description: "Italian masters of data-driven audiovisual art. Their project Dökk uses a dancer's heartbeat and brainwave data processed in real-time to generate visuals..."
 name: "fuse-star"
 location: "Modena, Italy"
 country: "Italy"

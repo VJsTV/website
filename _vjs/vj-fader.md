@@ -1,6 +1,7 @@
 ---
 layout: vjs-detail
 title: "VJ Fader"
+description: "Berlin-based VJ and visual artist known for technically accomplished live visual performances across the European electronic music circuit with flowing..."
 name: "vj-fader"
 location: "Berlin, Germany"
 country: "Germany"

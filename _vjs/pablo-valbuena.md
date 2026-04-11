@@ -1,6 +1,7 @@
 ---
 layout: vjs-detail
 title: "Pablo Valbuena"
+description: "Madrid-based artist working with time, light, and space to create site-specific projection interventions that augment the perception of architecture."
 name: "pablo-valbuena"
 location: "Madrid, Spain"
 country: "Spain"

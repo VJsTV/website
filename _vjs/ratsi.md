@@ -1,6 +1,7 @@
 ---
 layout: vjs-detail
 title: "Ratsi"
+description: "Paris-based VJ and generative visual artist known for precisely structured abstract systems that evolve across long sets, built from geometric primitives."
 name: "ratsi"
 location: "Paris, France"
 country: "France"

@@ -1,6 +1,7 @@
 ---
 layout: vjs-detail
 title: "Ryoichi Kurokawa"
+description: "Japanese audiovisual artist whose installations translate physical and mathematical phenomena into precise, meditative sensory experiences at the..."
 name: "ryoichi-kurokawa"
 location: "Japan / International"
 country: "Japan"
