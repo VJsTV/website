@@ -1,16 +1,13 @@
-<!--  Nav Name :Classic Dark Header -->
 <nav
   class="navbar {% if include.extra_class %} {{include.extra_class}} {% endif %} dark-wrapper inverse-text navbar-hover-opacity navbar-expand-lg nav-uppercase ">
   <div class="container ">
     <div class="navbar-brand" data-default-logo="{{ include.default_logo | default: 'white' }}">
-      <!-- White Logo -->
         <a href="{{site.url}}"><img 
         src="{{site.data.general_settings.light_logo_1x}}" 
         srcset="{{site.data.general_settings.light_logo_1x}} 1x, {{site.data.general_settings.light_logo_2x}} 2x"
         class="logo-light {% if include.default_logo == 'black' %}d-none{% endif %}" 
         alt="{{site.data.general_settings.title}}" /></a>
   
-      <!-- Black Logo -->
       <a href="{{site.url}}"><img 
         src="{{site.data.general_settings.black_logo_1x}}" 
         srcset="{{site.data.general_settings.black_logo_1x}} 1x, {{site.data.general_settings.black_logo_2x}} 2x"

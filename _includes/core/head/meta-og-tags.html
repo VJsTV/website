@@ -60,8 +60,15 @@
       "inLanguage": "en",
       "potentialAction": {
         "@type": "SearchAction",
-        "target": "{{ site.url }}/search?q={search_term_string}",
-        "query-input": "required name=search_term_string"
+        "target": {
+          "@type": "EntryPoint",
+          "urlTemplate": "{{ site.url }}/search?q={search_term_string}"
+        },
+        "query-input": {
+          "@type": "PropertyValueSpecification",
+          "valueRequired": true,
+          "valueName": "search_term_string"
+        }
       }
     },
     {
@@ -153,9 +160,8 @@
         "name": "{{ page.title | escape }}",
         "description": "{{ page.description | default: page.title | strip_newlines | truncate: 200 | escape }}",
         "embedUrl": "{{ page.video_url }}",
-        "thumbnailUrl": "{{ seo_image | absolute_url }}",
-        "uploadDate": "{{ page.year | default: '2024' }}-01-01",
-        "contentUrl": "{{ page.video_url }}",
+        "thumbnailUrl": "{{ seo_image | default: site.data.general_settings.meta_og_image | absolute_url }}",
+        "uploadDate": "{{ page.date | default: site.time | date: '%Y-%m-%dT%H:%M:%S+00:00' }}",
         "inLanguage": "en"
       }
       {% endif %}
@@ -168,7 +174,7 @@
       "name": "{{ page.title | escape }}",
       "url": "{{ page.url | absolute_url }}",
       "description": "{{ page.description | default: seo_description | strip_newlines | truncate: 200 | escape }}",
-      "eventAttendanceMode": "https://schema.org/OfflineEventAttendanceMode",
+      "eventAttendanceMode": "{% if page.event_type == 'Live Stream' or page.event_type == 'Online' or page.online %}https://schema.org/OnlineEventAttendanceMode{% elsif page.event_type == 'Hybrid' %}https://schema.org/MixedEventAttendanceMode{% else %}https://schema.org/OfflineEventAttendanceMode{% endif %}",
       "eventStatus": "https://schema.org/EventScheduled",
       "about": [{"@type": "Thing", "name": "VJ Culture"}, {"@type": "Thing", "name": "Live Visual Performances"}, {"@type": "Thing", "name": "{{ page.event_type | default: 'Audiovisual Event' | escape }}"}]
       {% if page.date %}, "startDate": "{{ page.date | date: '%Y-%m-%d' }}"{% endif %}

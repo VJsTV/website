@@ -1,8 +1,6 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <!-- Meta Tags-->
   <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 <meta name="theme-color" content="#050505" />
@@ -90,8 +88,15 @@
       "inLanguage": "en",
       "potentialAction": {
         "@type": "SearchAction",
-        "target": "https://vjstv.com/search?q={search_term_string}",
-        "query-input": "required name=search_term_string"
+        "target": {
+          "@type": "EntryPoint",
+          "urlTemplate": "https://vjstv.com/search?q={search_term_string}"
+        },
+        "query-input": {
+          "@type": "PropertyValueSpecification",
+          "valueRequired": true,
+          "valueName": "search_term_string"
+        }
       }
     },
     {
@@ -134,8 +139,7 @@
         "description": "ENGHIEN — AntiVJ audiovisual performance at the Bains Numériques Festival, June 2009. Visuals by Yannick Jacquet, Joanie Lemercier, Olivier Ratsi, and Romain Tardy. Music by Thomas Vaquié. A key ea...",
         "embedUrl": "https://player.vimeo.com/video/11707350",
         "thumbnailUrl": "https://vjstv.com/assets/images/meta-image.webp",
-        "uploadDate": "2009-01-01",
-        "contentUrl": "https://player.vimeo.com/video/11707350",
+        "uploadDate": "2026-04-12T08:51:56+00:00",
         "inLanguage": "en"
       }
       
@@ -154,12 +158,10 @@
 }
 </script>
 
-  <!-- Favicons-->
   <link rel="icon" type="image/x-icon" href="/assets/images/favicon.ico">
   <link rel="icon" type="image/png" sizes="16x16" href="/assets/images/favicon-16x16.png">
   <link rel="icon" type="image/png" sizes="32x32" href="/assets/images/favicon-32x32.png">
   <link rel="icon" type="image/png" sizes="96x96" href="/assets/images/favicon-96x96.png">
-  <!-- Stylesheets-->
   <link rel="shortcut icon" href="/assets/images/favicon.ico" />
 <link rel="dns-prefetch" href="https://fonts.googleapis.com" />
 <link rel="dns-prefetch" href="https://fonts.gstatic.com" />
@@ -167,40 +169,34 @@
 <link rel="dns-prefetch" href="https://player.vimeo.com" />
 <link rel="dns-prefetch" href="https://www.youtube-nocookie.com" />
 <link rel="dns-prefetch" href="https://i.vimeocdn.com" />
-<link rel="preload" href="/assets/css/vjstv.css?v=1775947229" as="style" />
+<link rel="preload" href="/assets/css/vjstv.css?v=1775983916" as="style" />
 <link rel="preload" href="/assets/css/bootstrap.min.css" as="style" />
 <link rel="stylesheet" type="text/css" href="/assets/css/bootstrap.min.css" />
-<link rel="stylesheet" type="text/css" href="/assets/css/vjstv.css?v=1775947229" />
+<link rel="stylesheet" type="text/css" href="/assets/css/vjstv.css?v=1775983916" />
 <link rel="stylesheet" type="text/css" href="/assets/css/plugins.css" media="print" onload="this.media='all'" />
 <link rel="stylesheet" type="text/css" href="/assets/revolution/css/settings.css" media="print" onload="this.media='all'" />
 <link rel="stylesheet" type="text/css" href="/assets/revolution/css/layers.css" media="print" onload="this.media='all'" />
 <link rel="stylesheet" type="text/css" href="/assets/revolution/css/navigation.css" media="print" onload="this.media='all'" />
 <link rel="stylesheet" type="text/css" href="/assets/type/type.css" media="print" onload="this.media='all'" />
 <link rel="stylesheet" type="text/css" href="/assets/css/style.css" media="print" onload="this.media='all'" />
-<!-- Global Color Scheme for all Pages-->
-
-<!-- Global Font Scheme font-->
 
 
-  <!-- Google Analytics-->
+
   
 </head>
 <body >
   <a href="#main-content" class="skip-to-content">Skip to content</a>
   <div class="content-wrapper" id="main-content" tabindex="-1">
-    <!--  Nav Name :Classic Dark Header -->
-<nav
+    <nav
   class="navbar  dark-wrapper inverse-text navbar-hover-opacity navbar-expand-lg nav-uppercase ">
   <div class="container ">
     <div class="navbar-brand" data-default-logo="white">
-      <!-- White Logo -->
         <a href="https://vjstv.com"><img 
         src="/assets/images/logo-vjstv.svg" 
         srcset="/assets/images/logo-vjstv.svg 1x, /assets/images/logo-vjstv.svg 2x"
         class="logo-light " 
         alt="VJs TV - Live Visual Performances, VJ Artists & Audiovisual Projects" /></a>
   
-      <!-- Black Logo -->
       <a href="https://vjstv.com"><img 
         src="/assets/images/logo-vjstv.svg" 
         srcset="/assets/images/logo-vjstv.svg 1x, /assets/images/logo-vjstv.svg 2x"
@@ -933,7 +929,7 @@ function vjsCopyLink(btn, url) {
 </footer>
 
 
-<!-- TIP JAR MODAL -->
+
 <div class="vjs-tip-modal" id="vjs-tip-modal" role="dialog" aria-label="Visual Tip Jar" onclick="if(event.target===this)vjsCloseTip()">
   <div class="vjs-tip-modal-inner">
     <div style="margin-bottom:1rem;"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" style="width:2.5rem; height:2.5rem;"><path d="M9 3h6v2H9V3z"/><path d="M8 5h8c1 0 2 1 2 2v10c0 2-1 4-2 4H8c-1 0-2-2-2-4V7c0-1 1-2 2-2Z"/><circle cx="12" cy="12" r="2"/></svg></div>
@@ -949,7 +945,7 @@ function vjsCopyLink(btn, url) {
   </div>
 </div>
 
-<!-- MOBILE BOTTOM NAV -->
+
 <nav class="vjs-mobile-nav" id="vjs-mobile-nav" aria-label="Mobile navigation">
   <div class="vjs-mobile-nav-items">
     <a href="/" class="vjs-mobile-nav-item">
@@ -975,7 +971,7 @@ function vjsCopyLink(btn, url) {
   </div>
 </nav>
 
-<!-- REPORT ISSUE MODAL (global) -->
+
 <div id="report-modal-global" role="dialog" aria-label="Report an issue" style="display:none; position:fixed; inset:0; z-index:9999; background:rgba(0,0,0,0.85); align-items:center; justify-content:center;">
   <div style="background:#0a0a0a; border:1px solid #222; max-width:480px; width:90%; margin:auto; position:relative;">
     <div style="padding:20px 24px; border-bottom:1px solid #222; display:flex; align-items:center; justify-content:space-between;">
@@ -1122,7 +1118,6 @@ document.getElementById('report-form-global').addEventListener('submit', functio
 
 
   </div>
-  <!-- Site Scripts-->
   <script src="/assets/js/jquery.min.js"></script>
 <script src="/assets/js/popper.min.js" defer></script>
 <script src="/assets/js/bootstrap.min.js" defer></script>

@@ -1,8 +1,6 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <!-- Meta Tags-->
   <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 <meta name="theme-color" content="#050505" />
@@ -90,8 +88,15 @@
       "inLanguage": "en",
       "potentialAction": {
         "@type": "SearchAction",
-        "target": "https://vjstv.com/search?q={search_term_string}",
-        "query-input": "required name=search_term_string"
+        "target": {
+          "@type": "EntryPoint",
+          "urlTemplate": "https://vjstv.com/search?q={search_term_string}"
+        },
+        "query-input": {
+          "@type": "PropertyValueSpecification",
+          "valueRequired": true,
+          "valueName": "search_term_string"
+        }
       }
     },
     {
@@ -148,12 +153,10 @@
 }
 </script>
 
-  <!-- Favicons-->
   <link rel="icon" type="image/x-icon" href="/assets/images/favicon.ico">
   <link rel="icon" type="image/png" sizes="16x16" href="/assets/images/favicon-16x16.png">
   <link rel="icon" type="image/png" sizes="32x32" href="/assets/images/favicon-32x32.png">
   <link rel="icon" type="image/png" sizes="96x96" href="/assets/images/favicon-96x96.png">
-  <!-- Stylesheets-->
   <link rel="shortcut icon" href="/assets/images/favicon.ico" />
 <link rel="dns-prefetch" href="https://fonts.googleapis.com" />
 <link rel="dns-prefetch" href="https://fonts.gstatic.com" />
@@ -161,40 +164,34 @@
 <link rel="dns-prefetch" href="https://player.vimeo.com" />
 <link rel="dns-prefetch" href="https://www.youtube-nocookie.com" />
 <link rel="dns-prefetch" href="https://i.vimeocdn.com" />
-<link rel="preload" href="/assets/css/vjstv.css?v=1775947229" as="style" />
+<link rel="preload" href="/assets/css/vjstv.css?v=1775983916" as="style" />
 <link rel="preload" href="/assets/css/bootstrap.min.css" as="style" />
 <link rel="stylesheet" type="text/css" href="/assets/css/bootstrap.min.css" />
-<link rel="stylesheet" type="text/css" href="/assets/css/vjstv.css?v=1775947229" />
+<link rel="stylesheet" type="text/css" href="/assets/css/vjstv.css?v=1775983916" />
 <link rel="stylesheet" type="text/css" href="/assets/css/plugins.css" media="print" onload="this.media='all'" />
 <link rel="stylesheet" type="text/css" href="/assets/revolution/css/settings.css" media="print" onload="this.media='all'" />
 <link rel="stylesheet" type="text/css" href="/assets/revolution/css/layers.css" media="print" onload="this.media='all'" />
 <link rel="stylesheet" type="text/css" href="/assets/revolution/css/navigation.css" media="print" onload="this.media='all'" />
 <link rel="stylesheet" type="text/css" href="/assets/type/type.css" media="print" onload="this.media='all'" />
 <link rel="stylesheet" type="text/css" href="/assets/css/style.css" media="print" onload="this.media='all'" />
-<!-- Global Color Scheme for all Pages-->
-
-<!-- Global Font Scheme font-->
 
 
-  <!-- Google Analytics-->
+
   
 </head>
 <body >
   <a href="#main-content" class="skip-to-content">Skip to content</a>
   <div class="content-wrapper" id="main-content" tabindex="-1">
-    <!--  Nav Name :Classic Dark Header -->
-<nav
+    <nav
   class="navbar  dark-wrapper inverse-text navbar-hover-opacity navbar-expand-lg nav-uppercase ">
   <div class="container ">
     <div class="navbar-brand" data-default-logo="white">
-      <!-- White Logo -->
         <a href="https://vjstv.com"><img 
         src="/assets/images/logo-vjstv.svg" 
         srcset="/assets/images/logo-vjstv.svg 1x, /assets/images/logo-vjstv.svg 2x"
         class="logo-light " 
         alt="VJs TV - Live Visual Performances, VJ Artists & Audiovisual Projects" /></a>
   
-      <!-- Black Logo -->
       <a href="https://vjstv.com"><img 
         src="/assets/images/logo-vjstv.svg" 
         srcset="/assets/images/logo-vjstv.svg 1x, /assets/images/logo-vjstv.svg 2x"
@@ -839,7 +836,7 @@
           <div class="lg-edu-icon">&#9684;</div>
           <div class="lg-edu-title">Resolume Arena</div>
           <div class="lg-edu-desc">The industry standard for VJ performance. Clip-based composition, effects, and MIDI/OSC control for live visual sets.</div>
-          <a href="/technology/resolume-arena" class="lg-edu-link">View Profile →</a>
+          <a href="/technology/resolume" class="lg-edu-link">View Profile →</a>
         </div>
         <div class="lg-edu-card">
           <div class="lg-edu-icon">&#9685;</div>
@@ -879,7 +876,7 @@
           <span class="ch3-section-label">Resources & Tools</span>
         </div>
         <div class="ch3-resources-grid">
-          <a href="/technology/resolume-arena" class="ch3-resource-item">
+          <a href="/technology/resolume" class="ch3-resource-item">
             <span class="ch3-resource-icon">&#9684;</span>
             <span class="ch3-resource-name">Resolume Arena</span>
           </a>
@@ -1605,7 +1602,7 @@
 </footer>
 
 
-<!-- TIP JAR MODAL -->
+
 <div class="vjs-tip-modal" id="vjs-tip-modal" role="dialog" aria-label="Visual Tip Jar" onclick="if(event.target===this)vjsCloseTip()">
   <div class="vjs-tip-modal-inner">
     <div style="margin-bottom:1rem;"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" style="width:2.5rem; height:2.5rem;"><path d="M9 3h6v2H9V3z"/><path d="M8 5h8c1 0 2 1 2 2v10c0 2-1 4-2 4H8c-1 0-2-2-2-4V7c0-1 1-2 2-2Z"/><circle cx="12" cy="12" r="2"/></svg></div>
@@ -1621,7 +1618,7 @@
   </div>
 </div>
 
-<!-- MOBILE BOTTOM NAV -->
+
 <nav class="vjs-mobile-nav" id="vjs-mobile-nav" aria-label="Mobile navigation">
   <div class="vjs-mobile-nav-items">
     <a href="/" class="vjs-mobile-nav-item">
@@ -1647,7 +1644,7 @@
   </div>
 </nav>
 
-<!-- REPORT ISSUE MODAL (global) -->
+
 <div id="report-modal-global" role="dialog" aria-label="Report an issue" style="display:none; position:fixed; inset:0; z-index:9999; background:rgba(0,0,0,0.85); align-items:center; justify-content:center;">
   <div style="background:#0a0a0a; border:1px solid #222; max-width:480px; width:90%; margin:auto; position:relative;">
     <div style="padding:20px 24px; border-bottom:1px solid #222; display:flex; align-items:center; justify-content:space-between;">
@@ -2200,7 +2197,6 @@ document.querySelectorAll('.vjs-reveal').forEach(function(el){ro.observe(el);});
 </script>
 
   </div>
-  <!-- Site Scripts-->
   <script src="/assets/js/jquery.min.js"></script>
 <script src="/assets/js/popper.min.js" defer></script>
 <script src="/assets/js/bootstrap.min.js" defer></script>
