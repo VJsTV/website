@@ -1,4 +1,10 @@
 <link rel="shortcut icon" href="{{site.data.general_settings.favicon | relative_url}}" />
+<style>
+.page-loading{position:fixed;top:0;left:0;right:0;bottom:0;background:#0a0a0a;z-index:9999999;display:flex;align-items:center;justify-content:center}
+.page-loading .status{position:relative;width:2rem;height:2rem}
+.page-loading .spinner{position:absolute;top:50%;left:50%;width:2.5rem;height:2.5rem;margin-top:-1.25rem;margin-left:-1.25rem;border:4px solid #333;border-top-color:#fff;border-radius:50%;animation:vjs-spin .8s linear infinite}
+@keyframes vjs-spin{to{transform:rotate(360deg)}}
+</style>
 <link rel="dns-prefetch" href="https://fonts.googleapis.com" />
 <link rel="dns-prefetch" href="https://fonts.gstatic.com" />
 <link rel="dns-prefetch" href="https://vimeo.com" />
