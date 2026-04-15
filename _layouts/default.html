@@ -11,6 +11,21 @@
   {% include utilities/analytics.html %}
 </head>
 <body {% if page.overflow %} class="overflow-hidden" {% endif %}>
+  <div class="page-loading" id="vjs-preloader">
+    <div class="vjs-loader-inner">
+      <svg class="vjs-loader-logo" viewBox="0 0 200 60" xmlns="http://www.w3.org/2000/svg">
+        <defs>
+          <linearGradient id="vjs-grad" x1="0%" y1="0%" x2="100%" y2="0%">
+            <stop offset="0%" style="stop-color:#00f0ff"/>
+            <stop offset="50%" style="stop-color:#ff00e5"/>
+            <stop offset="100%" style="stop-color:#ff4400"/>
+          </linearGradient>
+        </defs>
+        <text x="100" y="45" text-anchor="middle" fill="url(#vjs-grad)" font-family="Arial,Helvetica,sans-serif" font-weight="900" font-size="42" letter-spacing="4">VJs TV</text>
+      </svg>
+      <div class="vjs-loader-bar"><div class="vjs-loader-bar-fill"></div></div>
+    </div>
+  </div>
   <a href="#main-content" class="skip-to-content">Skip to content</a>
   <div class="content-wrapper" id="main-content" tabindex="-1">
     {{ content }}

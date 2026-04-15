@@ -1,9 +1,13 @@
 <link rel="shortcut icon" href="{{site.data.general_settings.favicon | relative_url}}" />
 <style>
-.page-loading{position:fixed;top:0;left:0;right:0;bottom:0;background:#0a0a0a;z-index:9999999;display:flex;align-items:center;justify-content:center}
-.page-loading .status{position:relative;width:2rem;height:2rem}
-.page-loading .spinner{position:absolute;top:50%;left:50%;width:2.5rem;height:2.5rem;margin-top:-1.25rem;margin-left:-1.25rem;border:4px solid #333;border-top-color:#fff;border-radius:50%;animation:vjs-spin .8s linear infinite}
-@keyframes vjs-spin{to{transform:rotate(360deg)}}
+.page-loading{position:fixed;top:0;left:0;right:0;bottom:0;background:#0a0a0a;z-index:9999999;display:flex;align-items:center;justify-content:center;opacity:1;transition:opacity .5s ease}
+.page-loading.fade-out{opacity:0;pointer-events:none}
+.vjs-loader-inner{display:flex;flex-direction:column;align-items:center;gap:24px}
+.vjs-loader-logo{width:180px;height:54px;animation:vjs-pulse 2s ease-in-out infinite}
+.vjs-loader-bar{width:120px;height:3px;background:rgba(255,255,255,.1);border-radius:3px;overflow:hidden}
+.vjs-loader-bar-fill{width:100%;height:100%;background:linear-gradient(90deg,#00f0ff,#ff00e5,#ff4400);border-radius:3px;animation:vjs-slide 1.2s ease-in-out infinite}
+@keyframes vjs-pulse{0%,100%{opacity:.7;transform:scale(.98)}50%{opacity:1;transform:scale(1)}}
+@keyframes vjs-slide{0%{transform:translateX(-100%)}100%{transform:translateX(100%)}}
 </style>
 <link rel="dns-prefetch" href="https://fonts.googleapis.com" />
 <link rel="dns-prefetch" href="https://fonts.gstatic.com" />

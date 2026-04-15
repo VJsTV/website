@@ -23,6 +23,8 @@ Key pages include:
 - **Directory Pages (`/artists`, `/projects`, `/events`, `/studios`, `/technology`, `/sponsors`)**: Provide filtered and sortable listings of content.
 - **Utility Pages (`/search`, `/submit`, `/partners`)**: Client-side search, project submission form, and a sponsor pitch page with interactive elements and real-time analytics.
 
+A branded preloader screen is implemented in `_layouts/default.html` with inline critical CSS in `_includes/core/styles/styles.html`. It shows a gradient "VJs TV" logo with an animated progress bar on a dark background, preventing any flash of unstyled content (FOUC). The preloader fades out via `assets/js/scripts.js` on document ready, with a `window.load` fallback and a 6-second safety timeout in `_includes/core/scripts/scripts.html`.
+
 Accessibility features include skip-to-content links, `:focus-visible` outlines, ARIA labels, and `prefers-reduced-motion` support. SEO is a core focus, implemented through canonical URLs, meta robots tags, XML/HTML sitemaps, comprehensive JSON-LD structured data for various content types, dynamic meta descriptions, Open Graph, Twitter Cards, and strict heading hierarchy. Performance is optimized with `requestAnimationFrame` throttling, passive scroll listeners, `will-change` hints, `IntersectionObserver`, `preconnect`/`dns-prefetch`/`preload` for critical assets, `defer` for non-critical scripts, and runtime lazy loading.
 
 The API architecture is dual-mode:

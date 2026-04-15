@@ -50,4 +50,16 @@ document.addEventListener('DOMContentLoaded', function() {
     }
   });
 });
+
+window.addEventListener('load', function() {
+  var p = document.getElementById('vjs-preloader');
+  if (p && !p.classList.contains('fade-out')) {
+    p.classList.add('fade-out');
+    setTimeout(function() { p.style.display = 'none'; }, 600);
+  }
+});
+setTimeout(function() {
+  var p = document.getElementById('vjs-preloader');
+  if (p) { p.classList.add('fade-out'); setTimeout(function() { p.style.display = 'none'; }, 600); }
+}, 6000);
 </script>

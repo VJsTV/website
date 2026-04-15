@@ -132,10 +132,14 @@
   <link rel="icon" type="image/png" sizes="96x96" href="/assets/images/favicon-96x96.png">
   <link rel="shortcut icon" href="/assets/images/favicon.ico" />
 <style>
-.page-loading{position:fixed;top:0;left:0;right:0;bottom:0;background:#0a0a0a;z-index:9999999;display:flex;align-items:center;justify-content:center}
-.page-loading .status{position:relative;width:2rem;height:2rem}
-.page-loading .spinner{position:absolute;top:50%;left:50%;width:2.5rem;height:2.5rem;margin-top:-1.25rem;margin-left:-1.25rem;border:4px solid #333;border-top-color:#fff;border-radius:50%;animation:vjs-spin .8s linear infinite}
-@keyframes vjs-spin{to{transform:rotate(360deg)}}
+.page-loading{position:fixed;top:0;left:0;right:0;bottom:0;background:#0a0a0a;z-index:9999999;display:flex;align-items:center;justify-content:center;opacity:1;transition:opacity .5s ease}
+.page-loading.fade-out{opacity:0;pointer-events:none}
+.vjs-loader-inner{display:flex;flex-direction:column;align-items:center;gap:24px}
+.vjs-loader-logo{width:180px;height:54px;animation:vjs-pulse 2s ease-in-out infinite}
+.vjs-loader-bar{width:120px;height:3px;background:rgba(255,255,255,.1);border-radius:3px;overflow:hidden}
+.vjs-loader-bar-fill{width:100%;height:100%;background:linear-gradient(90deg,#00f0ff,#ff00e5,#ff4400);border-radius:3px;animation:vjs-slide 1.2s ease-in-out infinite}
+@keyframes vjs-pulse{0%,100%{opacity:.7;transform:scale(.98)}50%{opacity:1;transform:scale(1)}}
+@keyframes vjs-slide{0%{transform:translateX(-100%)}100%{transform:translateX(100%)}}
 </style>
 <link rel="dns-prefetch" href="https://fonts.googleapis.com" />
 <link rel="dns-prefetch" href="https://fonts.gstatic.com" />
@@ -143,10 +147,10 @@
 <link rel="dns-prefetch" href="https://player.vimeo.com" />
 <link rel="dns-prefetch" href="https://www.youtube-nocookie.com" />
 <link rel="dns-prefetch" href="https://i.vimeocdn.com" />
-<link rel="preload" href="/assets/css/vjstv.css?v=1776268664" as="style" />
+<link rel="preload" href="/assets/css/vjstv.css?v=1776272812" as="style" />
 <link rel="preload" href="/assets/css/bootstrap.min.css" as="style" />
 <link rel="stylesheet" type="text/css" href="/assets/css/bootstrap.min.css" />
-<link rel="stylesheet" type="text/css" href="/assets/css/vjstv.css?v=1776268664" />
+<link rel="stylesheet" type="text/css" href="/assets/css/vjstv.css?v=1776272812" />
 <link rel="stylesheet" type="text/css" href="/assets/css/plugins.css" media="print" onload="this.media='all'" />
 <link rel="stylesheet" type="text/css" href="/assets/revolution/css/settings.css" media="print" onload="this.media='all'" />
 <link rel="stylesheet" type="text/css" href="/assets/revolution/css/layers.css" media="print" onload="this.media='all'" />
@@ -159,6 +163,21 @@
   
 </head>
 <body >
+  <div class="page-loading" id="vjs-preloader">
+    <div class="vjs-loader-inner">
+      <svg class="vjs-loader-logo" viewBox="0 0 200 60" xmlns="http://www.w3.org/2000/svg">
+        <defs>
+          <linearGradient id="vjs-grad" x1="0%" y1="0%" x2="100%" y2="0%">
+            <stop offset="0%" style="stop-color:#00f0ff"/>
+            <stop offset="50%" style="stop-color:#ff00e5"/>
+            <stop offset="100%" style="stop-color:#ff4400"/>
+          </linearGradient>
+        </defs>
+        <text x="100" y="45" text-anchor="middle" fill="url(#vjs-grad)" font-family="Arial,Helvetica,sans-serif" font-weight="900" font-size="42" letter-spacing="4">VJs TV</text>
+      </svg>
+      <div class="vjs-loader-bar"><div class="vjs-loader-bar-fill"></div></div>
+    </div>
+  </div>
   <a href="#main-content" class="skip-to-content">Skip to content</a>
   <div class="content-wrapper" id="main-content" tabindex="-1">
     <nav
@@ -967,6 +986,18 @@ document.addEventListener('DOMContentLoaded', function() {
     }
   });
 });
+
+window.addEventListener('load', function() {
+  var p = document.getElementById('vjs-preloader');
+  if (p && !p.classList.contains('fade-out')) {
+    p.classList.add('fade-out');
+    setTimeout(function() { p.style.display = 'none'; }, 600);
+  }
+});
+setTimeout(function() {
+  var p = document.getElementById('vjs-preloader');
+  if (p) { p.classList.add('fade-out'); setTimeout(function() { p.style.display = 'none'; }, 600); }
+}, 6000);
 </script>
 
 </body>
