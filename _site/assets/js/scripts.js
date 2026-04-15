@@ -1108,13 +1108,6 @@ $(document).ready(function() {
         /*-----------------------------------------------------------------------------------*/
         /*      PAGE LOADING
         /*-----------------------------------------------------------------------------------*/
-        var preloader = document.getElementById('vjs-preloader');
-        if (preloader) {
-                preloader.classList.add('fade-out');
-                setTimeout(function() {
-                        preloader.style.display = 'none';
-                }, 600);
-        }
         $('.page-loading').not('#vjs-preloader').delay(350).fadeOut('slow');
         $('.page-loading .status').fadeOut('slow');
         /*-----------------------------------------------------------------------------------*/

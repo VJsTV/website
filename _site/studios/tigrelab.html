@@ -146,6 +146,8 @@
 <style>
 .page-loading{position:fixed;top:0;left:0;right:0;bottom:0;background:#0a0a0a;z-index:9999999;display:flex;align-items:center;justify-content:center;opacity:1;transition:opacity .5s ease}
 .page-loading.fade-out{opacity:0;pointer-events:none}
+.content-wrapper{opacity:0;transition:opacity .3s ease}
+.content-wrapper.vjs-ready{opacity:1}
 .vjs-loader-inner{display:flex;flex-direction:column;align-items:center;gap:24px}
 .vjs-loader-logo{width:180px;height:54px;animation:vjs-pulse 2s ease-in-out infinite}
 .vjs-loader-bar{width:120px;height:3px;background:rgba(255,255,255,.1);border-radius:3px;overflow:hidden}
@@ -159,10 +161,10 @@
 <link rel="dns-prefetch" href="https://player.vimeo.com" />
 <link rel="dns-prefetch" href="https://www.youtube-nocookie.com" />
 <link rel="dns-prefetch" href="https://i.vimeocdn.com" />
-<link rel="preload" href="/assets/css/vjstv.css?v=1776272812" as="style" />
+<link rel="preload" href="/assets/css/vjstv.css?v=1776274581" as="style" />
 <link rel="preload" href="/assets/css/bootstrap.min.css" as="style" />
 <link rel="stylesheet" type="text/css" href="/assets/css/bootstrap.min.css" />
-<link rel="stylesheet" type="text/css" href="/assets/css/vjstv.css?v=1776272812" />
+<link rel="stylesheet" type="text/css" href="/assets/css/vjstv.css?v=1776274581" />
 <link rel="stylesheet" type="text/css" href="/assets/css/plugins.css" media="print" onload="this.media='all'" />
 <link rel="stylesheet" type="text/css" href="/assets/revolution/css/settings.css" media="print" onload="this.media='all'" />
 <link rel="stylesheet" type="text/css" href="/assets/revolution/css/layers.css" media="print" onload="this.media='all'" />
@@ -1154,17 +1156,17 @@ document.addEventListener('DOMContentLoaded', function() {
   });
 });
 
-window.addEventListener('load', function() {
+function vjsDismissPreloader() {
   var p = document.getElementById('vjs-preloader');
+  var cw = document.getElementById('main-content');
+  if (cw) cw.classList.add('vjs-ready');
   if (p && !p.classList.contains('fade-out')) {
     p.classList.add('fade-out');
     setTimeout(function() { p.style.display = 'none'; }, 600);
   }
-});
-setTimeout(function() {
-  var p = document.getElementById('vjs-preloader');
-  if (p) { p.classList.add('fade-out'); setTimeout(function() { p.style.display = 'none'; }, 600); }
-}, 6000);
+}
+window.addEventListener('load', vjsDismissPreloader);
+setTimeout(vjsDismissPreloader, 6000);
 </script>
 
 </body>
