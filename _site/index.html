@@ -150,10 +150,10 @@
 <link rel="dns-prefetch" href="https://player.vimeo.com" />
 <link rel="dns-prefetch" href="https://www.youtube-nocookie.com" />
 <link rel="dns-prefetch" href="https://i.vimeocdn.com" />
-<link rel="preload" href="/assets/css/vjstv.css?v=1777730840" as="style" />
+<link rel="preload" href="/assets/css/vjstv.css?v=1777734679" as="style" />
 <link rel="preload" href="/assets/css/bootstrap.min.css" as="style" />
 <link rel="stylesheet" type="text/css" href="/assets/css/bootstrap.min.css" />
-<link rel="stylesheet" type="text/css" href="/assets/css/vjstv.css?v=1777730840" />
+<link rel="stylesheet" type="text/css" href="/assets/css/vjstv.css?v=1777734679" />
 <link rel="stylesheet" type="text/css" href="/assets/css/plugins.css" media="print" onload="this.media='all'" />
 <link rel="stylesheet" type="text/css" href="/assets/revolution/css/settings.css" media="print" onload="this.media='all'" />
 <link rel="stylesheet" type="text/css" href="/assets/revolution/css/layers.css" media="print" onload="this.media='all'" />
@@ -163,7 +163,30 @@
 
 
 
-  
+  <script>
+(function() {
+  var meta = document.querySelector('meta[name="vjs-exp"]');
+  var variant = meta ? meta.getAttribute('content') : null;
+
+  window._vjsTrackQueue = window._vjsTrackQueue || [];
+
+  window.vjsTrack = function(name, props) {
+    try {
+      var payload = props ? Object.assign({}, props) : {};
+      if (variant) payload.vjs_exp = variant;
+      var entry = { name: name, props: payload, t: Date.now() };
+      window._vjsTrackQueue.push(entry);
+      if (typeof window.plausible === 'function') {
+        window.plausible(name, { props: payload });
+      }
+    } catch (e) { /* never throw */ }
+  };
+
+  // Expose the variant for components that want to render conditionally.
+  window.vjsExp = variant;
+})();
+</script>
+
 </head>
 <body >
   <div class="page-loading" id="vjs-preloader">
@@ -459,8 +482,8 @@
     
     <a href="/projects" class="vjs-strip-stat vjs-strip-stat--uv" title="Projects">55</a>
     <a href="/events" class="vjs-strip-stat vjs-strip-stat--cyan" title="Events">23</a>
-    <a href="/studios" class="vjs-strip-stat vjs-strip-stat--magenta" title="Studios">44</a>
-    <a href="/countries" class="vjs-strip-stat vjs-strip-stat--grad" title="Countries">48</a>
+    <a href="/studios" class="vjs-strip-stat vjs-strip-stat--magenta" title="Studios">47</a>
+    <a href="/countries" class="vjs-strip-stat vjs-strip-stat--grad" title="Countries">49</a>
   </div>
 </div>
 
@@ -686,9 +709,22 @@
 <!-- POSITIONING H1 — single, semantic, above-the-fold -->
 
 <header class="vjs-positioning">
-  <h1 class="vjs-positioning-h1">VJs TV &mdash; the live broadcast network and global directory for visual performance.</h1>
-  <p class="vjs-positioning-trust">20 artists across 48 countries &middot; 55 projects &middot; 3 live channels</p>
+  <h1 class="vjs-positioning-h1">
+    <span data-vjs-exp="A">VJs TV &mdash; the live broadcast network and global directory for visual performance.</span>
+    <span data-vjs-exp="B" hidden>Watch the world&rsquo;s best VJs live &mdash; the global broadcast network for visual culture.</span>
+  </h1>
+  <p class="vjs-positioning-trust">23 artists across 49 countries &middot; 55 projects &middot; 3 live channels</p>
 </header>
+<script>
+(function() {
+  var meta = document.querySelector('meta[name="vjs-exp"]');
+  var v = meta ? meta.getAttribute('content') : 'A';
+  var parts = document.querySelectorAll('[data-vjs-exp]');
+  for (var i = 0; i < parts.length; i++) {
+    parts[i].hidden = parts[i].getAttribute('data-vjs-exp') !== v;
+  }
+})();
+</script>
 <style>
 .vjs-positioning {
   background:#000; padding:18px 20px 14px; border-bottom:1px solid #111;
@@ -1391,11 +1427,10 @@ function heroPlay(card) {
 }
 </script>
 
-<!-- SPONSOR TICKER — single primary CTA + supporting category labels -->
+<!-- SPONSOR TICKER — one primary CTA + supporting category sub-line -->
 <div class="vjs-sponsor-bar">
   <div class="vjs-sponsor-bar-track">
-    <a href="/partners" class="vjs-sponsor-bar-item vjs-sponsor-bar-cta" style="color:var(--vjs-ultraviolet); text-decoration:none;">Become a Partner &rsaquo;</a><span class="vjs-sponsor-bar-dot"> &diams; </span><span class="vjs-sponsor-bar-item">Technology Partners</span><span class="vjs-sponsor-bar-dot"> &diams; </span><span class="vjs-sponsor-bar-item">Broadcast Sponsors</span><span class="vjs-sponsor-bar-dot"> &diams; </span><span class="vjs-sponsor-bar-item">Festival Partners</span><span class="vjs-sponsor-bar-dot"> &diams; </span><span class="vjs-sponsor-bar-item">Studio Partners</span><span class="vjs-sponsor-bar-dot"> &diams; </span><span class="vjs-sponsor-bar-item">Education Partners</span><span class="vjs-sponsor-bar-dot"> &diams; </span>
-    <span class="vjs-sponsor-bar-item">Technology Partners</span><span class="vjs-sponsor-bar-dot"> &diams; </span><span class="vjs-sponsor-bar-item">Broadcast Sponsors</span><span class="vjs-sponsor-bar-dot"> &diams; </span><span class="vjs-sponsor-bar-item">Festival Partners</span><span class="vjs-sponsor-bar-dot"> &diams; </span><span class="vjs-sponsor-bar-item">Studio Partners</span><span class="vjs-sponsor-bar-dot"> &diams; </span><span class="vjs-sponsor-bar-item">Education Partners</span><span class="vjs-sponsor-bar-dot"> &diams; </span>
+    <a href="/partners" class="vjs-sponsor-bar-item vjs-sponsor-bar-cta" style="color:var(--vjs-ultraviolet); text-decoration:none;" onclick="if(window.vjsTrack)window.vjsTrack('cta_click',{label:'become_partner',location:'home_marquee'});">Become a Partner &rsaquo;</a><span class="vjs-sponsor-bar-dot"> &diams; </span><span class="vjs-sponsor-bar-item">Technology, Broadcast, Festival, Studio &amp; Education Partners welcome</span>
   </div>
 </div>
 
@@ -2324,6 +2359,33 @@ function heroPlay(card) {
 
 
 
+<a href="/artists/beeple" class="text-decoration-none vjs-nts-card"
+   data-style="digital art, motion graphics, 3d renders, sci-fi environments"
+   data-tech="cinema 4d,octane render,after effects,zbrush,3d real-time rendering"
+   data-country="usa">
+  <div class="vjs-nts-visual">
+    <div class="vjs-nts-visual-inner">
+      
+        <img src="/assets/images/artists/beeple.jpg" alt="Beeple — visual artist profile photo" class="vjs-artist-photo" loading="lazy" decoding="async" width="400" height="400">
+      
+    </div>
+  </div>
+  <div class="vjs-nts-info">
+    <div class="vjs-nts-location"><span class="vjs-artist-country-flag">🇺🇸</span>USA</div>
+    <div class="vjs-nts-name">Beeple</div>
+    <div class="vjs-nts-style">Digital Art, Motion Graphics, 3D Renders, Sci-F...</div>
+  </div>
+</a>
+
+        
+        
+
+
+
+
+
+
+
 <a href="/artists/joanie-lemercier-artist" class="text-decoration-none vjs-nts-card"
    data-style="geometric light sculpture, projection illusion, environmental minimalism"
    data-tech="custom max/msp,single-projector systems,haze and fog,geometric optics,minimal hardware"
@@ -2447,33 +2509,6 @@ function heroPlay(card) {
     <div class="vjs-nts-location"><span class="vjs-artist-country-flag">🇺🇸</span>USA</div>
     <div class="vjs-nts-name">Refik Anadol</div>
     <div class="vjs-nts-style">AI-Generated Art, Machine Learning, Large-Scale...</div>
-  </div>
-</a>
-
-        
-        
-
-
-
-
-
-
-
-<a href="/artists/romain-tardy" class="text-decoration-none vjs-nts-card"
-   data-style="light as material, projection mapping, geometric minimalism"
-   data-tech="custom projection systems,architectural mapping,real-time rendering,max/msp,generative systems"
-   data-country="france">
-  <div class="vjs-nts-visual">
-    <div class="vjs-nts-visual-inner">
-      
-        <img src="/assets/images/artists/romain-tardy.avif" alt="Romain Tardy — visual artist profile photo" class="vjs-artist-photo" loading="lazy" decoding="async" width="400" height="400">
-      
-    </div>
-  </div>
-  <div class="vjs-nts-info">
-    <div class="vjs-nts-location"><span class="vjs-artist-country-flag">🇫🇷</span>France</div>
-    <div class="vjs-nts-name">Romain Tardy</div>
-    <div class="vjs-nts-style">Light as Material, Projection Mapping, Geometri...</div>
   </div>
 </a>
 
@@ -2816,9 +2851,12 @@ function heroPlay(card) {
         <span class="vjstv-footer-newsletter-title">Stay Updated</span>
         <span class="vjstv-footer-newsletter-sub">New artists, events & live sessions — straight to your inbox.</span>
       </div>
-      <form class="vjstv-footer-newsletter-form" onsubmit="event.preventDefault(); this.querySelector('button').textContent='✓ Subscribed'; this.querySelector('input').disabled=true; this.querySelector('button').disabled=true;" autocomplete="off">
-        <input type="email" placeholder="your@email.com" required />
+      <form class="vjstv-footer-newsletter-form" id="vjstv-footer-subscribe" autocomplete="off" novalidate>
+        <div style="position:absolute;left:-9999px;" aria-hidden="true"><input type="text" name="website_url" tabindex="-1" autocomplete="off" /></div>
+        <input type="email" name="email" placeholder="your@email.com" required />
+        <input type="hidden" name="source" value="footer" />
         <button type="submit">Subscribe</button>
+        <p id="vjstv-footer-subscribe-msg" style="margin:8px 0 0; font-family:'Barlow Condensed',sans-serif; font-size:0.72rem; color:var(--vjs-text-muted); display:none;"></p>
       </form>
     </div>
   </div>
@@ -2861,6 +2899,8 @@ function heroPlay(card) {
     <a href="/license" class="vjstv-footer-link">Commercial License</a>
     <span class="vjstv-footer-sep">&middot;</span>
     <a href="/sitemap" class="vjstv-footer-link">Sitemap</a>
+    <span class="vjstv-footer-sep">&middot;</span>
+    <button type="button" class="vjstv-footer-link" onclick="vjsOpenTip('manual')" style="background:none; border:none; padding:0; cursor:pointer; font:inherit; color:inherit;">Tip Jar</button>
   </div>
 </footer>
 
@@ -2959,12 +2999,74 @@ function vjsToggleGlitch() {
   if(btn) btn.classList.toggle('glitch-active', active);
 }
 
-function vjsOpenTip()  { document.getElementById('vjs-tip-modal').classList.add('open'); }
-function vjsCloseTip() { document.getElementById('vjs-tip-modal').classList.remove('open'); }
+/* ── VISUAL TIP JAR — deferred trigger + 30-day dismiss cookie ── */
+function vjsTipCookieGet(name) {
+  var m = document.cookie.match(new RegExp('(?:^|; )' + name + '=([^;]*)'));
+  return m ? decodeURIComponent(m[1]) : '';
+}
+function vjsTipCookieSet(name, value, days) {
+  var d = new Date(); d.setTime(d.getTime() + days * 86400000);
+  document.cookie = name + '=' + encodeURIComponent(value) + '; expires=' + d.toUTCString() + '; path=/; SameSite=Lax';
+}
+function vjsOpenTip(trigger) {
+  var modal = document.getElementById('vjs-tip-modal');
+  if (!modal) return;
+  modal.classList.add('open');
+  if (typeof window.vjsTrack === 'function') {
+    window.vjsTrack('tipjar_open', { trigger: trigger || 'manual' });
+  }
+}
+function vjsCloseTip() {
+  var modal = document.getElementById('vjs-tip-modal');
+  if (!modal) return;
+  modal.classList.remove('open');
+  vjsTipCookieSet('vjs-tipjar-dismiss', '1', 30);
+  if (typeof window.vjsTrack === 'function') window.vjsTrack('tipjar_dismiss');
+}
 function vjsTipAmount(amt) {
+  if (typeof window.vjsTrack === 'function') window.vjsTrack('tipjar_amount', { amount: amt });
   vjsCloseTip();
   alert('Thank you for supporting VJs TV! ' + amt + ' tip — payment integration coming soon.');
 }
+
+/* Auto-open after 30s dwell OR 75% scroll, whichever first.
+   Suppressed on /thank-you/*, /404, /partners (already-converting flows),
+   and any path containing /search (search is task-focused). */
+(function() {
+  var p = window.location.pathname || '';
+  if (
+    p.indexOf('/thank-you') === 0 ||
+    p === '/404.html' || p === '/404' ||
+    p.indexOf('/partners') === 0 ||
+    p.indexOf('/free-loops') === 0 ||
+    p.indexOf('/search') === 0
+  ) return;
+  if (vjsTipCookieGet('vjs-tipjar-dismiss')) return;
+
+  var fired = false;
+  function maybeOpen(trigger) {
+    if (fired) return;
+    if (vjsTipCookieGet('vjs-tipjar-dismiss')) return;
+    var modal = document.getElementById('vjs-tip-modal');
+    if (!modal) return;
+    fired = true;
+    vjsOpenTip(trigger);
+  }
+  var dwellTimer = setTimeout(function() { maybeOpen('dwell'); }, 30000);
+
+  function onScroll() {
+    var doc = document.documentElement;
+    var scrolled = (window.scrollY || doc.scrollTop || 0) + window.innerHeight;
+    var height = Math.max(doc.scrollHeight, document.body.scrollHeight);
+    if (height <= 0) return;
+    if (scrolled / height >= 0.75) {
+      window.removeEventListener('scroll', onScroll);
+      clearTimeout(dwellTimer);
+      maybeOpen('scroll');
+    }
+  }
+  window.addEventListener('scroll', onScroll, { passive: true });
+})();
 
 
 (function() {
@@ -2979,6 +3081,55 @@ function vjsTipAmount(amt) {
 
 var REPORT_API = '';
 if (!REPORT_API || REPORT_API === '') REPORT_API = '';
+
+/* ── FOOTER NEWSLETTER → /api/subscribe ── */
+(function() {
+  var form = document.getElementById('vjstv-footer-subscribe');
+  if (!form) return;
+  var msg = document.getElementById('vjstv-footer-subscribe-msg');
+  var btn = form.querySelector('button[type="submit"]');
+  var input = form.querySelector('input[type="email"]');
+
+  form.addEventListener('submit', function(e) {
+    e.preventDefault();
+    if (msg) { msg.style.display = 'none'; msg.style.color = ''; }
+    var email = (input.value || '').trim();
+    var emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    if (!email || !emailRegex.test(email)) {
+      if (msg) { msg.textContent = 'Please enter a valid email address.'; msg.style.color = '#ff6677'; msg.style.display = 'block'; }
+      return;
+    }
+    var data = {};
+    new FormData(form).forEach(function(v, k) { data[k] = v; });
+    btn.disabled = true; btn.textContent = 'Sending\u2026';
+
+    fetch(REPORT_API + '/api/subscribe', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(data),
+    })
+    .then(function(res) { return res.json().catch(function() { return { success: false, error: 'Unexpected response.' }; }); })
+    .then(function(result) {
+      if (result.success) {
+        if (typeof window.vjsTrack === 'function') {
+          window.vjsTrack('newsletter_signup', { source: 'footer' });
+        }
+        if (result.already_confirmed) {
+          window.location.href = '/thank-you/subscribe/?status=confirmed&source=footer';
+        } else {
+          window.location.href = '/thank-you/subscribe/?pending=1&source=footer';
+        }
+      } else {
+        if (msg) { msg.textContent = result.error || 'Something went wrong. Please try again.'; msg.style.color = '#ff6677'; msg.style.display = 'block'; }
+        btn.disabled = false; btn.textContent = 'Subscribe';
+      }
+    })
+    .catch(function() {
+      if (msg) { msg.textContent = 'Connection error. Please try again.'; msg.style.color = '#ff6677'; msg.style.display = 'block'; }
+      btn.disabled = false; btn.textContent = 'Subscribe';
+    });
+  });
+})();
 
 function openReportModal() {
   var m = document.getElementById('report-modal-global');
@@ -3038,8 +3189,10 @@ document.getElementById('report-form-global').addEventListener('submit', functio
   })
   .then(function(result) {
     if (result.success) {
-      form.style.display = 'none';
-      document.getElementById('report-success-global').style.display = 'block';
+      if (typeof window.vjsTrack === 'function') {
+        window.vjsTrack('report_sent', { page: window.location.pathname });
+      }
+      window.location.href = '/thank-you/report/';
     } else {
       document.getElementById('report-error-msg-global').textContent = result.error || 'Something went wrong.';
       errorEl.style.display = 'block';
@@ -3099,7 +3252,7 @@ function vjsScheduleOutside(e) {
 
 (function() {
   
-  var statsTargets = { 'stat-artists': 20, 'stat-projects': 55, 'stat-events': 23, 'stat-studios': 44, 'stat-sponsors': 0, 'stat-countries': 48 };
+  var statsTargets = { 'stat-artists': 23, 'stat-projects': 55, 'stat-events': 23, 'stat-studios': 47, 'stat-sponsors': 0, 'stat-countries': 49 };
   var started = false;
   function startCounters() {
     if(started) return; started=true;

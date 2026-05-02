@@ -112,6 +112,54 @@ Never paste stream keys back into `.replit` — that file is committed to the re
 
 The decision favours generative-AI assistants that surface VJs TV in conversational answers (good for artist discovery) while declining to subsidise unattributed dataset construction. Re-evaluate annually as the bot landscape shifts.
 
+### Conversion funnel (Task #3 — T1–T9)
+
+**Analytics (T1):**
+`_includes/utilities/analytics.html` now loads Plausible (privacy-first, no cookie banner) when `plausible_domain` is set in `_config.yml`. Falls back silently when unconfigured. `_includes/utilities/track.html` exposes `window.vjsTrack(name, props)` — a safe no-op wrapper that queues to `window._vjsTrackQueue` and forwards to `window.plausible` when loaded. The A/B variant (`vjs-exp`) is automatically attached to every event as a custom prop.
+
+**Thank-you pages (T2):**
+Six noindex pages at `/thank-you/{submit,booking,partner,report,subscribe,download}/` — each fires its conversion event via `vjsTrack` and has 2+ next-step CTAs.
+
+**ESP double opt-in (T3):**
+- `functions/api/subscribe.js` — POST creates a pending subscriber in `SUBSCRIBERS_KV` keyed `sub:<email>`. Emits a confirmation email via `env.SEB` (Cloudflare Email Routing). Rate-limited to 3/min, 30/day per IP via `guardPost`.
+- `functions/api/subscribe/confirm.js` — GET validates the token (24h TTL, stored as `sub-token:<token>`), flips `status: "confirmed"`, optionally mirrors to Resend audience if `RESEND_API_KEY` + `RESEND_AUDIENCE_ID` are set, then 302s to `/thank-you/subscribe/?status=confirmed`.
+- Additional Cloudflare Pages bindings required: `SUBSCRIBERS_KV` (new KV namespace), `SITE_ORIGIN` (e.g. `https://vjstv.com`), optional `RESEND_API_KEY`, `RESEND_AUDIENCE_ID`.
+- `_routes.json` updated to include both subscribe routes.
+- Footer newsletter form rewired to POST JSON to `/api/subscribe`, with honeypot, redirects to pending/confirmed thank-you page.
+
+**Free-loops landing (T4):**
+`free-loops/index.html` — hero email gate POSTing to `/api/subscribe?source=free-loops`, 6-benefit grid, FAQPage JSON-LD (Resolume, TouchDesigner, commercial use, licence, formats, cost). Double CTA (above and below fold).
+
+**Form redirects (T5):**
+All four main forms (`submit/index.html`, `partners/index.html`, `_layouts/vjs-detail.html`, `_includes/vjstv-footer.html` report form) now `window.location.href` redirect to their respective `/thank-you/` pages on success, replacing the old inline success divs. Loop pack checkout fires `vjsTrack('download_requested', …)` before navigating.
+
+**Tip jar (T6):**
+- Auto-opens after 30s dwell OR 75% scroll, whichever fires first.
+- Suppressed on `/thank-you/*`, `/404`, `/partners`, `/free-loops`, `/search`.
+- 30-day dismiss cookie (`vjs-tipjar-dismiss`). Manual "Tip Jar" link added to footer bar.
+- `vjsOpenTip(trigger)` accepts `'manual' | 'dwell' | 'scroll'` and reports to Plausible.
+
+**A/B harness (T7):**
+`functions/_middleware.js` — runs on every HTML response. Reads `vjs-exp` cookie; assigns A/B 50/50 (crypto RNG) on first visit, skips bots (UA pattern list), sets sticky 30-day cookie. Uses `HTMLRewriter` to inject `<meta name="vjs-exp" content="A|B">` into `<head>`. Homepage H1 contains both variant spans (`data-vjs-exp="A/B"`); inline script reads the meta and hides the non-active variant. `window.vjsExp` exposed for components. `Vary: Cookie` header added to rewritten responses.
+
+**Badge widget (T8):**
+`assets/images/badges/featured-on-vjstv.svg` — gradient dark badge (200×48px). On all `page.collection == "vjs"` detail pages, a `<details>` disclosure in the sidebar exposes a readonly `<textarea>` with the embed snippet and a "Copy Code" button using `navigator.clipboard.writeText()`. Button fires `vjsTrack('badge_copied', {artist})`.
+
+**CTA hierarchy (T9):**
+- Homepage sponsor marquee reduced to a single "Become a Partner" primary CTA with one sub-line; duplicate loop removed.
+- `partners/index.html` gets a testimonials section (3 quotes) and a live artist/studio logo strip (up to 6 `featured: true` items from `site.vjs` + `site.studios` Liquid data).
+
+### Content: new artists & studios (May 2026)
+Added 3 verified artists to `_vjs/`:
+- **Beeple** (`beeple.md`) — digital art / motion graphics / Everydays
+- **DocOptic** (`docoptic.md`) — VJ, live visuals educator, Resolume/TouchDesigner
+- **Hexeosis** (`hexeosis.md`) — geometric loops / generative digital art (since 2013)
+
+Added 3 verified studios to `_studios/`:
+- **United Visual Artists** (`united-visual-artists.md`) — London art/tech practice, `featured: true`
+- **Studio Rewind** (`studio-rewind.md`) — Rotterdam motion design & live show visuals
+- **Frantic** (`frantic.md`) — London CG / motion design / animation studio
+
 ## External Dependencies
 - **Jekyll Plugins**: `jekyll-feed`
 - **Styling**: Bootstrap
@@ -120,7 +168,7 @@ The decision favours generative-AI assistants that surface VJs TV in conversatio
 - **Form Submission/Backend**: Cloudflare Pages Functions, GitHub Issues (for submissions), Cloudflare Email Routing
 - **Bot mitigation**: Cloudflare Turnstile (site key in `_config.yml`, secret in Pages env)
 - **Rate limiting**: Cloudflare KV namespace bound as `RATE_LIMIT_KV`
-- **Analytics**: Cloudflare Analytics GraphQL API
+- **Analytics**: Plausible Analytics (primary, `plausible_domain` in `_config.yml`); Cloudflare Analytics GraphQL API (secondary, `/api/analytics`)
 - **AI Moderation**: Cloudflare Workers AI (`@cf/meta/llama-3.1-8b-instruct`)
 - **Image/Thumbnail Loading**: Vimeo oEmbed API
 - **Deployment**: Cloudflare Pages (frontend + functions)

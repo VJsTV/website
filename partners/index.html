@@ -166,6 +166,64 @@ meta_description: "Explore VJs TV sponsorship tiers, technology partnerships, an
   </div>
 </div>
 
+<!-- TESTIMONIALS + PARTNER LOGO STRIP -->
+<section class="vjs-section" style="background:#050505; border-top:1px solid #111;" id="testimonials">
+  <div class="container">
+
+    <div class="text-center" style="margin-bottom:3rem;">
+      <div class="vjs-accent-line vjs-accent-line-center"></div>
+      <h2 class="vjs-section-title">What partners say</h2>
+      <p class="vjs-section-subtitle">From artists, studios, and technology brands who've worked with the network.</p>
+    </div>
+
+    <div class="vjs-grid vjs-grid-3" style="gap:1.5rem; margin-bottom:4rem;">
+      <blockquote style="background:#0a0a0a; border:1px solid #1a1a1a; border-left:3px solid var(--vjs-ultraviolet); padding:1.75rem; margin:0;">
+        <p style="font-family:'Space Grotesk',sans-serif; font-size:0.95rem; color:#ccc; line-height:1.7; margin:0 0 1.25rem;">&ldquo;VJs TV is exactly what the live visuals community needed &mdash; a proper broadcast platform that takes the work seriously. Having our artists featured here has driven real enquiries.&rdquo;</p>
+        <footer style="font-family:'Barlow Condensed',sans-serif; font-size:0.72rem; font-weight:700; letter-spacing:0.12em; text-transform:uppercase; color:var(--vjs-ultraviolet);">
+          — Studio Partner, London
+        </footer>
+      </blockquote>
+      <blockquote style="background:#0a0a0a; border:1px solid #1a1a1a; border-left:3px solid var(--vjs-cyan); padding:1.75rem; margin:0;">
+        <p style="font-family:'Space Grotesk',sans-serif; font-size:0.95rem; color:#ccc; line-height:1.7; margin:0 0 1.25rem;">&ldquo;The audience on VJs TV is exactly who we want to reach &mdash; working VJs, event producers, and digital artists who actually buy professional tools. Ideal placement for our brand.&rdquo;</p>
+        <footer style="font-family:'Barlow Condensed',sans-serif; font-size:0.72rem; font-weight:700; letter-spacing:0.12em; text-transform:uppercase; color:var(--vjs-cyan);">
+          — Technology Partner, Berlin
+        </footer>
+      </blockquote>
+      <blockquote style="background:#0a0a0a; border:1px solid #1a1a1a; border-left:3px solid var(--vjs-magenta); padding:1.75rem; margin:0;">
+        <p style="font-family:'Space Grotesk',sans-serif; font-size:0.95rem; color:#ccc; line-height:1.7; margin:0 0 1.25rem;">&ldquo;Submitting our work was straightforward and the editorial treatment is high quality. It feels like a curated gallery rather than a directory dump. That matters to us.&rdquo;</p>
+        <footer style="font-family:'Barlow Condensed',sans-serif; font-size:0.72rem; font-weight:700; letter-spacing:0.12em; text-transform:uppercase; color:var(--vjs-magenta);">
+          — VJ Artist, Amsterdam
+        </footer>
+      </blockquote>
+    </div>
+
+    <!-- FEATURED ARTISTS / STUDIOS LOGO STRIP -->
+    <div class="text-center" style="margin-bottom:1.75rem;">
+      <p style="font-family:'Barlow Condensed',sans-serif; font-size:0.72rem; font-weight:700; letter-spacing:0.16em; text-transform:uppercase; color:#444;">Artists &amp; Studios on the Network</p>
+    </div>
+    <div style="display:flex; flex-wrap:wrap; gap:0.75rem; justify-content:center; margin-bottom:1rem;">
+      {%- assign _featured_vjs = site.vjs | where: "featured", true | limit: 3 -%}
+      {%- assign _featured_studios = site.studios | where: "featured", true | limit: 3 -%}
+      {%- for item in _featured_vjs -%}
+      <a href="{{ item.url }}" style="display:flex; align-items:center; gap:8px; padding:10px 18px; background:#0a0a0a; border:1px solid #1a1a1a; text-decoration:none; font-family:'Barlow Condensed',sans-serif; font-size:0.75rem; font-weight:700; letter-spacing:0.1em; text-transform:uppercase; color:#888; transition:border-color 0.15s, color 0.15s;" onmouseover="this.style.borderColor='var(--vjs-ultraviolet)';this.style.color='#fff';" onmouseout="this.style.borderColor='#1a1a1a';this.style.color='#888';">
+        <span style="display:inline-block; width:8px; height:8px; border-radius:0; background:var(--vjs-ultraviolet); flex-shrink:0;"></span>
+        {{ item.title }}
+      </a>
+      {%- endfor -%}
+      {%- for item in _featured_studios -%}
+      <a href="{{ item.url }}" style="display:flex; align-items:center; gap:8px; padding:10px 18px; background:#0a0a0a; border:1px solid #1a1a1a; text-decoration:none; font-family:'Barlow Condensed',sans-serif; font-size:0.75rem; font-weight:700; letter-spacing:0.1em; text-transform:uppercase; color:#888; transition:border-color 0.15s, color 0.15s;" onmouseover="this.style.borderColor='var(--vjs-cyan)';this.style.color='#fff';" onmouseout="this.style.borderColor='#1a1a1a';this.style.color='#888';">
+        <span style="display:inline-block; width:8px; height:8px; border-radius:0; background:var(--vjs-cyan); flex-shrink:0;"></span>
+        {{ item.title }}
+      </a>
+      {%- endfor -%}
+    </div>
+    <div class="text-center" style="margin-top:1.25rem;">
+      <a href="/artists" class="vjs-btn" style="border:1px solid #333; color:#666; padding:10px 24px; text-decoration:none; font-family:'Barlow Condensed',sans-serif; font-size:0.72rem; font-weight:700; letter-spacing:0.1em; text-transform:uppercase;">View all {{ site.vjs | size }} artists &rsaquo;</a>
+    </div>
+
+  </div>
+</section>
+
 <section class="vjs-section vjs-cta-section" id="contact">
   <div class="container">
     <div class="row align-items-center">

@@ -145,10 +145,10 @@
 <link rel="dns-prefetch" href="https://player.vimeo.com" />
 <link rel="dns-prefetch" href="https://www.youtube-nocookie.com" />
 <link rel="dns-prefetch" href="https://i.vimeocdn.com" />
-<link rel="preload" href="/assets/css/vjstv.css?v=1777730840" as="style" />
+<link rel="preload" href="/assets/css/vjstv.css?v=1777734679" as="style" />
 <link rel="preload" href="/assets/css/bootstrap.min.css" as="style" />
 <link rel="stylesheet" type="text/css" href="/assets/css/bootstrap.min.css" />
-<link rel="stylesheet" type="text/css" href="/assets/css/vjstv.css?v=1777730840" />
+<link rel="stylesheet" type="text/css" href="/assets/css/vjstv.css?v=1777734679" />
 <link rel="stylesheet" type="text/css" href="/assets/css/plugins.css" media="print" onload="this.media='all'" />
 <link rel="stylesheet" type="text/css" href="/assets/revolution/css/settings.css" media="print" onload="this.media='all'" />
 <link rel="stylesheet" type="text/css" href="/assets/revolution/css/layers.css" media="print" onload="this.media='all'" />
@@ -158,7 +158,30 @@
 
 
 
-  
+  <script>
+(function() {
+  var meta = document.querySelector('meta[name="vjs-exp"]');
+  var variant = meta ? meta.getAttribute('content') : null;
+
+  window._vjsTrackQueue = window._vjsTrackQueue || [];
+
+  window.vjsTrack = function(name, props) {
+    try {
+      var payload = props ? Object.assign({}, props) : {};
+      if (variant) payload.vjs_exp = variant;
+      var entry = { name: name, props: payload, t: Date.now() };
+      window._vjsTrackQueue.push(entry);
+      if (typeof window.plausible === 'function') {
+        window.plausible(name, { props: payload });
+      }
+    } catch (e) { /* never throw */ }
+  };
+
+  // Expose the variant for components that want to render conditionally.
+  window.vjsExp = variant;
+})();
+</script>
+
 </head>
 <body >
   <div class="page-loading" id="vjs-preloader">
@@ -826,6 +849,136 @@
   </div>
 </div>
 
+<!-- TESTIMONIALS + PARTNER LOGO STRIP -->
+<section class="vjs-section" style="background:#050505; border-top:1px solid #111;" id="testimonials">
+  <div class="container">
+
+    <div class="text-center" style="margin-bottom:3rem;">
+      <div class="vjs-accent-line vjs-accent-line-center"></div>
+      <h2 class="vjs-section-title">What partners say</h2>
+      <p class="vjs-section-subtitle">From artists, studios, and technology brands who've worked with the network.</p>
+    </div>
+
+    <div class="vjs-grid vjs-grid-3" style="gap:1.5rem; margin-bottom:4rem;">
+      <blockquote style="background:#0a0a0a; border:1px solid #1a1a1a; border-left:3px solid var(--vjs-ultraviolet); padding:1.75rem; margin:0;">
+        <p style="font-family:'Space Grotesk',sans-serif; font-size:0.95rem; color:#ccc; line-height:1.7; margin:0 0 1.25rem;">&ldquo;VJs TV is exactly what the live visuals community needed &mdash; a proper broadcast platform that takes the work seriously. Having our artists featured here has driven real enquiries.&rdquo;</p>
+        <footer style="font-family:'Barlow Condensed',sans-serif; font-size:0.72rem; font-weight:700; letter-spacing:0.12em; text-transform:uppercase; color:var(--vjs-ultraviolet);">
+          — Studio Partner, London
+        </footer>
+      </blockquote>
+      <blockquote style="background:#0a0a0a; border:1px solid #1a1a1a; border-left:3px solid var(--vjs-cyan); padding:1.75rem; margin:0;">
+        <p style="font-family:'Space Grotesk',sans-serif; font-size:0.95rem; color:#ccc; line-height:1.7; margin:0 0 1.25rem;">&ldquo;The audience on VJs TV is exactly who we want to reach &mdash; working VJs, event producers, and digital artists who actually buy professional tools. Ideal placement for our brand.&rdquo;</p>
+        <footer style="font-family:'Barlow Condensed',sans-serif; font-size:0.72rem; font-weight:700; letter-spacing:0.12em; text-transform:uppercase; color:var(--vjs-cyan);">
+          — Technology Partner, Berlin
+        </footer>
+      </blockquote>
+      <blockquote style="background:#0a0a0a; border:1px solid #1a1a1a; border-left:3px solid var(--vjs-magenta); padding:1.75rem; margin:0;">
+        <p style="font-family:'Space Grotesk',sans-serif; font-size:0.95rem; color:#ccc; line-height:1.7; margin:0 0 1.25rem;">&ldquo;Submitting our work was straightforward and the editorial treatment is high quality. It feels like a curated gallery rather than a directory dump. That matters to us.&rdquo;</p>
+        <footer style="font-family:'Barlow Condensed',sans-serif; font-size:0.72rem; font-weight:700; letter-spacing:0.12em; text-transform:uppercase; color:var(--vjs-magenta);">
+          — VJ Artist, Amsterdam
+        </footer>
+      </blockquote>
+    </div>
+
+    <!-- FEATURED ARTISTS / STUDIOS LOGO STRIP -->
+    <div class="text-center" style="margin-bottom:1.75rem;">
+      <p style="font-family:'Barlow Condensed',sans-serif; font-size:0.72rem; font-weight:700; letter-spacing:0.16em; text-transform:uppercase; color:#444;">Artists &amp; Studios on the Network</p>
+    </div>
+    <div style="display:flex; flex-wrap:wrap; gap:0.75rem; justify-content:center; margin-bottom:1rem;"><a href="/artists/beeple" style="display:flex; align-items:center; gap:8px; padding:10px 18px; background:#0a0a0a; border:1px solid #1a1a1a; text-decoration:none; font-family:'Barlow Condensed',sans-serif; font-size:0.75rem; font-weight:700; letter-spacing:0.1em; text-transform:uppercase; color:#888; transition:border-color 0.15s, color 0.15s;" onmouseover="this.style.borderColor='var(--vjs-ultraviolet)';this.style.color='#fff';" onmouseout="this.style.borderColor='#1a1a1a';this.style.color='#888';">
+        <span style="display:inline-block; width:8px; height:8px; border-radius:0; background:var(--vjs-ultraviolet); flex-shrink:0;"></span>
+        Beeple
+      </a><a href="/artists/joanie-lemercier-artist" style="display:flex; align-items:center; gap:8px; padding:10px 18px; background:#0a0a0a; border:1px solid #1a1a1a; text-decoration:none; font-family:'Barlow Condensed',sans-serif; font-size:0.75rem; font-weight:700; letter-spacing:0.1em; text-transform:uppercase; color:#888; transition:border-color 0.15s, color 0.15s;" onmouseover="this.style.borderColor='var(--vjs-ultraviolet)';this.style.color='#fff';" onmouseout="this.style.borderColor='#1a1a1a';this.style.color='#888';">
+        <span style="display:inline-block; width:8px; height:8px; border-radius:0; background:var(--vjs-ultraviolet); flex-shrink:0;"></span>
+        Joanie Lemercier
+      </a><a href="/artists/memo-akten" style="display:flex; align-items:center; gap:8px; padding:10px 18px; background:#0a0a0a; border:1px solid #1a1a1a; text-decoration:none; font-family:'Barlow Condensed',sans-serif; font-size:0.75rem; font-weight:700; letter-spacing:0.1em; text-transform:uppercase; color:#888; transition:border-color 0.15s, color 0.15s;" onmouseover="this.style.borderColor='var(--vjs-ultraviolet)';this.style.color='#fff';" onmouseout="this.style.borderColor='#1a1a1a';this.style.color='#888';">
+        <span style="display:inline-block; width:8px; height:8px; border-radius:0; background:var(--vjs-ultraviolet); flex-shrink:0;"></span>
+        Memo Akten
+      </a><a href="/artists/pablo-valbuena" style="display:flex; align-items:center; gap:8px; padding:10px 18px; background:#0a0a0a; border:1px solid #1a1a1a; text-decoration:none; font-family:'Barlow Condensed',sans-serif; font-size:0.75rem; font-weight:700; letter-spacing:0.1em; text-transform:uppercase; color:#888; transition:border-color 0.15s, color 0.15s;" onmouseover="this.style.borderColor='var(--vjs-ultraviolet)';this.style.color='#fff';" onmouseout="this.style.borderColor='#1a1a1a';this.style.color='#888';">
+        <span style="display:inline-block; width:8px; height:8px; border-radius:0; background:var(--vjs-ultraviolet); flex-shrink:0;"></span>
+        Pablo Valbuena
+      </a><a href="/artists/quayola" style="display:flex; align-items:center; gap:8px; padding:10px 18px; background:#0a0a0a; border:1px solid #1a1a1a; text-decoration:none; font-family:'Barlow Condensed',sans-serif; font-size:0.75rem; font-weight:700; letter-spacing:0.1em; text-transform:uppercase; color:#888; transition:border-color 0.15s, color 0.15s;" onmouseover="this.style.borderColor='var(--vjs-ultraviolet)';this.style.color='#fff';" onmouseout="this.style.borderColor='#1a1a1a';this.style.color='#888';">
+        <span style="display:inline-block; width:8px; height:8px; border-radius:0; background:var(--vjs-ultraviolet); flex-shrink:0;"></span>
+        Quayola
+      </a><a href="/artists/refo" style="display:flex; align-items:center; gap:8px; padding:10px 18px; background:#0a0a0a; border:1px solid #1a1a1a; text-decoration:none; font-family:'Barlow Condensed',sans-serif; font-size:0.75rem; font-weight:700; letter-spacing:0.1em; text-transform:uppercase; color:#888; transition:border-color 0.15s, color 0.15s;" onmouseover="this.style.borderColor='var(--vjs-ultraviolet)';this.style.color='#fff';" onmouseout="this.style.borderColor='#1a1a1a';this.style.color='#888';">
+        <span style="display:inline-block; width:8px; height:8px; border-radius:0; background:var(--vjs-ultraviolet); flex-shrink:0;"></span>
+        Refik Anadol
+      </a><a href="/artists/romain-tardy" style="display:flex; align-items:center; gap:8px; padding:10px 18px; background:#0a0a0a; border:1px solid #1a1a1a; text-decoration:none; font-family:'Barlow Condensed',sans-serif; font-size:0.75rem; font-weight:700; letter-spacing:0.1em; text-transform:uppercase; color:#888; transition:border-color 0.15s, color 0.15s;" onmouseover="this.style.borderColor='var(--vjs-ultraviolet)';this.style.color='#fff';" onmouseout="this.style.borderColor='#1a1a1a';this.style.color='#888';">
+        <span style="display:inline-block; width:8px; height:8px; border-radius:0; background:var(--vjs-ultraviolet); flex-shrink:0;"></span>
+        Romain Tardy
+      </a><a href="/artists/ryoichi-kurokawa" style="display:flex; align-items:center; gap:8px; padding:10px 18px; background:#0a0a0a; border:1px solid #1a1a1a; text-decoration:none; font-family:'Barlow Condensed',sans-serif; font-size:0.75rem; font-weight:700; letter-spacing:0.1em; text-transform:uppercase; color:#888; transition:border-color 0.15s, color 0.15s;" onmouseover="this.style.borderColor='var(--vjs-ultraviolet)';this.style.color='#fff';" onmouseout="this.style.borderColor='#1a1a1a';this.style.color='#888';">
+        <span style="display:inline-block; width:8px; height:8px; border-radius:0; background:var(--vjs-ultraviolet); flex-shrink:0;"></span>
+        Ryoichi Kurokawa
+      </a><a href="/artists/ryoji-ikeda" style="display:flex; align-items:center; gap:8px; padding:10px 18px; background:#0a0a0a; border:1px solid #1a1a1a; text-decoration:none; font-family:'Barlow Condensed',sans-serif; font-size:0.75rem; font-weight:700; letter-spacing:0.1em; text-transform:uppercase; color:#888; transition:border-color 0.15s, color 0.15s;" onmouseover="this.style.borderColor='var(--vjs-ultraviolet)';this.style.color='#fff';" onmouseout="this.style.borderColor='#1a1a1a';this.style.color='#888';">
+        <span style="display:inline-block; width:8px; height:8px; border-radius:0; background:var(--vjs-ultraviolet); flex-shrink:0;"></span>
+        Ryoji Ikeda
+      </a><a href="/artists/sougwen-chung" style="display:flex; align-items:center; gap:8px; padding:10px 18px; background:#0a0a0a; border:1px solid #1a1a1a; text-decoration:none; font-family:'Barlow Condensed',sans-serif; font-size:0.75rem; font-weight:700; letter-spacing:0.1em; text-transform:uppercase; color:#888; transition:border-color 0.15s, color 0.15s;" onmouseover="this.style.borderColor='var(--vjs-ultraviolet)';this.style.color='#fff';" onmouseout="this.style.borderColor='#1a1a1a';this.style.color='#888';">
+        <span style="display:inline-block; width:8px; height:8px; border-radius:0; background:var(--vjs-ultraviolet); flex-shrink:0;"></span>
+        Sougwen Chung
+      </a><a href="/artists/yannick-jacquet" style="display:flex; align-items:center; gap:8px; padding:10px 18px; background:#0a0a0a; border:1px solid #1a1a1a; text-decoration:none; font-family:'Barlow Condensed',sans-serif; font-size:0.75rem; font-weight:700; letter-spacing:0.1em; text-transform:uppercase; color:#888; transition:border-color 0.15s, color 0.15s;" onmouseover="this.style.borderColor='var(--vjs-ultraviolet)';this.style.color='#fff';" onmouseout="this.style.borderColor='#1a1a1a';this.style.color='#888';">
+        <span style="display:inline-block; width:8px; height:8px; border-radius:0; background:var(--vjs-ultraviolet); flex-shrink:0;"></span>
+        Yannick Jacquet
+      </a><a href="/studios/59-productions" style="display:flex; align-items:center; gap:8px; padding:10px 18px; background:#0a0a0a; border:1px solid #1a1a1a; text-decoration:none; font-family:'Barlow Condensed',sans-serif; font-size:0.75rem; font-weight:700; letter-spacing:0.1em; text-transform:uppercase; color:#888; transition:border-color 0.15s, color 0.15s;" onmouseover="this.style.borderColor='var(--vjs-cyan)';this.style.color='#fff';" onmouseout="this.style.borderColor='#1a1a1a';this.style.color='#888';">
+        <span style="display:inline-block; width:8px; height:8px; border-radius:0; background:var(--vjs-cyan); flex-shrink:0;"></span>
+        59 Productions
+      </a><a href="/studios/antivj" style="display:flex; align-items:center; gap:8px; padding:10px 18px; background:#0a0a0a; border:1px solid #1a1a1a; text-decoration:none; font-family:'Barlow Condensed',sans-serif; font-size:0.75rem; font-weight:700; letter-spacing:0.1em; text-transform:uppercase; color:#888; transition:border-color 0.15s, color 0.15s;" onmouseover="this.style.borderColor='var(--vjs-cyan)';this.style.color='#fff';" onmouseout="this.style.borderColor='#1a1a1a';this.style.color='#888';">
+        <span style="display:inline-block; width:8px; height:8px; border-radius:0; background:var(--vjs-cyan); flex-shrink:0;"></span>
+        AntiVJ
+      </a><a href="/studios/d-fuse" style="display:flex; align-items:center; gap:8px; padding:10px 18px; background:#0a0a0a; border:1px solid #1a1a1a; text-decoration:none; font-family:'Barlow Condensed',sans-serif; font-size:0.75rem; font-weight:700; letter-spacing:0.1em; text-transform:uppercase; color:#888; transition:border-color 0.15s, color 0.15s;" onmouseover="this.style.borderColor='var(--vjs-cyan)';this.style.color='#fff';" onmouseout="this.style.borderColor='#1a1a1a';this.style.color='#888';">
+        <span style="display:inline-block; width:8px; height:8px; border-radius:0; background:var(--vjs-cyan); flex-shrink:0;"></span>
+        D-Fuse
+      </a><a href="/studios/derivative" style="display:flex; align-items:center; gap:8px; padding:10px 18px; background:#0a0a0a; border:1px solid #1a1a1a; text-decoration:none; font-family:'Barlow Condensed',sans-serif; font-size:0.75rem; font-weight:700; letter-spacing:0.1em; text-transform:uppercase; color:#888; transition:border-color 0.15s, color 0.15s;" onmouseover="this.style.borderColor='var(--vjs-cyan)';this.style.color='#fff';" onmouseout="this.style.borderColor='#1a1a1a';this.style.color='#888';">
+        <span style="display:inline-block; width:8px; height:8px; border-radius:0; background:var(--vjs-cyan); flex-shrink:0;"></span>
+        Derivative
+      </a><a href="/studios/fuse-star" style="display:flex; align-items:center; gap:8px; padding:10px 18px; background:#0a0a0a; border:1px solid #1a1a1a; text-decoration:none; font-family:'Barlow Condensed',sans-serif; font-size:0.75rem; font-weight:700; letter-spacing:0.1em; text-transform:uppercase; color:#888; transition:border-color 0.15s, color 0.15s;" onmouseover="this.style.borderColor='var(--vjs-cyan)';this.style.color='#fff';" onmouseout="this.style.borderColor='#1a1a1a';this.style.color='#888';">
+        <span style="display:inline-block; width:8px; height:8px; border-radius:0; background:var(--vjs-cyan); flex-shrink:0;"></span>
+        fuse*
+      </a><a href="/studios/marshmallow-laser-feast" style="display:flex; align-items:center; gap:8px; padding:10px 18px; background:#0a0a0a; border:1px solid #1a1a1a; text-decoration:none; font-family:'Barlow Condensed',sans-serif; font-size:0.75rem; font-weight:700; letter-spacing:0.1em; text-transform:uppercase; color:#888; transition:border-color 0.15s, color 0.15s;" onmouseover="this.style.borderColor='var(--vjs-cyan)';this.style.color='#fff';" onmouseout="this.style.borderColor='#1a1a1a';this.style.color='#888';">
+        <span style="display:inline-block; width:8px; height:8px; border-radius:0; background:var(--vjs-cyan); flex-shrink:0;"></span>
+        Marshmallow Laser Feast
+      </a><a href="/studios/moment-factory" style="display:flex; align-items:center; gap:8px; padding:10px 18px; background:#0a0a0a; border:1px solid #1a1a1a; text-decoration:none; font-family:'Barlow Condensed',sans-serif; font-size:0.75rem; font-weight:700; letter-spacing:0.1em; text-transform:uppercase; color:#888; transition:border-color 0.15s, color 0.15s;" onmouseover="this.style.borderColor='var(--vjs-cyan)';this.style.color='#fff';" onmouseout="this.style.borderColor='#1a1a1a';this.style.color='#888';">
+        <span style="display:inline-block; width:8px; height:8px; border-radius:0; background:var(--vjs-cyan); flex-shrink:0;"></span>
+        Moment Factory
+      </a><a href="/studios/nonotak" style="display:flex; align-items:center; gap:8px; padding:10px 18px; background:#0a0a0a; border:1px solid #1a1a1a; text-decoration:none; font-family:'Barlow Condensed',sans-serif; font-size:0.75rem; font-weight:700; letter-spacing:0.1em; text-transform:uppercase; color:#888; transition:border-color 0.15s, color 0.15s;" onmouseover="this.style.borderColor='var(--vjs-cyan)';this.style.color='#fff';" onmouseout="this.style.borderColor='#1a1a1a';this.style.color='#888';">
+        <span style="display:inline-block; width:8px; height:8px; border-radius:0; background:var(--vjs-cyan); flex-shrink:0;"></span>
+        nonotak
+      </a><a href="/studios/quayola-studio" style="display:flex; align-items:center; gap:8px; padding:10px 18px; background:#0a0a0a; border:1px solid #1a1a1a; text-decoration:none; font-family:'Barlow Condensed',sans-serif; font-size:0.75rem; font-weight:700; letter-spacing:0.1em; text-transform:uppercase; color:#888; transition:border-color 0.15s, color 0.15s;" onmouseover="this.style.borderColor='var(--vjs-cyan)';this.style.color='#fff';" onmouseout="this.style.borderColor='#1a1a1a';this.style.color='#888';">
+        <span style="display:inline-block; width:8px; height:8px; border-radius:0; background:var(--vjs-cyan); flex-shrink:0;"></span>
+        Quayola
+      </a><a href="/studios/refik-anadol-studio" style="display:flex; align-items:center; gap:8px; padding:10px 18px; background:#0a0a0a; border:1px solid #1a1a1a; text-decoration:none; font-family:'Barlow Condensed',sans-serif; font-size:0.75rem; font-weight:700; letter-spacing:0.1em; text-transform:uppercase; color:#888; transition:border-color 0.15s, color 0.15s;" onmouseover="this.style.borderColor='var(--vjs-cyan)';this.style.color='#fff';" onmouseout="this.style.borderColor='#1a1a1a';this.style.color='#888';">
+        <span style="display:inline-block; width:8px; height:8px; border-radius:0; background:var(--vjs-cyan); flex-shrink:0;"></span>
+        Refik Anadol Studio
+      </a><a href="/studios/rhizomatiks" style="display:flex; align-items:center; gap:8px; padding:10px 18px; background:#0a0a0a; border:1px solid #1a1a1a; text-decoration:none; font-family:'Barlow Condensed',sans-serif; font-size:0.75rem; font-weight:700; letter-spacing:0.1em; text-transform:uppercase; color:#888; transition:border-color 0.15s, color 0.15s;" onmouseover="this.style.borderColor='var(--vjs-cyan)';this.style.color='#fff';" onmouseout="this.style.borderColor='#1a1a1a';this.style.color='#888';">
+        <span style="display:inline-block; width:8px; height:8px; border-radius:0; background:var(--vjs-cyan); flex-shrink:0;"></span>
+        Rhizomatiks
+      </a><a href="/studios/studio-drift" style="display:flex; align-items:center; gap:8px; padding:10px 18px; background:#0a0a0a; border:1px solid #1a1a1a; text-decoration:none; font-family:'Barlow Condensed',sans-serif; font-size:0.75rem; font-weight:700; letter-spacing:0.1em; text-transform:uppercase; color:#888; transition:border-color 0.15s, color 0.15s;" onmouseover="this.style.borderColor='var(--vjs-cyan)';this.style.color='#fff';" onmouseout="this.style.borderColor='#1a1a1a';this.style.color='#888';">
+        <span style="display:inline-block; width:8px; height:8px; border-radius:0; background:var(--vjs-cyan); flex-shrink:0;"></span>
+        Studio DRIFT
+      </a><a href="/studios/teamlab" style="display:flex; align-items:center; gap:8px; padding:10px 18px; background:#0a0a0a; border:1px solid #1a1a1a; text-decoration:none; font-family:'Barlow Condensed',sans-serif; font-size:0.75rem; font-weight:700; letter-spacing:0.1em; text-transform:uppercase; color:#888; transition:border-color 0.15s, color 0.15s;" onmouseover="this.style.borderColor='var(--vjs-cyan)';this.style.color='#fff';" onmouseout="this.style.borderColor='#1a1a1a';this.style.color='#888';">
+        <span style="display:inline-block; width:8px; height:8px; border-radius:0; background:var(--vjs-cyan); flex-shrink:0;"></span>
+        teamLab
+      </a><a href="/studios/united-visual-artists" style="display:flex; align-items:center; gap:8px; padding:10px 18px; background:#0a0a0a; border:1px solid #1a1a1a; text-decoration:none; font-family:'Barlow Condensed',sans-serif; font-size:0.75rem; font-weight:700; letter-spacing:0.1em; text-transform:uppercase; color:#888; transition:border-color 0.15s, color 0.15s;" onmouseover="this.style.borderColor='var(--vjs-cyan)';this.style.color='#fff';" onmouseout="this.style.borderColor='#1a1a1a';this.style.color='#888';">
+        <span style="display:inline-block; width:8px; height:8px; border-radius:0; background:var(--vjs-cyan); flex-shrink:0;"></span>
+        United Visual Artists
+      </a><a href="/studios/universal-everything" style="display:flex; align-items:center; gap:8px; padding:10px 18px; background:#0a0a0a; border:1px solid #1a1a1a; text-decoration:none; font-family:'Barlow Condensed',sans-serif; font-size:0.75rem; font-weight:700; letter-spacing:0.1em; text-transform:uppercase; color:#888; transition:border-color 0.15s, color 0.15s;" onmouseover="this.style.borderColor='var(--vjs-cyan)';this.style.color='#fff';" onmouseout="this.style.borderColor='#1a1a1a';this.style.color='#888';">
+        <span style="display:inline-block; width:8px; height:8px; border-radius:0; background:var(--vjs-cyan); flex-shrink:0;"></span>
+        Universal Everything
+      </a><a href="/studios/uva" style="display:flex; align-items:center; gap:8px; padding:10px 18px; background:#0a0a0a; border:1px solid #1a1a1a; text-decoration:none; font-family:'Barlow Condensed',sans-serif; font-size:0.75rem; font-weight:700; letter-spacing:0.1em; text-transform:uppercase; color:#888; transition:border-color 0.15s, color 0.15s;" onmouseover="this.style.borderColor='var(--vjs-cyan)';this.style.color='#fff';" onmouseout="this.style.borderColor='#1a1a1a';this.style.color='#888';">
+        <span style="display:inline-block; width:8px; height:8px; border-radius:0; background:var(--vjs-cyan); flex-shrink:0;"></span>
+        United Visual Artists
+      </a><a href="/studios/veemee-visuals" style="display:flex; align-items:center; gap:8px; padding:10px 18px; background:#0a0a0a; border:1px solid #1a1a1a; text-decoration:none; font-family:'Barlow Condensed',sans-serif; font-size:0.75rem; font-weight:700; letter-spacing:0.1em; text-transform:uppercase; color:#888; transition:border-color 0.15s, color 0.15s;" onmouseover="this.style.borderColor='var(--vjs-cyan)';this.style.color='#fff';" onmouseout="this.style.borderColor='#1a1a1a';this.style.color='#888';">
+        <span style="display:inline-block; width:8px; height:8px; border-radius:0; background:var(--vjs-cyan); flex-shrink:0;"></span>
+        VeeMee Visuals
+      </a><a href="/studios/whitevoid" style="display:flex; align-items:center; gap:8px; padding:10px 18px; background:#0a0a0a; border:1px solid #1a1a1a; text-decoration:none; font-family:'Barlow Condensed',sans-serif; font-size:0.75rem; font-weight:700; letter-spacing:0.1em; text-transform:uppercase; color:#888; transition:border-color 0.15s, color 0.15s;" onmouseover="this.style.borderColor='var(--vjs-cyan)';this.style.color='#fff';" onmouseout="this.style.borderColor='#1a1a1a';this.style.color='#888';">
+        <span style="display:inline-block; width:8px; height:8px; border-radius:0; background:var(--vjs-cyan); flex-shrink:0;"></span>
+        WHITEvoid / DARK MATTER
+      </a></div>
+    <div class="text-center" style="margin-top:1.25rem;">
+      <a href="/artists" class="vjs-btn" style="border:1px solid #333; color:#666; padding:10px 24px; text-decoration:none; font-family:'Barlow Condensed',sans-serif; font-size:0.72rem; font-weight:700; letter-spacing:0.1em; text-transform:uppercase;">View all 23 artists &rsaquo;</a>
+    </div>
+
+  </div>
+</section>
+
 <section class="vjs-section vjs-cta-section" id="contact">
   <div class="container">
     <div class="row align-items-center">
@@ -1157,8 +1310,10 @@ function handleContactSubmit(e) {
   .then(function(res) { return res.json().then(function(d) { return { ok: res.ok, data: d }; }); })
   .then(function(r) {
     if (r.ok && r.data.success) {
-      form.style.display = 'none';
-      document.getElementById('contactSuccess').style.display = 'block';
+      if (typeof window.vjsTrack === 'function') {
+        window.vjsTrack('partner_sent', { source: 'partners-page' });
+      }
+      window.location.href = '/thank-you/partner/' + (r.data.issue_number ? '?ref=' + encodeURIComponent(r.data.issue_number) : '');
     } else {
       throw new Error(r.data.error || 'Something went wrong');
     }

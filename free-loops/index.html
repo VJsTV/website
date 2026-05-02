@@ -1,98 +1,10 @@
 ---
 layout: default
-title: "Free VJ Loops Pack — 18 royalty-free clips | VJs TV"
-meta_title: "Free VJ Loops Pack — 18 royalty-free clips for Resolume & TouchDesigner"
-meta_description: "Download VJs TV Loops 01 — 18 seamlessly looping clips for Resolume, TouchDesigner, MadMapper. Free, royalty-free, commercial use included. Email required for delivery."
+title: "Free VJ Loops — 18 royalty-free clips for Resolume, TouchDesigner & beyond"
+meta_title: "Free VJ Loops — Download 18 royalty-free video clips"
+meta_description: "Download 18 free, seamlessly looping video clips — royalty-free for commercial use. Works in Resolume, TouchDesigner, VDMX, Modul8, and every major VJ platform."
 permalink: /free-loops/
 ---
-
-{% include layouts/nav/nav-3.html default_logo="white" %}
-
-{%- assign _country_count_arr = "" | split: "" -%}
-{%- for v in site.vjs -%}{%- if v.country and v.country != "" -%}{%- assign _country_count_arr = _country_count_arr | push: v.country -%}{%- endif -%}{%- endfor -%}
-{%- assign _countries = _country_count_arr | uniq | size -%}
-
-<section class="vjs-section" style="padding-top:4rem; padding-bottom:2rem;">
-  <div class="container" style="max-width:920px;">
-    <div style="text-align:center; margin-bottom:2.5rem;">
-      <p style="font-family:'Barlow Condensed',sans-serif; font-size:0.78rem; font-weight:700; letter-spacing:0.22em; text-transform:uppercase; color:var(--vjs-cyan); margin:0 0 1rem;">Free Pack &middot; VJs TV Loops 01</p>
-      <h1 style="font-family:'Barlow Condensed',sans-serif; font-weight:700; font-size:clamp(2rem, 5vw, 3.4rem); color:#fff; line-height:1.05; margin:0 0 1.25rem;">18 free VJ loops &mdash; ready for your next set.</h1>
-      <p style="font-family:'Space Grotesk',sans-serif; font-size:1.1rem; color:var(--vjs-text-muted); line-height:1.6; max-width:680px; margin:0 auto 1.5rem;">Seamlessly looping HD clips you can drop straight into <strong style="color:#fff;">Resolume</strong>, <strong style="color:#fff;">TouchDesigner</strong>, <strong style="color:#fff;">MadMapper</strong> or any modern VJ tool. Royalty-free. Commercial use included. Drop your email and we&rsquo;ll send the download link.</p>
-      <p style="font-family:'Space Grotesk',sans-serif; font-size:0.85rem; color:#666; margin:0;">Trusted by {{ site.vjs | size }}+ VJs across {{ _countries }} countries on the VJs TV network.</p>
-    </div>
-
-    <!-- BENEFITS -->
-    <div class="vjs-grid vjs-grid-3" style="gap:1rem; margin-bottom:2.5rem;">
-      <div class="vjs-card" style="border-color:rgba(157,0,255,0.35);">
-        <div class="vjs-card-body" style="padding:1.5rem;">
-          <div style="font-size:1.6rem; margin-bottom:0.5rem;">&#127916;</div>
-          <h3 style="font-family:'Space Grotesk',sans-serif; color:#fff; font-size:1.05rem; margin:0 0 0.5rem;">18 HD clips</h3>
-          <p style="color:var(--vjs-text-muted); font-size:0.88rem; margin:0; line-height:1.5;">Mixed BPM, mixed length. Curated for live performance &mdash; no filler.</p>
-        </div>
-      </div>
-      <div class="vjs-card" style="border-color:rgba(0,249,255,0.35);">
-        <div class="vjs-card-body" style="padding:1.5rem;">
-          <div style="font-size:1.6rem; margin-bottom:0.5rem;">&#128260;</div>
-          <h3 style="font-family:'Space Grotesk',sans-serif; color:#fff; font-size:1.05rem; margin:0 0 0.5rem;">Seamless loops</h3>
-          <p style="color:var(--vjs-text-muted); font-size:0.88rem; margin:0; line-height:1.5;">Frame-perfect loop points. ProRes &amp; HAP variants for instant playback.</p>
-        </div>
-      </div>
-      <div class="vjs-card" style="border-color:rgba(255,0,100,0.35);">
-        <div class="vjs-card-body" style="padding:1.5rem;">
-          <div style="font-size:1.6rem; margin-bottom:0.5rem;">&#9889;</div>
-          <h3 style="font-family:'Space Grotesk',sans-serif; color:#fff; font-size:1.05rem; margin:0 0 0.5rem;">Commercial use</h3>
-          <p style="color:var(--vjs-text-muted); font-size:0.88rem; margin:0; line-height:1.5;">Use them in paid gigs, brand activations, club nights &mdash; no royalties owed.</p>
-        </div>
-      </div>
-    </div>
-
-    <!-- EMAIL CAPTURE -->
-    <div style="background:#0a0a0a; border:1px solid #222; padding:2rem; margin-bottom:3rem;">
-      <form id="free-loops-form" autocomplete="off" novalidate>
-        <label for="fl-email" style="display:block; font-family:'Barlow Condensed',sans-serif; font-size:0.75rem; font-weight:700; letter-spacing:0.18em; text-transform:uppercase; color:var(--vjs-cyan); margin-bottom:0.5rem;">Email me the loop pack</label>
-        <div style="display:flex; flex-wrap:wrap; gap:0.75rem;">
-          <div style="position:absolute; left:-9999px;" aria-hidden="true"><input type="text" name="website_url" tabindex="-1" autocomplete="off" /></div>
-          <input id="fl-email" type="email" name="email" required placeholder="your@email.com" style="flex:1 1 280px; min-width:0; background:#000; border:1px solid #333; color:#fff; padding:14px 16px; font-family:'Space Grotesk',sans-serif; font-size:1rem;">
-          <input type="hidden" name="source" value="free-loops" />
-          <button type="submit" id="fl-btn" class="vjs-btn vjs-btn-primary" style="padding:14px 28px; flex:0 0 auto;">Send Me the Pack</button>
-        </div>
-        <p style="font-family:'Space Grotesk',sans-serif; font-size:0.8rem; color:#666; margin:0.75rem 0 0;">Double opt-in &mdash; we&rsquo;ll send a confirmation link first. Unsubscribe any time. No spam.</p>
-        <p id="fl-msg" role="status" style="margin:0.75rem 0 0; font-family:'Barlow Condensed',sans-serif; font-size:0.85rem; display:none;"></p>
-      </form>
-    </div>
-
-    <!-- FAQ -->
-    <h2 style="font-family:'Barlow Condensed',sans-serif; font-weight:700; font-size:1.6rem; color:#fff; margin:0 0 1.25rem; letter-spacing:0.04em;">FAQ</h2>
-    <div style="display:flex; flex-direction:column; gap:0.5rem;">
-      <details style="background:#0a0a0a; border:1px solid #222; padding:1rem 1.25rem;">
-        <summary style="cursor:pointer; font-family:'Space Grotesk',sans-serif; color:#fff; font-size:1rem; font-weight:600;">How do I use these in Resolume?</summary>
-        <div style="color:var(--vjs-text-muted); font-size:0.92rem; line-height:1.7; margin-top:0.75rem;">
-          <p style="margin:0 0 0.5rem;">Drag the .mov files directly into your Resolume composition or onto a clip slot. The pack ships in HAP-encoded variants for the smoothest, GPU-accelerated playback inside Resolume Arena and Avenue 7+.</p>
-          <p style="margin:0;">If you only have ProRes versions, Resolume will transcode on first import &mdash; one-time cost, then it caches forever.</p>
-        </div>
-      </details>
-      <details style="background:#0a0a0a; border:1px solid #222; padding:1rem 1.25rem;">
-        <summary style="cursor:pointer; font-family:'Space Grotesk',sans-serif; color:#fff; font-size:1rem; font-weight:600;">How do I use these in TouchDesigner?</summary>
-        <div style="color:var(--vjs-text-muted); font-size:0.92rem; line-height:1.7; margin-top:0.75rem;">
-          <p style="margin:0;">Use a <strong style="color:#fff;">Movie File In TOP</strong> and point it at any clip in the pack. Set <em>Loop Crossfade</em> to 0 since the clips are already loop-ready, then patch into your render network. ProRes 422 plays back natively on macOS; on Windows we recommend the included HAP variants for low CPU overhead.</p>
-        </div>
-      </details>
-      <details style="background:#0a0a0a; border:1px solid #222; padding:1rem 1.25rem;">
-        <summary style="cursor:pointer; font-family:'Space Grotesk',sans-serif; color:#fff; font-size:1rem; font-weight:600;">Can I use these commercially?</summary>
-        <div style="color:var(--vjs-text-muted); font-size:0.92rem; line-height:1.7; margin-top:0.75rem;">
-          <p style="margin:0;">Yes. The pack ships under a permissive royalty-free license that explicitly covers paid VJ gigs, club nights, festival sets, brand activations, music videos and content used in commercial advertising. No usage reporting or extra fees.</p>
-        </div>
-      </details>
-      <details style="background:#0a0a0a; border:1px solid #222; padding:1rem 1.25rem;">
-        <summary style="cursor:pointer; font-family:'Space Grotesk',sans-serif; color:#fff; font-size:1rem; font-weight:600;">What&rsquo;s the license &mdash; what can&rsquo;t I do?</summary>
-        <div style="color:var(--vjs-text-muted); font-size:0.92rem; line-height:1.7; margin-top:0.75rem;">
-          <p style="margin:0 0 0.5rem;">You can perform with them, project them, render them inside your own audiovisual works, and ship them as part of a derivative work (eg a music video).</p>
-          <p style="margin:0;">You <strong style="color:#fff;">cannot</strong> resell the raw clips on their own (no redistributing the pack, no flipping them on stock sites) or claim authorship of the source files. See <a href="/license" style="color:var(--vjs-cyan);">/license</a> for the full terms.</p>
-        </div>
-      </details>
-    </div>
-  </div>
-</section>
 
 <script type="application/ld+json">
 {
@@ -101,94 +13,290 @@ permalink: /free-loops/
   "mainEntity": [
     {
       "@type": "Question",
-      "name": "How do I use these in Resolume?",
+      "name": "How do I use these loops in Resolume?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "Drag the .mov files directly into your Resolume composition or onto a clip slot. The pack ships in HAP-encoded variants for the smoothest, GPU-accelerated playback inside Resolume Arena and Avenue 7+. If you only have ProRes versions, Resolume will transcode on first import — one-time cost, then it caches forever."
+        "text": "Import the ZIP into Resolume Arena or Avenue via File → Add Files to Library. The clips appear in your Media Library panel and can be dragged onto any clip slot. They are all HAP-compatible and loop-ready — just set the clip to loop mode in the clip settings panel."
       }
     },
     {
       "@type": "Question",
-      "name": "How do I use these in TouchDesigner?",
+      "name": "How do I use these loops in TouchDesigner?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "Use a Movie File In TOP and point it at any clip in the pack. Set Loop Crossfade to 0 since the clips are already loop-ready, then patch into your render network. ProRes 422 plays back natively on macOS; on Windows we recommend the included HAP variants for low CPU overhead."
+        "text": "In TouchDesigner, use a Movie File In TOP and point it at any clip from the pack. Set the 'Play Mode' to 'Loop' and the clip will cycle seamlessly. For multi-clip setups, use a Switch TOP driven by a Count CHOP or MIDI input to cut between them in real time."
       }
     },
     {
       "@type": "Question",
-      "name": "Can I use these commercially?",
+      "name": "Can I use these loops for commercial projects?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "Yes. The pack ships under a permissive royalty-free license that explicitly covers paid VJ gigs, club nights, festival sets, brand activations, music videos and content used in commercial advertising. No usage reporting or extra fees."
+        "text": "Yes. All 18 clips in VJs TV Loops 01 are licensed for royalty-free commercial use — live events, broadcast, advertising, film, and online content. You do not need to credit VJs TV, but attribution is always appreciated."
       }
     },
     {
       "@type": "Question",
-      "name": "What is the license — what can't I do?",
+      "name": "What is the licence for these loops?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "You can perform with the loops, project them, render them inside your own audiovisual works, and ship them as part of a derivative work such as a music video. You cannot resell the raw clips on their own (no redistributing the pack, no flipping them on stock sites) or claim authorship of the source files."
+        "text": "The clips are distributed under a royalty-free commercial licence. You may use them in live performances, event productions, music videos, broadcasts, and digital content without per-use fees. Redistribution or resale of the clips themselves (as standalone files or in other loop packs) is not permitted. Full terms at vjstv.com/license."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "What file formats are included?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "All clips are delivered as ProRes or H.264 MOV files, 1920×1080, 30fps, with seamless loop points. A HAP-encoded version is available on request. They play in Resolume, TouchDesigner, VDMX, Modul8, Notch, and any platform that accepts standard MOV/MP4 input."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Do I need to pay anything?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "The 18-clip VJs TV Loops 01 pack is completely free. All you need is an email address so we can send you the download link and keep you updated when new packs are released."
       }
     }
   ]
 }
 </script>
 
+{% include layouts/nav/nav-3.html default_logo="white" %}
+
+<!-- HERO -->
+<section class="vjs-hero" style="min-height:100vh; padding-top:0;">
+  <div class="vjs-hero-bg"></div>
+  <div class="vjs-hero-content" style="position:relative; z-index:1; padding:0 1rem;">
+
+    <p style="font-family:'Barlow Condensed',sans-serif; font-size:0.72rem; font-weight:700; letter-spacing:0.2em; text-transform:uppercase; color:var(--vjs-magenta); margin:0 0 1.25rem;">Free Download</p>
+    <h1 class="vjs-hero-title" style="font-size:clamp(2rem, 7vw, 4.5rem); margin-bottom:1rem; line-height:1.05;">
+      18 Free VJ Loops.<br>
+      <span style="color:var(--vjs-cyan);">Royalty-free.</span> Commercial use.
+    </h1>
+    <p class="vjs-hero-subtitle" style="max-width:600px; margin:0 auto 0.75rem;">
+      Seamlessly looping clips ready for Resolume, TouchDesigner, VDMX, Modul8 — and every other VJ platform. No watermarks, no attribution required, no per-use fees.
+    </p>
+    <p style="font-family:'Space Grotesk',sans-serif; font-size:0.85rem; color:#666; margin:0 auto 2.5rem;">
+      Used by {{ site.vjs | size }}+ artists in our network &middot; {{ site.studios | size }}+ studios &middot; 50+ countries
+    </p>
+
+    <!-- EMAIL GATE FORM -->
+    <div style="max-width:480px; margin:0 auto;">
+      <form id="free-loops-form" novalidate style="display:flex; flex-direction:column; gap:0.75rem;">
+        <div style="display:flex; gap:0; background:#0a0a0a; border:1px solid var(--vjs-ultraviolet);">
+          <input type="email" id="free-loops-email" name="email" placeholder="your@email.com" required
+            style="flex:1; background:transparent; border:none; padding:14px 16px; color:#fff; font-family:'Space Grotesk',sans-serif; font-size:0.9rem; outline:none;" />
+          <input type="hidden" name="source" value="free-loops" />
+          <button type="submit" id="free-loops-btn"
+            style="font-family:'Barlow Condensed',sans-serif; font-size:0.75rem; font-weight:700; letter-spacing:0.12em; text-transform:uppercase; padding:14px 24px; background:var(--vjs-ultraviolet); color:#fff; border:none; cursor:pointer; white-space:nowrap;">
+            Get Free Loops
+          </button>
+        </div>
+        <p id="free-loops-msg" style="font-family:'Barlow Condensed',sans-serif; font-size:0.72rem; color:var(--vjs-text-muted); text-align:center; margin:0; display:none;"></p>
+        <p style="font-family:'Barlow Condensed',sans-serif; font-size:0.68rem; color:#444; text-align:center; margin:0; letter-spacing:0.06em; text-transform:uppercase;">Free forever &middot; No spam &middot; Unsubscribe any time</p>
+      </form>
+    </div>
+
+  </div>
+</section>
+
+<!-- BENEFITS -->
+<section class="vjs-section vjs-section-alt">
+  <div class="container">
+    <div class="text-center" style="margin-bottom:3rem;">
+      <div class="vjs-accent-line vjs-accent-line-center"></div>
+      <h2 class="vjs-section-title">What you get</h2>
+      <p class="vjs-section-subtitle">VJs TV Loops 01 — the first pack from the network.</p>
+    </div>
+
+    <div class="vjs-grid vjs-grid-3" style="gap:1.5rem; margin-bottom:3rem;">
+      <div class="vjs-card" style="text-align:center; border-color:rgba(157,0,255,0.3);">
+        <div class="vjs-card-body" style="padding:2rem;">
+          <div style="font-size:2.5rem; margin-bottom:1rem;">&#127916;</div>
+          <h4 class="vjs-card-title" style="color:var(--vjs-ultraviolet) !important;">18 Seamless Clips</h4>
+          <p class="vjs-card-text">Full-HD 1920×1080 at 30fps. Every clip loops without a single frame cut — drop them in and forget about them.</p>
+        </div>
+      </div>
+      <div class="vjs-card" style="text-align:center; border-color:rgba(0,249,255,0.3);">
+        <div class="vjs-card-body" style="padding:2rem;">
+          <div style="font-size:2.5rem; margin-bottom:1rem;">&#9851;</div>
+          <h4 class="vjs-card-title" style="color:var(--vjs-cyan) !important;">Works Everywhere</h4>
+          <p class="vjs-card-text">Resolume Arena &amp; Avenue, TouchDesigner, VDMX, Modul8, Notch, Derivative, and any platform that takes standard video input.</p>
+        </div>
+      </div>
+      <div class="vjs-card" style="text-align:center; border-color:rgba(0,245,212,0.3);">
+        <div class="vjs-card-body" style="padding:2rem;">
+          <div style="font-size:2.5rem; margin-bottom:1rem;">&#9989;</div>
+          <h4 class="vjs-card-title" style="color:var(--vjs-electric-blue) !important;">True Royalty-Free</h4>
+          <p class="vjs-card-text">Commercial licence included. Live events, broadcast, advertising, music videos — no per-use fees, no attribution wall.</p>
+        </div>
+      </div>
+      <div class="vjs-card" style="text-align:center; border-color:rgba(255,0,255,0.3);">
+        <div class="vjs-card-body" style="padding:2rem;">
+          <div style="font-size:2.5rem; margin-bottom:1rem;">&#127775;</div>
+          <h4 class="vjs-card-title" style="color:var(--vjs-magenta) !important;">Blend-Mode Ready</h4>
+          <p class="vjs-card-text">Shot and rendered for additive and screen blend modes — layer them on any background without masking or keying.</p>
+        </div>
+      </div>
+      <div class="vjs-card" style="text-align:center; border-color:rgba(255,60,172,0.3);">
+        <div class="vjs-card-body" style="padding:2rem;">
+          <div style="font-size:2.5rem; margin-bottom:1rem;">&#128190;</div>
+          <h4 class="vjs-card-title" style="color:var(--vjs-pink) !important;">ProRes + H.264</h4>
+          <p class="vjs-card-text">Two codec options so you can pick quality or performance depending on your hardware and show requirements.</p>
+        </div>
+      </div>
+      <div class="vjs-card" style="text-align:center; border-color:rgba(123,47,255,0.3);">
+        <div class="vjs-card-body" style="padding:2rem;">
+          <div style="font-size:2.5rem; margin-bottom:1rem;">&#128336;</div>
+          <h4 class="vjs-card-title" style="color:var(--vjs-ultraviolet) !important;">Instant Delivery</h4>
+          <p class="vjs-card-text">Confirm your email and the download link arrives immediately. No waiting, no approval queue.</p>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- FAQ -->
+<section class="vjs-section" id="faq">
+  <div class="container" style="max-width:760px;">
+    <div class="text-center" style="margin-bottom:3rem;">
+      <div class="vjs-accent-line vjs-accent-line-center"></div>
+      <h2 class="vjs-section-title">Common questions</h2>
+    </div>
+
+    <div style="display:flex; flex-direction:column; gap:0;">
+
+      <details style="border-bottom:1px solid #1a1a1a; padding:1.25rem 0;">
+        <summary style="font-family:'Barlow Condensed',sans-serif; font-size:1rem; font-weight:700; letter-spacing:0.08em; text-transform:uppercase; color:#fff; cursor:pointer; list-style:none; display:flex; justify-content:space-between; align-items:center;">
+          How do I use these in Resolume? <span style="color:var(--vjs-ultraviolet); font-size:1.2rem;">+</span>
+        </summary>
+        <p style="font-family:'Space Grotesk',sans-serif; font-size:0.9rem; color:var(--vjs-text-muted); line-height:1.7; margin:1rem 0 0;">Import the ZIP into Resolume Arena or Avenue via <strong style="color:#fff;">File → Add Files to Library</strong>. The clips appear in your Media Library panel and can be dragged onto any clip slot. They are all loop-ready — just set the clip to loop mode in the clip settings panel.</p>
+      </details>
+
+      <details style="border-bottom:1px solid #1a1a1a; padding:1.25rem 0;">
+        <summary style="font-family:'Barlow Condensed',sans-serif; font-size:1rem; font-weight:700; letter-spacing:0.08em; text-transform:uppercase; color:#fff; cursor:pointer; list-style:none; display:flex; justify-content:space-between; align-items:center;">
+          How do I use these in TouchDesigner? <span style="color:var(--vjs-ultraviolet); font-size:1.2rem;">+</span>
+        </summary>
+        <p style="font-family:'Space Grotesk',sans-serif; font-size:0.9rem; color:var(--vjs-text-muted); line-height:1.7; margin:1rem 0 0;">In TouchDesigner, use a <strong style="color:#fff;">Movie File In TOP</strong> and point it at any clip from the pack. Set the Play Mode to <strong style="color:#fff;">Loop</strong> and the clip will cycle seamlessly. For multi-clip setups, use a Switch TOP driven by a Count CHOP or MIDI input to cut between clips in real time.</p>
+      </details>
+
+      <details style="border-bottom:1px solid #1a1a1a; padding:1.25rem 0;">
+        <summary style="font-family:'Barlow Condensed',sans-serif; font-size:1rem; font-weight:700; letter-spacing:0.08em; text-transform:uppercase; color:#fff; cursor:pointer; list-style:none; display:flex; justify-content:space-between; align-items:center;">
+          Can I use these for commercial projects? <span style="color:var(--vjs-ultraviolet); font-size:1.2rem;">+</span>
+        </summary>
+        <p style="font-family:'Space Grotesk',sans-serif; font-size:0.9rem; color:var(--vjs-text-muted); line-height:1.7; margin:1rem 0 0;">Yes. All 18 clips are licensed for <strong style="color:#fff;">royalty-free commercial use</strong> — live events, broadcast, advertising, film, and online content. No per-use fees and no attribution required (though always appreciated).</p>
+      </details>
+
+      <details style="border-bottom:1px solid #1a1a1a; padding:1.25rem 0;">
+        <summary style="font-family:'Barlow Condensed',sans-serif; font-size:1rem; font-weight:700; letter-spacing:0.08em; text-transform:uppercase; color:#fff; cursor:pointer; list-style:none; display:flex; justify-content:space-between; align-items:center;">
+          What is the exact licence? <span style="color:var(--vjs-ultraviolet); font-size:1.2rem;">+</span>
+        </summary>
+        <p style="font-family:'Space Grotesk',sans-serif; font-size:0.9rem; color:var(--vjs-text-muted); line-height:1.7; margin:1rem 0 0;">Royalty-free commercial licence. Use in live performances, event productions, music videos, broadcasts, and digital content without per-use fees. <strong style="color:#fff;">Redistribution or resale of the clips themselves</strong> (as standalone files or in other loop packs) is not permitted. Full terms at <a href="/license" style="color:var(--vjs-ultraviolet);">vjstv.com/license</a>.</p>
+      </details>
+
+      <details style="border-bottom:1px solid #1a1a1a; padding:1.25rem 0;">
+        <summary style="font-family:'Barlow Condensed',sans-serif; font-size:1rem; font-weight:700; letter-spacing:0.08em; text-transform:uppercase; color:#fff; cursor:pointer; list-style:none; display:flex; justify-content:space-between; align-items:center;">
+          What file formats are included? <span style="color:var(--vjs-ultraviolet); font-size:1.2rem;">+</span>
+        </summary>
+        <p style="font-family:'Space Grotesk',sans-serif; font-size:0.9rem; color:var(--vjs-text-muted); line-height:1.7; margin:1rem 0 0;">All clips are delivered as <strong style="color:#fff;">ProRes and H.264 MOV files</strong>, 1920×1080, 30fps, with seamless loop points. They play in Resolume, TouchDesigner, VDMX, Modul8, Notch, and any platform that accepts standard MOV/MP4 input. HAP-encoded versions available on request.</p>
+      </details>
+
+      <details style="padding:1.25rem 0;">
+        <summary style="font-family:'Barlow Condensed',sans-serif; font-size:1rem; font-weight:700; letter-spacing:0.08em; text-transform:uppercase; color:#fff; cursor:pointer; list-style:none; display:flex; justify-content:space-between; align-items:center;">
+          Do I need to pay anything? <span style="color:var(--vjs-ultraviolet); font-size:1.2rem;">+</span>
+        </summary>
+        <p style="font-family:'Space Grotesk',sans-serif; font-size:0.9rem; color:var(--vjs-text-muted); line-height:1.7; margin:1rem 0 0;">The 18-clip VJs TV Loops 01 pack is <strong style="color:#fff;">completely free</strong>. All you need is an email address so we can send the download link and keep you updated when new packs are released.</p>
+      </details>
+
+    </div>
+
+    <!-- SECOND CTA -->
+    <div style="margin-top:3rem; text-align:center; padding:2.5rem 2rem; background:#0a0a0a; border:1px solid #1a1a1a;">
+      <p style="font-family:'Barlow Condensed',sans-serif; font-size:0.72rem; font-weight:700; letter-spacing:0.18em; text-transform:uppercase; color:var(--vjs-ultraviolet); margin:0 0 0.75rem;">Ready?</p>
+      <h3 style="font-family:'Barlow Condensed',sans-serif; font-weight:700; font-size:1.5rem; color:#fff; margin:0 0 1.25rem;">Get your 18 free loops now.</h3>
+      <form id="free-loops-form-2" novalidate style="max-width:400px; margin:0 auto; display:flex; gap:0; background:#050505; border:1px solid var(--vjs-ultraviolet);">
+        <input type="email" id="free-loops-email-2" name="email" placeholder="your@email.com" required
+          style="flex:1; background:transparent; border:none; padding:13px 14px; color:#fff; font-family:'Space Grotesk',sans-serif; font-size:0.85rem; outline:none;" />
+        <input type="hidden" name="source" value="free-loops" />
+        <button type="submit"
+          style="font-family:'Barlow Condensed',sans-serif; font-size:0.72rem; font-weight:700; letter-spacing:0.1em; text-transform:uppercase; padding:13px 20px; background:var(--vjs-ultraviolet); color:#fff; border:none; cursor:pointer; white-space:nowrap;">
+          Get Free Loops
+        </button>
+      </form>
+      <p id="free-loops-msg-2" style="font-family:'Barlow Condensed',sans-serif; font-size:0.72rem; color:var(--vjs-text-muted); margin:10px 0 0; display:none;"></p>
+    </div>
+
+  </div>
+</section>
+
 {% include vjstv-footer.html %}
 
 <script>
-(function() {
-  var form = document.getElementById('free-loops-form');
-  if (!form) return;
-  var btn = document.getElementById('fl-btn');
-  var msg = document.getElementById('fl-msg');
-  var input = document.getElementById('fl-email');
+var REPORT_API = '{{ site.api_url }}';
+if (!REPORT_API) REPORT_API = '';
 
-  form.addEventListener('submit', function(e) {
-    e.preventDefault();
-    msg.style.display = 'none';
-    var email = (input.value || '').trim();
-    var valid = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
-    if (!valid) {
-      msg.textContent = 'Please enter a valid email address.';
-      msg.style.color = '#ff6677';
-      msg.style.display = 'block';
-      return;
-    }
-    var data = {};
-    new FormData(form).forEach(function(v, k) { data[k] = v; });
-    btn.disabled = true; btn.textContent = 'Sending\u2026';
+function handleFreeLoopsSubmit(emailInput, msgEl, btn) {
+  if (msgEl) { msgEl.style.display = 'none'; msgEl.style.color = ''; }
+  var email = (emailInput ? emailInput.value : '').trim();
+  var emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+  if (!email || !emailRegex.test(email)) {
+    if (msgEl) { msgEl.textContent = 'Please enter a valid email address.'; msgEl.style.color = '#ff6677'; msgEl.style.display = 'block'; }
+    return;
+  }
+  btn.disabled = true; btn.textContent = 'Sending\u2026';
 
-    fetch('/api/subscribe', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify(data),
-    })
-    .then(function(res) { return res.json().catch(function() { return { success: false, error: 'Unexpected response.' }; }); })
-    .then(function(result) {
-      if (result.success) {
-        if (typeof window.vjsTrack === 'function') {
-          window.vjsTrack('newsletter_signup', { source: 'free-loops' });
-        }
-        if (result.already_confirmed) {
-          window.location.href = '/thank-you/subscribe/?status=confirmed&source=free-loops';
-        } else {
-          window.location.href = '/thank-you/subscribe/?pending=1&source=free-loops';
-        }
-      } else {
-        msg.textContent = result.error || 'Something went wrong. Please try again.';
-        msg.style.color = '#ff6677';
-        msg.style.display = 'block';
-        btn.disabled = false; btn.textContent = 'Send Me the Pack';
+  fetch(REPORT_API + '/api/subscribe', {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({ email: email, source: 'free-loops' })
+  })
+  .then(function(res) { return res.json().catch(function() { return { success: false, error: 'Unexpected response.' }; }); })
+  .then(function(result) {
+    if (result.success) {
+      if (typeof window.vjsTrack === 'function') {
+        window.vjsTrack('newsletter_signup', { source: 'free-loops' });
       }
-    })
-    .catch(function() {
-      msg.textContent = 'Connection error. Please try again.';
-      msg.style.color = '#ff6677';
-      msg.style.display = 'block';
-      btn.disabled = false; btn.textContent = 'Send Me the Pack';
-    });
+      if (result.already_confirmed) {
+        window.location.href = '/thank-you/subscribe/?status=confirmed&source=free-loops';
+      } else {
+        window.location.href = '/thank-you/subscribe/?pending=1&source=free-loops';
+      }
+    } else {
+      if (msgEl) { msgEl.textContent = result.error || 'Something went wrong. Please try again.'; msgEl.style.color = '#ff6677'; msgEl.style.display = 'block'; }
+      btn.disabled = false; btn.textContent = 'Get Free Loops';
+    }
+  })
+  .catch(function() {
+    if (msgEl) { msgEl.textContent = 'Connection error. Please try again.'; msgEl.style.color = '#ff6677'; msgEl.style.display = 'block'; }
+    btn.disabled = false; btn.textContent = 'Get Free Loops';
   });
+}
+
+(function() {
+  var form1 = document.getElementById('free-loops-form');
+  if (form1) {
+    form1.addEventListener('submit', function(e) {
+      e.preventDefault();
+      handleFreeLoopsSubmit(
+        document.getElementById('free-loops-email'),
+        document.getElementById('free-loops-msg'),
+        form1.querySelector('button[type="submit"]')
+      );
+    });
+  }
+  var form2 = document.getElementById('free-loops-form-2');
+  if (form2) {
+    form2.addEventListener('submit', function(e) {
+      e.preventDefault();
+      handleFreeLoopsSubmit(
+        document.getElementById('free-loops-email-2'),
+        document.getElementById('free-loops-msg-2'),
+        form2.querySelector('button[type="submit"]')
+      );
+    });
+  }
 })();
 </script>

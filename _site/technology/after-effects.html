@@ -157,10 +157,10 @@
 <link rel="dns-prefetch" href="https://player.vimeo.com" />
 <link rel="dns-prefetch" href="https://www.youtube-nocookie.com" />
 <link rel="dns-prefetch" href="https://i.vimeocdn.com" />
-<link rel="preload" href="/assets/css/vjstv.css?v=1777730840" as="style" />
+<link rel="preload" href="/assets/css/vjstv.css?v=1777734679" as="style" />
 <link rel="preload" href="/assets/css/bootstrap.min.css" as="style" />
 <link rel="stylesheet" type="text/css" href="/assets/css/bootstrap.min.css" />
-<link rel="stylesheet" type="text/css" href="/assets/css/vjstv.css?v=1777730840" />
+<link rel="stylesheet" type="text/css" href="/assets/css/vjstv.css?v=1777734679" />
 <link rel="stylesheet" type="text/css" href="/assets/css/plugins.css" media="print" onload="this.media='all'" />
 <link rel="stylesheet" type="text/css" href="/assets/revolution/css/settings.css" media="print" onload="this.media='all'" />
 <link rel="stylesheet" type="text/css" href="/assets/revolution/css/layers.css" media="print" onload="this.media='all'" />
@@ -170,7 +170,30 @@
 
 
 
-  
+  <script>
+(function() {
+  var meta = document.querySelector('meta[name="vjs-exp"]');
+  var variant = meta ? meta.getAttribute('content') : null;
+
+  window._vjsTrackQueue = window._vjsTrackQueue || [];
+
+  window.vjsTrack = function(name, props) {
+    try {
+      var payload = props ? Object.assign({}, props) : {};
+      if (variant) payload.vjs_exp = variant;
+      var entry = { name: name, props: payload, t: Date.now() };
+      window._vjsTrackQueue.push(entry);
+      if (typeof window.plausible === 'function') {
+        window.plausible(name, { props: payload });
+      }
+    } catch (e) { /* never throw */ }
+  };
+
+  // Expose the variant for components that want to render conditionally.
+  window.vjsExp = variant;
+})();
+</script>
+
 </head>
 <body >
   <div class="page-loading" id="vjs-preloader">
@@ -422,9 +445,7 @@
     </div>
     <!-- /.widget -->
   </div>
-  <!-- /.offcanvas-info -->
-
-<div class="vjs-detail-header">
+  <!-- /.offcanvas-info --><div class="vjs-detail-header">
   <div class="vjs-detail-header-inner">
     
     <h1 class="vjs-detail-title">Adobe After Effects</h1>
@@ -600,9 +621,7 @@ function vjsCopyLink(btn, url) {
             
           </div>
         </div>
-        
-
-      </div>
+        </div>
     </div>
   </div>
 </section><script type="application/ld+json">
@@ -711,12 +730,11 @@ function vjsCopyLink(btn, url) {
         .then(function(res) { return res.json().catch(function() { return { success: false, error: 'Unexpected server response.' }; }).then(function(d) { return { ok: res.ok, data: d }; }); })
         .then(function(result) {
           if (result.data.success) {
-            if (form) form.style.display = 'none';
-            if (successPanel) successPanel.style.display = 'flex';
-            if (result.data.issue_number) {
-              var refDiv = document.getElementById('bookRef');
-              if (refDiv) { refDiv.textContent = 'Tracking reference: #' + result.data.issue_number; refDiv.style.display = 'block'; }
+            if (typeof window.vjsTrack === 'function') {
+              window.vjsTrack('booking_sent', { artist: 'Adobe After Effects' });
             }
+            window.location.href = '/thank-you/booking/' + (result.data.issue_number ? '?ref=' + encodeURIComponent(result.data.issue_number) : '');
+            return;
           } else {
             if (errDiv) { errDiv.textContent = result.data.error || 'Something went wrong. Please try again.'; errDiv.style.display = 'block'; }
             if (submitBtn) { submitBtn.textContent = 'SEND ENQUIRY'; submitBtn.disabled = false; }
@@ -773,9 +791,12 @@ function vjsCopyLink(btn, url) {
         <span class="vjstv-footer-newsletter-title">Stay Updated</span>
         <span class="vjstv-footer-newsletter-sub">New artists, events & live sessions — straight to your inbox.</span>
       </div>
-      <form class="vjstv-footer-newsletter-form" onsubmit="event.preventDefault(); this.querySelector('button').textContent='✓ Subscribed'; this.querySelector('input').disabled=true; this.querySelector('button').disabled=true;" autocomplete="off">
-        <input type="email" placeholder="your@email.com" required />
+      <form class="vjstv-footer-newsletter-form" id="vjstv-footer-subscribe" autocomplete="off" novalidate>
+        <div style="position:absolute;left:-9999px;" aria-hidden="true"><input type="text" name="website_url" tabindex="-1" autocomplete="off" /></div>
+        <input type="email" name="email" placeholder="your@email.com" required />
+        <input type="hidden" name="source" value="footer" />
         <button type="submit">Subscribe</button>
+        <p id="vjstv-footer-subscribe-msg" style="margin:8px 0 0; font-family:'Barlow Condensed',sans-serif; font-size:0.72rem; color:var(--vjs-text-muted); display:none;"></p>
       </form>
     </div>
   </div>
@@ -818,6 +839,8 @@ function vjsCopyLink(btn, url) {
     <a href="/license" class="vjstv-footer-link">Commercial License</a>
     <span class="vjstv-footer-sep">&middot;</span>
     <a href="/sitemap" class="vjstv-footer-link">Sitemap</a>
+    <span class="vjstv-footer-sep">&middot;</span>
+    <button type="button" class="vjstv-footer-link" onclick="vjsOpenTip('manual')" style="background:none; border:none; padding:0; cursor:pointer; font:inherit; color:inherit;">Tip Jar</button>
   </div>
 </footer>
 
@@ -916,12 +939,74 @@ function vjsToggleGlitch() {
   if(btn) btn.classList.toggle('glitch-active', active);
 }
 
-function vjsOpenTip()  { document.getElementById('vjs-tip-modal').classList.add('open'); }
-function vjsCloseTip() { document.getElementById('vjs-tip-modal').classList.remove('open'); }
+/* ── VISUAL TIP JAR — deferred trigger + 30-day dismiss cookie ── */
+function vjsTipCookieGet(name) {
+  var m = document.cookie.match(new RegExp('(?:^|; )' + name + '=([^;]*)'));
+  return m ? decodeURIComponent(m[1]) : '';
+}
+function vjsTipCookieSet(name, value, days) {
+  var d = new Date(); d.setTime(d.getTime() + days * 86400000);
+  document.cookie = name + '=' + encodeURIComponent(value) + '; expires=' + d.toUTCString() + '; path=/; SameSite=Lax';
+}
+function vjsOpenTip(trigger) {
+  var modal = document.getElementById('vjs-tip-modal');
+  if (!modal) return;
+  modal.classList.add('open');
+  if (typeof window.vjsTrack === 'function') {
+    window.vjsTrack('tipjar_open', { trigger: trigger || 'manual' });
+  }
+}
+function vjsCloseTip() {
+  var modal = document.getElementById('vjs-tip-modal');
+  if (!modal) return;
+  modal.classList.remove('open');
+  vjsTipCookieSet('vjs-tipjar-dismiss', '1', 30);
+  if (typeof window.vjsTrack === 'function') window.vjsTrack('tipjar_dismiss');
+}
 function vjsTipAmount(amt) {
+  if (typeof window.vjsTrack === 'function') window.vjsTrack('tipjar_amount', { amount: amt });
   vjsCloseTip();
   alert('Thank you for supporting VJs TV! ' + amt + ' tip — payment integration coming soon.');
 }
+
+/* Auto-open after 30s dwell OR 75% scroll, whichever first.
+   Suppressed on /thank-you/*, /404, /partners (already-converting flows),
+   and any path containing /search (search is task-focused). */
+(function() {
+  var p = window.location.pathname || '';
+  if (
+    p.indexOf('/thank-you') === 0 ||
+    p === '/404.html' || p === '/404' ||
+    p.indexOf('/partners') === 0 ||
+    p.indexOf('/free-loops') === 0 ||
+    p.indexOf('/search') === 0
+  ) return;
+  if (vjsTipCookieGet('vjs-tipjar-dismiss')) return;
+
+  var fired = false;
+  function maybeOpen(trigger) {
+    if (fired) return;
+    if (vjsTipCookieGet('vjs-tipjar-dismiss')) return;
+    var modal = document.getElementById('vjs-tip-modal');
+    if (!modal) return;
+    fired = true;
+    vjsOpenTip(trigger);
+  }
+  var dwellTimer = setTimeout(function() { maybeOpen('dwell'); }, 30000);
+
+  function onScroll() {
+    var doc = document.documentElement;
+    var scrolled = (window.scrollY || doc.scrollTop || 0) + window.innerHeight;
+    var height = Math.max(doc.scrollHeight, document.body.scrollHeight);
+    if (height <= 0) return;
+    if (scrolled / height >= 0.75) {
+      window.removeEventListener('scroll', onScroll);
+      clearTimeout(dwellTimer);
+      maybeOpen('scroll');
+    }
+  }
+  window.addEventListener('scroll', onScroll, { passive: true });
+})();
 
 
 (function() {
@@ -936,6 +1021,55 @@ function vjsTipAmount(amt) {
 
 var REPORT_API = '';
 if (!REPORT_API || REPORT_API === '') REPORT_API = '';
+
+/* ── FOOTER NEWSLETTER → /api/subscribe ── */
+(function() {
+  var form = document.getElementById('vjstv-footer-subscribe');
+  if (!form) return;
+  var msg = document.getElementById('vjstv-footer-subscribe-msg');
+  var btn = form.querySelector('button[type="submit"]');
+  var input = form.querySelector('input[type="email"]');
+
+  form.addEventListener('submit', function(e) {
+    e.preventDefault();
+    if (msg) { msg.style.display = 'none'; msg.style.color = ''; }
+    var email = (input.value || '').trim();
+    var emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    if (!email || !emailRegex.test(email)) {
+      if (msg) { msg.textContent = 'Please enter a valid email address.'; msg.style.color = '#ff6677'; msg.style.display = 'block'; }
+      return;
+    }
+    var data = {};
+    new FormData(form).forEach(function(v, k) { data[k] = v; });
+    btn.disabled = true; btn.textContent = 'Sending\u2026';
+
+    fetch(REPORT_API + '/api/subscribe', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(data),
+    })
+    .then(function(res) { return res.json().catch(function() { return { success: false, error: 'Unexpected response.' }; }); })
+    .then(function(result) {
+      if (result.success) {
+        if (typeof window.vjsTrack === 'function') {
+          window.vjsTrack('newsletter_signup', { source: 'footer' });
+        }
+        if (result.already_confirmed) {
+          window.location.href = '/thank-you/subscribe/?status=confirmed&source=footer';
+        } else {
+          window.location.href = '/thank-you/subscribe/?pending=1&source=footer';
+        }
+      } else {
+        if (msg) { msg.textContent = result.error || 'Something went wrong. Please try again.'; msg.style.color = '#ff6677'; msg.style.display = 'block'; }
+        btn.disabled = false; btn.textContent = 'Subscribe';
+      }
+    })
+    .catch(function() {
+      if (msg) { msg.textContent = 'Connection error. Please try again.'; msg.style.color = '#ff6677'; msg.style.display = 'block'; }
+      btn.disabled = false; btn.textContent = 'Subscribe';
+    });
+  });
+})();
 
 function openReportModal() {
   var m = document.getElementById('report-modal-global');
@@ -995,8 +1129,10 @@ document.getElementById('report-form-global').addEventListener('submit', functio
   })
   .then(function(result) {
     if (result.success) {
-      form.style.display = 'none';
-      document.getElementById('report-success-global').style.display = 'block';
+      if (typeof window.vjsTrack === 'function') {
+        window.vjsTrack('report_sent', { page: window.location.pathname });
+      }
+      window.location.href = '/thank-you/report/';
     } else {
       document.getElementById('report-error-msg-global').textContent = result.error || 'Something went wrong.';
       errorEl.style.display = 'block';
@@ -1011,6 +1147,37 @@ document.getElementById('report-form-global').addEventListener('submit', functio
 });
 </script>
 
+
+<script>
+(function() {
+  var btn = document.getElementById('vjs-badge-copy-btn');
+  if (!btn) return;
+  btn.addEventListener('click', function() {
+    var ta = document.getElementById('vjs-badge-snippet');
+    if (!ta) return;
+    var text = ta.value;
+    if (navigator.clipboard && navigator.clipboard.writeText) {
+      navigator.clipboard.writeText(text).then(function() {
+        btn.textContent = 'Copied!';
+        setTimeout(function() { btn.textContent = 'Copy Code'; }, 2000);
+      }).catch(function() {
+        ta.select();
+        document.execCommand('copy');
+        btn.textContent = 'Copied!';
+        setTimeout(function() { btn.textContent = 'Copy Code'; }, 2000);
+      });
+    } else {
+      ta.select();
+      document.execCommand('copy');
+      btn.textContent = 'Copied!';
+      setTimeout(function() { btn.textContent = 'Copy Code'; }, 2000);
+    }
+    if (typeof window.vjsTrack === 'function') {
+      window.vjsTrack('badge_copied', { artist: 'Adobe After Effects' });
+    }
+  });
+})();
+</script>
 
   </div>
   <script src="/assets/js/jquery.min.js"></script>
