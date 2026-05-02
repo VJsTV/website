@@ -1,15 +1,63 @@
 ---
 layout: none
+permalink: /search.json
 ---
 [
-  {% for post in site.posts %}
+  {%- for artist in site.vjs -%}
     {
-      "title"    : "{{ post.title | escape }}",
-      "category" : "{{ post.category }}",
-      "tags"     : "{{ post.tags | join: ', ' }}",
-      "url"      : "{{ site.baseurl }}{{ post.url }}",
-      "date"     : "{{ post.date }}",
-      "desc"     : "{{post.title}}"
-    } {% unless forloop.last %},{% endunless %}
-  {% endfor %}
+      "type": "artist",
+      "title": {{ artist.title | jsonify }},
+      "url": {{ artist.url | jsonify }},
+      "desc": {{ artist.visual_style | default: artist.bio | default: "" | strip_newlines | truncate: 160 | jsonify }},
+      "tags": {{ artist.technologies | default: empty_array | join: ", " | jsonify }},
+      "location": {{ artist.location | default: "" | jsonify }}
+    }{%- unless forloop.last -%},{%- endunless -%}
+  {%- endfor -%}
+  {%- if site.vjs.size > 0 and site.projects.size > 0 -%},{%- endif -%}
+  {%- for project in site.projects -%}
+    {
+      "type": "project",
+      "title": {{ project.title | jsonify }},
+      "url": {{ project.url | jsonify }},
+      "desc": {{ project.description | default: project.project_type | default: "" | strip_newlines | truncate: 200 | jsonify }},
+      "tags": {{ project.tags | default: empty_array | join: ", " | jsonify }},
+      "location": {{ project.location | default: "" | jsonify }},
+      "artist": {{ project.artist | default: "" | jsonify }}
+    }{%- unless forloop.last -%},{%- endunless -%}
+  {%- endfor -%}
+  {%- if site.projects.size > 0 and site.events.size > 0 -%},{%- endif -%}
+  {%- for event in site.events -%}
+    {
+      "type": "event",
+      "title": {{ event.title | jsonify }},
+      "url": {{ event.url | jsonify }},
+      "desc": {{ event.description | default: event.event_type | default: "" | strip_newlines | truncate: 200 | jsonify }},
+      "tags": {{ event.technologies | default: empty_array | join: ", " | jsonify }},
+      "location": {{ event.location | default: "" | jsonify }},
+      "date": {{ event.date | date: "%Y-%m-%d" | default: "" | jsonify }},
+      "event_type": {{ event.event_type | default: "" | jsonify }}
+    }{%- unless forloop.last -%},{%- endunless -%}
+  {%- endfor -%}
+  {%- if site.events.size > 0 and site.studios.size > 0 -%},{%- endif -%}
+  {%- for studio in site.studios -%}
+    {
+      "type": "studio",
+      "title": {{ studio.title | jsonify }},
+      "url": {{ studio.url | jsonify }},
+      "desc": {{ studio.description | default: studio.studio_type | default: "" | strip_newlines | truncate: 200 | jsonify }},
+      "tags": "",
+      "location": {{ studio.location | default: "" | jsonify }}
+    }{%- unless forloop.last -%},{%- endunless -%}
+  {%- endfor -%}
+  {%- if site.studios.size > 0 and site.technology.size > 0 -%},{%- endif -%}
+  {%- for tech in site.technology -%}
+    {
+      "type": "technology",
+      "title": {{ tech.title | jsonify }},
+      "url": {{ tech.url | jsonify }},
+      "desc": {{ tech.description | default: tech.category | default: "" | strip_newlines | truncate: 200 | jsonify }},
+      "tags": {{ tech.category | default: "" | jsonify }},
+      "developer": {{ tech.developer | default: "" | jsonify }}
+    }{%- unless forloop.last -%},{%- endunless -%}
+  {%- endfor -%}
 ]

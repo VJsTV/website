@@ -5,99 +5,32 @@ permalink: /sitemap.xml
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
         xmlns:video="http://www.google.com/schemas/sitemap-video/1.1">
+{%- comment -%}
+  Static / canonical pages.
+  Kept hand-curated so we control priority and changefreq for the
+  high-value top-level routes; everything below is generated.
+{%- endcomment -%}
+{%- assign static_pages = "/|1.0|daily,/live/|0.9|daily,/artists/|0.9|weekly,/projects/|0.9|weekly,/events/|0.9|weekly,/studios/|0.8|weekly,/technology/|0.8|weekly,/marketplace/|0.8|weekly,/sponsors/|0.5|monthly,/partners/|0.6|monthly,/submit/|0.6|monthly,/learn/|0.7|monthly,/search/|0.4|monthly,/countries/|0.6|monthly,/privacy/|0.3|yearly,/terms/|0.3|yearly,/license/|0.3|yearly" | split: "," -%}
+{%- for entry in static_pages -%}
+  {%- assign parts = entry | split: "|" -%}
   <url>
-    <loc>{{ site.url }}/</loc>
+    <loc>{{ site.url }}{{ parts[0] }}</loc>
     <lastmod>{{ site.time | date_to_xmlschema }}</lastmod>
-    <changefreq>daily</changefreq>
-    <priority>1.0</priority>
+    <changefreq>{{ parts[2] }}</changefreq>
+    <priority>{{ parts[1] }}</priority>
   </url>
-  <url>
-    <loc>{{ site.url }}/live/</loc>
-    <lastmod>{{ site.time | date_to_xmlschema }}</lastmod>
-    <changefreq>daily</changefreq>
-    <priority>0.9</priority>
-  </url>
-  <url>
-    <loc>{{ site.url }}/artists/</loc>
-    <lastmod>{{ site.time | date_to_xmlschema }}</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.9</priority>
-  </url>
-  <url>
-    <loc>{{ site.url }}/projects/</loc>
-    <lastmod>{{ site.time | date_to_xmlschema }}</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.9</priority>
-  </url>
-  <url>
-    <loc>{{ site.url }}/events/</loc>
-    <lastmod>{{ site.time | date_to_xmlschema }}</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.9</priority>
-  </url>
-  <url>
-    <loc>{{ site.url }}/studios/</loc>
-    <lastmod>{{ site.time | date_to_xmlschema }}</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.8</priority>
-  </url>
-  <url>
-    <loc>{{ site.url }}/technology/</loc>
-    <lastmod>{{ site.time | date_to_xmlschema }}</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.8</priority>
-  </url>
-  <url>
-    <loc>{{ site.url }}/marketplace/</loc>
-    <lastmod>{{ site.time | date_to_xmlschema }}</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.8</priority>
-  </url>
-  <url>
-    <loc>{{ site.url }}/sponsors/</loc>
-    <lastmod>{{ site.time | date_to_xmlschema }}</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.5</priority>
-  </url>
-  <url>
-    <loc>{{ site.url }}/partners/</loc>
-    <lastmod>{{ site.time | date_to_xmlschema }}</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  <url>
-    <loc>{{ site.url }}/submit/</loc>
-    <lastmod>{{ site.time | date_to_xmlschema }}</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  <url>
-    <loc>{{ site.url }}/privacy/</loc>
-    <lastmod>{{ site.time | date_to_xmlschema }}</lastmod>
-    <changefreq>yearly</changefreq>
-    <priority>0.3</priority>
-  </url>
-  <url>
-    <loc>{{ site.url }}/terms/</loc>
-    <lastmod>{{ site.time | date_to_xmlschema }}</lastmod>
-    <changefreq>yearly</changefreq>
-    <priority>0.3</priority>
-  </url>
-  <url>
-    <loc>{{ site.url }}/license/</loc>
-    <lastmod>{{ site.time | date_to_xmlschema }}</lastmod>
-    <changefreq>yearly</changefreq>
-    <priority>0.3</priority>
-  </url>
-  {% for artist in site.vjs %}
+{%- endfor -%}
+
+{%- comment -%} Collection items {%- endcomment -%}
+{% for artist in site.vjs %}
   <url>
     <loc>{{ site.url }}{{ artist.url }}</loc>
     <lastmod>{{ artist.date | default: site.time | date_to_xmlschema }}</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
-  {% endfor %}
-  {% for project in site.projects %}
+{% endfor %}
+{% for project in site.projects %}
   {% unless project.name == "time-tilings-stuk-pablo-valbuena" or project.name == "visions-of-america-ameriques-refik-anadol" or project.name == "rawtekk-heres-to-them-denial-of-service" or project.name == "pii-expansion-arquitectonica-zaragoza" %}
   <url>
     <loc>{{ site.url }}{{ project.url }}</loc>
@@ -119,45 +52,59 @@ permalink: /sitemap.xml
     {% endif %}
   </url>
   {% endunless %}
-  {% endfor %}
-  {% for event in site.events %}
+{% endfor %}
+{% for event in site.events %}
   <url>
     <loc>{{ site.url }}{{ event.url }}</loc>
     <lastmod>{{ event.date | default: site.time | date_to_xmlschema }}</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
-  {% endfor %}
-  {% for studio in site.studios %}
+{% endfor %}
+{% for studio in site.studios %}
   <url>
     <loc>{{ site.url }}{{ studio.url }}</loc>
     <lastmod>{{ studio.date | default: site.time | date_to_xmlschema }}</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
-  {% endfor %}
-  {% for tech in site.technology %}
+{% endfor %}
+{% for tech in site.technology %}
   <url>
     <loc>{{ site.url }}{{ tech.url }}</loc>
     <lastmod>{{ tech.date | default: site.time | date_to_xmlschema }}</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
-  {% endfor %}
-  {% for sponsor in site.sponsors %}
+{% endfor %}
+{% for sponsor in site.sponsors %}
   <url>
     <loc>{{ site.url }}{{ sponsor.url }}</loc>
     <lastmod>{{ sponsor.date | default: site.time | date_to_xmlschema }}</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.5</priority>
   </url>
-  {% endfor %}
-  {% for pack in site.loop_packs %}
+{% endfor %}
+{% for pack in site.loop_packs %}
   <url>
     <loc>{{ site.url }}{{ pack.url }}</loc>
     <lastmod>{{ pack.date | default: site.time | date_to_xmlschema }}</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
-  {% endfor %}
+{% endfor %}
+
+{%- comment -%}
+  Programmatic pages (generated by _plugins/programmatic_pages.rb)
+  and any /learn/* page that opts in via `sitemap: true`.
+{%- endcomment -%}
+{% assign _generated = site.pages | where: "sitemap", true %}
+{% for p in _generated %}
+  <url>
+    <loc>{{ site.url }}{{ p.url }}</loc>
+    <lastmod>{{ site.time | date_to_xmlschema }}</lastmod>
+    <changefreq>{% if p.layout == "programmatic-list" %}weekly{% else %}monthly{% endif %}</changefreq>
+    <priority>{% if p.layout == "programmatic-list" %}0.6{% else %}0.7{% endif %}</priority>
+  </url>
+{% endfor %}
 </urlset>

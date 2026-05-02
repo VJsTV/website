@@ -1,0 +1,124 @@
+---
+layout: default
+title: "How to Projection Map"
+meta_title: "How to Projection Map — Step-by-Step Guide for VJs (2026) | VJs TV"
+meta_description: "A practical, step-by-step guide to projection mapping in 2026: scouting the surface, choosing the projector, software workflow in MadMapper or Resolume Arena, and running the show."
+sitemap: true
+---
+{% include layouts/nav/nav-3.html default_logo="white" %}
+
+<div class="vjs-page-header">
+  <div class="container">
+    <nav aria-label="Breadcrumb" class="vjs-section-label" style="margin-bottom:8px;">
+      <a href="/" style="color:inherit;text-decoration:none;">Home</a>
+      <span style="opacity:0.4;margin:0 6px;">/</span>
+      <a href="/learn/" style="color:inherit;text-decoration:none;">Learn</a>
+      <span style="opacity:0.4;margin:0 6px;">/</span>
+      <span>How to Projection Map</span>
+    </nav>
+    <h1 class="vjs-section-title" style="font-size:clamp(2rem,5vw,3rem);">How to Projection Map</h1>
+    <div class="vjs-accent-line"></div>
+    <p style="font-family:'Barlow Condensed',sans-serif; font-size:1.05rem; color:var(--vjs-text-muted); max-width:720px; margin:0;">A practical, end-to-end workflow for projecting moving image onto a non-flat surface — the same workflow used at festivals and architectural installations, scaled down to a project you can do this weekend.</p>
+  </div>
+</div>
+
+<article class="vjs-section">
+  <div class="container" style="max-width:780px;">
+
+    <h2 style="font-family:'Barlow Condensed',sans-serif; font-weight:700; margin-top:2rem;">Step 1 — Scout the surface</h2>
+    <p>Before you buy anything, photograph the surface in the lighting conditions you will project in. Note its material (matte, reflective, dark, transparent), how far you can place a projector from it, and what ambient light will be present. Dark, matte, indoor surfaces are easy. Reflective glass at sunset is hard.</p>
+
+    <h2 style="font-family:'Barlow Condensed',sans-serif; font-weight:700; margin-top:2rem;">Step 2 — Choose the projector</h2>
+    <p>The two numbers that matter are <strong>lumens</strong> (brightness) and <strong>throw ratio</strong> (how far the projector sits from the surface for a given image size). For a small interior installation, 3000–5000 lumens is fine. For an exterior building facade in a partially lit street, you usually need 20 000+ lumens, often stacked. Measure the surface, then use the projector manufacturer's throw calculator.</p>
+
+    <h2 style="font-family:'Barlow Condensed',sans-serif; font-weight:700; margin-top:2rem;">Step 3 — Build the geometry in software</h2>
+    <p>Open <strong>MadMapper</strong> or <strong>Resolume Arena</strong>, create a new project at the projector's native resolution, and trace the surface. In MadMapper this means dragging quad surfaces and snapping their corners to the physical edges. In Resolume you use the <em>Output</em> screen with slices. Every surface gets its own input feed.</p>
+
+    <h2 style="font-family:'Barlow Condensed',sans-serif; font-weight:700; margin-top:2rem;">Step 4 — Make content that respects the surface</h2>
+    <p>Generic loops mapped onto a building look like loops mapped onto a building. The work that travels — the work you see at festivals — uses content custom-designed for the surface: animations that "open" architectural features, light that appears to be inside the surface, sequences that step around the corners of the geometry. Reference work in our <a href="/projects/">projects directory</a>.</p>
+
+    <h2 style="font-family:'Barlow Condensed',sans-serif; font-weight:700; margin-top:2rem;">Step 5 — Test in-place at night</h2>
+    <p>The first 80% of mapping happens at the desk. The last 20% — the part audiences notice — happens on site, in the dark, with the projector physically in its final position. Bring a laptop, a long HDMI cable, and at least an hour of unhurried tweak time before doors. Save your project file.</p>
+
+    <h2 style="font-family:'Barlow Condensed',sans-serif; font-weight:700; margin-top:2rem;">Step 6 — Run the show</h2>
+    <p>Triggering can be timecoded (locked to music) or live-VJ'd. For installations, schedule the playback. For live performance, route MIDI or OSC from your audio source to the mapping software. Always have a backup laptop or at least a saved file on a USB stick — projectors and laptops both fail at exactly the wrong moment.</p>
+
+    <h2 style="font-family:'Barlow Condensed',sans-serif; font-weight:700; margin-top:2rem;">Frequently asked</h2>
+
+    <h3 style="font-family:'Barlow Condensed',sans-serif; font-weight:700;">What software is best for projection mapping?</h3>
+    <p>For small to medium projects, <strong>MadMapper</strong> is purpose-built and has the cleanest workflow. For larger shows that combine mapping with live VJing, <strong>Resolume Arena</strong> is the standard. For broadcast and tour-grade installations, <strong>Disguise</strong> or <strong>Pandoras Box</strong>.</p>
+
+    <h3 style="font-family:'Barlow Condensed',sans-serif; font-weight:700;">How many lumens do I need?</h3>
+    <p>Indoor / dark room: 3000–5000 lm. Indoor / partial ambient light: 8000–12 000 lm. Outdoor at night, small building: 15 000–20 000 lm. Outdoor at night, large facade: stacked 30 000+ lm. The number is multiplicative with surface area, so always sanity-check on a calculator.</p>
+
+    <h3 style="font-family:'Barlow Condensed',sans-serif; font-weight:700;">Can I projection-map without a powerful computer?</h3>
+    <p>For static loops on a small surface, yes — most modern laptops will play back HD video into a single projector. For multi-projector mapping, real-time content, or 4K output, you need a discrete GPU. The bottleneck is almost always video memory and decode performance, not CPU.</p>
+
+    <h3 style="font-family:'Barlow Condensed',sans-serif; font-weight:700;">What is the difference between projection mapping and 3D mapping?</h3>
+    <p>"Projection mapping" is the umbrella term — fitting an image to a non-flat surface. "3D mapping" usually means content that gives the illusion of three-dimensional depth on a 2D facade (rotating geometry, openings into virtual space). 3D mapping is a technique <em>within</em> projection mapping.</p>
+
+    <h3 style="font-family:'Barlow Condensed',sans-serif; font-weight:700;">Where can I see professional projection-mapping work?</h3>
+    <p>Browse our <a href="/projects/">projects directory</a> filtered by Architectural Projection Mapping, or look at the studios in our <a href="/studios/">studios directory</a> who specialise in the form.</p>
+
+  </div>
+</article>
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "HowTo",
+      "@id": "{{ page.url | absolute_url }}#howto",
+      "name": "How to Projection Map",
+      "description": {{ page.meta_description | jsonify }},
+      "url": "{{ page.url | absolute_url }}",
+      "totalTime": "PT4H",
+      "step": [
+        { "@type": "HowToStep", "position": 1, "name": "Scout the surface", "text": "Photograph the surface in lighting conditions you will project in. Note its material, projector throw distance, and ambient light." },
+        { "@type": "HowToStep", "position": 2, "name": "Choose the projector", "text": "Pick lumens and throw ratio appropriate to the surface size and ambient light. Use the manufacturer's throw calculator." },
+        { "@type": "HowToStep", "position": 3, "name": "Build the geometry in software", "text": "In MadMapper or Resolume Arena, trace the physical surface with quad / slice surfaces at native projector resolution." },
+        { "@type": "HowToStep", "position": 4, "name": "Make content that respects the surface", "text": "Design animations specifically for the surface geometry rather than mapping generic loops." },
+        { "@type": "HowToStep", "position": 5, "name": "Test in-place at night", "text": "Tweak alignment with the projector in its final position before doors." },
+        { "@type": "HowToStep", "position": 6, "name": "Run the show", "text": "Trigger via timecode or live performance. Always have a backup laptop or saved file." }
+      ]
+    },
+    {
+      "@type": "FAQPage",
+      "@id": "{{ page.url | absolute_url }}#faq",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "What software is best for projection mapping?",
+          "acceptedAnswer": { "@type": "Answer", "text": "For small to medium projects, MadMapper. For larger shows combining mapping with live VJing, Resolume Arena. For broadcast and tour-grade installations, Disguise or Pandoras Box." }
+        },
+        {
+          "@type": "Question",
+          "name": "How many lumens do I need for projection mapping?",
+          "acceptedAnswer": { "@type": "Answer", "text": "Indoor dark room: 3000-5000 lm. Indoor partial ambient: 8000-12000 lm. Outdoor at night, small building: 15000-20000 lm. Outdoor large facade: stacked 30000+ lm." }
+        },
+        {
+          "@type": "Question",
+          "name": "Can I projection-map without a powerful computer?",
+          "acceptedAnswer": { "@type": "Answer", "text": "For static loops on a small surface, yes. For multi-projector mapping, real-time content, or 4K output, you need a discrete GPU. The bottleneck is video memory and decode performance." }
+        },
+        {
+          "@type": "Question",
+          "name": "What is the difference between projection mapping and 3D mapping?",
+          "acceptedAnswer": { "@type": "Answer", "text": "Projection mapping is the umbrella term for fitting an image to a non-flat surface. 3D mapping usually means content that creates the illusion of three-dimensional depth on a 2D facade. 3D mapping is a technique within projection mapping." }
+        }
+      ]
+    },
+    {
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        { "@type": "ListItem", "position": 1, "name": "Home", "item": "{{ site.url }}/" },
+        { "@type": "ListItem", "position": 2, "name": "Learn", "item": "{{ site.url }}/learn/" },
+        { "@type": "ListItem", "position": 3, "name": "How to Projection Map", "item": "{{ page.url | absolute_url }}" }
+      ]
+    }
+  ]
+}
+</script>
+
+{% include vjstv-footer.html %}

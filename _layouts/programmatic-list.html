@@ -1,0 +1,145 @@
+---
+layout: default
+---
+{% include layouts/nav/nav-3.html default_logo="white" %}
+
+{%- comment -%}
+  Resolve the matching items for this programmatic page.
+  Filtering keys are pre-computed by `_plugins/programmatic_pages.rb`
+  during the `:generator` phase so that nothing here needs to do work
+  beyond a plain `where` / `where_exp`.
+{%- endcomment -%}
+
+{%- assign items_kind = "" -%}
+{%- if page.kind == "artists_by_country" -%}
+  {%- assign items = site.vjs | where: "country_slug", page.slug | sort: "title" -%}
+  {%- assign items_kind = "artist" -%}
+{%- elsif page.kind == "artists_by_technology" -%}
+  {%- assign items = site.vjs | where_exp: "a", "a.technology_slugs contains page.slug" | sort: "title" -%}
+  {%- assign items_kind = "artist" -%}
+{%- elsif page.kind == "events_by_country" -%}
+  {%- assign items = site.events | where: "country_slug", page.slug | sort: "date" | reverse -%}
+  {%- assign items_kind = "event" -%}
+{%- elsif page.kind == "events_by_type" -%}
+  {%- assign items = site.events | where: "event_type_slug", page.slug | sort: "date" | reverse -%}
+  {%- assign items_kind = "event" -%}
+{%- elsif page.kind == "tech_projects" -%}
+  {%- assign items = site.projects | where_exp: "p", "p.matched_tech_slugs contains page.slug" | sort: "year" | reverse -%}
+  {%- assign items_kind = "project" -%}
+{%- else -%}
+  {%- assign items = "" | split: "" -%}
+{%- endif -%}
+
+<div class="vjs-page-header">
+  <div class="container">
+    <nav aria-label="Breadcrumb" class="vjs-section-label" style="margin-bottom:8px;">
+      <a href="/" style="color:inherit;text-decoration:none;">Home</a>
+      <span style="opacity:0.4;margin:0 6px;">/</span>
+      <a href="{{ page.breadcrumb_parent_url }}" style="color:inherit;text-decoration:none;">{{ page.breadcrumb_parent_title }}</a>
+      <span style="opacity:0.4;margin:0 6px;">/</span>
+      <span>{{ page.breadcrumb_section_title }}{% if page.value %} &middot; {{ page.value }}{% endif %}</span>
+    </nav>
+    <h1 class="vjs-section-title" style="font-size:clamp(2rem,5vw,3.5rem);">{{ page.title }}</h1>
+    <div class="vjs-accent-line"></div>
+    <p style="font-family:'Barlow Condensed',sans-serif; font-size:1.05rem; font-weight:400; color:var(--vjs-text-muted); max-width:760px; margin:0;">{{ page.intro }}</p>
+    <div style="margin-top:18px; font-family:'Barlow Condensed',sans-serif; font-size:0.7rem; letter-spacing:0.18em; text-transform:uppercase; color:#666;">
+      {{ items.size }} {% if items_kind == "artist" %}{% if items.size == 1 %}Artist{% else %}Artists{% endif %}{% elsif items_kind == "event" %}{% if items.size == 1 %}Event{% else %}Events{% endif %}{% elsif items_kind == "project" %}{% if items.size == 1 %}Project{% else %}Projects{% endif %}{% else %}Items{% endif %}
+    </div>
+  </div>
+</div>
+
+<section class="vjs-section">
+  <div class="container">
+    {% if items.size == 0 %}
+      <p style="text-align:center; padding:3rem; color:var(--vjs-text-muted); font-family:'Space Grotesk',sans-serif;">No items found yet. Check back soon as we expand the directory.</p>
+    {% else %}
+      <div class="vjs-grid vjs-grid-3">
+        {% if items_kind == "artist" %}
+          {% for artist in items %}
+            {% include cards/artist-card.html artist=artist %}
+          {% endfor %}
+        {% elsif items_kind == "event" %}
+          {% for event in items %}
+            {% include cards/event-card.html event=event %}
+          {% endfor %}
+        {% elsif items_kind == "project" %}
+          {% for project in items %}
+            {% include cards/project-card.html project=project %}
+          {% endfor %}
+        {% endif %}
+      </div>
+    {% endif %}
+
+    {%- comment -%} Cross-links to related programmatic / canonical pages {%- endcomment -%}
+    <div style="margin-top:60px; padding-top:30px; border-top:1px solid rgba(255,255,255,0.08);">
+      <div class="vjs-section-label" style="margin-bottom:14px;">Related</div>
+      <div style="display:flex; flex-wrap:wrap; gap:10px;">
+        {% if page.kind == "artists_by_country" %}
+          <a href="/artists/" class="vjs-tag vjs-tag-purple">All Artists</a>
+          <a href="/events/by-country/{{ page.slug }}/" class="vjs-tag vjs-tag-blue">Events in {{ page.value }}</a>
+          <a href="/countries" class="vjs-tag vjs-tag-cyan">Browse all countries</a>
+        {% elsif page.kind == "artists_by_technology" %}
+          <a href="/artists/" class="vjs-tag vjs-tag-purple">All Artists</a>
+          <a href="/technology/" class="vjs-tag vjs-tag-cyan">All Technology</a>
+        {% elsif page.kind == "events_by_country" %}
+          <a href="/events/" class="vjs-tag vjs-tag-blue">All Events</a>
+          <a href="/artists/by-country/{{ page.slug }}/" class="vjs-tag vjs-tag-purple">Artists in {{ page.value }}</a>
+        {% elsif page.kind == "events_by_type" %}
+          <a href="/events/" class="vjs-tag vjs-tag-blue">All Events</a>
+        {% elsif page.kind == "tech_projects" %}
+          <a href="{{ page.tech_url }}" class="vjs-tag vjs-tag-cyan">{{ page.value }} overview</a>
+          <a href="/artists/by-technology/{{ page.slug }}/" class="vjs-tag vjs-tag-purple">Artists using {{ page.value }}</a>
+          <a href="/technology/" class="vjs-tag vjs-tag-cyan">All Technology</a>
+        {% endif %}
+      </div>
+    </div>
+
+  </div>
+</section>
+
+{%- comment -%} JSON-LD: CollectionPage + ItemList + BreadcrumbList {%- endcomment -%}
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "CollectionPage",
+      "@id": "{{ page.url | absolute_url }}#collection",
+      "url": "{{ page.url | absolute_url }}",
+      "name": {{ page.title | jsonify }},
+      "description": {{ page.meta_description | jsonify }},
+      "isPartOf": { "@id": "{{ site.url }}/#website" },
+      "inLanguage": "en"
+    },
+    {
+      "@type": "ItemList",
+      "@id": "{{ page.url | absolute_url }}#itemlist",
+      "name": {{ page.title | jsonify }},
+      "numberOfItems": {{ items.size }},
+      "itemListElement": [
+        {% for item in items %}
+        {
+          "@type": "ListItem",
+          "position": {{ forloop.index }},
+          "url": {{ item.url | absolute_url | jsonify }},
+          "name": {{ item.title | jsonify }}
+        }{% unless forloop.last %},{% endunless %}
+        {% endfor %}
+      ]
+    },
+    {
+      "@type": "BreadcrumbList",
+      "@id": "{{ page.url | absolute_url }}#breadcrumbs",
+      "itemListElement": [
+        { "@type": "ListItem", "position": 1, "name": "Home", "item": "{{ site.url }}/" },
+        { "@type": "ListItem", "position": 2, "name": {{ page.breadcrumb_parent_title | jsonify }}, "item": "{{ page.breadcrumb_parent_url | absolute_url }}" }{% if page.breadcrumb_section_url %},
+        { "@type": "ListItem", "position": 3, "name": {{ page.breadcrumb_section_title | jsonify }}, "item": "{{ page.breadcrumb_section_url | absolute_url }}" },
+        { "@type": "ListItem", "position": 4, "name": {{ page.title | jsonify }}, "item": "{{ page.url | absolute_url }}" }{% else %},
+        { "@type": "ListItem", "position": 3, "name": {{ page.title | jsonify }}, "item": "{{ page.url | absolute_url }}" }{% endif %}
+      ]
+    }
+  ]
+}
+</script>
+
+{% include vjstv-footer.html %}

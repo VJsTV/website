@@ -62,7 +62,6 @@ exclude:
   - features
   - elements
   - home-pages
-  - search.json
   - CNAME
   - cloudflare.toml
   - github.toml

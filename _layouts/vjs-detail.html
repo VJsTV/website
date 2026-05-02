@@ -288,10 +288,60 @@ layout: default
         {% endif %}
         {% endif %}
 
+        {%- comment -%}
+          BROWSE — internal links into the programmatic SEO pages.
+          Surfaces country / technology / type hubs derived from the
+          item's own front-matter (slugs precomputed by
+          _plugins/programmatic_pages.rb).
+        {%- endcomment -%}
+        {%- assign _has_browse = false -%}
+        {%- if page.collection == "vjs" and page.country_slug -%}{%- assign _has_browse = true -%}{%- endif -%}
+        {%- if page.collection == "vjs" and page.technology_slugs.size > 0 -%}{%- assign _has_browse = true -%}{%- endif -%}
+        {%- if page.collection == "events" and page.country_slug -%}{%- assign _has_browse = true -%}{%- endif -%}
+        {%- if page.collection == "events" and page.event_type_slug -%}{%- assign _has_browse = true -%}{%- endif -%}
+        {%- if page.collection == "projects" and page.matched_tech_slugs.size > 0 -%}{%- assign _has_browse = true -%}{%- endif -%}
+        {%- if page.collection == "technology" and page.title_slug -%}{%- assign _has_browse = true -%}{%- endif -%}
+        {% if _has_browse %}
+        <div class="vjs-sidebar-card">
+          <h2 class="vjs-sidebar-card-heading" style="color:var(--vjs-electric-blue);">Browse</h2>
+          <div style="display:flex; flex-wrap:wrap; gap:6px;">
+            {% if page.collection == "vjs" %}
+              {% if page.country_slug %}
+              <a href="/artists/by-country/{{ page.country_slug }}/" class="vjs-tag vjs-tag-purple">Artists in {{ page.country }}</a>
+              {% endif %}
+              {% if page.technology_slugs.size > 0 %}
+                {% for tslug in page.technology_slugs %}
+                  {% assign _tname = page.technologies[forloop.index0] %}
+                  <a href="/artists/by-technology/{{ tslug }}/" class="vjs-tag vjs-tag-cyan">{{ _tname }} artists</a>
+                {% endfor %}
+              {% endif %}
+            {% elsif page.collection == "events" %}
+              {% if page.country_slug %}
+              <a href="/events/by-country/{{ page.country_slug }}/" class="vjs-tag vjs-tag-blue">Events in {{ page.country }}</a>
+              {% endif %}
+              {% if page.event_type_slug %}
+              <a href="/events/by-type/{{ page.event_type_slug }}/" class="vjs-tag vjs-tag-blue">{{ page.event_type }} events</a>
+              {% endif %}
+            {% elsif page.collection == "projects" %}
+              {% for tslug in page.matched_tech_slugs %}
+                {% assign _t = site.technology | where: "title_slug", tslug | first %}
+                {% if _t %}<a href="/technology/{{ tslug }}/projects/" class="vjs-tag vjs-tag-cyan">{{ _t.title }} projects</a>{% endif %}
+              {% endfor %}
+            {% elsif page.collection == "technology" %}
+              <a href="/technology/{{ page.title_slug }}/projects/" class="vjs-tag vjs-tag-cyan">Projects with {{ page.title }}</a>
+              <a href="/artists/by-technology/{{ page.title_slug }}/" class="vjs-tag vjs-tag-purple">Artists using {{ page.title }}</a>
+            {% endif %}
+          </div>
+        </div>
+        {% endif %}
+
       </div>
     </div>
   </div>
 </section>
+
+{%- comment -%} BreadcrumbList JSON-LD for rich-result eligibility. {%- endcomment -%}
+{% include seo/breadcrumb-jsonld.html %}
 
 {% unless page.category or page.tier %}
 <!-- BOOKING MODAL -->

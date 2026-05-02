@@ -88,6 +88,30 @@ Never paste stream keys back into `.replit` — that file is committed to the re
 ### CSP note
 `_headers` and the Express dev server keep `'unsafe-inline'` in `script-src` because numerous templates still use inline `<script>` blocks and `onclick=` handlers (forms, modals, particle canvas, analytics). Moving to a strict CSP with hashes/nonces is Task #4.
 
+### Tech SEO foundation (Task #2)
+- **Programmatic SEO pages** are generated at build time by `_plugins/programmatic_pages.rb`. The generator first normalises derived attributes onto each collection document (`country_slug`, `technology_slugs`, `event_type_slug`, `matched_tech_slugs`, `title_slug`), then emits one `Jekyll::PageWithoutAFile` per unique value across five route patterns:
+  - `/artists/by-country/<slug>/`
+  - `/artists/by-technology/<slug>/`
+  - `/events/by-country/<slug>/`
+  - `/events/by-type/<slug>/`
+  - `/technology/<slug>/projects/`
+  All pages share `_layouts/programmatic-list.html` which renders an intro paragraph, the matching cards via Liquid `where`/`where_exp` against the precomputed slugs, and a JSON-LD block (`CollectionPage` + `ItemList` + `BreadcrumbList`). Each detail page (`_layouts/vjs-detail.html`) cross-links back into these hubs from a "Browse" sidebar card derived from its own front-matter, completing the link graph.
+- Technology titles often carry a vendor prefix (e.g. "Adobe After Effects") while project front-matter uses the shortened name ("After Effects"). The generator builds match-key variants via `ProgrammaticSEO.tech_match_keys` (full title, hyphen-tail short form, vendor-prefix-stripped form against an explicit `VENDOR_PREFIXES` list) so projects are correctly tagged with the tech docs they actually use.
+- **Cornerstone /learn/ pages** live at `/learn/{what-is-a-vj,best-vj-software-2026,how-to-projection-map,free-vj-loops}/`. Each carries `Article` + (`FAQPage` or `HowTo`) + `BreadcrumbList` JSON-LD and links into the live artist/technology directories from inline anchors. `/learn/` itself is a hub index.
+- **BreadcrumbList JSON-LD** is rendered on every detail page via `_includes/seo/breadcrumb-jsonld.html`, included from `_layouts/vjs-detail.html` and `_layouts/loop-pack.html`. It auto-derives the section name and URL from `page.collection` (vjs → Artists, projects → Projects, etc.) unless the include is called with explicit `section_title` / `section_url` params.
+- **Sitemap regeneration**: `sitemap.xml` keeps the curated static-page block but appends every `site.pages | where: "sitemap", true` URL — that picks up programmatic pages (the generator sets `sitemap: true`) and the `/learn/*` pages.
+- **Site search** (`search.json` + `search/index.html`) now indexes all five collections (vjs, projects, events, studios, technology) with explicit type badges in the result UI. The legacy `posts`-only output was dead since the site has no blog posts.
+- **Image SEO**: card includes (`artist-card.html`, `studio-card.html`) and detail layouts enforce a non-empty `alt`, falling back to a sensible default ("VJ artist", "VJ studio") rather than ever rendering `alt=""`.
+- **Removed `<meta name="keywords">` block** from `_includes/core/head/meta-seo-tags.html` — the tag has been ignored by Google for over a decade and the auto-generated value was leaking the front-matter shape to scrapers without any SEO benefit. Description, OG, JSON-LD, and the new programmatic hubs do that job now.
+
+### Robots & AI-bot policy
+`robots.txt` declares an explicit per-bot decision rather than blanket `Allow: /`:
+
+- **Allowed** — Googlebot, Bingbot, DuckDuckBot, and the AI assistants that send users back to the source page with attribution: `PerplexityBot`, `Perplexity-User`, `Google-Extended`, `GPTBot`, `ChatGPT-User`, `OAI-SearchBot`, `ClaudeBot`, `Claude-User`, `anthropic-ai`. These drive measurable referral traffic and treat us as a citable source.
+- **Disallowed** — bots whose primary mode is bulk harvesting for resold training datasets without attribution: `CCBot` (Common Crawl), `cohere-ai`, `Bytespider` (ByteDance), `ImagesiftBot`, `Omgilibot`, `Diffbot`, `FacebookBot`, `Meta-ExternalAgent`, `PetalBot` (Huawei).
+
+The decision favours generative-AI assistants that surface VJs TV in conversational answers (good for artist discovery) while declining to subsidise unattributed dataset construction. Re-evaluate annually as the bot landscape shifts.
+
 ## External Dependencies
 - **Jekyll Plugins**: `jekyll-feed`
 - **Styling**: Bootstrap

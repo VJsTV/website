@@ -270,6 +270,31 @@ meta_description: "VJs TV is the global broadcast network for VJ culture. Watch 
 }
 </style>
 
+<!-- POSITIONING H1 — single, semantic, above-the-fold -->
+{% assign _country_count = _sc_arr | size %}
+<header class="vjs-positioning">
+  <h1 class="vjs-positioning-h1">VJs TV &mdash; the live broadcast network and global directory for visual performance.</h1>
+  <p class="vjs-positioning-trust">{{ site.vjs | size }} artists across {{ _country_count }} countries &middot; {{ site.projects | size }} projects &middot; 3 live channels</p>
+</header>
+<style>
+.vjs-positioning {
+  background:#000; padding:18px 20px 14px; border-bottom:1px solid #111;
+  text-align:center;
+}
+.vjs-positioning-h1 {
+  font-family:'Barlow Condensed',sans-serif; font-weight:700;
+  font-size:clamp(1rem, 2.4vw, 1.6rem); letter-spacing:0.02em;
+  margin:0 auto; max-width:1100px; line-height:1.25;
+  background:linear-gradient(90deg,#fff 0%,#9d00ff 50%,#00f9ff 100%);
+  -webkit-background-clip:text; -webkit-text-fill-color:transparent; background-clip:text;
+}
+.vjs-positioning-trust {
+  font-family:'Barlow Condensed',sans-serif; font-size:0.7rem; font-weight:600;
+  letter-spacing:0.18em; text-transform:uppercase; color:#666;
+  margin:6px 0 0;
+}
+</style>
+
 <section class="vjs-hero-wrap">
   <h2 style="position:absolute; left:-9999px; width:1px; height:1px; overflow:hidden;">Global broadcast network for VJ culture</h2>
 
@@ -413,12 +438,11 @@ function heroPlay(card) {
 }
 </script>
 
-<!-- SPONSOR TICKER -->
+<!-- SPONSOR TICKER — single primary CTA + supporting category labels -->
 <div class="vjs-sponsor-bar">
   <div class="vjs-sponsor-bar-track">
-    <span class="vjs-sponsor-bar-item" style="color:var(--vjs-ultraviolet);">Become a Partner</span><span class="vjs-sponsor-bar-dot"> &diams; </span><span class="vjs-sponsor-bar-item">Technology Partners Wanted</span><span class="vjs-sponsor-bar-dot"> &diams; </span><span class="vjs-sponsor-bar-item">Broadcast Sponsors Wanted</span><span class="vjs-sponsor-bar-dot"> &diams; </span><span class="vjs-sponsor-bar-item">Festival Partners Wanted</span><span class="vjs-sponsor-bar-dot"> &diams; </span>
-    <span class="vjs-sponsor-bar-item" style="color:var(--vjs-ultraviolet);">Become a Partner</span><span class="vjs-sponsor-bar-dot"> &diams; </span><span class="vjs-sponsor-bar-item">Technology Partners Wanted</span><span class="vjs-sponsor-bar-dot"> &diams; </span><span class="vjs-sponsor-bar-item">Broadcast Sponsors Wanted</span><span class="vjs-sponsor-bar-dot"> &diams; </span><span class="vjs-sponsor-bar-item">Festival Partners Wanted</span><span class="vjs-sponsor-bar-dot"> &diams; </span>
-    <span class="vjs-sponsor-bar-item" style="color:var(--vjs-ultraviolet);">Become a Partner</span><span class="vjs-sponsor-bar-dot"> &diams; </span><span class="vjs-sponsor-bar-item">Technology Partners Wanted</span><span class="vjs-sponsor-bar-dot"> &diams; </span><span class="vjs-sponsor-bar-item">Broadcast Sponsors Wanted</span><span class="vjs-sponsor-bar-dot"> &diams; </span><span class="vjs-sponsor-bar-item">Festival Partners Wanted</span><span class="vjs-sponsor-bar-dot"> &diams; </span>
+    <a href="/partners" class="vjs-sponsor-bar-item vjs-sponsor-bar-cta" style="color:var(--vjs-ultraviolet); text-decoration:none;">Become a Partner &rsaquo;</a><span class="vjs-sponsor-bar-dot"> &diams; </span><span class="vjs-sponsor-bar-item">Technology Partners</span><span class="vjs-sponsor-bar-dot"> &diams; </span><span class="vjs-sponsor-bar-item">Broadcast Sponsors</span><span class="vjs-sponsor-bar-dot"> &diams; </span><span class="vjs-sponsor-bar-item">Festival Partners</span><span class="vjs-sponsor-bar-dot"> &diams; </span><span class="vjs-sponsor-bar-item">Studio Partners</span><span class="vjs-sponsor-bar-dot"> &diams; </span><span class="vjs-sponsor-bar-item">Education Partners</span><span class="vjs-sponsor-bar-dot"> &diams; </span>
+    <span class="vjs-sponsor-bar-item">Technology Partners</span><span class="vjs-sponsor-bar-dot"> &diams; </span><span class="vjs-sponsor-bar-item">Broadcast Sponsors</span><span class="vjs-sponsor-bar-dot"> &diams; </span><span class="vjs-sponsor-bar-item">Festival Partners</span><span class="vjs-sponsor-bar-dot"> &diams; </span><span class="vjs-sponsor-bar-item">Studio Partners</span><span class="vjs-sponsor-bar-dot"> &diams; </span><span class="vjs-sponsor-bar-item">Education Partners</span><span class="vjs-sponsor-bar-dot"> &diams; </span>
   </div>
 </div>
 
