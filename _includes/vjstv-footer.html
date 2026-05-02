@@ -300,9 +300,6 @@ if (!REPORT_API || REPORT_API === '') REPORT_API = '';
     .then(function(res) { return res.json().catch(function() { return { success: false, error: 'Unexpected response.' }; }); })
     .then(function(result) {
       if (result.success) {
-        if (typeof window.vjsTrack === 'function') {
-          window.vjsTrack('newsletter_signup', { source: 'footer' });
-        }
         if (result.already_confirmed) {
           window.location.href = '/thank-you/subscribe/?status=confirmed&source=footer';
         } else {

@@ -1,15 +1,13 @@
 {
   "version": 1,
   "include": [
-    "/api/submit",
-    "/api/booking",
-    "/api/partner",
-    "/api/report",
-    "/api/subscribe",
-    "/api/subscribe/confirm",
-    "/api/analytics",
-    "/api/analytics/charts",
-    "/api/health"
+    "/*"
   ],
-  "exclude": []
+  "exclude": [
+    "/assets/*",
+    "/favicon.ico",
+    "/robots.txt",
+    "/sitemap.xml",
+    "/feed.xml"
+  ]
 }

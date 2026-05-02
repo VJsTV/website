@@ -145,10 +145,10 @@
 <link rel="dns-prefetch" href="https://player.vimeo.com" />
 <link rel="dns-prefetch" href="https://www.youtube-nocookie.com" />
 <link rel="dns-prefetch" href="https://i.vimeocdn.com" />
-<link rel="preload" href="/assets/css/vjstv.css?v=1777735779" as="style" />
+<link rel="preload" href="/assets/css/vjstv.css?v=1777736219" as="style" />
 <link rel="preload" href="/assets/css/bootstrap.min.css" as="style" />
 <link rel="stylesheet" type="text/css" href="/assets/css/bootstrap.min.css" />
-<link rel="stylesheet" type="text/css" href="/assets/css/vjstv.css?v=1777735779" />
+<link rel="stylesheet" type="text/css" href="/assets/css/vjstv.css?v=1777736219" />
 <link rel="stylesheet" type="text/css" href="/assets/css/plugins.css" media="print" onload="this.media='all'" />
 <link rel="stylesheet" type="text/css" href="/assets/revolution/css/settings.css" media="print" onload="this.media='all'" />
 <link rel="stylesheet" type="text/css" href="/assets/revolution/css/layers.css" media="print" onload="this.media='all'" />
@@ -1289,9 +1289,6 @@ if (!REPORT_API || REPORT_API === '') REPORT_API = '';
     .then(function(res) { return res.json().catch(function() { return { success: false, error: 'Unexpected response.' }; }); })
     .then(function(result) {
       if (result.success) {
-        if (typeof window.vjsTrack === 'function') {
-          window.vjsTrack('newsletter_signup', { source: 'footer' });
-        }
         if (result.already_confirmed) {
           window.location.href = '/thank-you/subscribe/?status=confirmed&source=footer';
         } else {
