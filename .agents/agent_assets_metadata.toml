@@ -1,5 +1,4 @@
 uploads = []
-outputs = []
 
 [[generated]]
 id = "FXUPChsOeyoL0PhadxH7H"
@@ -30,3 +29,9 @@ id = "s7W8tjyr_ubrM3f1Y9hYc"
 uri = "file://assets/images/loop-packs/vjstv-loops-01/preview-04.png"
 type = "image"
 title = "generated_image"
+
+[[outputs]]
+id = "LNAb_g1AIjoBIbE4blmna"
+uri = "file://AUDIT.md"
+type = "text"
+title = "VJs TV — Full Codebase, Architecture & Security Audit"
