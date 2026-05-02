@@ -1,7 +1,11 @@
 const SITEVERIFY_URL = "https://challenges.cloudflare.com/turnstile/v0/siteverify";
 
+// Verifies a Turnstile token against env.TURNSTILE_SECRET_KEY.
+// Fail-closed: if the secret is missing or the token is missing/invalid,
+// returns false. The decision of whether the secret is REQUIRED for a
+// given environment is made in guard.js, not here.
 export async function verifyTurnstile(token, env, ip) {
-  if (!env || !env.TURNSTILE_SECRET_KEY) return true;
+  if (!env || !env.TURNSTILE_SECRET_KEY) return false;
   if (!token || typeof token !== "string") return false;
 
   try {

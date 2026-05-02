@@ -7,11 +7,7 @@ import { isValidEmail } from "../_lib/validation.js";
 export async function onRequest(context) {
   const { request, env } = context;
 
-  const guard = await guardPost(request, env, {
-    endpoint: "partner",
-    perMinute: 3,
-    perDay: 30,
-  });
+  const guard = await guardPost(request, env, { endpoint: "partner" });
   if (guard.response) return guard.response;
   const data = guard.data;
 
@@ -62,7 +58,7 @@ export async function onRequest(context) {
     if (!issue.ok) {
       return json({ success: false, error: "Failed to send enquiry. Please try again." }, 502, request, env);
     }
-    return json({ success: true, issue_number: issue.data.number }, 200, request, env);
+    return json({ success: true, issue_number: issue.data.number }, 201, request, env);
   } catch (err) {
     return json({ success: false, error: "Server error. Please try again later." }, 500, request, env);
   }

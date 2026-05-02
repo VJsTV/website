@@ -55,7 +55,13 @@ Configure these in the Pages project so the functions behave correctly:
 - `CF_API_TOKEN`, `CF_ZONE_ID` — for `/api/analytics` and `/api/analytics/charts`.
 - `TURNSTILE_SECRET_KEY` — secret. When present, every POST endpoint requires a valid `cf-turnstile-response` token. The matching site key goes into `_config.yml → turnstile_site_key`; both must be set together.
 - `ALLOWED_ORIGINS` — optional comma-separated list. Defaults to `https://vjstv.com,https://www.vjstv.com`. Preview/local origins (`*.pages.dev`, `localhost`, `127.0.0.1`) are **only** accepted when `ALLOW_PREVIEW_ORIGINS=1` is also set on the environment — production should leave it unset.
-- `ALLOW_PREVIEW_ORIGINS` — set to `1` only on Pages preview/dev environments to permit `*.pages.dev` and localhost callers. Never set on production.
+- `ALLOW_PREVIEW_ORIGINS` — set to `1` only on Pages preview/dev environments to permit `*.pages.dev` and localhost callers, **and** to allow form POSTs to run without a Turnstile secret. Never set on production. When this flag is unset (production-like) and `TURNSTILE_SECRET_KEY` is missing, every POST endpoint returns `503 Service Temporarily Unavailable` — fail-closed by design.
+
+### Rate limits and success codes
+- All form endpoints (`/api/submit`, `/api/booking`, `/api/partner`, `/api/report`) enforce a uniform **5 requests / minute** and **50 requests / day** per IP via `functions/_lib/guard.js`. Exceeded limits return `429` with a `Retry-After` header.
+- Successful resource creation returns `201 Created`. `200 OK` is reserved for honeypot silent-drop responses and GET endpoints (`/api/health`, `/api/analytics`, `/api/analytics/charts`).
+- Turnstile failures (missing or invalid token, when the secret is configured) return `403 Forbidden`.
+- Disallowed origins return `403`. Server misconfiguration in production-like environments returns `503`.
 
 ### Streaming credentials (rotation procedure)
 The previous live-stream keys (`STREAM_KEY_1/2/3`) were committed to `.replit` under `[userenv.shared]` and have therefore been treated as compromised. They have been removed from the shared environment.

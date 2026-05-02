@@ -12,7 +12,7 @@ function parseAllowedOrigins(env) {
   return DEFAULT_ALLOWED.slice();
 }
 
-function previewAllowed(env) {
+export function previewAllowed(env) {
   if (!env) return false;
   const flag = env.ALLOW_PREVIEW_ORIGINS;
   if (flag === undefined || flag === null) return false;

@@ -7,11 +7,7 @@ import { isValidEmail } from "../_lib/validation.js";
 export async function onRequest(context) {
   const { request, env } = context;
 
-  const guard = await guardPost(request, env, {
-    endpoint: "report",
-    perMinute: 3,
-    perDay: 20,
-  });
+  const guard = await guardPost(request, env, { endpoint: "report" });
   if (guard.response) return guard.response;
   const data = guard.data;
 
@@ -67,7 +63,7 @@ export async function onRequest(context) {
   try {
     const issue = await createIssue(env, issueTitle, issueBody, labels);
     if (issue.ok) {
-      return json({ success: true, issue_number: issue.data.number }, 200, request, env);
+      return json({ success: true, issue_number: issue.data.number }, 201, request, env);
     }
     return json({ success: false, error: "Failed to file report. Please try again." }, 502, request, env);
   } catch (err) {

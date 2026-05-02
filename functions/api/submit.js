@@ -15,11 +15,7 @@ const REQUIRED = ["artist", "project_title", "email", "video_url", "description"
 export async function onRequest(context) {
   const { request, env } = context;
 
-  const guard = await guardPost(request, env, {
-    endpoint: "submit",
-    perMinute: 3,
-    perDay: 20,
-  });
+  const guard = await guardPost(request, env, { endpoint: "submit" });
   if (guard.response) return guard.response;
   const data = guard.data;
 
@@ -148,7 +144,7 @@ export async function onRequest(context) {
         success: true,
         issue_number: issue.data.number,
         issue_url: issue.data.html_url,
-      }, 200, request, env);
+      }, 201, request, env);
     }
     return json({ success: false, error: "Failed to create submission. Please try again." }, 502, request, env);
   } catch (err) {
