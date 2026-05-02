@@ -12,9 +12,21 @@ permalink: /thank-you/download/
 <section class="vjs-section" style="min-height:60vh; display:flex; align-items:center;">
   <div class="container" style="max-width:680px; text-align:center;">
     <div style="font-size:3rem; color:var(--vjs-cyan); line-height:1; margin-bottom:1rem;">&#10003;</div>
-    <p style="font-family:'Barlow Condensed',sans-serif; font-size:0.75rem; font-weight:700; letter-spacing:0.18em; text-transform:uppercase; color:var(--vjs-ultraviolet); margin:0 0 1rem;">Download started</p>
-    <h1 style="font-family:'Barlow Condensed',sans-serif; font-weight:700; font-size:clamp(1.6rem, 3.6vw, 2.4rem); margin:0 0 1.25rem; color:#fff; line-height:1.15;">Loop pack on its way.</h1>
-    <p style="font-family:'Space Grotesk',sans-serif; font-size:1rem; color:var(--vjs-text-muted); line-height:1.7; margin:0 0 2.5rem;">If the download doesn't start automatically, head back and click the file again. While you wait, here are some next stops worth your time.</p>
+    <p style="font-family:'Barlow Condensed',sans-serif; font-size:0.75rem; font-weight:700; letter-spacing:0.18em; text-transform:uppercase; color:var(--vjs-ultraviolet); margin:0 0 1rem;">Your download is ready</p>
+    <h1 style="font-family:'Barlow Condensed',sans-serif; font-weight:700; font-size:clamp(1.6rem, 3.6vw, 2.4rem); margin:0 0 1.25rem; color:#fff; line-height:1.15;" id="ty-dl-heading">Loop pack ready to download.</h1>
+    <p style="font-family:'Space Grotesk',sans-serif; font-size:1rem; color:var(--vjs-text-muted); line-height:1.7; margin:0 0 2rem;" id="ty-dl-body">Your download should start automatically. If it doesn&rsquo;t, click the button below.</p>
+
+    <div id="ty-dl-btn-wrap" style="margin-bottom:2.5rem; display:none;">
+      <a id="ty-dl-link" href="#" download
+         class="vjs-btn vjs-btn-primary"
+         style="font-size:1rem; padding:16px 32px; display:inline-block;">
+        Download Loop Pack
+      </a>
+    </div>
+
+    <p id="ty-dl-no-url" style="display:none; font-family:'Space Grotesk',sans-serif; font-size:0.9rem; color:#ff6677; margin:0 0 2rem;">
+      Download link not found. <a href="/marketplace/vjstv-loops-01" style="color:var(--vjs-ultraviolet);">Click here to go back to the pack page.</a>
+    </p>
 
     <div style="display:flex; gap:1rem; justify-content:center; flex-wrap:wrap;">
       <a href="/marketplace" class="vjs-btn vjs-btn-primary">Browse More Packs</a>
@@ -28,12 +40,56 @@ permalink: /thank-you/download/
 
 <script>
 (function() {
+  var qs = new URLSearchParams(window.location.search);
+  var pack   = qs.get('pack') || '';
+  var source = qs.get('source') || 'thank-you';
+  var url    = qs.get('url') || '';
+
   if (typeof window.vjsTrack === 'function') {
-    var qs = new URLSearchParams(window.location.search);
-    window.vjsTrack('download_requested', {
-      pack: qs.get('pack') || 'unknown',
-      source: qs.get('source') || 'thank-you'
-    });
+    window.vjsTrack('download_requested', { pack: pack || 'unknown', source: source });
+  }
+
+  if (url) {
+    // Validate the URL is same-origin or a relative path to prevent open redirect.
+    var isSafe = false;
+    try {
+      var parsed = new URL(url, window.location.origin);
+      isSafe = parsed.origin === window.location.origin;
+    } catch (e) {
+      // If url is a relative path, treat as safe.
+      isSafe = url.charAt(0) === '/' && url.charAt(1) !== '/';
+    }
+
+    var btnWrap = document.getElementById('ty-dl-btn-wrap');
+    var dlLink  = document.getElementById('ty-dl-link');
+
+    if (isSafe) {
+      if (pack) {
+        document.getElementById('ty-dl-heading').textContent = pack + ' — ready to download.';
+        dlLink.textContent = 'Download ' + pack;
+      }
+      dlLink.href = url;
+      btnWrap.style.display = 'block';
+
+      // Trigger automatic download after a short delay so the page renders first.
+      setTimeout(function() {
+        var a = document.createElement('a');
+        a.href = url;
+        a.download = '';
+        a.style.display = 'none';
+        document.body.appendChild(a);
+        a.click();
+        document.body.removeChild(a);
+      }, 600);
+    } else {
+      document.getElementById('ty-dl-no-url').style.display = 'block';
+    }
+  } else {
+    // No url param — show the manual fallback button pointing to the pack page.
+    var noUrl = document.getElementById('ty-dl-no-url');
+    noUrl.style.display = 'block';
+    document.getElementById('ty-dl-body').textContent =
+      'Head back to the pack page to grab your download.';
   }
 })();
 </script>

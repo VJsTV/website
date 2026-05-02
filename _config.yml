@@ -7,10 +7,13 @@ api_url: ""
 # server-side check is skipped (development mode). Set both turnstile_site_key
 # (here) and TURNSTILE_SECRET_KEY (env / Pages secret) to enable.
 turnstile_site_key: ""
-# Plausible Analytics. When set, Plausible's tagged-events + outbound-links
-# script is loaded site-wide and conversion events flow via window.vjsTrack.
-# When empty, no analytics script is loaded and vjsTrack is a no-op.
-plausible_domain: ""
+# Plausible Analytics — REQUIRED for conversion tracking in production.
+# Set this to your Plausible site domain (e.g. "vjstv.com") in your Cloudflare
+# Pages environment variables or directly here before deploying.
+# When empty, the Plausible script is not loaded and vjsTrack queues events
+# locally as no-ops — conversion data will NOT be recorded.
+# To enable: set plausible_domain to the domain registered in your Plausible account.
+plausible_domain: ""  # TODO: set to "vjstv.com" before going live
 permalink: "/:title"
 
 include:

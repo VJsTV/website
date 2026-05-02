@@ -99,13 +99,21 @@ export async function onRequest(context) {
       await env.SUBSCRIBERS_KV.put(emailKey(email), JSON.stringify(record));
     } catch (e) { /* best-effort */ }
 
-    // Mirror to Resend audience if configured. Best-effort, do not block redirect.
-    await mirrorToResend(env, email);
+    // Mirror to Resend audience (secondary/optional — KV + SEB is the primary path).
+    // Best-effort: never blocks the confirmation redirect.
+    mirrorToResend(env, email).catch(function() {});
 
-    // Post-confirmation welcome email with the free loop pack download link.
+    // Primary delivery path: SEB (Cloudflare Email Routing) sends the welcome
+    // email with the free loop pack download link. This is REQUIRED in production
+    // — if SEB is not bound, the subscriber is confirmed in KV but will not
+    // receive their download link. Bind SEB in Cloudflare Pages → Settings →
+    // Functions → Email bindings before going live.
     const { sendEmail, emailTemplate } = await import("../../_lib/email.js");
+    if (!env.SEB) {
+      console.error("[subscribe/confirm] SEB email binding is not configured — welcome email not sent for:", email);
+    }
     const downloadUrl = origin + "/marketplace/vjstv-loops-01";
-    await sendEmail(
+    const emailResult = await sendEmail(
       env,
       email,
       "You\u2019re in \u2014 download your free VJs TV loop pack",
@@ -124,6 +132,9 @@ export async function onRequest(context) {
         <p style="color:#666;font-size:12px;margin-top:24px;">You\u2019re receiving this because you subscribed at vjstv.com. To unsubscribe, reply to this email.</p>
       `)
     );
+    if (emailResult !== true) {
+      console.error("[subscribe/confirm] Welcome email send failed for:", email, "— check SEB binding and noreply@vjstv.com routing rule.");
+    }
   }
 
   // Burn the token so it can't be reused.
