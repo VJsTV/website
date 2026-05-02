@@ -43,6 +43,7 @@
         <div style="position:absolute;left:-9999px;" aria-hidden="true"><input type="text" name="website_url" tabindex="-1" autocomplete="off" /></div>
         <input type="email" name="email" placeholder="your@email.com" required />
         <input type="hidden" name="source" value="footer" />
+        {% include security/turnstile.html theme="dark" size="compact" %}
         <button type="submit">Subscribe</button>
         <p id="vjstv-footer-subscribe-msg" style="margin:8px 0 0; font-family:'Barlow Condensed',sans-serif; font-size:0.72rem; color:var(--vjs-text-muted); display:none;"></p>
       </form>

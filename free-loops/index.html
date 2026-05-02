@@ -94,6 +94,7 @@ permalink: /free-loops/
             Get Free Loops
           </button>
         </div>
+        {% include security/turnstile.html theme="dark" size="normal" %}
         <p id="free-loops-msg" style="font-family:'Barlow Condensed',sans-serif; font-size:0.72rem; color:var(--vjs-text-muted); text-align:center; margin:0; display:none;"></p>
         <p style="font-family:'Barlow Condensed',sans-serif; font-size:0.68rem; color:#444; text-align:center; margin:0; letter-spacing:0.06em; text-transform:uppercase;">Free forever &middot; No spam &middot; Unsubscribe any time</p>
       </form>
@@ -217,16 +218,19 @@ permalink: /free-loops/
     <div style="margin-top:3rem; text-align:center; padding:2.5rem 2rem; background:#0a0a0a; border:1px solid #1a1a1a;">
       <p style="font-family:'Barlow Condensed',sans-serif; font-size:0.72rem; font-weight:700; letter-spacing:0.18em; text-transform:uppercase; color:var(--vjs-ultraviolet); margin:0 0 0.75rem;">Ready?</p>
       <h3 style="font-family:'Barlow Condensed',sans-serif; font-weight:700; font-size:1.5rem; color:#fff; margin:0 0 1.25rem;">Get your 18 free loops now.</h3>
-      <form id="free-loops-form-2" novalidate style="max-width:400px; margin:0 auto; display:flex; gap:0; background:#050505; border:1px solid var(--vjs-ultraviolet);">
-        <input type="email" id="free-loops-email-2" name="email" placeholder="your@email.com" required
-          style="flex:1; background:transparent; border:none; padding:13px 14px; color:#fff; font-family:'Space Grotesk',sans-serif; font-size:0.85rem; outline:none;" />
-        <input type="hidden" name="source" value="free-loops" />
-        <button type="submit"
-          style="font-family:'Barlow Condensed',sans-serif; font-size:0.72rem; font-weight:700; letter-spacing:0.1em; text-transform:uppercase; padding:13px 20px; background:var(--vjs-ultraviolet); color:#fff; border:none; cursor:pointer; white-space:nowrap;">
-          Get Free Loops
-        </button>
+      <form id="free-loops-form-2" novalidate style="max-width:400px; margin:0 auto; display:flex; flex-direction:column; gap:0.5rem;">
+        <div style="display:flex; gap:0; background:#050505; border:1px solid var(--vjs-ultraviolet);">
+          <input type="email" id="free-loops-email-2" name="email" placeholder="your@email.com" required
+            style="flex:1; background:transparent; border:none; padding:13px 14px; color:#fff; font-family:'Space Grotesk',sans-serif; font-size:0.85rem; outline:none;" />
+          <input type="hidden" name="source" value="free-loops" />
+          <button type="submit"
+            style="font-family:'Barlow Condensed',sans-serif; font-size:0.72rem; font-weight:700; letter-spacing:0.1em; text-transform:uppercase; padding:13px 20px; background:var(--vjs-ultraviolet); color:#fff; border:none; cursor:pointer; white-space:nowrap;">
+            Get Free Loops
+          </button>
+        </div>
+        {% include security/turnstile.html theme="dark" size="normal" %}
+        <p id="free-loops-msg-2" style="font-family:'Barlow Condensed',sans-serif; font-size:0.72rem; color:var(--vjs-text-muted); margin:0; display:none;"></p>
       </form>
-      <p id="free-loops-msg-2" style="font-family:'Barlow Condensed',sans-serif; font-size:0.72rem; color:var(--vjs-text-muted); margin:10px 0 0; display:none;"></p>
     </div>
 
   </div>
@@ -248,10 +252,18 @@ function handleFreeLoopsSubmit(emailInput, msgEl, btn) {
   }
   btn.disabled = true; btn.textContent = 'Sending\u2026';
 
+  var formEl = btn.closest('form');
+  var postData = {};
+  if (formEl) {
+    new FormData(formEl).forEach(function(v, k) { postData[k] = v; });
+  } else {
+    postData.email = email;
+    postData.source = 'free-loops';
+  }
   fetch(REPORT_API + '/api/subscribe', {
     method: 'POST',
     headers: { 'Content-Type': 'application/json' },
-    body: JSON.stringify({ email: email, source: 'free-loops' })
+    body: JSON.stringify(postData)
   })
   .then(function(res) { return res.json().catch(function() { return { success: false, error: 'Unexpected response.' }; }); })
   .then(function(result) {
