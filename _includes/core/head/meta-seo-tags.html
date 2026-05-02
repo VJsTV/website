@@ -6,7 +6,13 @@
 <meta name="robots" content="noindex, follow" />
 {% else %}
 <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1" />
-{% assign _canon = page.url | absolute_url | replace: "index.html", "" %}{% if _canon != "/" and _canon != "" %}{% assign _last = _canon | slice: -1 %}{% if _last == "/" %}{% assign _len = _canon.size | minus: 1 %}{% assign _canon = _canon | slice: 0, _len %}{% endif %}{% endif %}
+{%- comment -%}
+  Canonical preserves the shape of page.url so it matches the served
+  URL (and the og:url tag): no trailing slash for file-style detail
+  pages like /artists/jago-vj, trailing slash for directory-style
+  pages like /artists/by-country/spain/ and /learn/what-is-a-vj/.
+{%- endcomment -%}
+{% assign _canon = page.url | replace: "index.html", "" | absolute_url %}
 <link rel="canonical" href="{{ _canon }}" />
 {% endif %}
 <link rel="preconnect" href="https://fonts.googleapis.com" />
