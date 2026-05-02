@@ -172,10 +172,10 @@
 <link rel="dns-prefetch" href="https://player.vimeo.com" />
 <link rel="dns-prefetch" href="https://www.youtube-nocookie.com" />
 <link rel="dns-prefetch" href="https://i.vimeocdn.com" />
-<link rel="preload" href="/assets/css/vjstv.css?v=1777734679" as="style" />
+<link rel="preload" href="/assets/css/vjstv.css?v=1777735445" as="style" />
 <link rel="preload" href="/assets/css/bootstrap.min.css" as="style" />
 <link rel="stylesheet" type="text/css" href="/assets/css/bootstrap.min.css" />
-<link rel="stylesheet" type="text/css" href="/assets/css/vjstv.css?v=1777734679" />
+<link rel="stylesheet" type="text/css" href="/assets/css/vjstv.css?v=1777735445" />
 <link rel="stylesheet" type="text/css" href="/assets/css/plugins.css" media="print" onload="this.media='all'" />
 <link rel="stylesheet" type="text/css" href="/assets/revolution/css/settings.css" media="print" onload="this.media='all'" />
 <link rel="stylesheet" type="text/css" href="/assets/revolution/css/layers.css" media="print" onload="this.media='all'" />
@@ -1991,6 +1991,10 @@ function switchChannel(ch) {
   if(badge) {
     var labels = { 1:'LIVE BROADCAST', 2:'LOOP GALLERY — CH.2', 3:'VJ EDUCATION — CH.3' };
     badge.innerHTML = '<span class="vjs-live-dot"></span>' + labels[ch];
+  }
+  var chNames = { 1:'CH.1_LIVE', 2:'CH.2_LOOP_GALLERY', 3:'CH.3_VJ_EDUCATION' };
+  if (typeof window.vjsTrack === 'function') {
+    window.vjsTrack('live_channel_switch', { to: chNames[ch] || String(ch) });
   }
 }
 

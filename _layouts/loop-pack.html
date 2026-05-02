@@ -105,8 +105,9 @@ layout: default
             {% endif %}
           </div>
           {% if page.price == 0 %}
-          <a href="/marketplace/download/?title={{ page.title | uri_escape }}&artist={{ page.artist | uri_escape }}&clips={{ page.clip_count }}&size={{ page.file_size | uri_escape }}&free=true&url={{ page.download_url | uri_escape }}&license={{ page.license_url | uri_escape }}"
-             class="vjs-mp-btn-primary">
+          <a href="/thank-you/download/?pack={{ page.title | uri_escape }}&artist={{ page.artist | uri_escape }}&clips={{ page.clip_count }}&size={{ page.file_size | uri_escape }}&free=true&url={{ page.download_url | uri_escape }}&source=loop-pack-free"
+             class="vjs-mp-btn-primary"
+             onclick="if(window.vjsTrack)window.vjsTrack('download_requested',{pack:'{{ page.title | escape }}',artist:'{{ page.artist | escape }}',source:'loop-pack-free'});">
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" style="width:1em;height:1em;vertical-align:middle;margin-right:6px;"><path d="M12 3v14M5 11l7 7 7-7"/><path d="M4 20h16"/></svg>
             FREE DOWNLOAD
           </a>
@@ -270,7 +271,7 @@ layout: default
       }
       setTimeout(function() {
         document.getElementById('mpModal').style.display = 'none';
-        window.location.href = '/marketplace/download?title=' + encodeURIComponent(title) + '&artist=' + encodeURIComponent(artist) + '&clips=' + encodeURIComponent(clips) + '&size=' + encodeURIComponent(size);
+        window.location.href = '/thank-you/download/?pack=' + encodeURIComponent(title) + '&artist=' + encodeURIComponent(artist) + '&clips=' + encodeURIComponent(clips) + '&size=' + encodeURIComponent(size) + '&source=loop-pack-paid';
       }, 1800);
     });
   }

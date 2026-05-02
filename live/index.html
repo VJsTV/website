@@ -723,6 +723,10 @@ function switchChannel(ch) {
     var labels = { 1:'LIVE BROADCAST', 2:'LOOP GALLERY — CH.2', 3:'VJ EDUCATION — CH.3' };
     badge.innerHTML = '<span class="vjs-live-dot"></span>' + labels[ch];
   }
+  var chNames = { 1:'CH.1_LIVE', 2:'CH.2_LOOP_GALLERY', 3:'CH.3_VJ_EDUCATION' };
+  if (typeof window.vjsTrack === 'function') {
+    window.vjsTrack('live_channel_switch', { to: chNames[ch] || String(ch) });
+  }
 }
 
 if(scheduleSection) scheduleSection.style.display = 'block';
