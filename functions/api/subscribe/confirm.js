@@ -118,15 +118,17 @@ export async function onRequest(context) {
       await env.SUBSCRIBERS_KV.put(emailKey(email), JSON.stringify(record));
     } catch (e) { /* best-effort */ }
 
-    // Mirror to Resend audience (secondary/optional — KV + SEB is the primary path).
-    // Best-effort: never blocks the confirmation redirect.
-    mirrorToResend(env, email).catch(function() {});
+    // ── ESP audience sync — REQUIRED in production ───────────────────────────
+    // mirrorToResend is the primary ESP list write. It logs a warning when env
+    // vars are absent (acceptable during local dev/preview) but is expected to
+    // succeed in production. The function itself never throws — errors are logged
+    // and the confirmation redirect always completes.
+    await mirrorToResend(env, email);
 
-    // Primary delivery path: SEB (Cloudflare Email Routing) sends the welcome
-    // email with the free loop pack download link. This is REQUIRED in production
-    // — if SEB is not bound, the subscriber is confirmed in KV but will not
-    // receive their download link. Bind SEB in Cloudflare Pages → Settings →
-    // Functions → Email bindings before going live.
+    // ── Welcome email via SEB (Cloudflare Email Routing) ─────────────────────
+    // SEB is REQUIRED in production. If absent, the subscriber is confirmed in
+    // KV but will NOT receive their download link. Bind SEB under:
+    //   Cloudflare Pages → Settings → Functions → Email bindings
     const { sendEmail, emailTemplate } = await import("../../_lib/email.js");
     if (!env.SEB) {
       console.error("[subscribe/confirm] SEB email binding is not configured — welcome email not sent for:", email);

@@ -119,7 +119,8 @@ layout: default
                   data-artist="{{ page.artist }}"
                   data-price="{{ page.price_display }}"
                   data-clips="{{ page.clip_count }}"
-                  data-size="{{ page.file_size }}">
+                  data-size="{{ page.file_size }}"
+                  data-url="{{ page.download_url | uri_escape }}">
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" style="width:1em;height:1em;vertical-align:middle;margin-right:6px;"><rect x="2" y="5" width="20" height="14" rx="0"/><path d="M2 10h20"/></svg>
             BUY NOW · {{ page.price_display }}
           </button>
@@ -267,12 +268,19 @@ layout: default
       var clips = firstBtn ? firstBtn.dataset.clips : '';
       var size = firstBtn ? firstBtn.dataset.size : '';
       var price = firstBtn ? firstBtn.dataset.price : '';
+      var dlUrl = firstBtn ? (firstBtn.dataset.url || '') : '';
       if (typeof window.vjsTrack === 'function') {
-        window.vjsTrack('download_requested', { pack: title, artist: artist, price: price, source: 'loop-pack-page' });
+        window.vjsTrack('download_requested', { pack: title, artist: artist, price: price, source: 'loop-pack-paid' });
       }
       setTimeout(function() {
         document.getElementById('mpModal').style.display = 'none';
-        window.location.href = '/thank-you/download/?pack=' + encodeURIComponent(title) + '&artist=' + encodeURIComponent(artist) + '&clips=' + encodeURIComponent(clips) + '&size=' + encodeURIComponent(size) + '&source=loop-pack-paid';
+        var dest = '/thank-you/download/?pack=' + encodeURIComponent(title) +
+                   '&artist=' + encodeURIComponent(artist) +
+                   '&clips=' + encodeURIComponent(clips) +
+                   '&size=' + encodeURIComponent(size) +
+                   '&source=loop-pack-paid';
+        if (dlUrl) dest += '&url=' + encodeURIComponent(dlUrl);
+        window.location.href = dest;
       }, 1800);
     });
   }
