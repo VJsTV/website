@@ -1,100 +1,69 @@
-const REPO_OWNER = "VJsTV";
-const REPO_NAME = "website";
-
-async function readBody(request) {
-  var contentType = request.headers.get("content-type") || "";
-  if (contentType.includes("application/json")) return await request.json();
-  var formData = await request.formData();
-  return Object.fromEntries(formData.entries());
-}
+import { json } from "../_lib/json.js";
+import { guardPost } from "../_lib/guard.js";
+import { createIssue } from "../_lib/github.js";
+import { moderateContent } from "../_lib/moderation.js";
+import { isValidEmail } from "../_lib/validation.js";
 
 export async function onRequest(context) {
   const { request, env } = context;
 
-  if (request.method === "OPTIONS") {
-    return new Response(null, {
-      headers: {
-        "Access-Control-Allow-Origin": "*",
-        "Access-Control-Allow-Methods": "POST, OPTIONS",
-        "Access-Control-Allow-Headers": "Content-Type",
-      },
-    });
+  const guard = await guardPost(request, env, {
+    endpoint: "partner",
+    perMinute: 3,
+    perDay: 30,
+  });
+  if (guard.response) return guard.response;
+  const data = guard.data;
+
+  const fullName = String(data.full_name || data.name || "").trim().slice(0, 100);
+  const company = String(data.company || "").trim().slice(0, 200);
+  const email = String(data.email || "").trim().slice(0, 254);
+  const tier = String(data.tier || "").trim().slice(0, 100);
+  const message = String(data.message || "").trim().slice(0, 3000);
+
+  if (!fullName || !email || !message) {
+    return json({ success: false, error: "Name, email, and message are required." }, 400, request, env);
+  }
+  if (!isValidEmail(email)) {
+    return json({ success: false, error: "Please provide a valid email address." }, 400, request, env);
   }
 
-  if (request.method !== "POST") {
-    return new Response(JSON.stringify({ error: "Method not allowed" }), { status: 405 });
+  const moderation = await moderateContent(env, [fullName, company, message].join("\n"), "partnership");
+  if (moderation.available && !moderation.approved) {
+    return json({
+      success: false,
+      moderated: true,
+      error: "Enquiry flagged by moderation: " + (moderation.reason || "Content policy violation."),
+    }, 422, request, env);
   }
 
-  const GITHUB_TOKEN = env.GITHUB_TOKEN;
+  const moderationNote = moderation.needsReview
+    ? "\n\n> **AI Moderation:** Needs manual review (moderator unavailable)."
+    : (moderation.confidence
+      ? "\n\n> **AI Moderation:** Approved (confidence: " + (moderation.confidence * 100).toFixed(0) + "%)"
+      : "");
 
-  const headers = {
-    "Access-Control-Allow-Origin": "*",
-    "Access-Control-Allow-Methods": "POST, OPTIONS",
-    "Access-Control-Allow-Headers": "Content-Type",
-    "Content-Type": "application/json",
-  };
+  const issueTitle = "SPONSORS & PARTNERS \u2013 " + (company || fullName);
+  const issueBody = [
+    "## Partnership Enquiry", "",
+    "**Name:** " + fullName,
+    "**Company:** " + (company || "N/A"),
+    "**Email:** " + email,
+    "**Partnership Tier:** " + (tier || "Not sure yet"),
+    "", "### Brand & Goals", "", message,
+    "", "---", "*Submitted via vjstv.com sponsors page*" + moderationNote,
+  ].join("\n");
 
-  if (!GITHUB_TOKEN) {
-    return new Response(JSON.stringify({ success: false, error: "Server configuration error." }), { status: 500, headers });
-  }
+  const labels = ["partnership"];
+  if (moderation.needsReview) labels.push("needs-review");
 
   try {
-    const data = await readBody(request);
-
-    var fullName = (data.full_name || "").trim().slice(0, 100);
-    var company = (data.company || "").trim().slice(0, 200);
-    var email = (data.email || "").trim().slice(0, 200);
-    var tier = (data.tier || "").trim().slice(0, 100);
-    var message = (data.message || "").trim().slice(0, 3000);
-
-    if (!fullName || !email || !message) {
-      return new Response(JSON.stringify({ success: false, error: "Name, email, and message are required." }), { status: 400, headers });
+    const issue = await createIssue(env, issueTitle, issueBody, labels);
+    if (!issue.ok) {
+      return json({ success: false, error: "Failed to send enquiry. Please try again." }, 502, request, env);
     }
-
-    if (data.website_url) {
-      return new Response(JSON.stringify({ success: true }), { headers });
-    }
-
-    var issueTitle = "SPONSORS & PARTNERS \u2013 " + (company || fullName);
-    var issueBody = [
-      "## Partnership Enquiry", "",
-      "**Name:** " + fullName,
-      "**Company:** " + (company || "N/A"),
-      "**Email:** " + email,
-      "**Partnership Tier:** " + (tier || "Not sure yet"),
-      "", "### Brand & Goals", "", message,
-      "", "---", "*Submitted via vjstv.com sponsors page*",
-    ].join("\n");
-
-    var controller = new AbortController();
-    var timeout = setTimeout(function() { controller.abort(); }, 10000);
-
-    var ghRes = await fetch("https://api.github.com/repos/" + REPO_OWNER + "/" + REPO_NAME + "/issues", {
-      method: "POST",
-      headers: {
-        "Authorization": "token " + GITHUB_TOKEN,
-        "Content-Type": "application/json",
-        "User-Agent": "VJsTV-CloudflareWorker",
-        "Accept": "application/vnd.github.v3+json",
-      },
-      body: JSON.stringify({
-        title: issueTitle,
-        body: issueBody,
-        labels: ["partnership"],
-      }),
-      signal: controller.signal,
-    });
-
-    clearTimeout(timeout);
-
-    var result = await ghRes.json();
-
-    if (result.id) {
-      return new Response(JSON.stringify({ success: true, issue_number: result.number }), { headers });
-    } else {
-      return new Response(JSON.stringify({ success: false, error: "Failed to send enquiry. Please try again." }), { status: 502, headers });
-    }
+    return json({ success: true, issue_number: issue.data.number }, 200, request, env);
   } catch (err) {
-    return new Response(JSON.stringify({ success: false, error: "Server error. Please try again later." }), { status: 500, headers });
+    return json({ success: false, error: "Server error. Please try again later." }, 500, request, env);
   }
 }

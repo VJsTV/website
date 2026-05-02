@@ -1,174 +1,157 @@
-const REPO_OWNER = "VJsTV";
-const REPO_NAME = "website";
+import { json } from "../_lib/json.js";
+import { guardPost } from "../_lib/guard.js";
+import { createIssue } from "../_lib/github.js";
+import { moderateContent } from "../_lib/moderation.js";
+import {
+  slugify,
+  extractVimeoId,
+  validateVideoUrl,
+  mapTypeToLabel,
+  isValidEmail,
+} from "../_lib/validation.js";
 
-function slugify(str) {
-  return str.toLowerCase().replace(/[^a-z0-9]+/g, "-").replace(/^-|-$/g, "");
-}
-
-function extractVimeoId(url) {
-  if (!url) return null;
-  var m = url.match(/vimeo\.com\/(?:video\/)?(\d+)/);
-  return m ? m[1] : null;
-}
-
-function mapTypeToLabel(category) {
-  var map = {
-    "vj-set": "vj-set",
-    "projection-mapping": "projection-mapping",
-    "generative-art": "generative-art",
-    "music-video": "music-video",
-    "live-visuals": "live-visuals",
-    "installation": "installation",
-    "ai-visuals": "ai-visuals",
-  };
-  return map[(category || "").toLowerCase().replace(/\s+/g, "-")] || "submission";
-}
-
-async function readBody(request) {
-  var contentType = request.headers.get("content-type") || "";
-  if (contentType.includes("application/json")) return await request.json();
-  var formData = await request.formData();
-  return Object.fromEntries(formData.entries());
-}
+const REQUIRED = ["artist", "project_title", "email", "video_url", "description", "category"];
 
 export async function onRequest(context) {
   const { request, env } = context;
 
-  if (request.method === "OPTIONS") {
-    return new Response(null, {
-      headers: {
-        "Access-Control-Allow-Origin": "*",
-        "Access-Control-Allow-Methods": "POST, OPTIONS",
-        "Access-Control-Allow-Headers": "Content-Type",
-      },
+  const guard = await guardPost(request, env, {
+    endpoint: "submit",
+    perMinute: 3,
+    perDay: 20,
+  });
+  if (guard.response) return guard.response;
+  const data = guard.data;
+
+  for (let i = 0; i < REQUIRED.length; i++) {
+    if (!data[REQUIRED[i]] || String(data[REQUIRED[i]]).trim() === "") {
+      return json({ success: false, error: "Missing required fields." }, 400, request, env);
+    }
+  }
+
+  const artist = String(data.artist).trim().slice(0, 200);
+  const projectTitle = String(data.project_title).trim().slice(0, 200);
+  const email = String(data.email).trim().slice(0, 254);
+  const description = String(data.description).trim().slice(0, 5000);
+  const category = String(data.category).trim().slice(0, 60);
+  const location = String(data.location || "").trim().slice(0, 200);
+  const studio = String(data.studio || "").trim().slice(0, 200);
+  const website = String(data.website || "").trim().slice(0, 500);
+  const instagram = String(data.instagram || "").trim().slice(0, 200);
+  const vimeoProfile = String(data.vimeo || "").trim().slice(0, 200);
+  const technologyRaw = String(data.technology || "").trim().slice(0, 500);
+  const yearRaw = String(data.year || "").trim();
+  const year = /^\d{4}$/.test(yearRaw) ? yearRaw : String(new Date().getFullYear());
+
+  if (!isValidEmail(email)) {
+    return json({ success: false, error: "Please provide a valid email address." }, 400, request, env);
+  }
+
+  const videoCheck = validateVideoUrl(data.video_url);
+  if (!videoCheck.ok) {
+    return json({ success: false, error: videoCheck.error }, 400, request, env);
+  }
+  const videoUrl = videoCheck.url;
+
+  const moderation = await moderateContent(
+    env,
+    [projectTitle, artist, description, technologyRaw, location].join("\n"),
+    "project"
+  );
+  if (moderation.available && !moderation.approved) {
+    return json({
+      success: false,
+      moderated: true,
+      error: "Submission flagged by moderation: " + (moderation.reason || "Content policy violation."),
+    }, 422, request, env);
+  }
+
+  const vimeoId = extractVimeoId(videoUrl);
+  const nameSlug = slugify(projectTitle + "-" + artist);
+  const typeLabel = mapTypeToLabel(category);
+  const issueTitle = "[" + category + "] " + projectTitle + " \u2013 " + artist;
+
+  const technologies = technologyRaw
+    ? technologyRaw.split(",").map(function (t) { return t.trim(); }).filter(Boolean)
+    : [];
+
+  const frontMatter = [
+    "---",
+    'layout: vjs-detail',
+    vimeoId ? 'vimeo_id: "' + vimeoId + '"' : null,
+    'title: "' + projectTitle.replace(/"/g, '\\"') + '"',
+    'name: "' + nameSlug + '"',
+    'artist: "' + artist.replace(/"/g, '\\"') + '"',
+    'project_type: "' + category + '"',
+    'location: "' + location.replace(/"/g, '\\"') + '"',
+    'year: ' + year,
+    'video_url: "' + (vimeoId ? 'https://player.vimeo.com/video/' + vimeoId : videoUrl) + '"',
+    'description: "' + description.replace(/"/g, '\\"').replace(/\n/g, " ") + '"',
+    'featured: false',
+    website ? 'website: "' + website.replace(/"/g, '\\"') + '"' : null,
+    studio ? 'studio: "' + studio.replace(/"/g, '\\"') + '"' : null,
+  ].filter(Boolean);
+
+  if (technologies.length > 0) {
+    frontMatter.push("technologies:");
+    technologies.forEach(function (t) { frontMatter.push('  - "' + t.replace(/"/g, '\\"') + '"'); });
+  }
+
+  const social = {};
+  if (instagram) social.instagram = instagram;
+  if (vimeoProfile) social.vimeo = vimeoProfile;
+  if (Object.keys(social).length > 0) {
+    frontMatter.push("social:");
+    Object.keys(social).forEach(function (k) {
+      frontMatter.push('  ' + k + ': "' + social[k].replace(/"/g, '\\"') + '"');
     });
   }
 
-  if (request.method !== "POST") {
-    return new Response(JSON.stringify({ error: "Method not allowed" }), { status: 405 });
-  }
+  frontMatter.push("---");
+  frontMatter.push("");
+  frontMatter.push("**" + projectTitle + "** by **" + artist + "** \u2014 " + description.replace(/\n/g, " "));
 
-  const GITHUB_TOKEN = env.GITHUB_TOKEN;
+  const moderationNote = moderation.needsReview
+    ? "\n\n> **AI Moderation:** Needs manual review (moderator unavailable or returned non-JSON)."
+    : (moderation.confidence
+      ? "\n\n> **AI Moderation:** Approved (confidence: " + (moderation.confidence * 100).toFixed(0) + "%)"
+      : "");
 
-  const headers = {
-    "Access-Control-Allow-Origin": "*",
-    "Access-Control-Allow-Methods": "POST, OPTIONS",
-    "Access-Control-Allow-Headers": "Content-Type",
-    "Content-Type": "application/json",
-  };
+  const issueBody = [
+    "## Submission Details", "",
+    "**Artist / Collective:** " + artist,
+    "**Project Title:** " + projectTitle,
+    "**Category:** " + category,
+    "**Email:** " + email,
+    "**Location:** " + (location || "N/A"),
+    "**Year:** " + year,
+    "**Video Link:** " + videoUrl,
+    vimeoId ? "**Vimeo ID:** " + vimeoId : null,
+    "", "### Description", "", description, "",
+    "**Technologies:** " + (technologyRaw || "N/A"),
+    "**Studio:** " + (studio || "N/A"),
+    "**Website:** " + (website || "N/A"),
+    "**Instagram:** " + (instagram || "N/A"),
+    "**Vimeo Profile:** " + (vimeoProfile || "N/A"),
+    "", "---", "", "### Jekyll Front Matter (auto-generated)", "",
+    "```yaml", frontMatter.join("\n"), "```",
+    "", "---", "*Submitted via vjstv.com submission form*" + moderationNote,
+  ].filter(function (l) { return l !== null; }).join("\n");
 
-  if (!GITHUB_TOKEN) {
-    return new Response(JSON.stringify({ success: false, error: "Server configuration error." }), { status: 500, headers });
-  }
+  const labels = ["submission", typeLabel];
+  if (moderation.needsReview) labels.push("needs-review");
 
   try {
-    const data = await readBody(request);
-
-    if (!data.artist || !data.project_title || !data.email || !data.video_url || !data.description || !data.category) {
-      return new Response(JSON.stringify({ success: false, error: "Missing required fields." }), { status: 400, headers });
+    const issue = await createIssue(env, issueTitle, issueBody, labels);
+    if (issue.ok) {
+      return json({
+        success: true,
+        issue_number: issue.data.number,
+        issue_url: issue.data.html_url,
+      }, 200, request, env);
     }
-
-    try { new URL(data.video_url); } catch (e) {
-      return new Response(JSON.stringify({ success: false, error: "Invalid video URL." }), { status: 400, headers });
-    }
-
-    if (data.honeypot) {
-      return new Response(JSON.stringify({ success: true }), { headers });
-    }
-
-    var vimeoId = extractVimeoId(data.video_url);
-    var nameSlug = slugify(data.project_title + "-" + data.artist);
-    var typeLabel = mapTypeToLabel(data.category);
-    var issueTitle = "[" + data.category + "] " + data.project_title + " \u2013 " + data.artist;
-
-    var technologies = data.technology
-      ? data.technology.split(",").map(function (t) { return t.trim(); }).filter(Boolean)
-      : [];
-
-    var frontMatter = [
-      "---",
-      'layout: vjs-detail',
-      vimeoId ? 'vimeo_id: "' + vimeoId + '"' : null,
-      'title: "' + data.project_title.replace(/"/g, '\\"') + '"',
-      'name: "' + nameSlug + '"',
-      'artist: "' + data.artist.replace(/"/g, '\\"') + '"',
-      'project_type: "' + data.category + '"',
-      'location: "' + (data.location || "").replace(/"/g, '\\"') + '"',
-      'year: ' + (data.year || new Date().getFullYear()),
-      'video_url: "' + (vimeoId ? 'https://player.vimeo.com/video/' + vimeoId : data.video_url) + '"',
-      'description: "' + data.description.replace(/"/g, '\\"').replace(/\n/g, " ") + '"',
-      'featured: false',
-      data.website ? 'website: "' + data.website + '"' : null,
-      data.studio ? 'studio: "' + data.studio + '"' : null,
-    ].filter(Boolean);
-
-    if (technologies.length > 0) {
-      frontMatter.push("technologies:");
-      technologies.forEach(function (t) { frontMatter.push('  - "' + t + '"'); });
-    }
-
-    var social = {};
-    if (data.instagram) social.instagram = data.instagram;
-    if (data.vimeo) social.vimeo = data.vimeo;
-    if (Object.keys(social).length > 0) {
-      frontMatter.push("social:");
-      Object.keys(social).forEach(function (k) { frontMatter.push('  ' + k + ': "' + social[k] + '"'); });
-    }
-
-    frontMatter.push("---");
-    frontMatter.push("");
-    frontMatter.push("**" + data.project_title.replace(/"/g, '') + "** by **" + data.artist.replace(/"/g, '') + "** \u2014 " + data.description.replace(/\n/g, " "));
-
-    var issueBody = [
-      "## Submission Details", "",
-      "**Artist / Collective:** " + data.artist,
-      "**Project Title:** " + data.project_title,
-      "**Category:** " + data.category,
-      "**Email:** " + data.email,
-      "**Location:** " + (data.location || "N/A"),
-      "**Year:** " + (data.year || "N/A"),
-      "**Video Link:** " + data.video_url,
-      vimeoId ? "**Vimeo ID:** " + vimeoId : null,
-      "", "### Description", "", data.description, "",
-      "**Technologies:** " + (data.technology || "N/A"),
-      "**Studio:** " + (data.studio || "N/A"),
-      "**Website:** " + (data.website || "N/A"),
-      "**Instagram:** " + (data.instagram || "N/A"),
-      "**Vimeo Profile:** " + (data.vimeo || "N/A"),
-      "", "---", "", "### Jekyll Front Matter (auto-generated)", "",
-      "```yaml", frontMatter.join("\n"), "```",
-      "", "---", "*Submitted via vjstv.com submission form*",
-    ].filter(function (l) { return l !== null; });
-
-    var controller = new AbortController();
-    var timeout = setTimeout(function() { controller.abort(); }, 10000);
-
-    var ghRes = await fetch("https://api.github.com/repos/" + REPO_OWNER + "/" + REPO_NAME + "/issues", {
-      method: "POST",
-      headers: {
-        "Authorization": "token " + GITHUB_TOKEN,
-        "Content-Type": "application/json",
-        "User-Agent": "VJsTV-CloudflareWorker",
-        "Accept": "application/vnd.github.v3+json",
-      },
-      body: JSON.stringify({
-        title: issueTitle,
-        body: issueBody.join("\n"),
-        labels: ["submission", typeLabel],
-      }),
-      signal: controller.signal,
-    });
-
-    clearTimeout(timeout);
-
-    var result = await ghRes.json();
-
-    if (result.id) {
-      return new Response(JSON.stringify({ success: true, issue_number: result.number, issue_url: result.html_url }), { headers });
-    } else {
-      return new Response(JSON.stringify({ success: false, error: "Failed to create submission. Please try again." }), { status: 502, headers });
-    }
+    return json({ success: false, error: "Failed to create submission. Please try again." }, 502, request, env);
   } catch (err) {
-    return new Response(JSON.stringify({ success: false, error: "Server error. Please try again later." }), { status: 500, headers });
+    return json({ success: false, error: "Server error. Please try again later." }, 500, request, env);
   }
 }

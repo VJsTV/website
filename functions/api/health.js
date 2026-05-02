@@ -1,23 +1,12 @@
+import { preflight } from "../_lib/cors.js";
+import { json } from "../_lib/json.js";
+
 export async function onRequest(context) {
-  const { request } = context;
-
-  if (request.method === "OPTIONS") {
-    return new Response(null, {
-      headers: {
-        "Access-Control-Allow-Origin": "*",
-        "Access-Control-Allow-Methods": "GET, OPTIONS",
-      },
-    });
-  }
-
+  const { request, env } = context;
+  const pre = preflight(request, env, "GET, OPTIONS");
+  if (pre) return pre;
   if (request.method !== "GET") {
-    return new Response(JSON.stringify({ error: "Method not allowed" }), { status: 405 });
+    return json({ success: false, error: "Method not allowed" }, 405, request, env);
   }
-
-  return new Response(JSON.stringify({ status: "ok", timestamp: new Date().toISOString() }), {
-    headers: {
-      "Content-Type": "application/json",
-      "Access-Control-Allow-Origin": "*",
-    },
-  });
+  return json({ status: "ok", timestamp: new Date().toISOString() }, 200, request, env);
 }

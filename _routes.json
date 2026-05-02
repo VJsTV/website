@@ -1,5 +1,13 @@
 {
   "version": 1,
-  "include": ["/api/*"],
+  "include": [
+    "/api/submit",
+    "/api/booking",
+    "/api/partner",
+    "/api/report",
+    "/api/analytics",
+    "/api/analytics/charts",
+    "/api/health"
+  ],
   "exclude": []
 }

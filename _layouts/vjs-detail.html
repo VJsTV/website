@@ -406,6 +406,8 @@ layout: default
       <!-- ERROR STATE -->
       <div class="vjs-book-error" id="bookError" style="display:none;background:rgba(255,0,68,0.1);border:1px solid rgba(255,0,68,0.3);color:#ff4488;padding:12px 16px;font-size:13px;margin-bottom:16px;"></div>
 
+      {% include security/turnstile.html %}
+
       <!-- SUBMIT -->
       <div class="vjs-book-actions">
         <div class="vjs-book-privacy">By submitting you agree this enquiry is forwarded to {{ page.title }}. We do not share your data.</div>
@@ -494,7 +496,7 @@ layout: default
         new FormData(form).forEach(function(v, k) { data[k] = v; });
         var errDiv = document.getElementById('bookError');
         if (errDiv) errDiv.style.display = 'none';
-        fetch('{{ site.api_url }}/api/booking', {
+        fetch(('{{ site.api_url }}' || '') + '/api/booking', {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify(data)

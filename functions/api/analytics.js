@@ -1,51 +1,46 @@
-export async function onRequest(context) {
-  const { request } = context;
+import { preflight, originAllowed } from "../_lib/cors.js";
+import { json } from "../_lib/json.js";
 
-  if (request.method === "OPTIONS") {
-    return new Response(null, {
-      headers: {
-        "Access-Control-Allow-Origin": "*",
-        "Access-Control-Allow-Methods": "GET, OPTIONS",
-        "Access-Control-Allow-Headers": "Content-Type",
-      },
-    });
-  }
+export async function onRequest(context) {
+  const { request, env } = context;
+
+  const pre = preflight(request, env, "GET, OPTIONS");
+  if (pre) return pre;
 
   if (request.method !== "GET") {
-    return new Response(JSON.stringify({ error: "Method not allowed" }), { status: 405 });
+    return json({ success: false, error: "Method not allowed" }, 405, request, env);
   }
 
-  return onRequestGetImpl(context);
-}
+  if (!originAllowed(request, env)) {
+    return json({ monthlyVisitors: 0, error: "Origin not allowed." }, 403, request, env);
+  }
 
-async function onRequestGetImpl(context) {
-  const { env } = context;
   const CF_API_TOKEN = env.CF_API_TOKEN;
   const CF_ZONE_ID = env.CF_ZONE_ID;
-
-  const headers = {
-    "Access-Control-Allow-Origin": "*",
-    "Content-Type": "application/json",
-    "Cache-Control": "public, max-age=600",
-  };
+  const cacheHeaders = { "Cache-Control": "public, max-age=600" };
 
   if (!CF_API_TOKEN || !CF_ZONE_ID) {
-    return new Response(JSON.stringify({ monthlyVisitors: 0, cached: false, error: "Analytics not configured" }), { headers });
+    return json(
+      { monthlyVisitors: 0, cached: false, error: "Analytics not configured" },
+      200, request, env, cacheHeaders
+    );
   }
 
   try {
-    var now = new Date();
-    var startDate = new Date(now);
+    const now = new Date();
+    const startDate = new Date(now);
     startDate.setDate(startDate.getDate() - 30);
-    var start = startDate.toISOString().split("T")[0];
-    var end = now.toISOString().split("T")[0];
+    const start = startDate.toISOString().split("T")[0];
+    const end = now.toISOString().split("T")[0];
 
-    var query = '{ viewer { zones(filter: { zoneTag: "' + CF_ZONE_ID + '" }) { httpRequests1dGroups(limit: 31, filter: { date_geq: "' + start + '", date_leq: "' + end + '" }) { sum { pageViews } } } } }';
+    const query = '{ viewer { zones(filter: { zoneTag: "' + CF_ZONE_ID +
+      '" }) { httpRequests1dGroups(limit: 31, filter: { date_geq: "' + start +
+      '", date_leq: "' + end + '" }) { sum { pageViews } } } } }';
 
-    var controller = new AbortController();
-    var timeout = setTimeout(function() { controller.abort(); }, 8000);
+    const controller = new AbortController();
+    const timer = setTimeout(function () { controller.abort(); }, 8000);
 
-    var cfRes = await fetch("https://api.cloudflare.com/client/v4/graphql", {
+    const cfRes = await fetch("https://api.cloudflare.com/client/v4/graphql", {
       method: "POST",
       headers: {
         "Authorization": "Bearer " + CF_API_TOKEN,
@@ -54,25 +49,24 @@ async function onRequestGetImpl(context) {
       body: JSON.stringify({ query: query }),
       signal: controller.signal,
     });
+    clearTimeout(timer);
 
-    clearTimeout(timeout);
-
-    var cfData = await cfRes.json();
+    const cfData = await cfRes.json();
 
     if (cfData.errors && cfData.errors.length > 0) {
-      return new Response(JSON.stringify({ monthlyVisitors: 0, cached: false, error: cfData.errors[0].message }), { headers });
+      return json({ monthlyVisitors: 0, cached: false, error: "Analytics upstream error" }, 200, request, env, cacheHeaders);
     }
 
-    var groups = (cfData.data && cfData.data.viewer && cfData.data.viewer.zones && cfData.data.viewer.zones[0] && cfData.data.viewer.zones[0].httpRequests1dGroups) || [];
-    var monthlyVisitors = 0;
-    for (var i = 0; i < groups.length; i++) {
-      var sum = groups[i].sum || {};
+    const groups = (cfData.data && cfData.data.viewer && cfData.data.viewer.zones &&
+      cfData.data.viewer.zones[0] && cfData.data.viewer.zones[0].httpRequests1dGroups) || [];
+    let monthlyVisitors = 0;
+    for (let i = 0; i < groups.length; i++) {
+      const sum = groups[i].sum || {};
       monthlyVisitors += sum.pageViews ? sum.pageViews : 0;
     }
 
-    return new Response(JSON.stringify({ monthlyVisitors: monthlyVisitors, cached: false }), { headers });
+    return json({ monthlyVisitors: monthlyVisitors, cached: false }, 200, request, env, cacheHeaders);
   } catch (err) {
-    return new Response(JSON.stringify({ monthlyVisitors: 0, cached: false, error: err.message }), { status: 500, headers });
+    return json({ monthlyVisitors: 0, cached: false, error: "Analytics fetch failed" }, 500, request, env, cacheHeaders);
   }
 }
-

@@ -39,10 +39,21 @@ process.on("SIGINT", function () { gracefulShutdown("SIGINT"); });
 
 app.use(compression());
 
+// Same-origin only by default. Set DEV_ALLOW_ORIGIN to opt-in to a specific
+// preview origin (e.g. the Replit dev domain) when you need cross-origin tests.
+var DEV_ALLOW_ORIGIN = process.env.DEV_ALLOW_ORIGIN || "";
+
 app.use(function (req, res, next) {
-  res.header("Access-Control-Allow-Origin", "*");
-  res.header("Access-Control-Allow-Methods", "GET,OPTIONS");
-  res.header("Access-Control-Allow-Headers", "Content-Type");
+  if (DEV_ALLOW_ORIGIN) {
+    var origin = req.headers.origin || "";
+    if (origin === DEV_ALLOW_ORIGIN) {
+      res.header("Access-Control-Allow-Origin", origin);
+      res.header("Vary", "Origin");
+      res.header("Access-Control-Allow-Methods", "GET,OPTIONS");
+      res.header("Access-Control-Allow-Headers", "Content-Type");
+      res.header("Access-Control-Max-Age", "86400");
+    }
+  }
   res.header("Strict-Transport-Security", "max-age=31536000; includeSubDomains; preload");
   res.header("X-Content-Type-Options", "nosniff");
   res.header("X-Frame-Options", "SAMEORIGIN");
@@ -50,8 +61,10 @@ app.use(function (req, res, next) {
   res.header("Referrer-Policy", "strict-origin-when-cross-origin");
   res.header("Permissions-Policy", "interest-cohort=(), geolocation=(), microphone=(), camera=(), payment=(), usb=()");
   res.header("Cross-Origin-Opener-Policy", "same-origin-allow-popups");
-  res.header("Content-Security-Policy", "default-src 'self'; script-src 'self' 'unsafe-inline' 'unsafe-eval' https://www.youtube-nocookie.com https://player.vimeo.com https://challenges.cloudflare.com https://static.cloudflareinsights.com https://cdnjs.cloudflare.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; img-src 'self' data: https: blob:; font-src 'self' https://fonts.gstatic.com; frame-src https://www.youtube-nocookie.com https://www.youtube.com https://player.vimeo.com https://challenges.cloudflare.com; connect-src 'self' https://vimeo.com https://player.vimeo.com https://website.guillaumelauzier.workers.dev https://www.youtube.com https://cloudflareinsights.com; media-src 'self' https:; object-src 'none'; base-uri 'self'; form-action 'self' https://website.guillaumelauzier.workers.dev; upgrade-insecure-requests");
-  if (req.method === "OPTIONS") return res.sendStatus(200);
+  // CSP mirrors the production _headers exactly. unsafe-inline is still required
+  // by inline scripts/onclick handlers; removing it is Task #4.
+  res.header("Content-Security-Policy", "default-src 'self'; script-src 'self' 'unsafe-inline' https://www.youtube-nocookie.com https://player.vimeo.com https://challenges.cloudflare.com https://static.cloudflareinsights.com https://cdnjs.cloudflare.com https://cdn.jsdelivr.net; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; img-src 'self' data: https: blob:; font-src 'self' https://fonts.gstatic.com; frame-src https://www.youtube-nocookie.com https://www.youtube.com https://player.vimeo.com https://challenges.cloudflare.com; connect-src 'self' https://vimeo.com https://player.vimeo.com https://www.youtube.com https://cloudflareinsights.com https://challenges.cloudflare.com; media-src 'self' https:; object-src 'none'; base-uri 'self'; form-action 'self'; upgrade-insecure-requests");
+  if (req.method === "OPTIONS") return res.sendStatus(204);
   next();
 });
 

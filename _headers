@@ -6,7 +6,18 @@
   Referrer-Policy: strict-origin-when-cross-origin
   Permissions-Policy: interest-cohort=(), geolocation=(), microphone=(), camera=(), payment=(), usb=()
   Cross-Origin-Opener-Policy: same-origin-allow-popups
-  Content-Security-Policy: default-src 'self'; script-src 'self' https://www.youtube-nocookie.com https://player.vimeo.com https://challenges.cloudflare.com https://static.cloudflareinsights.com https://cdnjs.cloudflare.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; img-src 'self' data: https: blob:; font-src 'self' https://fonts.gstatic.com; frame-src https://www.youtube-nocookie.com https://www.youtube.com https://player.vimeo.com https://challenges.cloudflare.com; connect-src 'self' https://vimeo.com https://player.vimeo.com https://website.guillaumelauzier.workers.dev https://www.youtube.com https://cloudflareinsights.com; media-src 'self' https:; object-src 'none'; base-uri 'self'; form-action 'self' https://website.guillaumelauzier.workers.dev; upgrade-insecure-requests
+  Content-Security-Policy: default-src 'self'; script-src 'self' 'unsafe-inline' https://www.youtube-nocookie.com https://player.vimeo.com https://challenges.cloudflare.com https://static.cloudflareinsights.com https://cdnjs.cloudflare.com https://cdn.jsdelivr.net; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; img-src 'self' data: https: blob:; font-src 'self' https://fonts.gstatic.com; frame-src https://www.youtube-nocookie.com https://www.youtube.com https://player.vimeo.com https://challenges.cloudflare.com; connect-src 'self' https://vimeo.com https://player.vimeo.com https://www.youtube.com https://cloudflareinsights.com https://challenges.cloudflare.com; media-src 'self' https:; object-src 'none'; base-uri 'self'; form-action 'self'; upgrade-insecure-requests
+
+# CSP NOTES:
+# - 'unsafe-inline' is currently required in script-src because the Jekyll templates
+#   contain numerous inline <script> blocks and onclick= handlers (forms, modals,
+#   particle canvas, analytics charts). Removing it is the goal of Task #4
+#   (perf slim-down & strict CSP) which extracts these into hashed external files.
+# - cdn.jsdelivr.net is allowed for Chart.js loaded by _includes/analytics-charts.html.
+# - connect-src no longer lists workers.dev because the API now lives at /api/*
+#   on the same origin via Cloudflare Pages Functions.
+# - challenges.cloudflare.com is allowed in connect-src for the Turnstile token POST
+#   that the widget performs in the background.
 
 /sitemap.xml
   Content-Type: application/xml; charset=utf-8

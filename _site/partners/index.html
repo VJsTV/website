@@ -149,10 +149,10 @@
 <link rel="dns-prefetch" href="https://player.vimeo.com" />
 <link rel="dns-prefetch" href="https://www.youtube-nocookie.com" />
 <link rel="dns-prefetch" href="https://i.vimeocdn.com" />
-<link rel="preload" href="/assets/css/vjstv.css?v=1777725098" as="style" />
+<link rel="preload" href="/assets/css/vjstv.css?v=1777728269" as="style" />
 <link rel="preload" href="/assets/css/bootstrap.min.css" as="style" />
 <link rel="stylesheet" type="text/css" href="/assets/css/bootstrap.min.css" />
-<link rel="stylesheet" type="text/css" href="/assets/css/vjstv.css?v=1777725098" />
+<link rel="stylesheet" type="text/css" href="/assets/css/vjstv.css?v=1777728269" />
 <link rel="stylesheet" type="text/css" href="/assets/css/plugins.css" media="print" onload="this.media='all'" />
 <link rel="stylesheet" type="text/css" href="/assets/revolution/css/settings.css" media="print" onload="this.media='all'" />
 <link rel="stylesheet" type="text/css" href="/assets/revolution/css/layers.css" media="print" onload="this.media='all'" />
@@ -673,7 +673,7 @@
   }
 
   document.addEventListener('DOMContentLoaded', function() {
-    fetch('https://website.guillaumelauzier.workers.dev/api/analytics/charts')
+    fetch(('' || '') + '/api/analytics/charts')
       .then(function(res) {
         if (!res.ok) throw new Error('HTTP ' + res.status);
         return res.json();
@@ -870,6 +870,7 @@
             <div style="margin-bottom:1.5rem;">
               <textarea name="message" placeholder="Tell us about your partnership interest..." rows="4" required style="width:100%; padding:12px 16px; background:var(--vjs-darker); border:1px solid var(--vjs-border); border-radius:0; color:var(--vjs-text); font-family:'Inter',sans-serif; font-size:0.9rem; outline:none; resize:vertical; transition:border-color 0.3s;" onfocus="this.style.borderColor='var(--vjs-ultraviolet)'" onblur="this.style.borderColor='var(--vjs-border)'"></textarea>
             </div>
+            
             <button type="submit" id="contactFormBtn" class="vjs-btn vjs-btn-primary" style="width:100%; text-align:center;">Send Message</button>
           </form>
           <p id="contactSuccess" style="display:none; color:var(--vjs-cyan); text-align:center; margin-top:1rem; font-size:0.9rem;">Message sent! We'll be in touch soon.</p>
@@ -1152,7 +1153,7 @@ function handleContactSubmit(e) {
 
   btn.textContent = 'Sending...'; btn.disabled = true;
 
-  fetch('https://website.guillaumelauzier.workers.dev/api/partner', {
+  fetch(('' || '') + '/api/partner', {
     method: 'POST',
     headers: { 'Content-Type': 'application/json' },
     body: JSON.stringify({ full_name: name, email: email, message: message })
@@ -1175,7 +1176,7 @@ function handleContactSubmit(e) {
 }
 
 function vjsLoadAnalytics() {
-  fetch('https://website.guillaumelauzier.workers.dev/api/analytics')
+  fetch(('' || '') + '/api/analytics')
     .then(function(res) {
       if (!res.ok) throw new Error('API returned ' + res.status);
       return res.json();

@@ -1,6 +1,12 @@
 baseurl: ""
 url: "https://vjstv.com"
-api_url: "https://website.guillaumelauzier.workers.dev"
+# API now lives at /api/* on the same origin via Cloudflare Pages Functions.
+# Set api_url to a fully-qualified URL only if you need to override (e.g. a staging worker).
+api_url: ""
+# Cloudflare Turnstile site key. When unset, the widget is not rendered and the
+# server-side check is skipped (development mode). Set both turnstile_site_key
+# (here) and TURNSTILE_SECRET_KEY (env / Pages secret) to enable.
+turnstile_site_key: ""
 permalink: "/:title"
 
 include:

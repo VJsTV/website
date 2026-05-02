@@ -1,100 +1,76 @@
-const REPO_OWNER = "VJsTV";
-const REPO_NAME = "website";
-
-async function readBody(request) {
-  var contentType = request.headers.get("content-type") || "";
-  if (contentType.includes("application/json")) return await request.json();
-  var formData = await request.formData();
-  return Object.fromEntries(formData.entries());
-}
+import { json } from "../_lib/json.js";
+import { guardPost } from "../_lib/guard.js";
+import { createIssue } from "../_lib/github.js";
+import { moderateContent } from "../_lib/moderation.js";
+import { isValidEmail } from "../_lib/validation.js";
 
 export async function onRequest(context) {
   const { request, env } = context;
 
-  if (request.method === "OPTIONS") {
-    return new Response(null, {
-      headers: {
-        "Access-Control-Allow-Origin": "*",
-        "Access-Control-Allow-Methods": "POST, OPTIONS",
-        "Access-Control-Allow-Headers": "Content-Type",
-      },
-    });
+  const guard = await guardPost(request, env, {
+    endpoint: "report",
+    perMinute: 3,
+    perDay: 20,
+  });
+  if (guard.response) return guard.response;
+  const data = guard.data;
+
+  const reporterName = String(data.reporter_name || "").trim().slice(0, 100);
+  const description = String(data.description || "").trim().slice(0, 2000);
+  const reporterEmail = String(data.reporter_email || "").trim().slice(0, 254);
+  const projectTitle = String(data.project_title || "Unknown Project").trim().slice(0, 200);
+  const projectUrlRaw = String(data.project_url || "").trim().slice(0, 500);
+
+  if (!reporterName || !description) {
+    return json({ success: false, error: "Name and description are required." }, 400, request, env);
+  }
+  if (reporterEmail && !isValidEmail(reporterEmail)) {
+    return json({ success: false, error: "Please provide a valid email address." }, 400, request, env);
   }
 
-  if (request.method !== "POST") {
-    return new Response(JSON.stringify({ error: "Method not allowed" }), { status: 405 });
+  let projectUrl = "";
+  if (projectUrlRaw) {
+    try {
+      const u = new URL(projectUrlRaw);
+      if (u.protocol === "https:" || u.protocol === "http:") projectUrl = u.href;
+    } catch (e) {
+      projectUrl = "";
+    }
   }
 
-  const GITHUB_TOKEN = env.GITHUB_TOKEN;
-
-  const headers = {
-    "Access-Control-Allow-Origin": "*",
-    "Access-Control-Allow-Methods": "POST, OPTIONS",
-    "Access-Control-Allow-Headers": "Content-Type",
-    "Content-Type": "application/json",
-  };
-
-  if (!GITHUB_TOKEN) {
-    return new Response(JSON.stringify({ success: false, error: "Server configuration error." }), { status: 500, headers });
+  const moderation = await moderateContent(env, [reporterName, description, projectTitle].join("\n"), "report");
+  if (moderation.available && !moderation.approved) {
+    return json({
+      success: false,
+      moderated: true,
+      error: "Report flagged by moderation: " + (moderation.reason || "Content policy violation."),
+    }, 422, request, env);
   }
+
+  const moderationNote = moderation.needsReview
+    ? "\n\n> **AI Moderation:** Needs manual review (moderator unavailable)."
+    : "";
+
+  const issueTitle = "[Report] " + projectTitle + " \u2013 " + reporterName;
+  const issueBody = [
+    "## Project Issue Report", "",
+    "**Reporter:** " + reporterName,
+    "**Email:** " + (reporterEmail || "N/A"),
+    "**Project:** " + (projectUrl ? "[" + projectTitle + "](" + projectUrl + ")" : projectTitle),
+    "", "### Description", "", description,
+    "", "---", "*Reported via vjstv.com project page*" + moderationNote,
+  ].join("\n");
+
+  const labels = ["report"];
+  if (moderation.needsReview) labels.push("needs-review");
 
   try {
-    const data = await readBody(request);
-
-    var reporterName = (data.reporter_name || "").trim().slice(0, 100);
-    var description = (data.description || "").trim().slice(0, 2000);
-    var reporterEmail = (data.reporter_email || "").trim().slice(0, 200);
-
-    if (!reporterName || !description) {
-      return new Response(JSON.stringify({ success: false, error: "Name and description are required." }), { status: 400, headers });
+    const issue = await createIssue(env, issueTitle, issueBody, labels);
+    if (issue.ok) {
+      return json({ success: true, issue_number: issue.data.number }, 200, request, env);
     }
-
-    if (data.honeypot) {
-      return new Response(JSON.stringify({ success: true }), { headers });
-    }
-
-    var projectTitle = (data.project_title || "Unknown Project").trim().slice(0, 200);
-    var projectUrl = (data.project_url || "").trim().slice(0, 500);
-
-    var issueTitle = "[Report] " + projectTitle + " \u2013 " + reporterName;
-    var issueBody = [
-      "## Project Issue Report", "",
-      "**Reporter:** " + reporterName,
-      "**Email:** " + (reporterEmail || "N/A"),
-      "**Project:** [" + projectTitle + "](" + projectUrl + ")",
-      "", "### Description", "", description,
-      "", "---", "*Reported via vjstv.com project page*",
-    ].join("\n");
-
-    var controller = new AbortController();
-    var timeout = setTimeout(function() { controller.abort(); }, 10000);
-
-    var ghRes = await fetch("https://api.github.com/repos/" + REPO_OWNER + "/" + REPO_NAME + "/issues", {
-      method: "POST",
-      headers: {
-        "Authorization": "token " + GITHUB_TOKEN,
-        "Content-Type": "application/json",
-        "User-Agent": "VJsTV-CloudflareWorker",
-        "Accept": "application/vnd.github.v3+json",
-      },
-      body: JSON.stringify({
-        title: issueTitle,
-        body: issueBody,
-        labels: ["report"],
-      }),
-      signal: controller.signal,
-    });
-
-    clearTimeout(timeout);
-
-    var result = await ghRes.json();
-
-    if (result.id) {
-      return new Response(JSON.stringify({ success: true, issue_number: result.number }), { headers });
-    } else {
-      return new Response(JSON.stringify({ success: true, issue_number: 0 }), { headers });
-    }
+    return json({ success: false, error: "Failed to file report. Please try again." }, 502, request, env);
   } catch (err) {
-    return new Response(JSON.stringify({ success: false, error: "Server error. Please try again later." }), { status: 500, headers });
+    return json({ success: false, error: "Server error. Please try again later." }, 500, request, env);
   }
 }

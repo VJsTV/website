@@ -27,17 +27,65 @@ A branded preloader screen is implemented in `_layouts/default.html` with inline
 
 Accessibility features include skip-to-content links, `:focus-visible` outlines, ARIA labels, and `prefers-reduced-motion` support. SEO is a core focus, implemented through canonical URLs, meta robots tags, XML/HTML sitemaps, comprehensive JSON-LD structured data for various content types, dynamic meta descriptions, Open Graph, Twitter Cards, and strict heading hierarchy. Performance is optimized with `requestAnimationFrame` throttling, passive scroll listeners, `will-change` hints, `IntersectionObserver`, `preconnect`/`dns-prefetch`/`preload` for critical assets, `defer` for non-critical scripts, and runtime lazy loading.
 
-The API architecture is dual-mode:
-- **Production**: A single Cloudflare Worker handles all API endpoints, including form submissions (moderated by Workers AI, creating GitHub Issues, and sending email confirmations), and Cloudflare Analytics data retrieval.
-- **Development**: An Express server (`api/server.js`) runs locally, serving static files and managing Jekyll watch. It includes health checks, gzip compression, caching, and graceful shutdown.
+### API architecture (post Task #1 consolidation)
+The API is now a single, same-origin surface served by Cloudflare Pages Functions:
+
+- `functions/api/submit.js` — project submissions
+- `functions/api/booking.js` — artist/studio/project enquiries
+- `functions/api/partner.js` — sponsorship & partnership enquiries
+- `functions/api/report.js` — project issue reports
+- `functions/api/analytics.js` — monthly visitor counter
+- `functions/api/analytics/charts.js` — daily uniques + top countries
+- `functions/api/health.js` — health probe
+
+All endpoints share `functions/_lib/`:
+`cors.js` (allowlist), `json.js`, `guard.js` (CORS+rate-limit+Turnstile+honeypot pipeline), `turnstile.js`, `rate-limit.js` (KV-backed, per-IP per-minute & per-day), `validation.js` (input sanitisation, video-host allowlist for Vimeo/YouTube only, RFC-ish email check, LLM input scrubber), `github.js` (issue creation with timeout), `email.js` (CRLF-stripping MIME builder), `moderation.js` (Workers AI w/ prompt-injection guard; failures fall through with `needsReview`), `country-names.js`.
+
+`_routes.json` lists only the seven endpoints above so static assets bypass the function runtime. The legacy monolithic `functions/worker.js` was deleted; `site.api_url` is now empty so the front-end calls relative `/api/*` paths.
+
+The local Express server in `api/server.js` only serves the static Jekyll build, the preview gzip/CSP headers, `/api/health`, and `/api/yt-info` (a YouTube oEmbed proxy used by the live page). It does **not** re-implement submit/booking/partner/report — those are exercised against a Cloudflare Pages dev server or production. Run `./scripts/smoke-api.sh https://vjstv.com` (or any base URL) to validate the full surface.
+
+### Required Cloudflare Pages bindings & secrets
+Configure these in the Pages project so the functions behave correctly:
+
+- `GITHUB_TOKEN` — secret, scoped repo write access to `VJsTV/website` issues (Pages Function only, never exposed to the browser).
+- `RATE_LIMIT_KV` — KV namespace binding used by `_lib/rate-limit.js`. If absent, rate limiting silently no-ops.
+- `AI` — Workers AI binding for content moderation. If absent, moderation is skipped and items are accepted; if the model errors, items are tagged `needs-review`.
+- `SEB` — Send-Email binding (Cloudflare Email Routing) for the booking confirmation receipt; optional.
+- `CF_API_TOKEN`, `CF_ZONE_ID` — for `/api/analytics` and `/api/analytics/charts`.
+- `TURNSTILE_SECRET_KEY` — secret. When present, every POST endpoint requires a valid `cf-turnstile-response` token. The matching site key goes into `_config.yml → turnstile_site_key`; both must be set together.
+- `ALLOWED_ORIGINS` — optional comma-separated list. Defaults to `https://vjstv.com,https://www.vjstv.com`. Preview/local origins (`*.pages.dev`, `localhost`, `127.0.0.1`) are **only** accepted when `ALLOW_PREVIEW_ORIGINS=1` is also set on the environment — production should leave it unset.
+- `ALLOW_PREVIEW_ORIGINS` — set to `1` only on Pages preview/dev environments to permit `*.pages.dev` and localhost callers. Never set on production.
+
+### Streaming credentials (rotation procedure)
+The previous live-stream keys (`STREAM_KEY_1/2/3`) were committed to `.replit` under `[userenv.shared]` and have therefore been treated as compromised. They have been removed from the shared environment.
+
+To restore live streaming:
+1. Rotate the keys in YouTube Studio / Restream / your CDN dashboard so the leaked values can no longer publish.
+2. Re-add the new keys via Replit **Secrets** (private, never committed): `STREAM_KEY_1`, `STREAM_KEY_2`, `STREAM_KEY_3`.
+3. Replit injects secrets into the workflow process, so anything reading `process.env.STREAM_KEY_*` continues to work.
+
+Never paste stream keys back into `.replit` — that file is committed to the repo.
+
+### Form security (Task #1 summary)
+- All POST endpoints flow through `guardPost`: CORS preflight, origin allowlist, rate-limit, honeypot trap, Turnstile token check.
+- The video-URL field on `/api/submit` only accepts Vimeo and YouTube hosts (host allowlist + ID extraction).
+- Email fields are validated and capped at 254 chars before being placed into MIME headers; the MIME builder strips CR/LF/NUL to defeat header injection.
+- The moderation prompt explicitly tells the model to treat user content as data and the input is scrubbed of control characters and triple-backticks before being templated in.
+- All forms now include `_includes/security/turnstile.html`. When `site.turnstile_site_key` is empty (current default), the widget is not rendered and the server check no-ops, so dev/preview keeps working.
+
+### CSP note
+`_headers` and the Express dev server keep `'unsafe-inline'` in `script-src` because numerous templates still use inline `<script>` blocks and `onclick=` handlers (forms, modals, particle canvas, analytics). Moving to a strict CSP with hashes/nonces is Task #4.
 
 ## External Dependencies
 - **Jekyll Plugins**: `jekyll-feed`
 - **Styling**: Bootstrap
 - **Fonts**: Google Fonts (Barlow Condensed, Orbitron)
 - **Video Hosting/Embedding**: Vimeo, YouTube
-- **Form Submission/Backend**: Cloudflare Workers, GitHub Issues (for submissions), Cloudflare Email Service
-- **Analytics**: Cloudflare Analytics API
-- **AI Moderation**: Cloudflare Workers AI
+- **Form Submission/Backend**: Cloudflare Pages Functions, GitHub Issues (for submissions), Cloudflare Email Routing
+- **Bot mitigation**: Cloudflare Turnstile (site key in `_config.yml`, secret in Pages env)
+- **Rate limiting**: Cloudflare KV namespace bound as `RATE_LIMIT_KV`
+- **Analytics**: Cloudflare Analytics GraphQL API
+- **AI Moderation**: Cloudflare Workers AI (`@cf/meta/llama-3.1-8b-instruct`)
 - **Image/Thumbnail Loading**: Vimeo oEmbed API
-- **Deployment**: GitHub Pages, Cloudflare Pages
+- **Deployment**: Cloudflare Pages (frontend + functions)

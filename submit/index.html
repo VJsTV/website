@@ -132,6 +132,8 @@ meta_description: "Submit your visual performance projects to VJs TV and join th
             </div>
           </div>
 
+          {% include security/turnstile.html %}
+
           <div style="padding-top:20px; border-top:1px solid #222; display:flex; align-items:center; justify-content:space-between; gap:16px; flex-wrap:wrap;">
             <p style="font-family:'Barlow Condensed',sans-serif; color:rgba(255,255,255,0.35); font-size:0.75rem; margin:0; max-width:360px;">By submitting you agree to our <a href="#" style="color:var(--vjs-ultraviolet); text-decoration:none;">Terms</a>. You retain all rights to your work.</p>
             <button type="submit" style="font-family:'Barlow Condensed',sans-serif; font-size:0.78rem; font-weight:700; text-transform:uppercase; letter-spacing:0.08em; background:#fff; color:#000; border:none; padding:10px 32px; cursor:pointer; transition:background 0.15s;">Submit Project</button>
@@ -163,6 +165,7 @@ meta_description: "Submit your visual performance projects to VJs TV and join th
 
 <script>
 var API_URL = '{{ site.api_url }}';
+if (!API_URL || API_URL === '') API_URL = '';
 
 document.getElementById('submit-form').addEventListener('submit', function(e) {
   e.preventDefault();
