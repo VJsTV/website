@@ -105,12 +105,13 @@ layout: default
             {% endif %}
           </div>
           {% if page.price == 0 %}
-          <a href="/thank-you/download/?pack={{ page.title | uri_escape }}&artist={{ page.artist | uri_escape }}&clips={{ page.clip_count }}&size={{ page.file_size | uri_escape }}&free=true&url={{ page.download_url | uri_escape }}&source=loop-pack-free"
+          <a href="/free-loops/#get"
              class="vjs-mp-btn-primary"
-             onclick="if(window.vjsTrack)window.vjsTrack('download_requested',{pack:'{{ page.title | escape }}',artist:'{{ page.artist | escape }}',source:'loop-pack-free'});">
+             onclick="if(window.vjsTrack)window.vjsTrack('lead_magnet_cta',{pack:'{{ page.title | escape }}',source:'loop-pack-page'});">
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" style="width:1em;height:1em;vertical-align:middle;margin-right:6px;"><path d="M12 3v14M5 11l7 7 7-7"/><path d="M4 20h16"/></svg>
-            FREE DOWNLOAD
+            GET FOR FREE
           </a>
+          <p style="font-family:'Barlow Condensed',sans-serif;font-size:0.68rem;color:#666;margin:8px 0 0;letter-spacing:0.06em;text-transform:uppercase;">Free with email — download link sent instantly</p>
           {% else %}
           <button class="vjs-mp-btn-primary vjs-mp-buy-btn"
                   data-pack="{{ page.name }}"

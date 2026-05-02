@@ -16,10 +16,25 @@ function tokenKey(token) {
   return "sub-token:" + token;
 }
 
+/**
+ * Sync a confirmed subscriber to Resend audience.
+ *
+ * This is the PRIMARY ESP list integration — when RESEND_API_KEY and
+ * RESEND_AUDIENCE_ID are configured, every confirmed subscriber is written
+ * to the Resend audience so broadcasted emails reach them. If either env var
+ * is absent the function logs a warning and resolves (graceful degradation
+ * during local dev / before ESP is wired); in production both MUST be set.
+ */
 async function mirrorToResend(env, email) {
-  if (!env || !env.RESEND_API_KEY) return { skipped: true };
+  if (!env || !env.RESEND_API_KEY) {
+    console.warn("[subscribe/confirm] RESEND_API_KEY not set — subscriber NOT synced to ESP audience:", email);
+    return { skipped: true };
+  }
   const audienceId = env.RESEND_AUDIENCE_ID || "";
-  if (!audienceId) return { skipped: true };
+  if (!audienceId) {
+    console.warn("[subscribe/confirm] RESEND_AUDIENCE_ID not set — subscriber NOT synced to ESP audience:", email);
+    return { skipped: true };
+  }
   try {
     const res = await fetch(
       "https://api.resend.com/audiences/" + encodeURIComponent(audienceId) + "/contacts",
@@ -32,8 +47,12 @@ async function mirrorToResend(env, email) {
         body: JSON.stringify({ email: email, unsubscribed: false }),
       }
     );
+    if (!res.ok) {
+      console.error("[subscribe/confirm] Resend audience sync failed:", res.status, email);
+    }
     return { ok: res.ok, status: res.status };
   } catch (err) {
+    console.error("[subscribe/confirm] Resend audience sync threw:", err && err.message, email);
     return { ok: false };
   }
 }
