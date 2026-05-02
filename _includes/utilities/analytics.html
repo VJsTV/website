@@ -1,12 +1,30 @@
-{% if site.data.general_settings.google_analytics.enable %}
+{%- comment -%}
+  Site-wide analytics include.
+
+  Plausible Analytics (privacy-first, cookieless, no banner required) is the
+  canonical analytics for VJs TV. The script is only emitted when
+  `plausible_domain` is configured in `_config.yml`. Custom events are
+  reported via `_includes/utilities/track.html` (window.vjsTrack).
+
+  The legacy Google Universal Analytics block is preserved as a fall-back
+  only if it is explicitly enabled in `_data/general_settings.yml`. Both
+  systems can coexist but Plausible is the source of truth for the
+  conversion funnel.
+{%- endcomment -%}
+{%- if site.plausible_domain and site.plausible_domain != "" -%}
+<script defer
+        data-domain="{{ site.plausible_domain }}"
+        src="https://plausible.io/js/script.tagged-events.outbound-links.js"></script>
+<script>window.plausible=window.plausible||function(){(window.plausible.q=window.plausible.q||[]).push(arguments)};</script>
+{%- endif -%}
+{% include utilities/track.html %}
+{%- if site.data.general_settings.google_analytics.enable and site.data.general_settings.google_analytics.key != "" -%}
 <script>
   (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
   (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
   m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
   })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
-
   ga('create', '{{ site.data.general_settings.google_analytics.key }}', 'auto');
   ga('send', 'pageview');
-
 </script>
-{% endif %}
+{%- endif -%}

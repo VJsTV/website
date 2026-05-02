@@ -1,0 +1,72 @@
+---
+layout: default
+title: "Subscription confirmed — VJs TV"
+meta_title: "Subscription confirmed — VJs TV"
+meta_description: "Thank you for subscribing to the VJs TV broadcast network."
+noindex: true
+permalink: /thank-you/subscribe/
+---
+
+{% include layouts/nav/nav-3.html default_logo="white" %}
+
+<section class="vjs-section" style="min-height:60vh; display:flex; align-items:center;">
+  <div class="container" style="max-width:720px; text-align:center;">
+
+    <!-- PENDING (right after submit, before user clicks the email) -->
+    <div id="ty-pending" style="display:none;">
+      <div style="font-size:3rem; color:var(--vjs-magenta); line-height:1; margin-bottom:1rem;">&#9993;</div>
+      <p style="font-family:'Barlow Condensed',sans-serif; font-size:0.75rem; font-weight:700; letter-spacing:0.18em; text-transform:uppercase; color:var(--vjs-ultraviolet); margin:0 0 1rem;">One more step</p>
+      <h1 style="font-family:'Barlow Condensed',sans-serif; font-weight:700; font-size:clamp(1.6rem, 3.6vw, 2.4rem); margin:0 0 1.25rem; color:#fff; line-height:1.15;">Check your inbox to confirm.</h1>
+      <p style="font-family:'Space Grotesk',sans-serif; font-size:1rem; color:var(--vjs-text-muted); line-height:1.7; margin:0 0 2rem;">We just sent you an email. Click the confirmation link inside to finish subscribing &mdash; you'll then receive a download link for our free <strong style="color:#fff;">VJs TV Loops 01</strong> pack.</p>
+      <p style="font-family:'Space Grotesk',sans-serif; font-size:0.85rem; color:#666; margin:0 0 2rem;">No email after a minute? Check spam, or try again from the footer.</p>
+    </div>
+
+    <!-- CONFIRMED (after the email link is clicked) -->
+    <div id="ty-confirmed" style="display:none;">
+      <div style="font-size:3rem; color:var(--vjs-cyan); line-height:1; margin-bottom:1rem;">&#10003;</div>
+      <p style="font-family:'Barlow Condensed',sans-serif; font-size:0.75rem; font-weight:700; letter-spacing:0.18em; text-transform:uppercase; color:var(--vjs-ultraviolet); margin:0 0 1rem;">You're in</p>
+      <h1 style="font-family:'Barlow Condensed',sans-serif; font-weight:700; font-size:clamp(1.6rem, 3.6vw, 2.4rem); margin:0 0 1.25rem; color:#fff; line-height:1.15;">Welcome to the broadcast network.</h1>
+      <p style="font-family:'Space Grotesk',sans-serif; font-size:1rem; color:var(--vjs-text-muted); line-height:1.7; margin:0 0 2rem;">Your subscription is confirmed. Grab your free 18-clip loop pack below &mdash; royalty-free, commercial use included.</p>
+      <div style="display:flex; gap:1rem; justify-content:center; flex-wrap:wrap; margin-bottom:1.5rem;">
+        <a href="/marketplace/vjstv-loops-01" class="vjs-btn vjs-btn-primary">Download Free Loop Pack</a>
+        <a href="/artists" class="vjs-btn" style="border:1px solid #333; color:#fff; padding:12px 24px; text-decoration:none; font-family:'Barlow Condensed',sans-serif; font-size:0.78rem; font-weight:700; letter-spacing:0.08em; text-transform:uppercase;">Discover Artists</a>
+      </div>
+    </div>
+
+    <!-- ERROR / EXPIRED -->
+    <div id="ty-error" style="display:none;">
+      <div style="font-size:3rem; color:#ff6677; line-height:1; margin-bottom:1rem;">!</div>
+      <p style="font-family:'Barlow Condensed',sans-serif; font-size:0.75rem; font-weight:700; letter-spacing:0.18em; text-transform:uppercase; color:#ff6677; margin:0 0 1rem;">Link expired</p>
+      <h1 style="font-family:'Barlow Condensed',sans-serif; font-weight:700; font-size:clamp(1.6rem, 3.6vw, 2.4rem); margin:0 0 1.25rem; color:#fff; line-height:1.15;">That confirmation link has expired.</h1>
+      <p style="font-family:'Space Grotesk',sans-serif; font-size:1rem; color:var(--vjs-text-muted); line-height:1.7; margin:0 0 2rem;">No worries &mdash; just resubscribe from the footer below and we'll send a fresh link straight away.</p>
+      <a href="/" class="vjs-btn vjs-btn-primary">Back to the Network</a>
+    </div>
+
+  </div>
+</section>
+
+{% include vjstv-footer.html %}
+
+<script>
+(function() {
+  var qs = new URLSearchParams(window.location.search);
+  var status = qs.get('status') || (qs.get('pending') ? 'pending' : 'confirmed');
+  var pending  = document.getElementById('ty-pending');
+  var confirmed = document.getElementById('ty-confirmed');
+  var errorEl   = document.getElementById('ty-error');
+
+  if (status === 'pending') {
+    pending.style.display = 'block';
+    if (typeof window.vjsTrack === 'function') {
+      window.vjsTrack('newsletter_signup', { source: qs.get('source') || 'unknown' });
+    }
+  } else if (status === 'expired' || status === 'error') {
+    errorEl.style.display = 'block';
+  } else {
+    confirmed.style.display = 'block';
+    if (typeof window.vjsTrack === 'function') {
+      window.vjsTrack('subscriber_confirmed', { source: qs.get('source') || 'unknown' });
+    }
+  }
+})();
+</script>

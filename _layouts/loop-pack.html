@@ -259,12 +259,17 @@ layout: default
       var btn = form.querySelector('[type="submit"]');
       btn.textContent = 'PROCESSING...';
       btn.disabled = true;
+      var firstBtn = document.querySelector('.vjs-mp-buy-btn');
+      var title = firstBtn ? firstBtn.dataset.title : '';
+      var artist = firstBtn ? firstBtn.dataset.artist : '';
+      var clips = firstBtn ? firstBtn.dataset.clips : '';
+      var size = firstBtn ? firstBtn.dataset.size : '';
+      var price = firstBtn ? firstBtn.dataset.price : '';
+      if (typeof window.vjsTrack === 'function') {
+        window.vjsTrack('download_requested', { pack: title, artist: artist, price: price, source: 'loop-pack-page' });
+      }
       setTimeout(function() {
         document.getElementById('mpModal').style.display = 'none';
-        var title = document.querySelector('.vjs-mp-buy-btn') ? document.querySelector('.vjs-mp-buy-btn').dataset.title : '';
-        var artist = document.querySelector('.vjs-mp-buy-btn') ? document.querySelector('.vjs-mp-buy-btn').dataset.artist : '';
-        var clips = document.querySelector('.vjs-mp-buy-btn') ? document.querySelector('.vjs-mp-buy-btn').dataset.clips : '';
-        var size = document.querySelector('.vjs-mp-buy-btn') ? document.querySelector('.vjs-mp-buy-btn').dataset.size : '';
         window.location.href = '/marketplace/download?title=' + encodeURIComponent(title) + '&artist=' + encodeURIComponent(artist) + '&clips=' + encodeURIComponent(clips) + '&size=' + encodeURIComponent(size);
       }, 1800);
     });

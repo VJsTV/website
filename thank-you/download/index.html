@@ -1,0 +1,39 @@
+---
+layout: default
+title: "Download started — VJs TV"
+meta_title: "Download started — VJs TV"
+meta_description: "Your loop pack download has started."
+noindex: true
+permalink: /thank-you/download/
+---
+
+{% include layouts/nav/nav-3.html default_logo="white" %}
+
+<section class="vjs-section" style="min-height:60vh; display:flex; align-items:center;">
+  <div class="container" style="max-width:680px; text-align:center;">
+    <div style="font-size:3rem; color:var(--vjs-cyan); line-height:1; margin-bottom:1rem;">&#10003;</div>
+    <p style="font-family:'Barlow Condensed',sans-serif; font-size:0.75rem; font-weight:700; letter-spacing:0.18em; text-transform:uppercase; color:var(--vjs-ultraviolet); margin:0 0 1rem;">Download started</p>
+    <h1 style="font-family:'Barlow Condensed',sans-serif; font-weight:700; font-size:clamp(1.6rem, 3.6vw, 2.4rem); margin:0 0 1.25rem; color:#fff; line-height:1.15;">Loop pack on its way.</h1>
+    <p style="font-family:'Space Grotesk',sans-serif; font-size:1rem; color:var(--vjs-text-muted); line-height:1.7; margin:0 0 2.5rem;">If the download doesn't start automatically, head back and click the file again. While you wait, here are some next stops worth your time.</p>
+
+    <div style="display:flex; gap:1rem; justify-content:center; flex-wrap:wrap;">
+      <a href="/marketplace" class="vjs-btn vjs-btn-primary">Browse More Packs</a>
+      <a href="/artists" class="vjs-btn" style="border:1px solid #333; color:#fff; padding:12px 24px; text-decoration:none; font-family:'Barlow Condensed',sans-serif; font-size:0.78rem; font-weight:700; letter-spacing:0.08em; text-transform:uppercase;">Discover Artists</a>
+      <a href="/license" class="vjs-btn" style="border:1px solid #333; color:#fff; padding:12px 24px; text-decoration:none; font-family:'Barlow Condensed',sans-serif; font-size:0.78rem; font-weight:700; letter-spacing:0.08em; text-transform:uppercase;">License Info</a>
+    </div>
+  </div>
+</section>
+
+{% include vjstv-footer.html %}
+
+<script>
+(function() {
+  if (typeof window.vjsTrack === 'function') {
+    var qs = new URLSearchParams(window.location.search);
+    window.vjsTrack('download_requested', {
+      pack: qs.get('pack') || 'unknown',
+      source: qs.get('source') || 'thank-you'
+    });
+  }
+})();
+</script>

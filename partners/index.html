@@ -497,8 +497,10 @@ function handleContactSubmit(e) {
   .then(function(res) { return res.json().then(function(d) { return { ok: res.ok, data: d }; }); })
   .then(function(r) {
     if (r.ok && r.data.success) {
-      form.style.display = 'none';
-      document.getElementById('contactSuccess').style.display = 'block';
+      if (typeof window.vjsTrack === 'function') {
+        window.vjsTrack('partner_sent', { source: 'partners-page' });
+      }
+      window.location.href = '/thank-you/partner/' + (r.data.issue_number ? '?ref=' + encodeURIComponent(r.data.issue_number) : '');
     } else {
       throw new Error(r.data.error || 'Something went wrong');
     }

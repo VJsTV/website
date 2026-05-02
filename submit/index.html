@@ -203,8 +203,10 @@ document.getElementById('submit-form').addEventListener('submit', function(e) {
   })
   .then(function(result) {
     if (result.success) {
-      form.style.display = 'none';
-      document.getElementById('submit-success').style.display = 'block';
+      if (typeof window.vjsTrack === 'function') {
+        window.vjsTrack('submit_complete', { has_email: data.email ? 'yes' : 'no' });
+      }
+      window.location.href = '/thank-you/submit/' + (result.issue_number ? '?ref=' + encodeURIComponent(result.issue_number) : '');
     } else {
       errorMsg.textContent = result.error || 'Something went wrong. Please try again.';
       errorEl.style.display = 'block';

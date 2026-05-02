@@ -1,0 +1,35 @@
+---
+layout: default
+title: "Submission received — VJs TV"
+meta_title: "Submission received — VJs TV"
+meta_description: "Your project submission has been received. We'll review it within 5–10 business days."
+noindex: true
+permalink: /thank-you/submit/
+---
+
+{% include layouts/nav/nav-3.html default_logo="white" %}
+
+<section class="vjs-section" style="min-height:60vh; display:flex; align-items:center;">
+  <div class="container" style="max-width:680px; text-align:center;">
+    <div style="font-size:3rem; color:var(--vjs-cyan); line-height:1; margin-bottom:1rem;">&#10003;</div>
+    <p style="font-family:'Barlow Condensed',sans-serif; font-size:0.75rem; font-weight:700; letter-spacing:0.18em; text-transform:uppercase; color:var(--vjs-ultraviolet); margin:0 0 1rem;">Submission received</p>
+    <h1 style="font-family:'Barlow Condensed',sans-serif; font-weight:700; font-size:clamp(1.6rem, 3.6vw, 2.4rem); margin:0 0 1.25rem; color:#fff; line-height:1.15;">Your project is in the queue.</h1>
+    <p style="font-family:'Space Grotesk',sans-serif; font-size:1rem; color:var(--vjs-text-muted); line-height:1.7; margin:0 0 2.5rem;">We review every submission by hand. You'll hear back within 5&ndash;10 business days. While you wait, dig into the network.</p>
+
+    <div style="display:flex; gap:1rem; justify-content:center; flex-wrap:wrap;">
+      <a href="/artists" class="vjs-btn vjs-btn-primary">Browse Artists</a>
+      <a href="/projects" class="vjs-btn" style="border:1px solid #333; color:#fff; padding:12px 24px; text-decoration:none; font-family:'Barlow Condensed',sans-serif; font-size:0.78rem; font-weight:700; letter-spacing:0.08em; text-transform:uppercase;">Latest Projects</a>
+      <a href="https://instagram.com/vjstv" target="_blank" rel="noopener" class="vjs-btn" style="border:1px solid #333; color:#fff; padding:12px 24px; text-decoration:none; font-family:'Barlow Condensed',sans-serif; font-size:0.78rem; font-weight:700; letter-spacing:0.08em; text-transform:uppercase;">Follow on Instagram</a>
+    </div>
+  </div>
+</section>
+
+{% include vjstv-footer.html %}
+
+<script>
+(function() {
+  if (typeof window.vjsTrack === 'function') {
+    window.vjsTrack('submit_complete', { source: 'submit-page' });
+  }
+})();
+</script>

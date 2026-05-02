@@ -3,6 +3,11 @@ layout: default
 ---
 {% include layouts/nav/nav-3.html default_logo="white" %}
 
+{%- if page.collection == "vjs" -%}
+{%- capture _badge_url -%}{{ site.url }}{{ page.url }}{%- endcapture -%}
+{%- capture _badge_snippet -%}<a href="{{ _badge_url }}" rel="dofollow" target="_blank" style="display:inline-block;text-decoration:none;line-height:0;"><img src="{{ site.url }}/assets/images/badges/featured-on-vjstv.svg" alt="Featured on VJs TV" width="200" height="48"/></a>{%- endcapture -%}
+{%- endif -%}
+
 <div class="vjs-detail-header">
   <div class="vjs-detail-header-inner">
     {% if page.technologies %}
@@ -554,12 +559,11 @@ layout: default
         .then(function(res) { return res.json().catch(function() { return { success: false, error: 'Unexpected server response.' }; }).then(function(d) { return { ok: res.ok, data: d }; }); })
         .then(function(result) {
           if (result.data.success) {
-            if (form) form.style.display = 'none';
-            if (successPanel) successPanel.style.display = 'flex';
-            if (result.data.issue_number) {
-              var refDiv = document.getElementById('bookRef');
-              if (refDiv) { refDiv.textContent = 'Tracking reference: #' + result.data.issue_number; refDiv.style.display = 'block'; }
+            if (typeof window.vjsTrack === 'function') {
+              window.vjsTrack('booking_sent', { artist: '{{ page.title | escape }}' });
             }
+            window.location.href = '/thank-you/booking/' + (result.data.issue_number ? '?ref=' + encodeURIComponent(result.data.issue_number) : '');
+            return;
           } else {
             if (errDiv) { errDiv.textContent = result.data.error || 'Something went wrong. Please try again.'; errDiv.style.display = 'block'; }
             if (submitBtn) { submitBtn.textContent = 'SEND ENQUIRY'; submitBtn.disabled = false; }
