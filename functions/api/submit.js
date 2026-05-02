@@ -54,7 +54,11 @@ export async function onRequest(context) {
     [projectTitle, artist, description, technologyRaw, location].join("\n"),
     "project"
   );
-  if (moderation.available && !moderation.approved) {
+  // Genuine moderator rejection blocks the submission. A "needsReview"
+  // signal means the moderator failed (parse error / network) — we still
+  // create the issue but tag it for manual review rather than 422-ing the
+  // user, since that is fail-safe behaviour, not approval.
+  if (moderation.available && !moderation.approved && !moderation.needsReview) {
     return json({
       success: false,
       moderated: true,

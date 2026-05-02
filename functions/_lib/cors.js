@@ -38,9 +38,13 @@ export function getAllowedOrigin(request, env) {
   return allowed[0];
 }
 
+// Strict: a missing Origin header is treated as not allowed for protected
+// endpoints. Browsers always set Origin on cross-origin POSTs and on most
+// same-origin POSTs; non-browser clients (curl, scripts) can opt in by
+// sending Origin: <one of the allowlist entries>.
 export function originAllowed(request, env) {
   const origin = request.headers.get("Origin");
-  if (!origin) return true;
+  if (!origin) return false;
   const allowed = parseAllowedOrigins(env);
   if (allowed.indexOf(origin) !== -1) return true;
   if (previewAllowed(env) && isPreviewOrigin(origin)) return true;

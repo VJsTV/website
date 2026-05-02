@@ -1,6 +1,14 @@
+import { previewAllowed } from "./cors.js";
+
+// KV-backed per-IP rate limiter. Fail-closed in production (no KV binding
+// or KV operation throws => allowed:false), fail-open in preview/dev so
+// local builds without a KV namespace still work.
 export async function checkRateLimit(env, key, perMinute, perDay) {
+  const isPreview = previewAllowed(env);
+
   if (!env || !env.RATE_LIMIT_KV) {
-    return { allowed: true, remaining: -1 };
+    if (isPreview) return { allowed: true, remaining: -1, kvMissing: true };
+    return { allowed: false, retryAfter: 60, reason: "rate-limit-backend-unavailable" };
   }
 
   const now = Math.floor(Date.now() / 1000);
@@ -32,6 +40,7 @@ export async function checkRateLimit(env, key, perMinute, perDay) {
 
     return { allowed: true, remaining: perMinute ? perMinute - minCount : -1 };
   } catch (err) {
-    return { allowed: true, remaining: -1, kvError: true };
+    if (isPreview) return { allowed: true, remaining: -1, kvError: true };
+    return { allowed: false, retryAfter: 60, reason: "rate-limit-backend-error" };
   }
 }

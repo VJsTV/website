@@ -61,7 +61,12 @@ Configure these in the Pages project so the functions behave correctly:
 - All form endpoints (`/api/submit`, `/api/booking`, `/api/partner`, `/api/report`) enforce a uniform **5 requests / minute** and **50 requests / day** per IP via `functions/_lib/guard.js`. Exceeded limits return `429` with a `Retry-After` header.
 - Successful resource creation returns `201 Created`. `200 OK` is reserved for honeypot silent-drop responses and GET endpoints (`/api/health`, `/api/analytics`, `/api/analytics/charts`).
 - Turnstile failures (missing or invalid token, when the secret is configured) return `403 Forbidden`.
-- Disallowed origins return `403`. Server misconfiguration in production-like environments returns `503`.
+- Disallowed origins return `403`. **Missing `Origin` header on a protected POST is also rejected with `403`** — non-browser clients must send `Origin: https://vjstv.com` (or another allowlisted value).
+- Server misconfiguration in production-like environments returns `503`. The KV-backed rate limiter also fails CLOSED with `429` when the `RATE_LIMIT_KV` binding is missing or unreachable in production (preview/dev with `ALLOW_PREVIEW_ORIGINS=1` continues to fail open so local builds work).
+- AI moderation is **fail-safe**: if the model returns malformed/non-JSON output, times out, or errors, the result is `approved:false, needsReview:true` — the submission is created and labelled `needs-review` rather than silently approved.
+
+### Tests
+Run `npm test` (uses Node's built-in test runner, no extra deps). Covers: rate-limit 6th-request 429 + Retry-After, KV-missing fail-closed in production, origin policy (missing Origin rejected, allowlist enforced, preview gating), https-only canonical-host video URL allowlist, LLM input sanitization (triple backticks/quotes/role tags/ignore-instructions phrases), moderation injection regression (model that emits `{"approved":true}` inside prose cannot flip approval), Turnstile fail-closed for missing secret/token. 24 tests total.
 
 ### Streaming credentials (rotation procedure)
 The previous live-stream keys (`STREAM_KEY_1/2/3`) were committed to `.replit` under `[userenv.shared]` and have therefore been treated as compromised. They have been removed from the shared environment.

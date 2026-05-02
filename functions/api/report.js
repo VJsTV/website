@@ -35,7 +35,9 @@ export async function onRequest(context) {
   }
 
   const moderation = await moderateContent(env, [reporterName, description, projectTitle].join("\n"), "report");
-  if (moderation.available && !moderation.approved) {
+  // See submit.js for the rationale: needsReview means moderator failure
+  // (fail-safe), not affirmative rejection — keep the report and label it.
+  if (moderation.available && !moderation.approved && !moderation.needsReview) {
     return json({
       success: false,
       moderated: true,

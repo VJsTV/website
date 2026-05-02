@@ -75,7 +75,10 @@ export async function moderateContent(env, text, contextLabel) {
     const parsed = parseModeratorJson(raw);
 
     if (!parsed) {
-      return { approved: true, reason: null, confidence: null, available: true, needsReview: true };
+      // Fail-safe: do NOT treat a malformed/non-JSON model response as
+      // approval. Mark needsReview so the handler keeps the submission but
+      // routes it to manual review instead of silently approving it.
+      return { approved: false, reason: "moderator-output-invalid", confidence: null, available: true, needsReview: true };
     }
 
     return {
@@ -86,6 +89,7 @@ export async function moderateContent(env, text, contextLabel) {
       needsReview: false,
     };
   } catch (err) {
-    return { approved: true, reason: null, confidence: null, available: true, needsReview: true, error: true };
+    // Fail-safe on network/timeout/abort: not an approval.
+    return { approved: false, reason: "moderator-error", confidence: null, available: true, needsReview: true, error: true };
   }
 }
