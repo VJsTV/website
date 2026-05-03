@@ -1,102 +1,75 @@
+import { previewAllowed } from "../../_lib/cors.js";
+
 function siteOrigin(env, request) {
   if (env && env.SITE_ORIGIN) return String(env.SITE_ORIGIN).replace(/\/+$/, "");
   try {
-    const u = new URL(request.url);
-    return u.origin;
+    return new URL(request.url).origin;
   } catch (e) {
     return "https://vjstv.com";
   }
 }
 
-function emailKey(email) {
-  return "sub:" + String(email).trim().toLowerCase();
-}
+function emailKey(email) { return "sub:" + String(email).trim().toLowerCase(); }
+function tokenKey(token) { return "sub-token:" + token; }
 
-function tokenKey(token) {
-  return "sub-token:" + token;
-}
-
-/**
- * Sync a confirmed subscriber to Resend audience.
- *
- * This is the PRIMARY ESP list integration — when RESEND_API_KEY and
- * RESEND_AUDIENCE_ID are configured, every confirmed subscriber is written
- * to the Resend audience so broadcasted emails reach them. If either env var
- * is absent the function logs a warning and resolves (graceful degradation
- * during local dev / before ESP is wired); in production both MUST be set.
- */
-async function mirrorToResend(env, email) {
-  if (!env || !env.RESEND_API_KEY) {
-    console.warn("[subscribe/confirm] RESEND_API_KEY not set — subscriber NOT synced to ESP audience:", email);
-    return { skipped: true };
-  }
-  const audienceId = env.RESEND_AUDIENCE_ID || "";
-  if (!audienceId) {
-    console.warn("[subscribe/confirm] RESEND_AUDIENCE_ID not set — subscriber NOT synced to ESP audience:", email);
-    return { skipped: true };
-  }
-  try {
-    const res = await fetch(
-      "https://api.resend.com/audiences/" + encodeURIComponent(audienceId) + "/contacts",
-      {
-        method: "POST",
-        headers: {
-          "Authorization": "Bearer " + env.RESEND_API_KEY,
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({ email: email, unsubscribed: false }),
-      }
-    );
-    if (!res.ok) {
-      console.error("[subscribe/confirm] Resend audience sync failed:", res.status, email);
-    }
-    return { ok: res.ok, status: res.status };
-  } catch (err) {
-    console.error("[subscribe/confirm] Resend audience sync threw:", err && err.message, email);
-    return { ok: false };
-  }
-}
-
-function redirect(url, status) {
+function redirect(url) {
   return new Response(null, {
-    status: status || 302,
+    status: 302,
     headers: { "Location": url, "Cache-Control": "no-store" },
   });
+}
+
+async function syncToResend(env, email) {
+  const res = await fetch(
+    "https://api.resend.com/audiences/" + encodeURIComponent(env.RESEND_AUDIENCE_ID) + "/contacts",
+    {
+      method: "POST",
+      headers: {
+        "Authorization": "Bearer " + env.RESEND_API_KEY,
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({ email, unsubscribed: false }),
+    }
+  );
+  if (!res.ok) console.error("[confirm] Resend sync failed:", res.status, email);
+  return res.ok;
 }
 
 export async function onRequest(context) {
   const { request, env } = context;
   const origin = siteOrigin(env, request);
+  const isPreview = previewAllowed(env);
 
   if (request.method !== "GET") {
     return new Response("Method not allowed", { status: 405 });
   }
 
   if (!env.SUBSCRIBERS_KV) {
-    return redirect(origin + "/thank-you/subscribe/?status=error&reason=unavailable", 302);
+    return redirect(origin + "/thank-you/subscribe/?status=error&reason=unavailable");
+  }
+
+  if (!isPreview && (!env.RESEND_API_KEY || !env.RESEND_AUDIENCE_ID)) {
+    return redirect(origin + "/thank-you/subscribe/?status=error&reason=esp_not_configured");
   }
 
   let token = "";
   try {
-    const u = new URL(request.url);
-    token = (u.searchParams.get("token") || "").trim().slice(0, 128);
+    token = (new URL(request.url).searchParams.get("token") || "").trim().slice(0, 128);
   } catch (e) {
-    return redirect(origin + "/thank-you/subscribe/?status=error&reason=badtoken", 302);
+    return redirect(origin + "/thank-you/subscribe/?status=error&reason=badtoken");
   }
 
   if (!token || !/^[a-f0-9]{8,}$/i.test(token)) {
-    return redirect(origin + "/thank-you/subscribe/?status=error&reason=badtoken", 302);
+    return redirect(origin + "/thank-you/subscribe/?status=error&reason=badtoken");
   }
 
   let email = null;
   try {
     email = await env.SUBSCRIBERS_KV.get(tokenKey(token));
-  } catch (e) {
-    email = null;
-  }
+  } catch (e) { email = null; }
 
   if (!email) {
-    return redirect(origin + "/thank-you/subscribe/?status=expired", 302);
+    return redirect(origin + "/thank-you/subscribe/?status=expired");
   }
 
   let record = null;
@@ -106,7 +79,7 @@ export async function onRequest(context) {
   } catch (e) { record = null; }
 
   if (!record) {
-    return redirect(origin + "/thank-you/subscribe/?status=expired", 302);
+    return redirect(origin + "/thank-you/subscribe/?status=expired");
   }
 
   const isNewConfirm = record.status !== "confirmed";
@@ -118,15 +91,15 @@ export async function onRequest(context) {
       await env.SUBSCRIBERS_KV.put(emailKey(email), JSON.stringify(record));
     } catch (e) { /* best-effort */ }
 
-    await mirrorToResend(env, email);
+    if (env.RESEND_API_KEY && env.RESEND_AUDIENCE_ID) {
+      await syncToResend(env, email);
+    }
 
     const { sendEmail, emailTemplate } = await import("../../_lib/email.js");
-    if (!env.SEB) {
-      console.error("[subscribe/confirm] SEB email binding is not configured — welcome email not sent for:", email);
-    }
-    const assetUrl    = "https://assets.vjstv.com/downloads/vjstv-loops-01.zip";
+    if (!env.SEB) console.error("[confirm] SEB not set — welcome email skipped:", email);
+    const assetUrl = "https://assets.vjstv.com/downloads/vjstv-loops-01.zip";
     const downloadUrl = origin + "/thank-you/download/?url=" + encodeURIComponent(assetUrl) + "&pack=" + encodeURIComponent("VJs TV Loops 01") + "&source=welcome-email";
-    const emailResult = await sendEmail(
+    const ok = await sendEmail(
       env,
       email,
       "You\u2019re in \u2014 download your free VJs TV loop pack",
@@ -145,13 +118,11 @@ export async function onRequest(context) {
         <p style="color:#666;font-size:12px;margin-top:24px;">You\u2019re receiving this because you subscribed at vjstv.com. To unsubscribe, reply to this email.</p>
       `)
     );
-    if (emailResult !== true) {
-      console.error("[subscribe/confirm] Welcome email send failed for:", email, "— check SEB binding and noreply@vjstv.com routing rule.");
-    }
+    if (ok !== true) console.error("[confirm] Welcome email failed:", email);
   }
 
   try { await env.SUBSCRIBERS_KV.delete(tokenKey(token)); } catch (e) {}
 
   const qs = isNewConfirm ? "?status=confirmed" : "?status=already_confirmed";
-  return redirect(origin + "/thank-you/subscribe/" + qs, 302);
+  return redirect(origin + "/thank-you/subscribe/" + qs);
 }
