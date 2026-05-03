@@ -23,9 +23,11 @@ layout: default
       <div class="vjs-mp-hero-thumb">
         <div class="vjs-mp-thumb-art" style="background: linear-gradient(135deg, {{ page.gradient }});{% if page.thumbnail %} background-image: url('{{ page.thumbnail }}'); background-size: cover; background-position: center;{% endif %}">
           <div class="vjs-mp-thumb-grid-overlay"></div>
+            {% if page.preview_video_url %}
             <video class="vjs-mp-thumb-video" autoplay muted loop playsinline preload="metadata" poster="{{ page.video_poster | default: '' }}">
-              <source src="/assets/videos/loop-packs/{{ page.name }}/preview.mp4" type="video/mp4">
+              <source src="{{ page.preview_video_url }}" type="video/mp4">
             </video>
+            {% endif %}
           <div class="vjs-mp-thumb-play-icon">
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
               <circle cx="12" cy="12" r="10"/>
@@ -113,17 +115,12 @@ layout: default
           </a>
           <p style="font-family:'Barlow Condensed',sans-serif;font-size:0.68rem;color:#666;margin:8px 0 0;letter-spacing:0.06em;text-transform:uppercase;">Free with email — download link sent instantly</p>
           {% else %}
-          <button class="vjs-mp-btn-primary vjs-mp-buy-btn"
-                  data-pack="{{ page.name }}"
-                  data-title="{{ page.title }}"
-                  data-artist="{{ page.artist }}"
-                  data-price="{{ page.price_display }}"
-                  data-clips="{{ page.clip_count }}"
-                  data-size="{{ page.file_size }}"
-                  data-url="{{ page.download_url | uri_escape }}">
+          <a href="/buy/?slug={{ page.name | uri_escape }}&price={{ page.price_display | uri_escape }}"
+             class="vjs-mp-btn-primary"
+             onclick="if(window.vjsTrack)window.vjsTrack('checkout_started',{pack:'{{ page.title | escape }}',price:'{{ page.price_display | escape }}',source:'loop-pack-page'});">
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" style="width:1em;height:1em;vertical-align:middle;margin-right:6px;"><rect x="2" y="5" width="20" height="14" rx="0"/><path d="M2 10h20"/></svg>
             BUY NOW · {{ page.price_display }}
-          </button>
+          </a>
           {% endif %}
           <div class="vjs-mp-guarantee">
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" style="width:0.85em;height:0.85em;vertical-align:middle;margin-right:4px;"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
@@ -177,112 +174,6 @@ layout: default
   </div>
 </div>
 
-<!-- PURCHASE MODAL -->
-<div class="vjs-mp-modal-overlay" id="mpModal" style="display:none;">
-  <div class="vjs-mp-modal">
-    <button class="vjs-mp-modal-close" onclick="document.getElementById('mpModal').style.display='none'">×</button>
-    <div class="vjs-mp-modal-header">
-      <div class="vjs-mp-modal-title" id="mpModalTitle"></div>
-      <div class="vjs-mp-modal-artist" id="mpModalArtist"></div>
-    </div>
-    <form class="vjs-mp-checkout-form" id="mpCheckoutForm">
-      <div class="vjs-mp-form-row">
-        <label class="vjs-mp-form-label">EMAIL ADDRESS</label>
-        <input type="email" class="vjs-mp-form-input" id="mpEmail" placeholder="you@example.com" required>
-      </div>
-      <div class="vjs-mp-form-row">
-        <label class="vjs-mp-form-label">CARD NUMBER</label>
-        <input type="text" class="vjs-mp-form-input" id="mpCard" placeholder="4242 4242 4242 4242" maxlength="19">
-      </div>
-      <div class="vjs-mp-form-row-2">
-        <div class="vjs-mp-form-row">
-          <label class="vjs-mp-form-label">EXPIRY</label>
-          <input type="text" class="vjs-mp-form-input" id="mpExpiry" placeholder="MM/YY" maxlength="5">
-        </div>
-        <div class="vjs-mp-form-row">
-          <label class="vjs-mp-form-label">CVC</label>
-          <input type="text" class="vjs-mp-form-input" id="mpCVC" placeholder="123" maxlength="4">
-        </div>
-      </div>
-      <div class="vjs-mp-order-summary">
-        <span>Order Total</span>
-        <span id="mpModalPrice" style="color:#39ff14; font-weight:700;"></span>
-      </div>
-      <button type="submit" class="vjs-mp-btn-primary" style="width:100%;">
-        PAY &amp; DOWNLOAD
-      </button>
-      <div class="vjs-mp-guarantee" style="text-align:center; margin-top:12px;">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" style="width:0.85em;height:0.85em;vertical-align:middle;margin-right:4px;"><rect x="3" y="11" width="18" height="11"/><path d="M7 11V7a5 5 0 0110 0v4"/></svg>
-        Secure payment · Instant download after payment
-      </div>
-    </form>
-  </div>
-</div>
-
 {% include seo/breadcrumb-jsonld.html section_title="Marketplace" section_url="/marketplace/" %}
 
 {% include vjstv-footer.html %}
-
-<script>
-(function() {
-  var buyBtns = document.querySelectorAll('.vjs-mp-buy-btn');
-  buyBtns.forEach(function(btn) {
-    btn.addEventListener('click', function() {
-      var modal = document.getElementById('mpModal');
-      document.getElementById('mpModalTitle').textContent = btn.dataset.title;
-      document.getElementById('mpModalArtist').textContent = 'by ' + btn.dataset.artist;
-      document.getElementById('mpModalPrice').textContent = btn.dataset.price;
-      modal.style.display = 'flex';
-    });
-  });
-
-  document.getElementById('mpModal').addEventListener('click', function(e) {
-    if (e.target === this) this.style.display = 'none';
-  });
-
-  var form = document.getElementById('mpCheckoutForm');
-  if (form) {
-    var cardInput = document.getElementById('mpCard');
-    var expiryInput = document.getElementById('mpExpiry');
-    if (cardInput) {
-      cardInput.addEventListener('input', function() {
-        var v = this.value.replace(/\D/g, '').slice(0, 16);
-        this.value = v.replace(/(.{4})/g, '$1 ').trim();
-      });
-    }
-    if (expiryInput) {
-      expiryInput.addEventListener('input', function() {
-        var v = this.value.replace(/\D/g, '').slice(0, 4);
-        if (v.length >= 2) v = v.slice(0, 2) + '/' + v.slice(2);
-        this.value = v;
-      });
-    }
-    form.addEventListener('submit', function(e) {
-      e.preventDefault();
-      var btn = form.querySelector('[type="submit"]');
-      btn.textContent = 'PROCESSING...';
-      btn.disabled = true;
-      var firstBtn = document.querySelector('.vjs-mp-buy-btn');
-      var title = firstBtn ? firstBtn.dataset.title : '';
-      var artist = firstBtn ? firstBtn.dataset.artist : '';
-      var clips = firstBtn ? firstBtn.dataset.clips : '';
-      var size = firstBtn ? firstBtn.dataset.size : '';
-      var price = firstBtn ? firstBtn.dataset.price : '';
-      var dlUrl = firstBtn ? (firstBtn.dataset.url || '') : '';
-      if (typeof window.vjsTrack === 'function') {
-        window.vjsTrack('download_requested', { pack: title, artist: artist, price: price, source: 'loop-pack-paid' });
-      }
-      setTimeout(function() {
-        document.getElementById('mpModal').style.display = 'none';
-        var dest = '/thank-you/download/?pack=' + encodeURIComponent(title) +
-                   '&artist=' + encodeURIComponent(artist) +
-                   '&clips=' + encodeURIComponent(clips) +
-                   '&size=' + encodeURIComponent(size) +
-                   '&source=loop-pack-paid';
-        if (dlUrl) dest += '&url=' + encodeURIComponent(dlUrl);
-        window.location.href = dest;
-      }, 1800);
-    });
-  }
-})();
-</script>

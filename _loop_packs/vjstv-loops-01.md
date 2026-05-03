@@ -16,6 +16,7 @@ featured: true
 file_size: "256 MB"
 license: "Commercial"
 thumbnail: "/assets/images/loop-packs/vjstv-loops-01.png"
+preview_video_url: "https://assets.vjstv.com/previews/vjstv-loops-01-preview.mp4"
 download_url: "https://assets.vjstv.com/downloads/vjstv-loops-01.zip"
 license_url: "/assets/downloads/vjstv-commercial-license.txt"
 clip_previews:

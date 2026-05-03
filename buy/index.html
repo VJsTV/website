@@ -1,0 +1,61 @@
+---
+layout: default
+title: "Checkout — VJs TV"
+noindex: true
+permalink: /buy/
+---
+{% include layouts/nav/nav-3.html default_logo="white" %}
+
+<section style="min-height:60vh; display:flex; align-items:center; justify-content:center; padding:4rem 1rem; background:#050505;">
+  <div style="max-width:480px; width:100%; text-align:center;">
+    <div style="font-family:'Orbitron',sans-serif; font-size:0.6rem; letter-spacing:0.25em; color:var(--vjs-ultraviolet); text-transform:uppercase; margin-bottom:1rem;">Checkout</div>
+    <h1 id="buy-pack-title" style="font-family:'Barlow Condensed',sans-serif; font-size:2rem; font-weight:700; color:#fff; margin-bottom:0.5rem;">Loading…</h1>
+    <div id="buy-pack-price" style="font-family:'Barlow Condensed',sans-serif; font-size:1.25rem; color:var(--vjs-neon); margin-bottom:2rem;"></div>
+    <div id="buy-status" style="font-family:'Barlow Condensed',sans-serif; font-size:0.8rem; color:#555; letter-spacing:0.1em; text-transform:uppercase; margin-bottom:1.5rem;">Redirecting to secure checkout…</div>
+    <div style="width:40px; height:2px; background:var(--vjs-ultraviolet); margin:0 auto; animation:buybar 1.2s ease-in-out infinite alternate;" id="buy-bar"></div>
+    <noscript><p style="color:#666; margin-top:2rem;">JavaScript is required to complete checkout.</p></noscript>
+  </div>
+</section>
+<style>
+@keyframes buybar { from{width:40px;opacity:0.4;} to{width:120px;opacity:1;} }
+</style>
+
+{% include vjstv-footer.html %}
+
+<script>
+(function() {
+  var params = new URLSearchParams(window.location.search);
+  var slug  = params.get('slug');
+  var email = params.get('email') || '';
+
+  if (!slug) {
+    document.getElementById('buy-status').textContent = 'No pack selected — redirecting to marketplace…';
+    setTimeout(function(){ window.location.href = '/marketplace'; }, 1500);
+    return;
+  }
+
+  document.getElementById('buy-pack-title').textContent = slug.replace(/-/g,' ').replace(/\b\w/g,function(c){return c.toUpperCase();});
+  document.getElementById('buy-pack-price').textContent = params.get('price') || '';
+
+  fetch('/api/checkout/create-session', {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({ slug: slug, email: email })
+  })
+  .then(function(r){ return r.json(); })
+  .then(function(data){
+    if (data.url) {
+      window.location.href = data.url;
+    } else if (data.error === 'free_pack_use_lead_magnet') {
+      window.location.href = '/free-loops/';
+    } else {
+      document.getElementById('buy-status').textContent = 'Checkout unavailable — please try again.';
+      document.getElementById('buy-bar').style.display = 'none';
+    }
+  })
+  .catch(function(){
+    document.getElementById('buy-status').textContent = 'Network error — please try again.';
+    document.getElementById('buy-bar').style.display = 'none';
+  });
+})();
+</script>

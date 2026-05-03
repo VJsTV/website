@@ -897,6 +897,7 @@ document.addEventListener('DOMContentLoaded', initYtPlayers);
   var clockEl = document.getElementById('pgrid-clock');
   var specialEl = document.getElementById('pgrid-special');
   var specialList = document.getElementById('pgrid-special-list');
+  var heartbeatData = {};
   var scheduleData = null;
 
   function timeToMinutes(t) {
@@ -993,9 +994,17 @@ document.addEventListener('DOMContentLoaded', initYtPlayers);
       }
 
       var isLive = specialEv && specialEv.type === 'live';
-      var statusHtml = isLive
-        ? '<span class="pgrid-ch-status" style="color:#ff003c;">● LIVE NOW</span>'
-        : '<span class="pgrid-ch-status" style="color:' + color + ';">ON AIR</span>';
+      var hb = heartbeatData[key];
+      var statusHtml;
+      if (isLive) {
+        statusHtml = '<span class="pgrid-ch-status" style="color:#ff003c;">● LIVE NOW</span>';
+      } else if (hb && hb.status === 'live') {
+        statusHtml = '<span class="pgrid-ch-status" style="color:' + color + ';">ON AIR</span>';
+      } else if (hb && hb.status === 'stale') {
+        statusHtml = '<span class="pgrid-ch-status" style="color:#555;">OFFLINE</span>';
+      } else {
+        statusHtml = '<span class="pgrid-ch-status" style="color:#333;">—</span>';
+      }
 
       html += '<div class="pgrid-ch">'
         + '<div class="pgrid-ch-header">'
@@ -1063,20 +1072,32 @@ document.addEventListener('DOMContentLoaded', initYtPlayers);
     specialList.innerHTML = html;
   }
 
+  function fetchHeartbeat() {
+    fetch('/api/stream/status')
+      .then(function(r){ return r.ok ? r.json() : null; })
+      .then(function(data){
+        if (!data || !data.channels) return;
+        data.channels.forEach(function(ch){ heartbeatData[ch.channel] = ch; });
+        renderGrid();
+      })
+      .catch(function(){});
+  }
+
   function fetchSchedule() {
     fetch(SCHEDULE_URL + '?t=' + Date.now())
       .then(function(r){ return r.json(); })
       .then(function(data){
-        scheduleData = data;
+        var payload = (data && data.alg === 'hmac-sha256' && data.payload) ? data.payload : data;
+        scheduleData = payload;
         renderGrid();
         var liveTitle = document.getElementById('live-now-title');
-        if (liveTitle && data.channels['ch1-live']) {
+        if (liveTitle && payload.channels && payload.channels['ch1-live']) {
           var now = new Date();
           var nowM = now.getUTCHours() * 60 + now.getUTCMinutes();
-          var sp = checkSpecialEvent(data.channels['ch1-live'], now);
+          var sp = checkSpecialEvent(payload.channels['ch1-live'], now);
           if (sp) { liveTitle.textContent = sp.title; }
           else {
-            var r = getCurrentBlock(data.channels['ch1-live'].blocks, nowM);
+            var r = getCurrentBlock(payload.channels['ch1-live'].blocks, nowM);
             if (r.current) liveTitle.textContent = r.current.title;
           }
         }
@@ -1088,8 +1109,10 @@ document.addEventListener('DOMContentLoaded', initYtPlayers);
   }
 
   fetchSchedule();
+  fetchHeartbeat();
   setInterval(renderGrid, 60000);
   setInterval(fetchSchedule, 300000);
+  setInterval(fetchHeartbeat, 60000);
 })();
 
 // ── SCROLL REVEAL ───────────────────────────────────────────

@@ -1,1 +1,2 @@
-assets/videos/loop-packs/vjstv-loops-01/vjstv-loops-01.zip filter=lfs diff=lfs merge=lfs -text
+assets/videos/loop-packs/**/*.mp4 filter=lfs diff=lfs merge=lfs -text
+assets/videos/loop-packs/**/*.zip filter=lfs diff=lfs merge=lfs -text

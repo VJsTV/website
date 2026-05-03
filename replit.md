@@ -160,6 +160,56 @@ Added 3 verified studios to `_studios/`:
 - **Studio Rewind** (`studio-rewind.md`) — Rotterdam motion design & live show visuals
 - **Frantic** (`frantic.md`) — London CG / motion design / animation studio
 
+### Streaming hardening & asset externalization (Task #5)
+
+**Duplicate directory reconciled:** `assets/videos/loop-packs/VJs TV Loops 01/` (space-named) deleted; `vjstv-loops-01/` is the single canonical source.
+
+**Video assets externalized to Cloudflare R2:**
+- All `*.mp4` and `*.zip` files under `assets/videos/loop-packs/` are gitignored and tracked by `.gitattributes` LFS rules as a safety net.
+- `_loop_packs/*.md` front matter uses `preview_video_url:` (R2 URL) for the hero preview video; `download_url:` points to `https://assets.vjstv.com/downloads/<slug>.zip`.
+- R2 bucket URL convention: `https://assets.vjstv.com/downloads/<slug>.zip` (paid + free packs), `https://assets.vjstv.com/previews/<slug>-preview.mp4` (loop previews).
+- `vjstv-docker/state/` is gitignored (runtime heartbeat files only).
+
+**Schedule signing (HMAC-SHA256):**
+- `vjstv-docker/scripts/sign-schedule.js` — CLI tool to wrap `schedule.json` in a signed envelope `{ alg, sig, payload }`. Run: `SCHEDULE_SIGNING_KEY=<hex32> node scripts/sign-schedule.js`.
+- `vjstv-docker/scripts/scheduler.js` verifies HMAC-SHA256 signature before applying any schedule change. Unsigned schedules are accepted with a warning when `SCHEDULE_SIGNING_KEY` is unset (dev mode); in production the key must be set.
+- The static `schedule/schedule.json` (served to the browser at `/schedule/schedule.json`) supports both raw and signed-envelope formats; the live page unwraps `payload` automatically.
+
+**Restart sidecar (no docker.sock in scheduler):**
+- `vjstv-docker/sidecar/restart-sidecar.js` — tiny Node.js HTTP server listening on a unix socket (`/run/restart.sock`). Accepts `POST /restart/:channel`, calls `docker restart`. This is the ONLY container that mounts `/var/run/docker.sock`.
+- `vjstv-docker/docker-compose.yml` — `restart-sidecar` service added; `scheduler` no longer mounts docker.sock; both share a named `restart_socket` volume. Scheduler POSTs to the sidecar via unix socket.
+
+**Portainer access control:**
+- Portainer's `ports:` mapping removed from `docker-compose.yml` (was `127.0.0.1:9000:9000`). Portainer is accessible only via Cloudflare Tunnel pointing at `http://vjstv_portainer:9000` on the internal Docker network.
+
+**Scheduler Docker HEALTHCHECK:**
+- Reads `vjstv-docker/state/heartbeat-<channel>.json` written every cron tick; exits non-zero if any file is missing or older than 5 minutes.
+- `process.on('uncaughtException')` and `process.on('unhandledRejection')` handlers added to scheduler.js.
+
+**Heartbeat → /live/ integration:**
+- Scheduler writes `vjstv-docker/state/heartbeat-{ch1-live,ch2-loop-gallery,ch3-vj-education}.json` every tick.
+- `functions/api/stream/heartbeat.js` — HMAC-authenticated POST endpoint; stores heartbeat in `HEARTBEAT_KV` (TTL 15 min).
+- `functions/api/stream/status.js` — unauthenticated GET; returns all channel heartbeats with `status: live|stale|unknown` and `age_secs`.
+- `/live/` page fetches `/api/stream/status` on load and every 60 s; programming grid shows real ON AIR / OFFLINE / LIVE NOW per channel.
+
+**Stripe checkout for paid packs:**
+- `functions/api/checkout/create-session.js` — POST `{ slug, email }` → returns `{ url }` (Stripe Checkout URL). Free packs return `free_pack_use_lead_magnet` error.
+- `functions/api/checkout/webhook.js` — verifies Stripe webhook signature, emails the R2 download URL via `env.SEB` on `checkout.session.completed`.
+- `/buy/` page (`buy/index.html`) reads `?slug=` from URL, POSTs to `/api/checkout/create-session`, and redirects to the Stripe-hosted checkout page.
+- Loop-pack layout `BUY NOW` button replaced: links to `/buy/?slug=<slug>` (no more fake card-input modal).
+
+**New Cloudflare Pages bindings required:**
+- `HEARTBEAT_KV` — KV namespace for per-channel heartbeat storage.
+- `HEARTBEAT_SECRET` — HMAC secret matching the Docker env var; authenticates scheduler → Pages heartbeat POSTs.
+- `STRIPE_SECRET_KEY` — Stripe secret key for creating checkout sessions.
+- `STRIPE_WEBHOOK_SECRET` — Stripe webhook signing secret.
+- `R2_DOWNLOAD_BASE` — optional; defaults to `https://assets.vjstv.com/downloads`.
+
+**New Docker env vars (see `vjstv-docker/.env.example`):**
+- `SCHEDULE_SIGNING_KEY` — hex-32 HMAC key for schedule signing.
+- `HEARTBEAT_SECRET` — matching secret for heartbeat POST auth.
+- `HEARTBEAT_ENDPOINT` — full URL of the Pages heartbeat function.
+
 ## External Dependencies
 - **Jekyll Plugins**: `jekyll-feed`
 - **Styling**: Bootstrap

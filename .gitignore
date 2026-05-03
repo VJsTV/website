@@ -37,3 +37,10 @@ yarn-error.log*
 # Misc
 .local/
 attached_assets/
+
+# Loop-pack video assets (hosted on Cloudflare R2 — never commit to repo)
+assets/videos/loop-packs/**/*.mp4
+assets/videos/loop-packs/**/*.zip
+
+# Heartbeat state (runtime, not committed)
+vjstv-docker/state/
