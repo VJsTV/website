@@ -136,11 +136,11 @@ export async function onRequest(context) {
         <div style="text-align:center;margin:28px 0;">
           <a href="${downloadUrl}" style="display:inline-block;background:#9d00ff;color:#fff;text-decoration:none;padding:14px 28px;font-weight:700;letter-spacing:1px;text-transform:uppercase;font-size:13px;">Download VJs TV Loops 01</a>
         </div>
-        <p>While you explore the pack, here are a few things worth bookmarking:</p>
+        <p>While the pack downloads, a few things worth doing:</p>
         <ul style="color:#999;padding-left:20px;line-height:2;">
-          <li><a href="${origin}/artists" style="color:#9d00ff;">Artist Directory</a> \u2014 discover working VJs from 50+ countries</li>
-          <li><a href="${origin}/live" style="color:#00f9ff;">Live Channels</a> \u2014 CH.1 live, CH.2 loop gallery, CH.3 education</li>
-          <li><a href="${origin}/marketplace" style="color:#9d00ff;">Loop Marketplace</a> \u2014 more packs, all royalty-free</li>
+          <li><a href="https://www.instagram.com/vjstvcom/" style="color:#9d00ff;">Follow @vjstvcom on Instagram</a> \u2014 new loops and artist features every week</li>
+          <li><a href="${origin}/submit" style="color:#00f9ff;">Submit your own work</a> \u2014 get listed in the global VJ directory</li>
+          <li><a href="${origin}/artists" style="color:#9d00ff;">Browse the Artist Directory</a> \u2014 working VJs from 50+ countries</li>
         </ul>
         <p style="color:#666;font-size:12px;margin-top:24px;">You\u2019re receiving this because you subscribed at vjstv.com. To unsubscribe, reply to this email.</p>
       `)
