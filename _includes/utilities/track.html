@@ -1,29 +1,3 @@
-{%- comment -%}
-  Conversion tracking helper.
-
-  Exposes window.vjsTrack(eventName, props) as a safe no-op wrapper around
-  Plausible. If Plausible is not loaded (no plausible_domain configured),
-  events are queued in window._vjsTrackQueue for later inspection but
-  never error.
-
-  Conversion vocabulary (keep in sync with /thank-you/ pages and any
-  Plausible custom-event goals):
-    - newsletter_signup     {source}
-    - subscriber_confirmed  {source}
-    - submit_complete       {has_email}
-    - booking_sent          {artist}
-    - partner_sent          {tier?}
-    - report_sent           {page}
-    - download_requested    {pack, source?}
-    - badge_copied          {artist}
-    - live_channel_switch   {to}
-    - tipjar_open           {trigger}     // 'manual' | 'dwell' | 'scroll'
-    - tipjar_dismiss        {}
-    - cta_click             {label, location}
-
-  The active A/B variant (when set by functions/_middleware.js) is
-  automatically attached as the `vjs_exp` custom property on every event.
-{%- endcomment -%}
 <script>
 (function() {
   var meta = document.querySelector('meta[name="vjs-exp"]');

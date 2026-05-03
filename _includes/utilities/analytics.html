@@ -1,16 +1,3 @@
-{%- comment -%}
-  Site-wide analytics include.
-
-  Plausible Analytics (privacy-first, cookieless, no banner required) is the
-  canonical analytics for VJs TV. The script is only emitted when
-  `plausible_domain` is configured in `_config.yml`. Custom events are
-  reported via `_includes/utilities/track.html` (window.vjsTrack).
-
-  The legacy Google Universal Analytics block is preserved as a fall-back
-  only if it is explicitly enabled in `_data/general_settings.yml`. Both
-  systems can coexist but Plausible is the source of truth for the
-  conversion funnel.
-{%- endcomment -%}
 {%- if site.plausible_domain and site.plausible_domain != "" -%}
 <script defer
         data-domain="{{ site.plausible_domain }}"

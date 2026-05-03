@@ -278,6 +278,10 @@ meta_description: "VJs TV is the global broadcast network for VJ culture. Watch 
     <span data-vjs-exp="B" hidden>Watch the world&rsquo;s best VJs live &mdash; the global broadcast network for visual culture.</span>
   </h1>
   <p class="vjs-positioning-trust">{{ site.vjs | size }} artists across {{ _country_count }} countries &middot; {{ site.projects | size }} projects &middot; 3 live channels</p>
+  <div class="vjs-positioning-ctas">
+    <a href="/live" class="vjs-btn vjs-btn-primary" style="padding:10px 28px; font-size:0.82rem;">Watch Live</a>
+    <a href="/submit" class="vjs-btn vjs-btn-outline" style="padding:10px 28px; font-size:0.82rem;">Submit Your Work</a>
+  </div>
 </header>
 <script>
 (function() {
@@ -305,6 +309,9 @@ meta_description: "VJs TV is the global broadcast network for VJ culture. Watch 
   font-family:'Barlow Condensed',sans-serif; font-size:0.7rem; font-weight:600;
   letter-spacing:0.18em; text-transform:uppercase; color:#666;
   margin:6px 0 0;
+}
+.vjs-positioning-ctas {
+  display:flex; gap:10px; justify-content:center; flex-wrap:wrap; margin-top:14px;
 }
 </style>
 
@@ -451,10 +458,10 @@ function heroPlay(card) {
 }
 </script>
 
-<!-- SPONSOR TICKER — one primary CTA + supporting category sub-line -->
+<!-- SPONSOR TICKER — informational only; partner CTAs live on /partners/ -->
 <div class="vjs-sponsor-bar">
   <div class="vjs-sponsor-bar-track">
-    <a href="/partners" class="vjs-sponsor-bar-item vjs-sponsor-bar-cta" style="color:var(--vjs-ultraviolet); text-decoration:none;" onclick="if(window.vjsTrack)window.vjsTrack('cta_click',{label:'become_partner',location:'home_marquee'});">Become a Partner &rsaquo;</a><span class="vjs-sponsor-bar-dot"> &diams; </span><span class="vjs-sponsor-bar-item">Technology, Broadcast, Festival, Studio &amp; Education Partners welcome</span>
+    <span class="vjs-sponsor-bar-item">Technology, Broadcast, Festival, Studio &amp; Education Partners welcome</span><span class="vjs-sponsor-bar-dot"> &diams; </span><a href="/partners" class="vjs-sponsor-bar-item" style="color:var(--vjs-ultraviolet); text-decoration:none;">Partnership options &rsaquo;</a>
   </div>
 </div>
 

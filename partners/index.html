@@ -24,12 +24,13 @@ meta_description: "Explore VJs TV sponsorship tiers, technology partnerships, an
 <!-- ANALYTICS LABEL -->
 <div id="vjs-analytics-label" style="text-align:center; color:var(--vjs-cyan); font-size:0.9rem; padding-top:1.5rem; display:none; font-family:'Space Grotesk',sans-serif; letter-spacing:0.05em;"></div>
 
+{% assign _p_sc = "" %}{% for a in site.vjs %}{% if a.location %}{% assign _c = a.location | split: ", " | last | strip %}{% unless _p_sc contains _c %}{% assign _p_sc = _p_sc | append: _c | append: "|" %}{% endunless %}{% endif %}{% endfor %}{% for p in site.projects %}{% if p.location %}{% assign _c = p.location | split: ", " | last | strip %}{% unless _p_sc contains _c %}{% assign _p_sc = _p_sc | append: _c | append: "|" %}{% endunless %}{% endif %}{% endfor %}{% assign _p_countries = _p_sc | split: "|" %}
 <!-- AUDIENCE STATS -->
 <div class="vjs-stats-bar" style="margin-bottom:0;">
-  <div class="vjs-stat-item"><div class="vjs-stat-number">97</div><div class="vjs-stat-label">Community Members</div></div>
-  <div class="vjs-stat-item"><div class="vjs-stat-number">50</div><div class="vjs-stat-label">Countries</div></div>
-  <div class="vjs-stat-item"><div class="vjs-stat-number" id="partner-stat-views">—</div><div class="vjs-stat-label">Monthly Page Views</div></div>
-  <div class="vjs-stat-item"><div class="vjs-stat-number">23</div><div class="vjs-stat-label">Live Events / Year</div></div>
+  <a href="/artists" class="vjs-stat-item vjs-stat-link"><div class="vjs-stat-number">{{ site.vjs | size }}</div><div class="vjs-stat-label">Artists</div></a>
+  <a href="/countries" class="vjs-stat-item vjs-stat-link"><div class="vjs-stat-number">{{ _p_countries | size }}</div><div class="vjs-stat-label">Countries</div></a>
+  <a href="/projects" class="vjs-stat-item vjs-stat-link"><div class="vjs-stat-number">{{ site.projects | size }}</div><div class="vjs-stat-label">Projects</div></a>
+  <a href="/live" class="vjs-stat-item vjs-stat-link"><div class="vjs-stat-number">3</div><div class="vjs-stat-label">Live Channels</div></a>
 </div>
 
 {% include analytics-charts.html %}

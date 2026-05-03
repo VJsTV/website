@@ -5,20 +5,6 @@ import { verifyTurnstile } from "../_lib/turnstile.js";
 import { readBody, isValidEmail } from "../_lib/validation.js";
 import { sendEmail, emailTemplate } from "../_lib/email.js";
 
-/**
- * POST /api/subscribe
- *
- * Intentionally does NOT go through guardPost — guardPost requires
- * GITHUB_TOKEN (for the GitHub Issues integration) which subscribe does
- * not need.  This function implements its own equivalent pipeline:
- *   CORS preflight → origin check → rate limit → body parse →
- *   honeypot → Turnstile (when secret is set) → business logic.
- *
- * Turnstile policy mirrors guardPost exactly:
- *   - Production (no ALLOW_PREVIEW_ORIGINS) + no TURNSTILE_SECRET_KEY → 503
- *   - Secret configured → token required, validated
- *   - Preview env + no secret → skip (dev/local builds work without widget)
- */
 
 const ALLOWED_SOURCES = new Set([
   "footer",
@@ -53,7 +39,6 @@ function tokenKey(token) {
 export async function onRequest(context) {
   const { request, env } = context;
 
-  // ── CORS preflight ────────────────────────────────────────────────────────
   const pre = preflight(request, env, "POST, OPTIONS");
   if (pre) return pre;
 
@@ -65,7 +50,6 @@ export async function onRequest(context) {
     return json({ success: false, error: "Origin not allowed." }, 403, request, env);
   }
 
-  // ── Turnstile gating (same policy as guardPost) ───────────────────────────
   const isPreview = previewAllowed(env);
   const hasTurnstileSecret = !!env.TURNSTILE_SECRET_KEY;
 
@@ -76,7 +60,6 @@ export async function onRequest(context) {
     );
   }
 
-  // ── Rate limiting ─────────────────────────────────────────────────────────
   const ip = request.headers.get("CF-Connecting-IP") || "unknown";
   const limit = await checkRateLimit(env, "subscribe:" + ip, 3, 30);
   if (!limit.allowed) {
@@ -87,7 +70,6 @@ export async function onRequest(context) {
     );
   }
 
-  // ── Parse body ────────────────────────────────────────────────────────────
   let data;
   try {
     data = await readBody(request);
@@ -98,12 +80,10 @@ export async function onRequest(context) {
     return json({ success: false, error: "Invalid request body." }, 400, request, env);
   }
 
-  // ── Honeypot ──────────────────────────────────────────────────────────────
   if (data.honeypot || data.website_url) {
     return json({ success: true }, 200, request, env);
   }
 
-  // ── Turnstile token validation (when secret is configured) ────────────────
   if (hasTurnstileSecret) {
     const tsToken = data["cf-turnstile-response"] || data.turnstile_token;
     if (!tsToken) {
@@ -121,7 +101,6 @@ export async function onRequest(context) {
     }
   }
 
-  // ── Business logic ────────────────────────────────────────────────────────
   if (!env.SUBSCRIBERS_KV) {
     return json(
       { success: false, error: "Subscriptions are temporarily unavailable. Please try again later." },

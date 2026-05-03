@@ -1,31 +1,3 @@
-/**
- * VJs TV Pages Middleware
- *
- * Responsibilities:
- *   1. Sticky A/B variant assignment via `vjs-exp` cookie + KV persistence.
- *      - On first visit (no cookie), assigns A/B 50/50 via crypto RNG.
- *        Bots always get variant A (control) and are never written to KV.
- *      - Assignment is stored in AB_TEST_KV (when bound) under a visitor
- *        key derived from CF-Connecting-IP + User-Agent hash. This lets
- *        Plausible breakdowns be cross-referenced against KV-aggregated
- *        variant counts for funnel-level lift measurement independent of
- *        browser storage clearing.
- *      - Cookie (HttpOnly:false, SameSite:Lax, 30d) provides in-browser
- *        stickiness for the duration of the experiment without a server
- *        round-trip on subsequent page loads.
- *      - The active variant is injected into HTML responses as
- *        `<meta name="vjs-exp" content="A|B">` so client JS can render
- *        the matching variant and attach it to every Plausible event as
- *        a custom property (see _includes/utilities/track.html).
- *   2. Skips /api/* routes entirely — Pages Functions there must be
- *      reachable without HTML rewriting.
- *
- * KV schema (AB_TEST_KV):
- *   "vis:<fingerprint>"  → { variant, first_seen, last_seen, page_count }
- *                          TTL 31 days (refreshed on each new assignment)
- *   "count:<variant>"   → integer string, incremented on each new assignment
- *                          No TTL — aggregate for the life of the experiment.
- */
 
 const BOT_UA = /(bot|crawl|spider|slurp|bingpreview|googlebot|facebookexternalhit|whatsapp|telegrambot|linkedinbot|pingdom|uptimerobot|ahrefs|semrush)/i;
 
@@ -41,11 +13,6 @@ function assignVariant() {
   return buf[0] < 128 ? "A" : "B";
 }
 
-/**
- * Build a stable, privacy-safe fingerprint for the visitor.
- * We use CF-Connecting-IP + a truncated UA hash — not uniquely identifying
- * but sufficient for experiment cohort assignment.
- */
 async function visitorKey(request) {
   const ip = request.headers.get("CF-Connecting-IP") || "unknown";
   const ua = (request.headers.get("User-Agent") || "").slice(0, 120);
@@ -60,10 +27,6 @@ async function visitorKey(request) {
   }
 }
 
-/**
- * Persist assignment to KV: update visitor record and increment global counter.
- * Best-effort — KV errors never block the response.
- */
 async function persistAssignment(kv, key, variant, now) {
   try {
     const [existing, countRaw] = await Promise.all([
@@ -80,7 +43,6 @@ async function persistAssignment(kv, key, variant, now) {
 
     await Promise.all([
       kv.put(key, JSON.stringify(record), { expirationTtl: 31 * 86400 }),
-      // Only increment global count on new assignments (no prior record).
       existing ? Promise.resolve() : kv.put("count:" + variant, String(newCount)),
     ]);
   } catch (e) { /* never block the response */ }
@@ -126,10 +88,8 @@ export async function onRequest(context) {
   }
   if (!variant) variant = "A"; // bots + unassigned: always control
 
-  // KV persistence — non-blocking, fire-and-forget.
   if (!isBot && env && env.AB_TEST_KV) {
     const vKey = await visitorKey(request);
-    // Always update page_count on each request; only increment global count on new assignment.
     persistAssignment(env.AB_TEST_KV, vKey, variant, Date.now());
   }
 
