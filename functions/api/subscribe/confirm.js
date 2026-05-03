@@ -133,7 +133,8 @@ export async function onRequest(context) {
     if (!env.SEB) {
       console.error("[subscribe/confirm] SEB email binding is not configured — welcome email not sent for:", email);
     }
-    const downloadUrl = origin + "/marketplace/vjstv-loops-01";
+    const assetUrl    = "https://assets.vjstv.com/downloads/vjstv-loops-01.zip";
+    const downloadUrl = origin + "/thank-you/download/?url=" + encodeURIComponent(assetUrl) + "&pack=" + encodeURIComponent("VJs TV Loops 01") + "&source=welcome-email";
     const emailResult = await sendEmail(
       env,
       email,

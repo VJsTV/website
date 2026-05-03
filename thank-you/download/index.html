@@ -51,10 +51,11 @@ permalink: /thank-you/download/
 
   if (url) {
     // Validate the URL is same-origin or a relative path to prevent open redirect.
+    var TRUSTED_ORIGINS = [window.location.origin, 'https://assets.vjstv.com'];
     var isSafe = false;
     try {
       var parsed = new URL(url, window.location.origin);
-      isSafe = parsed.origin === window.location.origin;
+      isSafe = TRUSTED_ORIGINS.indexOf(parsed.origin) !== -1;
     } catch (e) {
       // If url is a relative path, treat as safe.
       isSafe = url.charAt(0) === '/' && url.charAt(1) !== '/';
