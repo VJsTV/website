@@ -2494,21 +2494,6 @@ select.vjs-form-input {
   display: inline-block;
 }
 
-.vjs-tip-btn {
-  padding: 12px;
-  background: rgba(255,255,255,0.05);
-  border: 1px solid #333;
-  color: #fff;
-  cursor: pointer;
-  font-family: 'Barlow Condensed', sans-serif;
-  font-size: 0.82rem;
-  font-weight: 600;
-  text-transform: uppercase;
-  transition: background 0.15s, border-color 0.15s;
-}
-.vjs-tip-btn:hover { background: rgba(255,255,255,0.1); border-color: #555; }
-.vjs-tip-btn.featured { border-color: var(--vjs-magenta); color: var(--vjs-magenta); }
-
 @media (max-width: 900px) {
   .vjstv-footer-top { grid-template-columns: 1fr; }
   .vjstv-footer-brand { border-right: none; border-bottom: 1px solid #222; padding: 28px 20px; }
@@ -2786,35 +2771,6 @@ body.glitch-mode::before {
   color: #5865F2;
 }
 .vjs-float-sidebar-icon { font-size: 1.1rem; line-height: 1; }
-
-/* Tip jar modal */
-.vjs-tip-modal {
-  position: fixed;
-  inset: 0;
-  background: rgba(5,5,5,0.85);
-  backdrop-filter: blur(12px);
-  z-index: 99997;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  opacity: 0;
-  pointer-events: none;
-  transition: opacity 0.25s;
-}
-.vjs-tip-modal.open {
-  opacity: 1;
-  pointer-events: all;
-}
-.vjs-tip-modal-inner {
-  background: var(--vjs-card);
-  border: 1px solid rgba(255,0,170,0.3);
-  border-radius: 0;
-  padding: 2.5rem;
-  max-width: 380px;
-  width: 90%;
-  text-align: center;
-  box-shadow: 0 0 80px rgba(255,0,170,0.15);
-}
 
 /* ================================================================
    CHANNEL GRID — NTS 3-COLUMN SCHEDULE

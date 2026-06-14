@@ -150,10 +150,10 @@
 <link rel="dns-prefetch" href="https://player.vimeo.com" />
 <link rel="dns-prefetch" href="https://www.youtube-nocookie.com" />
 <link rel="dns-prefetch" href="https://i.vimeocdn.com" />
-<link rel="preload" href="/assets/css/vjstv.css?v=1781344973" as="style" />
+<link rel="preload" href="/assets/css/vjstv.css?v=1781474819" as="style" />
 <link rel="preload" href="/assets/css/bootstrap.min.css" as="style" />
 <link rel="stylesheet" type="text/css" href="/assets/css/bootstrap.min.css" />
-<link rel="stylesheet" type="text/css" href="/assets/css/vjstv.css?v=1781344973" />
+<link rel="stylesheet" type="text/css" href="/assets/css/vjstv.css?v=1781474819" />
 <link rel="stylesheet" type="text/css" href="/assets/css/plugins.css" media="print" onload="this.media='all'" />
 <link rel="stylesheet" type="text/css" href="/assets/revolution/css/settings.css" media="print" onload="this.media='all'" />
 <link rel="stylesheet" type="text/css" href="/assets/revolution/css/layers.css" media="print" onload="this.media='all'" />
@@ -2931,27 +2931,8 @@ function heroPlay(card) {
     <a href="/license" class="vjstv-footer-link">Commercial License</a>
     <span class="vjstv-footer-sep">&middot;</span>
     <a href="/sitemap" class="vjstv-footer-link">Sitemap</a>
-    <span class="vjstv-footer-sep">&middot;</span>
-    <button type="button" class="vjstv-footer-link" onclick="vjsOpenTip('manual')" style="background:none; border:none; padding:0; cursor:pointer; font:inherit; color:inherit;">Tip Jar</button>
   </div>
 </footer>
-
-
-
-<div class="vjs-tip-modal" id="vjs-tip-modal" role="dialog" aria-label="Visual Tip Jar" onclick="if(event.target===this)vjsCloseTip()">
-  <div class="vjs-tip-modal-inner">
-    <div style="margin-bottom:1rem;"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" style="width:2.5rem; height:2.5rem;"><path d="M9 3h6v2H9V3z"/><path d="M8 5h8c1 0 2 1 2 2v10c0 2-1 4-2 4H8c-1 0-2-2-2-4V7c0-1 1-2 2-2Z"/><circle cx="12" cy="12" r="2"/></svg></div>
-    <h3 style="font-family:'Barlow Condensed',sans-serif; font-size:1rem; font-weight:700; letter-spacing:0.08em; text-transform:uppercase; color:#fff; margin-bottom:0.5rem;">Visual Tip Jar</h3>
-    <p style="font-size:0.82rem; color:var(--vjs-text-muted); margin-bottom:1.75rem; line-height:1.6;">Support the VJs in the network directly. 100% goes to the artists.</p>
-    <div style="display:grid; grid-template-columns:1fr 1fr; gap:8px; margin-bottom:1.25rem;">
-      <button type="button" onclick="vjsTipAmount('€5')"  class="vjs-tip-btn">€5</button>
-      <button type="button" onclick="vjsTipAmount('€10')" class="vjs-tip-btn">€10</button>
-      <button type="button" onclick="vjsTipAmount('€25')" class="vjs-tip-btn">€25</button>
-      <button type="button" onclick="vjsTipAmount('€50')" class="vjs-tip-btn featured">€50 <svg viewBox="0 0 24 24" fill="currentColor" style="width:0.8em; height:0.8em; display:inline-block; vertical-align:middle; margin-left:2px;"><polygon points="12,2 15,10 23,10 17,15 19,23 12,18 5,23 7,15 1,10 9,10"/></svg></button>
-    </div>
-    <button type="button" onclick="vjsCloseTip()" style="background:none; border:none; color:var(--vjs-text-muted); font-family:'Barlow Condensed',sans-serif; font-size:0.7rem; letter-spacing:0.1em; cursor:pointer; text-transform:uppercase;">Close</button>
-  </div>
-</div>
 
 
 <nav class="vjs-mobile-nav" id="vjs-mobile-nav" aria-label="Mobile navigation">
@@ -3030,76 +3011,6 @@ function vjsToggleGlitch() {
   var btn = document.getElementById('glitch-btn');
   if(btn) btn.classList.toggle('glitch-active', active);
 }
-
-/* ── VISUAL TIP JAR — deferred trigger + 30-day dismiss cookie ── */
-function vjsTipCookieGet(name) {
-  var m = document.cookie.match(new RegExp('(?:^|; )' + name + '=([^;]*)'));
-  return m ? decodeURIComponent(m[1]) : '';
-}
-function vjsTipCookieSet(name, value, days) {
-  var d = new Date(); d.setTime(d.getTime() + days * 86400000);
-  document.cookie = name + '=' + encodeURIComponent(value) + '; expires=' + d.toUTCString() + '; path=/; SameSite=Lax';
-}
-function vjsOpenTip(trigger) {
-  var modal = document.getElementById('vjs-tip-modal');
-  if (!modal) return;
-  modal.classList.add('open');
-  if (typeof window.vjsTrack === 'function') {
-    window.vjsTrack('tipjar_open', { trigger: trigger || 'manual' });
-  }
-}
-function vjsCloseTip() {
-  var modal = document.getElementById('vjs-tip-modal');
-  if (!modal) return;
-  modal.classList.remove('open');
-  vjsTipCookieSet('vjs-tipjar-dismiss', '1', 30);
-  if (typeof window.vjsTrack === 'function') window.vjsTrack('tipjar_dismiss');
-}
-function vjsTipAmount(amt) {
-  if (typeof window.vjsTrack === 'function') window.vjsTrack('tipjar_amount', { amount: amt });
-  vjsCloseTip();
-  alert('Thank you for supporting VJs TV! ' + amt + ' tip — payment integration coming soon.');
-}
-
-/* Auto-open after 30s dwell OR 75% scroll, whichever first.
-   Suppressed on /thank-you/*, /404, /partners (already-converting flows),
-   and any path containing /search (search is task-focused). */
-(function() {
-  var p = window.location.pathname || '';
-  if (
-    p.indexOf('/thank-you') === 0 ||
-    p === '/404.html' || p === '/404' ||
-    p.indexOf('/partners') === 0 ||
-    p.indexOf('/free-loops') === 0 ||
-    p.indexOf('/search') === 0
-  ) return;
-  if (vjsTipCookieGet('vjs-tipjar-dismiss')) return;
-
-  var fired = false;
-  function maybeOpen(trigger) {
-    if (fired) return;
-    if (vjsTipCookieGet('vjs-tipjar-dismiss')) return;
-    var modal = document.getElementById('vjs-tip-modal');
-    if (!modal) return;
-    fired = true;
-    vjsOpenTip(trigger);
-  }
-  var dwellTimer = setTimeout(function() { maybeOpen('dwell'); }, 30000);
-
-  function onScroll() {
-    var doc = document.documentElement;
-    var scrolled = (window.scrollY || doc.scrollTop || 0) + window.innerHeight;
-    var height = Math.max(doc.scrollHeight, document.body.scrollHeight);
-    if (height <= 0) return;
-    if (scrolled / height >= 0.75) {
-      window.removeEventListener('scroll', onScroll);
-      clearTimeout(dwellTimer);
-      maybeOpen('scroll');
-    }
-  }
-  window.addEventListener('scroll', onScroll, { passive: true });
-})();
-
 
 (function() {
   var path = window.location.pathname;
