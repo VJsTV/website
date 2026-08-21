@@ -36,6 +36,47 @@ Also notable: `npm test` is broken (`node --test tests/` fails on Node 22; run t
 
 ---
 
+## 1a. The deploy pipeline is broken (added 2026-08-21, from a live build log)
+
+The Cloudflare **Workers Builds: vjstv** check fails on every build. The build log shows three independent defects, none of which are fixable by editing this repository — all three are Cloudflare **dashboard** settings.
+
+```
+Executing user build command: jekyll build
+Configuration file: none                              ← no _config.yml found
+     Source: /opt/buildhome/repo/_site                ← building FROM _site
+Destination: /opt/buildhome/repo/_site/_site          ← into _site/_site
+     done in 1.065 seconds.
+Executing user deploy command: npx wrangler versions uploa
+✘ [ERROR] Unknown argument: uploa
+Failed: error occurred while running deploy command
+```
+
+**D-1 — Deploy command is misspelled (CRITICAL, blocks every deploy).**
+The configured deploy command is `npx wrangler versions uploa` — missing the trailing `d`. Wrangler rejects it at argument parsing, so the deploy step fails before touching any repo file. **No change to this repository can make that command parse.** Fix: in the Cloudflare dashboard → Workers → `vjstv` → Settings → Build → Deploy command, change `uploa` to `upload`.
+
+**D-2 — Build root directory is `_site` (CRITICAL).**
+Jekyll reports `Configuration file: none` and `Source: …/repo/_site`, meaning the build runs one directory too deep — the project's root-directory setting points at `_site` instead of the repo root. Consequences: `_config.yml` is never loaded (so no collections, no permalinks, no plugins — note the absent `Jekyll Feed:` line), and output goes to `_site/_site`. The real site is never rebuilt by this pipeline. Fix: set the build root/output directory to the repo root, with output `_site`.
+*Verified locally:* `bundle exec jekyll build` from the repo root succeeds in 2.3 s, loads `_config.yml`, and generates the feed — including this PR's new file. The repository builds fine; the pipeline points at the wrong directory.
+
+**D-3 — No Wrangler configuration exists anywhere in the repo (HIGH).**
+`git log --all` shows `wrangler.json`/`wrangler.jsonc`/`wrangler.toml` have **never** been committed, and `.gitignore:10-12` actively excludes them. Even with D-1 and D-2 fixed, `wrangler versions upload` has no config and no entry point to upload. This also indicates a product mismatch: every doc, `_routes.json`, `_headers`, and the `functions/` file-routing convention describe a **Cloudflare Pages** project, but the failing check is **Workers Builds**. Decide which product this deploys to before adding config — this is an architectural decision, not a mechanical fix.
+
+**D-4 — The committed `_site/` is 45% incomplete (HIGH) — and this changes finding #6 above.**
+Because the pipeline never performs a real build, whatever is served comes from the **stale `_site/` committed to git**. Comparing it against a fresh local build:
+
+| | committed `_site/` | real build |
+|---|---|---|
+| Total HTML pages | 186 | **340** |
+| `/artists/` pages | 21 | **120** (missing all 29 programmatic `by-country` / `by-technology` hubs) |
+
+Entirely **absent** from the committed output: `_headers` (all security headers incl. CSP), `_routes.json` (Pages Functions routing), `sitemap.xml`, `robots.txt`, `search.json`, `atom.xml`, and the whole `/learn/` (5), `/thank-you/` (6), `/marketplace/` (3), `/buy/`, `/free-loops/`, and `/license/` sections.
+
+If the live site is being served from this tree, then the conversion funnel's thank-you pages, the cornerstone `/learn/` SEO pages, the marketplace, the sitemap, robots.txt, and **every security header audited in §2–§3 are simply not deployed** — the headers would exist only as an un-shipped source file. Confirm what is actually live at `vjstv.com` before trusting any §2/§3 header finding as production-accurate.
+
+> ⚠️ **Ordering caveat that supersedes action item #6.** Do **not** run `git rm -r --cached _site` until D-2 is fixed. While the build root is wrong, the committed `_site/` is the only artifact the pipeline has to serve — removing it could take the site down. Fix the build root first, confirm a real build deploys, *then* untrack `_site/`.
+
+---
+
 ## 2. Security — backend & API
 
 Status vs. May audit, with evidence:
@@ -141,12 +182,13 @@ Funnel work from May is real and complete (subscribe double-opt-in, thank-you pa
 ## 9. Recommended action plan
 
 **Do now (hours):**
+0. **Fix the deploy pipeline (§1a)** — it is currently failing on every build, so nothing below actually reaches production until it's repaired. In the Cloudflare dashboard: (a) correct the deploy command `uploa` → `upload`, (b) set the build root to the repo root rather than `_site`, (c) decide Pages vs Workers and commit the matching config. Then verify a real build deploys 340 pages, not 186.
 1. Rotate the three YouTube stream keys (assume compromised); redact the values from `AUDIT.md`.
 2. Fix the homepage schedule filter-order bug and the `/live` next-stream date filter.
 3. Restore the homepage `<h1>`; add one to `/live/`.
 4. Route `checkout/create-session.js` and `stream/heartbeat.js` through `guardPost` (rate limit + Turnstile); make `HEARTBEAT_SECRET`/`SCHEDULE_SIGNING_KEY` fail-closed in prod.
 5. Fix `package.json` test script (`node --test tests/*.test.mjs`) and add a minimal GitHub Actions workflow (test + Jekyll build).
-6. `git rm -r --cached _site attached_assets package-lock.json`(as intended by .gitignore) and stop committing build output.
+6. `git rm -r --cached attached_assets package-lock.json` (as intended by `.gitignore`) and stop committing them. **`_site` must wait until §1a/D-2 is fixed** — see the ordering caveat there.
 
 **This month:**
 7. Webhook hardening: timestamp tolerance, `event.id` idempotency, timing-safe compares; escape backslashes/backticks in `submit.js` YAML/issue-body generation; check `sendEmail()` result in `subscribe.js`.
