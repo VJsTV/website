@@ -9,3 +9,4 @@ end
 gem "webrick"
 gem "kramdown-parser-gfm", "~> 1.1"
 gem "rouge"
+gem "csv"
