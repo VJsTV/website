@@ -73,6 +73,9 @@ exclude:
   - github.toml
   - netlify.toml
   - README.md
+  - AUDIT.md
+  - GROWTH_AUDIT.md
+  - WEBSITE_AUDIT_2026-08.md
   - Gemfile
   - Gemfile.lock
   - replit.md

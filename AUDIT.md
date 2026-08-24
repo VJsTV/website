@@ -145,13 +145,13 @@ Same `countryNames` map exists in:
 
 #### F-2.5 — `search.json` is broken by design (HIGH)
 ```liquid
-{% for post in site.posts %}
+{% raw %}{% for post in site.posts %}{% endraw %}
 ```
 The site has 20 posts (`_posts/`) — leftovers from the original blog template. None are surfaced in nav. The actual searchable corpus (artists / projects / events / studios / technology) is **never indexed**. UX impact is severe: search box exists, returns nothing useful.
 
 **Fix.** Replace with:
 ```liquid
-[
+{% raw %}[
 {% assign all = site.vjs | concat: site.projects | concat: site.events | concat: site.studios | concat: site.technology %}
 {% for item in all %}
   { "title": {{ item.title | jsonify }},
@@ -160,7 +160,7 @@ The site has 20 posts (`_posts/`) — leftovers from the original blog template.
     "desc": {{ item.description | default: item.bio | default: '' | jsonify }},
     "tags": {{ item.technologies | default: empty | jsonify }} }{% unless forloop.last %},{% endunless %}
 {% endfor %}
-]
+]{% endraw %}
 ```
 Then update the `simple-jekyll-search` template to render a `type` badge.
 
