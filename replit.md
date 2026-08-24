@@ -3,6 +3,12 @@
 ## Overview
 VJs TV is a Jekyll-based platform dedicated to VJ culture and audiovisual performances. It serves as the broadcasting, discovery, and project infrastructure layer, complementing VJSMag (vjsmag.com) which focuses on editorial content. The project aims to be a central hub for VJ artists, projects, events, and technology, offering a dynamic and interactive experience for the VJ community.
 
+## Running on Replit
+
+The Replit **Start application** workflow runs `node api/server.js` on port 5000. The server serves the generated `_site` directory and runs `bundle exec jekyll build` on startup.
+
+For a fresh environment, install the existing dependencies with `npm install` and `bundle install`. The local preview supports the static site, `/api/health`, and the YouTube metadata proxy; the submission, booking, partner, report, and analytics endpoints require their Cloudflare Pages bindings and secrets as documented below.
+
 ## User Preferences
 I prefer clear and concise communication. When making changes, prioritize high-level architectural improvements over minor code tweaks. For significant modifications, please ask for confirmation before proceeding. Ensure all explanations are direct and focused on the impact on the system.
 
