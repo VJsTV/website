@@ -1,6 +1,10 @@
-import { preflight, originAllowed } from "../_lib/cors.js";
+import { preflight } from "../_lib/cors.js";
 import { json } from "../_lib/json.js";
 
+// Public, read-only, non-sensitive aggregate traffic data — no Origin check.
+// Browsers don't send an Origin header on same-origin GET fetch() calls, so
+// gating this behind originAllowed() (as the POST endpoints correctly do)
+// rejects every real same-origin page load with a 403.
 export async function handle(request, env) {
 
   const pre = preflight(request, env, "GET, OPTIONS");
@@ -8,10 +12,6 @@ export async function handle(request, env) {
 
   if (request.method !== "GET") {
     return json({ success: false, error: "Method not allowed" }, 405, request, env);
-  }
-
-  if (!originAllowed(request, env)) {
-    return json({ monthlyVisitors: 0, error: "Origin not allowed." }, 403, request, env);
   }
 
   const CF_API_TOKEN = env.CF_API_TOKEN;
