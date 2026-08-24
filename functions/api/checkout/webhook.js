@@ -16,7 +16,7 @@ async function stripeVerify(body, sigHeader, secret) {
   return hex === sig;
 }
 
-export async function onRequestPost({ request, env }) {
+export async function handlePost(request, env) {
   if (!env.STRIPE_WEBHOOK_SECRET) {
     return new Response('not configured', { status: 503 });
   }

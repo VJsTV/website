@@ -17,7 +17,6 @@ plausible_domain: "vjstv.com"
 permalink: "/:title"
 
 include:
-  - _routes.json
   - _headers
 
 plugins:

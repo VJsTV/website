@@ -12,8 +12,7 @@ import {
 
 const REQUIRED = ["artist", "project_title", "email", "video_url", "description", "category"];
 
-export async function onRequest(context) {
-  const { request, env } = context;
+export async function handle(request, env) {
 
   const guard = await guardPost(request, env, { endpoint: "submit" });
   if (guard.response) return guard.response;

@@ -7,10 +7,6 @@ _site/
 node_modules/
 package-lock.json
 
-# Wrangler auto-generated files
-wrangler.jsonc
-wrangler.json
-
 # Dependencies
 vendor/
 

@@ -10,7 +10,7 @@ function hmac(key, data) {
     .then(buf => Array.from(new Uint8Array(buf)).map(b => b.toString(16).padStart(2, '0')).join(''));
 }
 
-export async function onRequestPost({ request, env }) {
+export async function handlePost(request, env) {
   const origin = request.headers.get('Origin') || '';
   const isPreview = previewAllowed(env);
   const allowed = ['https://vjstv.com', 'https://www.vjstv.com'];

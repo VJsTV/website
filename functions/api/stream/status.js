@@ -1,7 +1,7 @@
 const CHANNELS = ['ch1-live', 'ch2-loop-gallery', 'ch3-vj-education'];
 const STALE_THRESHOLD = 300;
 
-export async function onRequestGet({ env, request }) {
+export async function handleGet(request, env) {
   const corsHeaders = {
     'Access-Control-Allow-Origin': '*',
     'Content-Type': 'application/json',
@@ -32,7 +32,7 @@ export async function onRequestGet({ env, request }) {
   return new Response(JSON.stringify({ channels: results, ts: now }), { headers: corsHeaders });
 }
 
-export async function onRequestOptions() {
+export async function handleOptions() {
   return new Response(null, {
     status: 204,
     headers: { 'Access-Control-Allow-Origin': '*', 'Access-Control-Allow-Methods': 'GET', 'Access-Control-Max-Age': '86400' },

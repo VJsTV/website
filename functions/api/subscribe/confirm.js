@@ -35,8 +35,7 @@ async function syncToResend(env, email) {
   return res.ok;
 }
 
-export async function onRequest(context) {
-  const { request, env } = context;
+export async function handle(request, env) {
   const origin = siteOrigin(env, request);
   const isPreview = previewAllowed(env);
 

@@ -10,12 +10,12 @@ const CORS = origin => ({
   'Content-Type': 'application/json',
 });
 
-export async function onRequestOptions({ request }) {
+export async function handleOptions(request) {
   const origin = request.headers.get('Origin') || '*';
   return new Response(null, { status: 204, headers: { ...CORS(origin), 'Access-Control-Allow-Methods': 'POST, OPTIONS' } });
 }
 
-export async function onRequestPost({ request, env }) {
+export async function handlePost(request, env) {
   const origin = request.headers.get('Origin') || '';
   const isPreview = previewAllowed(env);
   const allowed = ['https://vjstv.com', 'https://www.vjstv.com'];

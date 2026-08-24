@@ -60,8 +60,7 @@ class VjsExpMetaInjector {
   }
 }
 
-export async function onRequest(context) {
-  const { request, next, env } = context;
+export async function applyMiddleware({ request, next, env }) {
 
   let url;
   try {

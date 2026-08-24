@@ -4,8 +4,7 @@ import { createIssue } from "../_lib/github.js";
 import { moderateContent } from "../_lib/moderation.js";
 import { isValidEmail } from "../_lib/validation.js";
 
-export async function onRequest(context) {
-  const { request, env } = context;
+export async function handle(request, env) {
 
   const guard = await guardPost(request, env, { endpoint: "partner" });
   if (guard.response) return guard.response;

@@ -1,8 +1,7 @@
 import { preflight, originAllowed } from "../_lib/cors.js";
 import { json } from "../_lib/json.js";
 
-export async function onRequest(context) {
-  const { request, env } = context;
+export async function handle(request, env) {
 
   const pre = preflight(request, env, "GET, OPTIONS");
   if (pre) return pre;

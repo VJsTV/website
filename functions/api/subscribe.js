@@ -36,8 +36,7 @@ function tokenKey(token) {
   return "sub-token:" + token;
 }
 
-export async function onRequest(context) {
-  const { request, env } = context;
+export async function handle(request, env) {
 
   const pre = preflight(request, env, "POST, OPTIONS");
   if (pre) return pre;
