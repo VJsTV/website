@@ -57,7 +57,13 @@ function vjsDismissPreloader() {
   if (cw) cw.classList.add('vjs-ready');
   if (p && !p.classList.contains('fade-out')) {
     p.classList.add('fade-out');
-    setTimeout(function() { p.style.display = 'none'; }, 600);
+    // Intentionally NOT setting display:none afterward. #vjs-preloader is
+    // position:fixed (out of document flow), so once .fade-out drops its
+    // opacity to 0 and pointer-events to none it's already invisible and
+    // non-interactive — removing its box via display:none on top of that
+    // was registering as a Cumulative Layout Shift for real users (Chrome
+    // still counts the box going from "opacity 0, present" to "gone" as a
+    // geometry change) for no visible benefit.
   }
 }
 window.addEventListener('load', vjsDismissPreloader);
